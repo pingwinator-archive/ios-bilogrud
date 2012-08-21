@@ -57,24 +57,24 @@
     }
     
     if(UIInterfaceOrientationIsPortrait(toInterfaceOrientation)){
-        buttonUL.frame = CGRectMake(20, 20, 125, 125);
-        buttonUR.frame = CGRectMake(170, 20, 125, 125);
-//        buttonL.frame = CGRectMake(20, 165, 125, 125);
-//        buttonR.frame = CGRectMake(170, 165, 125, 125);
+        buttonUL.frame = CGRectMake(30, 10, 125, 125);
+        buttonUR.frame = CGRectMake(310, 10, 125, 125);
+        buttonL.frame = CGRectMake(30, 90, 125, 125);
+        buttonR.frame = CGRectMake(310, 90, 125, 125);
         NSLog( @"to portrait! %d", 5 );
-        buttonLL.frame = CGRectMake(20, 308, 125, 125);
-        buttonLR.frame = CGRectMake(170, 308, 125, 125);
+        buttonLL.frame = CGRectMake(30, 170, 125, 125);
+        buttonLR.frame = CGRectMake(310, 170, 125, 125);
         
     }
     else{
         if(UIInterfaceOrientationIsLandscape(toInterfaceOrientation)){
         NSLog( @"smth! %d", 5 );
-        buttonUL.frame = CGRectMake(20, 20, 125, 125);
-        buttonUR.frame = CGRectMake(20, 165, 125, 125);
-//        buttonL.frame = CGRectMake(20, 165, 125, 125);
-//        buttonR.frame = CGRectMake(165, 165, 125, 125);
-        buttonLL.frame = CGRectMake(308, 20, 125, 125);
-        buttonLR.frame = CGRectMake(308, 165, 125, 125);
+        buttonUL.frame = CGRectMake(10, 10, 125, 125);
+        buttonUR.frame = CGRectMake(10, 310, 125, 125);
+        buttonL.frame = CGRectMake(95, 10, 125, 125);
+        buttonR.frame = CGRectMake(95, 310, 125, 125);
+        buttonLL.frame = CGRectMake(180, 10, 125, 125);
+        buttonLR.frame = CGRectMake(180, 310, 125, 125);
     }
     }
 }
