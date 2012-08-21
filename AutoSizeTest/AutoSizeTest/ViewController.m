@@ -28,12 +28,12 @@
 
 - (void)viewDidUnload
 {
-    [self setButtonUL:nil];
-    [self setButtonUR:nil];
-    [self setButtonL:nil];
-    [self setButtonR:nil];
-    [self setButtonLL:nil];
-    [self setButtonLR:nil];
+    self.buttonUL = nil;
+    self.buttonUR = nil;
+    self.buttonL = nil;
+    self.buttonR = nil;
+    self.buttonLL = nil;
+    self.buttonLR = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
