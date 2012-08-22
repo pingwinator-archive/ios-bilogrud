@@ -24,7 +24,9 @@
     }
     return self;
 }
-
+-(void)dealloc{
+    [super dealloc];
+}
 - (void)viewDidLoad
 {
     self.blueViewController = [[[BlueViewController alloc]initWithNibName: @"BlueView" bundle:nil]autorelease];
@@ -79,26 +81,30 @@
     [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp forView:self.view cache:YES];
     if (self.yellowViewController.view.superview == nil) {
         if (self.yellowViewController == nil) {
-        self.yellowViewController =
-        [[YellowViewController alloc] initWithNibName:@"YellowView"
-                                                  bundle:nil];
+            YellowViewController* yellow = [[YellowViewController alloc]initWithNibName:@"YellowView"  bundle:nil];
+            self.yellowViewController = yellow;
+//        [[YellowViewController alloc]initWithNibName:@"YellowView" bundle:nil];
+//            [self.yellowViewController release];
+            [yellow release];
     }
         [UIView setAnimationTransition:
          UIViewAnimationTransitionFlipFromRight forView:self.view cache:YES];
         [self.blueViewController.view removeFromSuperview];
         [self.view insertSubview:self.yellowViewController.view atIndex:0];
+      
     }
     else {
             if (self.blueViewController == nil) {
-                self.blueViewController =
-                [[BlueViewController alloc] initWithNibName:@"BlueView"
+                BlueViewController *blue = [[BlueViewController alloc] initWithNibName:@"BlueView"
                                                         bundle:nil];
+                self.blueViewController = blue;
+                [blue release];
             }
             [UIView setAnimationTransition:
             UIViewAnimationTransitionFlipFromLeft forView:self.view cache:YES];
             [self.yellowViewController.view removeFromSuperview];
             [self.view insertSubview:self.blueViewController.view atIndex:0];
-    }
+          }
     [UIView commitAnimations];
 }
 @end
