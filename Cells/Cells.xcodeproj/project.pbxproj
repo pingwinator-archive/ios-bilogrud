@@ -15,6 +15,8 @@
 		6E3A51F815E5301C00534313 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E3A51F715E5301C00534313 /* AppDelegate.m */; };
 		6E3A51FB15E5301C00534313 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E3A51FA15E5301C00534313 /* ViewController.m */; };
 		6E3A51FE15E5301C00534313 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E3A51FC15E5301C00534313 /* ViewController.xib */; };
+		6E3A520615E5649100534313 /* NameAndColorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E3A520515E5649100534313 /* NameAndColorCell.m */; };
+		6E3A521E15E62FF500534313 /* NameAndColorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E3A521D15E62FF500534313 /* NameAndColorCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +33,9 @@
 		6E3A51F915E5301C00534313 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		6E3A51FA15E5301C00534313 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		6E3A51FD15E5301C00534313 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+		6E3A520415E5649100534313 /* NameAndColorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameAndColorCell.h; sourceTree = "<group>"; };
+		6E3A520515E5649100534313 /* NameAndColorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameAndColorCell.m; sourceTree = "<group>"; };
+		6E3A521D15E62FF500534313 /* NameAndColorCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NameAndColorCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +88,9 @@
 				6E3A51FA15E5301C00534313 /* ViewController.m */,
 				6E3A51FC15E5301C00534313 /* ViewController.xib */,
 				6E3A51EE15E5301C00534313 /* Supporting Files */,
+				6E3A520415E5649100534313 /* NameAndColorCell.h */,
+				6E3A520515E5649100534313 /* NameAndColorCell.m */,
+				6E3A521D15E62FF500534313 /* NameAndColorCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -151,6 +159,7 @@
 			files = (
 				6E3A51F215E5301C00534313 /* InfoPlist.strings in Resources */,
 				6E3A51FE15E5301C00534313 /* ViewController.xib in Resources */,
+				6E3A521E15E62FF500534313 /* NameAndColorCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,6 +173,7 @@
 				6E3A51F415E5301C00534313 /* main.m in Sources */,
 				6E3A51F815E5301C00534313 /* AppDelegate.m in Sources */,
 				6E3A51FB15E5301C00534313 /* ViewController.m in Sources */,
+				6E3A520615E5649100534313 /* NameAndColorCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
