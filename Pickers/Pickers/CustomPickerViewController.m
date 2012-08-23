@@ -7,6 +7,7 @@
 //
 
 #import "CustomPickerViewController.h"
+#import <AudioToolbox/AudioToolbox.h>
 
 @interface CustomPickerViewController ()
 
@@ -20,6 +21,7 @@
 @synthesize column5;
 @synthesize picker;
 @synthesize winLabel;
+@synthesize button;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -67,6 +69,7 @@
     self.column3 = nil;
     self.column4 = nil;
     self.column5 = nil;
+    self.button = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -89,12 +92,37 @@
         if (numInRow >= 3)
             win = YES;
     }
+    self.button.hidden = YES;
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"crunch" ofType:@"wav"];
+    SystemSoundID soundID;
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)[NSURL fileURLWithPath:path], &soundID);
+    AudioServicesPlaySystemSound (soundID);
     if (win)
-        winLabel.text = @"WIN!";
+        [self performSelector:@selector(playWinSound) withObject:nil afterDelay:.5];
     else
-        winLabel.text = @"";
+        [self performSelector:@selector(showButton) withObject:nil afterDelay:.5];
+    winLabel.text = @"";
+   
+//    if(win)
+//        winLabel.text = @"Win!!!";
+//    else
+//        winLabel.text = @"";
 }
+//????
 
+-(void)showButton {
+    self.button.hidden = NO;
+}
+-(void)playWinSound {
+    NSURL *soundURL = [[NSBundle mainBundle] URLForResource:@"win" withExtension:@"wav"];
+    SystemSoundID soundID;
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)soundURL, &soundID);
+    AudioServicesPlaySystemSound(soundID);
+    winLabel.text = @"WINNING!";
+    [self performSelector:@selector(showButton) withObject:nil  afterDelay:1.5];
+}
+   
+    
 #pragma mark -
 #pragma mark Picker Data Source Methods
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {

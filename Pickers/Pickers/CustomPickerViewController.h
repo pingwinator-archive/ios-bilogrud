@@ -11,6 +11,7 @@
 @interface CustomPickerViewController : UIViewController<UIPickerViewDataSource, UIPickerViewDelegate>
 @property (retain, nonatomic) IBOutlet UIPickerView *picker;
 @property (retain, nonatomic) IBOutlet UILabel *winLabel;
+@property (retain, nonatomic) IBOutlet UIButton *button;
 @property (retain, nonatomic) NSArray *column1;
 @property (retain, nonatomic) NSArray *column2;
 @property (retain, nonatomic) NSArray *column3;

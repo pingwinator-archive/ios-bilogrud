@@ -29,6 +29,10 @@
 		6E0F69C915E42D02008BEAF4 /* singleicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E0F69C415E42D02008BEAF4 /* singleicon.png */; };
 		6E0F69CA15E42D02008BEAF4 /* toolicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E0F69C515E42D02008BEAF4 /* toolicon.png */; };
 		6E0F69CC15E42D78008BEAF4 /* TabBarController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E0F69CB15E42D78008BEAF4 /* TabBarController.xib */; };
+		6E3A521415E6145900534313 /* statedictionary.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E3A521315E6145900534313 /* statedictionary.plist */; };
+		6E3A521915E61CED00534313 /* crunch.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6E3A521715E61CED00534313 /* crunch.wav */; };
+		6E3A521A15E61CED00534313 /* win.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6E3A521815E61CED00534313 /* win.wav */; };
+		6E3A521C15E6275700534313 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E3A521B15E6275700534313 /* AudioToolbox.framework */; };
 		6EDD956B15E4D704005F1AEA /* apple.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EDD956515E4D704005F1AEA /* apple.png */; };
 		6EDD956C15E4D704005F1AEA /* bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EDD956615E4D704005F1AEA /* bar.png */; };
 		6EDD956D15E4D704005F1AEA /* cherry.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EDD956715E4D704005F1AEA /* cherry.png */; };
@@ -69,6 +73,10 @@
 		6E0F69C415E42D02008BEAF4 /* singleicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = singleicon.png; sourceTree = "<group>"; };
 		6E0F69C515E42D02008BEAF4 /* toolicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toolicon.png; sourceTree = "<group>"; };
 		6E0F69CB15E42D78008BEAF4 /* TabBarController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TabBarController.xib; sourceTree = "<group>"; };
+		6E3A521315E6145900534313 /* statedictionary.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = statedictionary.plist; sourceTree = "<group>"; };
+		6E3A521715E61CED00534313 /* crunch.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = crunch.wav; sourceTree = "<group>"; };
+		6E3A521815E61CED00534313 /* win.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = win.wav; sourceTree = "<group>"; };
+		6E3A521B15E6275700534313 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		6EDD956515E4D704005F1AEA /* apple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = apple.png; sourceTree = "<group>"; };
 		6EDD956615E4D704005F1AEA /* bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bar.png; sourceTree = "<group>"; };
 		6EDD956715E4D704005F1AEA /* cherry.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cherry.png; sourceTree = "<group>"; };
@@ -82,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E3A521C15E6275700534313 /* AudioToolbox.framework in Frameworks */,
 				6E0F699115E42A72008BEAF4 /* UIKit.framework in Frameworks */,
 				6E0F699315E42A72008BEAF4 /* Foundation.framework in Frameworks */,
 				6E0F699515E42A72008BEAF4 /* CoreGraphics.framework in Frameworks */,
@@ -94,6 +103,9 @@
 		6E0F698115E42A72008BEAF4 = {
 			isa = PBXGroup;
 			children = (
+				6E3A521B15E6275700534313 /* AudioToolbox.framework */,
+				6E3A521615E61CED00534313 /* Custom Picker Sounds */,
+				6E3A521315E6145900534313 /* statedictionary.plist */,
 				6EDD956415E4D704005F1AEA /* Custom Picker Images */,
 				6E0F69C015E42CE3008BEAF4 /* Tab Bar Icons */,
 				6E0F699615E42A72008BEAF4 /* Pickers */,
@@ -167,6 +179,15 @@
 				6E0F69C515E42D02008BEAF4 /* toolicon.png */,
 			);
 			name = "Tab Bar Icons";
+			sourceTree = "<group>";
+		};
+		6E3A521615E61CED00534313 /* Custom Picker Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				6E3A521715E61CED00534313 /* crunch.wav */,
+				6E3A521815E61CED00534313 /* win.wav */,
+			);
+			path = "Custom Picker Sounds";
 			sourceTree = "<group>";
 		};
 		6EDD956415E4D704005F1AEA /* Custom Picker Images */ = {
@@ -251,6 +272,9 @@
 				6EDD956E15E4D704005F1AEA /* crown.png in Resources */,
 				6EDD956F15E4D704005F1AEA /* lemon.png in Resources */,
 				6EDD957015E4D704005F1AEA /* seven.png in Resources */,
+				6E3A521415E6145900534313 /* statedictionary.plist in Resources */,
+				6E3A521915E61CED00534313 /* crunch.wav in Resources */,
+				6E3A521A15E61CED00534313 /* win.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
