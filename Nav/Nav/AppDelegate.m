@@ -7,9 +7,10 @@
 //
 
 #import "AppDelegate.h"
+#import "FirstLevelController.h"
 
 @implementation AppDelegate
-
+@synthesize navController;
 - (void)dealloc
 {
     [_window release];
@@ -20,6 +21,11 @@
 {
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
+    
+    FirstLevelController *first = [[[FirstLevelController alloc]initWithStyle:UITableViewStylePlain]autorelease];
+    self.navController = [[[UINavigationController alloc]initWithRootViewController:first]autorelease];
+    [self.window addSubview: self.navController.view];
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;

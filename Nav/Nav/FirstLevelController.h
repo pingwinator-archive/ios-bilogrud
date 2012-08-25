@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface FirstLevelController : UITableViewController
-
+@property (retain, nonatomic) NSArray *controllers;
 @end

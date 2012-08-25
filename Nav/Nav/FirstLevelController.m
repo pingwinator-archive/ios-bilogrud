@@ -7,39 +7,47 @@
 //
 
 #import "FirstLevelController.h"
-
+#import "SecondLevelViewController.h"
+#import "DisclosureButtonController.h"
+#import "CheckListController.h"
 @interface FirstLevelController ()
 
 @end
 
 @implementation FirstLevelController
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+@synthesize controllers;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.title = @"First";
+    NSMutableArray *array = [[NSMutableArray alloc]init];
+   
+    // Disclosure Button
+    DisclosureButtonController *disclosureButtonController =
+    [[DisclosureButtonController alloc] initWithStyle:UITableViewStylePlain];
+    disclosureButtonController.title = @"Disclosure Buttons";
+    disclosureButtonController.rowImage = [UIImage imageNamed:@"disclosureButtonControllerIcon.png"];
+    [array addObject:disclosureButtonController];
+    
+    [disclosureButtonController release];
+    
+    // Checklist
+    CheckListController *checkListController = [[CheckListController alloc]initWithStyle :UITableViewStylePlain];
+    checkListController.title = @"Check One";
+    checkListController.rowImage = [UIImage imageNamed:@"checkmarkControllerIcon.png"];
+    [array addObject:checkListController];
+    [checkListController release];
+    
+     self.controllers = array;
+    [array release];
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
+    self.controllers = nil;
+  }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -48,27 +56,29 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return [self.controllers count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *FirstLevelCell = @"FirstLevelCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:FirstLevelCell];
     
-    // Configure the cell...
-    
+    if (cell == nil) {
+        cell = [[[UITableViewCell alloc]
+                initWithStyle:UITableViewCellStyleDefault reuseIdentifier: FirstLevelCell]autorelease];
+    }
+    // Configure the cell
+    NSUInteger row = [indexPath row];
+    SecondLevelViewController *controller = [controllers objectAtIndex:row];
+    cell.textLabel.text = controller.title;
+    cell.imageView.image = controller.rowImage;
+   // cell.imageView.image = [UIImage imageNamed:@"disclosureButtonControllerIcon.png"];
+
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
 
@@ -115,14 +125,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+    NSInteger row = [indexPath row];
+    SecondLevelViewController *nextController = [self.controllers objectAtIndex:row];
+    
+    [self.navigationController pushViewController:nextController animated:YES];
 }
 
 @end
