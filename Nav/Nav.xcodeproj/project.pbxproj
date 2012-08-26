@@ -27,6 +27,7 @@
 		6E2911A215E8001200F02325 /* DisclosureDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2911A115E8001200F02325 /* DisclosureDetailController.m */; };
 		6E2911A415E8002600F02325 /* DisclosureDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E2911A315E8002600F02325 /* DisclosureDetailController.xib */; };
 		6E2911AF15E8B91B00F02325 /* CheckListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2911AE15E8B91B00F02325 /* CheckListController.m */; };
+		6E2911BA15E9688000F02325 /* RowControlsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2911B915E9688000F02325 /* RowControlsController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +60,8 @@
 		6E2911A315E8002600F02325 /* DisclosureDetailController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DisclosureDetailController.xib; sourceTree = "<group>"; };
 		6E2911AD15E8B91B00F02325 /* CheckListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckListController.h; sourceTree = "<group>"; };
 		6E2911AE15E8B91B00F02325 /* CheckListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckListController.m; sourceTree = "<group>"; };
+		6E2911B815E9688000F02325 /* RowControlsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RowControlsController.h; sourceTree = "<group>"; };
+		6E2911B915E9688000F02325 /* RowControlsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RowControlsController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +123,8 @@
 				6E2911A315E8002600F02325 /* DisclosureDetailController.xib */,
 				6E2911AD15E8B91B00F02325 /* CheckListController.h */,
 				6E2911AE15E8B91B00F02325 /* CheckListController.m */,
+				6E2911B815E9688000F02325 /* RowControlsController.h */,
+				6E2911B915E9688000F02325 /* RowControlsController.m */,
 			);
 			path = Nav;
 			sourceTree = "<group>";
@@ -228,6 +233,7 @@
 				6E29119F15E7FEE300F02325 /* DisclosureButtonController.m in Sources */,
 				6E2911A215E8001200F02325 /* DisclosureDetailController.m in Sources */,
 				6E2911AF15E8B91B00F02325 /* CheckListController.m in Sources */,
+				6E2911BA15E9688000F02325 /* RowControlsController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

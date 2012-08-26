@@ -60,7 +60,7 @@
     return cell;
 }
 
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{// numberOfSectionsInTableView:(UITableView *)tableView{
     return [self.list count];
 }
 #pragma mark - Table Delegate Methods
