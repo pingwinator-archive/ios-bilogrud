@@ -28,6 +28,13 @@
 		6E2911A415E8002600F02325 /* DisclosureDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E2911A315E8002600F02325 /* DisclosureDetailController.xib */; };
 		6E2911AF15E8B91B00F02325 /* CheckListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2911AE15E8B91B00F02325 /* CheckListController.m */; };
 		6E2911BA15E9688000F02325 /* RowControlsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2911B915E9688000F02325 /* RowControlsController.m */; };
+		6EFA067B15EA404F00578B2C /* MoveMeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EFA067A15EA404F00578B2C /* MoveMeController.m */; };
+		6EFA067F15EA535800578B2C /* DeleteMeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EFA067E15EA535800578B2C /* DeleteMeController.m */; };
+		6EFA068115EA822000578B2C /* computers.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EFA068015EA822000578B2C /* computers.plist */; };
+		6EFA068415EA902800578B2C /* President.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EFA068315EA902800578B2C /* President.m */; };
+		6EFA068615EA95FF00578B2C /* Presidents.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6EFA068515EA95FE00578B2C /* Presidents.plist */; };
+		6EFA068915EA964300578B2C /* PresidentsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EFA068815EA964300578B2C /* PresidentsViewController.m */; };
+		6EFA068C15EA966F00578B2C /* PresidentDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EFA068B15EA966F00578B2C /* PresidentDetailController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +69,18 @@
 		6E2911AE15E8B91B00F02325 /* CheckListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckListController.m; sourceTree = "<group>"; };
 		6E2911B815E9688000F02325 /* RowControlsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RowControlsController.h; sourceTree = "<group>"; };
 		6E2911B915E9688000F02325 /* RowControlsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RowControlsController.m; sourceTree = "<group>"; };
+		6EFA067915EA404F00578B2C /* MoveMeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoveMeController.h; sourceTree = "<group>"; };
+		6EFA067A15EA404F00578B2C /* MoveMeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoveMeController.m; sourceTree = "<group>"; };
+		6EFA067D15EA535800578B2C /* DeleteMeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeleteMeController.h; sourceTree = "<group>"; };
+		6EFA067E15EA535800578B2C /* DeleteMeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeleteMeController.m; sourceTree = "<group>"; };
+		6EFA068015EA822000578B2C /* computers.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = computers.plist; sourceTree = "<group>"; };
+		6EFA068215EA902800578B2C /* President.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = President.h; sourceTree = "<group>"; };
+		6EFA068315EA902800578B2C /* President.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = President.m; sourceTree = "<group>"; };
+		6EFA068515EA95FE00578B2C /* Presidents.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Presidents.plist; sourceTree = "<group>"; };
+		6EFA068715EA964300578B2C /* PresidentsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresidentsViewController.h; sourceTree = "<group>"; };
+		6EFA068815EA964300578B2C /* PresidentsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresidentsViewController.m; sourceTree = "<group>"; };
+		6EFA068A15EA966F00578B2C /* PresidentDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresidentDetailController.h; sourceTree = "<group>"; };
+		6EFA068B15EA966F00578B2C /* PresidentDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresidentDetailController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +127,8 @@
 		6E175F2115E682AB00C8B094 /* Nav */ = {
 			isa = PBXGroup;
 			children = (
+				6EFA068515EA95FE00578B2C /* Presidents.plist */,
+				6EFA068015EA822000578B2C /* computers.plist */,
 				6E29118C15E7FE5500F02325 /* Images */,
 				6E175F2A15E682AB00C8B094 /* AppDelegate.h */,
 				6E175F2B15E682AB00C8B094 /* AppDelegate.m */,
@@ -125,6 +146,16 @@
 				6E2911AE15E8B91B00F02325 /* CheckListController.m */,
 				6E2911B815E9688000F02325 /* RowControlsController.h */,
 				6E2911B915E9688000F02325 /* RowControlsController.m */,
+				6EFA067915EA404F00578B2C /* MoveMeController.h */,
+				6EFA067A15EA404F00578B2C /* MoveMeController.m */,
+				6EFA067D15EA535800578B2C /* DeleteMeController.h */,
+				6EFA067E15EA535800578B2C /* DeleteMeController.m */,
+				6EFA068215EA902800578B2C /* President.h */,
+				6EFA068315EA902800578B2C /* President.m */,
+				6EFA068715EA964300578B2C /* PresidentsViewController.h */,
+				6EFA068815EA964300578B2C /* PresidentsViewController.m */,
+				6EFA068A15EA966F00578B2C /* PresidentDetailController.h */,
+				6EFA068B15EA966F00578B2C /* PresidentDetailController.m */,
 			);
 			path = Nav;
 			sourceTree = "<group>";
@@ -216,6 +247,8 @@
 				6E29119B15E7FE5500F02325 /* moveMeIcon.png in Resources */,
 				6E29119C15E7FE5500F02325 /* rowControlsIcon.png in Resources */,
 				6E2911A415E8002600F02325 /* DisclosureDetailController.xib in Resources */,
+				6EFA068115EA822000578B2C /* computers.plist in Resources */,
+				6EFA068615EA95FF00578B2C /* Presidents.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,6 +267,11 @@
 				6E2911A215E8001200F02325 /* DisclosureDetailController.m in Sources */,
 				6E2911AF15E8B91B00F02325 /* CheckListController.m in Sources */,
 				6E2911BA15E9688000F02325 /* RowControlsController.m in Sources */,
+				6EFA067B15EA404F00578B2C /* MoveMeController.m in Sources */,
+				6EFA067F15EA535800578B2C /* DeleteMeController.m in Sources */,
+				6EFA068415EA902800578B2C /* President.m in Sources */,
+				6EFA068915EA964300578B2C /* PresidentsViewController.m in Sources */,
+				6EFA068C15EA966F00578B2C /* PresidentDetailController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

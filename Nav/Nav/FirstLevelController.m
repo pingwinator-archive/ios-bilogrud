@@ -11,6 +11,9 @@
 #import "DisclosureButtonController.h"
 #import "CheckListController.h"
 #import "RowControlsController.h"
+#import "MoveMeController.h"
+#import "DeleteMeController.h"
+#import "PresidentsViewController.h"
 @interface FirstLevelController ()
 
 @end
@@ -45,6 +48,27 @@
     rowControlsController.rowImage = [UIImage imageNamed: @"rowControlsIcon.png"];
     [array addObject:rowControlsController];
     [rowControlsController release];
+    
+    // Move Me
+    MoveMeController *moveMeController = [[MoveMeController alloc] initWithStyle:UITableViewStylePlain];
+    moveMeController.title = @"Move Me";
+    moveMeController.rowImage = [UIImage imageNamed:@"moveMeIcon.png"];
+    [array addObject:moveMeController];
+    [moveMeController release];
+    
+    //Delete Me
+    DeleteMeController *deleteMeController = [[DeleteMeController alloc] initWithStyle:UITableViewStylePlain];
+    deleteMeController.title = @"Delete Me";
+    deleteMeController.rowImage = [UIImage imageNamed:@"DeleteMeIcon.png"];
+    [array addObject:deleteMeController];
+    [deleteMeController release];    
+    
+    // President View/Edit
+    PresidentsViewController *presidentsViewController = [[PresidentsViewController alloc] initWithStyle:UITableViewStylePlain];
+    presidentsViewController.title = @"Detail Edit";
+    presidentsViewController.rowImage = [UIImage imageNamed: @"detailEditIcon.png"];
+    [array addObject:presidentsViewController];
+    [presidentsViewController release];
     
     self.controllers = array;
     [array release];

@@ -52,7 +52,7 @@
 -(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *ControlRowIdentifier = @"ControlRowIdentifier";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ControlRowIdentifier];
-      
+  //  UITableViewCell *cell = nil;
     if (cell == nil) {
         NSNumber *bNumber = [NSNumber numberWithInteger:[self.i integerValue] + 1];
         self.i = bNumber;
