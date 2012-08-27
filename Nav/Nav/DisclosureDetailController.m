@@ -16,6 +16,11 @@
 @synthesize label;
 @synthesize message;
 
+-(void)dealloc{
+    [label release];
+    [message release];
+    [super dealloc];
+}
 -(void)viewWillAppear:(BOOL)animated{
     self.label.text = self.message;
     [super viewWillAppear:YES];

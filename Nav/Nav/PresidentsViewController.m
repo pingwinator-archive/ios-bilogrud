@@ -16,13 +16,10 @@
 
 @implementation PresidentsViewController
 @synthesize list;
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+
+-(void)dealloc{
+    [list release];
+    [super dealloc];
 }
 
 - (void)viewDidLoad
@@ -64,7 +61,7 @@
     NSString *presidentIdentifier = @"presidentIdentifier";
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:presidentIdentifier];
     if (cell == nil){
-        cell = [[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:presidentIdentifier]autorelease];
+        cell = [[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle  reuseIdentifier:presidentIdentifier]autorelease];
         
     }
     NSInteger row = [indexPath row];
@@ -83,5 +80,6 @@
     childController.president = pres;
     
     [self.navigationController pushViewController:childController animated:YES];
+    [childController release];
 }
 @end

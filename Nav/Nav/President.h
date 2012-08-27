@@ -16,7 +16,7 @@
     
 @interface President : NSObject<NSCoding>
 @property int number;
-@property NSInteger numb;
+//@property NSInteger numb;
 @property (copy, nonatomic) NSString *name;
 @property (copy, nonatomic) NSString *fromYear;
 @property (copy, nonatomic) NSString *toYear;

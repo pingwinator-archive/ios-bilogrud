@@ -15,6 +15,10 @@
 @implementation MoveMeController
 @synthesize list;
 
+-(void)dealloc{
+    self.list = nil;
+    [super dealloc];
+}
 -(IBAction)toggleMove{
     [self.tableView setEditing:!self.tableView.editing animated:YES];
     if (self.tableView.editing)

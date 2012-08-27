@@ -15,6 +15,11 @@
 @implementation DeleteMeController
 @synthesize list;
 
+-(void)dealloc{
+    [list release];
+    [super dealloc];
+}
+
 -(IBAction)toggleEdit:(id)sender{
     [self.tableView setEditing:!self.tableView.editing animated:YES];
     if (self.tableView.editing) {
@@ -39,17 +44,18 @@
     [super viewDidLoad];
 	if (list == nil) {
         NSString *path = [[NSBundle mainBundle] pathForResource:@"computers" ofType:@"plist"];
-        NSMutableArray *array = [[NSMutableArray alloc] initWithContentsOfFile:path];
+        NSMutableArray *array = [[[NSMutableArray alloc] initWithContentsOfFile:path]autorelease];
         self.list = array;
     }
     UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithTitle:@"Delete" style:UIBarButtonItemStyleBordered target:self action:@selector(toggleEdit:)];
     self.navigationItem.rightBarButtonItem = editButton;
+    [editButton release];
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    [self.list release];
+    self.list = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

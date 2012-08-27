@@ -19,6 +19,10 @@
 @synthesize list;
 @synthesize childController;
 
+-(void)dealloc{
+    self.list = nil;
+    [super dealloc];
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];

@@ -18,7 +18,14 @@
 @synthesize currentTextField;
 @synthesize tempValues;
 
-
+-(void)dealloc{
+    self.president = nil;
+    self.fieldLabels = nil;
+    self.currentTextField = nil;
+    self.tempValues = nil;
+    [super dealloc];
+    
+}
 -(IBAction)cansel:(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -62,14 +69,18 @@
     NSArray *array = [[NSArray alloc] initWithObjects:@"Name:", @"From:",
                       @"To:", @"Party:", nil];
     self.fieldLabels = array;
+    [array release];
     UIBarButtonItem *canselButton = [[UIBarButtonItem alloc]initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(cansel:)];
     self.navigationItem.leftBarButtonItem = canselButton;
+    [canselButton release];
     
     UIBarButtonItem *saveButton = [[UIBarButtonItem alloc]initWithTitle:@"Save" style:UIBarButtonItemStyleDone target:self action:@selector(save:)];
     self.navigationItem.rightBarButtonItem = saveButton;
+    [saveButton release];
     
     NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
     self.tempValues = dict;
+    [dict release];
 }
 
 - (void)viewDidUnload
@@ -100,17 +111,19 @@
     
     if(cell == nil)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:PresidentCellIdentifier];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:PresidentCellIdentifier]autorelease];
         
         UILabel *label = [[UILabel alloc] initWithFrame: CGRectMake(10, 10, 75, 25)];
         label.textAlignment = UITextAlignmentRight;
         label.tag = kLabelTag;
         label.font = [UIFont boldSystemFontOfSize:14];
         [cell.contentView addSubview:label];
+        [label release];
         
         UITextField *textField = [[UITextField alloc] initWithFrame: CGRectMake(90, 12, 200, 25)];
         textField.clearsOnBeginEditing = NO;
         [textField setDelegate:self];
+       
         //!
         textField.returnKeyType = UIReturnKeyDone;
         //connect with action

@@ -15,6 +15,11 @@
 @implementation RowControlsController
 @synthesize list;
 @synthesize i;
+
+-(void)dealloc{
+    [list release];
+    [super dealloc];
+}
 -(IBAction)buttonTapped:(id)sender{
     UIButton *senderButton = (UIButton*) sender;
     UITableViewCell *cell = (UITableViewCell *)[senderButton superview];

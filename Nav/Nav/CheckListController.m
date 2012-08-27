@@ -15,13 +15,10 @@
 @implementation CheckListController
 @synthesize lastIndexPath;
 @synthesize list;
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+-(void)dealloc{
+    self.list = nil;
+    self.lastIndexPath = nil;
+    [super dealloc];
 }
 
 - (void)viewDidLoad

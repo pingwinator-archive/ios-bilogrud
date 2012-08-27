@@ -9,7 +9,7 @@
 #import "President.h"
 
 @implementation President
-@synthesize numb;
+//@synthesize numb;
 @synthesize number;
 @synthesize name;
 @synthesize fromYear;
@@ -25,11 +25,11 @@
 }
 -(id)initWithCoder:(NSCoder *)aDecoder{
     if (self = [super init]) {
-        number = [aDecoder decodeIntForKey:kPresidentNumberKey];
-        name = [aDecoder decodeObjectForKey:kPresidentNameKey];
-        fromYear = [aDecoder decodeObjectForKey:kPresidentFromKey];
-        toYear = [aDecoder decodeObjectForKey:kPresidentToKey];
-        party = [aDecoder decodeObjectForKey:kPresidentPartyKey];
+        self.number = [aDecoder decodeIntForKey:kPresidentNumberKey];
+        self.name = [aDecoder decodeObjectForKey:kPresidentNameKey];
+        self.fromYear = [aDecoder decodeObjectForKey:kPresidentFromKey];
+        self.toYear = [aDecoder decodeObjectForKey:kPresidentToKey];
+        self.party = [aDecoder decodeObjectForKey:kPresidentPartyKey];
     }
     return self;
 }
