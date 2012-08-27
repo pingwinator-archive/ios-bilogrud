@@ -15,6 +15,8 @@
 		6E92AB1615EB46EB00D81B36 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E92AB1515EB46EB00D81B36 /* AppDelegate.m */; };
 		6E92AB1915EB46EB00D81B36 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E92AB1715EB46EB00D81B36 /* MainStoryboard.storyboard */; };
 		6E92AB1C15EB46EB00D81B36 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E92AB1B15EB46EB00D81B36 /* ViewController.m */; };
+		6E92AB2415EB566600D81B36 /* TaskListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E92AB2315EB566600D81B36 /* TaskListController.m */; };
+		6E92AB2715EB62E800D81B36 /* StaticCellsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E92AB2615EB62E800D81B36 /* StaticCellsController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +33,10 @@
 		6E92AB1815EB46EB00D81B36 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		6E92AB1A15EB46EB00D81B36 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		6E92AB1B15EB46EB00D81B36 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		6E92AB2215EB566600D81B36 /* TaskListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskListController.h; sourceTree = "<group>"; };
+		6E92AB2315EB566600D81B36 /* TaskListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskListController.m; sourceTree = "<group>"; };
+		6E92AB2515EB62E800D81B36 /* StaticCellsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaticCellsController.h; sourceTree = "<group>"; };
+		6E92AB2615EB62E800D81B36 /* StaticCellsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaticCellsController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +89,10 @@
 				6E92AB1A15EB46EB00D81B36 /* ViewController.h */,
 				6E92AB1B15EB46EB00D81B36 /* ViewController.m */,
 				6E92AB0C15EB46EB00D81B36 /* Supporting Files */,
+				6E92AB2215EB566600D81B36 /* TaskListController.h */,
+				6E92AB2315EB566600D81B36 /* TaskListController.m */,
+				6E92AB2515EB62E800D81B36 /* StaticCellsController.h */,
+				6E92AB2615EB62E800D81B36 /* StaticCellsController.m */,
 			);
 			path = "Simple Storyboard";
 			sourceTree = "<group>";
@@ -164,6 +174,8 @@
 				6E92AB1215EB46EB00D81B36 /* main.m in Sources */,
 				6E92AB1615EB46EB00D81B36 /* AppDelegate.m in Sources */,
 				6E92AB1C15EB46EB00D81B36 /* ViewController.m in Sources */,
+				6E92AB2415EB566600D81B36 /* TaskListController.m in Sources */,
+				6E92AB2715EB62E800D81B36 /* StaticCellsController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
