@@ -60,7 +60,23 @@
 
 }
 -(IBAction)textFieldDone:(id)sender{
-    [sender resignFirstResponder];
+    UITableViewCell *cell = (UITableViewCell *) [[sender superview]superview];
+    UITableView *table = (UITableView *)[cell superview];
+    NSIndexPath *textFieldIndexPath = [table indexPathForCell:cell];
+    NSInteger row = [textFieldIndexPath row];
+    row++;
+    if(row >= kNumberOfEditableRows){
+        row = 0;
+    }
+    NSIndexPath *newPath = [NSIndexPath indexPathForRow:row inSection:0];
+    UITableViewCell *nextCell = [self.tableView cellForRowAtIndexPath:newPath];
+    UITextField *nextField = nil;
+    for(UIView *oneView in nextCell.contentView.subviews){
+        if([oneView isMemberOfClass:[UITextField class]]){
+            nextField = (UITextField *)oneView;
+        }
+    }
+    [nextField becomeFirstResponder];
 }
 
 - (void)viewDidLoad
@@ -125,7 +141,7 @@
         [textField setDelegate:self];
        
         //!
-        textField.returnKeyType = UIReturnKeyDone;
+        //textField.returnKeyType = UIReturnKeyDone;
         //connect with action
         [textField addTarget:self action:@selector(textFieldDone:) forControlEvents:UIControlEventEditingDidEndOnExit];
         [cell.contentView addSubview:textField];
