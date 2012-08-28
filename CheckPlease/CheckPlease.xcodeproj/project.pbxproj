@@ -1,0 +1,296 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6E05D53315ED043E00489115 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E05D53215ED043E00489115 /* UIKit.framework */; };
+		6E05D53515ED043E00489115 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E05D53415ED043E00489115 /* Foundation.framework */; };
+		6E05D53715ED043E00489115 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E05D53615ED043E00489115 /* CoreGraphics.framework */; };
+		6E05D53D15ED043E00489115 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6E05D53B15ED043E00489115 /* InfoPlist.strings */; };
+		6E05D53F15ED043E00489115 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E05D53E15ED043E00489115 /* main.m */; };
+		6E05D54315ED043E00489115 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E05D54215ED043E00489115 /* AppDelegate.m */; };
+		6E05D54615ED043E00489115 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E05D54515ED043E00489115 /* ViewController.m */; };
+		6E05D54915ED043E00489115 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E05D54715ED043E00489115 /* ViewController.xib */; };
+		6E05D55115ED045D00489115 /* CGPointUtils.c in Sources */ = {isa = PBXBuildFile; fileRef = 6E05D54F15ED045D00489115 /* CGPointUtils.c */; };
+		6E05D55415ED04BD00489115 /* CheckMarkRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E05D55315ED04BD00489115 /* CheckMarkRecognizer.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		6E05D52E15ED043E00489115 /* CheckPlease.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CheckPlease.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E05D53215ED043E00489115 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		6E05D53415ED043E00489115 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		6E05D53615ED043E00489115 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		6E05D53A15ED043E00489115 /* CheckPlease-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CheckPlease-Info.plist"; sourceTree = "<group>"; };
+		6E05D53C15ED043E00489115 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6E05D53E15ED043E00489115 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6E05D54015ED043E00489115 /* CheckPlease-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CheckPlease-Prefix.pch"; sourceTree = "<group>"; };
+		6E05D54115ED043E00489115 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		6E05D54215ED043E00489115 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		6E05D54415ED043E00489115 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		6E05D54515ED043E00489115 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		6E05D54815ED043E00489115 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+		6E05D54F15ED045D00489115 /* CGPointUtils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CGPointUtils.c; sourceTree = "<group>"; };
+		6E05D55015ED045D00489115 /* CGPointUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGPointUtils.h; sourceTree = "<group>"; };
+		6E05D55215ED04BD00489115 /* CheckMarkRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheckMarkRecognizer.h; sourceTree = "<group>"; };
+		6E05D55315ED04BD00489115 /* CheckMarkRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckMarkRecognizer.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6E05D52B15ED043E00489115 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E05D53315ED043E00489115 /* UIKit.framework in Frameworks */,
+				6E05D53515ED043E00489115 /* Foundation.framework in Frameworks */,
+				6E05D53715ED043E00489115 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6E05D52315ED043E00489115 = {
+			isa = PBXGroup;
+			children = (
+				6E05D53815ED043E00489115 /* CheckPlease */,
+				6E05D53115ED043E00489115 /* Frameworks */,
+				6E05D52F15ED043E00489115 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6E05D52F15ED043E00489115 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6E05D52E15ED043E00489115 /* CheckPlease.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6E05D53115ED043E00489115 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6E05D53215ED043E00489115 /* UIKit.framework */,
+				6E05D53415ED043E00489115 /* Foundation.framework */,
+				6E05D53615ED043E00489115 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6E05D53815ED043E00489115 /* CheckPlease */ = {
+			isa = PBXGroup;
+			children = (
+				6E05D54F15ED045D00489115 /* CGPointUtils.c */,
+				6E05D55015ED045D00489115 /* CGPointUtils.h */,
+				6E05D54115ED043E00489115 /* AppDelegate.h */,
+				6E05D54215ED043E00489115 /* AppDelegate.m */,
+				6E05D54415ED043E00489115 /* ViewController.h */,
+				6E05D54515ED043E00489115 /* ViewController.m */,
+				6E05D54715ED043E00489115 /* ViewController.xib */,
+				6E05D53915ED043E00489115 /* Supporting Files */,
+				6E05D55215ED04BD00489115 /* CheckMarkRecognizer.h */,
+				6E05D55315ED04BD00489115 /* CheckMarkRecognizer.m */,
+			);
+			path = CheckPlease;
+			sourceTree = "<group>";
+		};
+		6E05D53915ED043E00489115 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6E05D53A15ED043E00489115 /* CheckPlease-Info.plist */,
+				6E05D53B15ED043E00489115 /* InfoPlist.strings */,
+				6E05D53E15ED043E00489115 /* main.m */,
+				6E05D54015ED043E00489115 /* CheckPlease-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6E05D52D15ED043E00489115 /* CheckPlease */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6E05D54C15ED043E00489115 /* Build configuration list for PBXNativeTarget "CheckPlease" */;
+			buildPhases = (
+				6E05D52A15ED043E00489115 /* Sources */,
+				6E05D52B15ED043E00489115 /* Frameworks */,
+				6E05D52C15ED043E00489115 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CheckPlease;
+			productName = CheckPlease;
+			productReference = 6E05D52E15ED043E00489115 /* CheckPlease.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6E05D52515ED043E00489115 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0440;
+				ORGANIZATIONNAME = Natasha;
+			};
+			buildConfigurationList = 6E05D52815ED043E00489115 /* Build configuration list for PBXProject "CheckPlease" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 6E05D52315ED043E00489115;
+			productRefGroup = 6E05D52F15ED043E00489115 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6E05D52D15ED043E00489115 /* CheckPlease */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6E05D52C15ED043E00489115 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E05D53D15ED043E00489115 /* InfoPlist.strings in Resources */,
+				6E05D54915ED043E00489115 /* ViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6E05D52A15ED043E00489115 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E05D53F15ED043E00489115 /* main.m in Sources */,
+				6E05D54315ED043E00489115 /* AppDelegate.m in Sources */,
+				6E05D54615ED043E00489115 /* ViewController.m in Sources */,
+				6E05D55115ED045D00489115 /* CGPointUtils.c in Sources */,
+				6E05D55415ED04BD00489115 /* CheckMarkRecognizer.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		6E05D53B15ED043E00489115 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6E05D53C15ED043E00489115 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		6E05D54715ED043E00489115 /* ViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6E05D54815ED043E00489115 /* en */,
+			);
+			name = ViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6E05D54A15ED043E00489115 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		6E05D54B15ED043E00489115 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6E05D54D15ED043E00489115 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CheckPlease/CheckPlease-Prefix.pch";
+				INFOPLIST_FILE = "CheckPlease/CheckPlease-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		6E05D54E15ED043E00489115 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CheckPlease/CheckPlease-Prefix.pch";
+				INFOPLIST_FILE = "CheckPlease/CheckPlease-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6E05D52815ED043E00489115 /* Build configuration list for PBXProject "CheckPlease" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E05D54A15ED043E00489115 /* Debug */,
+				6E05D54B15ED043E00489115 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6E05D54C15ED043E00489115 /* Build configuration list for PBXNativeTarget "CheckPlease" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E05D54D15ED043E00489115 /* Debug */,
+				6E05D54E15ED043E00489115 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6E05D52515ED043E00489115 /* Project object */;
+}
