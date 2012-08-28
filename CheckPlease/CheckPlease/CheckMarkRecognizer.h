@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface CheckMarkRecognizer : UIGestureRecognizer
-
+@property (assign, nonatomic) CGPoint lastPreviousPoint;
+@property (assign, nonatomic) CGPoint lastCurrentPoint;
+@property (assign, nonatomic) CGFloat lineLengthSoFar;
 @end
