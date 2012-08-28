@@ -74,6 +74,12 @@
 		</dict>
 		<dict>
 			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Warp Factor</string>
+		</dict>
+		<dict>
+			<key>Type</key>
 			<string>PSSliderSpecifier</string>
 			<key>Key</key>
 			<string>warpFactor</string>
@@ -87,8 +93,22 @@
 			<string>turtle.png</string>
 			<key>MaximumValueImage</key>
 			<string>rabbit.png</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
 			<key>Title</key>
-			<string>Warp Factor</string>
+			<string>Additional Info</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+			<key>Title</key>
+			<string>More Settings</string>
+			<key>Key</key>
+			<string></string>
+			<key>File</key>
+			<string>More</string>
 		</dict>
 	</array>
 	<key>StringsTable</key>
