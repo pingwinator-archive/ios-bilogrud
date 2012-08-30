@@ -27,8 +27,43 @@
     self.testConnection = nil;
     [super dealloc];
 }
--(IBAction)test{
+-(NSMutableURLRequest*)requestWithImage: (NSURL*)url{
+    NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60]autorelease];
+    NSString *boundary = @"----BoundarycC4YiaUFwM44F6rT";
     
+    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
+    
+    [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
+    
+     NSMutableData *body = [NSMutableData data];
+    [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+	
+    UIImage *image = [UIImage imageNamed:@"image.png"];
+    NSData* imageData = UIImagePNGRepresentation(image);
+    
+    
+    // Now append the image
+    // Note that the name of the form field is exactly the same as in the trace ('attachment[file]' in my case)!
+    // You can choose whatever filename you want.
+    [body appendData:[@"Content-Disposition: form-data; name=\"source\";filename=\"picture.png\"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+                       
+                       // We now need to tell the receiver what content type we have
+                       // In my case it's a png image. If you have a jpg, set it to 'image/jpg'
+                       [body appendData:[@"Content-Type: image/png\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+                       
+                       // Now we append the actual image data
+                       [body appendData:[NSData dataWithData:imageData]];
+                       
+                       // and again the delimiting boundary
+                       [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+                       
+                       // adding the body we've created to the request
+                       [request setHTTPBody:body];
+    return request;
+}
+
+-(IBAction)test{
+
     NSMutableDictionary *dictparametrs = [NSMutableDictionary dictionary];
     [dictparametrs setValue:kToken forKey:@"access_token"];
 //    [dictparametrs setValue:self.textMessage.text forKey:@"message"];
@@ -36,16 +71,16 @@
 //
     [dictparametrs setValue:@"http://a5.sphotos.ak.fbcdn.net/hphotos-ak-snc7/s720x720/430702_274084829330398_269741610_n.jpg" forKey:@"url"];
   //  [dictparametrs setValue:@"" forKey:@"source"];
-    NSString *urlStr = @"https://graph.facebook.com/me/photos";//[[NSString alloc]initWithFormat: @"https://graph.facebook.com/me/feed?access_token=%@", kToken];
+    NSString *urlStr = /*@"https://graph.facebook.com/me/photos";*/[[NSString alloc]initWithFormat: @"https://graph.facebook.com/me/photos?access_token=%@", kToken];
     NSURL* url = [NSURL URLWithString:urlStr];
-    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url];
+    NSMutableURLRequest* request = [self requestWithImage:url];//[NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"POST"];
     
     
     NSString *postParam = [dictparametrs paramFromDict];// [NSString stringWithFormat: @"message=%@&access_token=%@" , self.textMessage.text,kToken];
     
-    NSData *postData = [postParam dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-    [request setHTTPBody:postData];
+   // NSData *postData = [postParam dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+   //[request setHTTPBody:postData];
     self.testConnection = [[[NSURLConnection alloc] initWithRequest:request delegate:self]autorelease];
     
     [self.testConnection start];
