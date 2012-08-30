@@ -15,6 +15,10 @@
 		6E0B7A4F15ED631C0040AD16 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E0B7A4E15ED631C0040AD16 /* AppDelegate.m */; };
 		6E0B7A5215ED631C0040AD16 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E0B7A5115ED631C0040AD16 /* ViewController.m */; };
 		6E0B7A5515ED631C0040AD16 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E0B7A5315ED631C0040AD16 /* ViewController.xib */; };
+		6E0B7A6015ED64E60040AD16 /* eifel.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E0B7A5F15ED64E60040AD16 /* eifel.png */; };
+		6E0B7A6815ED65840040AD16 /* CheckImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E0B7A6715ED65840040AD16 /* CheckImage.m */; };
+		6E9715C915EE3F4B009397CC /* CGPointUtils.c in Sources */ = {isa = PBXBuildFile; fileRef = 6E9715C515EE3F4B009397CC /* CGPointUtils.c */; };
+		6E9715CA15EE3F4B009397CC /* CheckMarkRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E9715C815EE3F4B009397CC /* CheckMarkRecognizer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +35,13 @@
 		6E0B7A5015ED631C0040AD16 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		6E0B7A5115ED631C0040AD16 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		6E0B7A5415ED631C0040AD16 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+		6E0B7A5F15ED64E60040AD16 /* eifel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = eifel.png; path = ImageGestures/eifel.png; sourceTree = "<group>"; };
+		6E0B7A6615ED65840040AD16 /* CheckImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CheckImage.h; path = ../CheckImage.h; sourceTree = "<group>"; };
+		6E0B7A6715ED65840040AD16 /* CheckImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CheckImage.m; path = ../CheckImage.m; sourceTree = "<group>"; };
+		6E9715C515EE3F4B009397CC /* CGPointUtils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = CGPointUtils.c; path = ../CGPointUtils.c; sourceTree = "<group>"; };
+		6E9715C615EE3F4B009397CC /* CGPointUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGPointUtils.h; path = ../CGPointUtils.h; sourceTree = "<group>"; };
+		6E9715C715EE3F4B009397CC /* CheckMarkRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CheckMarkRecognizer.h; path = ../CheckMarkRecognizer.h; sourceTree = "<group>"; };
+		6E9715C815EE3F4B009397CC /* CheckMarkRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CheckMarkRecognizer.m; path = ../CheckMarkRecognizer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +61,7 @@
 		6E0B7A2F15ED631C0040AD16 = {
 			isa = PBXGroup;
 			children = (
+				6E0B7A6515ED65110040AD16 /* Images */,
 				6E0B7A4415ED631C0040AD16 /* ImageGestures */,
 				6E0B7A3D15ED631C0040AD16 /* Frameworks */,
 				6E0B7A3B15ED631C0040AD16 /* Products */,
@@ -77,6 +89,12 @@
 		6E0B7A4415ED631C0040AD16 /* ImageGestures */ = {
 			isa = PBXGroup;
 			children = (
+				6E0B7A6615ED65840040AD16 /* CheckImage.h */,
+				6E0B7A6715ED65840040AD16 /* CheckImage.m */,
+				6E9715C515EE3F4B009397CC /* CGPointUtils.c */,
+				6E9715C615EE3F4B009397CC /* CGPointUtils.h */,
+				6E9715C715EE3F4B009397CC /* CheckMarkRecognizer.h */,
+				6E9715C815EE3F4B009397CC /* CheckMarkRecognizer.m */,
 				6E0B7A4D15ED631C0040AD16 /* AppDelegate.h */,
 				6E0B7A4E15ED631C0040AD16 /* AppDelegate.m */,
 				6E0B7A5015ED631C0040AD16 /* ViewController.h */,
@@ -96,6 +114,14 @@
 				6E0B7A4C15ED631C0040AD16 /* ImageGestures-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6E0B7A6515ED65110040AD16 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				6E0B7A5F15ED64E60040AD16 /* eifel.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,6 +177,7 @@
 			files = (
 				6E0B7A4915ED631C0040AD16 /* InfoPlist.strings in Resources */,
 				6E0B7A5515ED631C0040AD16 /* ViewController.xib in Resources */,
+				6E0B7A6015ED64E60040AD16 /* eifel.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,6 +191,9 @@
 				6E0B7A4B15ED631C0040AD16 /* main.m in Sources */,
 				6E0B7A4F15ED631C0040AD16 /* AppDelegate.m in Sources */,
 				6E0B7A5215ED631C0040AD16 /* ViewController.m in Sources */,
+				6E0B7A6815ED65840040AD16 /* CheckImage.m in Sources */,
+				6E9715C915EE3F4B009397CC /* CGPointUtils.c in Sources */,
+				6E9715CA15EE3F4B009397CC /* CheckMarkRecognizer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,6 +307,7 @@
 				6E0B7A5A15ED631C0040AD16 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

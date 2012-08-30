@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ViewController : UIViewController
-
+@property (nonatomic, retain) IBOutlet UILabel *infoLabel;
+@property (retain, nonatomic) NSMutableArray *images;
 @end

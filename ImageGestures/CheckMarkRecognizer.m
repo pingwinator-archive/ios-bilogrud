@@ -21,14 +21,18 @@
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [super touchesBegan:touches withEvent:event];
-    UITouch *touch = [touches anyObject];
+    if([touches count] == 2){
+          UITouch *touch = [touches anyObject];
     CGPoint point = [touch locationInView:self.view];
     lastPreviousPoint = point;
     lastCurrentPoint = point;
     lineLengthSoFar = 0.0f;
+    }   
 }
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
     [super touchesMoved:touches withEvent:event];
+    if([touches count] == 2)
+    {
     UITouch *touch = [touches anyObject];
     CGPoint previousPoint = [ touch previousLocationInView:self.view];
     CGPoint currentPoint = [ touch locationInView:self.view];
@@ -40,5 +44,6 @@
     lineLengthSoFar += distanceBetweenPoints(previousPoint, currentPoint);
     lastPreviousPoint = previousPoint;
     lastCurrentPoint = currentPoint;
+    }
 }
 @end
