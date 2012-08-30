@@ -20,6 +20,7 @@
 @synthesize testData;
 @synthesize testConnection;
 @synthesize textMessage;
+
 -(void)dealloc{
     self.testData = nil;
     self.testTextView = nil;
@@ -41,24 +42,16 @@
     UIImage *image = [UIImage imageNamed:@"image.png"];
     NSData* imageData = UIImagePNGRepresentation(image);
     
-    
-    // Now append the image
-    // Note that the name of the form field is exactly the same as in the trace ('attachment[file]' in my case)!
-    // You can choose whatever filename you want.
     [body appendData:[@"Content-Disposition: form-data; name=\"source\";filename=\"picture.png\"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+     
+    [body appendData:[@"Content-Type: image/png\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[NSData dataWithData:imageData]];
                        
-                       // We now need to tell the receiver what content type we have
-                       // In my case it's a png image. If you have a jpg, set it to 'image/jpg'
-                       [body appendData:[@"Content-Type: image/png\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+     // and again the delimiting boundary
+     [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
                        
-                       // Now we append the actual image data
-                       [body appendData:[NSData dataWithData:imageData]];
-                       
-                       // and again the delimiting boundary
-                       [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-                       
-                       // adding the body we've created to the request
-                       [request setHTTPBody:body];
+     // adding the body we've created to the request
+     [request setHTTPBody:body];
     return request;
 }
 
@@ -71,7 +64,7 @@
 //
     [dictparametrs setValue:@"http://a5.sphotos.ak.fbcdn.net/hphotos-ak-snc7/s720x720/430702_274084829330398_269741610_n.jpg" forKey:@"url"];
   //  [dictparametrs setValue:@"" forKey:@"source"];
-    NSString *urlStr = /*@"https://graph.facebook.com/me/photos";*/[[[NSString alloc]initWithFormat: @"https://graph.facebook.com/me/photos?access_token=%@", kToken]autorelease];
+    NSString *urlStr = /*https://graph.facebook.com/me/photos@"";*/[[[NSString alloc]initWithFormat: @"https://graph.facebook.com/me/photos?access_token=%@", kToken]autorelease];
     NSURL* url = [NSURL URLWithString:urlStr];
     NSMutableURLRequest* request = [self requestWithImage:url];//[NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"POST"];
@@ -84,8 +77,7 @@
     self.testConnection = [[[NSURLConnection alloc] initWithRequest:request delegate:self]autorelease];
     
     [self.testConnection start];
-   
-  }
+}
 
 
 - (void)viewDidLoad
