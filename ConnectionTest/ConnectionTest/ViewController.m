@@ -71,13 +71,13 @@
 //
     [dictparametrs setValue:@"http://a5.sphotos.ak.fbcdn.net/hphotos-ak-snc7/s720x720/430702_274084829330398_269741610_n.jpg" forKey:@"url"];
   //  [dictparametrs setValue:@"" forKey:@"source"];
-    NSString *urlStr = /*@"https://graph.facebook.com/me/photos";*/[[NSString alloc]initWithFormat: @"https://graph.facebook.com/me/photos?access_token=%@", kToken];
+    NSString *urlStr = /*@"https://graph.facebook.com/me/photos";*/[[[NSString alloc]initWithFormat: @"https://graph.facebook.com/me/photos?access_token=%@", kToken]autorelease];
     NSURL* url = [NSURL URLWithString:urlStr];
     NSMutableURLRequest* request = [self requestWithImage:url];//[NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"POST"];
     
     
-    NSString *postParam = [dictparametrs paramFromDict];// [NSString stringWithFormat: @"message=%@&access_token=%@" , self.textMessage.text,kToken];
+  //  NSString *postParam = [dictparametrs paramFromDict];// [NSString stringWithFormat: @"message=%@&access_token=%@" , self.textMessage.text,kToken];
     
    // NSData *postData = [postParam dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
    //[request setHTTPBody:postData];
@@ -117,7 +117,7 @@
     
 }
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection{
-    NSString *str = [[[NSString alloc] initWithData:self.testData encoding:NSUTF8StringEncoding]autorelease];
+ //   NSString *str = [[[NSString alloc] initWithData:self.testData encoding:NSUTF8StringEncoding]autorelease];
 //    NSLog(@"json responce = %@ /n",str);
     SBJsonParser* parser = [[SBJsonParser alloc] init];
     NSDictionary* parseObj = [parser objectWithData:self.testData];
