@@ -10,7 +10,11 @@
 #import "SBJson.h"
 #import "Connect.h"
 
-#define kToken @"AAACEdEose0cBAIHIj5UxZBold7tikDV9KSnJBKRComMZA0NOhOUyLlbEsI7ZAr1D5eNtCa37JnSkJh7hchoazFXAPZBhClk2jViL7r3peulwhe8gCMt1"
+#define kToken @"AAACEdEose0cBAM4s0rZAJBUZBFhJ0ppg4RzgTac7VjLr4VdBWIlPAe3ypSsMRfUX9o181QOrQXY8Sf1jJCuHXxsQWnT9eOiqlt3Yc5A8s9MMgIRtcR"
+
+#define kUserInfoTag 1
+#define kUserImage 2
+#define kUserStatus 3
 @interface InfoViewController ()
 @property (nonatomic, retain)NSMutableDictionary *conDict;
 @end
@@ -23,6 +27,8 @@
 @synthesize conDict;
 @synthesize userIdValue;
 @synthesize loadImageActivity;
+@synthesize nameLabel;
+@synthesize statusInfo;
 -(void)dealloc{
     self.userImage = nil;
     self.personalInfo = nil;
@@ -31,6 +37,8 @@
     self.conDict = nil;
     self.userIdValue = nil;
     self.loadImageActivity = nil;
+    self.nameLabel = nil;
+    self.statusInfo = nil;
     [super dealloc];
 }
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -57,27 +65,51 @@
 
     self.conDict = [[[NSMutableDictionary alloc]init]autorelease];
     [self.loadImageActivity startAnimating];
+    
+    [self addConnectImage];
+    [self addConnectInfo];
+    [self addConnectStatus];
+}
+
+-(void) addConnectImage{
     NSString *urlString = [NSString stringWithFormat: @"https://graph.facebook.com/%@/picture", self.userIdValue];
     NSURL *url = [NSURL URLWithString:urlString ];
-    NSURLRequest *imageRequest = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:30];
-   
-    NSURLConnection *imageCon = [NSURLConnection connectionWithRequest:imageRequest delegate:self];
-
-    Connect *connectImage = [[Connect alloc] initConnect:imageCon responce:eResponceTypeImage];
-    [self addConnectionToDict:connectImage];
+    NSURLRequest *imageRequest = [NSURLRequest requestWithURL:url];// cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:30];
+    
+    Connect *connectImage = [[Connect alloc] initRequest:imageRequest responce:eResponceTypeImage];    connectImage.delegate = self;
+    connectImage.tag = kUserImage;
+    [self addConnectToDict:connectImage];
+    
     [connectImage startConnect];
     [connectImage release];
-    
-    NSString *urlInfoString = [[[NSString alloc]initWithFormat: @"https://graph.facebook.com/%@/?access_token=%@", self.userIdValue,kToken]autorelease];
+}
+
+#pragma mark - Add connects
+
+-(void)addConnectInfo{
+    NSString *urlInfoString = [[[NSString alloc]initWithFormat: @"https://graph.facebook.com/%@/?access_token=%@", self.userIdValue, kToken] autorelease];
     NSURL *urlInfo = [NSURL URLWithString:urlInfoString];
     NSURLRequest *infoRequest= [NSURLRequest requestWithURL:urlInfo];
     
-    NSURLConnection *infoCon = [NSURLConnection connectionWithRequest:infoRequest delegate:self];
-    
-    Connect *connectInfo = [[Connect alloc] initConnect:infoCon responce:eResponceTypeJson];
-    [self addConnectionToDict:connectInfo];
+    Connect *connectInfo = [[Connect alloc] initRequest:infoRequest responce:eResponceTypeJson];
+    connectInfo.delegate = self;
+    connectInfo.tag = kUserInfoTag;
+    [self addConnectToDict:connectInfo];
     [connectInfo startConnect];
     [connectInfo release];
+}
+
+-(void)addConnectStatus{
+    NSString *urlStatusString = [[[NSString alloc]initWithFormat: @"https://graph.facebook.com/%@/?access_token=%@/statuses", self.userIdValue,kToken]autorelease];
+    NSURL *urlStatus = [NSURL URLWithString:urlStatusString];
+    NSURLRequest *statusRequest= [NSURLRequest requestWithURL:urlStatus];
+    
+    Connect *connectStatus = [[Connect alloc] initRequest:statusRequest responce:eResponceTypeJson];
+    connectStatus.delegate = self;
+    connectStatus.tag = kUserStatus;
+    [self addConnectToDict:connectStatus];
+    [connectStatus startConnect];
+    [connectStatus release];
 }
 
 - (void)viewDidUnload
@@ -89,91 +121,91 @@
     self.testData = nil;
     self.conDict = nil;
     self.userIdValue = nil;
+    self.loadImageActivity = nil;
+    self.nameLabel = nil;
+    self.statusInfo = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-#pragma mark - NSURLConnectionDataDelegate methods
-
--(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response{
-    self.testData = [NSMutableData data];
-    [[self connectByConnection:connection] resetConnectData];
-}
--(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
-    [self.testData appendData:data]; 
-    
-    [[self connectByConnection:connection ] appendConnectData: data];
-}
--(void)connectionDidFinishLoading:(NSURLConnection *)connection{
-    Connect* connect = [self connectByConnection:connection];
-    switch (connect.responceType) {
-        case eResponceTypeImage:
-        {
-            
-            UIImage *testImage = [UIImage imageWithData: connect.data];
-            [self.loadImageActivity stopAnimating];
-            self.userImage.image = testImage;
-           
-        }
-            break;
-        case eResponceTypeJson:
-        {
-            SBJsonParser* parser = [[SBJsonParser alloc] init];
-            NSDictionary* parseObj = [parser objectWithData:connect.data];
-                [parser release];
-                NSLog(@"%@",parseObj);
-         
-            NSMutableString* information = [[NSMutableString alloc]init];
-            if ([parseObj valueForKey:@"name"]) {
-                [information appendFormat:@"Name: %@\n",[parseObj valueForKey:@"name"] ] ;
-            }
-            if ([parseObj valueForKey:@"birthday"]) {
-                [information appendFormat:@"Birthday: %@\n",[parseObj valueForKey:@"birthday"] ] ;
-            }
-            if ([parseObj valueForKey:@"gender"]) {
-                [information appendFormat:@"Gender: %@\n",[parseObj valueForKey:@"gender"] ] ;
-            }
-            self.personalInfo.text = information;
-        }
-        default:
-            break;
-    }
-    [self deleteConnectionFromDict:connection];
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
-{
-    NSLog(@" error %@",error);
-    Connect* C = [self connectByConnection:connection];
-    if(C.responceType == eResponceTypeImage){
-        [self.loadImageActivity stopAnimating];
-    }
-    [self deleteConnectionFromDict:connection];
+    return YES;//(interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma mark - connection dict
 
--(void)addConnectionToDict: (Connect *)con{
+-(void)addConnectToDict: (Connect *)con{
     [self.conDict setValue:con forKey:[con.connection description]];
 }
 
-- (void)removeConnect:(Connect*)connect
-{
+- (void)removeConnect:(Connect*)connect{
     NSString* key =  [connect.connection description];
     [connect retain];
     [self.conDict removeObjectForKey:key];
     [connect autorelease];
 }
 
--(void)deleteConnectionFromDict: (NSURLConnection*)con{
+-(void)deleteConnectFromDict: (NSURLConnection*)con{
      NSString* key =  [con description];
      [self.conDict removeObjectForKey:key];
 }
 
 -(Connect*)connectByConnection: (NSURLConnection*) con{
     return [self.conDict valueForKey:con.description];
+}
+
+#pragma mark - ConnectDelegate Method
+
+-(void)didLoadingData:(Connect *)connect error:(NSError *)err{
+    if (!err) {
+        NSLog(@"connect");
+        switch (connect.tag) {
+            case kUserImage:{
+                [self userImageLoading:connect];
+            }
+                break;
+            case kUserInfoTag:{
+                [self userInfoLoading:connect];
+            }
+                break;
+            case kUserStatus:
+            {
+                [self userStatusLoading:connect];
+            }
+            default:
+                break;
+        }
+    }
+    else{
+        if(connect.responceType == eResponceTypeImage){
+            [self.loadImageActivity stopAnimating];
+        }
+    }
+    [self deleteConnectFromDict:connect.connection];
+}
+#pragma mark - Data loading by tag
+-(void)userImageLoading: (Connect*)connect{
+    UIImage *testImage = [UIImage imageWithData: connect.data];
+    [self.loadImageActivity stopAnimating];
+    self.userImage.image = testImage;
+}
+
+-(void)userInfoLoading:(Connect*)connect{
+    NSDictionary* parseObj = [connect objectFromResponce];
+    if ([parseObj valueForKey:@"name"]) {
+        self.nameLabel.text = [parseObj valueForKey:@"name"];
+    }
+    
+    NSMutableString* information = [[[NSMutableString alloc]init]autorelease];
+    
+    if ([parseObj valueForKey:@"birthday"]) {
+        [information appendFormat:@"Birthday: %@\n",[parseObj valueForKey:@"birthday"] ] ;
+    }
+    //...
+    self.personalInfo.text = information;
+}
+
+-(void)userStatusLoading:(Connect*)connect{
+    NSDictionary* parseObj = [connect objectFromResponce];
+    self.statusInfo.text = @"dasgfidgfusd";
 }
 @end
