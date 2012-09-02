@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E51ED8415F2466500101920 /* female.gif in Resources */ = {isa = PBXBuildFile; fileRef = 6E51ED8015F2466500101920 /* female.gif */; };
+		6E51ED8515F2466500101920 /* female@2x.gif in Resources */ = {isa = PBXBuildFile; fileRef = 6E51ED8115F2466500101920 /* female@2x.gif */; };
+		6E51ED8615F2466500101920 /* male.gif in Resources */ = {isa = PBXBuildFile; fileRef = 6E51ED8215F2466500101920 /* male.gif */; };
+		6E51ED8715F2466500101920 /* male@2x.gif in Resources */ = {isa = PBXBuildFile; fileRef = 6E51ED8315F2466500101920 /* male@2x.gif */; };
 		6EAC9F0715F0CF6500231960 /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EAC9EEF15F0CF6500231960 /* NSObject+SBJson.m */; };
 		6EAC9F0815F0CF6500231960 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EAC9EF215F0CF6500231960 /* SBJsonParser.m */; };
 		6EAC9F0915F0CF6500231960 /* SBJsonStreamParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EAC9EF415F0CF6500231960 /* SBJsonStreamParser.m */; };
@@ -35,6 +39,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6E51ED8015F2466500101920 /* female.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = female.gif; sourceTree = "<group>"; };
+		6E51ED8115F2466500101920 /* female@2x.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "female@2x.gif"; sourceTree = "<group>"; };
+		6E51ED8215F2466500101920 /* male.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = male.gif; sourceTree = "<group>"; };
+		6E51ED8315F2466500101920 /* male@2x.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "male@2x.gif"; sourceTree = "<group>"; };
 		6EAC9EEE15F0CF6500231960 /* NSObject+SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJson.h"; sourceTree = "<group>"; };
 		6EAC9EEF15F0CF6500231960 /* NSObject+SBJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJson.m"; sourceTree = "<group>"; };
 		6EAC9EF015F0CF6500231960 /* SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson.h; sourceTree = "<group>"; };
@@ -131,6 +139,10 @@
 		6EB42CCF15F10C6100B314E3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6E51ED8215F2466500101920 /* male.gif */,
+				6E51ED8315F2466500101920 /* male@2x.gif */,
+				6E51ED8115F2466500101920 /* female@2x.gif */,
+				6E51ED8015F2466500101920 /* female.gif */,
 				6EB42CD015F10E2400B314E3 /* user_placeholder@2x.jpeg */,
 				6EB42CCC15F10C5900B314E3 /* user_placeholder.jpeg */,
 			);
@@ -251,6 +263,10 @@
 				6EF487EA15F0AE9D007B3004 /* InfoViewController.xib in Resources */,
 				6EB42CCD15F10C5900B314E3 /* user_placeholder.jpeg in Resources */,
 				6EB42CD115F10E2400B314E3 /* user_placeholder@2x.jpeg in Resources */,
+				6E51ED8415F2466500101920 /* female.gif in Resources */,
+				6E51ED8515F2466500101920 /* female@2x.gif in Resources */,
+				6E51ED8615F2466500101920 /* male.gif in Resources */,
+				6E51ED8715F2466500101920 /* male@2x.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

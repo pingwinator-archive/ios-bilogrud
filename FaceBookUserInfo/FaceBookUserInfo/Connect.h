@@ -14,13 +14,26 @@ typedef enum
     eResponceTypeImage
 } ResponceType;
 
-@interface Connect : NSObject
+@protocol ConnectDelegate;
+
+@interface Connect : NSObject<NSURLConnectionDelegate, NSURLConnectionDataDelegate>
+@property(readonly, nonatomic, retain)NSURLRequest *urlRequest;
 @property(readonly, nonatomic, retain)NSURLConnection *connection;
 @property(readonly, nonatomic, retain)NSMutableData *data;
 @property(readonly, nonatomic, assign)ResponceType responceType;
--(Connect *)initConnect: (NSURLConnection *)c responce: (ResponceType) resp;
-+(Connect *)connect: (NSURLConnection *)c responce: (ResponceType) resp;
+@property(nonatomic, assign) id <ConnectDelegate> delegate;
+@property (nonatomic, assign) NSUInteger tag;
+-(Connect *)initRequest: (NSURLRequest *)request responce: (ResponceType) resp;
++(Connect *)urlRequest: (NSURLRequest *)request responce: (ResponceType) resp;
 -(void)appendConnectData: (NSData*) appendedData;
 -(void)resetConnectData;
 -(void)startConnect;
+-(id)objectFromResponce;
+@end
+
+@protocol ConnectDelegate <NSObject>
+
+@required
+-(void)didLoadingData: (Connect*)connect error: (NSError*)err;
+
 @end

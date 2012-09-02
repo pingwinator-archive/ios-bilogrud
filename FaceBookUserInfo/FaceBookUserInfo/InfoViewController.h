@@ -7,13 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#include "Connect.h"
+@interface InfoViewController : UIViewController<ConnectDelegate>
 
-@interface InfoViewController : UIViewController<NSURLConnectionDelegate, NSURLConnectionDataDelegate>
 @property(retain, nonatomic) IBOutlet UITextView *personalInfo;
+@property(retain, nonatomic) IBOutlet UITextView *statusInfo;
 @property(retain, nonatomic) IBOutlet UIImageView *userImage;
+@property(retain, nonatomic) IBOutlet UILabel *nameLabel;
+@property(retain, nonatomic) IBOutlet UIActivityIndicatorView* loadImageActivity;
 @property(retain, nonatomic) NSMutableData* testData;
 @property(retain, nonatomic) NSURLConnection *testImageConnection;
 @property(retain, nonatomic) NSURLConnection *testInfoConnection;
 @property(retain, nonatomic) NSString* userIdValue;
-@property(retain, nonatomic) IBOutlet UIActivityIndicatorView* loadImageActivity;
+
 @end
