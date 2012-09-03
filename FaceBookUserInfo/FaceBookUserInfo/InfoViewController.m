@@ -10,7 +10,7 @@
 #import "SBJson.h"
 #import "Connect.h"
 
-#define kToken @"AAACEdEose0cBAM4s0rZAJBUZBFhJ0ppg4RzgTac7VjLr4VdBWIlPAe3ypSsMRfUX9o181QOrQXY8Sf1jJCuHXxsQWnT9eOiqlt3Yc5A8s9MMgIRtcR"
+#define kToken @"AAACEdEose0cBAJXIWkR0mSN1kUkejhlR5YTFUqHzmU3Xu709SGWAJUZB0pp2t9P64sZAKIYEVYD1dq3vIWyZCpSamijAlrylyjZBNZCUg6AXg2BTkqE6X"
 
 #define kUserInfoTag 1
 #define kUserImage 2
@@ -29,6 +29,8 @@
 @synthesize loadImageActivity;
 @synthesize nameLabel;
 @synthesize statusInfo;
+@synthesize statusesInfoTable;
+@synthesize statusesArr;
 -(void)dealloc{
     self.userImage = nil;
     self.personalInfo = nil;
@@ -100,7 +102,7 @@
 }
 
 -(void)addConnectStatus{
-    NSString *urlStatusString = [[[NSString alloc]initWithFormat: @"https://graph.facebook.com/%@/?access_token=%@/statuses", self.userIdValue,kToken]autorelease];
+    NSString *urlStatusString = [[[NSString alloc]initWithFormat: @"https://graph.facebook.com/%@/statuses?access_token=%@", self.userIdValue,kToken]autorelease];
     NSURL *urlStatus = [NSURL URLWithString:urlStatusString];
     NSURLRequest *statusRequest= [NSURLRequest requestWithURL:urlStatus];
     
@@ -200,12 +202,56 @@
     if ([parseObj valueForKey:@"birthday"]) {
         [information appendFormat:@"Birthday: %@\n",[parseObj valueForKey:@"birthday"] ] ;
     }
+    NSDictionary *location = [parseObj valueForKey:@"location"];
+    if([location valueForKey:@"name"]){
+        [information appendFormat:@"Location: %@\n",[location valueForKey:@"name"] ] ;
+
+    }
     //...
     self.personalInfo.text = information;
 }
 
 -(void)userStatusLoading:(Connect*)connect{
     NSDictionary* parseObj = [connect objectFromResponce];
-    self.statusInfo.text = @"dasgfidgfusd";
+    
+    
+    NSArray *dataArr = [parseObj valueForKey:@"data"];
+    self.statusesArr = [[[NSArray alloc]initWithArray:dataArr]autorelease];
+    
+    NSDictionary *status = [dataArr objectAtIndex:0];
+   
+    NSString *message = [status valueForKey:@"message"];
+    [self.statusesInfoTable reloadData];
+    self.statusInfo.text = message;
 }
+
+#pragma  mark - UITableViewDataSource Methods
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return (self.statusesArr) ?([self.statusesArr count]):0;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    static NSString *SimpleTableIdentifier = @"SimpleTableId";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:SimpleTableIdentifier];
+    
+    if(cell == nil){
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:SimpleTableIdentifier] autorelease];
+        
+    }
+    NSUInteger row = [indexPath row];
+    if([self.statusesArr count] != 0){
+    NSDictionary *status = [self.statusesArr objectAtIndex:row];
+    
+    NSString *message = [status valueForKey:@"message"];
+    NSString *time = [status valueForKey:@"updated_time"];
+    cell.textLabel.text = message;
+    cell.detailTextLabel.text = time;
+    }
+    return cell;
+}
+#pragma  mark UITableViewDelegate Methods
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+}
+
 @end

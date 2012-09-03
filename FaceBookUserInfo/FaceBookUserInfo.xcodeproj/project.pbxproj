@@ -26,6 +26,8 @@
 		6EAC9F1515F0DD5600231960 /* Connect.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EAC9F1415F0DD5600231960 /* Connect.m */; };
 		6EB42CCD15F10C5900B314E3 /* user_placeholder.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 6EB42CCC15F10C5900B314E3 /* user_placeholder.jpeg */; };
 		6EB42CD115F10E2400B314E3 /* user_placeholder@2x.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 6EB42CD015F10E2400B314E3 /* user_placeholder@2x.jpeg */; };
+		6EDA873515F4050A001DACB7 /* StatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EDA873415F4050A001DACB7 /* StatusCell.m */; };
+		6EDA873815F40529001DACB7 /* StatusCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EDA873715F40529001DACB7 /* StatusCell.xib */; };
 		6EF487B415F0A985007B3004 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF487B315F0A985007B3004 /* UIKit.framework */; };
 		6EF487B615F0A985007B3004 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF487B515F0A985007B3004 /* Foundation.framework */; };
 		6EF487B815F0A985007B3004 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF487B715F0A985007B3004 /* CoreGraphics.framework */; };
@@ -72,6 +74,9 @@
 		6EAC9F1415F0DD5600231960 /* Connect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Connect.m; sourceTree = "<group>"; };
 		6EB42CCC15F10C5900B314E3 /* user_placeholder.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = user_placeholder.jpeg; sourceTree = "<group>"; };
 		6EB42CD015F10E2400B314E3 /* user_placeholder@2x.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "user_placeholder@2x.jpeg"; sourceTree = "<group>"; };
+		6EDA873315F4050A001DACB7 /* StatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusCell.h; sourceTree = "<group>"; };
+		6EDA873415F4050A001DACB7 /* StatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusCell.m; sourceTree = "<group>"; };
+		6EDA873715F40529001DACB7 /* StatusCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatusCell.xib; sourceTree = "<group>"; };
 		6EF487AF15F0A985007B3004 /* FaceBookUserInfo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FaceBookUserInfo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EF487B315F0A985007B3004 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6EF487B515F0A985007B3004 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -192,6 +197,9 @@
 				6EF487BA15F0A985007B3004 /* Supporting Files */,
 				6EAC9F1315F0DD5600231960 /* Connect.h */,
 				6EAC9F1415F0DD5600231960 /* Connect.m */,
+				6EDA873315F4050A001DACB7 /* StatusCell.h */,
+				6EDA873415F4050A001DACB7 /* StatusCell.m */,
+				6EDA873715F40529001DACB7 /* StatusCell.xib */,
 			);
 			path = FaceBookUserInfo;
 			sourceTree = "<group>";
@@ -267,6 +275,7 @@
 				6E51ED8515F2466500101920 /* female@2x.gif in Resources */,
 				6E51ED8615F2466500101920 /* male.gif in Resources */,
 				6E51ED8715F2466500101920 /* male@2x.gif in Resources */,
+				6EDA873815F40529001DACB7 /* StatusCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,6 +303,7 @@
 				6EAC9F1115F0CF6500231960 /* SBJsonUTF8Stream.m in Sources */,
 				6EAC9F1215F0CF6500231960 /* SBJsonWriter.m in Sources */,
 				6EAC9F1515F0DD5600231960 /* Connect.m in Sources */,
+				6EDA873515F4050A001DACB7 /* StatusCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
