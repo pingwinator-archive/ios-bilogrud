@@ -36,9 +36,9 @@
 }
 
 -(void)callDelegateWithError:(NSError*) error{
-    if ([self.delegate respondsToSelector:@selector(didLoadingData:error:)]) {
-         [self.delegate didLoadingData:self error:error];
-    }
+//    if ([self.delegate respondsToSelector:@selector(didLoadingData:error:)]) {
+//         [self.delegate didLoadingData:self error:error];
+//    }
     if (self.block) {
         self.block(self, error);
     }
@@ -48,6 +48,15 @@
     return [NSString stringWithFormat:@"connection id %@", self.connection];
 }
 
+-(Connect *)initRequest: (NSURLRequest *)request  responce: (ResponceType) resp withBlock: (ConnectBlock) _block
+{
+    self = [self initRequest:request responce:resp];
+    if (self) {
+        self.block = _block;
+    }
+    return self;
+}
+
 -(Connect *)initRequest: (NSURLRequest *)request  responce: (ResponceType) resp{
     self = [super init];
     if (self) {
@@ -55,13 +64,16 @@
         self.responceType = resp;
         self.connection = [NSURLConnection connectionWithRequest:self.urlRequest delegate:self];
         self.tag = 0;
+        [self startConnect];
     }
     return self;
 }
 +(Connect *)urlRequest: (NSURLRequest *)request responce: (ResponceType) resp{
     return [[[Connect alloc] initRequest:request responce:resp]autorelease];
 }
-
++(Connect *)urlRequest: (NSURLRequest *)request responce: (ResponceType) resp withBlock: (ConnectBlock) _block{
+    return [[[Connect alloc] initRequest:request responce:resp withBlock:_block]autorelease];
+}
 -(void)appendConnectData: (NSData*) appendedData{
     self.data = (NSMutableData*)appendedData;
 }
@@ -71,8 +83,6 @@
 }
 
 -(void)startConnect{
-   
-   
     [self.connection start];
 }
 -(id)objectFromResponce{
@@ -97,6 +107,4 @@
      NSLog(@" error %@",error);
     [self callDelegateWithError:error];
 }
-
-
 @end

@@ -96,43 +96,62 @@
     NSURL *urlInfo = [NSURL URLWithString:urlInfoString];
     NSURLRequest *infoRequest= [NSURLRequest requestWithURL:urlInfo];
     
-    Connect *connectInfo = [[Connect alloc] initRequest:infoRequest responce:eResponceTypeJson];
-    connectInfo.block = ^(Connect *Con, NSError *err){
-        [self userInfoLoading:Con];
-    };
-    
+    Connect *connectInfo = [Connect urlRequest:infoRequest responce:eResponceTypeJson withBlock:^(Connect* con, NSError* er){
+        if(er){
+            if(con.responceType == eResponceTypeImage){
+                [self.loadImageActivity stopAnimating];
+            }
+        }
+        else{
+            [self userStatusLoading:con];
+            
+        }
+    }];
+
     [self addConnectToDict:connectInfo];
-    [connectInfo startConnect];
     [connectInfo release];
 }
 
 -(void)addConnectStatus{
     NSString *urlStatusString = [[[NSString alloc]initWithFormat: @"https://graph.facebook.com/%@/statuses?access_token=%@", self.userIdValue,kToken]autorelease];
-    NSURL *urlStatus = [NSURL URLWithString:urlStatusString];
+    NSURL *urlStatus = [NSURL URLWithString: urlStatusString];
     NSURLRequest *statusRequest= [NSURLRequest requestWithURL:urlStatus];
     
-    Connect *connectStatus = [[Connect alloc] initRequest:statusRequest responce:eResponceTypeJson];
-  
-    connectStatus.block = ^(Connect* con, NSError* er){
-     [self userStatusLoading:con];
-    };
-    
+    Connect *connectStatus = [Connect urlRequest:statusRequest responce:eResponceTypeJson withBlock:^(Connect* con, NSError* er){
+        if(er){
+            if(con.responceType == eResponceTypeImage){
+                [self.loadImageActivity stopAnimating];
+            }
+        }
+        else{
+             [self userStatusLoading:con];
+
+        }
+    }];
+     
     [self addConnectToDict:connectStatus];
-    [connectStatus startConnect];
+
     [connectStatus release];
 }
 
 -(void)addConnectFeed{
-//    NSString *urlFeedString = [[[NSString alloc]initWithFormat: @"https://graph.facebook.com/%@/feed?access_token=%@", self.userIdValue,kToken]autorelease];
-//    NSURL *urlFeed = [NSURL URLWithString:urlFeedString];
-//    NSURLRequest *statusRequest= [NSURLRequest requestWithURL:urlFeed];
-//    
-//    Connect *connectStatus = [[Connect alloc] initRequest:statusRequest responce:eResponceTypeJson];
-//    connectStatus.delegate = self;
-//    connectStatus.tag = kUserStatus;
-//    [self addConnectToDict:connectStatus];
-//    [connectStatus startConnect];
-//    [connectStatus release];
+    NSString *urlFeedString = [[[NSString alloc]initWithFormat: @"https://graph.facebook.com/%@/feed?access_token=%@", self.userIdValue,kToken]autorelease];
+    NSURL *urlFeed = [NSURL URLWithString:urlFeedString];
+    NSURLRequest *feedRequest= [NSURLRequest requestWithURL:urlFeed];
+   
+    Connect *connectFeed = [Connect urlRequest:feedRequest responce:eResponceTypeJson withBlock:^(Connect* con, NSError* er){
+        if(er){
+            if(con.responceType == eResponceTypeImage){
+                [self.loadImageActivity stopAnimating];
+            }
+        }
+        else{
+             [self userFeedLoading:con];
+        }
+    }];
+   
+    [self addConnectToDict:connectFeed];
+    [connectFeed release];
 }
 
 - (void)viewDidUnload
@@ -177,8 +196,8 @@
 }
 
 #pragma mark - ConnectDelegate Method
-  /*  
--(void)didLoadingData:(Connect *)connect error:(NSError *)err{
+
+-(void)didLoadingData:(Connect *)connect error:(NSError *)err{  /*  
 if (!err) {
         NSLog(@"connect");
         switch (connect.tag) {
@@ -208,8 +227,8 @@ if (!err) {
         }
     }
     [self deleteConnectFromDict:connect.connection];
-  
-} */
+  */
+}
 #pragma mark - Data loading by tag
 -(void)userImageLoading: (Connect*)connect{
     UIImage *testImage = [UIImage imageWithData: connect.data];
@@ -238,10 +257,7 @@ if (!err) {
 
 -(void)userStatusLoading:(Connect*)connect{
     NSDictionary* parseObj = [connect objectFromResponce];
-    
-    
     NSArray *dataArr = [parseObj valueForKey:@"data"];
-    
     self.statusesArr = dataArr;
     
     NSDictionary *status = [dataArr objectAtIndex:0];
@@ -254,18 +270,14 @@ if (!err) {
 -(void)userFeedLoading:(Connect*)connect{
     NSDictionary* parseObj = [connect objectFromResponce];
     
-//    NSArray *dataArr = [parseObj valueForKey:@"data"];
-//    self.statusesArr = [[[NSArray alloc]initWithArray:dataArr]autorelease];
-//    
-//    NSDictionary *status = [dataArr objectAtIndex:0];
-//    
-//    NSString *message = [status valueForKey:@"message"];
-//    [self.statusesInfoTable reloadData];
-//    self.statusInfo.text = message;
-    
+    NSArray *dataArr = [parseObj valueForKey:@"data"];
+   
+    NSDictionary *status = [dataArr objectAtIndex:0];
+//@!!!!
 }
 
 #pragma  mark - UITableViewDataSource Methods
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return (self.statusesArr) ?([self.statusesArr count]):0;
 }

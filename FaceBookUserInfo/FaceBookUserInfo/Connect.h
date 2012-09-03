@@ -30,7 +30,8 @@ typedef void (^ConnectBlock)(Connect* con, NSError* er);
 @property(nonatomic, copy) ConnectBlock block;
 -(Connect *)initRequest: (NSURLRequest *)request responce: (ResponceType) resp;
 +(Connect *)urlRequest: (NSURLRequest *)request responce: (ResponceType) resp;
-//+(Connect *)
+-(Connect *)initRequest: (NSURLRequest *)request  responce: (ResponceType) resp withBlock: (ConnectBlock) _block;
++(Connect *)urlRequest: (NSURLRequest *)request responce: (ResponceType) resp withBlock: (ConnectBlock) _block;
 -(void)appendConnectData: (NSData*) appendedData;
 -(void)resetConnectData;
 -(void)startConnect;
