@@ -10,11 +10,12 @@
 #import "SBJson.h"
 #import "Connect.h"
 
-#define kToken @"AAACEdEose0cBAJXIWkR0mSN1kUkejhlR5YTFUqHzmU3Xu709SGWAJUZB0pp2t9P64sZAKIYEVYD1dq3vIWyZCpSamijAlrylyjZBNZCUg6AXg2BTkqE6X"
+#define kToken @"AAACEdEose0cBAIIWKp0iBaHCM8JFsHVAeOabBcVfveC43KiwGVYSY3XNzpfQpAQNiORbzwLT9wa4acsgLoikmsggpch7xU63WY2NTr0BTquAebQo"
 
 #define kUserInfoTag 1
 #define kUserImage 2
 #define kUserStatus 3
+#define kUserFeedTag 4
 @interface InfoViewController ()
 @property (nonatomic, retain)NSMutableDictionary *conDict;
 @end
@@ -71,22 +72,24 @@
     [self addConnectImage];
     [self addConnectInfo];
     [self addConnectStatus];
+    [self addConnectFeed];
 }
+#pragma mark - Add connects
 
 -(void) addConnectImage{
     NSString *urlString = [NSString stringWithFormat: @"https://graph.facebook.com/%@/picture", self.userIdValue];
     NSURL *url = [NSURL URLWithString:urlString ];
     NSURLRequest *imageRequest = [NSURLRequest requestWithURL:url];// cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:30];
     
-    Connect *connectImage = [[Connect alloc] initRequest:imageRequest responce:eResponceTypeImage];    connectImage.delegate = self;
-    connectImage.tag = kUserImage;
+    Connect *connectImage = [[Connect alloc] initRequest:imageRequest responce:eResponceTypeImage];
+    connectImage.block = ^(Connect *Con, NSError *err){
+        [self userImageLoading:Con];
+    };
     [self addConnectToDict:connectImage];
     
     [connectImage startConnect];
     [connectImage release];
 }
-
-#pragma mark - Add connects
 
 -(void)addConnectInfo{
     NSString *urlInfoString = [[[NSString alloc]initWithFormat: @"https://graph.facebook.com/%@/?access_token=%@", self.userIdValue, kToken] autorelease];
@@ -94,8 +97,10 @@
     NSURLRequest *infoRequest= [NSURLRequest requestWithURL:urlInfo];
     
     Connect *connectInfo = [[Connect alloc] initRequest:infoRequest responce:eResponceTypeJson];
-    connectInfo.delegate = self;
-    connectInfo.tag = kUserInfoTag;
+    connectInfo.block = ^(Connect *Con, NSError *err){
+        [self userInfoLoading:Con];
+    };
+    
     [self addConnectToDict:connectInfo];
     [connectInfo startConnect];
     [connectInfo release];
@@ -107,11 +112,27 @@
     NSURLRequest *statusRequest= [NSURLRequest requestWithURL:urlStatus];
     
     Connect *connectStatus = [[Connect alloc] initRequest:statusRequest responce:eResponceTypeJson];
-    connectStatus.delegate = self;
-    connectStatus.tag = kUserStatus;
+  
+    connectStatus.block = ^(Connect* con, NSError* er){
+     [self userStatusLoading:con];
+    };
+    
     [self addConnectToDict:connectStatus];
     [connectStatus startConnect];
     [connectStatus release];
+}
+
+-(void)addConnectFeed{
+//    NSString *urlFeedString = [[[NSString alloc]initWithFormat: @"https://graph.facebook.com/%@/feed?access_token=%@", self.userIdValue,kToken]autorelease];
+//    NSURL *urlFeed = [NSURL URLWithString:urlFeedString];
+//    NSURLRequest *statusRequest= [NSURLRequest requestWithURL:urlFeed];
+//    
+//    Connect *connectStatus = [[Connect alloc] initRequest:statusRequest responce:eResponceTypeJson];
+//    connectStatus.delegate = self;
+//    connectStatus.tag = kUserStatus;
+//    [self addConnectToDict:connectStatus];
+//    [connectStatus startConnect];
+//    [connectStatus release];
 }
 
 - (void)viewDidUnload
@@ -156,9 +177,9 @@
 }
 
 #pragma mark - ConnectDelegate Method
-
+  /*  
 -(void)didLoadingData:(Connect *)connect error:(NSError *)err{
-    if (!err) {
+if (!err) {
         NSLog(@"connect");
         switch (connect.tag) {
             case kUserImage:{
@@ -173,6 +194,10 @@
             {
                 [self userStatusLoading:connect];
             }
+            case kUserFeedTag:{
+                [self userFeedLoading:connect];
+            }
+                break;
             default:
                 break;
         }
@@ -183,7 +208,8 @@
         }
     }
     [self deleteConnectFromDict:connect.connection];
-}
+  
+} */
 #pragma mark - Data loading by tag
 -(void)userImageLoading: (Connect*)connect{
     UIImage *testImage = [UIImage imageWithData: connect.data];
@@ -205,7 +231,6 @@
     NSDictionary *location = [parseObj valueForKey:@"location"];
     if([location valueForKey:@"name"]){
         [information appendFormat:@"Location: %@\n",[location valueForKey:@"name"] ] ;
-
     }
     //...
     self.personalInfo.text = information;
@@ -216,13 +241,28 @@
     
     
     NSArray *dataArr = [parseObj valueForKey:@"data"];
-    self.statusesArr = [[[NSArray alloc]initWithArray:dataArr]autorelease];
+    
+    self.statusesArr = dataArr;
     
     NSDictionary *status = [dataArr objectAtIndex:0];
    
     NSString *message = [status valueForKey:@"message"];
     [self.statusesInfoTable reloadData];
     self.statusInfo.text = message;
+}
+
+-(void)userFeedLoading:(Connect*)connect{
+    NSDictionary* parseObj = [connect objectFromResponce];
+    
+//    NSArray *dataArr = [parseObj valueForKey:@"data"];
+//    self.statusesArr = [[[NSArray alloc]initWithArray:dataArr]autorelease];
+//    
+//    NSDictionary *status = [dataArr objectAtIndex:0];
+//    
+//    NSString *message = [status valueForKey:@"message"];
+//    [self.statusesInfoTable reloadData];
+//    self.statusInfo.text = message;
+    
 }
 
 #pragma  mark - UITableViewDataSource Methods

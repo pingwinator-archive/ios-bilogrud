@@ -14,6 +14,10 @@ typedef enum
     eResponceTypeImage
 } ResponceType;
 
+@class Connect;
+
+typedef void (^ConnectBlock)(Connect* con, NSError* er);
+
 @protocol ConnectDelegate;
 
 @interface Connect : NSObject<NSURLConnectionDelegate, NSURLConnectionDataDelegate>
@@ -23,8 +27,10 @@ typedef enum
 @property(readonly, nonatomic, assign)ResponceType responceType;
 @property(nonatomic, assign) id <ConnectDelegate> delegate;
 @property (nonatomic, assign) NSUInteger tag;
+@property(nonatomic, copy) ConnectBlock block;
 -(Connect *)initRequest: (NSURLRequest *)request responce: (ResponceType) resp;
 +(Connect *)urlRequest: (NSURLRequest *)request responce: (ResponceType) resp;
+//+(Connect *)
 -(void)appendConnectData: (NSData*) appendedData;
 -(void)resetConnectData;
 -(void)startConnect;

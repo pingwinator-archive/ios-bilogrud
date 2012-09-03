@@ -23,9 +23,24 @@
 @synthesize urlRequest;
 @synthesize delegate;
 @synthesize tag;
+@synthesize block;
+
+-(void)dealloc{
+    if (self.connection) {
+        [self.connection cancel];
+    }
+    self.urlRequest = nil;
+    self.data = nil;
+    self.block = nil;
+    [super dealloc];
+}
+
 -(void)callDelegateWithError:(NSError*) error{
     if ([self.delegate respondsToSelector:@selector(didLoadingData:error:)]) {
          [self.delegate didLoadingData:self error:error];
+    }
+    if (self.block) {
+        self.block(self, error);
     }
 }
 - (NSString*)description
@@ -34,7 +49,7 @@
 }
 
 -(Connect *)initRequest: (NSURLRequest *)request  responce: (ResponceType) resp{
-      self = [super init];
+    self = [super init];
     if (self) {
         self.urlRequest = request;
         self.responceType = resp;
@@ -45,16 +60,6 @@
 }
 +(Connect *)urlRequest: (NSURLRequest *)request responce: (ResponceType) resp{
     return [[[Connect alloc] initRequest:request responce:resp]autorelease];
-}
-
-
--(void)dealloc{
-    if (self.connection) {
-        [self.connection cancel];
-    }
-    self.urlRequest = nil;
-    self.data = nil;
-    [super dealloc];
 }
 
 -(void)appendConnectData: (NSData*) appendedData{
