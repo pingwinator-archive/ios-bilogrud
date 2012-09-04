@@ -20,5 +20,6 @@
 @property(retain, nonatomic) NSURLConnection *testImageConnection;
 @property(retain, nonatomic) NSURLConnection *testInfoConnection;
 @property(retain, nonatomic) NSString *userIdValue;
-@property(retain, nonatomic) NSArray *statusesArr;
+
+
 @end

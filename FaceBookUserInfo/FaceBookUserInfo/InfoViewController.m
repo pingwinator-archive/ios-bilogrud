@@ -11,7 +11,7 @@
 #import "Connect.h"
 #include <dispatch/dispatch.h>
 
-#define kToken @"AAACEdEose0cBAErmwTIrNeZAJJJa7tFsbMip29o37J3QY1g7naDkdZA1oYobDbZAqvAInvlC1VvVo6fYncBLsDdLykO3EwFDE0IUEGfZBzntZBai1CYiX"
+#define kToken @"AAACEdEose0cBAFAQ4GzvQi6eG9IwUgRCCU3FT6C67IjrtTMdCA0tDyg3rn9cc5tHQjrY8uSYp7hPbH7xYktTFvOnZCAn10Gk0w9QEM4TmguLioqBS"
 
 #define kUserInfoTag 1
 #define kUserImage 2
@@ -19,6 +19,8 @@
 #define kUserFeedTag 4
 @interface InfoViewController ()
 @property (nonatomic, retain)NSMutableDictionary *conDict;
+@property(retain, nonatomic) NSArray *statusesArr;
+@property(retain, nonatomic) NSArray *feedsArr;
 @end
 
 @implementation InfoViewController
@@ -33,6 +35,7 @@
 @synthesize statusInfo;
 @synthesize statusesInfoTable;
 @synthesize statusesArr;
+@synthesize feedsArr;
 -(void)dealloc{
     self.userImage = nil;
     self.personalInfo = nil;
@@ -75,37 +78,79 @@
     [self addConnectImage];
     [self addConnectInfo];
     [self addConnectStatus];
-    [self addConnectFeed];
+//    [self addConnectFeed];
 }
 
-#pragma mark - Add connects
+#define GCD_BACKGROUND_BEGIN  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^(void) {
+#define GCD_MAIN_BEGIN dispatch_async(dispatch_get_main_queue(), ^{
+#define GCD_END });
+
+- (NSString*)getFileName:(NSURL*)url
+{
+    NSString* path = url.path;
+    path = [path stringByReplacingOccurrencesOfString:@"/" withString:@"_"];
+    return [NSTemporaryDirectory() stringByAppendingPathComponent:path];
+}
+
+#pragma mark - GCD Methods
 - (void)downloadImageURL:(NSURL *)imageURL
             completition:(void (^)(UIImage *))completitionBlock {
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        // cached image filename
-//        NSString *filePath = getCachePath(imageURL);
-//        // try to get cached image
+    NSString *filePath =[self getFileName:imageURL];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+            NSData *imageData = [NSData dataWithContentsOfFile:filePath];
+            UIImage *image = [UIImage imageWithData:imageData];
+            
+            if (image) {
+                // call completition on main queue (thread)
+            //    dispatch_async(dispatch_get_main_queue(), ^{
+                    completitionBlock(image);
+             //   });
+                return;
+            }
+        }
+        // no cached data – download and cache
+    GCD_BACKGROUND_BEGIN
+        NSData* imageData = [NSData dataWithContentsOfURL:imageURL];
+        UIImage *image = [UIImage imageWithData:imageData];
+        if (image) {
+            [imageData writeToFile:[self getFileName:imageURL] atomically:YES];
+        }
+        completitionBlock(image);
+    GCD_END
+    });
+}
+- (void)downloadInformation:(NSURL *)infoURL
+            completition:(void (^)(NSString* *))completitionBlock {
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//        NSString *filePath =[self getFileName:imageURL];
 //        if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-//            NSData *imageData = [NSData dataWithContentsOfFile:filePath]; UIImage *image = [UIImage imageWithData:imageData];
-//            // if succeeded - call completition block and return
+//            NSData *imageData = [NSData dataWithContentsOfFile:filePath];
+//            UIImage *image = [UIImage imageWithData:imageData];
+//            
 //            if (image) {
 //                // call completition on main queue (thread)
-//                dispatch_async(dispatch_get_main_queue(), ^{ completitionBlock(image); });
-//                return; }
+//                //    dispatch_async(dispatch_get_main_queue(), ^{
+//                completitionBlock(image);
+//                //   });
+//                return;
+//            }
 //        }
         // no cached data – download and cache
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^(void) { // download image data and create UIImage
-            NSData* imageData = [NSData dataWithContentsOfURL:imageURL];
-            UIImage *image = [UIImage imageWithData:imageData];
-//            if (image) {
-//                // cache to disk
-//                dispatch_async(dispatch_get_global_queue(0, 0), ^(void) { [imageData writeToFile:getCachePath(imageURL) atomically:YES]; });
-//            }
-//          //  call completition on main queue (thread)
-//            ￼￼//
-            dispatch_async(dispatch_get_main_queue(), ^{ completitionBlock(image); });
-        }); });
+        GCD_BACKGROUND_BEGIN
+        NSData* infoData = [NSData dataWithContentsOfURL:infoURL];//dataWithContentsOfURL:imageURL];
+//        UIImage *image = [UIImage imageWithData:imageData];
+//        if (image) {
+//            [imageData writeToFile:[self getFileName:imageURL] atomically:YES];
+//        }
+      
+        
+        completitionBlock(@"flkdnfkjndlf");
+        GCD_END
+    });
 }
+
+#pragma mark - Add connects
 -(void) addConnectImage{
     NSString *urlString = [NSString stringWithFormat: @"https://graph.facebook.com/%@/picture", self.userIdValue];
     NSURL *url = [NSURL URLWithString:urlString ];
@@ -118,24 +163,40 @@
 //    }];
 //    [self addConnectToDict:connectImage];
     
-    [self downloadImageURL:url completition:^(UIImage* testImage)  {
-        self.userImage.image = testImage;
-        [self.loadImageActivity stopAnimating];
-    }];
-   
+    void(^x)(UIImage*) = ^(UIImage* testImage)  {
+        if(testImage){
+            GCD_MAIN_BEGIN
+            self.userImage.image = testImage;
+            [self.loadImageActivity stopAnimating];
+            GCD_END
+        }
+        else{
+            [self.loadImageActivity stopAnimating];
+        }
+    };
+    
+    [self downloadImageURL:url completition:x];
 }
 
 -(void)addConnectInfo{
     NSString *urlInfoString = [[[NSString alloc]initWithFormat: @"https://graph.facebook.com/%@/?access_token=%@", self.userIdValue, kToken] autorelease];
     NSURL *urlInfo = [NSURL URLWithString:urlInfoString];
-    NSURLRequest *infoRequest= [NSURLRequest requestWithURL:urlInfo];
     
-    Connect *connectInfo = [Connect urlRequest:infoRequest withBlock:^(Connect* con, NSError* er){
-                 [self userStatusLoading:con];
-    }];
-
-    [self addConnectToDict:connectInfo];
-    //[connectInfo release];
+    
+    void (^infoBlock)(NSString*) = ^(NSString* name){
+        if(name){
+            self.nameLabel.text = name;
+        }
+    };
+    [self downloadInformation:urlInfo completition:infoBlock];
+//    NSURLRequest *infoRequest= [NSURLRequest requestWithURL:urlInfo];
+//    
+//    Connect *connectInfo = [Connect urlRequest:infoRequest withBlock:^(Connect* con, NSError* er){
+//                 [self userInfoLoading:con];
+//    }];
+//
+//    [self addConnectToDict:connectInfo];
+    
 }
 
 -(void)addConnectStatus{
@@ -270,11 +331,13 @@ if (!err) {
     NSArray *dataArr = [parseObj valueForKey:@"data"];
     self.statusesArr = dataArr;
     
+    if([dataArr count]){
     NSDictionary *status = [dataArr objectAtIndex:0];
    
     NSString *message = [status valueForKey:@"message"];
     [self.statusesInfoTable reloadData];
     self.statusInfo.text = message;
+    }
 }
 
 -(void)userFeedLoading:(Connect*)connect{
@@ -282,7 +345,12 @@ if (!err) {
     
     NSArray *dataArr = [parseObj valueForKey:@"data"];
    
+    if([dataArr count]){
     NSDictionary *status = [dataArr objectAtIndex:0];
+    self.feedsArr = dataArr;
+    }
+    
+    //arr of feed , sort by updated_time???
 //@!!!!
 }
 
