@@ -9,8 +9,9 @@
 #import "InfoViewController.h"
 #import "SBJson.h"
 #import "Connect.h"
+#include <dispatch/dispatch.h>
 
-#define kToken @"AAACEdEose0cBAIIWKp0iBaHCM8JFsHVAeOabBcVfveC43KiwGVYSY3XNzpfQpAQNiORbzwLT9wa4acsgLoikmsggpch7xU63WY2NTr0BTquAebQo"
+#define kToken @"AAACEdEose0cBAErmwTIrNeZAJJJa7tFsbMip29o37J3QY1g7naDkdZA1oYobDbZAqvAInvlC1VvVo6fYncBLsDdLykO3EwFDE0IUEGfZBzntZBai1CYiX"
 
 #define kUserInfoTag 1
 #define kUserImage 2
@@ -42,6 +43,8 @@
     self.loadImageActivity = nil;
     self.nameLabel = nil;
     self.statusInfo = nil;
+    self.statusesArr = nil;
+    self.statusesInfoTable = nil;
     [super dealloc];
 }
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -74,21 +77,52 @@
     [self addConnectStatus];
     [self addConnectFeed];
 }
-#pragma mark - Add connects
 
+#pragma mark - Add connects
+- (void)downloadImageURL:(NSURL *)imageURL
+            completition:(void (^)(UIImage *))completitionBlock {
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        // cached image filename
+//        NSString *filePath = getCachePath(imageURL);
+//        // try to get cached image
+//        if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+//            NSData *imageData = [NSData dataWithContentsOfFile:filePath]; UIImage *image = [UIImage imageWithData:imageData];
+//            // if succeeded - call completition block and return
+//            if (image) {
+//                // call completition on main queue (thread)
+//                dispatch_async(dispatch_get_main_queue(), ^{ completitionBlock(image); });
+//                return; }
+//        }
+        // no cached data – download and cache
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^(void) { // download image data and create UIImage
+            NSData* imageData = [NSData dataWithContentsOfURL:imageURL];
+            UIImage *image = [UIImage imageWithData:imageData];
+//            if (image) {
+//                // cache to disk
+//                dispatch_async(dispatch_get_global_queue(0, 0), ^(void) { [imageData writeToFile:getCachePath(imageURL) atomically:YES]; });
+//            }
+//          //  call completition on main queue (thread)
+//            ￼￼//
+            dispatch_async(dispatch_get_main_queue(), ^{ completitionBlock(image); });
+        }); });
+}
 -(void) addConnectImage{
     NSString *urlString = [NSString stringWithFormat: @"https://graph.facebook.com/%@/picture", self.userIdValue];
     NSURL *url = [NSURL URLWithString:urlString ];
-    NSURLRequest *imageRequest = [NSURLRequest requestWithURL:url];// cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:30];
+//    NSURLRequest *imageRequest = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:30];
+//    
+//    Connect *connectImage = [Connect urlRequest:imageRequest withBlock: ^(Connect *Con, NSError *err){
+//        [self.loadImageActivity stopAnimating];
+//        [self userImageLoading:Con];
+//       
+//    }];
+//    [self addConnectToDict:connectImage];
     
-    Connect *connectImage = [[Connect alloc] initRequest:imageRequest responce:eResponceTypeImage];
-    connectImage.block = ^(Connect *Con, NSError *err){
-        [self userImageLoading:Con];
-    };
-    [self addConnectToDict:connectImage];
-    
-    [connectImage startConnect];
-    [connectImage release];
+    [self downloadImageURL:url completition:^(UIImage* testImage)  {
+        self.userImage.image = testImage;
+        [self.loadImageActivity stopAnimating];
+    }];
+   
 }
 
 -(void)addConnectInfo{
@@ -96,62 +130,38 @@
     NSURL *urlInfo = [NSURL URLWithString:urlInfoString];
     NSURLRequest *infoRequest= [NSURLRequest requestWithURL:urlInfo];
     
-    Connect *connectInfo = [Connect urlRequest:infoRequest responce:eResponceTypeJson withBlock:^(Connect* con, NSError* er){
-        if(er){
-            if(con.responceType == eResponceTypeImage){
-                [self.loadImageActivity stopAnimating];
-            }
-        }
-        else{
-            [self userStatusLoading:con];
-            
-        }
+    Connect *connectInfo = [Connect urlRequest:infoRequest withBlock:^(Connect* con, NSError* er){
+                 [self userStatusLoading:con];
     }];
 
     [self addConnectToDict:connectInfo];
-    [connectInfo release];
+    //[connectInfo release];
 }
 
 -(void)addConnectStatus{
-    NSString *urlStatusString = [[[NSString alloc]initWithFormat: @"https://graph.facebook.com/%@/statuses?access_token=%@", self.userIdValue,kToken]autorelease];
+    NSString *urlStatusString = [[[NSString alloc]initWithFormat: @"https://graph.facebook.com/%@/statuses?access_token=%@", self.userIdValue, kToken] autorelease];
     NSURL *urlStatus = [NSURL URLWithString: urlStatusString];
     NSURLRequest *statusRequest= [NSURLRequest requestWithURL:urlStatus];
     
-    Connect *connectStatus = [Connect urlRequest:statusRequest responce:eResponceTypeJson withBlock:^(Connect* con, NSError* er){
-        if(er){
-            if(con.responceType == eResponceTypeImage){
-                [self.loadImageActivity stopAnimating];
-            }
-        }
-        else{
-             [self userStatusLoading:con];
-
-        }
+    Connect *connectStatus = [Connect urlRequest:statusRequest  withBlock:^(Connect* con, NSError* er){
+          [self userStatusLoading:con];
     }];
      
     [self addConnectToDict:connectStatus];
-
-    [connectStatus release];
+   // [connectStatus release];
 }
 
 -(void)addConnectFeed{
-    NSString *urlFeedString = [[[NSString alloc]initWithFormat: @"https://graph.facebook.com/%@/feed?access_token=%@", self.userIdValue,kToken]autorelease];
+    NSString *urlFeedString = [[[NSString alloc]initWithFormat: @"https://graph.facebook.com/%@/feed?access_token=%@", self.userIdValue, kToken] autorelease];
     NSURL *urlFeed = [NSURL URLWithString:urlFeedString];
     NSURLRequest *feedRequest= [NSURLRequest requestWithURL:urlFeed];
    
-    Connect *connectFeed = [Connect urlRequest:feedRequest responce:eResponceTypeJson withBlock:^(Connect* con, NSError* er){
-        if(er){
-            if(con.responceType == eResponceTypeImage){
-                [self.loadImageActivity stopAnimating];
-            }
-        }
-        else{
+    Connect *connectFeed = [Connect urlRequest:feedRequest withBlock:^(Connect* con, NSError* er){
              [self userFeedLoading:con];
-        }
     }];
    
     [self addConnectToDict:connectFeed];
-    [connectFeed release];
+    //[connectFeed release];
 }
 
 - (void)viewDidUnload
@@ -176,11 +186,11 @@
 #pragma mark - connection dict
 
 -(void)addConnectToDict: (Connect *)con{
-    [self.conDict setValue:con forKey:[con.connection description]];
+    [self.conDict setValue:con forKey:[con description]];
 }
 
 - (void)removeConnect:(Connect*)connect{
-    NSString* key =  [connect.connection description];
+    NSString* key =  [connect description];
     [connect retain];
     [self.conDict removeObjectForKey:key];
     [connect autorelease];

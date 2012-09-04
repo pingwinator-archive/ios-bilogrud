@@ -12,7 +12,7 @@
 
 @property(nonatomic, retain)NSURLConnection *connection;
 @property(nonatomic, retain)NSMutableData *data;
-@property(nonatomic, assign)ResponceType responceType;
+//@property(nonatomic, assign)ResponceType responceType;
 @property(nonatomic, retain)NSURLRequest *urlRequest;
 @end
 
@@ -21,8 +21,8 @@
 @synthesize data;
 @synthesize responceType;
 @synthesize urlRequest;
-@synthesize delegate;
-@synthesize tag;
+//@synthesize delegate;
+//@synthesize tag;
 @synthesize block;
 
 -(void)dealloc{
@@ -48,15 +48,21 @@
     return [NSString stringWithFormat:@"connection id %@", self.connection];
 }
 
--(Connect *)initRequest: (NSURLRequest *)request  responce: (ResponceType) resp withBlock: (ConnectBlock) _block
+-(Connect *)initRequest: (NSURLRequest *)request withBlock: (ConnectBlock) _block
 {
-    self = [self initRequest:request responce:resp];
+    self = [super init];
+    //self = [super init];
+    //self.urlRequest = request;
+   // self = [self initRequest:request];
     if (self) {
         self.block = _block;
+        self.connection = [NSURLConnection connectionWithRequest:request delegate:self];
+        [self startConnect];
     }
     return self;
 }
 
+/*
 -(Connect *)initRequest: (NSURLRequest *)request  responce: (ResponceType) resp{
     self = [super init];
     if (self) {
@@ -68,11 +74,12 @@
     }
     return self;
 }
+
 +(Connect *)urlRequest: (NSURLRequest *)request responce: (ResponceType) resp{
     return [[[Connect alloc] initRequest:request responce:resp]autorelease];
-}
-+(Connect *)urlRequest: (NSURLRequest *)request responce: (ResponceType) resp withBlock: (ConnectBlock) _block{
-    return [[[Connect alloc] initRequest:request responce:resp withBlock:_block]autorelease];
+} */
++(Connect *)urlRequest: (NSURLRequest *)request withBlock: (ConnectBlock) _block{
+    return [[[Connect alloc] initRequest:request  withBlock:_block]autorelease];
 }
 -(void)appendConnectData: (NSData*) appendedData{
     self.data = (NSMutableData*)appendedData;

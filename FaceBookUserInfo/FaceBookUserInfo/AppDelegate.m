@@ -18,9 +18,29 @@
     [_viewController release];
     [super dealloc];
 }
+-(void)test:(NSString*)stringFirst second:(NSString*)stringSecond block:(void(^)(NSString*, NSString*))blockVar
+{
+    if (blockVar) {
+        blockVar(stringFirst, stringSecond);
+    }
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+//    
+//    void (^x)(NSString*, NSString*) = ^(NSString* string1, NSString* string2){
+//        //NSL92'o2'g(@"%@\n%@", string1, string2);
+//        NSLog(@"%@", [NSString stringWithFormat:@"%@-------%@", string1, string2]);
+//    };
+////   NSLog(@"%@", x(@"first", @"second"));
+////    
+////
+//    [self test:@"111" second:@"222" block:^(NSString *str1, NSString *str2){
+//        NSLog(@"%@",[NSString stringWithFormat:@"%@%@", str1, str2]);
+//    }];
+//    
+//    [self test:@"111" second:@"222" block:x];
+//    
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
     self.viewController = [[[ViewController alloc] initWithNibName:@"ViewController" bundle:nil] autorelease];
