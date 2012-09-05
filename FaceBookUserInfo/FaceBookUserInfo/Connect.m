@@ -10,43 +10,37 @@
 #import "SBJSON/SBJson.h"
 @interface Connect ()
 
-@property(nonatomic, retain)NSURLConnection *connection;
-@property(nonatomic, retain)NSMutableData *data;
-//@property(nonatomic, assign)ResponceType responceType;
+@property(nonatomic, retain)NSData *data;
 @property(nonatomic, retain)NSURLRequest *urlRequest;
+@property(nonatomic, retain) NSURLResponse *responce;
 @end
 
 @implementation Connect
-@synthesize connection;
 @synthesize data;
-@synthesize responceType;
 @synthesize urlRequest;
-//@synthesize delegate;
-//@synthesize tag;
+@synthesize responce;
 @synthesize block;
 
 -(void)dealloc{
-    if (self.connection) {
-        [self.connection cancel];
-    }
+
     self.urlRequest = nil;
     self.data = nil;
     self.block = nil;
+    self.responce = nil;
     [super dealloc];
 }
 
 -(void)callDelegateWithError:(NSError*) error{
-//    if ([self.delegate respondsToSelector:@selector(didLoadingData:error:)]) {
-//         [self.delegate didLoadingData:self error:error];
-//    }
     if (self.block) {
+GCD_MAIN_BEGIN
         self.block(self, error);
+GCD_END
     }
 }
 
 - (NSString*)description
 {
-    return [NSString stringWithFormat:@"connection id %@", self.connection];
+    return [NSString stringWithFormat:@"connect to URL %@", self.urlRequest.URL.relativeString];
 }
 
 -(Connect *)initRequest: (NSURLRequest *)request withBlock: (ConnectBlock) _block
@@ -55,8 +49,17 @@
    
     if (self) {
         self.block = _block;
-        self.connection = [NSURLConnection connectionWithRequest:request delegate:self];
-        [self startConnect];
+GCD_BACKGROUND_BEGIN
+        NSURLResponse *resp = nil;
+        NSError *err = nil;
+        NSData* _data = [NSURLConnection sendSynchronousRequest:request returningResponse:&resp error:&err];
+        self.data = _data;
+        self.responce = resp;
+        if ([(NSHTTPURLResponse*)resp statusCode] >= 400) {
+            err = [NSError errorWithDomain:@"Http error" code:[(NSHTTPURLResponse*)resp statusCode] userInfo:nil];
+        }
+        [self callDelegateWithError:err];
+GCD_END
     }
     return self;
 }
@@ -65,41 +68,19 @@
     return [[[Connect alloc] initRequest:request  withBlock:_block]autorelease];
 }
 
--(void)appendConnectData: (NSData*) appendedData{
-    self.data = (NSMutableData*)appendedData;
-}
-
--(void)resetConnectData{
-    self.data = [NSMutableData data];
-}
-
--(void)startConnect{
-    [self.connection start];
-}
 
 -(id)objectFromResponce{
+  //  SBJsonParser* parser = [[SBJsonParser alloc] init];
+//    NSURLResponse *resp = nil;
+//    NSError *err = nil;
+
+//    self.data = [NSURLConnection sendSynchronousRequest:self.urlRequest returningResponse:&resp error:&err];
+//    
     SBJsonParser* parser = [[SBJsonParser alloc] init];
-    id parseObj = [parser objectWithData:self.data];
+    
+    id parseObj = [parser objectWithData: self.data];
     [parser release];
     return parseObj;
 }
 
-#pragma mark - NSURLConnectionDataDelegate
-
--(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response{
-    [self resetConnectData];
-}
-
--(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)_data{
-    [self appendConnectData: _data];
-}
-
--(void)connectionDidFinishLoading:(NSURLConnection *)connection{
-    [self callDelegateWithError:nil];
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
-     NSLog(@" error %@",error);
-    [self callDelegateWithError:error];
-}
 @end

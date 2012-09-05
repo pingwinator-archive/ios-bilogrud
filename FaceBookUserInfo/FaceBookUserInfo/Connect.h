@@ -8,39 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-typedef enum
-{
-    eResponceTypeJson = 0,
-    eResponceTypeImage
-} ResponceType;
-
 @class Connect;
 
 typedef void (^ConnectBlock)(Connect* con, NSError* er);
 
-@protocol ConnectDelegate;
-
-@interface Connect : NSObject<NSURLConnectionDelegate, NSURLConnectionDataDelegate>
+@interface Connect : NSObject
 @property(readonly, nonatomic, retain)NSURLRequest *urlRequest;
-@property(readonly, nonatomic, retain)NSURLConnection *connection;
-@property(readonly, nonatomic, retain)NSMutableData *data;
-@property(readonly, nonatomic, assign)ResponceType responceType;
-//@property(nonatomic, assign) id <ConnectDelegate> delegate;
-//@property (nonatomic, assign) NSUInteger tag;
+@property(readonly, nonatomic, retain) NSData *data;
+@property(readonly, nonatomic, retain) NSURLResponse *responce;
 @property(nonatomic, copy) ConnectBlock block;
-//-(Connect *)initRequest: (NSURLRequest *)request responce: (ResponceType) resp;
-//+(Connect *)urlRequest: (NSURLRequest *)request responce: (ResponceType) resp;
 -(Connect *)initRequest: (NSURLRequest *)request  withBlock: (ConnectBlock) _block;
 +(Connect *)urlRequest: (NSURLRequest *)request withBlock: (ConnectBlock) _block;
--(void)appendConnectData: (NSData*) appendedData;
--(void)resetConnectData;
--(void)startConnect;
 -(id)objectFromResponce;
-@end
-
-@protocol ConnectDelegate <NSObject>
-
-@required
--(void)didLoadingData: (Connect*)connect error: (NSError*)err;
-
 @end

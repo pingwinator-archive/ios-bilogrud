@@ -10,7 +10,7 @@
 #import "SBJson.h"
 #import "Connect.h"
 #include <dispatch/dispatch.h>
-
+#include "NSDictionary+HTTPParametrs.h"
 
 @interface InfoViewController ()
 @property (nonatomic, retain)NSMutableDictionary *conDict;
@@ -27,10 +27,10 @@
 @synthesize userIdValue;
 @synthesize loadImageActivity;
 @synthesize nameLabel;
-@synthesize statusInfo;
 @synthesize statusesInfoTable;
 @synthesize statusesArr;
 @synthesize feedsArr;
+@synthesize urlString;
 -(void)dealloc{
     self.userImage = nil;
     self.personalInfo = nil;
@@ -40,9 +40,9 @@
     self.userIdValue = nil;
     self.loadImageActivity = nil;
     self.nameLabel = nil;
-    self.statusInfo = nil;
     self.statusesArr = nil;
     self.statusesInfoTable = nil;
+    self.urlString = nil;
     [super dealloc];
 }
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -58,15 +58,27 @@
 {
     [super viewDidLoad];
 
-
+   
+   
+   // self.urlString = [self urlStringFromDict];//[[[NSString alloc]initWithFormat: @"https://graph.facebook.com/%@/?access_token=%@", userIdValue, kToken]autorelease];
+   
     self.conDict = [[[NSMutableDictionary alloc]init]autorelease];
     [self.loadImageActivity startAnimating];
     
     [self addConnectImage];
     [self addConnectInfo];
     [self addConnectStatus];
-    [self addConnectFeed];
+  //  [self addConnectFeed];
 }
+
+- (NSMutableDictionary*)baseDict
+{
+    NSMutableDictionary *dictparametrs = [NSMutableDictionary dictionary];
+    [dictparametrs setValue:kToken forKey:@"access_token"];
+    return dictparametrs;
+}
+
+
 
 
 - (NSString*)getFileName:(NSURL*)url
@@ -75,191 +87,94 @@
     path = [path stringByReplacingOccurrencesOfString:@"/" withString:@"_"];
     return [NSTemporaryDirectory() stringByAppendingPathComponent:path];
 }
-
-#pragma mark - GCD Methods
-- (void)downloadImageURL:(NSURL *)imageURL
-            completition:(void (^)(UIImage *))completitionBlock {
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-    NSString *filePath =[self getFileName:imageURL];
-        if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-            NSData *imageData = [NSData dataWithContentsOfFile:filePath];
-            UIImage *image = [UIImage imageWithData:imageData];
-            
-            if (image) {
-                    completitionBlock(image);
-            return;
-            }
-        }
-        // no cached data – download and cache
-    GCD_BACKGROUND_BEGIN
-        NSData* imageData = [NSData dataWithContentsOfURL:imageURL];
-        UIImage *image = [UIImage imageWithData:imageData];
-        if (image) {
-            [imageData writeToFile:[self getFileName:imageURL] atomically:YES];
-        }
-        completitionBlock(image);
-    GCD_END
-    });
+-(void)closeImageDownloading:(Connect*)con
+{
+    [self.loadImageActivity stopAnimating];
+    [self removeConnect:con];
 }
-- (void)downloadInformation:(NSURLRequest *)infoRequest
-            completition:(void (^)(NSString*))completitionBlock {
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-    NSString* nameStr = @"";
+
+-(BOOL)isImageInCash:(NSURL *)imageURL
+{
+    return ([[NSFileManager defaultManager] fileExistsAtPath: [self getFileName:imageURL]]);
+}
+
+-(void)cashingImage:(NSURL *)url dataImage:(NSData *)_data{
+    [_data writeToFile:[self getFileName:url] atomically:YES];
+}
+
+-(UIImage *)loadFromCash:(NSURL*)url
+{
+    NSString *filePath =[self getFileName:url];
+    NSData *imageData = [NSData dataWithContentsOfFile:filePath];
+    UIImage *testImage = [UIImage imageWithData: imageData];
     
-        NSURLResponse *resp = nil;
-        NSError *err = nil;
-        NSData* data = [NSURLConnection sendSynchronousRequest:infoRequest returningResponse:&resp error:&err];
-        
-        SBJsonParser* parser = [[SBJsonParser alloc] init];
-        NSDictionary* parseObj = [parser objectWithData:data];
-        [parser release];
-        if ([parseObj valueForKey:@"name"]) {
-            nameStr = [parseObj valueForKey:@"name"];
-        }
-    
-        completitionBlock(nameStr);
- 
-    });
+    return testImage;
 }
 
--(void)downloadStatus:(NSURLRequest *)request completition:(void (^)(NSArray *))completitionBlock {
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        NSArray* dataArr;
-        
-        NSURLResponse *resp = nil;
-        NSError *err = nil;
-        NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&resp error:&err];
-        
-        SBJsonParser* parser = [[SBJsonParser alloc] init];
-        NSDictionary* parseObj = [parser objectWithData:data];
-        [parser release];
-        
-        if(parseObj){
-           dataArr = [parseObj valueForKey:@"data"];
-                       
-            if([dataArr count]){
-                NSDictionary *status = [dataArr objectAtIndex:0];
-                
-                NSString *message = [status valueForKey:@"message"];
-                [self.statusesInfoTable reloadData];
-                self.statusInfo.text = message;
-            }
-        }
-        completitionBlock(dataArr);
-    });
-}
 
--(void)downloadFeed:(NSURLRequest *)request completition:(void (^)(NSArray *))completitionBlock {
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        NSArray* dataArr;
-        
-        NSURLResponse *resp = nil;
-        NSError *err = nil;
-        NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&resp error:&err];
-        
-        SBJsonParser* parser = [[SBJsonParser alloc] init];
-        NSDictionary* parseObj = [parser objectWithData:data];
-        [parser release];
-        
-        if(parseObj){
-            dataArr = [parseObj valueForKey:@"data"];
-            
-        }
-        completitionBlock(dataArr);
-    });
-}
 #pragma mark - Add connects
--(void) addConnectImage{
-    NSString *urlString = [NSString stringWithFormat: @"https://graph.facebook.com/%@/picture", self.userIdValue];
+-(void) addConnectImage
+{    
+   self.urlString = [NSString stringWithFormat: @"https://graph.facebook.com/%@/picture", self.userIdValue];
     NSURL *url = [NSURL URLWithString:urlString ];
- //   NSURLRequest *imageRequest = [NSURLRequest requestWithURL:url];
-//    
-//    Connect *connectImage = [Connect urlRequest:imageRequest withBlock: ^(Connect *Con, NSError *err){
-//        [self.loadImageActivity stopAnimating];
-//        [self userImageLoading:Con];
-//       
-//    }];
-//    [self addConnectToDict:connectImage];
-    
-    void(^x)(UIImage*) = ^(UIImage* testImage)  {
-        if(testImage){
-            GCD_MAIN_BEGIN
-            self.userImage.image = testImage;
-            [self.loadImageActivity stopAnimating];
-            GCD_END
+    if ([self isImageInCash:url]) {
+           self.userImage.image = [self loadFromCash:url];
+          [self.loadImageActivity stopAnimating];
+    } else {
+      void(^imageBlock)(Connect*, NSError *) = ^(Connect *con, NSError *err){
+        if(!err){
+            [self cashingImage:url dataImage:con.data];
+            [self userImageLoading:con];
         }
-        else{
-            [self.loadImageActivity stopAnimating];
-        }
+        [self closeImageDownloading:con];
     };
-    
-   [self downloadImageURL:url completition:x];
+        
+    NSURLRequest *imageRequest = [NSURLRequest requestWithURL:url];
+    Connect *connectImage = [Connect urlRequest:imageRequest withBlock: imageBlock];
+    [self addConnectToDict:connectImage];
+    }
 }
 
 -(void)addConnectInfo{
-    NSString *urlInfoString = [[[NSString alloc]initWithFormat: @"https://graph.facebook.com/%@/?access_token=%@", self.userIdValue, kToken] autorelease];
-    NSURL *urlInfo = [NSURL URLWithString:urlInfoString];
+  
+    NSMutableDictionary *dictparametrs = [self baseDict];
+    NSString *path = [dictparametrs paramFromDict];
+    self.urlString = [[[NSString alloc]initWithFormat: @"https://graph.facebook.com/%@/%@", self.userIdValue, path] autorelease];
+    
+    
+    //[[[NSString alloc]initWithFormat: @"https://graph.facebook.com/%@/?access_token=%@", self.userIdValue, kToken] autorelease];
+    NSURL *urlInfo = [NSURL URLWithString:self.urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:urlInfo];
-    void (^infoBlock)(NSString*) = ^(NSString *name){
-        if(name){
-            GCD_MAIN_BEGIN
-            self.nameLabel.text = name;
-            GCD_END
+ 
+    void(^infoBlock)(Connect*, NSError *) = ^(Connect *con, NSError *err){
+        if(!err){
+            [self userInfoLoading:con];
         }
     };
-    [self downloadInformation:request completition:infoBlock];
+    Connect *connectInfo = [Connect urlRequest:request withBlock:infoBlock];
+    [self addConnectToDict:connectInfo];
 }
 
 -(void)addConnectStatus{
-    NSString *urlStatusString = [[[NSString alloc]initWithFormat: @"https://graph.facebook.com/%@/statuses?access_token=%@", self.userIdValue, kToken] autorelease];
-    NSURL *urlStatus = [NSURL URLWithString: urlStatusString];
+    
+    NSMutableDictionary *dictparametrs = [self baseDict];
+    
+    [dictparametrs setValue:@"message,from" forKey:@"fields"];
+    NSString *path = [dictparametrs paramFromDict];
+    
+   self.urlString = [[[NSString alloc]initWithFormat: @"https://graph.facebook.com/%@/feed?%@", self.userIdValue, path] autorelease];
+    
+    
+    NSURL *urlStatus = [NSURL URLWithString: self.urlString];
     NSURLRequest *statusRequest= [NSURLRequest requestWithURL:urlStatus];
       
-    void(^statusBlock)(NSArray*) = ^(NSArray *feed){
-        if(feed){
-            GCD_MAIN_BEGIN
-            self.statusesArr = feed;
-            [self.statusesInfoTable reloadData];
-            GCD_END
+    void(^statusBlock)(Connect*, NSError *) = ^(Connect *con, NSError *err){
+        if(!err){
+            [self userStatusLoading:con];
         }
     };
-    [self downloadStatus:statusRequest completition:statusBlock];
-}
-/*
-- (NSComparisonResult)compare:(Person *)otherObject {
-    return [self.birthDate compare:otherObject.birthDate];
-}*/
--(void)addConnectFeed{
-    NSString *urlFeedString = [[[NSString alloc]initWithFormat: @"https://graph.facebook.com/%@/feed?access_token=%@", self.userIdValue, kToken] autorelease];
-    NSURL *urlFeed = [NSURL URLWithString:urlFeedString];
-    NSURLRequest *feedRequest= [NSURLRequest requestWithURL:urlFeed];
-   
-    void(^feedBlock)(NSArray*) = ^(NSArray *feed){
-        if(feed){
-            GCD_MAIN_BEGIN
-            self.feedsArr = feed;
-            
-             NSMutableArray *test = [[NSMutableArray alloc]initWithObjects:self.feedsArr,self.statusesArr, nil ];
-          
-            NSSortDescriptor *sortDescriptor;
-            sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"updated_time"  ascending:YES] autorelease];
-            NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-            NSArray *sortedArray = [[NSArray alloc]init];
-            sortedArray = [test sortedArrayUsingDescriptors:sortDescriptors];
-            
-            self.statusesArr = sortedArray;
-            
-            [self.statusesInfoTable reloadData];
-                       //[self.statusesInfoTable reloadData];
-            GCD_END
-        }
-    };
-    [self downloadFeed:feedRequest completition:feedBlock];
-//    Connect *connectFeed = [Connect urlRequest:feedRequest withBlock:^(Connect* con, NSError* er){
-//             [self userFeedLoading:con];
-//    }];
- //
- //   [self addConnectToDict:connectFeed];
+    Connect *connectStatus = [Connect urlRequest: statusRequest withBlock:statusBlock];
+    [self addConnectToDict:connectStatus];
 }
 
 - (void)viewDidUnload
@@ -273,7 +188,7 @@
     self.userIdValue = nil;
     self.loadImageActivity = nil;
     self.nameLabel = nil;
-    self.statusInfo = nil;
+    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -292,11 +207,6 @@
     [connect retain];
     [self.conDict removeObjectForKey:key];
     [connect autorelease];
-}
-
--(void)deleteConnectFromDict: (NSURLConnection*)con{
-     NSString* key =  [con description];
-     [self.conDict removeObjectForKey:key];
 }
 
 -(Connect*)connectByConnection: (NSURLConnection*) con{
@@ -338,17 +248,20 @@ if (!err) {
 }
 
 #pragma mark - Data loading by tag
-/*
+
 -(void)userImageLoading: (Connect*)connect{
+    GCD_MAIN_BEGIN
+    
     UIImage *testImage = [UIImage imageWithData: connect.data];
-    [self.loadImageActivity stopAnimating];
-    self.userImage.image = testImage;
+    if (testImage) {
+        self.userImage.image = testImage;
+    }
+    GCD_END
 }
 
 -(void)userInfoLoading:(Connect*)connect{
-    
-    
     NSDictionary* parseObj = [connect objectFromResponce];
+    
     if ([parseObj valueForKey:@"name"]) {
         self.nameLabel.text = [parseObj valueForKey:@"name"];
     }
@@ -369,14 +282,20 @@ if (!err) {
 -(void)userStatusLoading:(Connect*)connect{
     NSDictionary* parseObj = [connect objectFromResponce];
     NSArray *dataArr = [parseObj valueForKey:@"data"];
-    self.statusesArr = dataArr;
+    
+    NSMutableArray *onlyMessage = [[NSMutableArray alloc]init];
+  
+    for(int i = 0; i < [dataArr count]; i++){
+        if([[dataArr objectAtIndex:i]valueForKey:@"message"]){
+            [onlyMessage addObject:[dataArr objectAtIndex:i]];
+        }
+    }
+    
+    self.statusesArr = onlyMessage;
     
     if([dataArr count]){
-    NSDictionary *status = [dataArr objectAtIndex:0];
-   
-    NSString *message = [status valueForKey:@"message"];
-    [self.statusesInfoTable reloadData];
-    self.statusInfo.text = message;
+        [self.statusesInfoTable reloadData];
+      
     }
 }
 
@@ -386,14 +305,14 @@ if (!err) {
     NSArray *dataArr = [parseObj valueForKey:@"data"];
    
     if([dataArr count]){
-    NSDictionary *status = [dataArr objectAtIndex:0];
-    self.feedsArr = dataArr;
+  
+        self.feedsArr = dataArr;
     }
     
     //arr of feed , sort by updated_time???
 //@!!!!
 }
-*/
+
 #pragma  mark - UITableViewDataSource Methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -406,16 +325,15 @@ if (!err) {
     
     if(cell == nil){
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:SimpleTableIdentifier] autorelease];
-        
     }
     NSUInteger row = [indexPath row];
     if([self.statusesArr count] != 0){
-    NSDictionary *status = [self.statusesArr objectAtIndex:row];
-    
-    NSString *message = [status valueForKey:@"message"];
-    NSString *time = [status valueForKey:@"updated_time"];
-    cell.textLabel.text = message;
-    cell.detailTextLabel.text = time;
+        NSDictionary *status = [self.statusesArr objectAtIndex:row];
+        
+        NSString *message = [status valueForKey:@"message"];
+        NSString *time = [status valueForKey:@"updated_time"];
+        cell.textLabel.text = message;
+        cell.detailTextLabel.text = time;
     }
     return cell;
 }

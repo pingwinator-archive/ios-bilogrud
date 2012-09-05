@@ -28,6 +28,8 @@
 		6EB42CD115F10E2400B314E3 /* user_placeholder@2x.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 6EB42CD015F10E2400B314E3 /* user_placeholder@2x.jpeg */; };
 		6EDA873515F4050A001DACB7 /* StatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EDA873415F4050A001DACB7 /* StatusCell.m */; };
 		6EDA873815F40529001DACB7 /* StatusCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EDA873715F40529001DACB7 /* StatusCell.xib */; };
+		6EE139A215F760EA00AD876E /* NSDictionary+HTTPParametrs.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EE139A115F760EA00AD876E /* NSDictionary+HTTPParametrs.m */; };
+		6EE139AD15F7660F00AD876E /* UserData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EE139AC15F7660F00AD876E /* UserData.m */; };
 		6EF487B415F0A985007B3004 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF487B315F0A985007B3004 /* UIKit.framework */; };
 		6EF487B615F0A985007B3004 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF487B515F0A985007B3004 /* Foundation.framework */; };
 		6EF487B815F0A985007B3004 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF487B715F0A985007B3004 /* CoreGraphics.framework */; };
@@ -78,6 +80,10 @@
 		6EDA873315F4050A001DACB7 /* StatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusCell.h; sourceTree = "<group>"; };
 		6EDA873415F4050A001DACB7 /* StatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusCell.m; sourceTree = "<group>"; };
 		6EDA873715F40529001DACB7 /* StatusCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatusCell.xib; sourceTree = "<group>"; };
+		6EE139A015F760EA00AD876E /* NSDictionary+HTTPParametrs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+HTTPParametrs.h"; path = "../NSDictionary+HTTPParametrs.h"; sourceTree = "<group>"; };
+		6EE139A115F760EA00AD876E /* NSDictionary+HTTPParametrs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+HTTPParametrs.m"; path = "../NSDictionary+HTTPParametrs.m"; sourceTree = "<group>"; };
+		6EE139AB15F7660F00AD876E /* UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserData.h; path = FaceBookUserInfo/UserData.h; sourceTree = "<group>"; };
+		6EE139AC15F7660F00AD876E /* UserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserData.m; path = FaceBookUserInfo/UserData.m; sourceTree = "<group>"; };
 		6EF487AF15F0A985007B3004 /* FaceBookUserInfo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FaceBookUserInfo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EF487B315F0A985007B3004 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6EF487B515F0A985007B3004 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -158,6 +164,8 @@
 		6EF487A415F0A985007B3004 = {
 			isa = PBXGroup;
 			children = (
+				6EE139AB15F7660F00AD876E /* UserData.h */,
+				6EE139AC15F7660F00AD876E /* UserData.m */,
 				6EF487B915F0A985007B3004 /* FaceBookUserInfo */,
 				6EF487B215F0A985007B3004 /* Frameworks */,
 				6EF487B015F0A985007B3004 /* Products */,
@@ -185,6 +193,8 @@
 		6EF487B915F0A985007B3004 /* FaceBookUserInfo */ = {
 			isa = PBXGroup;
 			children = (
+				6EE139A015F760EA00AD876E /* NSDictionary+HTTPParametrs.h */,
+				6EE139A115F760EA00AD876E /* NSDictionary+HTTPParametrs.m */,
 				6ED269DF15F712E2002662C1 /* DefineConst.h */,
 				6EB42CCF15F10C6100B314E3 /* Resources */,
 				6EAC9EED15F0CF6500231960 /* SBJSON */,
@@ -306,6 +316,8 @@
 				6EAC9F1215F0CF6500231960 /* SBJsonWriter.m in Sources */,
 				6EAC9F1515F0DD5600231960 /* Connect.m in Sources */,
 				6EDA873515F4050A001DACB7 /* StatusCell.m in Sources */,
+				6EE139A215F760EA00AD876E /* NSDictionary+HTTPParametrs.m in Sources */,
+				6EE139AD15F7660F00AD876E /* UserData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
