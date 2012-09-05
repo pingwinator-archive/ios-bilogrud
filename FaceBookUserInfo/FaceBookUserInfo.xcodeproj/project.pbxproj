@@ -74,6 +74,7 @@
 		6EAC9F1415F0DD5600231960 /* Connect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Connect.m; sourceTree = "<group>"; };
 		6EB42CCC15F10C5900B314E3 /* user_placeholder.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = user_placeholder.jpeg; sourceTree = "<group>"; };
 		6EB42CD015F10E2400B314E3 /* user_placeholder@2x.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "user_placeholder@2x.jpeg"; sourceTree = "<group>"; };
+		6ED269DF15F712E2002662C1 /* DefineConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefineConst.h; sourceTree = "<group>"; };
 		6EDA873315F4050A001DACB7 /* StatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusCell.h; sourceTree = "<group>"; };
 		6EDA873415F4050A001DACB7 /* StatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusCell.m; sourceTree = "<group>"; };
 		6EDA873715F40529001DACB7 /* StatusCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatusCell.xib; sourceTree = "<group>"; };
@@ -184,6 +185,7 @@
 		6EF487B915F0A985007B3004 /* FaceBookUserInfo */ = {
 			isa = PBXGroup;
 			children = (
+				6ED269DF15F712E2002662C1 /* DefineConst.h */,
 				6EB42CCF15F10C6100B314E3 /* Resources */,
 				6EAC9EED15F0CF6500231960 /* SBJSON */,
 				6EF487E615F0AE9D007B3004 /* InfoViewController.h */,

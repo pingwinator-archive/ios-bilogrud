@@ -43,6 +43,7 @@
         self.block(self, error);
     }
 }
+
 - (NSString*)description
 {
     return [NSString stringWithFormat:@"connection id %@", self.connection];
@@ -51,9 +52,7 @@
 -(Connect *)initRequest: (NSURLRequest *)request withBlock: (ConnectBlock) _block
 {
     self = [super init];
-    //self = [super init];
-    //self.urlRequest = request;
-   // self = [self initRequest:request];
+   
     if (self) {
         self.block = _block;
         self.connection = [NSURLConnection connectionWithRequest:request delegate:self];
@@ -62,25 +61,10 @@
     return self;
 }
 
-/*
--(Connect *)initRequest: (NSURLRequest *)request  responce: (ResponceType) resp{
-    self = [super init];
-    if (self) {
-        self.urlRequest = request;
-        self.responceType = resp;
-        self.connection = [NSURLConnection connectionWithRequest:self.urlRequest delegate:self];
-        self.tag = 0;
-        [self startConnect];
-    }
-    return self;
-}
-
-+(Connect *)urlRequest: (NSURLRequest *)request responce: (ResponceType) resp{
-    return [[[Connect alloc] initRequest:request responce:resp]autorelease];
-} */
 +(Connect *)urlRequest: (NSURLRequest *)request withBlock: (ConnectBlock) _block{
     return [[[Connect alloc] initRequest:request  withBlock:_block]autorelease];
 }
+
 -(void)appendConnectData: (NSData*) appendedData{
     self.data = (NSMutableData*)appendedData;
 }
@@ -92,6 +76,7 @@
 -(void)startConnect{
     [self.connection start];
 }
+
 -(id)objectFromResponce{
     SBJsonParser* parser = [[SBJsonParser alloc] init];
     id parseObj = [parser objectWithData:self.data];
@@ -100,12 +85,15 @@
 }
 
 #pragma mark - NSURLConnectionDataDelegate
+
 -(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response{
     [self resetConnectData];
 }
+
 -(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)_data{
     [self appendConnectData: _data];
 }
+
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection{
     [self callDelegateWithError:nil];
 }

@@ -11,12 +11,7 @@
 #import "Connect.h"
 #include <dispatch/dispatch.h>
 
-#define kToken @"AAACEdEose0cBAFAQ4GzvQi6eG9IwUgRCCU3FT6C67IjrtTMdCA0tDyg3rn9cc5tHQjrY8uSYp7hPbH7xYktTFvOnZCAn10Gk0w9QEM4TmguLioqBS"
 
-#define kUserInfoTag 1
-#define kUserImage 2
-#define kUserStatus 3
-#define kUserFeedTag 4
 @interface InfoViewController ()
 @property (nonatomic, retain)NSMutableDictionary *conDict;
 @property(retain, nonatomic) NSArray *statusesArr;
@@ -62,15 +57,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    //image loading
-//    NSString* urlsstring =@"https://graph.facebook.com/100001866482612/picture";
-//    NSURL* url = [NSURL URLWithString:urlsstring];
-//    NSURLRequest* req = [NSURLRequest requestWithURL:url];
-//    NSOperationQueue* queue = [NSOperationQueue mainQueue];
-//   [NSURLConnection sendAsynchronousRequest:req queue:queue completionHandler:^(NSURLResponse* resp, NSData* data, NSError* error){
-//       UIImage* image = [UIImage imageWithData:data];
-//       self.userImage.image = image;
-//    }];
+
 
     self.conDict = [[[NSMutableDictionary alloc]init]autorelease];
     [self.loadImageActivity startAnimating];
@@ -78,12 +65,9 @@
     [self addConnectImage];
     [self addConnectInfo];
     [self addConnectStatus];
-//    [self addConnectFeed];
+    [self addConnectFeed];
 }
 
-#define GCD_BACKGROUND_BEGIN  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^(void) {
-#define GCD_MAIN_BEGIN dispatch_async(dispatch_get_main_queue(), ^{
-#define GCD_END });
 
 - (NSString*)getFileName:(NSURL*)url
 {
@@ -102,11 +86,8 @@
             UIImage *image = [UIImage imageWithData:imageData];
             
             if (image) {
-                // call completition on main queue (thread)
-            //    dispatch_async(dispatch_get_main_queue(), ^{
                     completitionBlock(image);
-             //   });
-                return;
+            return;
             }
         }
         // no cached data – download and cache
@@ -120,41 +101,78 @@
     GCD_END
     });
 }
-- (void)downloadInformation:(NSURL *)infoURL
-            completition:(void (^)(NSString* *))completitionBlock {
+- (void)downloadInformation:(NSURLRequest *)infoRequest
+            completition:(void (^)(NSString*))completitionBlock {
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
-//        NSString *filePath =[self getFileName:imageURL];
-//        if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-//            NSData *imageData = [NSData dataWithContentsOfFile:filePath];
-//            UIImage *image = [UIImage imageWithData:imageData];
-//            
-//            if (image) {
-//                // call completition on main queue (thread)
-//                //    dispatch_async(dispatch_get_main_queue(), ^{
-//                completitionBlock(image);
-//                //   });
-//                return;
-//            }
-//        }
-        // no cached data – download and cache
-        GCD_BACKGROUND_BEGIN
-        NSData* infoData = [NSData dataWithContentsOfURL:infoURL];//dataWithContentsOfURL:imageURL];
-//        UIImage *image = [UIImage imageWithData:imageData];
-//        if (image) {
-//            [imageData writeToFile:[self getFileName:imageURL] atomically:YES];
-//        }
-      
+    NSString* nameStr = @"";
+    
+        NSURLResponse *resp = nil;
+        NSError *err = nil;
+        NSData* data = [NSURLConnection sendSynchronousRequest:infoRequest returningResponse:&resp error:&err];
         
-        completitionBlock(@"flkdnfkjndlf");
-        GCD_END
+        SBJsonParser* parser = [[SBJsonParser alloc] init];
+        NSDictionary* parseObj = [parser objectWithData:data];
+        [parser release];
+        if ([parseObj valueForKey:@"name"]) {
+            nameStr = [parseObj valueForKey:@"name"];
+        }
+    
+        completitionBlock(nameStr);
+ 
     });
 }
 
+-(void)downloadStatus:(NSURLRequest *)request completition:(void (^)(NSArray *))completitionBlock {
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        NSArray* dataArr;
+        
+        NSURLResponse *resp = nil;
+        NSError *err = nil;
+        NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&resp error:&err];
+        
+        SBJsonParser* parser = [[SBJsonParser alloc] init];
+        NSDictionary* parseObj = [parser objectWithData:data];
+        [parser release];
+        
+        if(parseObj){
+           dataArr = [parseObj valueForKey:@"data"];
+                       
+            if([dataArr count]){
+                NSDictionary *status = [dataArr objectAtIndex:0];
+                
+                NSString *message = [status valueForKey:@"message"];
+                [self.statusesInfoTable reloadData];
+                self.statusInfo.text = message;
+            }
+        }
+        completitionBlock(dataArr);
+    });
+}
+
+-(void)downloadFeed:(NSURLRequest *)request completition:(void (^)(NSArray *))completitionBlock {
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        NSArray* dataArr;
+        
+        NSURLResponse *resp = nil;
+        NSError *err = nil;
+        NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&resp error:&err];
+        
+        SBJsonParser* parser = [[SBJsonParser alloc] init];
+        NSDictionary* parseObj = [parser objectWithData:data];
+        [parser release];
+        
+        if(parseObj){
+            dataArr = [parseObj valueForKey:@"data"];
+            
+        }
+        completitionBlock(dataArr);
+    });
+}
 #pragma mark - Add connects
 -(void) addConnectImage{
     NSString *urlString = [NSString stringWithFormat: @"https://graph.facebook.com/%@/picture", self.userIdValue];
     NSURL *url = [NSURL URLWithString:urlString ];
-//    NSURLRequest *imageRequest = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:30];
+ //   NSURLRequest *imageRequest = [NSURLRequest requestWithURL:url];
 //    
 //    Connect *connectImage = [Connect urlRequest:imageRequest withBlock: ^(Connect *Con, NSError *err){
 //        [self.loadImageActivity stopAnimating];
@@ -175,54 +193,73 @@
         }
     };
     
-    [self downloadImageURL:url completition:x];
+   [self downloadImageURL:url completition:x];
 }
 
 -(void)addConnectInfo{
     NSString *urlInfoString = [[[NSString alloc]initWithFormat: @"https://graph.facebook.com/%@/?access_token=%@", self.userIdValue, kToken] autorelease];
     NSURL *urlInfo = [NSURL URLWithString:urlInfoString];
-    
-    
-    void (^infoBlock)(NSString*) = ^(NSString* name){
+    NSURLRequest *request = [NSURLRequest requestWithURL:urlInfo];
+    void (^infoBlock)(NSString*) = ^(NSString *name){
         if(name){
+            GCD_MAIN_BEGIN
             self.nameLabel.text = name;
+            GCD_END
         }
     };
-    [self downloadInformation:urlInfo completition:infoBlock];
-//    NSURLRequest *infoRequest= [NSURLRequest requestWithURL:urlInfo];
-//    
-//    Connect *connectInfo = [Connect urlRequest:infoRequest withBlock:^(Connect* con, NSError* er){
-//                 [self userInfoLoading:con];
-//    }];
-//
-//    [self addConnectToDict:connectInfo];
-    
+    [self downloadInformation:request completition:infoBlock];
 }
 
 -(void)addConnectStatus{
     NSString *urlStatusString = [[[NSString alloc]initWithFormat: @"https://graph.facebook.com/%@/statuses?access_token=%@", self.userIdValue, kToken] autorelease];
     NSURL *urlStatus = [NSURL URLWithString: urlStatusString];
     NSURLRequest *statusRequest= [NSURLRequest requestWithURL:urlStatus];
-    
-    Connect *connectStatus = [Connect urlRequest:statusRequest  withBlock:^(Connect* con, NSError* er){
-          [self userStatusLoading:con];
-    }];
-     
-    [self addConnectToDict:connectStatus];
-   // [connectStatus release];
+      
+    void(^statusBlock)(NSArray*) = ^(NSArray *feed){
+        if(feed){
+            GCD_MAIN_BEGIN
+            self.statusesArr = feed;
+            [self.statusesInfoTable reloadData];
+            GCD_END
+        }
+    };
+    [self downloadStatus:statusRequest completition:statusBlock];
 }
-
+/*
+- (NSComparisonResult)compare:(Person *)otherObject {
+    return [self.birthDate compare:otherObject.birthDate];
+}*/
 -(void)addConnectFeed{
     NSString *urlFeedString = [[[NSString alloc]initWithFormat: @"https://graph.facebook.com/%@/feed?access_token=%@", self.userIdValue, kToken] autorelease];
     NSURL *urlFeed = [NSURL URLWithString:urlFeedString];
     NSURLRequest *feedRequest= [NSURLRequest requestWithURL:urlFeed];
    
-    Connect *connectFeed = [Connect urlRequest:feedRequest withBlock:^(Connect* con, NSError* er){
-             [self userFeedLoading:con];
-    }];
-   
-    [self addConnectToDict:connectFeed];
-    //[connectFeed release];
+    void(^feedBlock)(NSArray*) = ^(NSArray *feed){
+        if(feed){
+            GCD_MAIN_BEGIN
+            self.feedsArr = feed;
+            
+             NSMutableArray *test = [[NSMutableArray alloc]initWithObjects:self.feedsArr,self.statusesArr, nil ];
+          
+            NSSortDescriptor *sortDescriptor;
+            sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:@"updated_time"  ascending:YES] autorelease];
+            NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+            NSArray *sortedArray = [[NSArray alloc]init];
+            sortedArray = [test sortedArrayUsingDescriptors:sortDescriptors];
+            
+            self.statusesArr = sortedArray;
+            
+            [self.statusesInfoTable reloadData];
+                       //[self.statusesInfoTable reloadData];
+            GCD_END
+        }
+    };
+    [self downloadFeed:feedRequest completition:feedBlock];
+//    Connect *connectFeed = [Connect urlRequest:feedRequest withBlock:^(Connect* con, NSError* er){
+//             [self userFeedLoading:con];
+//    }];
+ //
+ //   [self addConnectToDict:connectFeed];
 }
 
 - (void)viewDidUnload
@@ -241,7 +278,7 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return YES;//(interfaceOrientation == UIInterfaceOrientationPortrait);
+    return YES;
 }
 
 #pragma mark - connection dict
@@ -267,7 +304,6 @@
 }
 
 #pragma mark - ConnectDelegate Method
-
 -(void)didLoadingData:(Connect *)connect error:(NSError *)err{  /*  
 if (!err) {
         NSLog(@"connect");
@@ -300,7 +336,9 @@ if (!err) {
     [self deleteConnectFromDict:connect.connection];
   */
 }
+
 #pragma mark - Data loading by tag
+/*
 -(void)userImageLoading: (Connect*)connect{
     UIImage *testImage = [UIImage imageWithData: connect.data];
     [self.loadImageActivity stopAnimating];
@@ -308,6 +346,8 @@ if (!err) {
 }
 
 -(void)userInfoLoading:(Connect*)connect{
+    
+    
     NSDictionary* parseObj = [connect objectFromResponce];
     if ([parseObj valueForKey:@"name"]) {
         self.nameLabel.text = [parseObj valueForKey:@"name"];
@@ -353,7 +393,7 @@ if (!err) {
     //arr of feed , sort by updated_time???
 //@!!!!
 }
-
+*/
 #pragma  mark - UITableViewDataSource Methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
