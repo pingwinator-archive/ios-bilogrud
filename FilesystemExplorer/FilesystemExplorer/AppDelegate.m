@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 
-#import "MasterViewController.h"
+#import "DirectoryViewController.h"
 
 @implementation AppDelegate
 
@@ -24,10 +24,15 @@
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
 
-    MasterViewController *masterViewController = [[[MasterViewController alloc] initWithNibName:@"MasterViewController" bundle:nil] autorelease];
-    self.navigationController = [[[UINavigationController alloc] initWithRootViewController:masterViewController] autorelease];
+    DirectoryViewController *directoryViewController = [[[DirectoryViewController alloc] initWithNibName:@"DirectoryViewController" bundle:nil] autorelease];
+    self.navigationController = [[[UINavigationController alloc] initWithRootViewController:directoryViewController] autorelease];
     self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];
+    
+    // populate the first view
+  //  NSString *str= NSHomeDirectory();
+	directoryViewController.directoryPath = NSHomeDirectory();
+
     return YES;
 }
 

@@ -10,8 +10,12 @@
 
 @class DetailViewController;
 
-@interface MasterViewController : UITableViewController
-
+@interface DirectoryViewController : UITableViewController
+{
+    NSString *directoryPath;
+	NSArray *directoryContents;
+}
 @property (strong, nonatomic) DetailViewController *detailViewController;
-
+@property(retain, nonatomic) NSArray *directoryContents;
+@property (nonatomic, retain) NSString *directoryPath;
 @end

@@ -6,16 +6,17 @@
 //  Copyright (c) 2012 Natasha. All rights reserved.
 //
 
-#import "MasterViewController.h"
+#import "DirectoryViewController.h"
 
 #import "DetailViewController.h"
 
-@interface MasterViewController () {
+@interface DirectoryViewController () {
     NSMutableArray *_objects;
 }
 @end
 
-@implementation MasterViewController
+@implementation DirectoryViewController
+@synthesize directoryContents;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -30,6 +31,8 @@
 {
     [_detailViewController release];
     [_objects release];
+    self.directoryPath = nil;
+    self.directoryContents = nil;
     [super dealloc];
 }
 
@@ -64,6 +67,23 @@
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
+-(NSString*) directoryPath {
+    return directoryPath;
+}
+
+-(void) setDirectoryPath: (NSString*) p {
+    [p retain];
+    [directoryPath release];
+    directoryPath = p;
+    [self loadDirectoryContents];
+    // also set title of nav controller with last path element NSString *pathTitle= [directoryPath lastPathComponent]; self.title = pathTitle;
+}
+- (void) loadDirectoryContents {
+	[self.directoryContents release];
+	self.directoryContents = [[NSFileManager defaultManager]contentsOfDirectoryAtPath:directoryPath error:nil ];
+	[self.directoryContents retain];
+}
+
 #pragma mark - Table View
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -73,7 +93,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _objects.count;
+    return [self.directoryContents count];//_objects.count;
 }
 
 // Customize the appearance of table view cells.
@@ -86,10 +106,8 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
+    cell.textLabel.text = [self.directoryContents objectAtIndex:indexPath.row];
 
-
-    NSDate *object = [_objects objectAtIndex:indexPath.row];
-    cell.textLabel.text = [object description];
     return cell;
 }
 
