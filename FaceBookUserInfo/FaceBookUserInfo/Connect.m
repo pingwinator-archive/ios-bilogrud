@@ -75,12 +75,15 @@ GCD_END
 //    NSError *err = nil;
 
 //    self.data = [NSURLConnection sendSynchronousRequest:self.urlRequest returningResponse:&resp error:&err];
-//    
+    id __block parseObj = nil;
+//GCD_BACKGROUND_BEGIN
     SBJsonParser* parser = [[SBJsonParser alloc] init];
     
-    id parseObj = [parser objectWithData: self.data];
+    parseObj = [parser objectWithData: self.data];
     [parser release];
+//GCD_END
     return parseObj;
+
 }
 
 @end

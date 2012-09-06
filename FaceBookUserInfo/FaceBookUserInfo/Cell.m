@@ -1,36 +1,26 @@
 //
-//  StatusCell.m
+//  Cell.m
 //  FaceBookUserInfo
 //
-//  Created by Natasha on 03.09.12.
+//  Created by Natasha on 06.09.12.
 //  Copyright (c) 2012 Natasha. All rights reserved.
 //
 
-#import "StatusCell.h"
+#import "Cell.h"
 
-@implementation StatusCell
+@implementation Cell
+@synthesize time;
+@synthesize name;
+@synthesize message;
+@synthesize photo;
 @synthesize nameLabel;
 @synthesize timeLabel;
-@synthesize messageTextView;
 @synthesize photoImageView;
-@synthesize name;
-@synthesize time;
-@synthesize photo;
-@synthesize message;
-
--(void)dealloc{
-    self.nameLabel = nil;
-    self.timeLabel = nil;
-    self.messageTextView = nil;
-    self.photoImageView = nil;
-    [super dealloc];
-    
-}
+@synthesize messageTextView;
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        // Initialization code
     }
     return self;
 }
@@ -41,11 +31,12 @@
 
     // Configure the view for the selected state
 }
-
 - (void)setTime:(NSDate *)c {
-    if (![c isEqual:self.time]) {
-        self.time = [c copy];
-        timeLabel.text = self.time;
+    if (![c isEqual:time]) {
+//?????
+       // self.time = [c copy];
+        time = [c copy];
+        timeLabel.text = (NSString*)time;
     }
 }
 
@@ -53,6 +44,19 @@
     if (![n isEqualToString:name]) {
         name = [n copy];
         nameLabel.text = name;
+    }
+}
+
+- (void)setMessage:(NSString *)m{
+    if (![m isEqualToString:message]) {
+        message = [m copy];
+        messageTextView.text = message;
+    }
+}
+- (void)setPhoto:(UIImage *)n {
+    if (![n isEqual:photo]) {
+        photo = [n copy];
+        photoImageView.image = photo;
     }
 }
 

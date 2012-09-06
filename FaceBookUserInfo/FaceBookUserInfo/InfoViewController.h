@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#include "Connect.h"
+#import "Connect.h"
+#import "StatusCell.h"
 @interface InfoViewController : UIViewController
 
 @property(retain, nonatomic) IBOutlet UITextView *personalInfo;
@@ -20,5 +21,5 @@
 @property(retain, nonatomic) NSURLConnection *testInfoConnection;
 @property(retain, nonatomic) NSString *userIdValue;
 @property(retain, nonatomic) NSString *urlString;
-
+@property(retain, nonatomic) IBOutlet StatusCell* customCell;
 @end

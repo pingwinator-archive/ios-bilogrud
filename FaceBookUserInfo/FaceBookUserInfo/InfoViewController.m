@@ -5,17 +5,20 @@
 //  Created by Natasha on 31.08.12.
 //  Copyright (c) 2012 Natasha. All rights reserved.
 //
-
+#import <dispatch/dispatch.h>
 #import "InfoViewController.h"
 #import "SBJson.h"
 #import "Connect.h"
-#include <dispatch/dispatch.h>
-#include "NSDictionary+HTTPParametrs.h"
-
+#import "NSDictionary+HTTPParametrs.h"
+#import "UserData.h"
+#import "StatusCell.h"
+#import "Cell.h"
 @interface InfoViewController ()
+{
+}
 @property (nonatomic, retain)NSMutableDictionary *conDict;
 @property(retain, nonatomic) NSArray *statusesArr;
-@property(retain, nonatomic) NSArray *feedsArr;
+@property(retain, nonatomic) NSMutableArray *allPosts;
 @end
 
 @implementation InfoViewController
@@ -29,8 +32,9 @@
 @synthesize nameLabel;
 @synthesize statusesInfoTable;
 @synthesize statusesArr;
-@synthesize feedsArr;
+@synthesize allPosts;
 @synthesize urlString;
+@synthesize customCell;
 -(void)dealloc{
     self.userImage = nil;
     self.personalInfo = nil;
@@ -57,11 +61,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-   
-   
-   // self.urlString = [self urlStringFromDict];//[[[NSString alloc]initWithFormat: @"https://graph.facebook.com/%@/?access_token=%@", userIdValue, kToken]autorelease];
-   
+    self.customCell = [[StatusCell alloc]init];
+                       
     self.conDict = [[[NSMutableDictionary alloc]init]autorelease];
     [self.loadImageActivity startAnimating];
     
@@ -77,9 +78,6 @@
     [dictparametrs setValue:kToken forKey:@"access_token"];
     return dictparametrs;
 }
-
-
-
 
 - (NSString*)getFileName:(NSURL*)url
 {
@@ -111,7 +109,6 @@
     return testImage;
 }
 
-
 #pragma mark - Add connects
 -(void) addConnectImage
 {    
@@ -139,10 +136,8 @@
   
     NSMutableDictionary *dictparametrs = [self baseDict];
     NSString *path = [dictparametrs paramFromDict];
-    self.urlString = [[[NSString alloc]initWithFormat: @"https://graph.facebook.com/%@/%@", self.userIdValue, path] autorelease];
+    self.urlString = [[[NSString alloc]initWithFormat: @"https://graph.facebook.com/%@/?%@", self.userIdValue, path] autorelease];
     
-    
-    //[[[NSString alloc]initWithFormat: @"https://graph.facebook.com/%@/?access_token=%@", self.userIdValue, kToken] autorelease];
     NSURL *urlInfo = [NSURL URLWithString:self.urlString];
     NSURLRequest *request = [NSURLRequest requestWithURL:urlInfo];
  
@@ -162,10 +157,10 @@
     [dictparametrs setValue:@"message,from" forKey:@"fields"];
     NSString *path = [dictparametrs paramFromDict];
     
-   self.urlString = [[[NSString alloc]initWithFormat: @"https://graph.facebook.com/%@/feed?%@", self.userIdValue, path] autorelease];
+    NSString *urlStr = [[[NSString alloc]initWithFormat: @"https://graph.facebook.com/%@/feed?%@", self.userIdValue, path] autorelease];
     
     
-    NSURL *urlStatus = [NSURL URLWithString: self.urlString];
+    NSURL *urlStatus = [NSURL URLWithString: urlStr];
     NSURLRequest *statusRequest= [NSURLRequest requestWithURL:urlStatus];
       
     void(^statusBlock)(Connect*, NSError *) = ^(Connect *con, NSError *err){
@@ -188,7 +183,6 @@
     self.userIdValue = nil;
     self.loadImageActivity = nil;
     self.nameLabel = nil;
-    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -265,15 +259,14 @@ if (!err) {
     if ([parseObj valueForKey:@"name"]) {
         self.nameLabel.text = [parseObj valueForKey:@"name"];
     }
-    
-    NSMutableString* information = [[[NSMutableString alloc]init]autorelease];
+    NSString* information = @"";// = [[[NSMutableString alloc]init]autorelease];
     
     if ([parseObj valueForKey:@"birthday"]) {
-        [information appendFormat:@"Birthday: %@\n",[parseObj valueForKey:@"birthday"] ] ;
+        information = [information stringByAppendingFormat: @"Birthday: %@\n",[parseObj valueForKey:@"birthday"] ] ;
     }
     NSDictionary *location = [parseObj valueForKey:@"location"];
     if([location valueForKey:@"name"]){
-        [information appendFormat:@"Location: %@\n",[location valueForKey:@"name"] ] ;
+        information = [information stringByAppendingFormat:@"Location: %@\n",[location valueForKey:@"name"] ] ;
     }
     //...
     self.personalInfo.text = information;
@@ -283,22 +276,39 @@ if (!err) {
     NSDictionary* parseObj = [connect objectFromResponce];
     NSArray *dataArr = [parseObj valueForKey:@"data"];
     
-    NSMutableArray *onlyMessage = [[NSMutableArray alloc]init];
+    NSMutableArray *onlyMessage = [[[NSMutableArray alloc]init]autorelease];
   
+    self.allPosts = [NSMutableArray array];
+    
     for(int i = 0; i < [dataArr count]; i++){
         if([[dataArr objectAtIndex:i]valueForKey:@"message"]){
             [onlyMessage addObject:[dataArr objectAtIndex:i]];
+            NSDictionary *temp = [dataArr objectAtIndex:i];
+            UserData *data = [[UserData alloc]init];
+            if([temp valueForKey:@"message"]) {
+                data.message = [temp valueForKey:@"message"];
+            }
+            if([temp valueForKey: @"from"]) {
+                NSDictionary* from = [temp valueForKey:@"from"];
+                data.userFromID = [from valueForKey: @"id"];
+               data.userFromName = [temp valueForKey: @"name"];
+            }
+            if([temp valueForKey: @"created_time"]) {
+                data.userFromID = [temp valueForKey: @"created_time"];
+            }
+            if([temp valueForKey: @"id"]) {
+                data.feedID = [temp valueForKey: @"id"];
+            }
+            [self.allPosts addObject:data];
+            [data release];
         }
     }
-    
-    self.statusesArr = onlyMessage;
-    
-    if([dataArr count]){
+   
+    if([self.allPosts count]){
         [self.statusesInfoTable reloadData];
-      
     }
 }
-
+/*
 -(void)userFeedLoading:(Connect*)connect{
     NSDictionary* parseObj = [connect objectFromResponce];
     
@@ -306,34 +316,38 @@ if (!err) {
    
     if([dataArr count]){
   
-        self.feedsArr = dataArr;
+        self.allPosts = dataArr;
     }
     
     //arr of feed , sort by updated_time???
 //@!!!!
 }
-
+*/
 #pragma  mark - UITableViewDataSource Methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return (self.statusesArr) ?([self.statusesArr count]):0;
+    return (self.allPosts) ?([self.allPosts count]):0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *SimpleTableIdentifier = @"SimpleTableId";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:SimpleTableIdentifier];
-    
-    if(cell == nil){
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:SimpleTableIdentifier] autorelease];
+  static NSString *CellTableIdentifier = @"CellTableIdentifier";
+  BOOL nibsRegistered = NO;
+    if (!nibsRegistered) {
+        UINib *nib = [UINib nibWithNibName:@"Cell" bundle:nil];
+        [tableView registerNib:nib forCellReuseIdentifier:CellTableIdentifier];
+        nibsRegistered = YES;
     }
-    NSUInteger row = [indexPath row];
-    if([self.statusesArr count] != 0){
-        NSDictionary *status = [self.statusesArr objectAtIndex:row];
+    
+     Cell *cell = (Cell *)[tableView dequeueReusableCellWithIdentifier:CellTableIdentifier];
+    
+    if([self.allPosts count] != 0){
+        NSUInteger row = [indexPath row];
+        UserData *status = [self.allPosts objectAtIndex:row];
         
-        NSString *message = [status valueForKey:@"message"];
-        NSString *time = [status valueForKey:@"updated_time"];
-        cell.textLabel.text = message;
-        cell.detailTextLabel.text = time;
+        cell.name = status.userName;//@"test";//messageTextView = [[UITextView alloc]init];
+        cell.time = status.time;//messageTextView.text = status.message; //message;
+        cell.message = status.message;
+       // cell.photo =
     }
     return cell;
 }

@@ -11,6 +11,8 @@
 		6E51ED8515F2466500101920 /* female@2x.gif in Resources */ = {isa = PBXBuildFile; fileRef = 6E51ED8115F2466500101920 /* female@2x.gif */; };
 		6E51ED8615F2466500101920 /* male.gif in Resources */ = {isa = PBXBuildFile; fileRef = 6E51ED8215F2466500101920 /* male.gif */; };
 		6E51ED8715F2466500101920 /* male@2x.gif in Resources */ = {isa = PBXBuildFile; fileRef = 6E51ED8315F2466500101920 /* male@2x.gif */; };
+		6E6FBBBB15F87220007FCFA5 /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E6FBBBA15F87220007FCFA5 /* Cell.m */; };
+		6E7D08B815F87AD100F16BF7 /* Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D08B715F87AD100F16BF7 /* Cell.xib */; };
 		6EAC9F0715F0CF6500231960 /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EAC9EEF15F0CF6500231960 /* NSObject+SBJson.m */; };
 		6EAC9F0815F0CF6500231960 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EAC9EF215F0CF6500231960 /* SBJsonParser.m */; };
 		6EAC9F0915F0CF6500231960 /* SBJsonStreamParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EAC9EF415F0CF6500231960 /* SBJsonStreamParser.m */; };
@@ -47,6 +49,9 @@
 		6E51ED8115F2466500101920 /* female@2x.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "female@2x.gif"; sourceTree = "<group>"; };
 		6E51ED8215F2466500101920 /* male.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = male.gif; sourceTree = "<group>"; };
 		6E51ED8315F2466500101920 /* male@2x.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "male@2x.gif"; sourceTree = "<group>"; };
+		6E6FBBB915F87220007FCFA5 /* Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
+		6E6FBBBA15F87220007FCFA5 /* Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cell.m; sourceTree = "<group>"; };
+		6E7D08B715F87AD100F16BF7 /* Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Cell.xib; sourceTree = "<group>"; };
 		6EAC9EEE15F0CF6500231960 /* NSObject+SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJson.h"; sourceTree = "<group>"; };
 		6EAC9EEF15F0CF6500231960 /* NSObject+SBJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJson.m"; sourceTree = "<group>"; };
 		6EAC9EF015F0CF6500231960 /* SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson.h; sourceTree = "<group>"; };
@@ -82,8 +87,8 @@
 		6EDA873715F40529001DACB7 /* StatusCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatusCell.xib; sourceTree = "<group>"; };
 		6EE139A015F760EA00AD876E /* NSDictionary+HTTPParametrs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+HTTPParametrs.h"; path = "../NSDictionary+HTTPParametrs.h"; sourceTree = "<group>"; };
 		6EE139A115F760EA00AD876E /* NSDictionary+HTTPParametrs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+HTTPParametrs.m"; path = "../NSDictionary+HTTPParametrs.m"; sourceTree = "<group>"; };
-		6EE139AB15F7660F00AD876E /* UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserData.h; path = FaceBookUserInfo/UserData.h; sourceTree = "<group>"; };
-		6EE139AC15F7660F00AD876E /* UserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserData.m; path = FaceBookUserInfo/UserData.m; sourceTree = "<group>"; };
+		6EE139AB15F7660F00AD876E /* UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserData.h; sourceTree = "<group>"; };
+		6EE139AC15F7660F00AD876E /* UserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserData.m; sourceTree = "<group>"; };
 		6EF487AF15F0A985007B3004 /* FaceBookUserInfo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FaceBookUserInfo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EF487B315F0A985007B3004 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6EF487B515F0A985007B3004 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -164,8 +169,6 @@
 		6EF487A415F0A985007B3004 = {
 			isa = PBXGroup;
 			children = (
-				6EE139AB15F7660F00AD876E /* UserData.h */,
-				6EE139AC15F7660F00AD876E /* UserData.m */,
 				6EF487B915F0A985007B3004 /* FaceBookUserInfo */,
 				6EF487B215F0A985007B3004 /* Frameworks */,
 				6EF487B015F0A985007B3004 /* Products */,
@@ -193,6 +196,10 @@
 		6EF487B915F0A985007B3004 /* FaceBookUserInfo */ = {
 			isa = PBXGroup;
 			children = (
+				6E6FBBB915F87220007FCFA5 /* Cell.h */,
+				6E6FBBBA15F87220007FCFA5 /* Cell.m */,
+				6EE139AB15F7660F00AD876E /* UserData.h */,
+				6EE139AC15F7660F00AD876E /* UserData.m */,
 				6EE139A015F760EA00AD876E /* NSDictionary+HTTPParametrs.h */,
 				6EE139A115F760EA00AD876E /* NSDictionary+HTTPParametrs.m */,
 				6ED269DF15F712E2002662C1 /* DefineConst.h */,
@@ -212,6 +219,7 @@
 				6EDA873315F4050A001DACB7 /* StatusCell.h */,
 				6EDA873415F4050A001DACB7 /* StatusCell.m */,
 				6EDA873715F40529001DACB7 /* StatusCell.xib */,
+				6E7D08B715F87AD100F16BF7 /* Cell.xib */,
 			);
 			path = FaceBookUserInfo;
 			sourceTree = "<group>";
@@ -288,6 +296,7 @@
 				6E51ED8615F2466500101920 /* male.gif in Resources */,
 				6E51ED8715F2466500101920 /* male@2x.gif in Resources */,
 				6EDA873815F40529001DACB7 /* StatusCell.xib in Resources */,
+				6E7D08B815F87AD100F16BF7 /* Cell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,6 +327,7 @@
 				6EDA873515F4050A001DACB7 /* StatusCell.m in Sources */,
 				6EE139A215F760EA00AD876E /* NSDictionary+HTTPParametrs.m in Sources */,
 				6EE139AD15F7660F00AD876E /* UserData.m in Sources */,
+				6E6FBBBB15F87220007FCFA5 /* Cell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,5 +14,6 @@
 @synthesize userFromName;
 @synthesize message;
 @synthesize time;
+@synthesize feedID;
 @end
 
