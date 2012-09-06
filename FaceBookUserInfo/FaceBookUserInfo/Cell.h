@@ -7,14 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "SelfloadImage.h"
+//fonts
+#define kCellOffset 50
+#define kFontMesage 14
 @interface Cell : UITableViewCell
-@property(copy, nonatomic) NSString *name;
-@property(copy, nonatomic) NSDate *time;
-@property(copy, nonatomic) NSString *message;
-@property(copy, nonatomic) UIImage *photo;
+@property(retain, nonatomic) NSString *name;
+@property(retain, nonatomic) NSDate *time;
+@property(retain, nonatomic) NSString *message;
+//@property(retain, nonatomic) UIImage *photo;
 @property (retain, nonatomic) IBOutlet UILabel *nameLabel;
 @property (retain, nonatomic) IBOutlet UILabel *timeLabel;
-@property (retain, nonatomic) IBOutlet UIImageView *photoImageView;
-@property (retain, nonatomic) IBOutlet UITextView *messageTextView;
+@property (retain, nonatomic) IBOutlet SelfloadImage *photoImageView;
+@property (retain, nonatomic) IBOutlet UILabel *messageLabel;
 @end

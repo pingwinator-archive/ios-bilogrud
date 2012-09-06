@@ -12,11 +12,11 @@
 @synthesize time;
 @synthesize name;
 @synthesize message;
-@synthesize photo;
+//@synthesize photo;
 @synthesize nameLabel;
 @synthesize timeLabel;
 @synthesize photoImageView;
-@synthesize messageTextView;
+@synthesize messageLabel;
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -33,31 +33,26 @@
 }
 - (void)setTime:(NSDate *)c {
     if (![c isEqual:time]) {
-//?????
-       // self.time = [c copy];
-        time = [c copy];
-        timeLabel.text = (NSString*)time;
+        timeLabel.text = (NSString*)c;
     }
 }
 
 - (void)setName:(NSString *)n {
     if (![n isEqualToString:name]) {
-        name = [n copy];
-        nameLabel.text = name;
+        nameLabel.text = n;
     }
 }
 
 - (void)setMessage:(NSString *)m{
     if (![m isEqualToString:message]) {
-        message = [m copy];
-        messageTextView.text = message;
+        messageLabel.text = m;
+       
     }
 }
-- (void)setPhoto:(UIImage *)n {
-    if (![n isEqual:photo]) {
-        photo = [n copy];
-        photoImageView.image = photo;
-    }
-}
+//- (void)setPhoto:(UIImage *)n {
+//    if (![n isEqual:photo]) {
+//        photoImageView.image = n;
+//    }
+//}
 
 @end

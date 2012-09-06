@@ -11,12 +11,12 @@
 #import "Connect.h"
 #import "NSDictionary+HTTPParametrs.h"
 #import "UserData.h"
-#import "StatusCell.h"
 #import "Cell.h"
-@interface InfoViewController ()
+
+@interface InfoViewController()<UITableViewDataSource, UITableViewDelegate>
 {
 }
-@property (nonatomic, retain)NSMutableDictionary *conDict;
+@property (nonatomic, retain) NSMutableDictionary *conDict;
 @property(retain, nonatomic) NSArray *statusesArr;
 @property(retain, nonatomic) NSMutableArray *allPosts;
 @end
@@ -28,13 +28,11 @@
 @synthesize testData;
 @synthesize conDict;
 @synthesize userIdValue;
-@synthesize loadImageActivity;
 @synthesize nameLabel;
 @synthesize statusesInfoTable;
 @synthesize statusesArr;
 @synthesize allPosts;
-@synthesize urlString;
-@synthesize customCell;
+
 -(void)dealloc{
     self.userImage = nil;
     self.personalInfo = nil;
@@ -42,11 +40,9 @@
     self.testData = nil;
     self.conDict = nil;
     self.userIdValue = nil;
-    self.loadImageActivity = nil;
     self.nameLabel = nil;
     self.statusesArr = nil;
     self.statusesInfoTable = nil;
-    self.urlString = nil;
     [super dealloc];
 }
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -61,15 +57,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.customCell = [[StatusCell alloc]init];
                        
     self.conDict = [[[NSMutableDictionary alloc]init]autorelease];
-    [self.loadImageActivity startAnimating];
+  //  [self.loadImageActivity startAnimating];
     
+    self.statusesInfoTable.separatorColor = [UIColor clearColor];
     [self addConnectImage];
     [self addConnectInfo];
     [self addConnectStatus];
-  //  [self addConnectFeed];
 }
 
 - (NSMutableDictionary*)baseDict
@@ -87,7 +82,6 @@
 }
 -(void)closeImageDownloading:(Connect*)con
 {
-    [self.loadImageActivity stopAnimating];
     [self removeConnect:con];
 }
 
@@ -112,33 +106,37 @@
 #pragma mark - Add connects
 -(void) addConnectImage
 {    
-   self.urlString = [NSString stringWithFormat: @"https://graph.facebook.com/%@/picture", self.userIdValue];
-    NSURL *url = [NSURL URLWithString:urlString ];
-    if ([self isImageInCash:url]) {
-           self.userImage.image = [self loadFromCash:url];
-          [self.loadImageActivity stopAnimating];
-    } else {
-      void(^imageBlock)(Connect*, NSError *) = ^(Connect *con, NSError *err){
-        if(!err){
-            [self cashingImage:url dataImage:con.data];
-            [self userImageLoading:con];
-        }
-        [self closeImageDownloading:con];
-    };
-        
-    NSURLRequest *imageRequest = [NSURLRequest requestWithURL:url];
-    Connect *connectImage = [Connect urlRequest:imageRequest withBlock: imageBlock];
-    [self addConnectToDict:connectImage];
-    }
+   NSString *urlStr = [NSString stringWithFormat: @"https://graph.facebook.com/%@/picture", self.userIdValue];
+   NSURL *url = [NSURL URLWithString:urlStr ];
+
+  [self.userImage loadImage:url];
+  //  SelfloadImage *test = [[SelfloadImage alloc]init];
+  //  UIImage *image = [test loadImage:url];
+//    if ([self isImageInCash:url]) {
+//           self.userImage.image = [self loadFromCash:url];
+//          [self.loadImageActivity stopAnimating];
+//    } else {
+//      void(^imageBlock)(Connect*, NSError *) = ^(Connect *con, NSError *err){
+//        if(!err){
+//            [self cashingImage:url dataImage:con.data];
+//            [self userImageLoading:con];
+//        }
+//        [self closeImageDownloading:con];
+//    };
+//        
+//    NSURLRequest *imageRequest = [NSURLRequest requestWithURL:url];
+//    Connect *connectImage = [Connect urlRequest:imageRequest withBlock: imageBlock];
+//    [self addConnectToDict:connectImage];
+//    }
 }
 
 -(void)addConnectInfo{
   
     NSMutableDictionary *dictparametrs = [self baseDict];
     NSString *path = [dictparametrs paramFromDict];
-    self.urlString = [[[NSString alloc]initWithFormat: @"https://graph.facebook.com/%@/?%@", self.userIdValue, path] autorelease];
+     NSString *urlStr = [[[NSString alloc]initWithFormat: @"https://graph.facebook.com/%@/?%@", self.userIdValue, path] autorelease];
     
-    NSURL *urlInfo = [NSURL URLWithString:self.urlString];
+    NSURL *urlInfo = [NSURL URLWithString:urlStr];
     NSURLRequest *request = [NSURLRequest requestWithURL:urlInfo];
  
     void(^infoBlock)(Connect*, NSError *) = ^(Connect *con, NSError *err){
@@ -181,7 +179,6 @@
     self.testData = nil;
     self.conDict = nil;
     self.userIdValue = nil;
-    self.loadImageActivity = nil;
     self.nameLabel = nil;
 }
 
@@ -208,40 +205,11 @@
 }
 
 #pragma mark - ConnectDelegate Method
--(void)didLoadingData:(Connect *)connect error:(NSError *)err{  /*  
-if (!err) {
-        NSLog(@"connect");
-        switch (connect.tag) {
-            case kUserImage:{
-                [self userImageLoading:connect];
-            }
-                break;
-            case kUserInfoTag:{
-                [self userInfoLoading:connect];
-            }
-                break;
-            case kUserStatus:
-            {
-                [self userStatusLoading:connect];
-            }
-            case kUserFeedTag:{
-                [self userFeedLoading:connect];
-            }
-                break;
-            default:
-                break;
-        }
-    }
-    else{
-        if(connect.responceType == eResponceTypeImage){
-            [self.loadImageActivity stopAnimating];
-        }
-    }
-    [self deleteConnectFromDict:connect.connection];
-  */
+-(void)didLoadingData:(Connect *)connect error:(NSError *)err{  
+
 }
 
-#pragma mark - Data loading by tag
+#pragma mark - Data loading
 
 -(void)userImageLoading: (Connect*)connect{
     GCD_MAIN_BEGIN
@@ -259,7 +227,7 @@ if (!err) {
     if ([parseObj valueForKey:@"name"]) {
         self.nameLabel.text = [parseObj valueForKey:@"name"];
     }
-    NSString* information = @"";// = [[[NSMutableString alloc]init]autorelease];
+    NSString* information = @"";
     
     if ([parseObj valueForKey:@"birthday"]) {
         information = [information stringByAppendingFormat: @"Birthday: %@\n",[parseObj valueForKey:@"birthday"] ] ;
@@ -291,10 +259,10 @@ if (!err) {
             if([temp valueForKey: @"from"]) {
                 NSDictionary* from = [temp valueForKey:@"from"];
                 data.userFromID = [from valueForKey: @"id"];
-               data.userFromName = [temp valueForKey: @"name"];
+               data.userFromName = [from valueForKey: @"name"];
             }
             if([temp valueForKey: @"created_time"]) {
-                data.userFromID = [temp valueForKey: @"created_time"];
+                data.time = [temp valueForKey: @"created_time"];
             }
             if([temp valueForKey: @"id"]) {
                 data.feedID = [temp valueForKey: @"id"];
@@ -308,25 +276,15 @@ if (!err) {
         [self.statusesInfoTable reloadData];
     }
 }
-/*
--(void)userFeedLoading:(Connect*)connect{
-    NSDictionary* parseObj = [connect objectFromResponce];
-    
-    NSArray *dataArr = [parseObj valueForKey:@"data"];
-   
-    if([dataArr count]){
-  
-        self.allPosts = dataArr;
-    }
-    
-    //arr of feed , sort by updated_time???
-//@!!!!
-}
-*/
+
 #pragma  mark - UITableViewDataSource Methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return (self.allPosts) ?([self.allPosts count]):0;
+    NSInteger count = [self.allPosts count];
+    if(count){
+        self.statusesInfoTable.separatorColor = [UIColor groupTableViewBackgroundColor];// lightGrayColor];
+    }
+    return count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -344,16 +302,33 @@ if (!err) {
         NSUInteger row = [indexPath row];
         UserData *status = [self.allPosts objectAtIndex:row];
         
-        cell.name = status.userName;//@"test";//messageTextView = [[UITextView alloc]init];
+        cell.name = status.userFromName;//@"test";//messageTextView = [[UITextView alloc]init];
         cell.time = status.time;//messageTextView.text = status.message; //message;
+        
+        
         cell.message = status.message;
-       // cell.photo =
+        cell.messageLabel.font = [UIFont systemFontOfSize:(CGFloat)kFontMesage];
+        
+        NSString *urlStr = [NSString stringWithFormat: @"https://graph.facebook.com/%@/picture", status.userFromID];
+        NSURL *url = [NSURL URLWithString:urlStr ];
+
+        [cell.photoImageView loadImage:url];
+
     }
+           
     return cell;
 }
+
 #pragma  mark UITableViewDelegate Methods
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString* text = [[self.allPosts objectAtIndex:indexPath.row] message];
+    CGSize textSize = [text sizeWithFont:[UIFont systemFontOfSize:kFontMesage]  constrainedToSize:CGSizeMake(214, 1000)];
+    
+    return MAX(75.f, textSize.height + kCellOffset);
 }
 
 @end
