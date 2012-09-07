@@ -15,8 +15,9 @@
 @property(retain, nonatomic) NSString *name;
 @property(retain, nonatomic) NSDate *time;
 @property(retain, nonatomic) NSString *message;
-//@property(retain, nonatomic) UIImage *photo;
+ //@property(retain, nonatomic) UIImage *photo;
 @property (retain, nonatomic) IBOutlet UILabel *nameLabel;
+//@property (retain, nonatomic) IBOutlet UITextView *test;
 @property (retain, nonatomic) IBOutlet UILabel *timeLabel;
 @property (retain, nonatomic) IBOutlet SelfloadImage *photoImageView;
 @property (retain, nonatomic) IBOutlet UILabel *messageLabel;

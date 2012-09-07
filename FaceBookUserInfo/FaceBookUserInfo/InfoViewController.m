@@ -305,7 +305,6 @@
         cell.name = status.userFromName;//@"test";//messageTextView = [[UITextView alloc]init];
         cell.time = status.time;//messageTextView.text = status.message; //message;
         
-        
         cell.message = status.message;
         cell.messageLabel.font = [UIFont systemFontOfSize:(CGFloat)kFontMesage];
         

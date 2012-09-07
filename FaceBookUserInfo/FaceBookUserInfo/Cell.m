@@ -17,6 +17,7 @@
 @synthesize timeLabel;
 @synthesize photoImageView;
 @synthesize messageLabel;
+//@synthesize test;
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -48,6 +49,9 @@
         messageLabel.text = m;
        
     }
+}
+-(void)prepareForReuse{
+
 }
 //- (void)setPhoto:(UIImage *)n {
 //    if (![n isEqual:photo]) {

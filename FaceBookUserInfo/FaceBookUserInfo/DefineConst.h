@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Natasha. All rights reserved.
 //
 
-#define kToken @"AAACEdEose0cBAKy1aRgPB9OA5hs3kLZBaGhIBETkZCq1ZCpxt80NLdzBIoTUAK6tcittBYKGTODXnvTkYkMuwtaNtMZBiVWvyGudVNFtwemZCTDTm9UVB"
+#define kToken @"AAACEdEose0cBAPVOjuiPDL8cZALi4pKvTjGhxLucpKVVN6FmhlNiwEkJ2PCWjHTwZArBWrqAmmZC2qr1o8ZC7M8ivRP74t0JeBbVoQXpwWOxAx6akgoW"
 
 #define kUserInfoTag 1
 #define kUserImage 2
