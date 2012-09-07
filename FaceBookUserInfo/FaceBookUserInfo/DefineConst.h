@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Natasha. All rights reserved.
 //
 
-#define kToken @"AAACEdEose0cBAEtX8hpeL5UYG43eyriSWUNyslZBIUg7HUi2VmFZAVxfrwzm3CTAUXWBImrgRPXuKhRuwUfBDDn3kF2Uu1lZB9ZBLXFklwNPK2auMKam"
+#define kToken @"AAACEdEose0cBAAS9UzZCzZCzLCeMMTUseDz2dC1gtBddmcxfGZAyG3rGeZAozoZATkljXB7IUtYPZAH6I3KEdHAXMx0lBZA7ZAg283s2OCOXQ1Rxvpazq8yO"
 
 #define kUserInfoTag 1
 #define kUserImage 2
@@ -16,4 +16,3 @@
 #define GCD_BACKGROUND_BEGIN  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^(void) {
 #define GCD_MAIN_BEGIN dispatch_async(dispatch_get_main_queue(), ^{
 #define GCD_END });
-

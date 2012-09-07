@@ -134,10 +134,10 @@
 		6E2A9F3015F9FB52001D88BB /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				6E2A9F3115F9FBE3001D88BB /* UIImage+Resize.m */,
 				6E2A9F3215F9FBE3001D88BB /* UIImage+Resize.h */,
-				6E2A9F2D15F9FB1A001D88BB /* UIImage+Alpha.m */,
+				6E2A9F3115F9FBE3001D88BB /* UIImage+Resize.m */,
 				6E2A9F2E15F9FB1A001D88BB /* UIImage+Alpha.h */,
+				6E2A9F2D15F9FB1A001D88BB /* UIImage+Alpha.m */,
 				6E2A9F2A15F9FA61001D88BB /* UIImage+RoundedCorner.h */,
 				6E2A9F2915F9FA61001D88BB /* UIImage+RoundedCorner.m */,
 				6EE139A015F760EA00AD876E /* NSDictionary+HTTPParametrs.h */,

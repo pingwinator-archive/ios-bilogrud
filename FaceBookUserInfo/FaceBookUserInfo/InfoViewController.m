@@ -19,6 +19,7 @@
 @property (nonatomic, retain) NSMutableDictionary *conDict;
 @property(retain, nonatomic) NSArray *statusesArr;
 @property(retain, nonatomic) NSMutableArray *allPosts;
+@property(retain,nonatomic) NSString *nextPage;//older messages
 @end
 
 @implementation InfoViewController
@@ -33,7 +34,7 @@
 @synthesize statusesArr;
 @synthesize allPosts;
 @synthesize imageCache;
-
+@synthesize nextPage;
 
 -(void)dealloc{
     self.userImage = nil;
@@ -46,7 +47,7 @@
     self.statusesArr = nil;
     self.statusesInfoTable = nil;
     self.imageCache = nil;
-    
+    self.nextPage = nil;
     [super dealloc];
 }
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -243,19 +244,32 @@
     //...
     self.personalInfo.text = information;
 }
+-(void)loadNextPage{
+    NSURL *url = [NSURL URLWithString:self.nextPage];
+    NSURLRequest *req = [NSURLRequest requestWithURL:url];
+    
+    
+    void(^nextPageBlock)(Connect*, NSError *) = ^(Connect *con, NSError *err){
+        if(!err){
+          //add to arr
+            [self userStatusLoading:con];
+        }
+    };
+    
+    Connect *nextPageConnect = [Connect urlRequest:req withBlock:nextPageBlock];
+    [self addConnectToDict:nextPageConnect];
+   
+}
 
--(void)userStatusLoading:(Connect*)connect{
-    NSDictionary* parseObj = [connect objectFromResponce];
-    NSArray *dataArr = [parseObj valueForKey:@"data"];
-    
+-(NSMutableArray *)messagePost: (NSArray *)allPost{
     NSMutableArray *onlyMessage = [[[NSMutableArray alloc]init]autorelease];
-  
-    self.allPosts = [NSMutableArray array];
+    NSMutableArray *resultArr = [NSMutableArray array];
+
     
-    for(int i = 0; i < [dataArr count]; i++){
-        if([[dataArr objectAtIndex:i]valueForKey:@"message"]){
-            [onlyMessage addObject:[dataArr objectAtIndex:i]];
-            NSDictionary *temp = [dataArr objectAtIndex:i];
+    for(int i = 0; i < [allPost count]; i++){
+        if([[allPost objectAtIndex:i]valueForKey:@"message"]){
+            [onlyMessage addObject:[allPost objectAtIndex:i]];
+            NSDictionary *temp = [allPost objectAtIndex:i];
             UserData *data = [[UserData alloc]init];
             if([temp valueForKey:@"message"]) {
                 data.message = [temp valueForKey:@"message"];
@@ -263,7 +277,7 @@
             if([temp valueForKey: @"from"]) {
                 NSDictionary* from = [temp valueForKey:@"from"];
                 data.userFromID = [from valueForKey: @"id"];
-               data.userFromName = [from valueForKey: @"name"];
+                data.userFromName = [from valueForKey: @"name"];
             }
             if([temp valueForKey: @"created_time"]) {
                 data.time = [temp valueForKey: @"created_time"];
@@ -271,11 +285,28 @@
             if([temp valueForKey: @"id"]) {
                 data.feedID = [temp valueForKey: @"id"];
             }
-            [self.allPosts addObject:data];
+            [resultArr addObject:data];
             [data release];
         }
     }
-   
+    return resultArr;
+  
+}
+-(void)userStatusLoading:(Connect*)connect{
+    NSDictionary* parseObj = [connect objectFromResponce];
+    NSArray *dataArr = [parseObj valueForKey:@"data"];
+    NSDictionary *pageDict = [parseObj valueForKey:@"paging"];
+    self.nextPage = [pageDict valueForKey:@"next"];
+    
+    if([self.allPosts count])
+    {
+        NSArray *add = [self messagePost:dataArr];
+        self.allPosts = [self.allPosts arrayByAddingObjectsFromArray:add];
+    }
+    else
+    {
+        self.allPosts = [self messagePost:dataArr];
+    }
     if([self.allPosts count]){
         [self.statusesInfoTable reloadData];
     }
@@ -301,10 +332,6 @@
             [tableView registerNib:nib forCellReuseIdentifier:CellTableIdentifier];
             nibsRegistered = YES;
         }
-
-    
-   
-    
      Cell *cell = (Cell *)[tableView dequeueReusableCellWithIdentifier:CellTableIdentifier];
  
 
@@ -321,11 +348,19 @@
         
         NSString *urlStr = [NSString stringWithFormat: @"https://graph.facebook.com/%@/picture", status.userFromID];
         NSURL *url = [NSURL URLWithString:urlStr ];
-        NSLog(@"will show pict %@", urlStr);
         [cell.photoImageView loadImage:url ];//singleton cache
         //  "global" cache
         //  [cell.photoImageView loadImage:url cashImages:self.imageCache];
+        
+        NSLog(@"indexPath row: %d\n",[indexPath row] );
+        NSLog(@"allPosts %d", [self.allPosts count]);
+        
+        if([self.allPosts count] < ([indexPath row] + 6)){
+            [self loadNextPage];
+        }
     }
+    
+ 
     return cell;
 }
 

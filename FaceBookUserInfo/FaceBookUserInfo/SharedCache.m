@@ -12,9 +12,9 @@
 @end
 @implementation SharedCache
 -(id)initCache{
-//    if ((self = [super init]))
-//    {
-//    }
+    if ((self = [super init]))
+    {
+    }
     return self;
 }
 
@@ -23,7 +23,7 @@
     static dispatch_once_t pred = 0;
     __strong static SharedCache * _sharedObject = nil;
     dispatch_once(&pred, ^{
-        _sharedObject = [[[self alloc] initCache]autorelease]; // or some other init method
+        _sharedObject = [[self alloc] initCache]; // or some other init method
     });
     return _sharedObject;
 }

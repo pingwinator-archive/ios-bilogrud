@@ -37,25 +37,24 @@
 
 -(void)loadImage: (NSURL *)url{
     self.cache = [SharedCache sharedInstance];
-   // NSCache *test = [SharedCache sharedInstance];;
-    
+     
     [self.activity startAnimating];
     void(^imageBlock)(Connect*, NSError *) = ^(Connect *con, NSError *err){
-        if (con == self.connect) {
+        //if (con == self.connect) {
             if(!err){
-                UIImage *testImage = [[UIImage imageWithData: connect.data] roundedCornerImage:10 borderSize:0];
+                //!
+                UIImage *testImage = [[UIImage imageWithData: connect.data] roundedCornerImage:5 borderSize:0];
                 if (testImage) {
-                    //!
                     self.image = testImage ;
                     [self.cache setObject:self.image forKey:url];
                     [self.activity stopAnimating];
                 }
-            }
+          //  }
         }
     };
     if([self.cache objectForKey:url] ){
      //!
-        [self.cache objectForKey:url];
+       self.image =  [self.cache objectForKey:url];
     
         [self.activity stopAnimating];
         
@@ -65,18 +64,17 @@
     }
 }
 -(void)loadImage: (NSURL *)url cashImages: (NSCache*)_cache{
-  //NSCache *cache = [[NSCache alloc]init];
     [self.activity startAnimating];
         void(^imageBlock)(Connect*, NSError *) = ^(Connect *con, NSError *err){
             if (con == self.connect) {
-            if(!err){
-                UIImage *testImage = [UIImage imageWithData: connect.data];
-                if (testImage) {
-                    self.image = testImage;
-                    [_cache setObject:self.image forKey:url];
-                    [self.activity stopAnimating];
+                if(!err){
+                    UIImage *testImage = [UIImage imageWithData: connect.data];
+                    if (testImage) {
+                        self.image = testImage;
+                        [_cache setObject:self.image forKey:url];
+                        [self.activity stopAnimating];
+                    }
                 }
-            }
             }
         };
     if([_cache objectForKey:url] ){
