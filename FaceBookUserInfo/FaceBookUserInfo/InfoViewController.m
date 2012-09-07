@@ -32,6 +32,8 @@
 @synthesize statusesInfoTable;
 @synthesize statusesArr;
 @synthesize allPosts;
+@synthesize imageCache;
+
 
 -(void)dealloc{
     self.userImage = nil;
@@ -43,6 +45,8 @@
     self.nameLabel = nil;
     self.statusesArr = nil;
     self.statusesInfoTable = nil;
+    self.imageCache = nil;
+    
     [super dealloc];
 }
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -60,7 +64,7 @@
                        
     self.conDict = [[[NSMutableDictionary alloc]init]autorelease];
   //  [self.loadImageActivity startAnimating];
-    
+    self.imageCache = [[NSCache alloc]init];
     self.statusesInfoTable.separatorColor = [UIColor clearColor];
     [self addConnectImage];
     [self addConnectInfo];
@@ -109,8 +113,8 @@
    NSString *urlStr = [NSString stringWithFormat: @"https://graph.facebook.com/%@/picture", self.userIdValue];
    NSURL *url = [NSURL URLWithString:urlStr ];
 
-  [self.userImage loadImage:url];
-  //  SelfloadImage *test = [[SelfloadImage alloc]init];
+    [self.userImage loadImage:url ];// cashImages:self.imageCache];
+     //  SelfloadImage *test = [[SelfloadImage alloc]init];
   //  UIImage *image = [test loadImage:url];
 //    if ([self isImageInCash:url]) {
 //           self.userImage.image = [self loadFromCash:url];
@@ -289,32 +293,39 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
   static NSString *CellTableIdentifier = @"CellTableIdentifier";
-  BOOL nibsRegistered = NO;
-    if (!nibsRegistered) {
-        UINib *nib = [UINib nibWithNibName:@"Cell" bundle:nil];
-        [tableView registerNib:nib forCellReuseIdentifier:CellTableIdentifier];
-        nibsRegistered = YES;
-    }
+    
+  
+        BOOL nibsRegistered = NO;
+        if (!nibsRegistered) {
+            UINib *nib = [UINib nibWithNibName:@"Cell" bundle:nil];
+            [tableView registerNib:nib forCellReuseIdentifier:CellTableIdentifier];
+            nibsRegistered = YES;
+        }
+
+    
+   
     
      Cell *cell = (Cell *)[tableView dequeueReusableCellWithIdentifier:CellTableIdentifier];
-    
+ 
+
     if([self.allPosts count] != 0){
+      
         NSUInteger row = [indexPath row];
         UserData *status = [self.allPosts objectAtIndex:row];
         
-        cell.name = status.userFromName;//@"test";//messageTextView = [[UITextView alloc]init];
-        cell.time = status.time;//messageTextView.text = status.message; //message;
+        cell.name = status.userFromName;
+        cell.time = status.time;
         
         cell.message = status.message;
         cell.messageLabel.font = [UIFont systemFontOfSize:(CGFloat)kFontMesage];
         
         NSString *urlStr = [NSString stringWithFormat: @"https://graph.facebook.com/%@/picture", status.userFromID];
         NSURL *url = [NSURL URLWithString:urlStr ];
-
-        [cell.photoImageView loadImage:url];
-
+        NSLog(@"will show pict %@", urlStr);
+        [cell.photoImageView loadImage:url ];//singleton cache
+        //  "global" cache
+        //  [cell.photoImageView loadImage:url cashImages:self.imageCache];
     }
-           
     return cell;
 }
 

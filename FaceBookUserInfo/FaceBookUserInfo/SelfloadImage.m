@@ -12,18 +12,20 @@
 
 @property (retain, nonatomic) Connect *connect;
 @property (retain, nonatomic) UIActivityIndicatorView *activity;
+
 @end
 
 @implementation SelfloadImage
-
 @synthesize activity;
 @synthesize connect;
+@synthesize cache;
 -(SelfloadImage *)init{
     self = [super init];
     if (self) {
     }
     return self;
 }
+
 
 - (void)awakeFromNib
 {
@@ -32,8 +34,38 @@
     self.activity.hidesWhenStopped = YES;
     [self addSubview:self.activity];
 }
+
 -(void)loadImage: (NSURL *)url{
-  NSCache *cash = [[NSCache alloc]init];
+    self.cache = [SharedCache sharedInstance];
+   // NSCache *test = [SharedCache sharedInstance];;
+    
+    [self.activity startAnimating];
+    void(^imageBlock)(Connect*, NSError *) = ^(Connect *con, NSError *err){
+        if (con == self.connect) {
+            if(!err){
+                UIImage *testImage = [[UIImage imageWithData: connect.data] roundedCornerImage:10 borderSize:0];
+                if (testImage) {
+                    //!
+                    self.image = testImage ;
+                    [self.cache setObject:self.image forKey:url];
+                    [self.activity stopAnimating];
+                }
+            }
+        }
+    };
+    if([self.cache objectForKey:url] ){
+     //!
+        [self.cache objectForKey:url];
+    
+        [self.activity stopAnimating];
+        
+    }  else {
+        NSURLRequest *imageRequest = [NSURLRequest requestWithURL:url];
+        self.connect = [Connect urlRequest:imageRequest withBlock: imageBlock];
+    }
+}
+-(void)loadImage: (NSURL *)url cashImages: (NSCache*)_cache{
+  //NSCache *cache = [[NSCache alloc]init];
     [self.activity startAnimating];
         void(^imageBlock)(Connect*, NSError *) = ^(Connect *con, NSError *err){
             if (con == self.connect) {
@@ -41,23 +73,28 @@
                 UIImage *testImage = [UIImage imageWithData: connect.data];
                 if (testImage) {
                     self.image = testImage;
-                    [cash setObject:self.image forKey:url];
+                    [_cache setObject:self.image forKey:url];
                     [self.activity stopAnimating];
                 }
-            } }
+            }
+            }
         };
-    if([cash objectForKey:url] ){
-        [cash objectForKey:url];
-    }  else{
+    if([_cache objectForKey:url] ){
+        self.image = [_cache objectForKey:url];
+        [self.activity stopAnimating];
+
+    }  else {
         NSURLRequest *imageRequest = [NSURLRequest requestWithURL:url];
         self.connect = [Connect urlRequest:imageRequest withBlock: imageBlock];
     }
 }
-
+-(void)stopLoading{
+    [self.connect stopConnect];
+}
 - (void)layoutSubviews{
     [super layoutSubviews];
     CGPoint centerView = self.center ;
-    centerView = CGPointMake(centerView.x - self.activity.frame.size.width, centerView.y - self.activity.frame.size.height);
+    centerView = CGPointMake( self.frame.size.width/2, self.frame.size.height/2);
     self.activity.center = centerView;
 }
 

@@ -20,4 +20,5 @@ typedef void (^ConnectBlock)(Connect* con, NSError* er);
 -(Connect *)initRequest: (NSURLRequest *)request  withBlock: (ConnectBlock) _block;
 +(Connect *)urlRequest: (NSURLRequest *)request withBlock: (ConnectBlock) _block;
 -(id)objectFromResponce;
+-(void)stopConnect;
 @end

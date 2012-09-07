@@ -37,7 +37,9 @@ GCD_MAIN_BEGIN
 GCD_END
     }
 }
-
+-(void)stopConnect{
+    self.block = nil;
+}
 - (NSString*)description
 {
     return [NSString stringWithFormat:@"connect to URL %@", self.urlRequest.URL.relativeString];

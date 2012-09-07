@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "Connect.h"
+#import "SharedCache.h"
+#import "UIImage+RoundedCorner.h"
 @interface SelfloadImage : UIImageView
--(void)loadImage: (NSURL *)userId;
-
-
+-(void)loadImage: (NSURL *)url cashImages: (NSCache*)cache;
+-(void)loadImage: (NSURL *)url;
+@property (retain, nonatomic ) SharedCache* cache;
 @end
+

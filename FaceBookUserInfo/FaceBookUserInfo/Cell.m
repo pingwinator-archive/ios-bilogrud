@@ -50,13 +50,8 @@
        
     }
 }
--(void)prepareForReuse{
-
-}
-//- (void)setPhoto:(UIImage *)n {
-//    if (![n isEqual:photo]) {
-//        photoImageView.image = n;
-//    }
+//-(void)prepareForReuse{
+//    self.imageView.image = nil;
 //}
 
 @end

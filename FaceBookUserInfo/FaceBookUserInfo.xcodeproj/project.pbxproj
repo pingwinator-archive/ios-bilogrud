@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E2A9F2B15F9FA61001D88BB /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A9F2915F9FA61001D88BB /* UIImage+RoundedCorner.m */; };
+		6E2A9F2F15F9FB1B001D88BB /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A9F2D15F9FB1A001D88BB /* UIImage+Alpha.m */; };
+		6E2A9F3315F9FBE3001D88BB /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A9F3115F9FBE3001D88BB /* UIImage+Resize.m */; };
+		6E318EDD15F9EBE60080548F /* SharedCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E318EDC15F9EBE60080548F /* SharedCache.m */; };
 		6E51ED8415F2466500101920 /* female.gif in Resources */ = {isa = PBXBuildFile; fileRef = 6E51ED8015F2466500101920 /* female.gif */; };
 		6E51ED8515F2466500101920 /* female@2x.gif in Resources */ = {isa = PBXBuildFile; fileRef = 6E51ED8115F2466500101920 /* female@2x.gif */; };
 		6E51ED8615F2466500101920 /* male.gif in Resources */ = {isa = PBXBuildFile; fileRef = 6E51ED8215F2466500101920 /* male.gif */; };
@@ -44,6 +48,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6E2A9F2915F9FA61001D88BB /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+RoundedCorner.m"; path = "FaceBookUserInfo/UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
+		6E2A9F2A15F9FA61001D88BB /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+RoundedCorner.h"; path = "FaceBookUserInfo/UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
+		6E2A9F2D15F9FB1A001D88BB /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Alpha.m"; path = "FaceBookUserInfo/UIImage+Alpha.m"; sourceTree = "<group>"; };
+		6E2A9F2E15F9FB1A001D88BB /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Alpha.h"; path = "FaceBookUserInfo/UIImage+Alpha.h"; sourceTree = "<group>"; };
+		6E2A9F3115F9FBE3001D88BB /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
+		6E2A9F3215F9FBE3001D88BB /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
+		6E318EDB15F9EBE60080548F /* SharedCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedCache.h; sourceTree = "<group>"; };
+		6E318EDC15F9EBE60080548F /* SharedCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharedCache.m; sourceTree = "<group>"; };
 		6E51ED8015F2466500101920 /* female.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = female.gif; sourceTree = "<group>"; };
 		6E51ED8115F2466500101920 /* female@2x.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "female@2x.gif"; sourceTree = "<group>"; };
 		6E51ED8215F2466500101920 /* male.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = male.gif; sourceTree = "<group>"; };
@@ -83,8 +95,8 @@
 		6EB42CCC15F10C5900B314E3 /* user_placeholder.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = user_placeholder.jpeg; sourceTree = "<group>"; };
 		6EB42CD015F10E2400B314E3 /* user_placeholder@2x.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "user_placeholder@2x.jpeg"; sourceTree = "<group>"; };
 		6ED269DF15F712E2002662C1 /* DefineConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefineConst.h; sourceTree = "<group>"; };
-		6EE139A015F760EA00AD876E /* NSDictionary+HTTPParametrs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+HTTPParametrs.h"; path = "../NSDictionary+HTTPParametrs.h"; sourceTree = "<group>"; };
-		6EE139A115F760EA00AD876E /* NSDictionary+HTTPParametrs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+HTTPParametrs.m"; path = "../NSDictionary+HTTPParametrs.m"; sourceTree = "<group>"; };
+		6EE139A015F760EA00AD876E /* NSDictionary+HTTPParametrs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+HTTPParametrs.h"; sourceTree = "<group>"; };
+		6EE139A115F760EA00AD876E /* NSDictionary+HTTPParametrs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+HTTPParametrs.m"; sourceTree = "<group>"; };
 		6EE139AB15F7660F00AD876E /* UserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserData.h; sourceTree = "<group>"; };
 		6EE139AC15F7660F00AD876E /* UserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserData.m; sourceTree = "<group>"; };
 		6EF487AF15F0A985007B3004 /* FaceBookUserInfo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FaceBookUserInfo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -119,6 +131,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6E2A9F3015F9FB52001D88BB /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				6E2A9F3115F9FBE3001D88BB /* UIImage+Resize.m */,
+				6E2A9F3215F9FBE3001D88BB /* UIImage+Resize.h */,
+				6E2A9F2D15F9FB1A001D88BB /* UIImage+Alpha.m */,
+				6E2A9F2E15F9FB1A001D88BB /* UIImage+Alpha.h */,
+				6E2A9F2A15F9FA61001D88BB /* UIImage+RoundedCorner.h */,
+				6E2A9F2915F9FA61001D88BB /* UIImage+RoundedCorner.m */,
+				6EE139A015F760EA00AD876E /* NSDictionary+HTTPParametrs.h */,
+				6EE139A115F760EA00AD876E /* NSDictionary+HTTPParametrs.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
 		6EAC9EED15F0CF6500231960 /* SBJSON */ = {
 			isa = PBXGroup;
 			children = (
@@ -167,6 +194,7 @@
 		6EF487A415F0A985007B3004 = {
 			isa = PBXGroup;
 			children = (
+				6E2A9F3015F9FB52001D88BB /* Categories */,
 				6EF487B915F0A985007B3004 /* FaceBookUserInfo */,
 				6EF487B215F0A985007B3004 /* Frameworks */,
 				6EF487B015F0A985007B3004 /* Products */,
@@ -194,14 +222,14 @@
 		6EF487B915F0A985007B3004 /* FaceBookUserInfo */ = {
 			isa = PBXGroup;
 			children = (
+				6E318EDB15F9EBE60080548F /* SharedCache.h */,
+				6E318EDC15F9EBE60080548F /* SharedCache.m */,
 				6EA70E9415F8D19C00C460CE /* SelfloadImage.h */,
 				6EA70E9515F8D19C00C460CE /* SelfloadImage.m */,
 				6E6FBBB915F87220007FCFA5 /* Cell.h */,
 				6E6FBBBA15F87220007FCFA5 /* Cell.m */,
 				6EE139AB15F7660F00AD876E /* UserData.h */,
 				6EE139AC15F7660F00AD876E /* UserData.m */,
-				6EE139A015F760EA00AD876E /* NSDictionary+HTTPParametrs.h */,
-				6EE139A115F760EA00AD876E /* NSDictionary+HTTPParametrs.m */,
 				6ED269DF15F712E2002662C1 /* DefineConst.h */,
 				6EB42CCF15F10C6100B314E3 /* Resources */,
 				6EAC9EED15F0CF6500231960 /* SBJSON */,
@@ -324,6 +352,10 @@
 				6EE139AD15F7660F00AD876E /* UserData.m in Sources */,
 				6E6FBBBB15F87220007FCFA5 /* Cell.m in Sources */,
 				6EA70E9615F8D19C00C460CE /* SelfloadImage.m in Sources */,
+				6E318EDD15F9EBE60080548F /* SharedCache.m in Sources */,
+				6E2A9F2B15F9FA61001D88BB /* UIImage+RoundedCorner.m in Sources */,
+				6E2A9F2F15F9FB1B001D88BB /* UIImage+Alpha.m in Sources */,
+				6E2A9F3315F9FBE3001D88BB /* UIImage+Resize.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
