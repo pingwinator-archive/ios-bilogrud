@@ -7,9 +7,11 @@
 //
 
 #import "SharedCache.h"
+
 @interface SharedCache()
 - (id)initCache;
 @end
+
 @implementation SharedCache
 -(id)initCache{
     if ((self = [super init]))

@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "Connect.h"
 #import "SelfloadImage.h"
+#import "ODRefreshControl.h"
 
 @class Cell;
+
 @interface InfoViewController : UIViewController
 
 @property(retain, nonatomic) IBOutlet UITextView *personalInfo;
@@ -22,5 +24,5 @@
 @property(retain, nonatomic) NSURLConnection *testInfoConnection;
 @property(retain, nonatomic) NSString *userIdValue;
 @property(retain, nonatomic) NSCache *imageCache;
-
+@property(retain, nonatomic) NSDictionary *pagingStructure;
 @end

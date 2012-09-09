@@ -16,7 +16,8 @@
 @synthesize showInfoButton;
 @synthesize userIdField;
 
--(void)dealloc{
+-(void)dealloc
+{
     self.showInfoButton = nil;
     self.userIdField = nil;
     [super dealloc];
@@ -41,10 +42,15 @@
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
+    self.showInfoButton = nil;
+    self.userIdField = nil;
 }
--(void)viewWillDisappear:(BOOL)animated{
+
+-(void)viewWillDisappear:(BOOL)animated
+{
     
 }
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);

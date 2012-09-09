@@ -9,5 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface NSDictionary (HTTPParametrs)
+
 -(NSString *)paramFromDict;
+
 @end

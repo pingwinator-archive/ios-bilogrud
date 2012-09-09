@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SharedCache : NSCache// NSObject
+@interface SharedCache : NSCache
 +(SharedCache *)sharedInstance;
 @end

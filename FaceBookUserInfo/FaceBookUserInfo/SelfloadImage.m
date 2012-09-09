@@ -19,13 +19,14 @@
 @synthesize activity;
 @synthesize connect;
 @synthesize cache;
--(SelfloadImage *)init{
+
+-(SelfloadImage *)init
+{
     self = [super init];
     if (self) {
     }
     return self;
 }
-
 
 - (void)awakeFromNib
 {
@@ -35,27 +36,24 @@
     [self addSubview:self.activity];
 }
 
--(void)loadImage: (NSURL *)url{
+-(void)loadImage: (NSURL *)url
+{
     self.cache = [SharedCache sharedInstance];
      
     [self.activity startAnimating];
     void(^imageBlock)(Connect*, NSError *) = ^(Connect *con, NSError *err){
-        //if (con == self.connect) {
             if(!err){
                 //!
                 UIImage *testImage = [[UIImage imageWithData: connect.data] roundedCornerImage:5 borderSize:0];
                 if (testImage) {
                     self.image = testImage ;
                     [self.cache setObject:self.image forKey:url];
-                    [self.activity stopAnimating];
                 }
-          //  }
-        }
+                  [self.activity stopAnimating];
+            }
     };
     if([self.cache objectForKey:url] ){
-     //!
-       self.image =  [self.cache objectForKey:url];
-    
+        self.image =  [self.cache objectForKey:url];
         [self.activity stopAnimating];
         
     }  else {
@@ -63,7 +61,9 @@
         self.connect = [Connect urlRequest:imageRequest withBlock: imageBlock];
     }
 }
--(void)loadImage: (NSURL *)url cashImages: (NSCache*)_cache{
+
+-(void)loadImage: (NSURL *)url cashImages: (NSCache*)_cache
+{
     [self.activity startAnimating];
         void(^imageBlock)(Connect*, NSError *) = ^(Connect *con, NSError *err){
             if (con == self.connect) {
@@ -86,15 +86,17 @@
         self.connect = [Connect urlRequest:imageRequest withBlock: imageBlock];
     }
 }
--(void)stopLoading{
+
+-(void)stopLoading
+{
     [self.connect stopConnect];
 }
-- (void)layoutSubviews{
+
+- (void)layoutSubviews
+{
     [super layoutSubviews];
     CGPoint centerView = self.center ;
     centerView = CGPointMake( self.frame.size.width/2, self.frame.size.height/2);
     self.activity.center = centerView;
 }
-
-
 @end

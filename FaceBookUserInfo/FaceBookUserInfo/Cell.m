@@ -12,12 +12,11 @@
 @synthesize time;
 @synthesize name;
 @synthesize message;
-//@synthesize photo;
 @synthesize nameLabel;
 @synthesize timeLabel;
 @synthesize photoImageView;
 @synthesize messageLabel;
-//@synthesize test;
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -32,19 +31,23 @@
 
     // Configure the view for the selected state
 }
-- (void)setTime:(NSDate *)c {
+
+- (void)setTime:(NSDate *)c
+{
     if (![c isEqual:time]) {
         timeLabel.text = (NSString*)c;
     }
 }
 
-- (void)setName:(NSString *)n {
+- (void)setName:(NSString *)n
+{
     if (![n isEqualToString:name]) {
         nameLabel.text = n;
     }
 }
 
-- (void)setMessage:(NSString *)m{
+- (void)setMessage:(NSString *)m
+{
     if (![m isEqualToString:message]) {
         messageLabel.text = m;
        

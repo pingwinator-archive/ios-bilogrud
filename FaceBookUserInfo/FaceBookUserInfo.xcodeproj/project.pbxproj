@@ -17,6 +17,8 @@
 		6E51ED8715F2466500101920 /* male@2x.gif in Resources */ = {isa = PBXBuildFile; fileRef = 6E51ED8315F2466500101920 /* male@2x.gif */; };
 		6E6FBBBB15F87220007FCFA5 /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E6FBBBA15F87220007FCFA5 /* Cell.m */; };
 		6E7D08B815F87AD100F16BF7 /* Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D08B715F87AD100F16BF7 /* Cell.xib */; };
+		6E8B034815FC8AFC0030EC2E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E8B034715FC8AFC0030EC2E /* QuartzCore.framework */; };
+		6E8B035A15FC9A030030EC2E /* ODRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B035915FC9A030030EC2E /* ODRefreshControl.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6EA70E9615F8D19C00C460CE /* SelfloadImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EA70E9515F8D19C00C460CE /* SelfloadImage.m */; };
 		6EAC9F0715F0CF6500231960 /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EAC9EEF15F0CF6500231960 /* NSObject+SBJson.m */; };
 		6EAC9F0815F0CF6500231960 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EAC9EF215F0CF6500231960 /* SBJsonParser.m */; };
@@ -63,6 +65,9 @@
 		6E6FBBB915F87220007FCFA5 /* Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
 		6E6FBBBA15F87220007FCFA5 /* Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cell.m; sourceTree = "<group>"; };
 		6E7D08B715F87AD100F16BF7 /* Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Cell.xib; sourceTree = "<group>"; };
+		6E8B034715FC8AFC0030EC2E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		6E8B035815FC9A030030EC2E /* ODRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODRefreshControl.h; sourceTree = "<group>"; };
+		6E8B035915FC9A030030EC2E /* ODRefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODRefreshControl.m; sourceTree = "<group>"; };
 		6EA70E9415F8D19C00C460CE /* SelfloadImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelfloadImage.h; sourceTree = "<group>"; };
 		6EA70E9515F8D19C00C460CE /* SelfloadImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelfloadImage.m; sourceTree = "<group>"; };
 		6EAC9EEE15F0CF6500231960 /* NSObject+SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJson.h"; sourceTree = "<group>"; };
@@ -122,6 +127,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E8B034815FC8AFC0030EC2E /* QuartzCore.framework in Frameworks */,
 				6EF487B415F0A985007B3004 /* UIKit.framework in Frameworks */,
 				6EF487B615F0A985007B3004 /* Foundation.framework in Frameworks */,
 				6EF487B815F0A985007B3004 /* CoreGraphics.framework in Frameworks */,
@@ -144,6 +150,15 @@
 				6EE139A115F760EA00AD876E /* NSDictionary+HTTPParametrs.m */,
 			);
 			name = Categories;
+			sourceTree = "<group>";
+		};
+		6E8B035715FC9A030030EC2E /* ODRefreshControl */ = {
+			isa = PBXGroup;
+			children = (
+				6E8B035815FC9A030030EC2E /* ODRefreshControl.h */,
+				6E8B035915FC9A030030EC2E /* ODRefreshControl.m */,
+			);
+			path = ODRefreshControl;
 			sourceTree = "<group>";
 		};
 		6EAC9EED15F0CF6500231960 /* SBJSON */ = {
@@ -194,6 +209,7 @@
 		6EF487A415F0A985007B3004 = {
 			isa = PBXGroup;
 			children = (
+				6E8B035715FC9A030030EC2E /* ODRefreshControl */,
 				6E2A9F3015F9FB52001D88BB /* Categories */,
 				6EF487B915F0A985007B3004 /* FaceBookUserInfo */,
 				6EF487B215F0A985007B3004 /* Frameworks */,
@@ -212,6 +228,7 @@
 		6EF487B215F0A985007B3004 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6E8B034715FC8AFC0030EC2E /* QuartzCore.framework */,
 				6EF487B315F0A985007B3004 /* UIKit.framework */,
 				6EF487B515F0A985007B3004 /* Foundation.framework */,
 				6EF487B715F0A985007B3004 /* CoreGraphics.framework */,
@@ -356,6 +373,7 @@
 				6E2A9F2B15F9FA61001D88BB /* UIImage+RoundedCorner.m in Sources */,
 				6E2A9F2F15F9FB1B001D88BB /* UIImage+Alpha.m in Sources */,
 				6E2A9F3315F9FBE3001D88BB /* UIImage+Resize.m in Sources */,
+				6E8B035A15FC9A030030EC2E /* ODRefreshControl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
