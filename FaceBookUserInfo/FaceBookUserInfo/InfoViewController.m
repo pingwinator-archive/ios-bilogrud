@@ -40,7 +40,8 @@
 @synthesize nextPage;
 @synthesize previousPage;
 @synthesize updatePreviousPage;
-
+@synthesize postButton;
+@synthesize textPost;
 -(void)dealloc{
     self.userImage = nil;
     self.personalInfo = nil;
@@ -54,6 +55,8 @@
     self.imageCache = nil;
     self.nextPage = nil;
     self.pagingStructure = nil;
+    self.textPost = nil;
+    self.postButton = nil;
     [super dealloc];
 }
 
@@ -67,6 +70,7 @@
     
       self.updatePreviousPage = NO;
     
+    self.textPost.delegate = self;
     self.conDict = [[[NSMutableDictionary alloc]init]autorelease];
    //if use cache loading
     // self.imageCache = [[NSCache alloc]init];
@@ -74,6 +78,35 @@
     [self addConnectImage];
     [self addConnectInfo];
     [self addConnectStatus];
+}
+#pragma mark - Post Methods
+-(IBAction)post
+{
+    NSString *message =self.textPost.text;
+    NSMutableDictionary *dictparametrs = [NSMutableDictionary dictionary];
+    [dictparametrs setValue:kToken forKey:@"access_token"];
+    [dictparametrs setValue:message forKey:@"message"];
+
+    NSString *urlStr = [[NSString alloc]initWithFormat: @"https://graph.facebook.com/%@/feed", userIdValue];
+    NSURL* url = [NSURL URLWithString:urlStr];
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url];
+
+     [request setHTTPMethod:@"POST"];
+    
+     NSString *postParam = [dictparametrs paramFromDict];
+    
+      NSData *postData = [postParam dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+      [request setHTTPBody:postData];
+    
+    void(^postBlock)(Connect *, NSError *) = ^(Connect *con, NSError *err){
+        if(!err){
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"message was send" message:self.textPost.text delegate:nil cancelButtonTitle:@"great!" otherButtonTitles: nil];
+            [alert show];
+        }
+    };
+    
+      Connect *post = [Connect urlRequest:request withBlock:postBlock];
+    [ self addConnectToDict:post];
 }
 
 - (NSMutableDictionary*)baseDict
@@ -302,7 +335,7 @@ GCD_END
 
 -(void)dropViewDidBeginRefreshing:(ODRefreshControl *)refreshControl
 { 
-    double delayInSeconds = 3.0;
+    double delayInSeconds = 1.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         [self loadPreviousPage];
@@ -431,4 +464,12 @@ GCD_END
 {
     
 }
+
+#pragma mark - UITextFieldDelegate Methods
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
+
 @end

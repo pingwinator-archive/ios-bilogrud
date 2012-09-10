@@ -1,0 +1,424 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6E2A9F5415FE0A7F001D88BB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E2A9F5315FE0A7F001D88BB /* UIKit.framework */; };
+		6E2A9F5615FE0A7F001D88BB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E2A9F5515FE0A7F001D88BB /* Foundation.framework */; };
+		6E2A9F5815FE0A7F001D88BB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E2A9F5715FE0A7F001D88BB /* CoreGraphics.framework */; };
+		6E2A9F5E15FE0A7F001D88BB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6E2A9F5C15FE0A7F001D88BB /* InfoPlist.strings */; };
+		6E2A9F6015FE0A7F001D88BB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A9F5F15FE0A7F001D88BB /* main.m */; };
+		6E2A9F6415FE0A7F001D88BB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A9F6315FE0A7F001D88BB /* AppDelegate.m */; };
+		6E2A9F6A15FE0A7F001D88BB /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E2A9F6815FE0A7F001D88BB /* LoginViewController.xib */; };
+		6E2A9F7115FE0ADB001D88BB /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A9F7015FE0ADB001D88BB /* LoginViewController.m */; };
+		6E2A9F7515FE0CB7001D88BB /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6E2A9F7415FE0CB7001D88BB /* FacebookSDKResources.bundle */; };
+		6E2A9F7B15FE126A001D88BB /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E2A9F7A15FE126A001D88BB /* FacebookSDK.framework */; };
+		6E2A9F7F15FE2545001D88BB /* StatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A9F7D15FE2545001D88BB /* StatusViewController.m */; };
+		6E2A9F8015FE2545001D88BB /* StatusViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E2A9F7E15FE2545001D88BB /* StatusViewController.xib */; };
+		6E2A9F8815FE264D001D88BB /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A9F8615FE264D001D88BB /* MainViewController.m */; };
+		6E2A9F8915FE264D001D88BB /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E2A9F8715FE264D001D88BB /* MainViewController.xib */; };
+		6E2A9F9015FE300A001D88BB /* NSDictionary+HTTPParametrs.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A9F8E15FE300A001D88BB /* NSDictionary+HTTPParametrs.m */; };
+		6E2A9F9915FE4451001D88BB /* Connect.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A9F9815FE4451001D88BB /* Connect.m */; };
+		6E2A9FB415FE46C6001D88BB /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A9F9C15FE46C6001D88BB /* NSObject+SBJson.m */; };
+		6E2A9FB515FE46C6001D88BB /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A9F9F15FE46C6001D88BB /* SBJsonParser.m */; };
+		6E2A9FB615FE46C6001D88BB /* SBJsonStreamParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A9FA115FE46C6001D88BB /* SBJsonStreamParser.m */; };
+		6E2A9FB715FE46C6001D88BB /* SBJsonStreamParserAccumulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A9FA315FE46C6001D88BB /* SBJsonStreamParserAccumulator.m */; };
+		6E2A9FB815FE46C6001D88BB /* SBJsonStreamParserAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A9FA515FE46C6001D88BB /* SBJsonStreamParserAdapter.m */; };
+		6E2A9FB915FE46C6001D88BB /* SBJsonStreamParserState.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A9FA715FE46C6001D88BB /* SBJsonStreamParserState.m */; };
+		6E2A9FBA15FE46C6001D88BB /* SBJsonStreamWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A9FA915FE46C6001D88BB /* SBJsonStreamWriter.m */; };
+		6E2A9FBB15FE46C6001D88BB /* SBJsonStreamWriterAccumulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A9FAB15FE46C6001D88BB /* SBJsonStreamWriterAccumulator.m */; };
+		6E2A9FBC15FE46C6001D88BB /* SBJsonStreamWriterState.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A9FAD15FE46C6001D88BB /* SBJsonStreamWriterState.m */; };
+		6E2A9FBD15FE46C6001D88BB /* SBJsonTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A9FAF15FE46C6001D88BB /* SBJsonTokeniser.m */; };
+		6E2A9FBE15FE46C6001D88BB /* SBJsonUTF8Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A9FB115FE46C6001D88BB /* SBJsonUTF8Stream.m */; };
+		6E2A9FBF15FE46C6001D88BB /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A9FB315FE46C6001D88BB /* SBJsonWriter.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		6E2A9F4F15FE0A7F001D88BB /* FacebookSDKApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FacebookSDKApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E2A9F5315FE0A7F001D88BB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		6E2A9F5515FE0A7F001D88BB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		6E2A9F5715FE0A7F001D88BB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		6E2A9F5B15FE0A7F001D88BB /* FacebookSDKApp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FacebookSDKApp-Info.plist"; sourceTree = "<group>"; };
+		6E2A9F5D15FE0A7F001D88BB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6E2A9F5F15FE0A7F001D88BB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6E2A9F6115FE0A7F001D88BB /* FacebookSDKApp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FacebookSDKApp-Prefix.pch"; sourceTree = "<group>"; };
+		6E2A9F6215FE0A7F001D88BB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		6E2A9F6315FE0A7F001D88BB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		6E2A9F6515FE0A7F001D88BB /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		6E2A9F6915FE0A7F001D88BB /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LoginViewController.xib; sourceTree = "<group>"; };
+		6E2A9F7015FE0ADB001D88BB /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		6E2A9F7415FE0CB7001D88BB /* FacebookSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FacebookSDKResources.bundle; sourceTree = "<group>"; };
+		6E2A9F7A15FE126A001D88BB /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		6E2A9F7C15FE2545001D88BB /* StatusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusViewController.h; sourceTree = "<group>"; };
+		6E2A9F7D15FE2545001D88BB /* StatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusViewController.m; sourceTree = "<group>"; };
+		6E2A9F7E15FE2545001D88BB /* StatusViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatusViewController.xib; sourceTree = "<group>"; };
+		6E2A9F8515FE264D001D88BB /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		6E2A9F8615FE264D001D88BB /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		6E2A9F8715FE264D001D88BB /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
+		6E2A9F8E15FE300A001D88BB /* NSDictionary+HTTPParametrs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+HTTPParametrs.m"; sourceTree = "<group>"; };
+		6E2A9F8F15FE300A001D88BB /* NSDictionary+HTTPParametrs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+HTTPParametrs.h"; sourceTree = "<group>"; };
+		6E2A9F9715FE4451001D88BB /* Connect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Connect.h; sourceTree = "<group>"; };
+		6E2A9F9815FE4451001D88BB /* Connect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Connect.m; sourceTree = "<group>"; };
+		6E2A9F9B15FE46C6001D88BB /* NSObject+SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJson.h"; sourceTree = "<group>"; };
+		6E2A9F9C15FE46C6001D88BB /* NSObject+SBJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJson.m"; sourceTree = "<group>"; };
+		6E2A9F9D15FE46C6001D88BB /* SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson.h; sourceTree = "<group>"; };
+		6E2A9F9E15FE46C6001D88BB /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
+		6E2A9F9F15FE46C6001D88BB /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
+		6E2A9FA015FE46C6001D88BB /* SBJsonStreamParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamParser.h; sourceTree = "<group>"; };
+		6E2A9FA115FE46C6001D88BB /* SBJsonStreamParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamParser.m; sourceTree = "<group>"; };
+		6E2A9FA215FE46C6001D88BB /* SBJsonStreamParserAccumulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamParserAccumulator.h; sourceTree = "<group>"; };
+		6E2A9FA315FE46C6001D88BB /* SBJsonStreamParserAccumulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamParserAccumulator.m; sourceTree = "<group>"; };
+		6E2A9FA415FE46C6001D88BB /* SBJsonStreamParserAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamParserAdapter.h; sourceTree = "<group>"; };
+		6E2A9FA515FE46C6001D88BB /* SBJsonStreamParserAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamParserAdapter.m; sourceTree = "<group>"; };
+		6E2A9FA615FE46C6001D88BB /* SBJsonStreamParserState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamParserState.h; sourceTree = "<group>"; };
+		6E2A9FA715FE46C6001D88BB /* SBJsonStreamParserState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamParserState.m; sourceTree = "<group>"; };
+		6E2A9FA815FE46C6001D88BB /* SBJsonStreamWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamWriter.h; sourceTree = "<group>"; };
+		6E2A9FA915FE46C6001D88BB /* SBJsonStreamWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamWriter.m; sourceTree = "<group>"; };
+		6E2A9FAA15FE46C6001D88BB /* SBJsonStreamWriterAccumulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamWriterAccumulator.h; sourceTree = "<group>"; };
+		6E2A9FAB15FE46C6001D88BB /* SBJsonStreamWriterAccumulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamWriterAccumulator.m; sourceTree = "<group>"; };
+		6E2A9FAC15FE46C6001D88BB /* SBJsonStreamWriterState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamWriterState.h; sourceTree = "<group>"; };
+		6E2A9FAD15FE46C6001D88BB /* SBJsonStreamWriterState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamWriterState.m; sourceTree = "<group>"; };
+		6E2A9FAE15FE46C6001D88BB /* SBJsonTokeniser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonTokeniser.h; sourceTree = "<group>"; };
+		6E2A9FAF15FE46C6001D88BB /* SBJsonTokeniser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonTokeniser.m; sourceTree = "<group>"; };
+		6E2A9FB015FE46C6001D88BB /* SBJsonUTF8Stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonUTF8Stream.h; sourceTree = "<group>"; };
+		6E2A9FB115FE46C6001D88BB /* SBJsonUTF8Stream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonUTF8Stream.m; sourceTree = "<group>"; };
+		6E2A9FB215FE46C6001D88BB /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
+		6E2A9FB315FE46C6001D88BB /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6E2A9F4C15FE0A7F001D88BB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E2A9F5415FE0A7F001D88BB /* UIKit.framework in Frameworks */,
+				6E2A9F5615FE0A7F001D88BB /* Foundation.framework in Frameworks */,
+				6E2A9F5815FE0A7F001D88BB /* CoreGraphics.framework in Frameworks */,
+				6E2A9F7B15FE126A001D88BB /* FacebookSDK.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6E2A9F4415FE0A7F001D88BB = {
+			isa = PBXGroup;
+			children = (
+				6E2A9F9A15FE46C5001D88BB /* SBJSON */,
+				6E2A9F9115FE300F001D88BB /* Categories */,
+				6E2A9F5915FE0A7F001D88BB /* FacebookSDKApp */,
+				6E2A9F5215FE0A7F001D88BB /* Frameworks */,
+				6E2A9F5015FE0A7F001D88BB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6E2A9F5015FE0A7F001D88BB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6E2A9F4F15FE0A7F001D88BB /* FacebookSDKApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6E2A9F5215FE0A7F001D88BB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6E2A9F7A15FE126A001D88BB /* FacebookSDK.framework */,
+				6E2A9F7415FE0CB7001D88BB /* FacebookSDKResources.bundle */,
+				6E2A9F5315FE0A7F001D88BB /* UIKit.framework */,
+				6E2A9F5515FE0A7F001D88BB /* Foundation.framework */,
+				6E2A9F5715FE0A7F001D88BB /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6E2A9F5915FE0A7F001D88BB /* FacebookSDKApp */ = {
+			isa = PBXGroup;
+			children = (
+				6E2A9F9715FE4451001D88BB /* Connect.h */,
+				6E2A9F9815FE4451001D88BB /* Connect.m */,
+				6E2A9F8515FE264D001D88BB /* MainViewController.h */,
+				6E2A9F8615FE264D001D88BB /* MainViewController.m */,
+				6E2A9F8715FE264D001D88BB /* MainViewController.xib */,
+				6E2A9F7C15FE2545001D88BB /* StatusViewController.h */,
+				6E2A9F7D15FE2545001D88BB /* StatusViewController.m */,
+				6E2A9F7E15FE2545001D88BB /* StatusViewController.xib */,
+				6E2A9F6215FE0A7F001D88BB /* AppDelegate.h */,
+				6E2A9F6315FE0A7F001D88BB /* AppDelegate.m */,
+				6E2A9F6515FE0A7F001D88BB /* LoginViewController.h */,
+				6E2A9F7015FE0ADB001D88BB /* LoginViewController.m */,
+				6E2A9F6815FE0A7F001D88BB /* LoginViewController.xib */,
+				6E2A9F5A15FE0A7F001D88BB /* Supporting Files */,
+			);
+			path = FacebookSDKApp;
+			sourceTree = "<group>";
+		};
+		6E2A9F5A15FE0A7F001D88BB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6E2A9F5B15FE0A7F001D88BB /* FacebookSDKApp-Info.plist */,
+				6E2A9F5C15FE0A7F001D88BB /* InfoPlist.strings */,
+				6E2A9F5F15FE0A7F001D88BB /* main.m */,
+				6E2A9F6115FE0A7F001D88BB /* FacebookSDKApp-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6E2A9F9115FE300F001D88BB /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				6E2A9F8F15FE300A001D88BB /* NSDictionary+HTTPParametrs.h */,
+				6E2A9F8E15FE300A001D88BB /* NSDictionary+HTTPParametrs.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		6E2A9F9A15FE46C5001D88BB /* SBJSON */ = {
+			isa = PBXGroup;
+			children = (
+				6E2A9F9B15FE46C6001D88BB /* NSObject+SBJson.h */,
+				6E2A9F9C15FE46C6001D88BB /* NSObject+SBJson.m */,
+				6E2A9F9D15FE46C6001D88BB /* SBJson.h */,
+				6E2A9F9E15FE46C6001D88BB /* SBJsonParser.h */,
+				6E2A9F9F15FE46C6001D88BB /* SBJsonParser.m */,
+				6E2A9FA015FE46C6001D88BB /* SBJsonStreamParser.h */,
+				6E2A9FA115FE46C6001D88BB /* SBJsonStreamParser.m */,
+				6E2A9FA215FE46C6001D88BB /* SBJsonStreamParserAccumulator.h */,
+				6E2A9FA315FE46C6001D88BB /* SBJsonStreamParserAccumulator.m */,
+				6E2A9FA415FE46C6001D88BB /* SBJsonStreamParserAdapter.h */,
+				6E2A9FA515FE46C6001D88BB /* SBJsonStreamParserAdapter.m */,
+				6E2A9FA615FE46C6001D88BB /* SBJsonStreamParserState.h */,
+				6E2A9FA715FE46C6001D88BB /* SBJsonStreamParserState.m */,
+				6E2A9FA815FE46C6001D88BB /* SBJsonStreamWriter.h */,
+				6E2A9FA915FE46C6001D88BB /* SBJsonStreamWriter.m */,
+				6E2A9FAA15FE46C6001D88BB /* SBJsonStreamWriterAccumulator.h */,
+				6E2A9FAB15FE46C6001D88BB /* SBJsonStreamWriterAccumulator.m */,
+				6E2A9FAC15FE46C6001D88BB /* SBJsonStreamWriterState.h */,
+				6E2A9FAD15FE46C6001D88BB /* SBJsonStreamWriterState.m */,
+				6E2A9FAE15FE46C6001D88BB /* SBJsonTokeniser.h */,
+				6E2A9FAF15FE46C6001D88BB /* SBJsonTokeniser.m */,
+				6E2A9FB015FE46C6001D88BB /* SBJsonUTF8Stream.h */,
+				6E2A9FB115FE46C6001D88BB /* SBJsonUTF8Stream.m */,
+				6E2A9FB215FE46C6001D88BB /* SBJsonWriter.h */,
+				6E2A9FB315FE46C6001D88BB /* SBJsonWriter.m */,
+			);
+			path = SBJSON;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6E2A9F4E15FE0A7F001D88BB /* FacebookSDKApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6E2A9F6D15FE0A7F001D88BB /* Build configuration list for PBXNativeTarget "FacebookSDKApp" */;
+			buildPhases = (
+				6E2A9F4B15FE0A7F001D88BB /* Sources */,
+				6E2A9F4C15FE0A7F001D88BB /* Frameworks */,
+				6E2A9F4D15FE0A7F001D88BB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FacebookSDKApp;
+			productName = FacebookSDKApp;
+			productReference = 6E2A9F4F15FE0A7F001D88BB /* FacebookSDKApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6E2A9F4615FE0A7F001D88BB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0440;
+				ORGANIZATIONNAME = Natasha;
+			};
+			buildConfigurationList = 6E2A9F4915FE0A7F001D88BB /* Build configuration list for PBXProject "FacebookSDKApp" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 6E2A9F4415FE0A7F001D88BB;
+			productRefGroup = 6E2A9F5015FE0A7F001D88BB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6E2A9F4E15FE0A7F001D88BB /* FacebookSDKApp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6E2A9F4D15FE0A7F001D88BB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E2A9F5E15FE0A7F001D88BB /* InfoPlist.strings in Resources */,
+				6E2A9F6A15FE0A7F001D88BB /* LoginViewController.xib in Resources */,
+				6E2A9F7515FE0CB7001D88BB /* FacebookSDKResources.bundle in Resources */,
+				6E2A9F8015FE2545001D88BB /* StatusViewController.xib in Resources */,
+				6E2A9F8915FE264D001D88BB /* MainViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6E2A9F4B15FE0A7F001D88BB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E2A9F6015FE0A7F001D88BB /* main.m in Sources */,
+				6E2A9F6415FE0A7F001D88BB /* AppDelegate.m in Sources */,
+				6E2A9F7115FE0ADB001D88BB /* LoginViewController.m in Sources */,
+				6E2A9F7F15FE2545001D88BB /* StatusViewController.m in Sources */,
+				6E2A9F8815FE264D001D88BB /* MainViewController.m in Sources */,
+				6E2A9F9015FE300A001D88BB /* NSDictionary+HTTPParametrs.m in Sources */,
+				6E2A9F9915FE4451001D88BB /* Connect.m in Sources */,
+				6E2A9FB415FE46C6001D88BB /* NSObject+SBJson.m in Sources */,
+				6E2A9FB515FE46C6001D88BB /* SBJsonParser.m in Sources */,
+				6E2A9FB615FE46C6001D88BB /* SBJsonStreamParser.m in Sources */,
+				6E2A9FB715FE46C6001D88BB /* SBJsonStreamParserAccumulator.m in Sources */,
+				6E2A9FB815FE46C6001D88BB /* SBJsonStreamParserAdapter.m in Sources */,
+				6E2A9FB915FE46C6001D88BB /* SBJsonStreamParserState.m in Sources */,
+				6E2A9FBA15FE46C6001D88BB /* SBJsonStreamWriter.m in Sources */,
+				6E2A9FBB15FE46C6001D88BB /* SBJsonStreamWriterAccumulator.m in Sources */,
+				6E2A9FBC15FE46C6001D88BB /* SBJsonStreamWriterState.m in Sources */,
+				6E2A9FBD15FE46C6001D88BB /* SBJsonTokeniser.m in Sources */,
+				6E2A9FBE15FE46C6001D88BB /* SBJsonUTF8Stream.m in Sources */,
+				6E2A9FBF15FE46C6001D88BB /* SBJsonWriter.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		6E2A9F5C15FE0A7F001D88BB /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6E2A9F5D15FE0A7F001D88BB /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		6E2A9F6815FE0A7F001D88BB /* LoginViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6E2A9F6915FE0A7F001D88BB /* en */,
+			);
+			name = LoginViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6E2A9F6B15FE0A7F001D88BB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_LDFLAGS = "-lsqlite3.0";
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		6E2A9F6C15FE0A7F001D88BB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_LDFLAGS = "-lsqlite3.0";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6E2A9F6E15FE0A7F001D88BB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FacebookSDKApp/FacebookSDKApp-Prefix.pch";
+				INFOPLIST_FILE = "FacebookSDKApp/FacebookSDKApp-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		6E2A9F6F15FE0A7F001D88BB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FacebookSDKApp/FacebookSDKApp-Prefix.pch";
+				INFOPLIST_FILE = "FacebookSDKApp/FacebookSDKApp-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6E2A9F4915FE0A7F001D88BB /* Build configuration list for PBXProject "FacebookSDKApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E2A9F6B15FE0A7F001D88BB /* Debug */,
+				6E2A9F6C15FE0A7F001D88BB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6E2A9F6D15FE0A7F001D88BB /* Build configuration list for PBXNativeTarget "FacebookSDKApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E2A9F6E15FE0A7F001D88BB /* Debug */,
+				6E2A9F6F15FE0A7F001D88BB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6E2A9F4615FE0A7F001D88BB /* Project object */;
+}

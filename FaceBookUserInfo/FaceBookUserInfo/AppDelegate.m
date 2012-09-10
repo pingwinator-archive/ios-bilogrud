@@ -20,7 +20,6 @@
 }
 -(void)test:(NSString*)stringFirst second:(NSString*)stringSecond block:(void(^)(NSString*, NSString*))blockVar
 {
-    
     if (blockVar) {
         blockVar(stringFirst, stringSecond);
     }
