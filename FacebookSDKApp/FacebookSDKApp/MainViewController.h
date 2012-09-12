@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "SelfloadImage.h"
 @interface MainViewController : UIViewController
-
+@property (nonatomic, retain) IBOutlet UILabel* tokenLabel;
+@property (nonatomic, retain) IBOutlet SelfloadImage *userImageView;
 -(IBAction)createStatus;
-
+-(IBAction)showFeed;
+-(IBAction)logOut;
 @end

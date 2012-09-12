@@ -97,4 +97,8 @@
     return nil;
 }
 
+-(id) errorTrace{
+    return [NSArray arrayWithObjects:@"error1", nil];
+}
+
 @end

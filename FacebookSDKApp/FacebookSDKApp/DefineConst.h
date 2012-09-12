@@ -16,3 +16,5 @@
 #define GCD_BACKGROUND_BEGIN  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^(void) {
 #define GCD_MAIN_BEGIN dispatch_async(dispatch_get_main_queue(), ^{
 #define GCD_END });
+
+#define fileName @"token.plist"

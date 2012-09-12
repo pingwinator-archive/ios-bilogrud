@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 
-#import "LoginViewController.h"
+#import "MainViewController.h"
 
 @implementation AppDelegate
 
@@ -23,8 +23,7 @@
 {
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
-    self.viewController = [[[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil] autorelease];
-    self.window.rootViewController = self.viewController;
+    self.viewController = [[[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil] autorelease];
     self.window.rootViewController = [[[UINavigationController alloc] initWithRootViewController:self.viewController] autorelease];
     [self.window makeKeyAndVisible];
     return YES;
@@ -58,54 +57,6 @@
     [FBSession.activeSession close];
 }
 
-/*
- * Callback for session changes.
- */
-- (void)sessionStateChanged:(FBSession *)session
-                      state:(FBSessionState) state
-                      error:(NSError *)error
-{
-    switch (state) {
-        case FBSessionStateOpen:
-            if (!error) {
-                // We have a valid session
-                NSLog(@"User session found");
-                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-                [defaults setValue:session.accessToken forKey:@"token"];
-            }
-            break;
-        case FBSessionStateClosed:
-        case FBSessionStateClosedLoginFailed:
-            [FBSession.activeSession closeAndClearTokenInformation];
-            break;
-        default:
-            break;
-    }
-    
-    if (error) {
-        UIAlertView *alertView = [[UIAlertView alloc]
-                                  initWithTitle:@"Error"
-                                  message:error.localizedDescription
-                                  delegate:nil
-                                  cancelButtonTitle:@"OK"
-                                  otherButtonTitles:nil];
-        [alertView show];
-    }
-}
-
-- (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI {
-    NSArray *permissions = [[NSArray alloc] initWithObjects:
-                            @"user_likes",
-                            @"read_stream",
-                            nil];
-    return [FBSession openActiveSessionWithPermissions:permissions
-    allowLoginUI:allowLoginUI completionHandler:^(FBSession *session,
-                                                  FBSessionState state,    NSError *error)
-            {
-                [self sessionStateChanged:session  state:state  error:error];
-            }];
-}
-
 - (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
@@ -113,4 +64,5 @@
     // attempt to extract a token from the url
     return [FBSession.activeSession handleOpenURL:url];
 }
+
 @end
