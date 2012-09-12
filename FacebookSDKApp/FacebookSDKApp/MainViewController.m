@@ -10,23 +10,25 @@
 #import "StatusViewController.h"
 #import "LoginViewController.h"
 #import "FeedViewController.h"
-
+#import "NSDictionary+HTTPParametrs.h"
 
 @interface MainViewController ()
-
 @end
 
 @implementation MainViewController
 @synthesize tokenLabel;
 @synthesize userImageView;
+@synthesize nameLabel;
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    if([self isActiveToken]){
+    SettingManager *setting = [SettingManager sharedInstance];
+    if ([setting isAccessToken]) {
         [self loadImage];
+        [self addConnectName];
+        self.tokenLabel.text = [[setting baseDict]valueForKey:kAccessToken];
     } else {
-        LoginViewController *login = [[[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil]autorelease];
-       [self presentModalViewController:login animated:YES];
+        [self logIn];
     }
 }
 
@@ -46,21 +48,48 @@
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
+#pragma mark - connects
 
-- (BOOL)isActiveToken{
-    NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
-    return ([def valueForKey:@"token"]) ? YES : NO;
+-(void)addConnectName
+{
+    NSMutableDictionary *dictparametrs = [[SettingManager sharedInstance] baseDict];
+    NSString *path = [dictparametrs paramFromDict];
+    NSString *urlStr = [[[NSString alloc]initWithFormat: @"%@me/?%@", basePathUrl, path] autorelease];
+    
+    NSURL *urlInfo = [NSURL URLWithString:urlStr];
+    NSURLRequest *request = [NSURLRequest requestWithURL:urlInfo];
+    
+    void(^infoBlock)(Connect*, NSError *) = ^(Connect *con, NSError *err){
+        if(!err){
+            [self userInfoLoading:con];
+        }
+    };
+    [Connect urlRequest:request withBlock:infoBlock];
 }
 
-#pragma mark - 
+
+#pragma mark - loading
 
 -(void) loadImage
 {
-    NSString *urlStr = [NSString stringWithFormat: @"https://graph.facebook.com/me/picture?access_token=BAACB0SVqSSEBAK0jiuUNVOsAWqjydt6kZAY0FexOU35zkr9Nxe5tx7KUu4ryPYd47vUEmoOIqoU6ZBfw6REW9LOPCDiBA6mIPltd6Kg4X3KddLsW0pj2oxx8NfLScZD"];
+    NSMutableDictionary *dictparametrs = [[SettingManager sharedInstance]baseDict];
+   
+    NSString *urlStr = [NSString stringWithFormat: @"%@me/picture?%@", basePathUrl, [dictparametrs paramFromDict]];
     NSURL *url = [NSURL URLWithString:urlStr ];
     
     [self.userImageView loadImage:url ];// cashImages:self.imageCache];
 }
+
+-(void)userInfoLoading:(Connect*)connect
+{
+    NSDictionary* parseObj = [connect objectFromResponce];
+    
+    if ([parseObj valueForKey:@"name"]) {
+        self.nameLabel.text = [parseObj valueForKey:@"name"];
+    }
+}
+
+#pragma mark -
 -(IBAction)createStatus
 {
     StatusViewController *detail = [[StatusViewController alloc]initWithNibName:@"StatusViewController" bundle:nil];
@@ -74,6 +103,12 @@
 }
 -(IBAction)logOut
 {
-    
+    [[SettingManager sharedInstance]resetToken];
+     [self logIn];
+}
+-(void)logIn
+{
+    LoginViewController *login = [[[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil]autorelease];
+    [self presentModalViewController:login animated:YES];
 }
 @end

@@ -43,9 +43,7 @@
     {
         self.camera = NO;
     }
-    
 }
-
 
 - (void)viewDidUnload
 {
@@ -63,14 +61,14 @@
 //    [self.conDict setValue:con forKey:[con description]];
 //}
 
-- (NSMutableDictionary*)baseDict
-{
-    NSMutableDictionary *dictparametrs = [NSMutableDictionary dictionary];
-    NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
-    
-    [dictparametrs setValue:[def valueForKey:@"token"] forKey:@"access_token"];
-    return dictparametrs;
-}
+//- (NSMutableDictionary*)baseDict
+//{
+//    NSMutableDictionary *dictparametrs = [NSMutableDictionary dictionary];
+//    NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+//    
+//    [dictparametrs setValue:[def valueForKey:@"token"] forKey:@"access_token"];
+//    return dictparametrs;
+//}
 
 #pragma mark - post status
 

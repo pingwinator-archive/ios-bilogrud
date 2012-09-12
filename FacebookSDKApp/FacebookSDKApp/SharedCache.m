@@ -20,13 +20,10 @@
     return self;
 }
 
-+(SharedCache *)sharedInstance
++(id)sharedInstance
 {
-    static dispatch_once_t pred = 0;
-    __strong static SharedCache * _sharedObject = nil;
-    dispatch_once(&pred, ^{
-        _sharedObject = [[self alloc] initCache]; // or some other init method
+    DEFINE_SHARED_INSTANCE_USING_BLOCK(^{
+        return [[self alloc] init];
     });
-    return _sharedObject;
 }
 @end

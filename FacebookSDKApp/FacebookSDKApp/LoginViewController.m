@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import "MainViewController.h"
+
 @interface LoginViewController ()
 
 @end
@@ -20,11 +21,7 @@
 {
     
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-    NSString *filePath = [self dataFilePath];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-        NSArray *array = [[NSArray alloc] initWithContentsOfFile:filePath];
-    }
+
 }
 
 - (void)viewDidUnload
@@ -62,9 +59,10 @@
             if (!error) {
                 // We have a valid session
                 NSLog(@"User session found");
-                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-                [defaults setValue:session.accessToken forKey:@"token"];
-                [defaults synchronize];
+                
+                SettingManager *setting= [SettingManager sharedInstance];
+                [setting saveAccessToken:session.accessToken];
+               
                 [self dismissModalViewControllerAnimated:YES];
             }
             break;
@@ -93,11 +91,5 @@
             {
                 [self sessionStateChanged:session  state:state  error:error];
             }];
-}
-
--(NSString *)dataFilePath{
-    NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentDirectory = [path objectAtIndex:0];
-    return [documentDirectory stringByAppendingPathComponent:fileName];
 }
 @end

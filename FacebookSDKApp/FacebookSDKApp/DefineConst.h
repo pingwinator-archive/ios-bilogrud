@@ -17,4 +17,14 @@
 #define GCD_MAIN_BEGIN dispatch_async(dispatch_get_main_queue(), ^{
 #define GCD_END });
 
-#define fileName @"token.plist"
+#define fileName @"tokenfile"
+#define basePathUrl @"https://graph.facebook.com/"
+#define kAccessToken @"access_token"
+
+#define DEFINE_SHARED_INSTANCE_USING_BLOCK(block) \
+static dispatch_once_t pred = 0; \
+__strong static id _sharedObject = nil; \
+dispatch_once(&pred, ^{ \
+_sharedObject = block(); \
+}); \
+return _sharedObject; 

@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface SharedCache : NSCache
-+(SharedCache *)sharedInstance;
++(id)sharedInstance;
 @end

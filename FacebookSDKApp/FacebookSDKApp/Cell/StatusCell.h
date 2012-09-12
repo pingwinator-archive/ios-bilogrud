@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SelfloadImage.h"
 
-#define kCellOffset 50
+#define kCellOffset 59
 #define kFontMesage 14
 
 @interface StatusCell : UITableViewCell

@@ -9,6 +9,8 @@
 #import "FeedViewController.h"
 #import "StatusCell.h"
 #import "UserData.h"
+#import "NSDictionary+HTTPParametrs.h"
+#import "ODRefreshControl.h"
 @interface FeedViewController ()
 
 @property(retain, nonatomic) NSArray *statusesArr;
@@ -34,13 +36,14 @@
 {
     [super viewDidLoad];
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    ODRefreshControl *refreshControl = [[[ODRefreshControl alloc] initInScrollView:self.tableView]autorelease];
+    [refreshControl addTarget:self action:@selector(dropViewDidBeginRefreshing:) forControlEvents:UIControlEventValueChanged];
+    
+    self.updatePreviousPage = NO;
+    [self addConnectStatus];
+    
 }
-
 - (void)viewDidUnload
 {
     [super viewDidUnload];
@@ -50,10 +53,20 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return YES;//(interfaceOrientation == UIInterfaceOrientationPortrait);
 }
-#pragma mark - Next, Previous page loding
-/*
+#pragma mark - ODRefreshControl Method
+-(void)dropViewDidBeginRefreshing:(ODRefreshControl *)refreshControl
+{
+    double delayInSeconds = 1.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+     //   [self loadPreviousPage];
+        [refreshControl endRefreshing];
+    });
+}
+#pragma mark - next, previous pages 
+
 -(void)loadNextPage
 {
     NSURL *url = [NSURL URLWithString:self.nextPage];
@@ -65,7 +78,7 @@
         }
     };
     Connect *nextPageConnect = [Connect urlRequest:req withBlock:nextPageBlock];
-    [self addConnectToDict:nextPageConnect];
+    //[self addConnectToDict:nextPageConnect];
 }
 
 -(void)loadPreviousPage
@@ -82,8 +95,124 @@
     };
     
     Connect *prevPageConnect = [Connect urlRequest:req withBlock:prevPageBlock];
-    [self addConnectToDict:prevPageConnect];
-}*/
+   // [self addConnectToDict:prevPageConnect];
+}
+
+
+#pragma mark - connect status
+-(void)addConnectStatus
+{
+    NSMutableDictionary *dictparametrs = [[SettingManager sharedInstance]baseDict];
+    [dictparametrs setValue:@"message,from" forKey:@"fields"];
+    NSString *path = [dictparametrs paramFromDict];
+    
+    NSString *urlStr = [[[NSString alloc]initWithFormat: @"%@me/feed?%@", basePathUrl, path] autorelease];
+    
+    
+    NSURL *urlStatus = [NSURL URLWithString: urlStr];
+    NSURLRequest *statusRequest= [NSURLRequest requestWithURL:urlStatus];
+    
+    void(^statusBlock)(Connect*, NSError *) = ^(Connect *con, NSError *err){
+        if(!err){
+            [self userStatusLoading:con];
+        }
+    };
+    [Connect urlRequest: statusRequest withBlock:statusBlock];
+}
+
+#pragma mark status loading
+
+-(void)userStatusLoading:(Connect*)connect
+{
+    NSDictionary* parseObj = [connect objectFromResponce];
+    NSArray *dataArr = [parseObj valueForKey:@"data"];
+    NSDictionary *pageDict = [parseObj valueForKey:@"paging"];
+    if([pageDict valueForKey:@"next"]){
+        self.nextPage = [pageDict valueForKey:@"next"];
+    }
+    // пустой
+    if(![self.allPosts count]) {
+        self.previousPage = [pageDict valueForKey:@"previous"];
+        self.allPosts = [self onlyHasMessagePost:dataArr];
+        NSLog(@" last %@",[[self.allPosts lastObject] message]);
+    }
+    else{
+        if(self.nextPage)
+            [self userNextPageStatusLoading:dataArr];
+    }
+    //need to update previous page when customer pull to refresh
+    if(self.updatePreviousPage){
+        self.updatePreviousPage = NO;
+        
+        [self userPrevPageStatusLoading:dataArr];
+        self.previousPage = [pageDict valueForKey:@"previous"];
+    }
+    if([self.allPosts count]){
+        [self.tableView reloadData];
+    }
+}
+
+
+-(void)userPrevPageStatusLoading:(NSArray*) dataArr
+{
+    NSArray *add = [self onlyHasMessagePost:dataArr];
+    NSArray *tempArray = [add arrayByAddingObjectsFromArray:self.allPosts ];
+    self.allPosts = (NSMutableArray *)tempArray;
+}
+
+-(void)userNextPageStatusLoading:(NSArray*) dataArr
+{
+    NSArray *add = [self onlyHasMessagePost:dataArr];
+    NSArray *tempArray = [self.allPosts arrayByAddingObjectsFromArray:add];
+    self.allPosts =  (NSMutableArray *)tempArray;
+
+    NSMutableArray *insertIndexPaths = [[NSMutableArray alloc] init];
+    int ind;
+    int beginIndex = [self.allPosts count] - [add count];
+    int endIndex = [self.allPosts count];
+    for (ind = beginIndex; ind < endIndex; ind++){
+       NSIndexPath *newPath = [NSIndexPath indexPathForRow:ind inSection:0];
+      [insertIndexPaths addObject:newPath];
+    }
+    
+    [self.tableView insertRowsAtIndexPaths:insertIndexPaths withRowAnimation:UITableViewRowAnimationTop];
+    
+    [insertIndexPaths release];
+}
+
+
+-(NSMutableArray *)onlyHasMessagePost: (NSArray *)allPost
+{
+    NSMutableArray *onlyMessage = [[[NSMutableArray alloc]init]autorelease];
+    NSMutableArray *resultArr = [NSMutableArray array];
+    
+    for(int i = 0; i < [allPost count]; i++){
+        if([[allPost objectAtIndex:i]valueForKey:@"message"]){
+            [onlyMessage addObject:[allPost objectAtIndex:i]];
+            NSDictionary *temp = [allPost objectAtIndex:i];
+            UserData *data = [[UserData alloc]init];
+            if([temp valueForKey:@"message"]) {
+                data.message = [temp valueForKey:@"message"];
+            }
+            if([temp valueForKey: @"from"]) {
+                NSDictionary* from = [temp valueForKey:@"from"];
+                data.userFromID = [from valueForKey: @"id"];
+                data.userFromName = [from valueForKey: @"name"];
+            }
+            if([temp valueForKey: @"created_time"]) {
+                data.time = [temp valueForKey: @"created_time"];
+            }
+            if([temp valueForKey: @"id"]) {
+                data.feedID = [temp valueForKey: @"id"];
+            }
+            [resultArr addObject:data];
+            [data release];
+        }
+    }
+    return resultArr;
+}
+
+
 #pragma mark - Table
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -91,7 +220,7 @@
     if(count){
         tableView.separatorColor = [UIColor groupTableViewBackgroundColor];
     }
-    return 1;
+    return count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -116,13 +245,13 @@
         cell.message = status.message;
         cell.messageLabel.font = [UIFont systemFontOfSize:(CGFloat)kFontMesage];
         
-        NSString *urlStr = [NSString stringWithFormat: @"https://graph.facebook.com/%@/picture", status.userFromID];
+        NSString *urlStr = [NSString stringWithFormat: @"%@%@/picture?%@", basePathUrl, status.userFromID, [[[SettingManager sharedInstance] baseDict] paramFromDict]];
         NSURL *url = [NSURL URLWithString:urlStr ];
         [cell.photoImageView loadImage:url ];//singleton cache
         //  "global" cache
         //  [cell.photoImageView loadImage:url cashImages:self.imageCache];
         if([self.allPosts count] < ([indexPath row] + 2)){
-         //   [self loadNextPage];
+        [self loadNextPage];
         }
     }
     return cell;
@@ -134,53 +263,8 @@
 {
     NSString* text = [[self.allPosts objectAtIndex:indexPath.row] message];
     CGSize textSize = [text sizeWithFont:[UIFont systemFontOfSize:kFontMesage]  constrainedToSize:CGSizeMake(214, 1000)];
-    return MAX(75.f, textSize.height + kCellOffset);
+    return MAX(93.f, textSize.height + kCellOffset);
 }
-
--(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-}
-
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 

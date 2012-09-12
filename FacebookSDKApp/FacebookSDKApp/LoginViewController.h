@@ -13,5 +13,5 @@
 @property(nonatomic, retain) IBOutlet UIButton* singInButton;
 
 -(IBAction)authButtonAction;
-
++(NSString *)dataFilePath;
 @end

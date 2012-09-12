@@ -9,5 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @interface SettingManager : NSObject
-
+//@property (retain, nonatomic, readonly) NSString *accessToken;
+- (void)saveAccessToken:(NSString*)token;
+- (BOOL)isAccessToken;
+- (NSMutableDictionary*)baseDict;
+- (void) resetToken;
++ (id) sharedInstance;
 @end
