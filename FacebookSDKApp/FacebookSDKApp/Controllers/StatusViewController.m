@@ -116,6 +116,18 @@
     // and again the delimiting boundary
     [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     
+    
+    
+    NSMutableDictionary* dict =  [[SettingManager sharedInstance] baseDict];
+    for (NSString *key in [dict allKeys]) {
+        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", key] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"%@", [dict objectForKey:key]] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        }
+    [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSASCIIStringEncoding]];
+
+    
+    
     // adding the body we've created to the request
     [request setHTTPBody:body];
     return request;
@@ -152,7 +164,7 @@
 {
     NSMutableDictionary *dictparametrs = [[SettingManager sharedInstance] baseDict];
   
-    NSString *urlStr = [NSString stringWithFormat:@"%@/me/photos/?%@", basePathUrl, [dictparametrs paramFromDict]];
+    NSString *urlStr = [NSString stringWithFormat:@"%@/me/photos", basePathUrl];
     NSURL* url = [NSURL URLWithString:urlStr];
      
     NSMutableURLRequest* request = [self requestWithImage:url];
