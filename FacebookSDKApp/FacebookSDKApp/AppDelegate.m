@@ -9,6 +9,9 @@
 #import "AppDelegate.h"
 
 #import "MainViewController.h"
+@interface AppDelegate()
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url  sourceApplication:(NSString *)sourceApplication annotation:(id)annotation;
+@end
 
 @implementation AppDelegate
 
