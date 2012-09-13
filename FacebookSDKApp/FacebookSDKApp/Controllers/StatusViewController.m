@@ -9,10 +9,11 @@
 #import "StatusViewController.h"
 #import <MobileCoreServices/UTCoreTypes.h>
 #import "NSDictionary+HTTPParametrs.h"
-
+#import "UIImage+RoundedCorner.h"
 @interface StatusViewController ()
 
 -(void)imageFromSource:(UIImagePickerControllerSourceType)type;
+-(NSMutableURLRequest*)requestWithURL:(NSURL*)url withImage:(UIImage*)sendImage andText:(NSString*)message;
 
 @end
 
@@ -20,15 +21,15 @@
 @synthesize statusInput;
 @synthesize camera;
 @synthesize photoButton;
-@synthesize sendPhotoButton;
 @synthesize postingImage;
+@synthesize prePostingImage;
 
 -(void)dealloc
 {
     self.statusInput = nil;
     self.photoButton = nil;
-    self.sendPhotoButton = nil;
     self.postingImage = nil;
+    self.prePostingImage = nil;
     [super dealloc];
 }
 
@@ -47,52 +48,16 @@
     [super viewDidUnload];
     self.statusInput = nil;
     self.photoButton = nil;
-    self.sendPhotoButton = nil;
+    self.postingImage = nil;
+    self.prePostingImage = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
-//-(void)addConnectToDict: (Connect *)con
-//{
-//    [self.conDict setValue:con forKey:[con description]];
-//}
 
-
-#pragma mark - post status
-/*
--(void)sendStatus{
-     
-    NSString *message = statusInput.text;
-    
-    NSMutableDictionary *dictparametrs = [[SettingManager sharedInstance] baseDict];
-    [dictparametrs setValue:message forKey:@"message"];
-     
-    NSString *urlStr = [[NSString alloc] initWithFormat: @"/%@/me/feed", basePathUrl];
-    NSURL* url = [NSURL URLWithString:urlStr];
-    [urlStr release];
-    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url];
-     
-    [request setHTTPMethod:@"POST"];
-     
-    NSString *postParam = [dictparametrs paramFromDict];
-     
-    NSData *postData = [postParam dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-    [request setHTTPBody:postData];
-     
-    void(^postBlock)(Connect *, NSError *) = ^(Connect *con, NSError *err){
-         if(!err){
-             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"message was send" message:message delegate:nil cancelButtonTitle:@"great!" otherButtonTitles: nil];
-             [alert show];
-             [alert release];
-         }
-    };
-     
-    [Connect urlRequest:request withBlock:postBlock];
-}
-*/
-#pragma mark - post photo
+#pragma mark - post photo and status
 
 -(NSMutableURLRequest*)requestWithURL:(NSURL*)url withImage:(UIImage*)sendImage andText:(NSString*)message{
     NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] initWithURL:url] autorelease];
@@ -127,13 +92,8 @@
     // and again the delimiting boundary
     [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     
-    
-    
-   
     [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSASCIIStringEncoding]];
 
-    
-    
     // adding the body we've created to the request
     [request setHTTPBody:body];
     return request;
@@ -168,8 +128,6 @@
 
 -(void)sendMessageWithPhoto
 {
- //   NSMutableDictionary *dictparametrs = [[SettingManager sharedInstance] baseDict];
-  
     NSString *urlStr = [NSString stringWithFormat:@"%@/me/photos", basePathUrl];
     NSURL* url = [NSURL URLWithString:urlStr];
      
@@ -194,6 +152,12 @@
     [actionSheet release];
 }
 
+-(IBAction)removePhoto
+{
+
+}
+
+
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
   //select button
     if(buttonIndex == [actionSheet destructiveButtonIndex]){
@@ -201,16 +165,17 @@
     }
     
 }
+
 #pragma mark UIImagePickerController delegate methods
+
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
    if( [[info objectForKey:UIImagePickerControllerMediaType] isEqual: (NSString*)kUTTypeImage])
    {
        UIImage *choosenImage = [info objectForKey:UIImagePickerControllerEditedImage];
       //
-       self.postingImage = choosenImage;
+       self.prePostingImage.image = [choosenImage roundedCornerImage:5 borderSize:1];
+              
        [self.photoButton setBackgroundImage:choosenImage forState: UIControlStateNormal ];
-       self.sendPhotoButton.enabled = YES;
-       
    }
     [picker dismissModalViewControllerAnimated:YES];
 }

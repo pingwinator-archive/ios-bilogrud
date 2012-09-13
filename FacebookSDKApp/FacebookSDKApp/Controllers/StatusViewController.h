@@ -8,12 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "Connect.h"
+
 @interface StatusViewController : UIViewController<UIActionSheetDelegate, UIImagePickerControllerDelegate>
+
 @property (nonatomic, retain) IBOutlet UIButton* photoButton;
-@property (nonatomic, retain) IBOutlet UIButton* sendPhotoButton;
 @property (nonatomic, retain) IBOutlet UITextView* statusInput;
 @property (nonatomic, retain) UIImage* postingImage;
+@property (nonatomic, assign) BOOL camera;
+@property (nonatomic, retain) IBOutlet UIImageView* prePostingImage;
 -(IBAction)pressPhoto;
--(IBAction)sendPhoto;
-@property(nonatomic, assign) BOOL camera;
+-(IBAction)removePhoto;
 @end
