@@ -106,7 +106,7 @@
     [dictparametrs setValue:@"message,from" forKey:@"fields"];
     NSString *path = [dictparametrs paramFromDict];
     
-    NSString *urlStr = [[[NSString alloc] initWithFormat: @"%@me/feed?%@", basePathUrl, path] autorelease];
+    NSString *urlStr = [[[NSString alloc] initWithFormat: @"%@/me/feed?%@", basePathUrl, path] autorelease];
     
     
     NSURL *urlStatus = [NSURL URLWithString: urlStr];
@@ -245,7 +245,7 @@
         cell.message = status.message;
         cell.messageLabel.font = [UIFont systemFontOfSize:(CGFloat)kFontMesage];
         
-        NSString *urlStr = [NSString stringWithFormat: @"%@%@/picture?%@", basePathUrl, status.userFromID, [[[SettingManager sharedInstance] baseDict] paramFromDict]];
+        NSString *urlStr = [NSString stringWithFormat: @"%@/%@/picture?%@", basePathUrl, status.userFromID, [[[SettingManager sharedInstance] baseDict] paramFromDict]];
         NSURL *url = [NSURL URLWithString:urlStr ];
         [cell.photoImageView loadImage:url ];//singleton cache
         //  "global" cache

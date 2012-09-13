@@ -250,6 +250,30 @@
 					<int key="connectionID">20</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">createStatusButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="61683430"/>
+					</object>
+					<int key="connectionID">21</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">logOutButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="764671902"/>
+					</object>
+					<int key="connectionID">22</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">showFeedButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="328926979"/>
+					</object>
+					<int key="connectionID">23</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">createStatus</string>
 						<reference key="source" ref="61683430"/>
@@ -360,7 +384,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">20</int>
+			<int key="maxID">23</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -387,14 +411,29 @@
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="createStatusButton">UIButton</string>
+						<string key="logOutButton">UIButton</string>
 						<string key="nameLabel">UILabel</string>
+						<string key="showFeedButton">UIButton</string>
 						<string key="tokenLabel">UILabel</string>
 						<string key="userImageView">SelfloadImage</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="createStatusButton">
+							<string key="name">createStatusButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="logOutButton">
+							<string key="name">logOutButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="nameLabel">
 							<string key="name">nameLabel</string>
 							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="showFeedButton">
+							<string key="name">showFeedButton</string>
+							<string key="candidateClassName">UIButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="tokenLabel">
 							<string key="name">tokenLabel</string>

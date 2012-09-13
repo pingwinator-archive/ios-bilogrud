@@ -24,9 +24,8 @@
 
 - (void)viewDidLoad
 {
-    
+    [self.singInButton setTitle:NSLocalizedString(@"Sing In", @"") forState:UIControlStateNormal];
     [super viewDidLoad];
-
 }
 
 - (void)viewDidUnload
@@ -48,9 +47,6 @@
     // The user has initiated a login, so call the openSession method
     // and show the login UX if necessary.
     [self openSessionWithAllowLoginUI:YES];
-    
-    
-//    
 }
 #pragma mark - fb
 

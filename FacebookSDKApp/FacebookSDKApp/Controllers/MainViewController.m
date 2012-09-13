@@ -20,12 +20,17 @@
 @synthesize tokenLabel;
 @synthesize userImageView;
 @synthesize nameLabel;
-
+@synthesize showFeedButton;
+@synthesize createStatusButton;
+@synthesize logOutButton;
 -(void)dealloc
 {
     self.tokenLabel = nil;
     self.userImageView = nil;
     self.nameLabel = nil;
+    self.showFeedButton = nil;
+    self.logOutButton = nil;
+    self.createStatusButton = nil;
     [super dealloc];
 }
 
@@ -42,7 +47,10 @@
 }
 
 - (void)viewDidLoad
-{    
+{
+    [self.createStatusButton setTitle:NSLocalizedString(@"New Status", @"") forState:UIControlStateNormal];
+    [self.showFeedButton setTitle:NSLocalizedString(@"Show Feed" , @"") forState:UIControlStateNormal];
+    [self.logOutButton setTitle:NSLocalizedString(@"Log Out", @"") forState:UIControlStateNormal ];
     [super viewDidLoad];
 }
 

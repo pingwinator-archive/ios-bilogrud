@@ -21,13 +21,14 @@
 @synthesize camera;
 @synthesize photoButton;
 @synthesize sendPhotoButton;
-
+@synthesize postingImage;
 
 -(void)dealloc
 {
     self.statusInput = nil;
     self.photoButton = nil;
     self.sendPhotoButton = nil;
+    self.postingImage = nil;
     [super dealloc];
 }
 
@@ -35,7 +36,7 @@
 {
     [super viewDidLoad];
     
-    UIBarButtonItem *sendButton = [[[UIBarButtonItem alloc] initWithTitle:@"send" style:UIBarButtonItemStyleBordered target:self action:@selector(sendStatus)] autorelease];
+    UIBarButtonItem *sendButton = [[[UIBarButtonItem alloc] initWithTitle:@"send" style:UIBarButtonItemStyleBordered target:self action:@selector(sendMessageWithPhoto)] autorelease];
     self.navigationItem.rightBarButtonItem = sendButton;
     
     self.camera = [UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerSourceTypeCamera];
@@ -60,7 +61,7 @@
 
 
 #pragma mark - post status
-
+/*
 -(void)sendStatus{
      
     NSString *message = statusInput.text;
@@ -90,11 +91,11 @@
      
     [Connect urlRequest:request withBlock:postBlock];
 }
-
+*/
 #pragma mark - post photo
 
--(NSMutableURLRequest*)requestWithImage: (NSURL*)url{
-    NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] initWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60] autorelease];
+-(NSMutableURLRequest*)requestWithURL:(NSURL*)url withImage:(UIImage*)sendImage andText:(NSString*)message{
+    NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] initWithURL:url] autorelease];
     NSString *boundary = @"----BoundarycC4YiaUFwM44F6rT";
     
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
@@ -105,6 +106,16 @@
     NSMutableData *body = [NSMutableData data];
     [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
 	
+    NSMutableDictionary* dict =  [[SettingManager sharedInstance] baseDict];
+    [dict setValue:message forKey:@"message"];
+    
+    
+    for (NSString *key in [dict allKeys]) {
+        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", key] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"%@", [dict objectForKey:key]] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    }
+    
     UIImage *image = [self.photoButton backgroundImageForState:UIControlStateNormal];//.currentBackgroundImage;//[UIImage  imageNamed:@"image.png"];
     NSData* imageData = UIImagePNGRepresentation(image);
     
@@ -118,12 +129,7 @@
     
     
     
-    NSMutableDictionary* dict =  [[SettingManager sharedInstance] baseDict];
-    for (NSString *key in [dict allKeys]) {
-        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", key] dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:[[NSString stringWithFormat:@"%@", [dict objectForKey:key]] dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-        }
+   
     [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSASCIIStringEncoding]];
 
     
@@ -160,14 +166,15 @@
     [Connect urlRequest:request withBlock:postBlock];
 }
 
--(IBAction)sendPhoto
+-(void)sendMessageWithPhoto
 {
-    NSMutableDictionary *dictparametrs = [[SettingManager sharedInstance] baseDict];
+ //   NSMutableDictionary *dictparametrs = [[SettingManager sharedInstance] baseDict];
   
     NSString *urlStr = [NSString stringWithFormat:@"%@/me/photos", basePathUrl];
     NSURL* url = [NSURL URLWithString:urlStr];
      
-    NSMutableURLRequest* request = [self requestWithImage:url];
+    NSMutableURLRequest* request = [self requestWithURL:url withImage:self.postingImage andText:self.statusInput.text];
+    
     [request setHTTPMethod:@"POST"];
     
     void(^postBlock)(Connect *, NSError *) = ^(Connect *con, NSError *err){
@@ -200,7 +207,8 @@
    {
        UIImage *choosenImage = [info objectForKey:UIImagePickerControllerEditedImage];
       //
-       [self.photoButton setBackgroundImage:choosenImage forState: UIControlStateNormal ];//currentBackgroundImage:choosenImage];
+       self.postingImage = choosenImage;
+       [self.photoButton setBackgroundImage:choosenImage forState: UIControlStateNormal ];
        self.sendPhotoButton.enabled = YES;
        
    }
