@@ -24,15 +24,21 @@
 @synthesize photoButton;
 @synthesize postingImage;
 @synthesize prePostingImage;
-
+@synthesize baseView;
 -(void)dealloc
 {
     self.statusInput = nil;
     self.photoButton = nil;
     self.postingImage = nil;
     self.prePostingImage = nil;
- 
+    self.baseView = nil;
     [super dealloc];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+
 }
 
 - (void)viewDidLoad
@@ -50,12 +56,12 @@
     
     self.prePostingImage.layer.cornerRadius = 10;
     self.prePostingImage.layer.masksToBounds = YES;
-  
-    //cursor
-    self.statusInput.editable = YES;
-   // self.statusInput.selectedRange = NSMakeRange(2, 0);
+    UIImage *base = self.baseView.image;//[UIImage imageNamed:@"gray.png"];
+    base =  [base roundedCornerImage:10 borderSize:1];
+    self.baseView.image =  base;
     
-    [ self.statusInput setSelectedRange:NSMakeRange(10, 0)];
+    //cursor
+    self.statusInput.editable = YES;    
 }
 
 - (void)viewDidUnload
@@ -65,11 +71,12 @@
     self.photoButton = nil;
     self.postingImage = nil;
     self.prePostingImage = nil;
+    self.baseView = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return YES;//(interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma mark - post photo and status
@@ -98,7 +105,7 @@
         [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     }
     
-    UIImage *image = [self.photoButton backgroundImageForState:UIControlStateNormal];//.currentBackgroundImage;//[UIImage  imageNamed:@"image.png"];
+    UIImage *image = self.postingImage;
     NSData* imageData = UIImagePNGRepresentation(image);
     
     [body appendData:[@"Content-Disposition: form-data; name=\"source\";filename=\"picture.png\"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
@@ -198,7 +205,11 @@ if(buttonIndex == 1){
    {
        UIImage *choosenImage = [info objectForKey:UIImagePickerControllerEditedImage];
       //
+       self.postingImage = choosenImage;
        self.prePostingImage.image = [choosenImage roundedCornerImage:10 borderSize:1];
+       CGRect rect = CGRectMake(28, 110, 265, 100);
+       self.statusInput.frame = rect;
+       [self.statusInput becomeFirstResponder];
               
    }
     [picker dismissModalViewControllerAnimated:YES];

@@ -199,7 +199,8 @@
                 data.userFromName = [from valueForKey: @"name"];
             }
             if([temp valueForKey: @"created_time"]) {
-                data.time = [temp valueForKey: @"created_time"];
+                
+                data.time = [self dateFromString:[temp valueForKey: @"created_time"]];
             }
             if([temp valueForKey: @"id"]) {
                 data.feedID = [temp valueForKey: @"id"];
@@ -211,8 +212,26 @@
     return resultArr;
 }
 
+-(NSDate*) dateFromString: (NSString*) string
+{
+    NSDateFormatter *formatter = [[[NSDateFormatter alloc ] init] autorelease];
+    [formatter setDateFormat: @"yyyy-MM-dd'T'HH:mm:ssZ"];
+    NSDate *resultDate = [formatter dateFromString:string];
+    return resultDate;
+}
+
+
+-(NSString*) stringWithDate: (NSDate*) date
+{
+     
+    NSDateFormatter *_formatter = [[[NSDateFormatter alloc ] init] autorelease];
+    [_formatter setDateFormat: @"dd-MMM-yyyy HH:mm a"];
+    NSString *resStrDate = [_formatter stringFromDate:date];
+    return resStrDate;
+}
 
 #pragma mark - Table
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     NSInteger count = [self.allPosts count];
@@ -239,7 +258,7 @@
         UserData *status = [self.allPosts objectAtIndex:row];
         
         cell.name = status.userFromName;
-        cell.time = status.time;
+        cell.time = [self stringWithDate:status.time];
         
         cell.message = status.message;
         cell.messageLabel.font = [UIFont systemFontOfSize:(CGFloat)kFontMesage];

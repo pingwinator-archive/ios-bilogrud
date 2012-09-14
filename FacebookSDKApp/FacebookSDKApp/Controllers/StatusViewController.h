@@ -16,6 +16,7 @@
 @property (nonatomic, retain) UIImage* postingImage;
 @property (nonatomic, assign) BOOL camera;
 @property (nonatomic, retain) IBOutlet UIImageView* prePostingImage;
+@property (nonatomic, retain) IBOutlet UIImageView* baseView;
 -(IBAction)pressPhoto;
 -(IBAction)removePhoto;
 @end

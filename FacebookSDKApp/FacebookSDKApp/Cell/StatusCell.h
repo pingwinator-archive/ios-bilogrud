@@ -14,7 +14,7 @@
 
 @interface StatusCell : UITableViewCell
 @property(retain, nonatomic) NSString *name;
-@property(retain, nonatomic) NSDate *time;
+@property(retain, nonatomic) NSString *time;
 @property(retain, nonatomic) NSString *message;
 @property (retain, nonatomic) IBOutlet UILabel *nameLabel;
 @property (retain, nonatomic) IBOutlet UILabel *timeLabel;

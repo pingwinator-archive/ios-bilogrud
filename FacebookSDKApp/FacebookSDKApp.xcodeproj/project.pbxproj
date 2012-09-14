@@ -28,6 +28,8 @@
 		6E2A9FD915FF5EA6001D88BB /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E2A9FD815FF5EA6001D88BB /* MobileCoreServices.framework */; };
 		6E2AA01E15FF868B001D88BB /* StatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2AA01D15FF868B001D88BB /* StatusCell.m */; };
 		6E2AA02015FF86A2001D88BB /* StatusCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E2AA01F15FF86A2001D88BB /* StatusCell.xib */; };
+		6E40516F1603770F003E6AFB /* gray.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E40516D1603770F003E6AFB /* gray.png */; };
+		6E4051701603770F003E6AFB /* gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E40516E1603770F003E6AFB /* gray@2x.png */; };
 		6E5DF8CD1601DC2F00962F86 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6E5DF8C71601DC2F00962F86 /* InfoPlist.strings */; };
 		6E5DF8CE1601DC2F00962F86 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E5DF8C81601DC2F00962F86 /* Default.png */; };
 		6E5DF8D01601DC2F00962F86 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E5DF8CC1601DC2F00962F86 /* main.m */; };
@@ -97,6 +99,8 @@
 		6E2AA01C15FF868B001D88BB /* StatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusCell.h; sourceTree = "<group>"; };
 		6E2AA01D15FF868B001D88BB /* StatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusCell.m; sourceTree = "<group>"; };
 		6E2AA01F15FF86A2001D88BB /* StatusCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatusCell.xib; sourceTree = "<group>"; };
+		6E40516D1603770F003E6AFB /* gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gray.png; sourceTree = "<group>"; };
+		6E40516E1603770F003E6AFB /* gray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gray@2x.png"; sourceTree = "<group>"; };
 		6E5DF8C71601DC2F00962F86 /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = InfoPlist.strings; path = "Supporting Files/InfoPlist.strings"; sourceTree = "<group>"; };
 		6E5DF8C81601DC2F00962F86 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = "Supporting Files/Default.png"; sourceTree = "<group>"; };
 		6E5DF8C91601DC2F00962F86 /* DefineConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DefineConst.h; path = "Supporting Files/DefineConst.h"; sourceTree = "<group>"; };
@@ -260,6 +264,8 @@
 		6E2A9FC315FF5542001D88BB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6E40516D1603770F003E6AFB /* gray.png */,
+				6E40516E1603770F003E6AFB /* gray@2x.png */,
 				6E5DF9431602EF1000962F86 /* camera@2x.png */,
 				6E5DF9441602EF1000962F86 /* camera.png */,
 				6E5DF93F16027B9F00962F86 /* bg@2x.png */,
@@ -473,6 +479,8 @@
 				6E5DF94216027B9F00962F86 /* bg.png in Resources */,
 				6E5DF9451602EF1000962F86 /* camera@2x.png in Resources */,
 				6E5DF9461602EF1000962F86 /* camera.png in Resources */,
+				6E40516F1603770F003E6AFB /* gray.png in Resources */,
+				6E4051701603770F003E6AFB /* gray@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
