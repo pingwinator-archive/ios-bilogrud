@@ -94,8 +94,7 @@
         }
     };
     
-    Connect *prevPageConnect = [Connect urlRequest:req withBlock:prevPageBlock];
-   // [self addConnectToDict:prevPageConnect];
+  [Connect urlRequest:req withBlock:prevPageBlock];
 }
 
 

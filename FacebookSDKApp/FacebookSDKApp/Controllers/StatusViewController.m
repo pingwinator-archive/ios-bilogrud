@@ -10,6 +10,7 @@
 #import <MobileCoreServices/UTCoreTypes.h>
 #import "NSDictionary+HTTPParametrs.h"
 #import "UIImage+RoundedCorner.h"
+#import <QuartzCore/QuartzCore.h>
 @interface StatusViewController ()
 
 -(void)imageFromSource:(UIImagePickerControllerSourceType)type;
@@ -30,6 +31,7 @@
     self.photoButton = nil;
     self.postingImage = nil;
     self.prePostingImage = nil;
+ 
     [super dealloc];
 }
 
@@ -41,7 +43,20 @@
     self.navigationItem.rightBarButtonItem = sendButton;
     
     self.camera = [UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerSourceTypeCamera];
-    }
+    
+    //customizeTextView
+    self.statusInput.layer.cornerRadius = 10;
+    self.statusInput.layer.masksToBounds = YES;
+    
+    self.prePostingImage.layer.cornerRadius = 10;
+    self.prePostingImage.layer.masksToBounds = YES;
+  
+    //cursor
+    self.statusInput.editable = YES;
+   // self.statusInput.selectedRange = NSMakeRange(2, 0);
+    
+    [ self.statusInput setSelectedRange:NSMakeRange(10, 0)];
+}
 
 - (void)viewDidUnload
 {
@@ -61,6 +76,8 @@
 
 -(NSMutableURLRequest*)requestWithURL:(NSURL*)url withImage:(UIImage*)sendImage andText:(NSString*)message{
     NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] initWithURL:url] autorelease];
+   
+    
     NSString *boundary = @"----BoundarycC4YiaUFwM44F6rT";
     
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
@@ -147,7 +164,7 @@
 
 -(IBAction)pressPhoto
 {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"select" otherButtonTitles:(self.camera)?@"camera":nil, nil];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Choose existing", (self.camera)?@"Take photo":nil,  nil];
     [actionSheet showInView:self.view];
     [actionSheet release];
 }
@@ -157,11 +174,19 @@
 
 }
 
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if(actionSheet.firstOtherButtonIndex == buttonIndex ){
+            [self imageFromSource:UIImagePickerControllerSourceTypePhotoLibrary];
+    }
+if(buttonIndex == 1){
+    [self imageFromSource:UIImagePickerControllerSourceTypeCamera];
+}
+}
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
   //select button
     if(buttonIndex == [actionSheet destructiveButtonIndex]){
-        [self imageFromSource:UIImagePickerControllerSourceTypePhotoLibrary];
+//        [self imageFromSource:UIImagePickerControllerSourceTypePhotoLibrary];
     }
     
 }
@@ -173,9 +198,8 @@
    {
        UIImage *choosenImage = [info objectForKey:UIImagePickerControllerEditedImage];
       //
-       self.prePostingImage.image = [choosenImage roundedCornerImage:5 borderSize:1];
+       self.prePostingImage.image = [choosenImage roundedCornerImage:10 borderSize:1];
               
-       [self.photoButton setBackgroundImage:choosenImage forState: UIControlStateNormal ];
    }
     [picker dismissModalViewControllerAnimated:YES];
 }
@@ -204,4 +228,33 @@
         [alert release];
     }
 }
+
+
+
+- (void)getMediaFromSource:(UIImagePickerControllerSourceType)sourceType {
+    NSArray *mediaTypes = [UIImagePickerController
+                           availableMediaTypesForSourceType:sourceType];
+    if ([UIImagePickerController isSourceTypeAvailable:
+         sourceType] && [mediaTypes count] > 0) {
+        NSArray *mediaTypes = [UIImagePickerController
+                               availableMediaTypesForSourceType:sourceType];
+        UIImagePickerController *picker =
+        [[UIImagePickerController alloc] init];
+        picker.mediaTypes = mediaTypes;
+        picker.delegate = self;
+        picker.allowsEditing = YES;
+        picker.sourceType = sourceType;
+        [self presentModalViewController:picker animated:YES];
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle:@"Error accessing media"
+                              message:@"Device doesn’t support that media source."
+                              delegate:nil
+                              cancelButtonTitle:@"Drat!"
+                              otherButtonTitles:nil];
+        [alert show];
+    }
+}
+
+
 @end

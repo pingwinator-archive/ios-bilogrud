@@ -59,8 +59,11 @@
 		6E5DF9301601DFB700962F86 /* StatusViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E5DF92C1601DFB700962F86 /* StatusViewController.xib */; };
 		6E5DF9321601E02A00962F86 /* FacebookSDKApp-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E5DF9311601E02A00962F86 /* FacebookSDKApp-Info.plist */; };
 		6E5DF9341601E15B00962F86 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E5DF9331601E15B00962F86 /* Default@2x.png */; };
-		6E5DF9381601E19B00962F86 /* FacebookSDKApp-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E5DF9351601E19B00962F86 /* FacebookSDKApp-Info.plist */; };
 		6E5DF9391601E19B00962F86 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6E5DF9371601E19B00962F86 /* InfoPlist.strings */; };
+		6E5DF94116027B9F00962F86 /* bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E5DF93F16027B9F00962F86 /* bg@2x.png */; };
+		6E5DF94216027B9F00962F86 /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E5DF94016027B9F00962F86 /* bg.png */; };
+		6E5DF9451602EF1000962F86 /* camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E5DF9431602EF1000962F86 /* camera@2x.png */; };
+		6E5DF9461602EF1000962F86 /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E5DF9441602EF1000962F86 /* camera.png */; };
 		6E7A11B9160073790065ABF1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E7A11B8160073790065ABF1 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
@@ -150,9 +153,12 @@
 		6E5DF92C1601DFB700962F86 /* StatusViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatusViewController.xib; sourceTree = "<group>"; };
 		6E5DF9311601E02A00962F86 /* FacebookSDKApp-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "FacebookSDKApp-Info.plist"; path = "Supporting Files/FacebookSDKApp-Info.plist"; sourceTree = "<group>"; };
 		6E5DF9331601E15B00962F86 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Supporting Files/Default@2x.png"; sourceTree = "<group>"; };
-		6E5DF9351601E19B00962F86 /* FacebookSDKApp-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FacebookSDKApp-Info.plist"; sourceTree = "<group>"; };
 		6E5DF9361601E19B00962F86 /* FacebookSDKApp-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FacebookSDKApp-Prefix.pch"; sourceTree = "<group>"; };
 		6E5DF9371601E19B00962F86 /* InfoPlist.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
+		6E5DF93F16027B9F00962F86 /* bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg@2x.png"; sourceTree = "<group>"; };
+		6E5DF94016027B9F00962F86 /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
+		6E5DF9431602EF1000962F86 /* camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera@2x.png"; sourceTree = "<group>"; };
+		6E5DF9441602EF1000962F86 /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
 		6E7A11B8160073790065ABF1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -223,7 +229,6 @@
 		6E2A9F5915FE0A7F001D88BB /* FacebookSDKApp */ = {
 			isa = PBXGroup;
 			children = (
-				6E5DF9351601E19B00962F86 /* FacebookSDKApp-Info.plist */,
 				6E5DF9361601E19B00962F86 /* FacebookSDKApp-Prefix.pch */,
 				6E5DF9371601E19B00962F86 /* InfoPlist.strings */,
 				6E5DF91B1601DF5300962F86 /* Managers */,
@@ -255,6 +260,10 @@
 		6E2A9FC315FF5542001D88BB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6E5DF9431602EF1000962F86 /* camera@2x.png */,
+				6E5DF9441602EF1000962F86 /* camera.png */,
+				6E5DF93F16027B9F00962F86 /* bg@2x.png */,
+				6E5DF94016027B9F00962F86 /* bg.png */,
 				6E5DF9281601DFB700962F86 /* Nibs */,
 				6E24198A15FFB4A4004F3E8A /* male.gif */,
 				6E24198615FFB49B004F3E8A /* female.gif */,
@@ -457,10 +466,13 @@
 				6E5DF9301601DFB700962F86 /* StatusViewController.xib in Resources */,
 				6E5DF9321601E02A00962F86 /* FacebookSDKApp-Info.plist in Resources */,
 				6E5DF9341601E15B00962F86 /* Default@2x.png in Resources */,
-				6E5DF9381601E19B00962F86 /* FacebookSDKApp-Info.plist in Resources */,
 				6E5DF9391601E19B00962F86 /* InfoPlist.strings in Resources */,
 				6E07E17F1602046B00BD1F7D /* Localizable.strings in Resources */,
 				6E07E18E160217F600BD1F7D /* facebook-imessage@2x.png in Resources */,
+				6E5DF94116027B9F00962F86 /* bg@2x.png in Resources */,
+				6E5DF94216027B9F00962F86 /* bg.png in Resources */,
+				6E5DF9451602EF1000962F86 /* camera@2x.png in Resources */,
+				6E5DF9461602EF1000962F86 /* camera.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
