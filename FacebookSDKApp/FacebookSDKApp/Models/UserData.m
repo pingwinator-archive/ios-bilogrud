@@ -15,5 +15,7 @@
 @synthesize message;
 @synthesize time;
 @synthesize feedID;
+@synthesize likes;
+@synthesize comments;
 @end
 

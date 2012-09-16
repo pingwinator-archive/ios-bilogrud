@@ -10,7 +10,7 @@
 #import <MobileCoreServices/UTCoreTypes.h>
 #import "NSDictionary+HTTPParametrs.h"
 #import "UIImage+RoundedCorner.h"
-#import <QuartzCore/QuartzCore.h>
+//#import <QuartzCore/QuartzCore.h>
 @interface StatusViewController ()
 
 -(void)imageFromSource:(UIImagePickerControllerSourceType)type;
@@ -25,6 +25,7 @@
 @synthesize postingImage;
 @synthesize prePostingImage;
 @synthesize baseView;
+@synthesize activityView;
 -(void)dealloc
 {
     self.statusInput = nil;
@@ -32,13 +33,8 @@
     self.postingImage = nil;
     self.prePostingImage = nil;
     self.baseView = nil;
+    self.activityView = nil;
     [super dealloc];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-
 }
 
 - (void)viewDidLoad
@@ -50,18 +46,16 @@
     
     self.camera = [UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerSourceTypeCamera];
     
-    //customizeTextView
-    self.statusInput.layer.cornerRadius = 10;
-    self.statusInput.layer.masksToBounds = YES;
+    self.postingImage = [self.postingImage roundedCornerImage:10 borderSize:1];
     
-    self.prePostingImage.layer.cornerRadius = 10;
-    self.prePostingImage.layer.masksToBounds = YES;
-    UIImage *base = self.baseView.image;//[UIImage imageNamed:@"gray.png"];
-    base =  [base roundedCornerImage:10 borderSize:1];
-    self.baseView.image =  base;
-    
-    //cursor
-    self.statusInput.editable = YES;    
+    self.baseView.image =  [self.baseView.image roundedCornerImage:10 borderSize:1];
+       
+    self.statusInput.editable = YES;
+   
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(doLongPress:)];
+    [self.prePostingImage addGestureRecognizer:longPress];
+    [longPress release];
+
 }
 
 - (void)viewDidUnload
@@ -79,9 +73,21 @@
     return YES;//(interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+
+#pragma mark - Long Press
+
+-(void)doLongPress: (UILongPressGestureRecognizer *) recognizer{
+    [self.view bringSubviewToFront:[recognizer view]];
+    self.prePostingImage.image = nil;
+    CGRect rect = CGRectMake(32, 15, 254, 148);
+    self.statusInput.frame = rect;
+    [self reloadInputViews];
+}
+
 #pragma mark - post photo and status
 
--(NSMutableURLRequest*)requestWithURL:(NSURL*)url withImage:(UIImage*)sendImage andText:(NSString*)message{
+-(NSMutableURLRequest*)requestWithURL:(NSURL*)url withImage:(UIImage*)sendImage andText:(NSString*)message
+{
     NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] initWithURL:url] autorelease];
    
     
@@ -152,6 +158,7 @@
 
 -(void)sendMessageWithPhoto
 {
+    self.activityView.hidden = NO;
     NSString *urlStr = [NSString stringWithFormat:@"%@/me/photos", basePathUrl];
     NSURL* url = [NSURL URLWithString:urlStr];
      
@@ -161,10 +168,15 @@
     
     void(^postBlock)(Connect *, NSError *) = ^(Connect *con, NSError *err){
         if(!err){
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"image was post" message:urlStr delegate:nil cancelButtonTitle:@"great!" otherButtonTitles: nil];
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"image was post" message:urlStr delegate:nil cancelButtonTitle:@"great!" otherButtonTitles: nil];
+            [alert show];
+            [alert release];
+        } else {
+            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"image didn't post" message:@"error" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil ];
             [alert show];
             [alert release];
         }
+        self.activityView.hidden = YES;
     };
     [Connect urlRequest:(NSURLRequest*)request withBlock:postBlock];
 }
@@ -176,26 +188,10 @@
     [actionSheet release];
 }
 
--(IBAction)removePhoto
-{
-
-}
-
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     if(actionSheet.firstOtherButtonIndex == buttonIndex ){
             [self imageFromSource:UIImagePickerControllerSourceTypePhotoLibrary];
     }
-if(buttonIndex == 1){
-    [self imageFromSource:UIImagePickerControllerSourceTypeCamera];
-}
-}
-
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex{
-  //select button
-    if(buttonIndex == [actionSheet destructiveButtonIndex]){
-//        [self imageFromSource:UIImagePickerControllerSourceTypePhotoLibrary];
-    }
-    
 }
 
 #pragma mark UIImagePickerController delegate methods
@@ -207,7 +203,7 @@ if(buttonIndex == 1){
       //
        self.postingImage = choosenImage;
        self.prePostingImage.image = [choosenImage roundedCornerImage:10 borderSize:1];
-       CGRect rect = CGRectMake(28, 110, 265, 100);
+       CGRect rect = CGRectMake(32, 120, 254, 46);
        self.statusInput.frame = rect;
        [self.statusInput becomeFirstResponder];
               
