@@ -9,13 +9,13 @@
 /* Begin PBXBuildFile section */
 		6E2A9F2B15F9FA61001D88BB /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A9F2915F9FA61001D88BB /* UIImage+RoundedCorner.m */; };
 		6E2A9F2F15F9FB1B001D88BB /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A9F2D15F9FB1A001D88BB /* UIImage+Alpha.m */; };
-		6E2A9F3315F9FBE3001D88BB /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A9F3115F9FBE3001D88BB /* UIImage+Resize.m */; };
 		6E318EDD15F9EBE60080548F /* SharedCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E318EDC15F9EBE60080548F /* SharedCache.m */; };
 		6E51ED8415F2466500101920 /* female.gif in Resources */ = {isa = PBXBuildFile; fileRef = 6E51ED8015F2466500101920 /* female.gif */; };
 		6E51ED8515F2466500101920 /* female@2x.gif in Resources */ = {isa = PBXBuildFile; fileRef = 6E51ED8115F2466500101920 /* female@2x.gif */; };
 		6E51ED8615F2466500101920 /* male.gif in Resources */ = {isa = PBXBuildFile; fileRef = 6E51ED8215F2466500101920 /* male.gif */; };
 		6E51ED8715F2466500101920 /* male@2x.gif in Resources */ = {isa = PBXBuildFile; fileRef = 6E51ED8315F2466500101920 /* male@2x.gif */; };
 		6E6FBBBB15F87220007FCFA5 /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E6FBBBA15F87220007FCFA5 /* Cell.m */; };
+		6E7A11CB160090150065ABF1 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E7A11CA160090150065ABF1 /* UIImage+Resize.m */; };
 		6E7D08B815F87AD100F16BF7 /* Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D08B715F87AD100F16BF7 /* Cell.xib */; };
 		6E8B034815FC8AFC0030EC2E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E8B034715FC8AFC0030EC2E /* QuartzCore.framework */; };
 		6E8B035A15FC9A030030EC2E /* ODRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B035915FC9A030030EC2E /* ODRefreshControl.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -54,8 +54,6 @@
 		6E2A9F2A15F9FA61001D88BB /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+RoundedCorner.h"; path = "FaceBookUserInfo/UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
 		6E2A9F2D15F9FB1A001D88BB /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Alpha.m"; path = "FaceBookUserInfo/UIImage+Alpha.m"; sourceTree = "<group>"; };
 		6E2A9F2E15F9FB1A001D88BB /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Alpha.h"; path = "FaceBookUserInfo/UIImage+Alpha.h"; sourceTree = "<group>"; };
-		6E2A9F3115F9FBE3001D88BB /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
-		6E2A9F3215F9FBE3001D88BB /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
 		6E318EDB15F9EBE60080548F /* SharedCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedCache.h; sourceTree = "<group>"; };
 		6E318EDC15F9EBE60080548F /* SharedCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharedCache.m; sourceTree = "<group>"; };
 		6E51ED8015F2466500101920 /* female.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = female.gif; sourceTree = "<group>"; };
@@ -64,6 +62,8 @@
 		6E51ED8315F2466500101920 /* male@2x.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "male@2x.gif"; sourceTree = "<group>"; };
 		6E6FBBB915F87220007FCFA5 /* Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
 		6E6FBBBA15F87220007FCFA5 /* Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cell.m; sourceTree = "<group>"; };
+		6E7A11C9160090150065ABF1 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Resize.h"; path = "FaceBookUserInfo/UIImage+Resize.h"; sourceTree = "<group>"; };
+		6E7A11CA160090150065ABF1 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Resize.m"; path = "FaceBookUserInfo/UIImage+Resize.m"; sourceTree = "<group>"; };
 		6E7D08B715F87AD100F16BF7 /* Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Cell.xib; sourceTree = "<group>"; };
 		6E8B034715FC8AFC0030EC2E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		6E8B035815FC9A030030EC2E /* ODRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODRefreshControl.h; sourceTree = "<group>"; };
@@ -140,8 +140,8 @@
 		6E2A9F3015F9FB52001D88BB /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				6E2A9F3215F9FBE3001D88BB /* UIImage+Resize.h */,
-				6E2A9F3115F9FBE3001D88BB /* UIImage+Resize.m */,
+				6E7A11C9160090150065ABF1 /* UIImage+Resize.h */,
+				6E7A11CA160090150065ABF1 /* UIImage+Resize.m */,
 				6E2A9F2E15F9FB1A001D88BB /* UIImage+Alpha.h */,
 				6E2A9F2D15F9FB1A001D88BB /* UIImage+Alpha.m */,
 				6E2A9F2A15F9FA61001D88BB /* UIImage+RoundedCorner.h */,
@@ -372,8 +372,8 @@
 				6E318EDD15F9EBE60080548F /* SharedCache.m in Sources */,
 				6E2A9F2B15F9FA61001D88BB /* UIImage+RoundedCorner.m in Sources */,
 				6E2A9F2F15F9FB1B001D88BB /* UIImage+Alpha.m in Sources */,
-				6E2A9F3315F9FBE3001D88BB /* UIImage+Resize.m in Sources */,
 				6E8B035A15FC9A030030EC2E /* ODRefreshControl.m in Sources */,
+				6E7A11CB160090150065ABF1 /* UIImage+Resize.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
