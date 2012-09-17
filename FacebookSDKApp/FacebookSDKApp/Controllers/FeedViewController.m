@@ -23,15 +23,14 @@
 
 @implementation FeedViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
+- (void)dealloc
 {
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+    self.statusesArr = nil;
+    self.allPosts = nil;
+    self.nextPage = nil;
+    self.previousPage = nil;
+    [super dealloc];
 }
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -48,27 +47,32 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    self.statusesArr = nil;
+    self.allPosts = nil;
+    self.nextPage = nil;
+    self.previousPage = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return YES;//(interfaceOrientation == UIInterfaceOrientationPortrait);
+    return YES;
 }
+
 #pragma mark - ODRefreshControl Method
--(void)dropViewDidBeginRefreshing:(ODRefreshControl *)refreshControl
+
+- (void)dropViewDidBeginRefreshing:(ODRefreshControl *)refreshControl
 {
     double delayInSeconds = 1.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-     //   [self loadPreviousPage];
+        [self loadPreviousPage];
         [refreshControl endRefreshing];
     });
 }
+
 #pragma mark - next, previous pages 
 
--(void)loadNextPage
+- (void)loadNextPage
 {
     NSURL *url = [NSURL URLWithString:self.nextPage];
     NSURLRequest *req = [NSURLRequest requestWithURL:url];
@@ -79,10 +83,9 @@
         }
     };
     [Connect urlRequest:req withBlock:nextPageBlock];
-    //[self addConnectToDict:nextPageConnect];
 }
 
--(void)loadPreviousPage
+- (void)loadPreviousPage
 {
     NSURL *url = [NSURL URLWithString:self.previousPage];
     NSURLRequest *req = [NSURLRequest requestWithURL:url];
@@ -100,14 +103,14 @@
 
 
 #pragma mark - connect status
--(void)addConnectStatus
+
+- (void)addConnectStatus
 {
-    NSMutableDictionary *dictparametrs = [[SettingManager sharedInstance]baseDict];
+    NSMutableDictionary *dictparametrs = [[SettingManager sharedInstance] baseDict];
     [dictparametrs setValue:@"message,from,likes,comments" forKey:@"fields"];
     NSString *path = [dictparametrs paramFromDict];
     
     NSString *urlStr = [[[NSString alloc] initWithFormat: @"%@/me/feed?%@", basePathUrl, path] autorelease];
-    
     
     NSURL *urlStatus = [NSURL URLWithString: urlStr];
     NSURLRequest *statusRequest= [NSURLRequest requestWithURL:urlStatus];
@@ -122,7 +125,7 @@
 
 #pragma mark status loading
 
--(void)userStatusLoading:(Connect*)connect
+- (void)userStatusLoading:(Connect*)connect
 {
     NSDictionary* parseObj = [connect objectFromResponce];
     NSArray *dataArr = [parseObj valueForKey:@"data"];
@@ -152,8 +155,7 @@
     }
 }
 
-
--(void)userPrevPageStatusLoading:(NSArray*) dataArr
+- (void)userPrevPageStatusLoading:(NSArray*) dataArr
 {
     NSArray *add = [self onlyHasMessagePost:dataArr];
     NSArray *tempArray = [add arrayByAddingObjectsFromArray:self.allPosts ];
@@ -174,14 +176,13 @@
        NSIndexPath *newPath = [NSIndexPath indexPathForRow:ind inSection:0];
       [insertIndexPaths addObject:newPath];
     }
-    
     [self.tableView insertRowsAtIndexPaths:insertIndexPaths withRowAnimation:UITableViewRowAnimationTop];
     
     [insertIndexPaths release];
 }
 
 
--(NSMutableArray *)onlyHasMessagePost: (NSArray *)allPost
+- (NSMutableArray *)onlyHasMessagePost: (NSArray *)allPost
 {
     NSMutableArray *onlyMessage = [[[NSMutableArray alloc] init] autorelease];
     NSMutableArray *resultArr = [NSMutableArray array];
@@ -221,7 +222,7 @@
     return resultArr;
 }
 
--(NSDate*) dateFromString: (NSString*) string
+- (NSDate*) dateFromString: (NSString*) string
 {
     NSDateFormatter *formatter = [[[NSDateFormatter alloc ] init] autorelease];
     [formatter setDateFormat: @"yyyy-MM-dd'T'HH:mm:ssZ"];
@@ -230,7 +231,7 @@
 }
 
 
--(NSString*) stringWithDate: (NSDate*) date
+- (NSString*) stringWithDate: (NSDate*) date
 {
      
     NSDateFormatter *_formatter = [[[NSDateFormatter alloc ] init] autorelease];
@@ -239,7 +240,7 @@
     return resStrDate;
 }
 
-#pragma mark - Table
+#pragma mark - UITableViewDataSource Methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -274,15 +275,17 @@
         
         cell.likeLabel.text = @"test";
      
-       /* if([status.likes valueForKey:@"count"]){
-            id i = [status.likes valueForKey:@"count"];
-            cell.likeLabel.text = i;
+        if([status.likes valueForKey:@"count"]){
+            NSNumber* i = [status.likes valueForKey:@"count"];
+            cell.likeLabel.text = [i stringValue];
+        } else {
+            cell.likeLabel.text = @"0";
         }
-     */
+       
         NSString *urlStr = [NSString stringWithFormat: @"%@/%@/picture?%@", basePathUrl, status.userFromID, [[[SettingManager sharedInstance] baseDict] paramFromDict]];
         NSURL *url = [NSURL URLWithString:urlStr ];
         [cell.photoImageView loadImage:url ];//singleton cache
-        //  "global" cache
+        //  if "global" cache
         //  [cell.photoImageView loadImage:url cashImages:self.imageCache];
         if([self.allPosts count] < ([indexPath row] + 2)){
         [self loadNextPage];
@@ -291,27 +294,13 @@
     return cell;
 }
 
-#pragma  mark UITableViewDelegate Methods
+#pragma  mark - UITableViewDelegate Methods
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString* text = [[self.allPosts objectAtIndex:indexPath.row] message];
     CGSize textSize = [text sizeWithFont:[UIFont systemFontOfSize:kFontMesage]  constrainedToSize:CGSizeMake(280, 1000)];
     return MAX(94.f, textSize.height + kCellOffset);
-}
-
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
 }
 
 @end

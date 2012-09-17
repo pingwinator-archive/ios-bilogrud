@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6E07E17F1602046B00BD1F7D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6E07E1811602046B00BD1F7D /* Localizable.strings */; };
 		6E07E183160204E500BD1F7D /* facebook-imessage.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E07E185160204E500BD1F7D /* facebook-imessage.png */; };
 		6E07E18E160217F600BD1F7D /* facebook-imessage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E07E18D160217F600BD1F7D /* facebook-imessage@2x.png */; };
 		6E24198315FFAED9004F3E8A /* NSDictionary+HTTPParametrs.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E24198215FFAED9004F3E8A /* NSDictionary+HTTPParametrs.m */; };
@@ -68,12 +67,11 @@
 		6E5DF9461602EF1000962F86 /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E5DF9441602EF1000962F86 /* camera.png */; };
 		6E5DF9551604A9EB00962F86 /* like.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E5DF9541604A9EB00962F86 /* like.png */; };
 		6E7A11B9160073790065ABF1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E7A11B8160073790065ABF1 /* QuartzCore.framework */; };
+		6EB7F3D71607B2D3007556A5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6EB7F3D51607B2D3007556A5 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6E07E1801602046B00BD1F7D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6E07E184160204E500BD1F7D /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/facebook-imessage.png"; sourceTree = "<group>"; };
-		6E07E18C1602176400BD1F7D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6E07E18D160217F600BD1F7D /* facebook-imessage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook-imessage@2x.png"; sourceTree = "<group>"; };
 		6E24198115FFAED9004F3E8A /* NSDictionary+HTTPParametrs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+HTTPParametrs.h"; sourceTree = "<group>"; };
 		6E24198215FFAED9004F3E8A /* NSDictionary+HTTPParametrs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+HTTPParametrs.m"; sourceTree = "<group>"; };
@@ -166,6 +164,8 @@
 		6E5DF9441602EF1000962F86 /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
 		6E5DF9541604A9EB00962F86 /* like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = like.png; sourceTree = "<group>"; };
 		6E7A11B8160073790065ABF1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		6EB7F3D61607B2D3007556A5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6EB7F3D81607B2E1007556A5 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,7 +203,6 @@
 		6E2A9F4415FE0A7F001D88BB = {
 			isa = PBXGroup;
 			children = (
-				6E07E1811602046B00BD1F7D /* Localizable.strings */,
 				6E2A9F5915FE0A7F001D88BB /* FacebookSDKApp */,
 				6E24198015FFAED9004F3E8A /* Categories */,
 				6E2A9FC315FF5542001D88BB /* Resources */,
@@ -253,9 +252,9 @@
 			isa = PBXGroup;
 			children = (
 				6E5DF9331601E15B00962F86 /* Default@2x.png */,
+				6E5DF8C81601DC2F00962F86 /* Default.png */,
 				6E5DF9311601E02A00962F86 /* FacebookSDKApp-Info.plist */,
 				6E5DF8C71601DC2F00962F86 /* InfoPlist.strings */,
-				6E5DF8C81601DC2F00962F86 /* Default.png */,
 				6E5DF8C91601DC2F00962F86 /* DefineConst.h */,
 				6E5DF8CB1601DC2F00962F86 /* FacebookSDKApp-Prefix.pch */,
 				6E5DF8CC1601DC2F00962F86 /* main.m */,
@@ -266,6 +265,7 @@
 		6E2A9FC315FF5542001D88BB /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6EB7F3D51607B2D3007556A5 /* Localizable.strings */,
 				6E5DF9281601DFB700962F86 /* Nibs */,
 				6E5DF9541604A9EB00962F86 /* like.png */,
 				6E40516D1603770F003E6AFB /* gray.png */,
@@ -476,7 +476,6 @@
 				6E5DF9321601E02A00962F86 /* FacebookSDKApp-Info.plist in Resources */,
 				6E5DF9341601E15B00962F86 /* Default@2x.png in Resources */,
 				6E5DF9391601E19B00962F86 /* InfoPlist.strings in Resources */,
-				6E07E17F1602046B00BD1F7D /* Localizable.strings in Resources */,
 				6E07E18E160217F600BD1F7D /* facebook-imessage@2x.png in Resources */,
 				6E5DF94116027B9F00962F86 /* bg@2x.png in Resources */,
 				6E5DF94216027B9F00962F86 /* bg.png in Resources */,
@@ -485,6 +484,7 @@
 				6E40516F1603770F003E6AFB /* gray.png in Resources */,
 				6E4051701603770F003E6AFB /* gray@2x.png in Resources */,
 				6E5DF9551604A9EB00962F86 /* like.png in Resources */,
+				6EB7F3D71607B2D3007556A5 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -530,22 +530,21 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		6E07E1811602046B00BD1F7D /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6E07E1801602046B00BD1F7D /* en */,
-				6E07E18C1602176400BD1F7D /* ru */,
-			);
-			name = Localizable.strings;
-			path = Resources;
-			sourceTree = "<group>";
-		};
 		6E07E185160204E500BD1F7D /* facebook-imessage.png */ = {
 			isa = PBXVariantGroup;
 			children = (
 				6E07E184160204E500BD1F7D /* en */,
 			);
 			name = "facebook-imessage.png";
+			sourceTree = "<group>";
+		};
+		6EB7F3D51607B2D3007556A5 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6EB7F3D61607B2D3007556A5 /* en */,
+				6EB7F3D81607B2E1007556A5 /* ru */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

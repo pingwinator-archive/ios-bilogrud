@@ -20,7 +20,7 @@
 @synthesize connect;
 @synthesize cache;
 
--(SelfloadImage *)init
+- (SelfloadImage *)init
 {
     self = [super init];
     if (self) {
@@ -36,7 +36,7 @@
     [self addSubview:self.activity];
 }
 
--(void)loadImage: (NSURL *)url
+- (void)loadImage: (NSURL *)url
 {
     self.cache = [SharedCache sharedInstance];
      
@@ -62,7 +62,7 @@
     }
 }
 
--(void)loadImage: (NSURL *)url cashImages: (NSCache*)_cache
+- (void)loadImage: (NSURL *)url cashImages: (NSCache*)_cache
 {
     [self.activity startAnimating];
         void(^imageBlock)(Connect*, NSError *) = ^(Connect *con, NSError *err){

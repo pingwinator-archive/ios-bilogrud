@@ -23,6 +23,7 @@
 @synthesize showFeedButton;
 @synthesize createStatusButton;
 @synthesize logOutButton;
+
 -(void)dealloc
 {
     self.tokenLabel = nil;
@@ -39,7 +40,7 @@
     SettingManager *setting = [SettingManager sharedInstance];
     if ([setting isAccessToken]) {
         [self loadImage];
-        [self addConnectName];
+        [self loadBaseUserInfo];
         self.tokenLabel.text = setting.accessToken;
     } else {
         [self logIn];
@@ -60,6 +61,9 @@
     self.tokenLabel = nil;
     self.userImageView = nil;
     self.nameLabel = nil;
+    self.showFeedButton = nil;
+    self.logOutButton = nil;
+    self.createStatusButton = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -67,9 +71,9 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-#pragma mark - connects
+#pragma mark - Loading User Data Methods
 
--(void)addConnectName
+- (void)loadBaseUserInfo
 {
     NSMutableDictionary *dictparametrs = [[SettingManager sharedInstance] baseDict];
     NSString *path = [dictparametrs paramFromDict];
@@ -86,9 +90,7 @@
     [Connect urlRequest:request withBlock:infoBlock];
 }
 
-#pragma mark - loading
-
--(void) loadImage
+- (void)loadImage
 {
     NSMutableDictionary *dictparametrs = [[SettingManager sharedInstance] baseDict];
    
@@ -98,7 +100,7 @@
     [self.userImageView loadImage:url ];
 }
 
--(void)userInfoLoading:(Connect*)connect
+- (void) userInfoLoading:(Connect*)connect
 {
     NSDictionary* parseObj = [connect objectFromResponce];
     
@@ -107,31 +109,31 @@
     }
 }
 
-#pragma mark - public interface methods
+#pragma mark - User Interaction Methods
 
--(IBAction)createStatus
+- (IBAction)createStatus
 {
     StatusViewController *detail = [[StatusViewController alloc] initWithNibName:@"StatusViewController" bundle:nil];
     [self.navigationController pushViewController:detail animated:YES];
     [detail release];
 }
 
--(IBAction)showFeed
+- (IBAction)showFeed
 {
     FeedViewController *feed = [[FeedViewController alloc] initWithNibName:@"FeedViewController" bundle:nil];
     [self.navigationController pushViewController:feed animated:YES];
     [feed release];
 }
 
--(IBAction)logOut
+- (IBAction)logOut
 {
     [[SettingManager sharedInstance] resetToken];
-     [self logIn];
+    [self logIn];
 }
 
 #pragma mark - private 
 
--(void)logIn
+- (void)logIn
 {
     LoginViewController *login = [[[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil] autorelease];
     [self presentModalViewController:login animated:YES];

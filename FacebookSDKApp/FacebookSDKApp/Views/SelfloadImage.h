@@ -12,8 +12,8 @@
 #import "UIImage+RoundedCorner.h"
 @interface SelfloadImage : UIImageView
 
--(void)loadImage: (NSURL *)url cashImages: (NSCache*)cache;
--(void)loadImage: (NSURL *)url;
+- (void)loadImage: (NSURL *)url cashImages: (NSCache*)cache;
+- (void)loadImage: (NSURL *)url;
 
 @property (retain, nonatomic ) SharedCache* cache;
 

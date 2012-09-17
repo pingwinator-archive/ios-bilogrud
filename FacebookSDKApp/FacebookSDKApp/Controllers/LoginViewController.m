@@ -41,23 +41,19 @@
 }
 
 //
--(IBAction)authButtonAction
+- (IBAction)authButtonAction
 {
-  //  AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    // The user has initiated a login, so call the openSession method
-    // and show the login UX if necessary.
     [self openSessionWithAllowLoginUI:YES];
 }
-#pragma mark - fb
 
-- (void)sessionStateChanged:(FBSession *)session
-                      state:(FBSessionState) state
-                      error:(NSError *)error
+#pragma mark - Facebook
+
+- (void)sessionStateChanged:(FBSession *)session state:(FBSessionState) state error:(NSError *)error
 {
     switch (state) {
         case FBSessionStateOpen:
             if (!error) {
-                // We have a valid session
+                // valid session
                 NSLog(@"User session found");
                 
                 SettingManager *setting= [SettingManager sharedInstance];

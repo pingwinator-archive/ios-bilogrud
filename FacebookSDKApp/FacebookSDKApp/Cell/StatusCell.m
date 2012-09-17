@@ -22,7 +22,14 @@
 -(void) dealloc
 {
     self.likeLabel = nil;
+    self.time = nil;
+    self.name = nil;
+    self.message = nil;
     self.messageLabel = nil;
+    self.nameLabel = nil;
+    self.timeLabel = nil;
+    self.photoImageView = nil;
+    
     [super dealloc];
 }
 

@@ -18,4 +18,3 @@
 @synthesize likes;
 @synthesize comments;
 @end
-

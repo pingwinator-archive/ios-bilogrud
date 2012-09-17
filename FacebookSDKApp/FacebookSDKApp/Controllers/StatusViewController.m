@@ -10,7 +10,7 @@
 #import <MobileCoreServices/UTCoreTypes.h>
 #import "NSDictionary+HTTPParametrs.h"
 #import "UIImage+RoundedCorner.h"
-//#import <QuartzCore/QuartzCore.h>
+#import <QuartzCore/QuartzCore.h>
 @interface StatusViewController ()
 
 -(void)imageFromSource:(UIImagePickerControllerSourceType)type;
@@ -66,17 +66,18 @@
     self.postingImage = nil;
     self.prePostingImage = nil;
     self.baseView = nil;
+    self.activityView = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return YES;//(interfaceOrientation == UIInterfaceOrientationPortrait);
+    return YES;
 }
 
 
-#pragma mark - Long Press
+#pragma mark - Long Press Guester 
 
--(void)doLongPress: (UILongPressGestureRecognizer *) recognizer{
+- (void)doLongPress: (UILongPressGestureRecognizer *) recognizer{
     [self.view bringSubviewToFront:[recognizer view]];
     self.prePostingImage.image = nil;
     CGRect rect = CGRectMake(32, 15, 254, 148);
@@ -84,34 +85,31 @@
     [self reloadInputViews];
 }
 
-#pragma mark - post photo and status
+#pragma mark - Post photo and status
 
--(NSMutableURLRequest*)requestWithURL:(NSURL*)url withImage:(UIImage*)sendImage andText:(NSString*)message
+- (NSMutableURLRequest*)requestWithURL:(NSURL*)url withImage:(UIImage*)sendImage andText:(NSString*)message
 {
-    NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] initWithURL:url] autorelease];
+    NSMutableURLRequest* request = [[[NSMutableURLRequest alloc] initWithURL:url] autorelease];
    
+    NSString* boundary = @"----BoundarycC4YiaUFwM44F6rT";
     
-    NSString *boundary = @"----BoundarycC4YiaUFwM44F6rT";
-    
-    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
+    NSString* contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
     
     [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
     
-    
-    NSMutableData *body = [NSMutableData data];
+    NSMutableData* body = [NSMutableData data];
     [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
 	
     NSMutableDictionary* dict =  [[SettingManager sharedInstance] baseDict];
     [dict setValue:message forKey:@"message"];
     
-    
-    for (NSString *key in [dict allKeys]) {
+    for (NSString* key in [dict allKeys]) {
         [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", key] dataUsingEncoding:NSUTF8StringEncoding]];
         [body appendData:[[NSString stringWithFormat:@"%@", [dict objectForKey:key]] dataUsingEncoding:NSUTF8StringEncoding]];
         [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     }
     
-    UIImage *image = self.postingImage;
+    UIImage* image = self.postingImage;
     NSData* imageData = UIImagePNGRepresentation(image);
     
     [body appendData:[@"Content-Disposition: form-data; name=\"source\";filename=\"picture.png\"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
@@ -129,25 +127,25 @@
     return request;
 }
 
--(void)sendPhotoByURL
+- (void)sendPhotoByURL
 {
     NSMutableDictionary *dictparametrs = [[SettingManager sharedInstance] baseDict];
     [dictparametrs setValue:@"http://a5.sphotos.ak.fbcdn.net/hphotos-ak-snc7/s720x720/430702_274084829330398_269741610_n.jpg" forKey:@"url"];
     
-    NSString *urlStr = [NSString stringWithFormat:@"%@/me/photos/", basePathUrl];
+    NSString* urlStr = [NSString stringWithFormat:@"%@/me/photos/", basePathUrl];
     NSURL* url = [NSURL URLWithString:urlStr];
     
     NSMutableURLRequest* request = [[[NSMutableURLRequest alloc] initWithURL:url] autorelease];
     [request setHTTPMethod:@"POST"];
     
-    NSString *postParam = [dictparametrs paramFromDict];
+    NSString* postParam = [dictparametrs paramFromDict];
     
-    NSData *postData = [postParam dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    NSData* postData = [postParam dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     [request setHTTPBody:postData];
     
-    void(^postBlock)(Connect *, NSError *) = ^(Connect *con, NSError *err){
+    void(^postBlock)(Connect *, NSError *) = ^(Connect* con, NSError* err){
         if(!err){
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"image was post" message:urlStr delegate:nil cancelButtonTitle:@"great!" otherButtonTitles: nil];
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString (@"image was post", @"") message:urlStr delegate:nil cancelButtonTitle:NSLocalizedString(@"great!", @"") otherButtonTitles: nil];
             [alert show];
             [alert release];
         }
@@ -156,10 +154,10 @@
     [Connect urlRequest:request withBlock:postBlock];
 }
 
--(void)sendMessageWithPhoto
+- (void)sendMessageWithPhoto
 {
     self.activityView.hidden = NO;
-    NSString *urlStr = [NSString stringWithFormat:@"%@/me/photos", basePathUrl];
+    NSString* urlStr = [NSString stringWithFormat:@"%@/me/photos", basePathUrl];
     NSURL* url = [NSURL URLWithString:urlStr];
      
     NSMutableURLRequest* request = [self requestWithURL:url withImage:self.postingImage andText:self.statusInput.text];
@@ -168,11 +166,11 @@
     
     void(^postBlock)(Connect *, NSError *) = ^(Connect *con, NSError *err){
         if(!err){
-            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"image was post" message:urlStr delegate:nil cancelButtonTitle:@"great!" otherButtonTitles: nil];
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"image was post", @"") message:urlStr delegate:nil cancelButtonTitle:NSLocalizedString(@"great!", @"") otherButtonTitles: nil];
             [alert show];
             [alert release];
         } else {
-            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"image didn't post" message:@"error" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil ];
+            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"image didn't post", @"") message:@"error" delegate:nil cancelButtonTitle:NSLocalizedString(@"ok", @"") otherButtonTitles:nil, nil ];
             [alert show];
             [alert release];
         }
@@ -181,22 +179,22 @@
     [Connect urlRequest:(NSURLRequest*)request withBlock:postBlock];
 }
 
--(IBAction)pressPhoto
+- (IBAction)pressPhoto
 {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Choose existing", (self.camera)?@"Take photo":nil,  nil];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Choose existing", @""), (self.camera)?NSLocalizedString(@"Take photo", @""):nil,  nil];
     [actionSheet showInView:self.view];
     [actionSheet release];
 }
 
--(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     if(actionSheet.firstOtherButtonIndex == buttonIndex ){
             [self imageFromSource:UIImagePickerControllerSourceTypePhotoLibrary];
     }
 }
 
-#pragma mark UIImagePickerController delegate methods
+#pragma mark - UIImagePickerController delegate methods
 
--(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
    if( [[info objectForKey:UIImagePickerControllerMediaType] isEqual: (NSString*)kUTTypeImage])
    {
        UIImage *choosenImage = [info objectForKey:UIImagePickerControllerEditedImage];
@@ -230,13 +228,11 @@
     }
     else
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"error" message:@"Device doesn’t support that media source." delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil ];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"error", @"") message:NSLocalizedString(@"Device doesn’t support that media source.", @"") delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil ];
         [alert show];
         [alert release];
     }
 }
-
-
 
 - (void)getMediaFromSource:(UIImagePickerControllerSourceType)sourceType {
     NSArray *mediaTypes = [UIImagePickerController
@@ -254,14 +250,12 @@
         [self presentModalViewController:picker animated:YES];
     } else {
         UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle:@"Error accessing media"
-                              message:@"Device doesn’t support that media source."
+                              initWithTitle:NSLocalizedString(@"Error accessing media", @"")
+                              message:NSLocalizedString(@"Device doesn’t support that media source", @"")
                               delegate:nil
-                              cancelButtonTitle:@"Drat!"
+                              cancelButtonTitle:NSLocalizedString(@"ok", @"")
                               otherButtonTitles:nil];
         [alert show];
     }
 }
-
-
 @end
