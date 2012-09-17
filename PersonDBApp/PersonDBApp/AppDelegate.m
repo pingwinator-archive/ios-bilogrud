@@ -22,13 +22,20 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
+@synthesize navController;
+@synthesize personListViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
+    self.personListViewController = [[[PersonListViewController alloc]initWithNibName:nil bundle:nil] autorelease];
+    self.navController = [[[UINavigationController alloc] initWithRootViewController:self.personListViewController] autorelease];
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    self.window.rootViewController = self.navController;
+    
     return YES;
 }
 

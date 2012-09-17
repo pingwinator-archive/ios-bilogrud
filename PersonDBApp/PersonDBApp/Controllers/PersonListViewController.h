@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PersonListViewController : UIViewController
+@interface PersonListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate>
 
+@property (retain, nonatomic) UITableView* tableViewPersons;
+@property (retain, nonatomic) NSFetchedResultsController* personFetchRC;
 @end

@@ -15,6 +15,9 @@
 		6E5E955516073EBF00A39BFA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E5E955416073EBF00A39BFA /* main.m */; };
 		6E5E955916073EBF00A39BFA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E5E955816073EBF00A39BFA /* AppDelegate.m */; };
 		6E5E955C16073EBF00A39BFA /* PersonDBApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6E5E955A16073EBF00A39BFA /* PersonDBApp.xcdatamodeld */; };
+		6E5E956416073FD900A39BFA /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E5E956316073FD900A39BFA /* Person.m */; };
+		6E5E9568160740B500A39BFA /* PersonListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E5E9567160740B500A39BFA /* PersonListViewController.m */; };
+		6E5E956B160740CE00A39BFA /* AddPersonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E5E956A160740CE00A39BFA /* AddPersonViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +33,12 @@
 		6E5E955716073EBF00A39BFA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6E5E955816073EBF00A39BFA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		6E5E955B16073EBF00A39BFA /* PersonDBApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PersonDBApp.xcdatamodel; sourceTree = "<group>"; };
+		6E5E956216073FD900A39BFA /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
+		6E5E956316073FD900A39BFA /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
+		6E5E9566160740B500A39BFA /* PersonListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonListViewController.h; sourceTree = "<group>"; };
+		6E5E9567160740B500A39BFA /* PersonListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonListViewController.m; sourceTree = "<group>"; };
+		6E5E9569160740CE00A39BFA /* AddPersonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPersonViewController.h; sourceTree = "<group>"; };
+		6E5E956A160740CE00A39BFA /* AddPersonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddPersonViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +87,9 @@
 		6E5E954E16073EBF00A39BFA /* PersonDBApp */ = {
 			isa = PBXGroup;
 			children = (
+				6E5E95651607406400A39BFA /* Controllers */,
+				6E5E956216073FD900A39BFA /* Person.h */,
+				6E5E956316073FD900A39BFA /* Person.m */,
 				6E5E955716073EBF00A39BFA /* AppDelegate.h */,
 				6E5E955816073EBF00A39BFA /* AppDelegate.m */,
 				6E5E955A16073EBF00A39BFA /* PersonDBApp.xcdatamodeld */,
@@ -95,6 +107,17 @@
 				6E5E955616073EBF00A39BFA /* PersonDBApp-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6E5E95651607406400A39BFA /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				6E5E9566160740B500A39BFA /* PersonListViewController.h */,
+				6E5E9567160740B500A39BFA /* PersonListViewController.m */,
+				6E5E9569160740CE00A39BFA /* AddPersonViewController.h */,
+				6E5E956A160740CE00A39BFA /* AddPersonViewController.m */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -162,6 +185,9 @@
 				6E5E955516073EBF00A39BFA /* main.m in Sources */,
 				6E5E955916073EBF00A39BFA /* AppDelegate.m in Sources */,
 				6E5E955C16073EBF00A39BFA /* PersonDBApp.xcdatamodeld in Sources */,
+				6E5E956416073FD900A39BFA /* Person.m in Sources */,
+				6E5E9568160740B500A39BFA /* PersonListViewController.m in Sources */,
+				6E5E956B160740CE00A39BFA /* AddPersonViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

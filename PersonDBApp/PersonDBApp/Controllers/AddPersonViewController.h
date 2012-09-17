@@ -10,4 +10,8 @@
 
 @interface AddPersonViewController : UIViewController
 
+@property (nonatomic, retain) UITextField *textFieldFirstName;
+@property (nonatomic, retain) UITextField *textFieldLastName;
+@property (nonatomic, retain) UITextField *textFieldAge;
+
 @end
