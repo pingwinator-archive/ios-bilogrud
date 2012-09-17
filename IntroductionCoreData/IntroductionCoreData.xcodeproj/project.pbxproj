@@ -15,6 +15,7 @@
 		6E40516016037094003E6AFB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E40515F16037094003E6AFB /* main.m */; };
 		6E40516416037094003E6AFB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E40516316037094003E6AFB /* AppDelegate.m */; };
 		6E40516716037094003E6AFB /* IntroductionCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6E40516516037094003E6AFB /* IntroductionCoreData.xcdatamodeld */; };
+		6E40517316037F82003E6AFB /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E40517216037F82003E6AFB /* Person.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,8 @@
 		6E40516216037094003E6AFB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6E40516316037094003E6AFB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		6E40516616037094003E6AFB /* IntroductionCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IntroductionCoreData.xcdatamodel; sourceTree = "<group>"; };
+		6E40517116037F82003E6AFB /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
+		6E40517216037F82003E6AFB /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +84,8 @@
 				6E40516216037094003E6AFB /* AppDelegate.h */,
 				6E40516316037094003E6AFB /* AppDelegate.m */,
 				6E40516516037094003E6AFB /* IntroductionCoreData.xcdatamodeld */,
+				6E40517116037F82003E6AFB /* Person.h */,
+				6E40517216037F82003E6AFB /* Person.m */,
 				6E40515A16037094003E6AFB /* Supporting Files */,
 			);
 			path = IntroductionCoreData;
@@ -162,6 +167,7 @@
 				6E40516016037094003E6AFB /* main.m in Sources */,
 				6E40516416037094003E6AFB /* AppDelegate.m in Sources */,
 				6E40516716037094003E6AFB /* IntroductionCoreData.xcdatamodeld in Sources */,
+				6E40517316037F82003E6AFB /* Person.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
