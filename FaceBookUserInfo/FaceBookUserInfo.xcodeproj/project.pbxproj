@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E2419A115FFB76E004F3E8A /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2419A015FFB76E004F3E8A /* UIImage+Resize.m */; };
 		6E2A9F2B15F9FA61001D88BB /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A9F2915F9FA61001D88BB /* UIImage+RoundedCorner.m */; };
 		6E2A9F2F15F9FB1B001D88BB /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A9F2D15F9FB1A001D88BB /* UIImage+Alpha.m */; };
-		6E2A9F3315F9FBE3001D88BB /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A9F3115F9FBE3001D88BB /* UIImage+Resize.m */; };
 		6E318EDD15F9EBE60080548F /* SharedCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E318EDC15F9EBE60080548F /* SharedCache.m */; };
 		6E51ED8415F2466500101920 /* female.gif in Resources */ = {isa = PBXBuildFile; fileRef = 6E51ED8015F2466500101920 /* female.gif */; };
 		6E51ED8515F2466500101920 /* female@2x.gif in Resources */ = {isa = PBXBuildFile; fileRef = 6E51ED8115F2466500101920 /* female@2x.gif */; };
@@ -50,12 +50,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6E24199F15FFB76E004F3E8A /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Resize.h"; path = "FaceBookUserInfo/UIImage+Resize.h"; sourceTree = "<group>"; };
+		6E2419A015FFB76E004F3E8A /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Resize.m"; path = "FaceBookUserInfo/UIImage+Resize.m"; sourceTree = "<group>"; };
 		6E2A9F2915F9FA61001D88BB /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+RoundedCorner.m"; path = "FaceBookUserInfo/UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
 		6E2A9F2A15F9FA61001D88BB /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+RoundedCorner.h"; path = "FaceBookUserInfo/UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
 		6E2A9F2D15F9FB1A001D88BB /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Alpha.m"; path = "FaceBookUserInfo/UIImage+Alpha.m"; sourceTree = "<group>"; };
 		6E2A9F2E15F9FB1A001D88BB /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Alpha.h"; path = "FaceBookUserInfo/UIImage+Alpha.h"; sourceTree = "<group>"; };
-		6E2A9F3115F9FBE3001D88BB /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
-		6E2A9F3215F9FBE3001D88BB /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
 		6E318EDB15F9EBE60080548F /* SharedCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedCache.h; sourceTree = "<group>"; };
 		6E318EDC15F9EBE60080548F /* SharedCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharedCache.m; sourceTree = "<group>"; };
 		6E51ED8015F2466500101920 /* female.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = female.gif; sourceTree = "<group>"; };
@@ -140,8 +140,8 @@
 		6E2A9F3015F9FB52001D88BB /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				6E2A9F3215F9FBE3001D88BB /* UIImage+Resize.h */,
-				6E2A9F3115F9FBE3001D88BB /* UIImage+Resize.m */,
+				6E24199F15FFB76E004F3E8A /* UIImage+Resize.h */,
+				6E2419A015FFB76E004F3E8A /* UIImage+Resize.m */,
 				6E2A9F2E15F9FB1A001D88BB /* UIImage+Alpha.h */,
 				6E2A9F2D15F9FB1A001D88BB /* UIImage+Alpha.m */,
 				6E2A9F2A15F9FA61001D88BB /* UIImage+RoundedCorner.h */,
@@ -372,8 +372,8 @@
 				6E318EDD15F9EBE60080548F /* SharedCache.m in Sources */,
 				6E2A9F2B15F9FA61001D88BB /* UIImage+RoundedCorner.m in Sources */,
 				6E2A9F2F15F9FB1B001D88BB /* UIImage+Alpha.m in Sources */,
-				6E2A9F3315F9FBE3001D88BB /* UIImage+Resize.m in Sources */,
 				6E8B035A15FC9A030030EC2E /* ODRefreshControl.m in Sources */,
+				6E2419A115FFB76E004F3E8A /* UIImage+Resize.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

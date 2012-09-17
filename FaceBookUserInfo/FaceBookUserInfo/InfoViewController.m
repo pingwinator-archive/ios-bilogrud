@@ -75,7 +75,7 @@
    //if use cache loading
     // self.imageCache = [[NSCache alloc]init];
     self.statusesInfoTable.separatorColor = [UIColor clearColor];
-    [self addConnectImage];
+    [self loadImage];
     [self addConnectInfo];
     [self addConnectStatus];
 }
@@ -149,7 +149,7 @@
 
 #pragma mark - Add connects
 
--(void) addConnectImage
+-(void) loadImage
 {    
    NSString *urlStr = [NSString stringWithFormat: @"https://graph.facebook.com/%@/picture", self.userIdValue];
    NSURL *url = [NSURL URLWithString:urlStr ];
