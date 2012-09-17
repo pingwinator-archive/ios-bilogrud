@@ -1,0 +1,323 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6E86832C16076D43007A7F58 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E86832B16076D43007A7F58 /* UIKit.framework */; };
+		6E86832E16076D43007A7F58 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E86832D16076D43007A7F58 /* Foundation.framework */; };
+		6E86833016076D43007A7F58 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E86832F16076D43007A7F58 /* CoreGraphics.framework */; };
+		6E86833216076D43007A7F58 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E86833116076D43007A7F58 /* CoreData.framework */; };
+		6E86833816076D43007A7F58 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6E86833616076D43007A7F58 /* InfoPlist.strings */; };
+		6E86833A16076D44007A7F58 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E86833916076D44007A7F58 /* main.m */; };
+		6E86833E16076D44007A7F58 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E86833D16076D44007A7F58 /* AppDelegate.m */; };
+		6E86834116076D44007A7F58 /* RandomTimerApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6E86833F16076D44007A7F58 /* RandomTimerApp.xcdatamodeld */; };
+		6E86834B16076E67007A7F58 /* RandomTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E86834A16076E67007A7F58 /* RandomTableViewController.m */; };
+		6E86834F16076F2A007A7F58 /* GaneratedData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E86834E16076F2A007A7F58 /* GaneratedData.m */; };
+		6E86835616077493007A7F58 /* Generator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E86835516077493007A7F58 /* Generator.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		6E86832716076D43007A7F58 /* RandomTimerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RandomTimerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E86832B16076D43007A7F58 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		6E86832D16076D43007A7F58 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		6E86832F16076D43007A7F58 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		6E86833116076D43007A7F58 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		6E86833516076D43007A7F58 /* RandomTimerApp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RandomTimerApp-Info.plist"; sourceTree = "<group>"; };
+		6E86833716076D43007A7F58 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6E86833916076D44007A7F58 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6E86833B16076D44007A7F58 /* RandomTimerApp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RandomTimerApp-Prefix.pch"; sourceTree = "<group>"; };
+		6E86833C16076D44007A7F58 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		6E86833D16076D44007A7F58 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		6E86834016076D44007A7F58 /* RandomTimerApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RandomTimerApp.xcdatamodel; sourceTree = "<group>"; };
+		6E86834916076E67007A7F58 /* RandomTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RandomTableViewController.h; sourceTree = "<group>"; };
+		6E86834A16076E67007A7F58 /* RandomTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RandomTableViewController.m; sourceTree = "<group>"; };
+		6E86834D16076F2A007A7F58 /* GaneratedData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GaneratedData.h; sourceTree = "<group>"; };
+		6E86834E16076F2A007A7F58 /* GaneratedData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GaneratedData.m; sourceTree = "<group>"; };
+		6E86835416077493007A7F58 /* Generator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Generator.h; sourceTree = "<group>"; };
+		6E86835516077493007A7F58 /* Generator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Generator.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6E86832416076D43007A7F58 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E86832C16076D43007A7F58 /* UIKit.framework in Frameworks */,
+				6E86832E16076D43007A7F58 /* Foundation.framework in Frameworks */,
+				6E86833016076D43007A7F58 /* CoreGraphics.framework in Frameworks */,
+				6E86833216076D43007A7F58 /* CoreData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6E86831C16076D43007A7F58 = {
+			isa = PBXGroup;
+			children = (
+				6E86833316076D43007A7F58 /* RandomTimerApp */,
+				6E86832A16076D43007A7F58 /* Frameworks */,
+				6E86832816076D43007A7F58 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6E86832816076D43007A7F58 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6E86832716076D43007A7F58 /* RandomTimerApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6E86832A16076D43007A7F58 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6E86832B16076D43007A7F58 /* UIKit.framework */,
+				6E86832D16076D43007A7F58 /* Foundation.framework */,
+				6E86832F16076D43007A7F58 /* CoreGraphics.framework */,
+				6E86833116076D43007A7F58 /* CoreData.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6E86833316076D43007A7F58 /* RandomTimerApp */ = {
+			isa = PBXGroup;
+			children = (
+				6E86834C16076F12007A7F58 /* Models */,
+				6E86834816076D93007A7F58 /* Controllers */,
+				6E86833C16076D44007A7F58 /* AppDelegate.h */,
+				6E86833D16076D44007A7F58 /* AppDelegate.m */,
+				6E86833F16076D44007A7F58 /* RandomTimerApp.xcdatamodeld */,
+				6E86833416076D43007A7F58 /* Supporting Files */,
+			);
+			path = RandomTimerApp;
+			sourceTree = "<group>";
+		};
+		6E86833416076D43007A7F58 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6E86833516076D43007A7F58 /* RandomTimerApp-Info.plist */,
+				6E86833616076D43007A7F58 /* InfoPlist.strings */,
+				6E86833916076D44007A7F58 /* main.m */,
+				6E86833B16076D44007A7F58 /* RandomTimerApp-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6E86834816076D93007A7F58 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				6E86834916076E67007A7F58 /* RandomTableViewController.h */,
+				6E86834A16076E67007A7F58 /* RandomTableViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		6E86834C16076F12007A7F58 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6E86834D16076F2A007A7F58 /* GaneratedData.h */,
+				6E86834E16076F2A007A7F58 /* GaneratedData.m */,
+				6E86835416077493007A7F58 /* Generator.h */,
+				6E86835516077493007A7F58 /* Generator.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6E86832616076D43007A7F58 /* RandomTimerApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6E86834416076D44007A7F58 /* Build configuration list for PBXNativeTarget "RandomTimerApp" */;
+			buildPhases = (
+				6E86832316076D43007A7F58 /* Sources */,
+				6E86832416076D43007A7F58 /* Frameworks */,
+				6E86832516076D43007A7F58 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RandomTimerApp;
+			productName = RandomTimerApp;
+			productReference = 6E86832716076D43007A7F58 /* RandomTimerApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6E86831E16076D43007A7F58 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0440;
+				ORGANIZATIONNAME = Natasha;
+			};
+			buildConfigurationList = 6E86832116076D43007A7F58 /* Build configuration list for PBXProject "RandomTimerApp" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 6E86831C16076D43007A7F58;
+			productRefGroup = 6E86832816076D43007A7F58 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6E86832616076D43007A7F58 /* RandomTimerApp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6E86832516076D43007A7F58 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E86833816076D43007A7F58 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6E86832316076D43007A7F58 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E86833A16076D44007A7F58 /* main.m in Sources */,
+				6E86833E16076D44007A7F58 /* AppDelegate.m in Sources */,
+				6E86834116076D44007A7F58 /* RandomTimerApp.xcdatamodeld in Sources */,
+				6E86834B16076E67007A7F58 /* RandomTableViewController.m in Sources */,
+				6E86834F16076F2A007A7F58 /* GaneratedData.m in Sources */,
+				6E86835616077493007A7F58 /* Generator.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		6E86833616076D43007A7F58 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6E86833716076D43007A7F58 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6E86834216076D44007A7F58 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6E86834316076D44007A7F58 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6E86834516076D44007A7F58 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "RandomTimerApp/RandomTimerApp-Prefix.pch";
+				INFOPLIST_FILE = "RandomTimerApp/RandomTimerApp-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		6E86834616076D44007A7F58 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "RandomTimerApp/RandomTimerApp-Prefix.pch";
+				INFOPLIST_FILE = "RandomTimerApp/RandomTimerApp-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6E86832116076D43007A7F58 /* Build configuration list for PBXProject "RandomTimerApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E86834216076D44007A7F58 /* Debug */,
+				6E86834316076D44007A7F58 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6E86834416076D44007A7F58 /* Build configuration list for PBXNativeTarget "RandomTimerApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E86834516076D44007A7F58 /* Debug */,
+				6E86834616076D44007A7F58 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		6E86833F16076D44007A7F58 /* RandomTimerApp.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6E86834016076D44007A7F58 /* RandomTimerApp.xcdatamodel */,
+			);
+			currentVersion = 6E86834016076D44007A7F58 /* RandomTimerApp.xcdatamodel */;
+			path = RandomTimerApp.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 6E86831E16076D43007A7F58 /* Project object */;
+}

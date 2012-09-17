@@ -1,0 +1,289 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6E5E954716073EBF00A39BFA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E5E954616073EBF00A39BFA /* UIKit.framework */; };
+		6E5E954916073EBF00A39BFA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E5E954816073EBF00A39BFA /* Foundation.framework */; };
+		6E5E954B16073EBF00A39BFA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E5E954A16073EBF00A39BFA /* CoreGraphics.framework */; };
+		6E5E954D16073EBF00A39BFA /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E5E954C16073EBF00A39BFA /* CoreData.framework */; };
+		6E5E955316073EBF00A39BFA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6E5E955116073EBF00A39BFA /* InfoPlist.strings */; };
+		6E5E955516073EBF00A39BFA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E5E955416073EBF00A39BFA /* main.m */; };
+		6E5E955916073EBF00A39BFA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E5E955816073EBF00A39BFA /* AppDelegate.m */; };
+		6E5E955C16073EBF00A39BFA /* PersonDBApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6E5E955A16073EBF00A39BFA /* PersonDBApp.xcdatamodeld */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		6E5E954216073EBF00A39BFA /* PersonDBApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PersonDBApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E5E954616073EBF00A39BFA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		6E5E954816073EBF00A39BFA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		6E5E954A16073EBF00A39BFA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		6E5E954C16073EBF00A39BFA /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		6E5E955016073EBF00A39BFA /* PersonDBApp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PersonDBApp-Info.plist"; sourceTree = "<group>"; };
+		6E5E955216073EBF00A39BFA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6E5E955416073EBF00A39BFA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6E5E955616073EBF00A39BFA /* PersonDBApp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PersonDBApp-Prefix.pch"; sourceTree = "<group>"; };
+		6E5E955716073EBF00A39BFA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		6E5E955816073EBF00A39BFA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		6E5E955B16073EBF00A39BFA /* PersonDBApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PersonDBApp.xcdatamodel; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6E5E953F16073EBF00A39BFA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E5E954716073EBF00A39BFA /* UIKit.framework in Frameworks */,
+				6E5E954916073EBF00A39BFA /* Foundation.framework in Frameworks */,
+				6E5E954B16073EBF00A39BFA /* CoreGraphics.framework in Frameworks */,
+				6E5E954D16073EBF00A39BFA /* CoreData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6E5E953716073EBF00A39BFA = {
+			isa = PBXGroup;
+			children = (
+				6E5E954E16073EBF00A39BFA /* PersonDBApp */,
+				6E5E954516073EBF00A39BFA /* Frameworks */,
+				6E5E954316073EBF00A39BFA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6E5E954316073EBF00A39BFA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6E5E954216073EBF00A39BFA /* PersonDBApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6E5E954516073EBF00A39BFA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6E5E954616073EBF00A39BFA /* UIKit.framework */,
+				6E5E954816073EBF00A39BFA /* Foundation.framework */,
+				6E5E954A16073EBF00A39BFA /* CoreGraphics.framework */,
+				6E5E954C16073EBF00A39BFA /* CoreData.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6E5E954E16073EBF00A39BFA /* PersonDBApp */ = {
+			isa = PBXGroup;
+			children = (
+				6E5E955716073EBF00A39BFA /* AppDelegate.h */,
+				6E5E955816073EBF00A39BFA /* AppDelegate.m */,
+				6E5E955A16073EBF00A39BFA /* PersonDBApp.xcdatamodeld */,
+				6E5E954F16073EBF00A39BFA /* Supporting Files */,
+			);
+			path = PersonDBApp;
+			sourceTree = "<group>";
+		};
+		6E5E954F16073EBF00A39BFA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6E5E955016073EBF00A39BFA /* PersonDBApp-Info.plist */,
+				6E5E955116073EBF00A39BFA /* InfoPlist.strings */,
+				6E5E955416073EBF00A39BFA /* main.m */,
+				6E5E955616073EBF00A39BFA /* PersonDBApp-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6E5E954116073EBF00A39BFA /* PersonDBApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6E5E955F16073EBF00A39BFA /* Build configuration list for PBXNativeTarget "PersonDBApp" */;
+			buildPhases = (
+				6E5E953E16073EBF00A39BFA /* Sources */,
+				6E5E953F16073EBF00A39BFA /* Frameworks */,
+				6E5E954016073EBF00A39BFA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PersonDBApp;
+			productName = PersonDBApp;
+			productReference = 6E5E954216073EBF00A39BFA /* PersonDBApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6E5E953916073EBF00A39BFA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0440;
+				ORGANIZATIONNAME = Natasha;
+			};
+			buildConfigurationList = 6E5E953C16073EBF00A39BFA /* Build configuration list for PBXProject "PersonDBApp" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 6E5E953716073EBF00A39BFA;
+			productRefGroup = 6E5E954316073EBF00A39BFA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6E5E954116073EBF00A39BFA /* PersonDBApp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6E5E954016073EBF00A39BFA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E5E955316073EBF00A39BFA /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6E5E953E16073EBF00A39BFA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E5E955516073EBF00A39BFA /* main.m in Sources */,
+				6E5E955916073EBF00A39BFA /* AppDelegate.m in Sources */,
+				6E5E955C16073EBF00A39BFA /* PersonDBApp.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		6E5E955116073EBF00A39BFA /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6E5E955216073EBF00A39BFA /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6E5E955D16073EBF00A39BFA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6E5E955E16073EBF00A39BFA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6E5E956016073EBF00A39BFA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PersonDBApp/PersonDBApp-Prefix.pch";
+				INFOPLIST_FILE = "PersonDBApp/PersonDBApp-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		6E5E956116073EBF00A39BFA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PersonDBApp/PersonDBApp-Prefix.pch";
+				INFOPLIST_FILE = "PersonDBApp/PersonDBApp-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6E5E953C16073EBF00A39BFA /* Build configuration list for PBXProject "PersonDBApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E5E955D16073EBF00A39BFA /* Debug */,
+				6E5E955E16073EBF00A39BFA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6E5E955F16073EBF00A39BFA /* Build configuration list for PBXNativeTarget "PersonDBApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6E5E956016073EBF00A39BFA /* Debug */,
+				6E5E956116073EBF00A39BFA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		6E5E955A16073EBF00A39BFA /* PersonDBApp.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6E5E955B16073EBF00A39BFA /* PersonDBApp.xcdatamodel */,
+			);
+			currentVersion = 6E5E955B16073EBF00A39BFA /* PersonDBApp.xcdatamodel */;
+			path = PersonDBApp.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 6E5E953916073EBF00A39BFA /* Project object */;
+}
