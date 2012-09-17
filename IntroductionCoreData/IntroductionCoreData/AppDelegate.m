@@ -7,6 +7,11 @@
 //
 
 #import "AppDelegate.h"
+#import "Person.h"
+
+@interface AppDelegate()
+- (BOOL)createNewPersonWithFirstName:(NSString*)paramFirstName lastName:(NSString*)paramLastName age:(NSUInteger)paramAge;
+@end
 
 @implementation AppDelegate
 
@@ -25,13 +30,83 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [self createNewPersonWithFirstName:@"Anthony" lastName:@"Robbins"
+                                   age:51];
+    [self createNewPersonWithFirstName:@"Richard" lastName:@"Branson"
+                                   age:61];
+    //read
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSSortDescriptor *ageSort = [[NSSortDescriptor alloc] initWithKey:@"age"
+                                                            ascending:YES];
+    fetchRequest.sortDescriptors = [NSArray arrayWithObject:ageSort];
+    
+    NSEntityDescription* entity = [NSEntityDescription entityForName:@"Person" inManagedObjectContext:self.managedObjectContext];
+    
+    
+    [fetchRequest setEntity:entity];
+    
+    NSError *requestError = nil;
+    NSArray *persons = [self.managedObjectContext executeFetchRequest:fetchRequest error:&requestError];
+    if([persons count] ){
+        NSUInteger counter = 1;
+        for (Person *thisPerson in persons){
+            NSLog(@"Person %d First Name = %@", (NSUInteger)counter, thisPerson.firstName);
+            NSLog(@"Person %lu Last Name = %@", (unsigned long)counter,
+                  thisPerson.lastName);
+            NSLog(@"Person %lu Age = %ld", (unsigned long)counter,
+                  (unsigned long)[thisPerson.age unsignedIntegerValue]);
+            counter++;
+    }
+    } else {
+        NSLog(@"Could not find any Person entities in the context.");
+    }
+    
+    //delete
+    Person *lastPerson = [persons lastObject];
+    [self.managedObjectContext deleteObject:lastPerson];
+    if ([lastPerson isDeleted]){
+        NSLog(@"Successfully deleted the last person...");
+        NSError *savingError = nil;
+        if ([self.managedObjectContext save:&savingError]){
+            NSLog(@"Successfully saved the context.");
+        } else {
+                NSLog(@"Failed to save the context.");
+        }
+    } else {
+        NSLog(@"Failed to delete the last person.");
+    }
+    
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-    // Override point for customization after application launch.
+  
+    
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
 }
 
+- (BOOL)createNewPersonWithFirstName:(NSString*)paramFirstName lastName:(NSString*)paramLastName age:(NSUInteger)paramAge{
+    BOOL result = NO;
+    if ([paramFirstName length] == 0 || [paramLastName length] == 0) {
+        NSLog(@"First and Last names are mandatory.");
+        return NO;
+    }
+    Person* newPerson = [NSEntityDescription insertNewObjectForEntityForName:@"Person" inManagedObjectContext:self.managedObjectContext];
+    if (!newPerson){
+        NSLog(@"Failed to create the new person.");
+        return NO;
+    }
+    newPerson.firstName = paramFirstName;
+    newPerson.lastName = paramLastName;
+    newPerson.age = [NSNumber numberWithUnsignedInteger:paramAge];
+    NSError *savingError = nil;
+    if ([self.managedObjectContext save:&savingError]){
+        return YES;
+    } else {
+        NSLog(@"Failed to save the new person. Error = %@", savingError); }
+    return result;
+}
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
