@@ -41,7 +41,7 @@
 {
     [super viewDidLoad];
     
-    UIBarButtonItem *sendButton = [[[UIBarButtonItem alloc] initWithTitle:@"send" style:UIBarButtonItemStyleBordered target:self action:@selector(sendMessageWithPhoto)] autorelease];
+    UIBarButtonItem *sendButton = [[[UIBarButtonItem alloc] initWithTitle: NSLocalizedString(@"send", @"")  style:UIBarButtonItemStyleBordered target:self action:@selector(sendMessageWithPhoto)] autorelease];
     self.navigationItem.rightBarButtonItem = sendButton;
     
     self.camera = [UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerSourceTypeCamera];
@@ -90,7 +90,7 @@
 - (NSMutableURLRequest*)requestWithURL:(NSURL*)url withImage:(UIImage*)sendImage andText:(NSString*)message
 {
     NSMutableURLRequest* request = [[[NSMutableURLRequest alloc] initWithURL:url] autorelease];
-   
+ 
     NSString* boundary = @"----BoundarycC4YiaUFwM44F6rT";
     
     NSString* contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
@@ -121,7 +121,7 @@
     [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     
     [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSASCIIStringEncoding]];
-
+    
     // adding the body we've created to the request
     [request setHTTPBody:body];
     return request;
@@ -170,7 +170,7 @@
             [alert show];
             [alert release];
         } else {
-            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"image didn't post", @"") message:@"error" delegate:nil cancelButtonTitle:NSLocalizedString(@"ok", @"") otherButtonTitles:nil, nil ];
+            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"image didn't post", @"") message:@"error" delegate:nil cancelButtonTitle:NSLocalizedString(@"Ok", @"") otherButtonTitles:nil, nil ];
             [alert show];
             [alert release];
         }
@@ -228,7 +228,7 @@
     }
     else
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"error", @"") message:NSLocalizedString(@"Device doesn’t support that media source.", @"") delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil ];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"error", @"") message:NSLocalizedString(@"Device doesn’t support that media source", @"") delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil ];
         [alert show];
         [alert release];
     }
@@ -253,7 +253,7 @@
                               initWithTitle:NSLocalizedString(@"Error accessing media", @"")
                               message:NSLocalizedString(@"Device doesn’t support that media source", @"")
                               delegate:nil
-                              cancelButtonTitle:NSLocalizedString(@"ok", @"")
+                              cancelButtonTitle:NSLocalizedString(@"Ok", @"")
                               otherButtonTitles:nil];
         [alert show];
     }
