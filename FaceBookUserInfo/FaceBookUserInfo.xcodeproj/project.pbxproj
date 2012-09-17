@@ -16,6 +16,7 @@
 		6E51ED8615F2466500101920 /* male.gif in Resources */ = {isa = PBXBuildFile; fileRef = 6E51ED8215F2466500101920 /* male.gif */; };
 		6E51ED8715F2466500101920 /* male@2x.gif in Resources */ = {isa = PBXBuildFile; fileRef = 6E51ED8315F2466500101920 /* male@2x.gif */; };
 		6E6FBBBB15F87220007FCFA5 /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E6FBBBA15F87220007FCFA5 /* Cell.m */; };
+		6E7A11CB160090150065ABF1 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E7A11CA160090150065ABF1 /* UIImage+Resize.m */; };
 		6E7D08B815F87AD100F16BF7 /* Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E7D08B715F87AD100F16BF7 /* Cell.xib */; };
 		6E8B034815FC8AFC0030EC2E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E8B034715FC8AFC0030EC2E /* QuartzCore.framework */; };
 		6E8B035A15FC9A030030EC2E /* ODRefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8B035915FC9A030030EC2E /* ODRefreshControl.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -64,6 +65,8 @@
 		6E51ED8315F2466500101920 /* male@2x.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "male@2x.gif"; sourceTree = "<group>"; };
 		6E6FBBB915F87220007FCFA5 /* Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
 		6E6FBBBA15F87220007FCFA5 /* Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cell.m; sourceTree = "<group>"; };
+		6E7A11C9160090150065ABF1 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Resize.h"; path = "FaceBookUserInfo/UIImage+Resize.h"; sourceTree = "<group>"; };
+		6E7A11CA160090150065ABF1 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Resize.m"; path = "FaceBookUserInfo/UIImage+Resize.m"; sourceTree = "<group>"; };
 		6E7D08B715F87AD100F16BF7 /* Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Cell.xib; sourceTree = "<group>"; };
 		6E8B034715FC8AFC0030EC2E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		6E8B035815FC9A030030EC2E /* ODRefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODRefreshControl.h; sourceTree = "<group>"; };
