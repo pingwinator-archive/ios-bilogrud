@@ -15,4 +15,6 @@
 @property (retain, nonatomic) NSString *message;
 @property (retain, nonatomic) NSString *feedID;
 @property (retain, nonatomic) NSDate* time;
+@property (retain, nonatomic) NSDictionary *likes;
+@property (retain, nonatomic) NSDictionary *comments;
 @end

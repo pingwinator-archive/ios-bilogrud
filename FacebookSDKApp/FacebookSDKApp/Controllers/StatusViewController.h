@@ -13,10 +13,11 @@
 
 @property (nonatomic, retain) IBOutlet UIButton* photoButton;
 @property (nonatomic, retain) IBOutlet UITextView* statusInput;
-@property (nonatomic, retain) UIImage* postingImage;
-@property (nonatomic, assign) BOOL camera;
 @property (nonatomic, retain) IBOutlet UIImageView* prePostingImage;
 @property (nonatomic, retain) IBOutlet UIImageView* baseView;
+@property (nonatomic, retain) IBOutlet UIView* activityView;
+@property (nonatomic, retain) UIImage* postingImage;
+@property (nonatomic, assign) BOOL camera;
+
 -(IBAction)pressPhoto;
--(IBAction)removePhoto;
 @end

@@ -17,6 +17,15 @@
 @synthesize timeLabel;
 @synthesize photoImageView;
 @synthesize messageLabel;
+@synthesize likeLabel;
+
+-(void) dealloc
+{
+    self.likeLabel = nil;
+    self.messageLabel = nil;
+    [super dealloc];
+}
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];

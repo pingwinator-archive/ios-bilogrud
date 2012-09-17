@@ -15,7 +15,7 @@
 
 @property(retain, nonatomic) NSArray *statusesArr;
 @property(retain, nonatomic) NSMutableArray *allPosts;
-@property(retain,nonatomic) NSString *nextPage;//older messages
+@property(retain, nonatomic) NSString *nextPage;//older messages
 @property(retain, nonatomic) NSString *previousPage;//new message
 @property(assign, nonatomic) BOOL updatePreviousPage;
 
@@ -36,6 +36,7 @@
 {
     [super viewDidLoad];
 
+    self.tableView.separatorColor = [UIColor clearColor];
     
     ODRefreshControl *refreshControl = [[[ODRefreshControl alloc] initInScrollView:self.tableView] autorelease];
     [refreshControl addTarget:self action:@selector(dropViewDidBeginRefreshing:) forControlEvents:UIControlEventValueChanged];
@@ -102,7 +103,7 @@
 -(void)addConnectStatus
 {
     NSMutableDictionary *dictparametrs = [[SettingManager sharedInstance]baseDict];
-    [dictparametrs setValue:@"message,from" forKey:@"fields"];
+    [dictparametrs setValue:@"message,from,likes,comments" forKey:@"fields"];
     NSString *path = [dictparametrs paramFromDict];
     
     NSString *urlStr = [[[NSString alloc] initWithFormat: @"%@/me/feed?%@", basePathUrl, path] autorelease];
@@ -205,6 +206,14 @@
             if([temp valueForKey: @"id"]) {
                 data.feedID = [temp valueForKey: @"id"];
             }
+            if([temp valueForKey: @"likes"]) {
+                data.likes = [temp valueForKey: @"likes"];
+                id i = [data.likes valueForKey:@"count"];
+                NSLog(@"%@", i);
+            }
+            if([temp valueForKey: @"comments"]) {
+                data.comments = [temp valueForKey: @"comments"];
+            }
             [resultArr addObject:data];
             [data release];
         }
@@ -225,7 +234,7 @@
 {
      
     NSDateFormatter *_formatter = [[[NSDateFormatter alloc ] init] autorelease];
-    [_formatter setDateFormat: @"dd-MMM-yyyy HH:mm a"];
+    [_formatter setDateFormat: @"dd-MM-yyyy HH:mm "];
     NSString *resStrDate = [_formatter stringFromDate:date];
     return resStrDate;
 }
@@ -263,6 +272,13 @@
         cell.message = status.message;
         cell.messageLabel.font = [UIFont systemFontOfSize:(CGFloat)kFontMesage];
         
+        cell.likeLabel.text = @"test";
+     
+       /* if([status.likes valueForKey:@"count"]){
+            id i = [status.likes valueForKey:@"count"];
+            cell.likeLabel.text = i;
+        }
+     */
         NSString *urlStr = [NSString stringWithFormat: @"%@/%@/picture?%@", basePathUrl, status.userFromID, [[[SettingManager sharedInstance] baseDict] paramFromDict]];
         NSURL *url = [NSURL URLWithString:urlStr ];
         [cell.photoImageView loadImage:url ];//singleton cache
@@ -280,8 +296,8 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString* text = [[self.allPosts objectAtIndex:indexPath.row] message];
-    CGSize textSize = [text sizeWithFont:[UIFont systemFontOfSize:kFontMesage]  constrainedToSize:CGSizeMake(214, 1000)];
-    return MAX(93.f, textSize.height + kCellOffset);
+    CGSize textSize = [text sizeWithFont:[UIFont systemFontOfSize:kFontMesage]  constrainedToSize:CGSizeMake(280, 1000)];
+    return MAX(94.f, textSize.height + kCellOffset);
 }
 
 #pragma mark - Table view delegate
