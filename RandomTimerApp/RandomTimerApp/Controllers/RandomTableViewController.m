@@ -24,6 +24,7 @@
 {
     self.fetchResult = nil;
     self.tableRandomData = nil;
+    self.listGeneratedData = nil;
     [super dealloc];
 }
 - (NSManagedObjectContext *) managedObjectContext
@@ -34,22 +35,26 @@
     return managedContext;
 }
 
--(NSFetchedResultsController*) fetchResult
+-(void) initFetchResult
 {
-    if(self.fetchResult) {
-        return self.fetchResult;
-    }
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc]init];
     
-    NSEntityDescription* entity = [NSEntityDescription entityForName:@"GaneratedDara" inManagedObjectContext:[self managedObjectContext]];
+    NSEntityDescription* entity = [NSEntityDescription entityForName:@"GeneratedData" inManagedObjectContext:[self managedObjectContext]];
     
     [fetchRequest setEntity:entity];
+    fetchRequest.sortDescriptors = [[NSArray alloc] initWithArray: nil];//[NSSortDescriptor sortDescriptorWithKey:<#(NSString *)#> ascending:<#(BOOL)#>
+    fetchResult = [[NSFetchedResultsController alloc]initWithFetchRequest:fetchRequest managedObjectContext:[self managedObjectContext] sectionNameKeyPath:nil cacheName:@"Root"];
     
-    fetchResult = [[NSFetchedResultsController alloc]initWithFetchRequest:fetchRequest managedObjectContext:[self managedObjectContext] sectionNameKeyPath:nil cacheName:nil];
     
     fetchResult.delegate = self;
-    
-    return fetchResult;
+    NSError *err;
+    BOOL success = [fetchResult performFetch:&err];
+    if (!success) {
+        NSLog(@"fail");
+    }
+    self.fetchResult = fetchResult;
+    [fetchResult release];
+   
 }
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -64,20 +69,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self initFetchResult];
+    
     Generator* gen = [[Generator alloc] init];
     [gen doGenerate];
     self.listGeneratedData = [[[NSMutableArray alloc] init] autorelease];
-        //self.listGeneratedData = self.fetchResult;
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)viewDidUnload
 {
-    [super viewDidUnload];
+     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }

@@ -31,8 +31,6 @@
     NSLog(@"%@", numb);
     self.timer = [NSTimer scheduledTimerWithTimeInterval:numb.intValue  target:self selector:@selector(fire) userInfo:nil repeats:NO];
     
-  
-
     AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     NSManagedObjectContext* context = appDelegate.managedObjectContext;
     GeneratedData *newData = [NSEntityDescription insertNewObjectForEntityForName:@"GeneratedData" inManagedObjectContext:context];
