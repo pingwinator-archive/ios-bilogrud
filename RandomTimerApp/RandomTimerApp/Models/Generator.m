@@ -21,13 +21,13 @@
 }
 
 - (NSNumber*)randomNumberFrom:(NSNumber*)from To:(NSNumber*)to{
-    return [NSNumber numberWithInt: rand()];
+    return [NSNumber numberWithInt: 5 + rand() % 5];
 }
 
 - (void)doGenerate
 {
     NSNumber* numb = [self randomNumberFrom:[NSNumber numberWithInt:5] To:[NSNumber numberWithInt:10]];
-   // NSLog(@"%@", [NSDate date]);
+    NSLog(@"%@", numb);
     self.timer = [NSTimer scheduledTimerWithTimeInterval:numb.intValue  target:self selector:@selector(fire) userInfo:nil repeats:NO];
     
   
