@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1487" systemVersion="12A269" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="GaneratedData" representedClassName="GaneratedData" syncable="YES">
+    <entity name="GeneratedData" representedClassName="GeneratedData" syncable="YES">
         <attribute name="number" optional="YES" attributeType="Integer 16" minValueString="5" maxValueString="10" defaultValueString="5" syncable="YES"/>
         <attribute name="time" optional="YES" attributeType="Date" syncable="YES"/>
     </entity>
     <elements>
-        <element name="GaneratedData" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="GeneratedData" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

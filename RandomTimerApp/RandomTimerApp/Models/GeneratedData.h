@@ -10,9 +10,9 @@
 #import <CoreData/CoreData.h>
 
 
-@interface GaneratedData : NSManagedObject
+@interface GeneratedData : NSManagedObject
 
 @property (nonatomic, retain) NSDate * time;
 @property (nonatomic, retain) NSNumber * number;
-
+- (GeneratedData *) initWithNumber: (NSNumber *)numb;
 @end

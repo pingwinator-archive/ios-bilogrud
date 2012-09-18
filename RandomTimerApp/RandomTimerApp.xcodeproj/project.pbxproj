@@ -16,7 +16,7 @@
 		6E86833E16076D44007A7F58 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E86833D16076D44007A7F58 /* AppDelegate.m */; };
 		6E86834116076D44007A7F58 /* RandomTimerApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6E86833F16076D44007A7F58 /* RandomTimerApp.xcdatamodeld */; };
 		6E86834B16076E67007A7F58 /* RandomTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E86834A16076E67007A7F58 /* RandomTableViewController.m */; };
-		6E86834F16076F2A007A7F58 /* GaneratedData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E86834E16076F2A007A7F58 /* GaneratedData.m */; };
+		6E86834F16076F2A007A7F58 /* GeneratedData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E86834E16076F2A007A7F58 /* GeneratedData.m */; };
 		6E86835616077493007A7F58 /* Generator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E86835516077493007A7F58 /* Generator.m */; };
 /* End PBXBuildFile section */
 
@@ -35,8 +35,8 @@
 		6E86834016076D44007A7F58 /* RandomTimerApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RandomTimerApp.xcdatamodel; sourceTree = "<group>"; };
 		6E86834916076E67007A7F58 /* RandomTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RandomTableViewController.h; sourceTree = "<group>"; };
 		6E86834A16076E67007A7F58 /* RandomTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RandomTableViewController.m; sourceTree = "<group>"; };
-		6E86834D16076F2A007A7F58 /* GaneratedData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GaneratedData.h; sourceTree = "<group>"; };
-		6E86834E16076F2A007A7F58 /* GaneratedData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GaneratedData.m; sourceTree = "<group>"; };
+		6E86834D16076F2A007A7F58 /* GeneratedData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneratedData.h; sourceTree = "<group>"; };
+		6E86834E16076F2A007A7F58 /* GeneratedData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedData.m; sourceTree = "<group>"; };
 		6E86835416077493007A7F58 /* Generator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Generator.h; sourceTree = "<group>"; };
 		6E86835516077493007A7F58 /* Generator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Generator.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -120,8 +120,8 @@
 		6E86834C16076F12007A7F58 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				6E86834D16076F2A007A7F58 /* GaneratedData.h */,
-				6E86834E16076F2A007A7F58 /* GaneratedData.m */,
+				6E86834D16076F2A007A7F58 /* GeneratedData.h */,
+				6E86834E16076F2A007A7F58 /* GeneratedData.m */,
 				6E86835416077493007A7F58 /* Generator.h */,
 				6E86835516077493007A7F58 /* Generator.m */,
 			);
@@ -194,7 +194,7 @@
 				6E86833E16076D44007A7F58 /* AppDelegate.m in Sources */,
 				6E86834116076D44007A7F58 /* RandomTimerApp.xcdatamodeld in Sources */,
 				6E86834B16076E67007A7F58 /* RandomTableViewController.m in Sources */,
-				6E86834F16076F2A007A7F58 /* GaneratedData.m in Sources */,
+				6E86834F16076F2A007A7F58 /* GeneratedData.m in Sources */,
 				6E86835616077493007A7F58 /* Generator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -303,6 +303,7 @@
 				6E86834616076D44007A7F58 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

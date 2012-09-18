@@ -6,8 +6,7 @@
 //  Copyright (c) 2012 Natasha. All rights reserved.
 //
 
-#import "AppDelegate.h"
-#import "Generator.h"
+#import "AppDelegate.h" 
 
 @implementation AppDelegate
 
@@ -23,16 +22,19 @@
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
-
+@synthesize mainController;
+@synthesize navController;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-    Generator* gen = [[Generator alloc] init];
-    [gen doGenerate];
+   
+    self.mainController = [[[RandomTableViewController alloc] init] autorelease];
+    self.navController = [[[UINavigationController alloc] initWithRootViewController:self.mainController] autorelease];
     
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    self.window.rootViewController = self.navController;
     return YES;
 }
 

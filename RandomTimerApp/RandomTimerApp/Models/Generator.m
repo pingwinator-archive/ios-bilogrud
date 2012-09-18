@@ -7,44 +7,54 @@
 //
 
 #import "Generator.h"
-
+#import "AppDelegate.h"
+#import "GeneratedData.h"
+#import "stdlib.h"
 @implementation Generator
 
 @synthesize timer;
--(NSNumber*)randomNumberFrom:(NSNumber*)from To:(NSNumber*)to{
-    return [NSNumber numberWithInt:5];
+
+- (void) dealloc
+{
+    self.timer = nil;
+    [super dealloc];
 }
--(void)doGenerate
+
+- (NSNumber*)randomNumberFrom:(NSNumber*)from To:(NSNumber*)to{
+    return [NSNumber numberWithInt: rand()];
+}
+
+- (void)doGenerate
 {
     NSNumber* numb = [self randomNumberFrom:[NSNumber numberWithInt:5] To:[NSNumber numberWithInt:10]];
-    NSLog(@"%@", [NSDate date]);
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:numb.intValue  target:self selector:@selector(fire) userInfo:nil repeats:YES];
+   // NSLog(@"%@", [NSDate date]);
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:numb.intValue  target:self selector:@selector(fire) userInfo:nil repeats:NO];
     
-    
-/*
- AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
- NSManagedObjectContext* context = appDelegate.managedObjectContext;
- Person* newPerson = [NSEntityDescription insertNewObjectForEntityForName:@"Person" inManagedObjectContext:context];
- if(newPerson){
- newPerson.firstName = self.textFieldFirstName.text;
- newPerson.lastName = self.textFieldLastName.text;
- newPerson.age = [NSNumber numberWithInteger:[self.textFieldAge.text integerValue]];
- 
- NSError* err = nil;
- if([context save:&err]){
- [self.navigationController popViewControllerAnimated:YES];
- } else {
- NSLog(@"error with saving");
- }
- } else {
- NSLog(@"error with object");
- }
+  
 
- */
+    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext* context = appDelegate.managedObjectContext;
+    GeneratedData *newData = [NSEntityDescription insertNewObjectForEntityForName:@"GeneratedData" inManagedObjectContext:context];
+    if(newData) {
+        newData.time = [NSDate date];
+        newData.number = numb;
+        
+        NSError* err = nil;
+        if([context save:&err]){
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"ok" message:err.description delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil ];
+            [alert show];
+            [alert release];
+        } else {
+            NSLog(@"error with saving");
+        }
+    } else {
+    NSLog(@"error with object");
+    }
+
 }
 
 - (void)fire
 {
-    NSLog(@"fire %@", [NSDate date]);
+   NSLog(@"fire %@", [NSDate date]);
 }
 @end

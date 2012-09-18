@@ -8,6 +8,9 @@
 
 #import "RandomTableViewController.h"
 #import "AppDelegate.h"
+#import "Generator.h"
+#import "GeneratedData.h"
+
 @interface RandomTableViewController ()
 
 @end
@@ -15,6 +18,7 @@
 @implementation RandomTableViewController
 @synthesize fetchResult;
 @synthesize tableRandomData;
+@synthesize listGeneratedData;
 
 -(void)dealloc
 {
@@ -41,11 +45,11 @@
     
     [fetchRequest setEntity:entity];
     
-    NSFetchedResultsController* frc = [[NSFetchedResultsController alloc]initWithFetchRequest:fetchRequest managedObjectContext:[self managedObjectContext] sectionNameKeyPath:nil cacheName:nil];
+    fetchResult = [[NSFetchedResultsController alloc]initWithFetchRequest:fetchRequest managedObjectContext:[self managedObjectContext] sectionNameKeyPath:nil cacheName:nil];
     
-    frc.delegate = self;
+    fetchResult.delegate = self;
     
-    return self.fetchResult;
+    return fetchResult;
 }
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -60,7 +64,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    Generator* gen = [[Generator alloc] init];
+    [gen doGenerate];
+    self.listGeneratedData = [[[NSMutableArray alloc] init] autorelease];
+        //self.listGeneratedData = self.fetchResult;
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -80,20 +87,44 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+#pragma mark fetch
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
+{
+    [self.tableView beginUpdates];
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
+{
+    switch (type) {
+        case NSFetchedResultsChangeInsert:
+        {
+            [self.listGeneratedData addObject:anObject];
+            [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationMiddle ];
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    [self.tableView endUpdates];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+   // Return the number of rows in the section.
+    return [self.listGeneratedData count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -101,7 +132,14 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    // Configure the cell...
+    if (!cell){
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    
+    GeneratedData *data = [self.fetchResult objectAtIndexPath:indexPath];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", data.number];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", data.time];
     
     return cell;
 }
