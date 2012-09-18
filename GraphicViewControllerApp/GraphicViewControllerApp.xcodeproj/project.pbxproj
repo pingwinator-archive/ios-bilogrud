@@ -16,6 +16,7 @@
 		6EB2E5A91608ADB500BBBF2C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB2E5A81608ADB500BBBF2C /* ViewController.m */; };
 		6EB2E5AC1608ADB500BBBF2C /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EB2E5AA1608ADB500BBBF2C /* ViewController_iPhone.xib */; };
 		6EB2E5AF1608ADB500BBBF2C /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EB2E5AD1608ADB500BBBF2C /* ViewController_iPad.xib */; };
+		6EB2E5BB1608B9BD00BBBF2C /* drawTestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB2E5BA1608B9BD00BBBF2C /* drawTestView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,8 @@
 		6EB2E5A81608ADB500BBBF2C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		6EB2E5AB1608ADB500BBBF2C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPhone.xib; sourceTree = "<group>"; };
 		6EB2E5AE1608ADB500BBBF2C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPad.xib; sourceTree = "<group>"; };
+		6EB2E5B91608B9BD00BBBF2C /* drawTestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drawTestView.h; sourceTree = "<group>"; };
+		6EB2E5BA1608B9BD00BBBF2C /* drawTestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = drawTestView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +89,8 @@
 				6EB2E5AA1608ADB500BBBF2C /* ViewController_iPhone.xib */,
 				6EB2E5AD1608ADB500BBBF2C /* ViewController_iPad.xib */,
 				6EB2E59C1608ADB500BBBF2C /* Supporting Files */,
+				6EB2E5B91608B9BD00BBBF2C /* drawTestView.h */,
+				6EB2E5BA1608B9BD00BBBF2C /* drawTestView.m */,
 			);
 			path = GraphicViewControllerApp;
 			sourceTree = "<group>";
@@ -168,6 +173,7 @@
 				6EB2E5A21608ADB500BBBF2C /* main.m in Sources */,
 				6EB2E5A61608ADB500BBBF2C /* AppDelegate.m in Sources */,
 				6EB2E5A91608ADB500BBBF2C /* ViewController.m in Sources */,
+				6EB2E5BB1608B9BD00BBBF2C /* drawTestView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

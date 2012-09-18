@@ -16,6 +16,7 @@
 
 - (void)viewDidLoad
 {
+    [self drawRect:CGRectMake(50.0f, 50.0f, 200.0f, 200.0f)];
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 }
@@ -35,4 +36,11 @@
     }
 }
 
+- (void)drawRect:(CGRect)rect
+{
+    UIFont *Helvetica = [UIFont fontWithName:@"HelveticaNeue-Bold" size:40.0f];
+    NSString *str = @"Don't worry";
+    [str drawAtPoint:CGPointMake(60.0f, 60.0f) withFont:Helvetica];
+
+}
 @end
