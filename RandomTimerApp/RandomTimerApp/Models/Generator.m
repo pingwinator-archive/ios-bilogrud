@@ -20,8 +20,9 @@
     [super dealloc];
 }
 
-- (NSNumber*)randomNumberFrom:(NSNumber*)from To:(NSNumber*)to{
-    return [NSNumber numberWithInt: 5 + rand() % 5];
+- (NSNumber*)randomNumberFrom:(NSNumber*)from To:(NSNumber*)to
+{
+    return [NSNumber numberWithInt: [from intValue]+ rand() % ([to intValue]-[from intValue]) ];
 }
 
 - (void)doGenerate
