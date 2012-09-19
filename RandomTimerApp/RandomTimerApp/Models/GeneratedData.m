@@ -13,10 +13,14 @@
 
 @dynamic time;
 @dynamic number;
-- (GeneratedData *) initWithNumber: (NSNumber *)numb{
-    GeneratedData *data = [[GeneratedData alloc]init];
-    data.time = (NSDate *)[NSDate date];
+
++(id) generatedDataWithNumber: (NSNumber *)numb inContext:(NSManagedObjectContext*)context
+{
+    GeneratedData *data = [NSEntityDescription insertNewObjectForEntityForName:@"GeneratedData" inManagedObjectContext:context];
+
+    data.time = [NSDate date];
     data.number = numb;
+    [context save:nil];
     return data;
 }
 @end

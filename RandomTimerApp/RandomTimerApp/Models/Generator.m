@@ -33,27 +33,12 @@
     
     AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     NSManagedObjectContext* context = appDelegate.managedObjectContext;
-    GeneratedData *newData = [NSEntityDescription insertNewObjectForEntityForName:@"GeneratedData" inManagedObjectContext:context];
-    if(newData) {
-        newData.time = [NSDate date];
-        newData.number = numb;
-        
-        NSError* err = nil;
-        if([context save:&err]){
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"ok" message:err.description delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil ];
-            [alert show];
-            [alert release];
-        } else {
-            NSLog(@"error with saving");
-        }
-    } else {
-    NSLog(@"error with object");
-    }
-
+    [GeneratedData generatedDataWithNumber:numb inContext:context];
 }
 
 - (void)fire
 {
    NSLog(@"fire %@", [NSDate date]);
+    [self doGenerate];
 }
 @end

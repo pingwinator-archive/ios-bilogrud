@@ -43,17 +43,18 @@
     
     [fetchRequest setEntity:entity];
     fetchRequest.sortDescriptors = [[NSArray alloc] initWithArray: nil];//[NSSortDescriptor sortDescriptorWithKey:<#(NSString *)#> ascending:<#(BOOL)#>
-    fetchResult = [[NSFetchedResultsController alloc]initWithFetchRequest:fetchRequest managedObjectContext:[self managedObjectContext] sectionNameKeyPath:nil cacheName:@"Root"];
+    self.fetchResult  = [[[NSFetchedResultsController alloc]initWithFetchRequest:fetchRequest managedObjectContext:[self managedObjectContext] sectionNameKeyPath:nil cacheName:nil] autorelease];
     
     
-    fetchResult.delegate = self;
+    self.fetchResult.delegate = self;
     NSError *err;
     BOOL success = [fetchResult performFetch:&err];
     if (!success) {
         NSLog(@"fail");
+        
     }
-    self.fetchResult = fetchResult;
-    [fetchResult release];
+    
+    [fetchRequest release];
    
 }
 - (id)initWithStyle:(UITableViewStyle)style
@@ -66,15 +67,22 @@
     return self;
 }
 
+-(void)genarate
+{
+    Generator* gen = [[Generator alloc] init];
+    [gen doGenerate];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self initFetchResult];
     
-    Generator* gen = [[Generator alloc] init];
-    [gen doGenerate];
-    self.listGeneratedData = [[[NSMutableArray alloc] init] autorelease];
-}
+    [self initFetchResult];
+ //   NSArray* resultArray = [self.fetchResult fetchedObjects];
+    
+    [self performSelector:@selector(genarate) withObject:nil afterDelay:2];
+    
+   }
 
 - (void)viewDidUnload
 {
@@ -125,7 +133,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
    // Return the number of rows in the section.
-    return [self.listGeneratedData count];
+    return [[self.fetchResult fetchedObjects] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
