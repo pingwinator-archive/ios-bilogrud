@@ -55,10 +55,9 @@
 {
     NSLog(@"change");
     
-    if([switchTypeGenerator isOn])
-    {}
-    else
-    {
+    if([switchTypeGenerator isOn]) {
+    
+    } else {
     
     }
 }

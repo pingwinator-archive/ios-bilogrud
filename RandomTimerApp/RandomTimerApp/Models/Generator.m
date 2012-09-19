@@ -64,6 +64,12 @@
     NSString* stringUrl = @"http://www.random.org/integers/?num=1&min=5&max=10&col=1&base=10&format=plain&rnd=new";
     NSURL* url = [NSURL URLWithString:stringUrl];
     NSURLRequest* request = [NSURLRequest requestWithURL:url];
+    void(^test)(Connect *, NSError *) = ^(Connect *con, NSError *err){
+        if(!err){
+        }
+    };
+    
+    Connect* con = [Connect urlRequest:request withBlock:test];
       return [NSNumber numberWithInt:2];
 }
 
