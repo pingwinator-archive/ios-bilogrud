@@ -12,12 +12,28 @@
 		6E86833016076D43007A7F58 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E86832F16076D43007A7F58 /* CoreGraphics.framework */; };
 		6E86833216076D43007A7F58 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E86833116076D43007A7F58 /* CoreData.framework */; };
 		6E86833816076D43007A7F58 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6E86833616076D43007A7F58 /* InfoPlist.strings */; };
-		6E86833A16076D44007A7F58 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E86833916076D44007A7F58 /* main.m */; };
 		6E86833E16076D44007A7F58 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E86833D16076D44007A7F58 /* AppDelegate.m */; };
 		6E86834116076D44007A7F58 /* RandomTimerApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6E86833F16076D44007A7F58 /* RandomTimerApp.xcdatamodeld */; };
 		6E86834B16076E67007A7F58 /* RandomTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E86834A16076E67007A7F58 /* RandomTableViewController.m */; };
 		6E86834F16076F2A007A7F58 /* GeneratedData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E86834E16076F2A007A7F58 /* GeneratedData.m */; };
 		6E86835616077493007A7F58 /* Generator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E86835516077493007A7F58 /* Generator.m */; };
+		6ED98254160A32A30070ADEF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED98253160A32A30070ADEF /* main.m */; };
+		6ED98259160A32E60070ADEF /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED98258160A32E60070ADEF /* CoreDataManager.m */; };
+		6ED98275160A32F20070ADEF /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED9825D160A32F20070ADEF /* NSObject+SBJson.m */; };
+		6ED98276160A32F20070ADEF /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED98260160A32F20070ADEF /* SBJsonParser.m */; };
+		6ED98277160A32F20070ADEF /* SBJsonStreamParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED98262160A32F20070ADEF /* SBJsonStreamParser.m */; };
+		6ED98278160A32F20070ADEF /* SBJsonStreamParserAccumulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED98264160A32F20070ADEF /* SBJsonStreamParserAccumulator.m */; };
+		6ED98279160A32F20070ADEF /* SBJsonStreamParserAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED98266160A32F20070ADEF /* SBJsonStreamParserAdapter.m */; };
+		6ED9827A160A32F20070ADEF /* SBJsonStreamParserState.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED98268160A32F20070ADEF /* SBJsonStreamParserState.m */; };
+		6ED9827B160A32F20070ADEF /* SBJsonStreamWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED9826A160A32F20070ADEF /* SBJsonStreamWriter.m */; };
+		6ED9827C160A32F20070ADEF /* SBJsonStreamWriterAccumulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED9826C160A32F20070ADEF /* SBJsonStreamWriterAccumulator.m */; };
+		6ED9827D160A32F20070ADEF /* SBJsonStreamWriterState.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED9826E160A32F20070ADEF /* SBJsonStreamWriterState.m */; };
+		6ED9827E160A32F20070ADEF /* SBJsonTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED98270160A32F20070ADEF /* SBJsonTokeniser.m */; };
+		6ED9827F160A32F20070ADEF /* SBJsonUTF8Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED98272160A32F20070ADEF /* SBJsonUTF8Stream.m */; };
+		6ED98280160A32F20070ADEF /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED98274160A32F20070ADEF /* SBJsonWriter.m */; };
+		6ED98284160A331F0070ADEF /* Connect.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED98283160A331F0070ADEF /* Connect.m */; };
+		6ED98288160A33400070ADEF /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED98286160A33400070ADEF /* SettingViewController.m */; };
+		6ED98289160A33400070ADEF /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6ED98287160A33400070ADEF /* SettingViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,7 +44,6 @@
 		6E86833116076D43007A7F58 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		6E86833516076D43007A7F58 /* RandomTimerApp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RandomTimerApp-Info.plist"; sourceTree = "<group>"; };
 		6E86833716076D43007A7F58 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		6E86833916076D44007A7F58 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6E86833B16076D44007A7F58 /* RandomTimerApp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RandomTimerApp-Prefix.pch"; sourceTree = "<group>"; };
 		6E86833C16076D44007A7F58 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6E86833D16076D44007A7F58 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -39,6 +54,40 @@
 		6E86834E16076F2A007A7F58 /* GeneratedData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedData.m; sourceTree = "<group>"; };
 		6E86835416077493007A7F58 /* Generator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Generator.h; sourceTree = "<group>"; };
 		6E86835516077493007A7F58 /* Generator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Generator.m; sourceTree = "<group>"; };
+		6ED98253160A32A30070ADEF /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "Supporting files/main.m"; sourceTree = "<group>"; };
+		6ED98256160A32C90070ADEF /* CommonConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommonConst.h; path = "Supporting files/CommonConst.h"; sourceTree = "<group>"; };
+		6ED98257160A32E60070ADEF /* CoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataManager.h; sourceTree = "<group>"; };
+		6ED98258160A32E60070ADEF /* CoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataManager.m; sourceTree = "<group>"; };
+		6ED9825C160A32F20070ADEF /* NSObject+SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJson.h"; sourceTree = "<group>"; };
+		6ED9825D160A32F20070ADEF /* NSObject+SBJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJson.m"; sourceTree = "<group>"; };
+		6ED9825E160A32F20070ADEF /* SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson.h; sourceTree = "<group>"; };
+		6ED9825F160A32F20070ADEF /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
+		6ED98260160A32F20070ADEF /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
+		6ED98261160A32F20070ADEF /* SBJsonStreamParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamParser.h; sourceTree = "<group>"; };
+		6ED98262160A32F20070ADEF /* SBJsonStreamParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamParser.m; sourceTree = "<group>"; };
+		6ED98263160A32F20070ADEF /* SBJsonStreamParserAccumulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamParserAccumulator.h; sourceTree = "<group>"; };
+		6ED98264160A32F20070ADEF /* SBJsonStreamParserAccumulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamParserAccumulator.m; sourceTree = "<group>"; };
+		6ED98265160A32F20070ADEF /* SBJsonStreamParserAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamParserAdapter.h; sourceTree = "<group>"; };
+		6ED98266160A32F20070ADEF /* SBJsonStreamParserAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamParserAdapter.m; sourceTree = "<group>"; };
+		6ED98267160A32F20070ADEF /* SBJsonStreamParserState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamParserState.h; sourceTree = "<group>"; };
+		6ED98268160A32F20070ADEF /* SBJsonStreamParserState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamParserState.m; sourceTree = "<group>"; };
+		6ED98269160A32F20070ADEF /* SBJsonStreamWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamWriter.h; sourceTree = "<group>"; };
+		6ED9826A160A32F20070ADEF /* SBJsonStreamWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamWriter.m; sourceTree = "<group>"; };
+		6ED9826B160A32F20070ADEF /* SBJsonStreamWriterAccumulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamWriterAccumulator.h; sourceTree = "<group>"; };
+		6ED9826C160A32F20070ADEF /* SBJsonStreamWriterAccumulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamWriterAccumulator.m; sourceTree = "<group>"; };
+		6ED9826D160A32F20070ADEF /* SBJsonStreamWriterState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamWriterState.h; sourceTree = "<group>"; };
+		6ED9826E160A32F20070ADEF /* SBJsonStreamWriterState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamWriterState.m; sourceTree = "<group>"; };
+		6ED9826F160A32F20070ADEF /* SBJsonTokeniser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonTokeniser.h; sourceTree = "<group>"; };
+		6ED98270160A32F20070ADEF /* SBJsonTokeniser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonTokeniser.m; sourceTree = "<group>"; };
+		6ED98271160A32F20070ADEF /* SBJsonUTF8Stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonUTF8Stream.h; sourceTree = "<group>"; };
+		6ED98272160A32F20070ADEF /* SBJsonUTF8Stream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonUTF8Stream.m; sourceTree = "<group>"; };
+		6ED98273160A32F20070ADEF /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
+		6ED98274160A32F20070ADEF /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		6ED98282160A331F0070ADEF /* Connect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Connect.h; sourceTree = "<group>"; };
+		6ED98283160A331F0070ADEF /* Connect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Connect.m; sourceTree = "<group>"; };
+		6ED98285160A33400070ADEF /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		6ED98286160A33400070ADEF /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		6ED98287160A33400070ADEF /* SettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,10 +136,13 @@
 		6E86833316076D43007A7F58 /* RandomTimerApp */ = {
 			isa = PBXGroup;
 			children = (
+				6ED9825A160A32F20070ADEF /* External */,
 				6E86834C16076F12007A7F58 /* Models */,
 				6E86834816076D93007A7F58 /* Controllers */,
 				6E86833C16076D44007A7F58 /* AppDelegate.h */,
 				6E86833D16076D44007A7F58 /* AppDelegate.m */,
+				6ED98257160A32E60070ADEF /* CoreDataManager.h */,
+				6ED98258160A32E60070ADEF /* CoreDataManager.m */,
 				6E86833F16076D44007A7F58 /* RandomTimerApp.xcdatamodeld */,
 				6E86833416076D43007A7F58 /* Supporting Files */,
 			);
@@ -100,9 +152,10 @@
 		6E86833416076D43007A7F58 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6ED98256160A32C90070ADEF /* CommonConst.h */,
+				6ED98253160A32A30070ADEF /* main.m */,
 				6E86833516076D43007A7F58 /* RandomTimerApp-Info.plist */,
 				6E86833616076D43007A7F58 /* InfoPlist.strings */,
-				6E86833916076D44007A7F58 /* main.m */,
 				6E86833B16076D44007A7F58 /* RandomTimerApp-Prefix.pch */,
 			);
 			name = "Supporting Files";
@@ -111,6 +164,9 @@
 		6E86834816076D93007A7F58 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				6ED98285160A33400070ADEF /* SettingViewController.h */,
+				6ED98286160A33400070ADEF /* SettingViewController.m */,
+				6ED98287160A33400070ADEF /* SettingViewController.xib */,
 				6E86834916076E67007A7F58 /* RandomTableViewController.h */,
 				6E86834A16076E67007A7F58 /* RandomTableViewController.m */,
 			);
@@ -126,6 +182,56 @@
 				6E86835516077493007A7F58 /* Generator.m */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		6ED9825A160A32F20070ADEF /* External */ = {
+			isa = PBXGroup;
+			children = (
+				6ED98281160A331F0070ADEF /* Connect */,
+				6ED9825B160A32F20070ADEF /* SBJSON */,
+			);
+			path = External;
+			sourceTree = "<group>";
+		};
+		6ED9825B160A32F20070ADEF /* SBJSON */ = {
+			isa = PBXGroup;
+			children = (
+				6ED9825C160A32F20070ADEF /* NSObject+SBJson.h */,
+				6ED9825D160A32F20070ADEF /* NSObject+SBJson.m */,
+				6ED9825E160A32F20070ADEF /* SBJson.h */,
+				6ED9825F160A32F20070ADEF /* SBJsonParser.h */,
+				6ED98260160A32F20070ADEF /* SBJsonParser.m */,
+				6ED98261160A32F20070ADEF /* SBJsonStreamParser.h */,
+				6ED98262160A32F20070ADEF /* SBJsonStreamParser.m */,
+				6ED98263160A32F20070ADEF /* SBJsonStreamParserAccumulator.h */,
+				6ED98264160A32F20070ADEF /* SBJsonStreamParserAccumulator.m */,
+				6ED98265160A32F20070ADEF /* SBJsonStreamParserAdapter.h */,
+				6ED98266160A32F20070ADEF /* SBJsonStreamParserAdapter.m */,
+				6ED98267160A32F20070ADEF /* SBJsonStreamParserState.h */,
+				6ED98268160A32F20070ADEF /* SBJsonStreamParserState.m */,
+				6ED98269160A32F20070ADEF /* SBJsonStreamWriter.h */,
+				6ED9826A160A32F20070ADEF /* SBJsonStreamWriter.m */,
+				6ED9826B160A32F20070ADEF /* SBJsonStreamWriterAccumulator.h */,
+				6ED9826C160A32F20070ADEF /* SBJsonStreamWriterAccumulator.m */,
+				6ED9826D160A32F20070ADEF /* SBJsonStreamWriterState.h */,
+				6ED9826E160A32F20070ADEF /* SBJsonStreamWriterState.m */,
+				6ED9826F160A32F20070ADEF /* SBJsonTokeniser.h */,
+				6ED98270160A32F20070ADEF /* SBJsonTokeniser.m */,
+				6ED98271160A32F20070ADEF /* SBJsonUTF8Stream.h */,
+				6ED98272160A32F20070ADEF /* SBJsonUTF8Stream.m */,
+				6ED98273160A32F20070ADEF /* SBJsonWriter.h */,
+				6ED98274160A32F20070ADEF /* SBJsonWriter.m */,
+			);
+			path = SBJSON;
+			sourceTree = "<group>";
+		};
+		6ED98281160A331F0070ADEF /* Connect */ = {
+			isa = PBXGroup;
+			children = (
+				6ED98282160A331F0070ADEF /* Connect.h */,
+				6ED98283160A331F0070ADEF /* Connect.m */,
+			);
+			path = Connect;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -180,6 +286,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E86833816076D43007A7F58 /* InfoPlist.strings in Resources */,
+				6ED98289160A33400070ADEF /* SettingViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,12 +297,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6E86833A16076D44007A7F58 /* main.m in Sources */,
 				6E86833E16076D44007A7F58 /* AppDelegate.m in Sources */,
 				6E86834116076D44007A7F58 /* RandomTimerApp.xcdatamodeld in Sources */,
 				6E86834B16076E67007A7F58 /* RandomTableViewController.m in Sources */,
 				6E86834F16076F2A007A7F58 /* GeneratedData.m in Sources */,
 				6E86835616077493007A7F58 /* Generator.m in Sources */,
+				6ED98254160A32A30070ADEF /* main.m in Sources */,
+				6ED98259160A32E60070ADEF /* CoreDataManager.m in Sources */,
+				6ED98275160A32F20070ADEF /* NSObject+SBJson.m in Sources */,
+				6ED98276160A32F20070ADEF /* SBJsonParser.m in Sources */,
+				6ED98277160A32F20070ADEF /* SBJsonStreamParser.m in Sources */,
+				6ED98278160A32F20070ADEF /* SBJsonStreamParserAccumulator.m in Sources */,
+				6ED98279160A32F20070ADEF /* SBJsonStreamParserAdapter.m in Sources */,
+				6ED9827A160A32F20070ADEF /* SBJsonStreamParserState.m in Sources */,
+				6ED9827B160A32F20070ADEF /* SBJsonStreamWriter.m in Sources */,
+				6ED9827C160A32F20070ADEF /* SBJsonStreamWriterAccumulator.m in Sources */,
+				6ED9827D160A32F20070ADEF /* SBJsonStreamWriterState.m in Sources */,
+				6ED9827E160A32F20070ADEF /* SBJsonTokeniser.m in Sources */,
+				6ED9827F160A32F20070ADEF /* SBJsonUTF8Stream.m in Sources */,
+				6ED98280160A32F20070ADEF /* SBJsonWriter.m in Sources */,
+				6ED98284160A331F0070ADEF /* Connect.m in Sources */,
+				6ED98288160A33400070ADEF /* SettingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
