@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RandomTableViewController : UITableViewController< NSFetchedResultsControllerDelegate>
+@interface RandomTableViewController : UITableViewController< NSFetchedResultsControllerDelegate, NSURLConnectionDataDelegate>
 
 @property (retain, nonatomic) UITableView* tableRandomData;
 @property (retain, nonatomic) NSFetchedResultsController* fetchResult;
-@property (retain, nonatomic) NSMutableArray* listGeneratedData;
+//@property (retain, nonatomic) NSMutableArray* listGeneratedData;
+
 @end

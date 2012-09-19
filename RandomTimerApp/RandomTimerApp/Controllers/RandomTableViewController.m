@@ -10,53 +10,50 @@
 #import "AppDelegate.h"
 #import "Generator.h"
 #import "GeneratedData.h"
-
+#import "CoreDataManager.h"
+#import "SettingViewController.h"
 @interface RandomTableViewController ()
-
+@property (retain, nonatomic) Generator* generator;
+- (void)genarate;
+- (void)showSettings;
 @end
 
 @implementation RandomTableViewController
 @synthesize fetchResult;
 @synthesize tableRandomData;
-@synthesize listGeneratedData;
+@synthesize generator;
 
--(void)dealloc
+- (void)dealloc
 {
     self.fetchResult = nil;
     self.tableRandomData = nil;
-    self.listGeneratedData = nil;
+    self.generator = nil;
     [super dealloc];
 }
-- (NSManagedObjectContext *) managedObjectContext
-{    
-    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext* managedContext = appDelegate.managedObjectContext;
-    
-    return managedContext;
-}
 
--(void) initFetchResult
+- (void)initFetchResult
 {
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc]init];
     
-    NSEntityDescription* entity = [NSEntityDescription entityForName:@"GeneratedData" inManagedObjectContext:[self managedObjectContext]];
+    NSEntityDescription* entity = [NSEntityDescription entityForName:@"GeneratedData" inManagedObjectContext:[[CoreDataManager sharedInstance] managedObjectContext ]];
     
     [fetchRequest setEntity:entity];
-    fetchRequest.sortDescriptors = [[NSArray alloc] initWithArray: nil];//[NSSortDescriptor sortDescriptorWithKey:<#(NSString *)#> ascending:<#(BOOL)#>
-    self.fetchResult  = [[[NSFetchedResultsController alloc]initWithFetchRequest:fetchRequest managedObjectContext:[self managedObjectContext] sectionNameKeyPath:nil cacheName:nil] autorelease];
     
+    NSSortDescriptor* sortDescr = [NSSortDescriptor sortDescriptorWithKey:@"time" ascending:NO];
+    fetchRequest.sortDescriptors = [[[NSArray alloc] initWithObjects:sortDescr, nil] autorelease];
+    self.fetchResult  = [[[NSFetchedResultsController alloc]initWithFetchRequest:fetchRequest managedObjectContext:[[CoreDataManager sharedInstance] managedObjectContext ] sectionNameKeyPath:nil cacheName:nil] autorelease];
+  
     
     self.fetchResult.delegate = self;
     NSError *err;
     BOOL success = [fetchResult performFetch:&err];
     if (!success) {
-        NSLog(@"fail");
-        
+        NSLog(@"fail performFetch");
     }
     
     [fetchRequest release];
-   
 }
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -67,22 +64,21 @@
     return self;
 }
 
--(void)genarate
-{
-    Generator* gen = [[Generator alloc] init];
-    [gen doGenerate];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     [self initFetchResult];
- //   NSArray* resultArray = [self.fetchResult fetchedObjects];
-    
+ 
     [self performSelector:@selector(genarate) withObject:nil afterDelay:2];
+  
+    UIBarButtonItem *right  = [[UIBarButtonItem alloc] initWithTitle: NSLocalizedString(@"Setting", @"") style:UIBarButtonItemStylePlain target:self action:@selector(showSettings)];
     
-   }
+    self.navigationItem.rightBarButtonItem = right;
+    [right release];
+    
+    [self.navigationItem setLeftBarButtonItem:[self editButtonItem]];
+}
 
 - (void)viewDidUnload
 {
@@ -94,6 +90,22 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void)genarate
+{
+    self.generator = [[Generator alloc] init];
+    [self.generator doGenerate];
+    [self.generator release];
+}
+
+- (void) showSettings
+{
+    NSLog(@"setting button");
+    SettingViewController* settingViewController = [[[SettingViewController alloc]initWithNibName:@"SettingViewController" bundle:nil] autorelease];
+    
+    
+    [self.navigationController pushViewController:settingViewController animated:YES];
 }
 
 #pragma mark fetch
@@ -108,12 +120,30 @@
     switch (type) {
         case NSFetchedResultsChangeInsert:
         {
-            [self.listGeneratedData addObject:anObject];
             [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationMiddle ];
         }
             break;
-            
+        case NSFetchedResultsChangeUpdate:
+        {
+        }
+            break;
+        case NSFetchedResultsChangeMove:
+        {
+            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                             withRowAnimation:UITableViewRowAnimationFade];
+            [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
+                             withRowAnimation:UITableViewRowAnimationFade];
+        }
+            break;
+        case NSFetchedResultsChangeDelete:
+        {
+            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationTop];
+        }
+            break;
         default:
+        {
+            NSLog(@"unknown NSFetchedResultsChangeType");
+        }
             break;
     }
 }
@@ -162,19 +192,41 @@
 }
 */
 
-/*
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        GeneratedData* deletingRow = [self.fetchResult objectAtIndexPath:indexPath];
+        
+        self.fetchResult.delegate = nil;
+        
+        [[[CoreDataManager sharedInstance] managedObjectContext ] deleteObject:deletingRow];
+        if([deletingRow isDeleted])
+        {
+            [[[CoreDataManager sharedInstance] managedObjectContext ] save:nil];
+            
+            NSError* fetchingError;
+            if ([self.fetchResult performFetch:&fetchingError]){
+                NSLog(@"Successfully fetched.");
+                NSArray *rowsToDelete = [[NSArray alloc] initWithObjects:indexPath, nil] ;
+                [self.tableView deleteRowsAtIndexPaths:rowsToDelete withRowAnimation:UITableViewRowAnimationAutomatic];
+                [rowsToDelete release];
+            } else {
+                NSLog(@"Failed to fetch with error = %@", fetchingError); 
+        }
+        }
+        
+        self.fetchResult.delegate = self;
+        
         // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
+        //[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
-*/
+
 
 /*
 // Override to support rearranging the table view.

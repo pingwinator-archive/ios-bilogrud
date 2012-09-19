@@ -20,7 +20,14 @@
 
     data.time = [NSDate date];
     data.number = numb;
-    [context save:nil];
+    NSError *err = NULL;
+    [context save: &err];
+    
+    if(err)
+    {
+        NSLog(@"check error: %@", err.description);
+    } 
+        
     return data;
 }
 @end
