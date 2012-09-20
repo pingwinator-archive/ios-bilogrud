@@ -38,8 +38,8 @@
     [self refreshFields];
     //UI
     self.textSwitchLabel.text = NSLocalizedString(@"Generate Number Local", @"");
-    self.cleanCD.titleLabel.text = NSLocalizedString(@"Clean CoreData", @"");
-    
+   // self.cleanCD.titleLabel.text = NSLocalizedString(@"Clean CoreData", @"");
+    [self.cleanCD setTitle:NSLocalizedString(@"Clean CoreData", @"") forState:UIControlStateNormal];
     UIApplication *app = [UIApplication sharedApplication];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:app];
     

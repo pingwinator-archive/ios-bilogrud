@@ -14,7 +14,7 @@
 @dynamic time;
 @dynamic number;
 
-+(id) generatedDataWithNumber: (NSNumber *)numb inContext:(NSManagedObjectContext*)context
++ (id) generatedDataWithNumber: (NSNumber *)numb inContext:(NSManagedObjectContext*)context
 {
     GeneratedData *data = [NSEntityDescription insertNewObjectForEntityForName:@"GeneratedData" inManagedObjectContext:context];
 
