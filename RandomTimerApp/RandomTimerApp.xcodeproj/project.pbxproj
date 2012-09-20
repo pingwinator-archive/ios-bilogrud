@@ -19,6 +19,7 @@
 		6E86835616077493007A7F58 /* Generator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E86835516077493007A7F58 /* Generator.m */; };
 		6EAFE897160B6D8700DFB58A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6EAFE899160B6D8700DFB58A /* Localizable.strings */; };
 		6EAFE89C160B71A900DFB58A /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EAFE89B160B71A900DFB58A /* SettingViewController.m */; };
+		6EAFE89F160B72F700DFB58A /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EAFE89E160B72F700DFB58A /* SettingViewController.xib */; };
 		6ED98254160A32A30070ADEF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED98253160A32A30070ADEF /* main.m */; };
 		6ED98259160A32E60070ADEF /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED98258160A32E60070ADEF /* CoreDataManager.m */; };
 		6ED98275160A32F20070ADEF /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 6ED9825D160A32F20070ADEF /* NSObject+SBJson.m */; };
@@ -57,6 +58,7 @@
 		6EAFE898160B6D8700DFB58A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6EAFE89A160B6D9100DFB58A /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6EAFE89B160B71A900DFB58A /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		6EAFE89E160B72F700DFB58A /* SettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingViewController.xib; sourceTree = "<group>"; };
 		6ED98253160A32A30070ADEF /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "Supporting files/main.m"; sourceTree = "<group>"; };
 		6ED98256160A32C90070ADEF /* CommonConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommonConst.h; path = "Supporting files/CommonConst.h"; sourceTree = "<group>"; };
 		6ED98257160A32E60070ADEF /* CoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataManager.h; sourceTree = "<group>"; };
@@ -188,9 +190,18 @@
 		6EAFE894160B6D6000DFB58A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6EAFE89D160B72F700DFB58A /* Nibs */,
 				6EAFE899160B6D8700DFB58A /* Localizable.strings */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		6EAFE89D160B72F700DFB58A /* Nibs */ = {
+			isa = PBXGroup;
+			children = (
+				6EAFE89E160B72F700DFB58A /* SettingViewController.xib */,
+			);
+			path = Nibs;
 			sourceTree = "<group>";
 		};
 		6ED9825A160A32F20070ADEF /* External */ = {
@@ -297,6 +308,7 @@
 			files = (
 				6E12AA2D160A4EA6009E6085 /* Settings.bundle in Resources */,
 				6EAFE897160B6D8700DFB58A /* Localizable.strings in Resources */,
+				6EAFE89F160B72F700DFB58A /* SettingViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
