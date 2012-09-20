@@ -36,6 +36,9 @@
 - (void)doGenerate
 {
     self.isLocalRandom = NO;
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    self.isLocalRandom = (BOOL)[defaults objectForKey:@"kRandom"];
+//    
     NSNumber* numb ;
     if(self.isLocalRandom) {
         numb = [self randomNumberFrom:[NSNumber numberWithInt:5] To:[NSNumber numberWithInt:10]];
@@ -47,11 +50,7 @@
     
     self.timer = [NSTimer scheduledTimerWithTimeInterval:numb.intValue  target:self selector:@selector(fire) userInfo:nil repeats:NO];
     
-    CoreDataManager* coreDataManager = [CoreDataManager sharedInstance];
-    
-    
-    NSManagedObjectContext* context = coreDataManager.managedObjectContext;
-    [GeneratedData generatedDataWithNumber:numb inContext:context];
+    [GeneratedData generatedDataWithNumber:numb inContext:[[CoreDataManager sharedInstance] managedObjectContext]];
 }
 
 - (void)fire
@@ -61,16 +60,22 @@
 }
 
 - (NSNumber*)numberRandomOrg{
-    NSString* stringUrl = @"http://www.random.org/integers/?num=1&min=5&max=10&col=1&base=10&format=plain&rnd=new";
+   __block NSNumber* res = [[NSNumber alloc] init] ;
+    NSString* stringUrl = @"http://www.random.org/integers/?num=1&min=1&max=5&col=1&base=10&format=plain&rnd=new";
     NSURL* url = [NSURL URLWithString:stringUrl];
     NSURLRequest* request = [NSURLRequest requestWithURL:url];
+    
     void(^test)(Connect *, NSError *) = ^(Connect *con, NSError *err){
         if(!err){
+           NSString* str = [[NSString alloc]  initWithBytes:[con.data bytes]
+                                      length:[con.data length] encoding: NSUTF8StringEncoding];
+            res = (NSNumber*)[str intValue] ;
+            //!!!
         }
     };
     
-    Connect* con = [Connect urlRequest:request withBlock:test];
-      return [NSNumber numberWithInt:2];
+    [Connect urlRequest:request withBlock:test];
+    return res;
 }
 
 

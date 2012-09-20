@@ -22,4 +22,5 @@ return _sharedObject;
 #define GCD_MAIN_BEGIN dispatch_async(dispatch_get_main_queue(), ^{
 #define GCD_END });
 
+
 #endif

@@ -22,6 +22,7 @@
 @synthesize fetchResult;
 @synthesize tableRandomData;
 @synthesize generator;
+@synthesize useLocal;
 
 - (void)dealloc
 {
@@ -43,7 +44,6 @@
     fetchRequest.sortDescriptors = [[[NSArray alloc] initWithObjects:sortDescr, nil] autorelease];
     self.fetchResult  = [[[NSFetchedResultsController alloc]initWithFetchRequest:fetchRequest managedObjectContext:[[CoreDataManager sharedInstance] managedObjectContext ] sectionNameKeyPath:nil cacheName:nil] autorelease];
   
-    
     self.fetchResult.delegate = self;
     NSError *err;
     BOOL success = [fetchResult performFetch:&err];
@@ -67,6 +67,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+     UIApplication *app = [UIApplication sharedApplication];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:app];
     
     [self initFetchResult];
  
@@ -85,6 +87,19 @@
      [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+}
+
+- (void)applicationWillEnterForeground:(NSNotification *)notification
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults synchronize];
+    [self refreshFields];
+}
+
+- (void)refreshFields
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    self.useLocal = (BOOL)[defaults objectForKey:@"kRandom"];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

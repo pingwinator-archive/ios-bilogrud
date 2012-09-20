@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E12AA2D160A4EA6009E6085 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6E12AA2C160A4EA6009E6085 /* Settings.bundle */; };
 		6E86832C16076D43007A7F58 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E86832B16076D43007A7F58 /* UIKit.framework */; };
 		6E86832E16076D43007A7F58 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E86832D16076D43007A7F58 /* Foundation.framework */; };
 		6E86833016076D43007A7F58 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E86832F16076D43007A7F58 /* CoreGraphics.framework */; };
@@ -37,6 +38,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6E12AA2C160A4EA6009E6085 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		6E86832716076D43007A7F58 /* RandomTimerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RandomTimerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E86832B16076D43007A7F58 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6E86832D16076D43007A7F58 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -145,6 +147,7 @@
 				6ED98258160A32E60070ADEF /* CoreDataManager.m */,
 				6E86833F16076D44007A7F58 /* RandomTimerApp.xcdatamodeld */,
 				6E86833416076D43007A7F58 /* Supporting Files */,
+				6E12AA2C160A4EA6009E6085 /* Settings.bundle */,
 			);
 			path = RandomTimerApp;
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 			files = (
 				6E86833816076D43007A7F58 /* InfoPlist.strings in Resources */,
 				6ED98289160A33400070ADEF /* SettingViewController.xib in Resources */,
+				6E12AA2D160A4EA6009E6085 /* Settings.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

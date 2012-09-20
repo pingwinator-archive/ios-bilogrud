@@ -12,5 +12,6 @@
 @property (retain, nonatomic) IBOutlet UIButton* cleanCD;
 @property (retain, nonatomic) IBOutlet UISwitch* switchTypeGenerator;
 - (IBAction)cleanCoreData;
-- (IBAction)changeTypeGenerator;
+- (IBAction)engineSwitchTapped;
+
 @end

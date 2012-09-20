@@ -13,5 +13,5 @@
 @property (retain, nonatomic) UITableView* tableRandomData;
 @property (retain, nonatomic) NSFetchedResultsController* fetchResult;
 //@property (retain, nonatomic) NSMutableArray* listGeneratedData;
-
+@property (assign, nonatomic) BOOL useLocal;
 @end
