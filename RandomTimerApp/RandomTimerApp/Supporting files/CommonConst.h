@@ -22,5 +22,18 @@ return _sharedObject;
 #define GCD_MAIN_BEGIN dispatch_async(dispatch_get_main_queue(), ^{
 #define GCD_END });
 
+#ifdef DEBUGGING
+# define DBLog(fmt,...) NSLog(@"%@",[NSString stringWithFormat:(fmt), ##__VA_ARGS__]);
+#else
+# define DBLog(...)
+#endif
+
+#ifdef DEBUG
+#   define DLog(desc, ...) NSLog((@"%s [Line %d] " desc), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
+#else
+#   define DLog(...) while(0)
+#endif
+
+#define VLog(v) DLog(@#v @"=%@",v)
 
 #endif

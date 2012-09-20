@@ -12,19 +12,19 @@
 #import "stdlib.h"
 #import "CoreDataManager.h"
 #import "Connect.h"
-@interface Generator()
+typedef void (^GenBlock)(NSNumber*);
 
-@property (retain, nonatomic) NSString* testData;
+
+@interface Generator()
+@property (retain, nonatomic) NSTimer* timer;
 @end
 @implementation Generator
 
 @synthesize timer;
-@synthesize isLocalRandom;
-@synthesize testData;
+
 - (void) dealloc
 {
     self.timer = nil;
-    self.testData = nil;
     [super dealloc];
 }
 
@@ -33,50 +33,48 @@
     return [NSNumber numberWithInt: [from intValue]+ rand() % ([to intValue]-[from intValue]) ];
 }
 
-- (void)doGenerate
+- (void)startGenerator
 {
-    self.isLocalRandom = NO;
-//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    self.isLocalRandom = (BOOL)[defaults objectForKey:@"kRandom"];
-//    
-    NSNumber* numb ;
-    if(self.isLocalRandom) {
-        numb = [self randomNumberFrom:[NSNumber numberWithInt:5] To:[NSNumber numberWithInt:10]];
-        NSLog(@"%@", numb);
-    } else {
-        numb = [self numberRandomOrg];
-        NSLog(@"%@", numb);
-    }
-    
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:numb.intValue  target:self selector:@selector(fire) userInfo:nil repeats:NO];
-    
-    [GeneratedData generatedDataWithNumber:numb inContext:[[CoreDataManager sharedInstance] managedObjectContext]];
-}
-
-- (void)fire
-{
-   NSLog(@"fire %@", [NSDate date]);
-    [self doGenerate];
-}
-
-- (NSNumber*)numberRandomOrg{
-   __block NSNumber* res = [[NSNumber alloc] init] ;
-    NSString* stringUrl = @"http://www.random.org/integers/?num=1&min=1&max=5&col=1&base=10&format=plain&rnd=new";
-    NSURL* url = [NSURL URLWithString:stringUrl];
-    NSURLRequest* request = [NSURLRequest requestWithURL:url];
-    
-    void(^test)(Connect *, NSError *) = ^(Connect *con, NSError *err){
-        if(!err){
-           NSString* str = [[NSString alloc]  initWithBytes:[con.data bytes]
-                                      length:[con.data length] encoding: NSUTF8StringEncoding];
-            res = (NSNumber*)[str intValue] ;
-            //!!!
-        }
+    void(^genBlock)(NSNumber*) = ^(NSNumber* num) {
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:num.intValue  target:self selector:@selector(startGenerator) userInfo:nil repeats:NO];
+        [GeneratedData generatedDataWithNumber:num inContext:[[CoreDataManager sharedInstance] managedObjectContext]];
     };
-    
-    [Connect urlRequest:request withBlock:test];
-    return res;
+    [self generateNewNumber: genBlock];
+}
+- (void)stopGenerator
+{
+    [self.timer invalidate];
 }
 
-
+- (void)generateNewNumber: (GenBlock) genBLock
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if([defaults boolForKey:@"kRandom"]){
+        NSNumber* numb = [self randomNumberFrom:[NSNumber numberWithInt:5] To:[NSNumber numberWithInt:10]];
+        if (genBLock) {
+            genBLock(numb);
+        }
+    } else {
+           DBLog(@"<<<<<<<<<<<<<no!");
+        NSString* stringUrl = @"http://www.random.org/integers/?num=1&min=1&max=5&col=1&base=10&format=plain&rnd=new";
+        NSURL* url = [NSURL URLWithString:stringUrl];
+        NSURLRequest* request = [NSURLRequest requestWithURL:url];
+        
+        void(^test)(Connect *, NSError *) = ^(Connect *con, NSError *err){
+            if(!err){
+                NSString* str = [[[NSString alloc] initWithData:con.data
+                                                       encoding:NSUTF8StringEncoding] autorelease];
+                str = [str stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+                NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
+                [f setNumberStyle:NSNumberFormatterDecimalStyle];
+                NSNumber * res = [f numberFromString:str];
+                [f release];
+                if (genBLock) {
+                    genBLock(res);
+                }
+            }
+        };
+        [Connect urlRequest:request withBlock:test];      
+    }
+}
 @end

@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Generator.h"
 
 @interface RandomTableViewController : UITableViewController< NSFetchedResultsControllerDelegate, NSURLConnectionDataDelegate>
 
 @property (retain, nonatomic) UITableView* tableRandomData;
 @property (retain, nonatomic) NSFetchedResultsController* fetchResult;
-//@property (retain, nonatomic) NSMutableArray* listGeneratedData;
 @property (assign, nonatomic) BOOL useLocal;
+@property (retain, nonatomic) Generator* generator;
 @end

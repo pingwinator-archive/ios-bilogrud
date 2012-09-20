@@ -13,7 +13,6 @@
 #import "CoreDataManager.h"
 #import "SettingViewController.h"
 @interface RandomTableViewController ()
-@property (retain, nonatomic) Generator* generator;
 - (void)genarate;
 - (void)showSettings;
 @end
@@ -48,7 +47,7 @@
     NSError *err;
     BOOL success = [fetchResult performFetch:&err];
     if (!success) {
-        NSLog(@"fail performFetch");
+        DBLog(@"fail performFetch");
     }
     
     [fetchRequest release];
@@ -71,9 +70,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:app];
     
     [self initFetchResult];
+    [self.tableView reloadData];
+    [self genarate];
  
-    [self performSelector:@selector(genarate) withObject:nil afterDelay:2];
-  
     UIBarButtonItem *right  = [[UIBarButtonItem alloc] initWithTitle: NSLocalizedString(@"Setting", @"") style:UIBarButtonItemStylePlain target:self action:@selector(showSettings)];
     
     self.navigationItem.rightBarButtonItem = right;
@@ -110,15 +109,13 @@
 - (void)genarate
 {
     self.generator = [[Generator alloc] init];
-    [self.generator doGenerate];
+    [self.generator startGenerator];
     [self.generator release];
 }
 
 - (void) showSettings
 {
-    NSLog(@"setting button");
     SettingViewController* settingViewController = [[[SettingViewController alloc]initWithNibName:@"SettingViewController" bundle:nil] autorelease];
-    
     
     [self.navigationController pushViewController:settingViewController animated:YES];
 }
@@ -157,7 +154,7 @@
             break;
         default:
         {
-            NSLog(@"unknown NSFetchedResultsChangeType");
+            DBLog(@"unknown NSFetchedResultsChangeType");
         }
             break;
     }
@@ -223,13 +220,12 @@
             
             NSError* fetchingError;
             if ([self.fetchResult performFetch:&fetchingError]){
-                NSLog(@"Successfully fetched.");
                 NSArray *rowsToDelete = [[NSArray alloc] initWithObjects:indexPath, nil] ;
                 [self.tableView deleteRowsAtIndexPaths:rowsToDelete withRowAnimation:UITableViewRowAnimationAutomatic];
                 [rowsToDelete release];
             } else {
-                NSLog(@"Failed to fetch with error = %@", fetchingError); 
-        }
+                DBLog(@"Failed to fetch with error = %@", fetchingError); 
+            }
         }
         
         self.fetchResult.delegate = self;

@@ -25,7 +25,7 @@
     
     if(err)
     {
-        NSLog(@"check error: %@", err.description);
+        DBLog(@"check error: %@", err.description);
     } 
         
     return data;

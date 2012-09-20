@@ -9,9 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface Generator : NSObject
-
-@property (retain, nonatomic) NSTimer* timer;
-@property (assign, nonatomic) BOOL isLocalRandom;
-- (void)doGenerate;
-
+- (void)startGenerator;
+- (void)stopGenerator;
 @end

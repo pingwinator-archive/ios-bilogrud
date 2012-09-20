@@ -15,12 +15,11 @@
 @implementation SettingViewController
 @synthesize cleanCD;
 @synthesize switchTypeGenerator;
-@synthesize textSwitchLabel;
+
 - (void)dealloc
 {
     self.cleanCD = nil;
     self.switchTypeGenerator = nil;
-    self.textSwitchLabel = nil;
     [super dealloc];
 }
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -36,9 +35,6 @@
 {
     [super viewDidLoad];
     [self refreshFields];
-    //UI
-    self.textSwitchLabel.text = NSLocalizedString(@"Generate Number Local", @"");
-    self.cleanCD.titleLabel.text = NSLocalizedString(@"Clean CoreData", @"");
     
     UIApplication *app = [UIApplication sharedApplication];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:app];
@@ -77,21 +73,17 @@
 }
 
 
-- (void)applicationWillEnterForeground:(NSNotification *)notification {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults synchronize];
+- (void)applicationWillEnterForeground:(NSNotification *)notification { NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults]; [defaults synchronize];
     [self refreshFields];
 }
 
 - (void)refreshFields {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     self.switchTypeGenerator.on = [defaults boolForKey:@"kRandom"];
-    
 }
 - (IBAction)engineSwitchTapped {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSLog(@"--------%@",self.switchTypeGenerator.on?@"yes":@"no");
     [defaults setBool:self.switchTypeGenerator.on forKey:@"kRandom"];
-     [defaults synchronize];
 }
 @end
