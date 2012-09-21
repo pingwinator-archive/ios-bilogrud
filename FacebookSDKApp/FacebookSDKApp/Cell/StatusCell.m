@@ -58,6 +58,8 @@
 
 - (void)setName:(NSString *)n
 {
+    [name release];
+    name = [n retain];
     if (![n isEqualToString:name]) {
         nameLabel.text = n;
     }

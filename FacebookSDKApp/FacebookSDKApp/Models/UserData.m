@@ -17,4 +17,15 @@
 @synthesize feedID;
 @synthesize likes;
 @synthesize comments;
+- (void) dealloc {
+    self.userName = nil;
+    self.userFromID = nil;
+    self.userFromName = nil;
+    self.message = nil;
+    self.time = nil;
+    self.feedID = nil;
+    self.likes = nil;
+    self.comments = nil;
+    [super dealloc];
+}
 @end
