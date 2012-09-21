@@ -10,5 +10,5 @@
 
 @property (nonatomic, retain) NSDate * time;
 @property (nonatomic, retain) NSNumber * number;
-+ (id)generatedDataWithNumber: (NSNumber *)numb inContext:(NSManagedObjectContext*)context;
+
 @end

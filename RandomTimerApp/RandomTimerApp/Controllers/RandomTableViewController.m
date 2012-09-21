@@ -21,7 +21,6 @@
 @synthesize fetchResult;
 @synthesize tableRandomData;
 @synthesize generator;
-@synthesize useLocal;
 
 - (void)dealloc
 {
@@ -49,7 +48,6 @@
     if (!success) {
         DBLog(@"fail performFetch");
     }
-    
     [fetchRequest release];
 }
 
@@ -83,22 +81,10 @@
 
 - (void)viewDidUnload
 {
-     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-- (void)applicationWillEnterForeground:(NSNotification *)notification
-{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults synchronize];
-    [self refreshFields];
-}
-
-- (void)refreshFields
-{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    self.useLocal = (BOOL)[defaults objectForKey:@"kRandom"];
+    [super viewDidUnload];
+    self.fetchResult = nil;
+    self.tableRandomData = nil;
+    self.generator = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -109,8 +95,8 @@
 - (void)genarate
 {
     self.generator = [[Generator alloc] init];
-    [self.generator startGenerator];
     [self.generator release];
+    [self.generator startGenerator];
 }
 
 - (void) showSettings
@@ -120,7 +106,7 @@
     [self.navigationController pushViewController:settingViewController animated:YES];
 }
 
-#pragma mark fetch
+#pragma mark - NSFetchedResultsControllerDelegate Methods
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
@@ -189,21 +175,23 @@
     }
     
     GeneratedData *data = [self.fetchResult objectAtIndexPath:indexPath];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", data.number];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", data.time];
+    cell.textLabel.text = data.number.stringValue;
     
+       
+    cell.detailTextLabel.text = [self stringWithDate:data.time];
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
+#pragma mark - NSDateFormatter methods
 
+- (NSString*) stringWithDate: (NSDate*) date
+{
+    
+    NSDateFormatter *_formatter = [[[NSDateFormatter alloc ] init] autorelease];
+    [_formatter setDateFormat: @"dd-MM-yyyy HH:mm:ss"];
+    NSString *resStrDate = [_formatter stringFromDate:date];
+    return resStrDate;
+}
 
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -211,49 +199,16 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         GeneratedData* deletingRow = [self.fetchResult objectAtIndexPath:indexPath];
         
-        self.fetchResult.delegate = nil;
-        
         [[[CoreDataManager sharedInstance] managedObjectContext ] deleteObject:deletingRow];
         if([deletingRow isDeleted])
         {
             [[[CoreDataManager sharedInstance] managedObjectContext ] save:nil];
-            
-            NSError* fetchingError;
-            if ([self.fetchResult performFetch:&fetchingError]){
-                NSArray *rowsToDelete = [[NSArray alloc] initWithObjects:indexPath, nil] ;
-                [self.tableView deleteRowsAtIndexPaths:rowsToDelete withRowAnimation:UITableViewRowAnimationAutomatic];
-                [rowsToDelete release];
-            } else {
-                DBLog(@"Failed to fetch with error = %@", fetchingError); 
-            }
         }
-        
-        self.fetchResult.delegate = self;
-        
-        // Delete the row from the data source
-        //[tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
     else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
-
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 

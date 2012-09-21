@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6E12AA2D160A4EA6009E6085 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6E12AA2C160A4EA6009E6085 /* Settings.bundle */; };
+		6E5E7F24160C958C00AB6C3F /* GeneratedData+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E5E7F23160C958C00AB6C3F /* GeneratedData+Helper.m */; };
 		6E86832C16076D43007A7F58 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E86832B16076D43007A7F58 /* UIKit.framework */; };
 		6E86832E16076D43007A7F58 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E86832D16076D43007A7F58 /* Foundation.framework */; };
 		6E86833016076D43007A7F58 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E86832F16076D43007A7F58 /* CoreGraphics.framework */; };
@@ -39,6 +40,8 @@
 
 /* Begin PBXFileReference section */
 		6E12AA2C160A4EA6009E6085 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		6E5E7F22160C958C00AB6C3F /* GeneratedData+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GeneratedData+Helper.h"; sourceTree = "<group>"; };
+		6E5E7F23160C958C00AB6C3F /* GeneratedData+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GeneratedData+Helper.m"; sourceTree = "<group>"; };
 		6E86832716076D43007A7F58 /* RandomTimerApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RandomTimerApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E86832B16076D43007A7F58 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6E86832D16076D43007A7F58 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -108,6 +111,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6E5E7F20160C956700AB6C3F /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				6E5E7F22160C958C00AB6C3F /* GeneratedData+Helper.h */,
+				6E5E7F23160C958C00AB6C3F /* GeneratedData+Helper.m */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		6E86831C16076D43007A7F58 = {
 			isa = PBXGroup;
 			children = (
@@ -139,9 +151,10 @@
 		6E86833316076D43007A7F58 /* RandomTimerApp */ = {
 			isa = PBXGroup;
 			children = (
+				6E86834C16076F12007A7F58 /* Models */,
+				6E5E7F20160C956700AB6C3F /* Helpers */,
 				6EAFE894160B6D6000DFB58A /* Resources */,
 				6ED9825A160A32F20070ADEF /* External */,
-				6E86834C16076F12007A7F58 /* Models */,
 				6E86834816076D93007A7F58 /* Controllers */,
 				6E86833C16076D44007A7F58 /* AppDelegate.h */,
 				6E86833D16076D44007A7F58 /* AppDelegate.m */,
@@ -340,6 +353,7 @@
 				6ED98280160A32F20070ADEF /* SBJsonWriter.m in Sources */,
 				6ED98284160A331F0070ADEF /* Connect.m in Sources */,
 				6EAFE89C160B71A900DFB58A /* SettingViewController.m in Sources */,
+				6E5E7F24160C958C00AB6C3F /* GeneratedData+Helper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,5 +9,5 @@
 #import "GeneratedData.h"
 
 @interface GeneratedData (Helper)
-
++(id) generatedDataWithNumber: (NSNumber *)numb inContext:(NSManagedObjectContext*)context;
 @end
