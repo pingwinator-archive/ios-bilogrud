@@ -7,6 +7,7 @@
 //
 
 #import "SettingViewController.h"
+#import "RandomTableViewController.h"
 
 @interface SettingViewController ()
 
@@ -21,15 +22,8 @@
     self.cleanCD = nil;
     self.switchTypeGenerator = nil;
     self.textSwitchLabel = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillEnterForegroundNotification object: [UIApplication sharedApplication]];
     [super dealloc];
-}
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
 }
 
 - (void)viewDidLoad
@@ -43,14 +37,12 @@
     UIApplication *app = [UIApplication sharedApplication];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:app];
     
-    // Do any additional setup after loading the view from its nib.
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+   
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -60,6 +52,12 @@
 
 - (void)cleanCoreData
 {
+    RandomTableViewController* mainCV = [[self.navigationController viewControllers] objectAtIndex:0] ;
+    if(mainCV) {
+        [mainCV.generator stopGenerator];
+    }
+        
+   
     NSFetchRequest* allGener = [[NSFetchRequest alloc] init];
     [allGener setEntity:[NSEntityDescription entityForName:@"GeneratedData" inManagedObjectContext:[[CoreDataManager sharedInstance] managedObjectContext ]]];
     [allGener setIncludesPropertyValues:NO]; //only fetch the managedObjectID
@@ -74,6 +72,9 @@
     }
     NSError *saveError = nil;
     [[[CoreDataManager sharedInstance] managedObjectContext ] save:&saveError];
+    if(mainCV) {
+        [mainCV.generator startGenerator];
+    }
 }
 
 

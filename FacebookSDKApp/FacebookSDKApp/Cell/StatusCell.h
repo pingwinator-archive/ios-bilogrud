@@ -10,7 +10,7 @@
 #import "SelfloadImage.h"
 
 #define kCellOffset 50
-#define kFontMesage 14
+#define kFontMesage 14.f
 
 @interface StatusCell : UITableViewCell
 @property (retain, nonatomic) NSString *name;

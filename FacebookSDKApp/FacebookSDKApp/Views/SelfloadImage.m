@@ -20,6 +20,12 @@
 @synthesize connect;
 @synthesize cache;
 
+- (void)dealloc {
+    self.activity = nil;
+    self.connect = nil;
+    self.cache = nil;
+    [super dealloc];
+}
 - (SelfloadImage *)init
 {
     self = [super init];

@@ -8,7 +8,7 @@
 
 #import "Generator.h"
 #import "AppDelegate.h"
-#import "GeneratedData.h"
+#import "GeneratedData+Helper.h"
 #import "stdlib.h"
 #import "CoreDataManager.h"
 #import "Connect.h"
