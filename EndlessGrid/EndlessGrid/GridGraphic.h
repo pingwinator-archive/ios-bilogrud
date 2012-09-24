@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface GridGraphic : UIView
-
+@property (retain, nonatomic) NSNumber* cellHeight;
+@property (retain, nonatomic) NSNumber* cellWidth;
 @end

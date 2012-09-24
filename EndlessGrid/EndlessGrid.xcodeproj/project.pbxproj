@@ -18,6 +18,7 @@
 		6EE7420716109B4E00699999 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EE7420616109B4E00699999 /* Default-568h@2x.png */; };
 		6EE7420A16109B4E00699999 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EE7420916109B4E00699999 /* ViewController.m */; };
 		6EE7420D16109B4E00699999 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EE7420B16109B4E00699999 /* ViewController.xib */; };
+		6EE7421916109C6600699999 /* GridGraphic.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EE7421816109C6600699999 /* GridGraphic.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,8 @@
 		6EE7420816109B4E00699999 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		6EE7420916109B4E00699999 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		6EE7420C16109B4E00699999 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+		6EE7421716109C6600699999 /* GridGraphic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridGraphic.h; sourceTree = "<group>"; };
+		6EE7421816109C6600699999 /* GridGraphic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridGraphic.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +92,8 @@
 				6EE7420916109B4E00699999 /* ViewController.m */,
 				6EE7420B16109B4E00699999 /* ViewController.xib */,
 				6EE741F716109B4D00699999 /* Supporting Files */,
+				6EE7421716109C6600699999 /* GridGraphic.h */,
+				6EE7421816109C6600699999 /* GridGraphic.m */,
 			);
 			path = EndlessGrid;
 			sourceTree = "<group>";
@@ -176,6 +181,7 @@
 				6EE741FD16109B4D00699999 /* main.m in Sources */,
 				6EE7420116109B4D00699999 /* AppDelegate.m in Sources */,
 				6EE7420A16109B4E00699999 /* ViewController.m in Sources */,
+				6EE7421916109C6600699999 /* GridGraphic.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
