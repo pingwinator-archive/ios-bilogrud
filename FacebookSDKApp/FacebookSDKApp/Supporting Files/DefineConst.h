@@ -47,7 +47,10 @@ return _sharedObject;
 #define kLikes @"likes"
 #define kCount @"count"
 #define kComments @"comments"
-
+#define kFields @"fields"
+#define kAccessToken @"access_token"
 
 #define dateFormatISO8601 @"yyyy-MM-dd'T'HH:mm:ssZ"
 #define dateFormatStatus @"dd-MM-yyyy HH:mm"
+
+#define permissionStr  @"user_likes", @"read_stream", @"publish_stream"

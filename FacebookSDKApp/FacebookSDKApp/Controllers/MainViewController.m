@@ -104,8 +104,8 @@
 {
     NSDictionary* parseObj = [connect objectFromResponce];
     
-    if ([parseObj valueForKey:@"name"]) {
-        self.nameLabel.text = [parseObj valueForKey:@"name"];
+    if ([parseObj valueForKey:kName]) {
+        self.nameLabel.text = [parseObj valueForKey:kName];
     }
 }
 

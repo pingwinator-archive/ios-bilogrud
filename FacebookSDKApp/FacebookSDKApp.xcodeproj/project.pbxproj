@@ -67,6 +67,8 @@
 		6E5DF9461602EF1000962F86 /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E5DF9441602EF1000962F86 /* camera.png */; };
 		6E5DF9551604A9EB00962F86 /* like.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E5DF9541604A9EB00962F86 /* like.png */; };
 		6E7A11B9160073790065ABF1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E7A11B8160073790065ABF1 /* QuartzCore.framework */; };
+		6E8E6FCB16105D9A00545953 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E8E6FCA16105D9A00545953 /* Default-568h@2x.png */; };
+		6E8E6FCE1610620900545953 /* NSDate+DateFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8E6FCD1610620900545953 /* NSDate+DateFormat.m */; };
 		6EB7F3D71607B2D3007556A5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6EB7F3D51607B2D3007556A5 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
@@ -164,6 +166,9 @@
 		6E5DF9441602EF1000962F86 /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
 		6E5DF9541604A9EB00962F86 /* like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = like.png; sourceTree = "<group>"; };
 		6E7A11B8160073790065ABF1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		6E8E6FCA16105D9A00545953 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Supporting Files/Default-568h@2x.png"; sourceTree = "<group>"; };
+		6E8E6FCC1610620900545953 /* NSDate+DateFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+DateFormat.h"; sourceTree = "<group>"; };
+		6E8E6FCD1610620900545953 /* NSDate+DateFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+DateFormat.m"; sourceTree = "<group>"; };
 		6EB7F3D61607B2D3007556A5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6EB7F3D81607B2E1007556A5 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -196,6 +201,8 @@
 				6E24199515FFB6DE004F3E8A /* UIImage+RoundedCorner.m */,
 				6E24198115FFAED9004F3E8A /* NSDictionary+HTTPParametrs.h */,
 				6E24198215FFAED9004F3E8A /* NSDictionary+HTTPParametrs.m */,
+				6E8E6FCC1610620900545953 /* NSDate+DateFormat.h */,
+				6E8E6FCD1610620900545953 /* NSDate+DateFormat.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -251,6 +258,7 @@
 		6E2A9F5A15FE0A7F001D88BB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6E8E6FCA16105D9A00545953 /* Default-568h@2x.png */,
 				6E5DF9331601E15B00962F86 /* Default@2x.png */,
 				6E5DF8C81601DC2F00962F86 /* Default.png */,
 				6E5DF9311601E02A00962F86 /* FacebookSDKApp-Info.plist */,
@@ -485,6 +493,7 @@
 				6E4051701603770F003E6AFB /* gray@2x.png in Resources */,
 				6E5DF9551604A9EB00962F86 /* like.png in Resources */,
 				6EB7F3D71607B2D3007556A5 /* Localizable.strings in Resources */,
+				6E8E6FCB16105D9A00545953 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,6 +533,7 @@
 				6E5DF9231601DF5300962F86 /* SettingManager.m in Sources */,
 				6E5DF9241601DF5300962F86 /* SharedCache.m in Sources */,
 				6E5DF9271601DF6900962F86 /* SelfloadImage.m in Sources */,
+				6E8E6FCE1610620900545953 /* NSDate+DateFormat.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

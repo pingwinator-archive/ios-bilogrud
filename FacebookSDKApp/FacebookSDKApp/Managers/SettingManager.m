@@ -78,7 +78,7 @@
 - (NSMutableDictionary*)baseDict
 {
     NSMutableDictionary *dictparametrs = [NSMutableDictionary dictionary];
-    [dictparametrs setValue:self.accessToken forKey:@"access_token"];
+    [dictparametrs setValue:self.accessToken forKey: kAccessToken ];
     return dictparametrs;
 }
 

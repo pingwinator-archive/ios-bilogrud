@@ -71,7 +71,7 @@
     }
     
     if (error) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:error.localizedDescription  delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") message:error.localizedDescription  delegate:nil cancelButtonTitle:NSLocalizedString(@"Ok", @"") otherButtonTitles:nil];
         [alertView show];
         [alertView release];
     }
@@ -79,9 +79,7 @@
 
 - (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI {
     NSArray *permissions = [[[NSArray alloc] initWithObjects:
-                            @"user_likes",
-                            @"read_stream",
-                            @"publish_stream",
+                            permissionStr,
                             nil] autorelease];
     return [FBSession openActiveSessionWithPermissions:permissions  allowLoginUI:allowLoginUI completionHandler:^(FBSession *session, FBSessionState state,  NSError *error)
             {

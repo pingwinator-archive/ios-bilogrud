@@ -10,4 +10,9 @@
 
 @implementation NSDate (DateFormat)
 
+- (NSString*)data:(NSDate*)date{
+    //[NSDate dateWithTimeIntervalSince1970: ];
+    
+    return @"";
+}
 @end

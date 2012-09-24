@@ -41,7 +41,7 @@
     [refreshControl addTarget:self action:@selector(dropViewDidBeginRefreshing:) forControlEvents:UIControlEventValueChanged];
     
     self.updatePreviousPage = NO;
-    [self addConnectStatus];
+    [self statusLoading];
     
 }
 - (void)viewDidUnload
@@ -79,7 +79,7 @@
     void(^nextPageBlock)(Connect*, NSError *) = ^(Connect *con, NSError *err){
         if(!err){
             //add to arr
-            [self userStatusLoading:con];
+            [self userStatusParsing:con];
         }
     };
     [Connect urlRequest:req withBlock:nextPageBlock];
@@ -94,7 +94,7 @@
     void(^prevPageBlock)(Connect*, NSError *) = ^(Connect *con, NSError *err){
         if(!err){
             //add to arr
-            [self userStatusLoading:con];
+            [self userStatusParsing:con];
         }
     };
     
@@ -104,10 +104,10 @@
 
 #pragma mark - status loading
 
-- (void)addConnectStatus
+- (void)statusLoading
 {
     NSMutableDictionary *dictparametrs = [[SettingManager sharedInstance] baseDict];
-    [dictparametrs setValue:@"message,from,likes,comments" forKey:@"fields"];
+    [dictparametrs setValue:@"message,from,likes,comments" forKey: kFields];
     NSString *path = [dictparametrs paramFromDict];
     
     NSString *urlStr = [[[NSString alloc] initWithFormat: @"%@/me/feed?%@", basePathUrl, path] autorelease];
@@ -117,7 +117,7 @@
     
     void(^statusBlock)(Connect*, NSError *) = ^(Connect *con, NSError *err){
         if(!err){
-            [self userStatusLoading:con];
+            [self userStatusParsing:con];
         }
     };
     [Connect urlRequest: statusRequest withBlock:statusBlock];
@@ -125,7 +125,7 @@
 
 #pragma mark - status info parsing
 
-- (void)userStatusLoading:(Connect*)connect
+- (void)userStatusParsing:(Connect*)connect
 {
     NSDictionary* parseObj = [connect objectFromResponce];
     NSArray *dataArr = [parseObj valueForKey:kData];
@@ -152,6 +152,7 @@
     }
     if([self.allPosts count]){
         [self.tableView reloadData];
+    //    [self.tableView reloadRowsAtIndexPaths:<#(NSArray *)#> withRowAnimation:<#(UITableViewRowAnimation)#>]
     }
 }
 
@@ -273,8 +274,6 @@
         cell.message = status.message;
         cell.messageLabel.font = [UIFont systemFontOfSize:(CGFloat)kFontMesage];
         
-        cell.likeLabel.text = @"test";
-     
         if([status.likes valueForKey: kCount]){
             NSNumber* i = [status.likes valueForKey: kCount];
             cell.likeLabel.text = [i stringValue];
