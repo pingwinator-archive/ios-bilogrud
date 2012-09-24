@@ -20,7 +20,7 @@
 
 @implementation StatusViewController
 @synthesize statusInput;
-@synthesize camera;
+@synthesize hasCamera;
 @synthesize photoButton;
 @synthesize postingImage;
 @synthesize prePostingImage;
@@ -41,14 +41,14 @@
 {
     [super viewDidLoad];
     
-    UIBarButtonItem *sendButton = [[[UIBarButtonItem alloc] initWithTitle: NSLocalizedString(@"send", @"")  style:UIBarButtonItemStyleBordered target:self action:@selector(sendMessageWithPhoto)] autorelease];
+    UIBarButtonItem *sendButton = [[[UIBarButtonItem alloc] initWithTitle: NSLocalizedString(@"Send", @"")  style:UIBarButtonItemStyleBordered target:self action:@selector(sendMessageWithPhoto)] autorelease];
     self.navigationItem.rightBarButtonItem = sendButton;
     
-    self.camera = [UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerSourceTypeCamera];
+    self.hasCamera = [UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerSourceTypeCamera];
     
-    self.postingImage = [self.postingImage roundedCornerImage:10 borderSize:1];
+    self.postingImage = [self.postingImage roundedCornerImage:kRoundedCornerImageSize borderSize:kBorderSize];
     
-    self.baseView.image =  [self.baseView.image roundedCornerImage:10 borderSize:1];
+    self.baseView.image =  [self.baseView.image roundedCornerImage:kRoundedCornerImageSize borderSize:kBorderSize];
        
     self.statusInput.editable = YES;
    
@@ -74,18 +74,32 @@
     return YES;
 }
 
-
 #pragma mark - Long Press Guester 
 
 - (void)doLongPress: (UILongPressGestureRecognizer *) recognizer{
     [self.view bringSubviewToFront:[recognizer view]];
     self.prePostingImage.image = nil;
-    CGRect rect = CGRectMake(32, 15, 254, 148);
+    CGRect rect = onlyMessageRectMake;//CGRectMake(32, 15, 254, 148);
     self.statusInput.frame = rect;
     [self reloadInputViews];
 }
 
-#pragma mark - Post photo and status
+#pragma mark - Post photo and/or status
+
+- (NSMutableURLRequest*)requestWithURL:(NSURL *)url withText:(NSString *)message{
+    NSMutableDictionary *dictparametrs = [[SettingManager sharedInstance] baseDict];
+    [dictparametrs setValue:message forKey:kMessage];
+    
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url];
+    
+    [request setHTTPMethod:@"POST"];
+    
+    NSString *postParam = [dictparametrs paramFromDict];
+    
+    NSData *postData = [postParam dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    [request setHTTPBody:postData];
+    return request;
+}
 
 - (NSMutableURLRequest*)requestWithURL:(NSURL*)url withImage:(UIImage*)sendImage andText:(NSString*)message
 {
@@ -101,7 +115,7 @@
     [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
 	
     NSMutableDictionary* dict =  [[SettingManager sharedInstance] baseDict];
-    [dict setValue:message forKey:@"message"];
+    [dict setValue:message forKey:kMessage];
     
     for (NSString* key in [dict allKeys]) {
         [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", key] dataUsingEncoding:NSUTF8StringEncoding]];
@@ -127,50 +141,32 @@
     return request;
 }
 
-- (void)sendPhotoByURL
-{
-    NSMutableDictionary *dictparametrs = [[SettingManager sharedInstance] baseDict];
-    [dictparametrs setValue:@"http://a5.sphotos.ak.fbcdn.net/hphotos-ak-snc7/s720x720/430702_274084829330398_269741610_n.jpg" forKey:@"url"];
-    
-    NSString* urlStr = [NSString stringWithFormat:@"%@/me/photos/", basePathUrl];
-    NSURL* url = [NSURL URLWithString:urlStr];
-    
-    NSMutableURLRequest* request = [[[NSMutableURLRequest alloc] initWithURL:url] autorelease];
-    [request setHTTPMethod:@"POST"];
-    
-    NSString* postParam = [dictparametrs paramFromDict];
-    
-    NSData* postData = [postParam dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-    [request setHTTPBody:postData];
-    
-    void(^postBlock)(Connect *, NSError *) = ^(Connect* con, NSError* err){
-        if(!err){
-            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString (@"image was post", @"") message:urlStr delegate:nil cancelButtonTitle:NSLocalizedString(@"great!", @"") otherButtonTitles: nil];
-            [alert show];
-            [alert release];
-        }
-    };
-    
-    [Connect urlRequest:request withBlock:postBlock];
-}
-
 - (void)sendMessageWithPhoto
 {
     self.activityView.hidden = NO;
-    NSString* urlStr = [NSString stringWithFormat:@"%@/me/photos", basePathUrl];
-    NSURL* url = [NSURL URLWithString:urlStr];
-     
-    NSMutableURLRequest* request = [self requestWithURL:url withImage:self.postingImage andText:self.statusInput.text];
+    NSString* urlStr = nil;
+    NSURL* url = nil;
+    
+    NSMutableURLRequest* request;
+    if(self.prePostingImage.image && self.statusInput.text){
+        urlStr = [NSString stringWithFormat:@"%@/me/photos", basePathUrl];
+        url = [NSURL URLWithString:urlStr];
+        request = [self requestWithURL:url withImage:self.postingImage andText:self.statusInput.text];
+    } else if (self.statusInput.text && !self.prePostingImage.image) {
+        urlStr = [NSString stringWithFormat:@"%@/me/feed", basePathUrl];
+        url = [NSURL URLWithString:urlStr];
+        request = [self requestWithURL:url withText:self.statusInput.text];
+    }
     
     [request setHTTPMethod:@"POST"];
     
     void(^postBlock)(Connect *, NSError *) = ^(Connect *con, NSError *err){
         if(!err){
-            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"image was post", @"") message:urlStr delegate:nil cancelButtonTitle:NSLocalizedString(@"great!", @"") otherButtonTitles: nil];
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Succesfull post", @"") message:urlStr delegate:nil cancelButtonTitle:NSLocalizedString(@"Ok", @"") otherButtonTitles: nil];
             [alert show];
             [alert release];
         } else {
-            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"image didn't post", @"") message:@"error" delegate:nil cancelButtonTitle:NSLocalizedString(@"Ok", @"") otherButtonTitles:nil, nil ];
+            UIAlertView* alert = [[UIAlertView alloc]initWithTitle:NSLocalizedString(@"Failed post", @"") message:NSLocalizedString(@"Error", @"") delegate:nil cancelButtonTitle:NSLocalizedString(@"Ok", @"") otherButtonTitles:nil, nil ];
             [alert show];
             [alert release];
         }
@@ -181,7 +177,7 @@
 
 - (IBAction)pressPhoto
 {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Choose existing", @""), (self.camera)?NSLocalizedString(@"Take photo", @""):nil,  nil];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"") destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Choose existing", @""), (self.hasCamera)?NSLocalizedString(@"Take photo", @""):nil,  nil];
     [actionSheet showInView:self.view];
     [actionSheet release];
 }
@@ -201,7 +197,7 @@
       //
        self.postingImage = choosenImage;
        self.prePostingImage.image = [choosenImage roundedCornerImage:10 borderSize:1];
-       CGRect rect = CGRectMake(32, 120, 254, 46);
+       CGRect rect = messageWithPphotoRectMake;//CGRectMake(32, 120, 254, 46);
        self.statusInput.frame = rect;
        [self.statusInput becomeFirstResponder];
               
@@ -228,7 +224,7 @@
     }
     else
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"error", @"") message:NSLocalizedString(@"Device doesn’t support that media source", @"") delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil ];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") message:NSLocalizedString(@"Device doesn’t support that media source", @"") delegate:nil cancelButtonTitle:NSLocalizedString(@"Ok", @"") otherButtonTitles:nil, nil ];
         [alert show];
         [alert release];
     }

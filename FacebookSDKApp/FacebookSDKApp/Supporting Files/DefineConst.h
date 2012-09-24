@@ -27,3 +27,27 @@ dispatch_once(&pred, ^{ \
 _sharedObject = block(); \
 }); \
 return _sharedObject; 
+
+
+#define kRoundedCornerImageSize 10
+#define kBorderSize 1
+#define onlyMessageRectMake CGRectMake(32, 15, 254, 148)
+#define messageWithPphotoRectMake CGRectMake(32, 120, 254, 46);
+
+#define kMessage @"message"
+#define kData @"data"
+#define kPaging @"paging"
+#define kNext @"next"
+#define kPrevious @"previous"
+#define kFrom @"from"
+#define kTo @"to"
+#define kId @"id"
+#define kName @"name"
+#define kTime @"created_time"
+#define kLikes @"likes"
+#define kCount @"count"
+#define kComments @"comments"
+
+
+#define dateFormatISO8601 @"yyyy-MM-dd'T'HH:mm:ssZ"
+#define dateFormatStatus @"dd-MM-yyyy HH:mm"

@@ -37,12 +37,8 @@ GCD_MAIN_BEGIN
 GCD_END
     }
 }
--(void)stopConnect{
+- (void)stopConnect{
     self.block = nil;
-}
-- (NSString*)description
-{
-    return [NSString stringWithFormat:@"connect to URL %@", self.urlRequest.URL.relativeString];
 }
 
 -(Connect *)initRequest: (NSURLRequest *)request withBlock: (ConnectBlock) _block
@@ -66,12 +62,12 @@ GCD_END
     return self;
 }
 
-+(Connect *)urlRequest: (NSURLRequest *)request withBlock: (ConnectBlock) _block{
++ (Connect *)urlRequest: (NSURLRequest *)request withBlock: (ConnectBlock) _block{
     return [[[Connect alloc] initRequest:request  withBlock:_block] autorelease];
 }
 
 
--(id)objectFromResponce{
+- (id)objectFromResponce{
   //  SBJsonParser* parser = [[SBJsonParser alloc] init];
 //    NSURLResponse *resp = nil;
 //    NSError *err = nil;

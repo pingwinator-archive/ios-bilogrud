@@ -102,7 +102,7 @@
 }
 
 
-#pragma mark - connect status
+#pragma mark - status loading
 
 - (void)addConnectStatus
 {
@@ -123,19 +123,19 @@
     [Connect urlRequest: statusRequest withBlock:statusBlock];
 }
 
-#pragma mark status loading
+#pragma mark - status info parsing
 
 - (void)userStatusLoading:(Connect*)connect
 {
     NSDictionary* parseObj = [connect objectFromResponce];
-    NSArray *dataArr = [parseObj valueForKey:@"data"];
-    NSDictionary *pageDict = [parseObj valueForKey:@"paging"];
-    if([pageDict valueForKey:@"next"]){
-        self.nextPage = [pageDict valueForKey:@"next"];
+    NSArray *dataArr = [parseObj valueForKey:kData];
+    NSDictionary *pageDict = [parseObj valueForKey:kPaging];
+    if([pageDict valueForKey: kNext]){
+        self.nextPage = [pageDict valueForKey: kNext];
     }
     // пустой
     if(![self.allPosts count]) {
-        self.previousPage = [pageDict valueForKey:@"previous"];
+        self.previousPage = [pageDict valueForKey:kPrevious];
         self.allPosts = [self onlyHasMessagePost:dataArr];
         NSLog(@" last %@",[[self.allPosts lastObject] message]);
     }
@@ -148,7 +148,7 @@
         self.updatePreviousPage = NO;
         
         [self userPrevPageStatusLoading:dataArr];
-        self.previousPage = [pageDict valueForKey:@"previous"];
+        self.previousPage = [pageDict valueForKey:kPrevious];
     }
     if([self.allPosts count]){
         [self.tableView reloadData];
@@ -188,32 +188,32 @@
     NSMutableArray *resultArr = [NSMutableArray array];
     
     for(int i = 0; i < [allPost count]; i++){
-        if([[allPost objectAtIndex:i]valueForKey:@"message"]){
+        if([[allPost objectAtIndex:i]valueForKey:kMessage]){
             [onlyMessage addObject:[allPost objectAtIndex:i]];
             NSDictionary *temp = [allPost objectAtIndex:i];
             UserData *data = [[UserData alloc] init];
-            if([temp valueForKey:@"message"]) {
-                data.message = [temp valueForKey:@"message"];
+            if([temp valueForKey:kMessage]) {
+                data.message = [temp valueForKey:kMessage];
             }
-            if([temp valueForKey: @"from"]) {
-                NSDictionary* from = [temp valueForKey:@"from"];
-                data.userFromID = [from valueForKey: @"id"];
-                data.userFromName = [from valueForKey: @"name"];
+            if([temp valueForKey: kFrom]) {
+                NSDictionary* from = [temp valueForKey: kFrom];
+                data.userFromID = [from valueForKey: kId];
+                data.userFromName = [from valueForKey: kName];
             }
-            if([temp valueForKey: @"created_time"]) {
+            if([temp valueForKey: kTime]) {
                 
-                data.time = [self dateFromString:[temp valueForKey: @"created_time"]];
+                data.time = [self dateFromString:[temp valueForKey: kTime]];
             }
-            if([temp valueForKey: @"id"]) {
-                data.feedID = [temp valueForKey: @"id"];
+            if([temp valueForKey: kId]) {
+                data.feedID = [temp valueForKey: kId];
             }
-            if([temp valueForKey: @"likes"]) {
-                data.likes = [temp valueForKey: @"likes"];
-                id i = [data.likes valueForKey:@"count"];
+            if([temp valueForKey: kLikes]) {
+                data.likes = [temp valueForKey: kLikes];
+                id i = [data.likes valueForKey: kCount];
                 NSLog(@"%@", i);
             }
-            if([temp valueForKey: @"comments"]) {
-                data.comments = [temp valueForKey: @"comments"];
+            if([temp valueForKey: kComments]) {
+                data.comments = [temp valueForKey: kComments];
             }
             [resultArr addObject:data];
             [data release];
@@ -225,7 +225,7 @@
 - (NSDate*) dateFromString: (NSString*) string
 {
     NSDateFormatter *formatter = [[[NSDateFormatter alloc ] init] autorelease];
-    [formatter setDateFormat: @"yyyy-MM-dd'T'HH:mm:ssZ"];
+    [formatter setDateFormat: dateFormatISO8601];
     NSDate *resultDate = [formatter dateFromString:string];
     return resultDate;
 }
@@ -235,7 +235,7 @@
 {
      
     NSDateFormatter *_formatter = [[[NSDateFormatter alloc ] init] autorelease];
-    [_formatter setDateFormat: @"dd-MM-yyyy HH:mm "];
+    [_formatter setDateFormat: dateFormatStatus];
     NSString *resStrDate = [_formatter stringFromDate:date];
     return resStrDate;
 }
@@ -275,8 +275,8 @@
         
         cell.likeLabel.text = @"test";
      
-        if([status.likes valueForKey:@"count"]){
-            NSNumber* i = [status.likes valueForKey:@"count"];
+        if([status.likes valueForKey: kCount]){
+            NSNumber* i = [status.likes valueForKey: kCount];
             cell.likeLabel.text = [i stringValue];
         } else {
             cell.likeLabel.text = @"0";
