@@ -11,6 +11,7 @@
 #import "UserData.h"
 #import "NSDictionary+HTTPParametrs.h"
 #import "ODRefreshControl.h"
+#import "NSDate+DateFormat.h"
 @interface FeedViewController ()
 
 @property(retain, nonatomic) NSArray *statusesArr;
@@ -269,7 +270,8 @@
         UserData *status = [self.allPosts objectAtIndex:row];
         
         cell.name = status.userFromName;
-        cell.time = [self stringWithDate:status.time];
+       
+        cell.time = [status.time dateStringWithFormat];//[self stringWithDate:status.time];
         
         cell.message = status.message;
         cell.messageLabel.font = [UIFont systemFontOfSize:(CGFloat)kFontMesage];
