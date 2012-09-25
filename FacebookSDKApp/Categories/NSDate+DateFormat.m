@@ -27,6 +27,9 @@
         int amountMonth = timeTestInteger / (monthInSeconds) ;
         if(amountMonth > 1) {
             result = [result stringByAppendingFormat:NSLocalizedString(@"more %[one, some, many, none]d monthes ago", @""), amountMonth ];
+            NSString* str =[NSString stringWithFormat:@"%@", PluralFormForStringAndValueRU(result, amountMonth)];
+            
+            NSLog(@"str %@ ",str);
         } else {
             result = [result stringByAppendingFormat:NSLocalizedString(@"more %d month ago", @""), amountMonth ];
         }
@@ -65,5 +68,26 @@
         result = [result stringByAppendingFormat:NSLocalizedString(@"several seconds ago", @"")];
     }
        return result;
+}
+
+NSString *PluralFormForRU(NSInteger n)
+{
+    // One  - 1, 21, 31, ...
+    // Some - 2-4, 22-24, 32-34 ...
+    // Many - 5-20, 25-30, ...
+    NSInteger n10 = n % 10;
+    if ((n10 == 1) && ((n == 1) || (n > 20))) {
+        return @"[one]";
+    } else if ((n10 > 1) && (n10 < 5) && ((n > 20) || (n < 10))) {
+        return @"[some]";
+    } else {
+        return @"[many]";
+    }
+}
+
+
+NSString *PluralFormForStringAndValueRU(NSString* str, NSUInteger n)
+{
+    return [str stringByReplacingOccurrencesOfString:@"[one, some, many, none]" withString:PluralFormForRU(n)];
 }
 @end

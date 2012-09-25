@@ -21,7 +21,6 @@
 		6E2A9F5615FE0A7F001D88BB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E2A9F5515FE0A7F001D88BB /* Foundation.framework */; };
 		6E2A9F5815FE0A7F001D88BB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E2A9F5715FE0A7F001D88BB /* CoreGraphics.framework */; };
 		6E2A9F6415FE0A7F001D88BB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2A9F6315FE0A7F001D88BB /* AppDelegate.m */; };
-		6E2A9F7B15FE126A001D88BB /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E2A9F7A15FE126A001D88BB /* FacebookSDK.framework */; };
 		6E2A9FCA15FF5542001D88BB /* photo.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E2A9FC615FF5542001D88BB /* photo.png */; };
 		6E2A9FCB15FF5542001D88BB /* photo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E2A9FC715FF5542001D88BB /* photo@2x.png */; };
 		6E2A9FD915FF5EA6001D88BB /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E2A9FD815FF5EA6001D88BB /* MobileCoreServices.framework */; };
@@ -69,6 +68,7 @@
 		6E7A11B9160073790065ABF1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E7A11B8160073790065ABF1 /* QuartzCore.framework */; };
 		6E8E6FCB16105D9A00545953 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E8E6FCA16105D9A00545953 /* Default-568h@2x.png */; };
 		6E8E6FCE1610620900545953 /* NSDate+DateFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8E6FCD1610620900545953 /* NSDate+DateFormat.m */; };
+		6E8E703F1610EFEA00545953 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E8E703E1610EFEA00545953 /* FacebookSDK.framework */; };
 		6EB7F3D71607B2D3007556A5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6EB7F3D51607B2D3007556A5 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
@@ -93,7 +93,6 @@
 		6E2A9F5715FE0A7F001D88BB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		6E2A9F6215FE0A7F001D88BB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6E2A9F6315FE0A7F001D88BB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		6E2A9F7A15FE126A001D88BB /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../FacebookSDK.framework; sourceTree = "<group>"; };
 		6E2A9FC615FF5542001D88BB /* photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photo.png; sourceTree = "<group>"; };
 		6E2A9FC715FF5542001D88BB /* photo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo@2x.png"; sourceTree = "<group>"; };
 		6E2A9FD815FF5EA6001D88BB /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -169,6 +168,7 @@
 		6E8E6FCA16105D9A00545953 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Supporting Files/Default-568h@2x.png"; sourceTree = "<group>"; };
 		6E8E6FCC1610620900545953 /* NSDate+DateFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+DateFormat.h"; sourceTree = "<group>"; };
 		6E8E6FCD1610620900545953 /* NSDate+DateFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+DateFormat.m"; sourceTree = "<group>"; };
+		6E8E703E1610EFEA00545953 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = Externals/FacebookSDK.framework; sourceTree = "<group>"; };
 		6EB7F3D61607B2D3007556A5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6EB7F3D81607B2E1007556A5 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -183,7 +183,7 @@
 				6E2A9F5415FE0A7F001D88BB /* UIKit.framework in Frameworks */,
 				6E2A9F5815FE0A7F001D88BB /* CoreGraphics.framework in Frameworks */,
 				6E2A9F5615FE0A7F001D88BB /* Foundation.framework in Frameworks */,
-				6E2A9F7B15FE126A001D88BB /* FacebookSDK.framework in Frameworks */,
+				6E8E703F1610EFEA00545953 /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,9 +408,9 @@
 		6E7A11C716008B4E0065ABF1 /* Externals */ = {
 			isa = PBXGroup;
 			children = (
+				6E8E703E1610EFEA00545953 /* FacebookSDK.framework */,
 				6E5DF8F11601DF4200962F86 /* SBJSON */,
 				6E5DF90B1601DF4200962F86 /* ODRefreshControl */,
-				6E2A9F7A15FE126A001D88BB /* FacebookSDK.framework */,
 			);
 			name = Externals;
 			sourceTree = "<group>";
@@ -615,11 +615,16 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/FacebookSDKApp/Externals\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FacebookSDKApp/FacebookSDKApp-Prefix.pch";
 				INFOPLIST_FILE = "FacebookSDKApp/FacebookSDKApp-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/FacebookSDKApp/Externals\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -631,11 +636,16 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/FacebookSDKApp/Externals\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FacebookSDKApp/FacebookSDKApp-Prefix.pch";
 				INFOPLIST_FILE = "FacebookSDKApp/FacebookSDKApp-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/FacebookSDKApp/Externals\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
