@@ -5,7 +5,7 @@
 //  Created by Natasha on 24.09.12.
 //  Copyright (c) 2012 Natasha. All rights reserved.
 //
-
+#import <math.h>
 #import "GridGraphic.h"
 #define kCellHeight 40.0
 #define kCellWidth 40.0
@@ -97,17 +97,28 @@
     CGContextSetLineWidth(context, 2.0);
     CGContextSetStrokeColorWithColor(context, [UIColor blackColor].CGColor);
     
-    for (int i = self.gridOffsetX; i < self.gridOffsetX  + self.frame.size.width;  i += kCellWidth) {
-        NSLog(@"%f", self.gridOffsetX);
+//    for (int i = self.gridOffsetX; i < self.gridOffsetX  + self.frame.size.width;  i += kCellWidth) {
+//        NSLog(@"%f", self.gridOffsetX);
+//        CGContextMoveToPoint(context, i, 0);
+//        CGContextAddLineToPoint(context, i, self.frame.size.height);
+//    }
+    float offsetForCellX = fmodf(self.gridOffsetX, [cellWidth floatValue]);// [self.gridOffsetX intValue] % [cellWidth intValue];
+    for(int i = rect.origin.x + offsetForCellX; i < rect.origin.x + rect.size.width; i += kCellWidth)
+    {
         CGContextMoveToPoint(context, i, 0);
         CGContextAddLineToPoint(context, i, self.frame.size.height);
     }
     
-    NSLog(@"rect : %f %f", self.rectDrawing.origin.x, self.rectDrawing.origin.y);
-    for(int j = self.gridOffsetY ; j < self.gridOffsetY + self.frame.size.height; j += kCellHeight ){
+    float offsetForCellY = fmodf(self.gridOffsetY, [cellHeight floatValue]);
+    for (int j = rect.origin.y + offsetForCellY; j < rect.origin.y + rect.size.height; j += kCellHeight ) {
         CGContextMoveToPoint(context, 0, j);
         CGContextAddLineToPoint(context, self.frame.size.width, j);
     }
+//    NSLog(@"rect : %f %f", self.rectDrawing.origin.x, self.rectDrawing.origin.y);
+//    for(int j = self.gridOffsetY ; j < self.gridOffsetY + self.frame.size.height; j += kCellHeight ){
+//        CGContextMoveToPoint(context, 0, j);
+//        CGContextAddLineToPoint(context, self.frame.size.width, j);
+//    }
     
     CGContextStrokePath(context);
 }
