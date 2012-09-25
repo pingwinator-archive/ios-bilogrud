@@ -11,4 +11,8 @@
 @interface GridGraphic : UIView
 @property (retain, nonatomic) NSNumber* cellHeight;
 @property (retain, nonatomic) NSNumber* cellWidth;
+@property (assign, nonatomic) CGFloat gridOffsetX;
+@property (assign, nonatomic) CGFloat gridOffsetY;
+//@property (assign, nonatomic) CGPoint gridOffset;
+@property (assign, nonatomic) CGRect rectDrawing;
 @end
