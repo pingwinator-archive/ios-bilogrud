@@ -15,4 +15,5 @@
 @property (assign, nonatomic) CGFloat gridOffsetY;
 //@property (assign, nonatomic) CGPoint gridOffset;
 @property (assign, nonatomic) CGRect rectDrawing;
+
 @end
