@@ -17,11 +17,38 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+        [self addGesture];
+    }
+    return self;
+}
+- (id) init
+{
+    self = [super init];
+    if(self) {
+        [self addGesture];
     }
     return self;
 }
 
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if(self) {
+        [self addGesture];
+    }
+    return self;
+}
+
+- (void)addGesture
+{
+    UIPanGestureRecognizer* panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(performPanGesture:)];
+    [self addGestureRecognizer:panGestureRecognizer];
+}
+
+- (void) performPanGesture: (UIPanGestureRecognizer*) panGestureRecognizer
+{
+    NSLog(@"---------pan!");
+}
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
@@ -39,8 +66,6 @@
 //    CGContextMoveToPoint(context, 0, 0);
 //    CGContextAddLineToPoint(context, 300, 400);
     CGContextStrokePath(context);
-
-   // self.window.frame.size.height
 }
 
 @end

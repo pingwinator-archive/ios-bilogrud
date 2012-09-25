@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "GridGraphic.h"
 @interface ViewController : UIViewController
-
+@property(retain, nonatomic) IBOutlet GridGraphic* grid;
 @end

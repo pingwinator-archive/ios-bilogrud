@@ -13,11 +13,11 @@
 @end
 
 @implementation ViewController
-
+@synthesize grid;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+//    self.grid = [[GridGraphic alloc]initWithFrame:CGRectMake(0, 0, 320, 320)];
 }
 
 - (void)didReceiveMemoryWarning
