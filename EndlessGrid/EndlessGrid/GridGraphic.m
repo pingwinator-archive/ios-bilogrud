@@ -12,8 +12,10 @@
 
 @interface GridGraphic()
 @property (assign, nonatomic) CGPoint firstTouchPoint;
-@property (assign, nonatomic) NSInteger axisX;
-@property (assign, nonatomic) NSInteger axisY;
+@property (assign, nonatomic) NSInteger offsetForIntAsixX;
+@property (assign, nonatomic) NSInteger offsetForIntAsixY;
+@property (assign, nonatomic) NSInteger amountLinesX;
+@property (assign, nonatomic) NSInteger amountLinesY;
 @end
 
 @implementation GridGraphic
@@ -23,9 +25,10 @@
 @synthesize gridOffsetY;
 @synthesize rectDrawing;
 @synthesize firstTouchPoint;
-@synthesize axisX;
-@synthesize axisY;
-
+@synthesize offsetForIntAsixX;
+@synthesize offsetForIntAsixY;
+@synthesize amountLinesX;
+@synthesize amountLinesY;
 - (void) dealloc
 {
     self.cellHeight = nil;
@@ -57,7 +60,6 @@
         [self addGesture];
         self.gridOffsetX = 0.f;
         self.rectDrawing = self.frame;
-        self.axisX = -2;
     }
     return self;
 }
@@ -84,8 +86,14 @@
 }
 - (void)performTapGesture: (UITapGestureRecognizer*)tapGestureRecognizer
 {
-    CGPoint p =  [tapGestureRecognizer locationInView:self];
-       NSLog(@">>>>>>tap! %f %f", p.x, p.y);
+    CGPoint tapedPoint =  [tapGestureRecognizer locationInView:self];
+       NSLog(@">>>>>>tap! %f %f", tapedPoint.x, tapedPoint.y);
+    //to dekart coordinates
+    for (int i = self.offsetForIntAsixX; i < self.offsetForIntAsixX + self.amountLinesX; i++) {
+        if(tapedPoint.x > i * [self.cellWidth intValue] && tapedPoint.x < (i+1) * [self.cellWidth intValue])
+            NSLog(@"x: %d", i);
+    }
+    
 }
 
 - (void)performPinchGesture: (UIPinchGestureRecognizer*) pinchGestureRecognizer
@@ -105,7 +113,8 @@
         self.firstTouchPoint = translation;
     }
     CGFloat deltaX = self.firstTouchPoint.x - translation.x;//translation.x - self.firstTouchPoint.x;
-    CGFloat deltaY = self.firstTouchPoint.y - translation.y;//translation.y - self.firstTouchPoint.y;
+    CGFloat deltaY = translation.y - self.firstTouchPoint.y;
+    //self.firstTouchPoint.y - translation.y;//translation.y - self.firstTouchPoint.y;
     self.firstTouchPoint = translation;
 //    NSLog(@"---translation %d %d", (int)translation.x, (int)translation.y);
     self.gridOffsetX  = deltaX + self.gridOffsetX;
@@ -124,7 +133,7 @@
     //font, color for numbers
     UIColor *magentaColor = [UIColor colorWithRed:0.5f  green:0.0f blue:0.5f alpha:1.0f];
     [magentaColor set];
-    UIFont *helveticaBold = [UIFont fontWithName:@"HelveticaNeue-Bold" size:20.0f];
+    UIFont *helveticaBold = [UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0f];
     
     self.cellHeight = [NSNumber numberWithDouble:kCellHeight];
     self.cellWidth = [NSNumber numberWithDouble:kCellWidth];
@@ -139,9 +148,10 @@
     
     if(offsetForCellX < 0)
         addX = 1;
-    int offsetForIntAsixX = self.gridOffsetX / [self.cellWidth intValue];
+    //int
+    self.offsetForIntAsixX = self.gridOffsetX / [self.cellWidth intValue];
    
-    int amountLinesX = self.frame.size.width  / [cellWidth intValue];
+    self.amountLinesX = self.frame.size.width  / [cellWidth intValue];
     //NSLog(@"amount visible lines %d", amountLinesX);
     for(int i = rect.origin.x + offsetForCellX, j = 0; i < (rect.origin.x + rect.size.width) && j <= amountLinesX + addX; i += kCellWidth, j++)
     {
@@ -149,27 +159,29 @@
         CGContextAddLineToPoint(context, i, rect.origin.y + self.frame.size.height);
        // NSLog(@"h:  %f", self.frame.size.height);
          //text
-        NSString *myString = [NSString stringWithFormat:@"%d", j + offsetForIntAsixX];//self.axisX;
-        [myString drawAtPoint:CGPointMake(i + 5., 1.) withFont:helveticaBold];
+        NSString *myString = [NSString stringWithFormat:@"%d", j + self.offsetForIntAsixX];
+        [myString drawAtPoint:CGPointMake(i + 4., 1.) withFont:helveticaBold];
     }
     
-    int addY = 0;
-    float offsetForCellY = fmodf(self.gridOffsetY, [cellHeight floatValue]);
-    
-    if(offsetForCellY < 0)
-        addY = 1;
-    int offsetForIntAsixY = self.gridOffsetY / [self.cellHeight intValue];
-    
-    int amountLinesY = self.frame.size.height  / [cellHeight intValue];
-    for (int i = rect.origin.y + offsetForCellY, j = 0; i < (rect.origin.y + rect.size.height) && j <= amountLinesY + addY; i += kCellHeight, j++) {
-        CGContextMoveToPoint(context, 0, i);
-        CGContextAddLineToPoint(context, self.frame.size.width, i);
-        //text
-        NSString *myString = [NSString stringWithFormat:@"%d", j + offsetForIntAsixY];
-        [myString drawAtPoint:CGPointMake(1., i +5.) withFont:helveticaBold];
-    }
+//    int addY = 0;
+//    float offsetForCellY = fmodf(self.gridOffsetY, [cellHeight floatValue]);
+//    
+//    if(offsetForCellY < 0)
+//        addY = 1;
+//    //int
+//    self.offsetForIntAsixY = self.gridOffsetY / [self.cellHeight intValue];
+//    
+//    int amountLinesY = self.frame.size.height  / [cellHeight intValue];
+//    for (int i = rect.origin.y + offsetForCellY, j = amountLinesY; i < (rect.origin.y + rect.size.height) && j >= 0; i += kCellHeight, j--) {
+//        CGContextMoveToPoint(context, 0, i);
+//        CGContextAddLineToPoint(context, self.frame.size.width, i);
+//        //text
+//        NSString *myString = [NSString stringWithFormat:@"%d", j + self.offsetForIntAsixY];
+//        [myString drawAtPoint:CGPointMake(1., i +5.) withFont:helveticaBold];
+//    }
     
     CGContextStrokePath(context);
 }
+
 
 @end
