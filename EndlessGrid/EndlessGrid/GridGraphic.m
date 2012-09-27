@@ -64,8 +64,9 @@
         self.amountLinesX = self.frame.size.width  / [self.cellWidth intValue];
         self.amountLinesY = self.frame.size.height  / [self.cellHeight intValue];
         
-        self.gridOffsetX =  0.0f + [self.cellWidth intValue];//- self.amountLinesX * [self.cellWidth intValue]; //0.f;
-        self.gridOffsetY = - (self.amountLinesY ) * [self.cellHeight intValue];
+        self.gridOffsetX =  0.0f ;//+ [self.cellWidth intValue];//- self.amountLinesX * [self.cellWidth intValue]; //0.f;
+        self.gridOffsetY = - self.frame.size.height;//(self.amountLinesY ) * [self.cellHeight intValue];
+        NSLog(@"offset y %f", self.gridOffsetY);
     }
     return self;
 }
@@ -96,23 +97,38 @@
     CGPoint tapedPoint =  [tapGestureRecognizer locationInView:self];
     NSLog(@">>>>>>tap! %f %f", tapedPoint.x, tapedPoint.y);
     //to dekart coordinates
-    CGPoint dekart = [self screenToDekart:tapedPoint withHeigth:self.frame.size.height];
-    NSLog(@"to dekart: %f %f", dekart.x, dekart.y);
-    NSLog(@"offsetForIntAsixX: %d", self.offsetForIntAsixX);
-    for (int i = self.offsetForIntAsixX; i < self.offsetForIntAsixX + self.amountLinesX; i++) {
-        if(tapedPoint.x > i * [self.cellWidth intValue] && tapedPoint.x < (i + 1) * [self.cellWidth intValue])
-            NSLog(@"x: %d", i );
-        }
+ //   CGPoint dekart = [self screenToDekart:tapedPoint];
+//    NSLog(@"to dekart: %f %f", dekart.x, dekart.y);
+//    NSLog(@"offsetForIntAsixX: %d", self.offsetForIntAsixX);
+//    for (int i = self.offsetForIntAsixX; i < self.offsetForIntAsixX + self.amountLinesX; i++) {
+//        if(tapedPoint.x > i * [self.cellWidth intValue] && tapedPoint.x < (i + 1) * [self.cellWidth intValue])
+//            NSLog(@"x: %d", i );
+//        }
+    
+    
+    //to screen
+   CGPoint dek = CGPointMake(3, -2);
+    CGPoint scr = [self dekartToScreen:dek];
+    NSLog(@"to screen: %f %f", scr.x, scr.y);
 }
 
-- (CGPoint) dekartToScreen: (CGPoint)dekart withHeigth
+- (CGPoint) dekartToScreen: (CGPoint)dekart 
 {
-    return CGPointMake(dekart.x, self.frame.size.height - dekart.y);
+    CGPoint screen = CGPointMake(dekart.x * [self.cellWidth floatValue] - self.gridOffsetX, self.frame.size.height - (dekart.y * [self.cellHeight floatValue] - self.gridOffsetY ));
+    NSLog(@"h : %f", self.frame.size.height);
+    return screen;
 }
 
-- (CGPoint) screenToDekart: (CGPoint)screen withHeigth: (CGFloat) height
+- (CGPoint) screenToDekart: (CGPoint)screen 
 {
-    return CGPointMake(screen.x, height - screen.y);
+    CGPoint dekart;
+    dekart.x = screen.x / [self.cellWidth floatValue]  + self.offsetForIntAsixX;//+ self.gridOffsetX;
+    
+    CGFloat f = self.frame.size.height  + self.gridOffsetY - screen.y / [self.cellHeight floatValue];
+    
+    dekart.y = self.frame.size.height - (screen.y / [self.cellHeight floatValue]);// - self.offsetForIntAsixY);
+    // = CGPointMake(screen.x / [self.cellWidth floatValue] + self.gridOffsetX, self.frame.size.height - (screen.y * [self.cellHeight floatValue] + self.gridOffsetY));
+    return dekart;
 }
 
 - (void)performPinchGesture: (UIPinchGestureRecognizer*) pinchGestureRecognizer
@@ -143,13 +159,14 @@
     CGRect test = CGRectMake(self.rectDrawing.origin.x , self.rectDrawing.origin.y, self.rectDrawing.size.width, self.rectDrawing.size.height);
   
     self.rectDrawing = test;
-    [self setNeedsDisplay ];//]InRect:CGRectMake(0, 0, 200, 200)];
+    [self setNeedsDisplay ];
 }
 
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
 {
+     NSLog(@"height begin: %f", self.frame.size.height);
    // rect = self.bounds;
     //font, color for numbers
     UIColor *magentaColor = [UIColor colorWithRed:0.5f  green:0.0f blue:0.5f alpha:1.0f];
@@ -166,9 +183,9 @@
     
 
     self.offsetForIntAsixX = self.gridOffsetX / -[self.cellWidth intValue];
-    NSLog(@"frig offsetx %f and left val %d first x %f", self.gridOffsetX, self.offsetForIntAsixX, rect.origin.x + offsetForCellX);
+    NSLog(@"grid offsetx %f and left val %d first x %f", self.gridOffsetX, self.offsetForIntAsixX, rect.origin.x + offsetForCellX);
    
-    for(int i = rect.origin.x - [self.cellWidth intValue] + offsetForCellX, j = 0; i < (rect.origin.x + rect.size.width) && j <= amountLinesX + 1; i += kCellWidth, j++)
+    for(int i = rect.origin.x /* - [self.cellWidth intValue]*/ + offsetForCellX, j = 0; i < (rect.origin.x + rect.size.width) && j <= amountLinesX + 1; i += kCellWidth, j++)
     {
         CGContextMoveToPoint(context, i, 0);
         CGContextAddLineToPoint(context, i, rect.origin.y + self.frame.size.height);
@@ -193,6 +210,7 @@
         [myString drawAtPoint:CGPointMake(2., i +2.) withFont:helveticaBold];
     }
     
+    NSLog(@"height end: %f", self.frame.size.height);
     CGContextStrokePath(context);
 }
 
