@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+@class SettingView;
 
 @interface GridGraphic : UIView
 @property (retain, nonatomic) NSNumber* cellHeight;
@@ -15,4 +16,7 @@
 @property (assign, nonatomic) CGFloat gridOffsetY;
 //@property (assign, nonatomic) CGPoint gridOffset;
 @property (assign, nonatomic) CGRect rectDrawing;
+@property (retain, nonatomic) IBOutlet UIButton* settingButton;
+
+- (IBAction)showSetting;
 @end

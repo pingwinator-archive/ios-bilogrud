@@ -8,7 +8,7 @@
 #import <math.h>
 #import "GridGraphic.h"
 #import "Shape.h"
-
+#import "SettingView.h"
 #define kCellHeight 40.0
 #define kCellWidth 40.0
 
@@ -19,6 +19,7 @@
 @property (assign, nonatomic) NSInteger amountLinesX;
 @property (assign, nonatomic) NSInteger amountLinesY;
 @property (retain, nonatomic) NSMutableArray* shapes;
+@property (retain, nonatomic) SettingView* settingView;
 @end
 
 @implementation GridGraphic
@@ -33,6 +34,8 @@
 @synthesize amountLinesX;
 @synthesize amountLinesY;
 @synthesize shapes;
+@synthesize settingButton;
+@synthesize settingView;
 
 - (void) dealloc
 {
@@ -76,10 +79,18 @@
         
         self.shapes = [[NSMutableArray alloc] init];
         [self.shapes addObject:[NSValue valueWithCGPoint: CGPointMake(3, -2)]];
+        
+       // [self.settingButton performSelector:@selector(@"showSettings")];
+        
     }
     return self;
 }
 
+- (void)showSetting{
+    self.settingView = [[[SettingView alloc]initWithFrame:CGRectMake(0, 0, 200, 200)]autorelease];
+    [self addSubview:self.settingView];
+    NSLog(@"URA!");
+}
 #pragma mark - GestureRecognizers Methods
 
 - (void)addGesture

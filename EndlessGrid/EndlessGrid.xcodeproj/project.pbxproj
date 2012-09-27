@@ -20,6 +20,8 @@
 		6EE8E879161476C700668FFC /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EE8E874161476C700668FFC /* ViewController.xib */; };
 		6EE8E87A161476C700668FFC /* GridGraphic.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EE8E877161476C700668FFC /* GridGraphic.m */; };
 		6EE8E87E16147A2300668FFC /* Shape.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EE8E87D16147A2300668FFC /* Shape.m */; };
+		6EE8E8AA16149CEE00668FFC /* SettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EE8E8A916149CEE00668FFC /* SettingView.m */; };
+		6EE8E8AD1614A3EA00668FFC /* SettingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EE8E8AC1614A3EA00668FFC /* SettingView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +45,9 @@
 		6EE8E877161476C700668FFC /* GridGraphic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridGraphic.m; sourceTree = "<group>"; };
 		6EE8E87C16147A2300668FFC /* Shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shape.h; sourceTree = "<group>"; };
 		6EE8E87D16147A2300668FFC /* Shape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shape.m; sourceTree = "<group>"; };
+		6EE8E8A816149CEE00668FFC /* SettingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingView.h; sourceTree = "<group>"; };
+		6EE8E8A916149CEE00668FFC /* SettingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingView.m; sourceTree = "<group>"; };
+		6EE8E8AC1614A3EA00668FFC /* SettingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				6EE8E874161476C700668FFC /* ViewController.xib */,
+				6EE8E8AC1614A3EA00668FFC /* SettingView.xib */,
 			);
 			path = Nibs;
 			sourceTree = "<group>";
@@ -146,6 +152,8 @@
 			children = (
 				6EE8E876161476C700668FFC /* GridGraphic.h */,
 				6EE8E877161476C700668FFC /* GridGraphic.m */,
+				6EE8E8A816149CEE00668FFC /* SettingView.h */,
+				6EE8E8A916149CEE00668FFC /* SettingView.m */,
 			);
 			name = Views;
 			path = EndlessGrid/Views;
@@ -217,6 +225,7 @@
 				6EE7420516109B4E00699999 /* Default@2x.png in Resources */,
 				6EE7420716109B4E00699999 /* Default-568h@2x.png in Resources */,
 				6EE8E879161476C700668FFC /* ViewController.xib in Resources */,
+				6EE8E8AD1614A3EA00668FFC /* SettingView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,6 +241,7 @@
 				6EE8E878161476C700668FFC /* ViewController.m in Sources */,
 				6EE8E87A161476C700668FFC /* GridGraphic.m in Sources */,
 				6EE8E87E16147A2300668FFC /* Shape.m in Sources */,
+				6EE8E8AA16149CEE00668FFC /* SettingView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
