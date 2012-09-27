@@ -17,7 +17,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    self.grid = [[GridGraphic alloc]initWithFrame:CGRectMake(0, 0, 320, 320)];
 }
 
 - (void)didReceiveMemoryWarning
@@ -26,4 +25,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)awakeFromNib {
+    
+    NSLog(@"awakeFromNib %f", self.grid.frame.size.height);
+    [super awakeFromNib];
+    
+}
 @end

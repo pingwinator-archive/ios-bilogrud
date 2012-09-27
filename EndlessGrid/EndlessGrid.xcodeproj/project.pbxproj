@@ -16,9 +16,10 @@
 		6EE7420316109B4E00699999 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EE7420216109B4E00699999 /* Default.png */; };
 		6EE7420516109B4E00699999 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EE7420416109B4E00699999 /* Default@2x.png */; };
 		6EE7420716109B4E00699999 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EE7420616109B4E00699999 /* Default-568h@2x.png */; };
-		6EE7420A16109B4E00699999 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EE7420916109B4E00699999 /* ViewController.m */; };
-		6EE7420D16109B4E00699999 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EE7420B16109B4E00699999 /* ViewController.xib */; };
-		6EE7421916109C6600699999 /* GridGraphic.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EE7421816109C6600699999 /* GridGraphic.m */; };
+		6EE8E878161476C700668FFC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EE8E871161476C700668FFC /* ViewController.m */; };
+		6EE8E879161476C700668FFC /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EE8E874161476C700668FFC /* ViewController.xib */; };
+		6EE8E87A161476C700668FFC /* GridGraphic.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EE8E877161476C700668FFC /* GridGraphic.m */; };
+		6EE8E87E16147A2300668FFC /* Shape.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EE8E87D16147A2300668FFC /* Shape.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,11 +36,13 @@
 		6EE7420216109B4E00699999 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		6EE7420416109B4E00699999 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		6EE7420616109B4E00699999 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		6EE7420816109B4E00699999 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		6EE7420916109B4E00699999 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		6EE7420C16109B4E00699999 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
-		6EE7421716109C6600699999 /* GridGraphic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridGraphic.h; sourceTree = "<group>"; };
-		6EE7421816109C6600699999 /* GridGraphic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridGraphic.m; sourceTree = "<group>"; };
+		6EE8E870161476C700668FFC /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		6EE8E871161476C700668FFC /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		6EE8E874161476C700668FFC /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
+		6EE8E876161476C700668FFC /* GridGraphic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridGraphic.h; sourceTree = "<group>"; };
+		6EE8E877161476C700668FFC /* GridGraphic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridGraphic.m; sourceTree = "<group>"; };
+		6EE8E87C16147A2300668FFC /* Shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shape.h; sourceTree = "<group>"; };
+		6EE8E87D16147A2300668FFC /* Shape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shape.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +62,10 @@
 		6EE741E116109B4D00699999 = {
 			isa = PBXGroup;
 			children = (
+				6EE8E87B161479E100668FFC /* Models */,
+				6EE8E86F161476C700668FFC /* Controllers */,
+				6EE8E872161476C700668FFC /* Resources */,
+				6EE8E875161476C700668FFC /* Views */,
 				6EE741F616109B4D00699999 /* EndlessGrid */,
 				6EE741EF16109B4D00699999 /* Frameworks */,
 				6EE741ED16109B4D00699999 /* Products */,
@@ -88,12 +95,7 @@
 			children = (
 				6EE741FF16109B4D00699999 /* AppDelegate.h */,
 				6EE7420016109B4D00699999 /* AppDelegate.m */,
-				6EE7420816109B4E00699999 /* ViewController.h */,
-				6EE7420916109B4E00699999 /* ViewController.m */,
-				6EE7420B16109B4E00699999 /* ViewController.xib */,
 				6EE741F716109B4D00699999 /* Supporting Files */,
-				6EE7421716109C6600699999 /* GridGraphic.h */,
-				6EE7421816109C6600699999 /* GridGraphic.m */,
 			);
 			path = EndlessGrid;
 			sourceTree = "<group>";
@@ -110,6 +112,53 @@
 				6EE7420616109B4E00699999 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6EE8E86F161476C700668FFC /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				6EE8E870161476C700668FFC /* ViewController.h */,
+				6EE8E871161476C700668FFC /* ViewController.m */,
+			);
+			name = Controllers;
+			path = EndlessGrid/Controllers;
+			sourceTree = "<group>";
+		};
+		6EE8E872161476C700668FFC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6EE8E873161476C700668FFC /* Nibs */,
+			);
+			name = Resources;
+			path = EndlessGrid/Resources;
+			sourceTree = "<group>";
+		};
+		6EE8E873161476C700668FFC /* Nibs */ = {
+			isa = PBXGroup;
+			children = (
+				6EE8E874161476C700668FFC /* ViewController.xib */,
+			);
+			path = Nibs;
+			sourceTree = "<group>";
+		};
+		6EE8E875161476C700668FFC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6EE8E876161476C700668FFC /* GridGraphic.h */,
+				6EE8E877161476C700668FFC /* GridGraphic.m */,
+			);
+			name = Views;
+			path = EndlessGrid/Views;
+			sourceTree = "<group>";
+		};
+		6EE8E87B161479E100668FFC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6EE8E87C16147A2300668FFC /* Shape.h */,
+				6EE8E87D16147A2300668FFC /* Shape.m */,
+			);
+			name = Models;
+			path = EndlessGrid/Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,7 +216,7 @@
 				6EE7420316109B4E00699999 /* Default.png in Resources */,
 				6EE7420516109B4E00699999 /* Default@2x.png in Resources */,
 				6EE7420716109B4E00699999 /* Default-568h@2x.png in Resources */,
-				6EE7420D16109B4E00699999 /* ViewController.xib in Resources */,
+				6EE8E879161476C700668FFC /* ViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,8 +229,9 @@
 			files = (
 				6EE741FD16109B4D00699999 /* main.m in Sources */,
 				6EE7420116109B4D00699999 /* AppDelegate.m in Sources */,
-				6EE7420A16109B4E00699999 /* ViewController.m in Sources */,
-				6EE7421916109C6600699999 /* GridGraphic.m in Sources */,
+				6EE8E878161476C700668FFC /* ViewController.m in Sources */,
+				6EE8E87A161476C700668FFC /* GridGraphic.m in Sources */,
+				6EE8E87E16147A2300668FFC /* Shape.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,14 +244,6 @@
 				6EE741FA16109B4D00699999 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		6EE7420B16109B4E00699999 /* ViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6EE7420C16109B4E00699999 /* en */,
-			);
-			name = ViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
