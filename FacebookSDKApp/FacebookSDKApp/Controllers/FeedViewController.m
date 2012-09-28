@@ -248,9 +248,15 @@
 {
     NSInteger count = [self.allPosts count];
     if(count){
-        tableView.separatorColor = [UIColor groupTableViewBackgroundColor];
+        tableView.separatorColor = [UIColor brownColor];// lightGrayColor];//groupTableViewBackgroundColor];
+        tableView.separatorStyle = UITableViewStylePlain;
     }
     return count;
+}
+
+-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // update
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -301,7 +307,7 @@
 {
     NSString* text = [[self.allPosts objectAtIndex:indexPath.row] message];
     CGSize textSize = [text sizeWithFont:[UIFont systemFontOfSize:kFontMesage]  constrainedToSize:CGSizeMake(280, 1000)];
-    return MAX(94.f, textSize.height + kCellOffset);
+    return MAX(95.f, textSize.height + kCellOffset);
 }
 
 @end

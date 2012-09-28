@@ -50,6 +50,11 @@
 
 - (void)sessionStateChanged:(FBSession *)session state:(FBSessionState) state error:(NSError *)error
 {
+    if([[FBSession activeSession] accessToken])
+    {
+        NSLog(@"!!!User session found");
+
+    }
     switch (state) {
         case FBSessionStateOpen:
             if (!error) {
@@ -78,12 +83,20 @@
 }
 
 - (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI {
-    NSArray *permissions = [[[NSArray alloc] initWithObjects:
+   NSArray *permissions = [[[NSArray alloc] initWithObjects:
                             permissionStr,
                             nil] autorelease];
-    return [FBSession openActiveSessionWithPermissions:permissions  allowLoginUI:allowLoginUI completionHandler:^(FBSession *session, FBSessionState state,  NSError *error)
+    
+//    NSArray *permissions = [NSArray arrayWithObjects:@"user_photos", @"friends_photos", nil];
+    
+//    [[FBSession activeSession] reauthorizeWithReadPermissions:permissions
+//                                            completionHandler:^(FBSession *session, NSError *error) {
+//                                                /* handle success + failure in block */
+//                                            }];
+    
+    return [FBSession  openActiveSessionWithPermissions:permissions  allowLoginUI:allowLoginUI completionHandler:^(FBSession *session, FBSessionState status,  NSError *error)
             {
-                [self sessionStateChanged:session  state:state  error:error];
+                [self sessionStateChanged:session  state:status  error:error];
             }];
 }
 

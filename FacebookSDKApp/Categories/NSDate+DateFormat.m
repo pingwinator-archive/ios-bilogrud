@@ -26,7 +26,7 @@
     if(timeTestInteger > monthInSeconds) {
         int amountMonth = timeTestInteger / (monthInSeconds) ;
         if(amountMonth > 1) {
-            result = [result stringByAppendingFormat:NSLocalizedString(@"more %[one, some, many, none]d monthes ago", @""), amountMonth ];
+            result = [result stringByAppendingFormat:NSLocalizedString(@"more %d monthes ago", @""), amountMonth ];
             NSString* str =[NSString stringWithFormat:@"%@", PluralFormForStringAndValueRU(result, amountMonth)];
             
             NSLog(@"str %@ ",str);

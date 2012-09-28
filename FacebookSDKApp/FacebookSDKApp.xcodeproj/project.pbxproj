@@ -176,7 +176,7 @@
 		6EE8E8921614940700668FFC /* StatusCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatusCell.h; path = FacebookSDKApp/Views/Cell/StatusCell.h; sourceTree = SOURCE_ROOT; };
 		6EE8E8931614940700668FFC /* StatusCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StatusCell.m; path = FacebookSDKApp/Views/Cell/StatusCell.m; sourceTree = SOURCE_ROOT; };
 		6EE8E8941614940700668FFC /* StatusCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StatusCell.xib; path = FacebookSDKApp/Views/Cell/StatusCell.xib; sourceTree = SOURCE_ROOT; };
-		6EE8E8A216149BF600668FFC /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = FacebookSDKApp/Externals/FacebookSDK.framework; sourceTree = "<group>"; };
+		6EE8E8A216149BF600668FFC /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = Externals/FacebookSDK.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,7 +219,6 @@
 		6E2A9F4415FE0A7F001D88BB = {
 			isa = PBXGroup;
 			children = (
-				6EE8E8A216149BF600668FFC /* FacebookSDK.framework */,
 				6E2A9F5915FE0A7F001D88BB /* FacebookSDKApp */,
 				6E24198015FFAED9004F3E8A /* Categories */,
 				6E2A9FC315FF5542001D88BB /* Resources */,
@@ -418,13 +417,22 @@
 		6E7A11C716008B4E0065ABF1 /* Externals */ = {
 			isa = PBXGroup;
 			children = (
-				6EE8E88C1614917C00668FFC /* Social.framework */,
-				6EE8E88A1614917300668FFC /* AdSupport.framework */,
-				6EE8E8871614916400668FFC /* Accounts.framework */,
+				6E8EEC9E1614CB0A00B410C5 /* Facebook */,
 				6E5DF8F11601DF4200962F86 /* SBJSON */,
 				6E5DF90B1601DF4200962F86 /* ODRefreshControl */,
 			);
 			name = Externals;
+			sourceTree = "<group>";
+		};
+		6E8EEC9E1614CB0A00B410C5 /* Facebook */ = {
+			isa = PBXGroup;
+			children = (
+				6EE8E8A216149BF600668FFC /* FacebookSDK.framework */,
+				6EE8E88C1614917C00668FFC /* Social.framework */,
+				6EE8E88A1614917300668FFC /* AdSupport.framework */,
+				6EE8E8871614916400668FFC /* Accounts.framework */,
+			);
+			name = Facebook;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

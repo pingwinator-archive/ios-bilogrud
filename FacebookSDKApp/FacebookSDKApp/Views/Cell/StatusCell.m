@@ -17,6 +17,22 @@
 @synthesize timeLabel;
 @synthesize photoImageView;
 @synthesize messageLabel;
+@synthesize likeLabel;
+
+-(void) dealloc
+{
+    self.likeLabel = nil;
+    self.time = nil;
+    self.name = nil;
+    self.message = nil;
+    self.messageLabel = nil;
+    self.nameLabel = nil;
+    self.timeLabel = nil;
+    self.photoImageView = nil;
+    
+    [super dealloc];
+}
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -42,6 +58,8 @@
 
 - (void)setName:(NSString *)n
 {
+    [name release];
+    name = [n retain];
     if (![n isEqualToString:name]) {
         nameLabel.text = n;
     }
