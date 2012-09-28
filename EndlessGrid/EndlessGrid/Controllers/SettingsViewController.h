@@ -18,7 +18,6 @@
 @property(retain, nonatomic) IBOutlet UIButton* addSegment;
 @property (nonatomic, assign) id <SettingsViewDelegate> delegate;
 @property (nonatomic) ActionType senderActionType;
-- (IBAction)closeSetting;
 - (IBAction)pressButton:(UIButton*)sender;
 @end
 

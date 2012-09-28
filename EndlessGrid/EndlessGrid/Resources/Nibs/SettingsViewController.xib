@@ -40,9 +40,10 @@
 						<object class="IBUIButton" id="717424120">
 							<reference key="NSNextResponder" ref="223113662"/>
 							<int key="NSvFlags">292</int>
-							<string key="NSFrame">{{227, 204}, {73, 30}}</string>
+							<string key="NSFrame">{{124, 109}, {73, 30}}</string>
 							<reference key="NSSuperview" ref="223113662"/>
 							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<bool key="IBUIOpaque">NO</bool>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -75,10 +76,10 @@
 						<object class="IBUIButton" id="476358877">
 							<reference key="NSNextResponder" ref="223113662"/>
 							<int key="NSvFlags">294</int>
-							<string key="NSFrame">{{20, 55}, {280, 30}}</string>
+							<string key="NSFrame">{{65, 46}, {50, 50}}</string>
 							<reference key="NSSuperview" ref="223113662"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="195169197"/>
+							<reference key="NSNextKeyView" ref="1016019059"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<bool key="IBUIOpaque">NO</bool>
 							<int key="IBUITag">1</int>
@@ -86,23 +87,26 @@
 							<int key="IBUIContentHorizontalAlignment">0</int>
 							<int key="IBUIContentVerticalAlignment">0</int>
 							<int key="IBUIButtonType">1</int>
-							<string key="IBUINormalTitle">Draw point</string>
 							<reference key="IBUIHighlightedTitleColor" ref="952841568"/>
 							<object class="NSColor" key="IBUINormalTitleColor">
 								<int key="NSColorSpace">1</int>
 								<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 							</object>
 							<reference key="IBUINormalTitleShadowColor" ref="460583441"/>
+							<object class="NSCustomResource" key="IBUINormalBackgroundImage">
+								<string key="NSClassName">NSImage</string>
+								<string key="NSResourceName">PointIcon.png</string>
+							</object>
 							<reference key="IBUIFontDescription" ref="659575289"/>
 							<reference key="IBUIFont" ref="333111907"/>
 						</object>
 						<object class="IBUIButton" id="195169197">
 							<reference key="NSNextResponder" ref="223113662"/>
 							<int key="NSvFlags">294</int>
-							<string key="NSFrame">{{20, 90}, {280, 30}}</string>
+							<string key="NSFrame">{{205, 46}, {50, 50}}</string>
 							<reference key="NSSuperview" ref="223113662"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="1016019059"/>
+							<reference key="NSNextKeyView" ref="717424120"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<bool key="IBUIOpaque">NO</bool>
 							<int key="IBUITag">2</int>
@@ -110,23 +114,26 @@
 							<int key="IBUIContentHorizontalAlignment">0</int>
 							<int key="IBUIContentVerticalAlignment">0</int>
 							<int key="IBUIButtonType">1</int>
-							<string key="IBUINormalTitle">Draw line</string>
 							<reference key="IBUIHighlightedTitleColor" ref="952841568"/>
 							<object class="NSColor" key="IBUINormalTitleColor">
 								<int key="NSColorSpace">1</int>
 								<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 							</object>
 							<reference key="IBUINormalTitleShadowColor" ref="460583441"/>
+							<object class="NSCustomResource" key="IBUINormalBackgroundImage">
+								<string key="NSClassName">NSImage</string>
+								<string key="NSResourceName">LineSetIcon.png</string>
+							</object>
 							<reference key="IBUIFontDescription" ref="659575289"/>
 							<reference key="IBUIFont" ref="333111907"/>
 						</object>
 						<object class="IBUIButton" id="1016019059">
 							<reference key="NSNextResponder" ref="223113662"/>
-							<int key="NSvFlags">308</int>
-							<string key="NSFrame">{{20, 124}, {280, 30}}</string>
+							<int key="NSvFlags">294</int>
+							<string key="NSFrame">{{135, 46}, {50, 50}}</string>
 							<reference key="NSSuperview" ref="223113662"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="717424120"/>
+							<reference key="NSNextKeyView" ref="195169197"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
 							<bool key="IBUIOpaque">NO</bool>
 							<int key="IBUITag">3</int>
@@ -134,13 +141,16 @@
 							<int key="IBUIContentHorizontalAlignment">0</int>
 							<int key="IBUIContentVerticalAlignment">0</int>
 							<int key="IBUIButtonType">1</int>
-							<string key="IBUINormalTitle">Draw segment</string>
 							<reference key="IBUIHighlightedTitleColor" ref="952841568"/>
 							<object class="NSColor" key="IBUINormalTitleColor">
 								<int key="NSColorSpace">1</int>
 								<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 							</object>
 							<reference key="IBUINormalTitleShadowColor" ref="460583441"/>
+							<object class="NSCustomResource" key="IBUINormalBackgroundImage">
+								<string key="NSClassName">NSImage</string>
+								<string key="NSResourceName">LineIcon.png</string>
+							</object>
 							<reference key="IBUIFontDescription" ref="659575289"/>
 							<reference key="IBUIFont" ref="333111907"/>
 						</object>
@@ -151,12 +161,10 @@
 					<reference key="NSNextKeyView" ref="476358877"/>
 					<string key="NSReuseIdentifierKey">_NS:9</string>
 					<object class="NSColor" key="IBUIBackgroundColor">
-						<int key="NSColorSpace">3</int>
-						<bytes key="NSWhite">MQA</bytes>
-						<object class="NSColorSpace" key="NSCustomColorSpace">
-							<int key="NSID">2</int>
-						</object>
+						<int key="NSColorSpace">1</int>
+						<bytes key="NSRGB">MSAwIDAAA</bytes>
 					</object>
+					<bool key="IBUIAutoresizesSubviews">NO</bool>
 					<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 				</object>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
@@ -295,10 +303,10 @@
 						<int key="objectID">3</int>
 						<reference key="object" ref="223113662"/>
 						<array class="NSMutableArray" key="children">
+							<reference ref="717424120"/>
 							<reference ref="476358877"/>
 							<reference ref="195169197"/>
 							<reference ref="1016019059"/>
-							<reference ref="717424120"/>
 						</array>
 						<reference key="parent" ref="383970274"/>
 					</object>
@@ -311,16 +319,19 @@
 						<int key="objectID">14</int>
 						<reference key="object" ref="476358877"/>
 						<reference key="parent" ref="223113662"/>
+						<string key="objectName">drawPointButton</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">15</int>
 						<reference key="object" ref="195169197"/>
 						<reference key="parent" ref="223113662"/>
+						<string key="objectName">drawLineButton</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">16</int>
 						<reference key="object" ref="1016019059"/>
 						<reference key="parent" ref="223113662"/>
+						<string key="objectName">drawSegmentButton</string>
 					</object>
 				</array>
 			</object>
@@ -347,20 +358,17 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">SettingsViewController</string>
 					<string key="superclassName">UIViewController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="closeSetting">id</string>
-						<string key="pressButton:">UIButton</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="closeSetting">
-							<string key="name">closeSetting</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="pressButton:">
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">pressButton:</string>
+						<string key="NS.object.0">UIButton</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">pressButton:</string>
+						<object class="IBActionInfo" key="NS.object.0">
 							<string key="name">pressButton:</string>
 							<string key="candidateClassName">UIButton</string>
 						</object>
-					</dictionary>
+					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="addLine">UIButton</string>
 						<string key="addPoint">UIButton</string>
@@ -396,6 +404,11 @@
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
+		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<string key="LineIcon.png">{64, 64}</string>
+			<string key="LineSetIcon.png">{64, 64}</string>
+			<string key="PointIcon.png">{64, 64}</string>
+		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">1926</string>
 	</data>
 </archive>

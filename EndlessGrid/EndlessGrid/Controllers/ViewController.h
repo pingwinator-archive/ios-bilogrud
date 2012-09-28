@@ -11,14 +11,13 @@
 @class SettingsViewController;
 @protocol SettingsViewDelegate;
 
-
 @interface ViewController : UIViewController<SettingsViewDelegate>
 
 @property(retain, nonatomic) IBOutlet GridGraphic* grid;
 @property(retain, nonatomic)  SettingsViewController* settingViewController;
 @property(retain, nonatomic) IBOutlet UIButton* testButton;
+@property(retain, nonatomic) IBOutlet UIView* bgView;
 
-
-- (IBAction)test;//:(id)sender
+- (IBAction)showSetting;
 - (void)hideSettingsView;
 @end

@@ -20,6 +20,16 @@
 @synthesize addSegment;
 @synthesize senderActionType;
 
+- (void)dealloc
+{
+    self.closeButton = nil;
+    self.delegate = nil;
+    self.addLine = nil;
+    self.addPoint = nil;
+    self.addSegment = nil;
+    [super dealloc];
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -38,6 +48,10 @@
 -(void)viewDidUnload
 {
     self.closeButton = nil;
+    self.delegate = nil;
+    self.addLine = nil;
+    self.addPoint = nil;
+    self.addSegment = nil;
     [super viewDidUnload];
 }
 
@@ -49,10 +63,6 @@
 
 - (IBAction)pressButton:(UIButton*)sender
 {
-if(sender)
-{
-    NSLog(@"sender!?");
-}
     switch ([sender tag]) {
         case kAddPointTag: {
             self.senderActionType = kAddPoint;
@@ -77,11 +87,5 @@ if(sender)
     if ([self.delegate respondsToSelector:@selector(hideSettingsView:)]) {
         [self.delegate hideSettingsView:self.senderActionType];
     }
-}
-- (void)closeSetting
-{
-//    if ([self.delegate respondsToSelector:@selector(hideSettingsView)]) {
-//        [self.delegate hideSettingsView];
-//    }
 }
 @end

@@ -17,12 +17,31 @@
 @synthesize grid;
 @synthesize settingViewController;
 @synthesize testButton;
+@synthesize bgView;
+
+
+- (void)dealloc
+{
+    self.bgView = nil;
+    self.settingViewController = nil;
+    self.testButton = nil;
+    self.grid = nil;
+    [super dealloc];
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 }
 
+- (void)viewDidUnload
+{
+    self.bgView = nil;
+    self.settingViewController = nil;
+    self.testButton = nil;
+    self.grid = nil;
+    [super viewDidUnload];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -31,23 +50,35 @@
 
 - (void)awakeFromNib {
     
-    NSLog(@"awakeFromNib %f", self.grid.frame.size.height);
+    DBLog(@"awakeFromNib %f", self.grid.frame.size.height);
     [super awakeFromNib];
     
 }
 
-- (void)test
+- (void)showSetting
 {
+    [self.settingViewController.view removeFromSuperview];
     self.settingViewController = [[SettingsViewController alloc]initWithNibName:@"SettingsViewController" bundle:nil];
-    [self presentModalViewController:self.settingViewController animated:YES];
     self.settingViewController.delegate = self;
+    self.bgView.hidden = NO;
+    UIView* settingSmallView = self.settingViewController.view;
+  
+    settingSmallView.frame = CGRectMake(10, 200, 300, 150);
+    settingSmallView.backgroundColor = [UIColor redColor];
+   // settingSmallView.alpha = 1.0f;
+    
+    [self.bgView addSubview:settingSmallView];
+ 
+    self.grid.userInteractionEnabled = NO;
 }
 
 - (void)hideSettingsView:(ActionType)senderActionType
 {
-    NSLog(@"!!!close with type: %u", senderActionType);
-    [self dismissModalViewControllerAnimated:YES];
-    if( self.grid.actionType != kAddNone ) {
+    [self.settingViewController.view removeFromSuperview];
+    self.bgView.hidden = YES;
+    self.grid.userInteractionEnabled = YES;
+    //[self dismissModalViewControllerAnimated:YES];
+    if( senderActionType != kAddNone ) {
         self.grid.actionType = senderActionType;
     }
 }
