@@ -19,24 +19,26 @@
 @property (assign, nonatomic) NSInteger amountLinesX;
 @property (assign, nonatomic) NSInteger amountLinesY;
 @property (retain, nonatomic) NSMutableArray* shapes;
-
+@property (assign, nonatomic) BOOL existStartOfSegment;
 @end
-
+ 
 @implementation GridGraphic
 @synthesize cellHeight;
 @synthesize cellWidth;
 @synthesize gridOffsetX;
 @synthesize gridOffsetY;
-@synthesize rectDrawing;
+//@synthesize rectDrawing;
 @synthesize firstTouchPoint;
 @synthesize offsetForIntAsixX;
 @synthesize offsetForIntAsixY;
 @synthesize amountLinesX;
 @synthesize amountLinesY;
 @synthesize shapes;
-@synthesize settingButton;
-@synthesize settingView;
+//@synthesize settingButton;
+// @synthesize settingView;
 //@synthesize bgForSetting;
+@synthesize actionType;
+@synthesize existStartOfSegment;
 
 - (void) dealloc
 {
@@ -82,7 +84,7 @@
         [self.shapes addObject:[NSValue valueWithCGPoint: CGPointMake(3, -2)]];
         
        // [self.settingButton performSelector:@selector(@"showSettings")];
-        
+        self.actionType = kAddPoint;
     }
     return self;
 }
@@ -103,8 +105,8 @@
 
 - (void)hideSettingsView
 {
-    [self.settingView removeFromSuperview];
-    self.settingView = nil;
+//    [self.settingView removeFromSuperview];
+//    self.settingView = nil;
 }
 
 #pragma mark - GestureRecognizers Methods
@@ -132,15 +134,45 @@
 }
 - (void)performTapGesture: (UITapGestureRecognizer*)tapGestureRecognizer
 {
-    CGPoint tapedPoint =  [tapGestureRecognizer locationInView:self];
-    NSLog(@">>>>>>tap! %f %f", tapedPoint.x, tapedPoint.y);
-    //to dekart coordinates
-    CGPoint dekart = [self screenToDekart:tapedPoint];
-    NSLog(@"to dekart: %f %f", dekart.x, dekart.y);
+    switch (self.actionType) {
+        case kAddPoint: {
+            CGPoint tapedPoint =  [tapGestureRecognizer locationInView:self];
+            NSLog(@">>>>>>tap! %f %f", tapedPoint.x, tapedPoint.y);
+            //to dekart coordinates
+            CGPoint dekart = [self screenToDekart:tapedPoint];
+            NSLog(@"to dekart: %f %f", dekart.x, dekart.y);
+            
+            [self.shapes addObject:[NSValue valueWithCGPoint:dekart]];
+            [self setNeedsDisplay];
 
-    [self.shapes addObject:[NSValue valueWithCGPoint:dekart]];
-    [self setNeedsDisplay];
-    //to screen
+        }
+            break;
+        case kAddLine: {
+            NSLog(@"draw line!!!!");
+        }
+            break;
+        case kAddSegment: {
+            NSLog(@"draw segment!!!");
+            NSValue* secondVal = nil;
+            NSValue* firstVal  = nil;
+            if(existStartOfSegment) {
+                CGPoint secondTap = [tapGestureRecognizer locationInView:self];
+                secondVal = [NSValue valueWithCGPoint:[self screenToDekart:secondTap]];
+                [self.shapes addObject:[[NSMutableArray alloc]initWithObjects:firstVal, secondVal, nil]];
+                self.existStartOfSegment = NO;
+            } else {
+                CGPoint firstTap = [tapGestureRecognizer locationInView:self];
+                firstVal = [NSValue valueWithCGPoint:[self screenToDekart:firstTap]];
+                self.existStartOfSegment = YES;
+            }
+        }
+            break;
+        default: {
+            NSLog(@"undefine drawing. Who is here?");
+        }
+            break;
+    }
+       //to screen
 //   CGPoint dek = CGPointMake(3, -2);
 //    CGPoint scr = [self dekartToScreen:dek];
 //    NSLog(@"to screen: %f %f", scr.x, scr.y);
@@ -171,9 +203,9 @@
     self.gridOffsetX  = deltaX + self.gridOffsetX;
     self.gridOffsetY = deltaY + self.gridOffsetY;
     // NSLog(@"-------   %f", gridOffsetX);
-    CGRect test = CGRectMake(self.rectDrawing.origin.x , self.rectDrawing.origin.y, self.rectDrawing.size.width, self.rectDrawing.size.height);
-    
-    self.rectDrawing = test;
+//    CGRect test = CGRectMake(self.rectDrawing.origin.x , self.rectDrawing.origin.y, self.rectDrawing.size.width, self.rectDrawing.size.height);
+//    
+//    self.rectDrawing = test;
     [self setNeedsDisplay ];
 }
 
@@ -191,10 +223,9 @@
     CGPoint dekart;
     dekart.x = screen.x / [self.cellWidth floatValue]  + self.offsetForIntAsixX;//+ self.gridOffsetX;
     
-    CGFloat f = self.frame.size.height  + self.gridOffsetY - screen.y / [self.cellHeight floatValue];
+  //  CGFloat f = self.frame.size.height  + self.gridOffsetY - screen.y / [self.cellHeight floatValue];
     
-    dekart.y = (self.frame.size.height  + self.gridOffsetY - screen.y) / [self.cellHeight floatValue];// - self.offsetForIntAsixY);
-    // = CGPointMake(screen.x / [self.cellWidth floatValue] + self.gridOffsetX, self.frame.size.height - (screen.y * [self.cellHeight floatValue] + self.gridOffsetY));
+    dekart.y = (self.frame.size.height  + self.gridOffsetY - screen.y) / [self.cellHeight floatValue];
     return dekart;
 }
 
@@ -214,11 +245,11 @@
     CGContextSetStrokeColorWithColor(context, [UIColor blackColor].CGColor);
     float offsetForCellX = fmodf(self.gridOffsetX, [cellWidth floatValue]);
     
-
+    //vertical lines
     self.offsetForIntAsixX = self.gridOffsetX / -[self.cellWidth intValue];
     NSLog(@"grid offsetx %f and left val %d first x %f", self.gridOffsetX, self.offsetForIntAsixX, rect.origin.x + offsetForCellX);
    
-    for(int i = rect.origin.x /* - [self.cellWidth intValue]*/ + offsetForCellX, j = 0; i < (rect.origin.x + rect.size.width) && j <= amountLinesX + 1; i += kCellWidth, j++)
+    for(int i = rect.origin.x + offsetForCellX, j = 0; i < (rect.origin.x + rect.size.width) && j <= amountLinesX + 1; i += kCellWidth, j++)
     {
         CGContextMoveToPoint(context, i, 0);
         CGContextAddLineToPoint(context, i, rect.origin.y + self.frame.size.height);
@@ -232,17 +263,17 @@
     
     if(offsetForCellY < 0)
         addY = 1;
-    //int
+    
     self.offsetForIntAsixY = self.gridOffsetY / [self.cellHeight intValue];
     
-    for (int i = rect.origin.y + offsetForCellY, j = self.amountLinesY; i < (rect.origin.y + rect.size.height) && j >= - addY; i += kCellHeight, j--) {
+    for (int i = rect.origin.y + offsetForCellY, j = self.amountLinesY; i < (rect.origin.y + rect.size.height) && j >= - 1; i += kCellHeight, j--) {
         CGContextMoveToPoint(context, 0, i);
         CGContextAddLineToPoint(context, self.frame.size.width, i);
         //text
         NSString *numberYStr = [NSString stringWithFormat:@"%d", j + self.offsetForIntAsixY];
         [numberYStr drawAtPoint:CGPointMake(2., i +2.) withFont:helveticaBold];
     }
-    
+    //draw point
     for (NSValue* value in self.shapes) {
         NSLog(@"count of points: %d", [self.shapes count]);
         CGContextStrokePath(context);
@@ -250,8 +281,13 @@
         CGPoint point = [value CGPointValue];
         CGPoint screen = [self dekartToScreen:point];
         CGContextAddEllipseInRect(context,(CGRectMake (screen.x, screen.y, 5.0, 5.0)));
-      //  CGContextDrawPath(context, kCGPathFill);
-       //CGContextStrokePath(context);
+    }
+    for (NSMutableArray* arr in self.shapes) {
+       //!!! if([arr isKindOfClass:<#(Class)#> )
+        CGPoint firstP = [[arr objectAtIndex:0] CGPointValue];
+        CGPoint secondP = [[arr objectAtIndex:1] CGPointValue];
+        CGContextMoveToPoint(context, firstP.x, firstP.y);
+        CGContextAddLineToPoint(context, secondP.x, secondP.y);
     }
     CGContextStrokePath(context);
 }

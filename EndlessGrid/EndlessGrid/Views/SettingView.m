@@ -10,7 +10,7 @@
 
 @implementation SettingView
 @synthesize test;
-@synthesize delegate;
+//@synthesize delegate;
 
 - (void)dealloc
 {
@@ -37,8 +37,7 @@
 }
 - ( void)initControls
 {
-    self.test
-    = [[[UIButton alloc] initWithFrame:CGRectMake(10, 10, 50, 20)] autorelease];
+    self.test = [[[UIButton alloc] initWithFrame:CGRectMake(10, 10, 50, 20)] autorelease];
     self.test.titleLabel.text = @"hide";
     self.test.backgroundColor = [UIColor greenColor];
     [self.test addTarget:self action:@selector(hide) forControlEvents:UIControlEventTouchUpInside];
@@ -47,9 +46,9 @@
 
 - (void)hide
 {
-    if ([self.delegate respondsToSelector:@selector(hideSettingsView)]) {
-        [self.delegate hideSettingsView];
-    }
+//    if ([self.delegate respondsToSelector:@selector(hideSettingsView)]) {
+//        [self.delegate hideSettingsView];
+//    }
 }
 
 /*

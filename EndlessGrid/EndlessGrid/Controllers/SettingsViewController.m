@@ -13,6 +13,12 @@
 @end
 
 @implementation SettingsViewController
+@synthesize closeButton;
+@synthesize delegate;
+@synthesize addLine;
+@synthesize addPoint;
+@synthesize addSegment;
+@synthesize senderActionType;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -29,6 +35,11 @@
 	// Do any additional setup after loading the view.
     
    }
+-(void)viewDidUnload
+{
+    self.closeButton = nil;
+    [super viewDidUnload];
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -36,4 +47,41 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)pressButton:(UIButton*)sender
+{
+if(sender)
+{
+    NSLog(@"sender!?");
+}
+    switch ([sender tag]) {
+        case kAddPointTag: {
+            self.senderActionType = kAddPoint;
+        }
+            break;
+        case kAddLineTag: {
+            self.senderActionType = kAddLine;
+        }
+            break;
+        case kAddSegmentTag:{
+            self.senderActionType = kAddSegment;
+        }
+            break;
+        case kOnlyClose:{
+            self.senderActionType = kAddNone;
+        }
+            break;
+        default:
+            break;
+    }
+    
+    if ([self.delegate respondsToSelector:@selector(hideSettingsView:)]) {
+        [self.delegate hideSettingsView:self.senderActionType];
+    }
+}
+- (void)closeSetting
+{
+//    if ([self.delegate respondsToSelector:@selector(hideSettingsView)]) {
+//        [self.delegate hideSettingsView];
+//    }
+}
 @end

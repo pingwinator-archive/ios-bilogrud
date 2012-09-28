@@ -17,6 +17,7 @@
 @synthesize grid;
 @synthesize settingViewController;
 @synthesize testButton;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -34,9 +35,20 @@
     [super awakeFromNib];
     
 }
+
 - (void)test
 {
     self.settingViewController = [[SettingsViewController alloc]initWithNibName:@"SettingsViewController" bundle:nil];
     [self presentModalViewController:self.settingViewController animated:YES];
+    self.settingViewController.delegate = self;
+}
+
+- (void)hideSettingsView:(ActionType)senderActionType
+{
+    NSLog(@"!!!close with type: %u", senderActionType);
+    [self dismissModalViewControllerAnimated:YES];
+    if( self.grid.actionType != kAddNone ) {
+        self.grid.actionType = senderActionType;
+    }
 }
 @end

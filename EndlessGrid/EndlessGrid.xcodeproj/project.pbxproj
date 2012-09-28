@@ -51,6 +51,7 @@
 		6EE8E87D16147A2300668FFC /* Shape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shape.m; sourceTree = "<group>"; };
 		6EE8E8A816149CEE00668FFC /* SettingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingView.h; sourceTree = "<group>"; };
 		6EE8E8A916149CEE00668FFC /* SettingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingView.m; sourceTree = "<group>"; };
+		6EE8E8BA1615B86D00668FFC /* DefConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefConst.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +119,7 @@
 				6EE7420216109B4E00699999 /* Default.png */,
 				6EE7420416109B4E00699999 /* Default@2x.png */,
 				6EE7420616109B4E00699999 /* Default-568h@2x.png */,
+				6EE8E8BA1615B86D00668FFC /* DefConst.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
