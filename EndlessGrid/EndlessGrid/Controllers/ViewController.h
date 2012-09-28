@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GridGraphic.h"
+@class GridGraphic;
+@class SettingsViewController;
+
 @interface ViewController : UIViewController
+
 @property(retain, nonatomic) IBOutlet GridGraphic* grid;
+@property(retain, nonatomic)  SettingsViewController* settingViewController;
+@property(retain, nonatomic) IBOutlet UIButton* testButton;
+
+-(IBAction)test;//:(id)sender
 @end

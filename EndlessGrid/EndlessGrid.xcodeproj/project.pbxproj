@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E8EECAA1614F2F200B410C5 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8EECA91614F2F200B410C5 /* SettingsViewController.m */; };
+		6E8EECAC1614F3D600B410C5 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E8EECAB1614F3D600B410C5 /* SettingsViewController.xib */; };
 		6EE741F116109B4D00699999 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE741F016109B4D00699999 /* UIKit.framework */; };
 		6EE741F316109B4D00699999 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE741F216109B4D00699999 /* Foundation.framework */; };
 		6EE741F516109B4D00699999 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE741F416109B4D00699999 /* CoreGraphics.framework */; };
@@ -21,10 +23,12 @@
 		6EE8E87A161476C700668FFC /* GridGraphic.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EE8E877161476C700668FFC /* GridGraphic.m */; };
 		6EE8E87E16147A2300668FFC /* Shape.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EE8E87D16147A2300668FFC /* Shape.m */; };
 		6EE8E8AA16149CEE00668FFC /* SettingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EE8E8A916149CEE00668FFC /* SettingView.m */; };
-		6EE8E8AD1614A3EA00668FFC /* SettingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EE8E8AC1614A3EA00668FFC /* SettingView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6E8EECA81614F2F200B410C5 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		6E8EECA91614F2F200B410C5 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		6E8EECAB1614F3D600B410C5 /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		6EE741EC16109B4D00699999 /* EndlessGrid.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EndlessGrid.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EE741F016109B4D00699999 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6EE741F216109B4D00699999 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -47,7 +51,6 @@
 		6EE8E87D16147A2300668FFC /* Shape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shape.m; sourceTree = "<group>"; };
 		6EE8E8A816149CEE00668FFC /* SettingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingView.h; sourceTree = "<group>"; };
 		6EE8E8A916149CEE00668FFC /* SettingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingView.m; sourceTree = "<group>"; };
-		6EE8E8AC1614A3EA00668FFC /* SettingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +127,8 @@
 			children = (
 				6EE8E870161476C700668FFC /* ViewController.h */,
 				6EE8E871161476C700668FFC /* ViewController.m */,
+				6E8EECA81614F2F200B410C5 /* SettingsViewController.h */,
+				6E8EECA91614F2F200B410C5 /* SettingsViewController.m */,
 			);
 			name = Controllers;
 			path = EndlessGrid/Controllers;
@@ -142,7 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				6EE8E874161476C700668FFC /* ViewController.xib */,
-				6EE8E8AC1614A3EA00668FFC /* SettingView.xib */,
+				6E8EECAB1614F3D600B410C5 /* SettingsViewController.xib */,
 			);
 			path = Nibs;
 			sourceTree = "<group>";
@@ -225,7 +230,7 @@
 				6EE7420516109B4E00699999 /* Default@2x.png in Resources */,
 				6EE7420716109B4E00699999 /* Default-568h@2x.png in Resources */,
 				6EE8E879161476C700668FFC /* ViewController.xib in Resources */,
-				6EE8E8AD1614A3EA00668FFC /* SettingView.xib in Resources */,
+				6E8EECAC1614F3D600B410C5 /* SettingsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,6 +247,7 @@
 				6EE8E87A161476C700668FFC /* GridGraphic.m in Sources */,
 				6EE8E87E16147A2300668FFC /* Shape.m in Sources */,
 				6EE8E8AA16149CEE00668FFC /* SettingView.m in Sources */,
+				6E8EECAA1614F2F200B410C5 /* SettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

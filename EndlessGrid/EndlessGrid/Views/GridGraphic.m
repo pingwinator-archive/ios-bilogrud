@@ -19,7 +19,7 @@
 @property (assign, nonatomic) NSInteger amountLinesX;
 @property (assign, nonatomic) NSInteger amountLinesY;
 @property (retain, nonatomic) NSMutableArray* shapes;
-@property (retain, nonatomic) SettingView* settingView;
+
 @end
 
 @implementation GridGraphic
@@ -36,6 +36,7 @@
 @synthesize shapes;
 @synthesize settingButton;
 @synthesize settingView;
+//@synthesize bgForSetting;
 
 - (void) dealloc
 {
@@ -87,10 +88,25 @@
 }
 
 - (void)showSetting{
-    self.settingView = [[[SettingView alloc]initWithFrame:CGRectMake(0, 0, 200, 200)]autorelease];
-    [self addSubview:self.settingView];
+//    self.settingView = [[[SettingView alloc]initWithFrame:CGRectMake(100, 100, 100, 100)]autorelease];
+//    [self addSubview: self.settingView];
+ //   self.settingView.delegate = self;
+   
+   // self.bgForSetting.hidden = NO;
+//    self.settingView.hidden = NO;
+//    self.settingView.backgroundColor = [UIColor redColor];
+    
+    
     NSLog(@"URA!");
 }
+#pragma mark - Setting
+
+- (void)hideSettingsView
+{
+    [self.settingView removeFromSuperview];
+    self.settingView = nil;
+}
+
 #pragma mark - GestureRecognizers Methods
 
 - (void)addGesture

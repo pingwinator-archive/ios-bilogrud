@@ -7,13 +7,16 @@
 //
 
 #import "ViewController.h"
-
+#import "GridGraphic.h"
+#import "SettingsViewController.h"
 @interface ViewController ()
 
 @end
 
 @implementation ViewController
 @synthesize grid;
+@synthesize settingViewController;
+@synthesize testButton;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -30,5 +33,10 @@
     NSLog(@"awakeFromNib %f", self.grid.frame.size.height);
     [super awakeFromNib];
     
+}
+- (void)test
+{
+    self.settingViewController = [[SettingsViewController alloc]initWithNibName:@"SettingsViewController" bundle:nil];
+    [self presentModalViewController:self.settingViewController animated:YES];
 }
 @end

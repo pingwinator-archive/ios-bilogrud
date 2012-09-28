@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol SettingsViewDelegate;
+
 @interface SettingView : UIView
+@property(retain, nonatomic) UIButton* test;
+@property (nonatomic, assign) id <SettingsViewDelegate> delegate;
+@end
+
+@protocol SettingsViewDelegate <NSObject>
+
+- (void)hideSettingsView;
 
 @end
