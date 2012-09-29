@@ -248,15 +248,10 @@
 {
     NSInteger count = [self.allPosts count];
     if(count){
-        tableView.separatorColor = [UIColor brownColor];// lightGrayColor];//groupTableViewBackgroundColor];
+        tableView.separatorColor = [UIColor brownColor];
         tableView.separatorStyle = UITableViewStylePlain;
     }
     return count;
-}
-
--(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // update
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
