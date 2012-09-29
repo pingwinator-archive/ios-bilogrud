@@ -183,7 +183,6 @@
     [insertIndexPaths release];
 }
 
-
 - (NSMutableArray *)onlyHasMessagePost: (NSArray *)allPost
 {
     NSMutableArray *onlyMessage = [[[NSMutableArray alloc] init] autorelease];
@@ -272,7 +271,7 @@
         
         cell.name = status.userFromName;
        
-        cell.time = [status.time dateStringWithFormat];//[self stringWithDate:status.time];
+        cell.time = [status.time dateStringWithFormat];
         
         cell.message = status.message;
         cell.messageLabel.font = [UIFont systemFontOfSize:(CGFloat)kFontMesage];
@@ -302,7 +301,7 @@
 {
     NSString* text = [[self.allPosts objectAtIndex:indexPath.row] message];
     CGSize textSize = [text sizeWithFont:[UIFont systemFontOfSize:kFontMesage]  constrainedToSize:CGSizeMake(280, 1000)];
-    return MAX(95.f, textSize.height + kCellOffset);
+    return MAX(cellHeight, textSize.height + kCellOffset);
 }
 
 @end

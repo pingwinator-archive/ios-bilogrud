@@ -54,3 +54,5 @@ return _sharedObject;
 #define dateFormatStatus @"dd-MM-yyyy HH:mm"
 
 #define permissionStr  @"user_likes", @"read_stream", @"publish_stream"
+
+#define cellHeight 95.0f

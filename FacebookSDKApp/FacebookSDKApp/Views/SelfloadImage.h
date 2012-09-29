@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+@class SharedCache;
 #import "Connect.h"
-#import "SharedCache.h"
-#import "UIImage+RoundedCorner.h"
 @interface SelfloadImage : UIImageView
 
 - (void)loadImage: (NSURL *)url cashImages: (NSCache*)cache;

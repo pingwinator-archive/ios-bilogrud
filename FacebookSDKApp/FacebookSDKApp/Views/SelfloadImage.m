@@ -7,7 +7,8 @@
 //
 
 #import "SelfloadImage.h"
-
+#import "SharedCache.h"
+#import "UIImage+RoundedCorner.h"
 @interface SelfloadImage()
 
 @property (retain, nonatomic) Connect *connect;
