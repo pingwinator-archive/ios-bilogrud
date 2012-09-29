@@ -11,7 +11,7 @@
 #import "SettingsViewController.h"
 #import "UIImage+RoundedCorner.h"
 @interface ViewController ()
-
+@property(retain, nonatomic) UIView* settingSmallView;
 @end
 
 @implementation ViewController
@@ -19,7 +19,7 @@
 @synthesize settingViewController;
 @synthesize testButton;
 @synthesize bgView;
-
+@synthesize settingSmallView;
 
 - (void)dealloc
 {
@@ -27,6 +27,7 @@
     self.settingViewController = nil;
     self.testButton = nil;
     self.grid = nil;
+    self.settingSmallView = nil;
     [super dealloc];
 }
 
@@ -41,6 +42,7 @@
     self.settingViewController = nil;
     self.testButton = nil;
     self.grid = nil;
+    self.settingSmallView = nil;
     [super viewDidUnload];
 }
 - (void)didReceiveMemoryWarning
@@ -60,7 +62,9 @@
 {
     self.bgView.backgroundColor = [[UIColor clearColor] colorWithAlphaComponent:0.5];
     
-    
+    [UIView animateWithDuration:0.4 animations:^{
+        self.bgView.alpha = 1.0;
+    }];
     
     [self.settingViewController.view removeFromSuperview];
     self.settingViewController = [[SettingsViewController alloc]initWithNibName:@"SettingsViewController" bundle:nil];
@@ -68,14 +72,14 @@
     self.bgView.hidden = NO;
     
     
-    UIView* settingSmallView = self.settingViewController.view;
+    self.settingSmallView = self.settingViewController.view;
     
     UIImage* imageSegm = [[UIImage imageNamed:@"LineIcon.png" ] roundedCornerImage:7 borderSize:0];
     self.settingViewController.addSegm.image = imageSegm;
-    settingSmallView.frame = CGRectMake(0, 100, 320, 130);
-    settingSmallView.backgroundColor = [UIColor redColor] ;
+    self.settingSmallView.frame = CGRectMake(0, 100, 320, 130);
+    self.settingSmallView.backgroundColor = [UIColor redColor] ;
   
-    [self.bgView addSubview:settingSmallView];
+    [self.bgView addSubview:self.settingSmallView];
  
     self.grid.userInteractionEnabled = NO;
 }
@@ -89,5 +93,6 @@
     if( senderActionType != kAddNone ) {
         self.grid.actionType = senderActionType;
     }
+    self.bgView.alpha = 0.0f;
 }
 @end
