@@ -7,7 +7,7 @@
 //
 
 #import "SettingsViewController.h"
-#import "UIImage+RoundedCorner.h"
+
 @interface SettingsViewController ()
 
 @end
@@ -44,8 +44,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-//    UIImage* imageSegm = [UIImage imageNamed:@"LineIcon.png" ];
-//    [self.addSegm setImage:[imageSegm roundedCornerImage:7 borderSize:0]];  
+  
    }
 -(void)viewDidUnload
 {

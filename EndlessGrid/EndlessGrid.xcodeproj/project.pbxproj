@@ -23,6 +23,7 @@
 		6EAEE2DC1616C5370048A0F5 /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EAEE2D71616C5370048A0F5 /* UIImage+Alpha.m */; };
 		6EAEE2DD1616C5370048A0F5 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EAEE2D91616C5370048A0F5 /* UIImage+Resize.m */; };
 		6EAEE2DE1616C5370048A0F5 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EAEE2DB1616C5370048A0F5 /* UIImage+RoundedCorner.m */; };
+		6EB36C051616F63D00CAB75E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EB36C041616F63D00CAB75E /* QuartzCore.framework */; };
 		6EE741F116109B4D00699999 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE741F016109B4D00699999 /* UIKit.framework */; };
 		6EE741F316109B4D00699999 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE741F216109B4D00699999 /* Foundation.framework */; };
 		6EE741F516109B4D00699999 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE741F416109B4D00699999 /* CoreGraphics.framework */; };
@@ -61,6 +62,7 @@
 		6EAEE2D91616C5370048A0F5 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
 		6EAEE2DA1616C5370048A0F5 /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
 		6EAEE2DB1616C5370048A0F5 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
+		6EB36C041616F63D00CAB75E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		6EE741EC16109B4D00699999 /* EndlessGrid.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EndlessGrid.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EE741F016109B4D00699999 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6EE741F216109B4D00699999 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -87,6 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EB36C051616F63D00CAB75E /* QuartzCore.framework in Frameworks */,
 				6EE741F116109B4D00699999 /* UIKit.framework in Frameworks */,
 				6EE741F316109B4D00699999 /* Foundation.framework in Frameworks */,
 				6EE741F516109B4D00699999 /* CoreGraphics.framework in Frameworks */,
@@ -149,6 +152,7 @@
 		6EE741EF16109B4D00699999 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6EB36C041616F63D00CAB75E /* QuartzCore.framework */,
 				6EE741F016109B4D00699999 /* UIKit.framework */,
 				6EE741F216109B4D00699999 /* Foundation.framework */,
 				6EE741F416109B4D00699999 /* CoreGraphics.framework */,

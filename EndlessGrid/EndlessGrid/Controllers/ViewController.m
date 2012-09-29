@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "GridGraphic.h"
 #import "SettingsViewController.h"
+#import "UIImage+RoundedCorner.h"
 @interface ViewController ()
 
 @end
@@ -57,17 +58,23 @@
 
 - (void)showSetting
 {
+    self.bgView.backgroundColor = [[UIColor clearColor] colorWithAlphaComponent:0.5];
+    
+    
+    
     [self.settingViewController.view removeFromSuperview];
     self.settingViewController = [[SettingsViewController alloc]initWithNibName:@"SettingsViewController" bundle:nil];
     self.settingViewController.delegate = self;
     self.bgView.hidden = NO;
-    UIView* settingSmallView = self.settingViewController.view;
-  
-    settingSmallView.frame = CGRectMake(10, 100, 300, 150);
-    settingSmallView.backgroundColor = [UIColor redColor] ;
-    settingSmallView.alpha = 1.0f;
-    settingSmallView.opaque = YES;
     
+    
+    UIView* settingSmallView = self.settingViewController.view;
+    
+    UIImage* imageSegm = [[UIImage imageNamed:@"LineIcon.png" ] roundedCornerImage:7 borderSize:0];
+    self.settingViewController.addSegm.image = imageSegm;
+    settingSmallView.frame = CGRectMake(0, 100, 320, 130);
+    settingSmallView.backgroundColor = [UIColor redColor] ;
+  
     [self.bgView addSubview:settingSmallView];
  
     self.grid.userInteractionEnabled = NO;
