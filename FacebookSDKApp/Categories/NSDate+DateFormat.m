@@ -7,10 +7,11 @@
 //
 
 #import "NSDate+DateFormat.h"
+#define yearInSeconds (12 * monthInSeconds)
 #define monthInSeconds (30 * dayInSeconds)
 #define weekInSeconds (7 * dayInSeconds)
-#define dayInSeconds 24 * hourInSeconds
-#define hourInSeconds 60 * minInSeconds
+#define dayInSeconds (24 * hourInSeconds)
+#define hourInSeconds (60 * minInSeconds)
 #define minInSeconds 60
 @implementation NSDate (DateFormat)
 
@@ -23,8 +24,16 @@
     NSInteger timeTestInteger = (NSInteger) timeTest;
     
     NSLog(@"hour : %d", hourInSeconds);
-    if(timeTestInteger > monthInSeconds) {
-        int amountMonth = timeTestInteger / (monthInSeconds) ;
+    
+    if(timeTestInteger > yearInSeconds) {
+        int amountYear = timeTestInteger / yearInSeconds;
+        if(amountYear > 1) {
+            result = [result stringByAppendingFormat:NSLocalizedString(@"more %d years ago", @""), amountYear ];
+        } else {
+            result = [result stringByAppendingFormat:NSLocalizedString(@"near a year ago", @""), amountYear ];
+        }
+    } else if (timeTestInteger > monthInSeconds) {
+        int amountMonth = timeTestInteger / monthInSeconds ;
         if(amountMonth > 1) {
             result = [result stringByAppendingFormat:NSLocalizedString(@"more %d monthes ago", @""), amountMonth ];
             NSString* str =[NSString stringWithFormat:@"%@", PluralFormForStringAndValueRU(result, amountMonth)];
@@ -34,14 +43,14 @@
             result = [result stringByAppendingFormat:NSLocalizedString(@"more %d month ago", @""), amountMonth ];
         }
     } else if (timeTestInteger > weekInSeconds) {
-        int amountWeek = timeTestInteger / (weekInSeconds);
+        int amountWeek = timeTestInteger / weekInSeconds;
         if(amountWeek > 1) {
             result = [result stringByAppendingFormat:NSLocalizedString(@"near %d weeks ago",@""), amountWeek];
         } else {
             result = [result stringByAppendingFormat:NSLocalizedString(@"near one week ago", @"")];
         }
     } else if (timeTestInteger > dayInSeconds) {
-        int amountDay = timeTestInteger / (dayInSeconds);
+        int amountDay = timeTestInteger / dayInSeconds;
         if(amountDay > 1) {
             result = [result stringByAppendingFormat:NSLocalizedString(@"near %d days ago", @""), amountDay];
         } else {
@@ -51,14 +60,14 @@
      //   id check = timeTestInteger / hourInSeconds;
         NSNumber* test = [NSNumber numberWithInt:timeTestInteger/hourInSeconds];
         NSLog(@"%@", test);
-        int amountHour = timeTestInteger / (hourInSeconds);
+        int amountHour = timeTestInteger / hourInSeconds;
         if(amountHour > 1) {
             result = [result stringByAppendingFormat:NSLocalizedString(@"near %d hours ago", @""), amountHour];
         } else {
             result = [result stringByAppendingFormat:NSLocalizedString(@"near an hour ago", @"")];
         }
     } else if(timeTestInteger > minInSeconds) {
-        int amountMin = timeTestInteger / (minInSeconds);
+        int amountMin = timeTestInteger / minInSeconds;
         if(amountMin > 1) {
             result = [result stringByAppendingFormat:NSLocalizedString(@"near %d minutes ago", @""), amountMin];
         } else {
