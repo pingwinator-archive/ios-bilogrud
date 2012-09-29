@@ -9,7 +9,7 @@
 #import "CoreDataManager.h"
 
 @interface CoreDataManager()
--(id) init;
+
 @end
 
 @implementation CoreDataManager
@@ -23,15 +23,6 @@
     [_managedObjectModel release];
     [_persistentStoreCoordinator release];
     [super dealloc];
-}
-
-
-- (id)init
-{
-    if ((self = [super init]))
-    {
-    }
-    return self;
 }
 
 +(id)sharedInstance
