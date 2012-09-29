@@ -23,6 +23,9 @@
 @property (assign, nonatomic) BOOL existStartOfSegment;
 @property (assign, nonatomic) CGPoint firstDekartSegment;
 @property (assign, nonatomic) CGPoint lastDekartSegment;
+@property (assign, nonatomic) BOOL existStartOfLine;
+@property (assign, nonatomic) CGPoint firstDekartLinePoint;
+@property (assign, nonatomic) CGPoint lastDekartLinePoint;
 @property (assign, nonatomic) CGFloat lastCellScale;
 
 - (void)addGesture;
@@ -49,6 +52,9 @@
 @synthesize existStartOfSegment;
 @synthesize firstDekartSegment;
 @synthesize lastDekartSegment;
+@synthesize existStartOfLine;
+@synthesize firstDekartLinePoint;
+@synthesize lastDekartLinePoint;
 @synthesize lastCellScale;
 - (void) dealloc
 {
@@ -138,10 +144,23 @@
             break;
         case kAddLine: {
             DBLog(@"draw line!!!!");
+            if(self.existStartOfLine) {
+                 CGPoint secondTap = [tapGestureRecognizer locationInView:self];
+                self.lastDekartLinePoint = [self screenToDekart:secondTap];
+                SLine* line = [[SLine alloc] initWithFirstPoint:self.firstDekartLinePoint secondPoint:self.lastDekartLinePoint];
+                [self.shapes addObject:line];
+                [line release];
+                [self setNeedsDisplay];
+                self.existStartOfLine = NO;
+            } else {
+                CGPoint firstTap = [tapGestureRecognizer locationInView:self];
+                self.firstDekartLinePoint = [self screenToDekart:firstTap];
+                self.existStartOfLine = YES;
+            }
         }
             break;
         case kAddSegment: {
-            if(existStartOfSegment) {
+            if(self.existStartOfSegment) {
                 CGPoint secondTap = [tapGestureRecognizer locationInView:self];
                 self.lastDekartSegment = [self screenToDekart:secondTap];
                 SSegment* segment = [[SSegment alloc] initWithFirstPoint:self.firstDekartSegment LastPoint:self.lastDekartSegment ];//]hFirstPoint:firstDekart lastPoint:secondDekart];
@@ -166,23 +185,17 @@
 - (void)performPinchGesture: (UIPinchGestureRecognizer*) pinchGestureRecognizer
 {
     DBLog(@"%f",[pinchGestureRecognizer scale ]);
+
     CGFloat newH = [pinchGestureRecognizer scale] * [self.cellHeight floatValue];
-    
+        
+    if(newH < 20){
+        newH = 20;
+    }
+    if(newH > 70) {
+        newH = 70;
+    }
     self.cellHeight = [NSNumber numberWithFloat:newH];
     self.cellWidth = [NSNumber numberWithFloat:newH];
-    
-//    if( [self.cellHeight intValue] > 70) {
-//        self.lastCellScale = 70;//[self.cellHeight floatValue];
-//        self.cellHeight = [NSNumber numberWithFloat:70];
-//        self.cellWidth = [NSNumber numberWithFloat:70];
-//        
-//    }
-//    if ([self.cellHeight intValue] < 10) {
-//        self.cellHeight = [NSNumber numberWithFloat:10];
-//        self.cellWidth = [NSNumber numberWithFloat:10];
-//        self.lastCellScale = 10.0f;
-//    }
-
     [self setNeedsDisplay];
 }
 
@@ -276,6 +289,17 @@
             CGContextMoveToPoint(context, firstPointScreen.x, firstPointScreen.y);
             CGContextAddLineToPoint(context, lastPointScreen.x, lastPointScreen.y);
         }
+        //line
+        if([shape isKindOfClass:[SLine class]]) {
+            CGContextStrokePath(context);
+            SLine* shapeLine = shape;
+            CGContextSetStrokeColorWithColor(context, shapeLine.color.CGColor);
+            CGPoint firstPointScreen = [self dekartToScreen: shapeLine.firstPoint];
+            CGPoint lastPointScreen = [self dekartToScreen: shapeLine.secondPoint];
+            CGContextMoveToPoint(context, firstPointScreen.x, firstPointScreen.y);
+            CGContextAddLineToPoint(context, lastPointScreen.x, lastPointScreen.y);
+        }
+
     }
     CGContextStrokePath(context);
 }

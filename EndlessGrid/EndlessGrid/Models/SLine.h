@@ -9,5 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface SLine : NSObject
-
+@property (assign, nonatomic) CGPoint firstPoint;
+@property (assign, nonatomic) CGPoint secondPoint;
+@property (retain, nonatomic) UIColor* color;
+- (id)initWithFirstPoint: (CGPoint) fPoint secondPoint:(CGPoint) sPoint;
 @end

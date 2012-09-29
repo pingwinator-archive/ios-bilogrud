@@ -13,9 +13,10 @@
 
 @interface SettingsViewController : UIViewController
 @property (retain, nonatomic) IBOutlet UIButton* closeButton;
-@property(retain, nonatomic) IBOutlet UIButton* addPoint;
-@property(retain, nonatomic) IBOutlet UIButton* addLine;
-@property(retain, nonatomic) IBOutlet UIButton* addSegment;
+@property (retain, nonatomic) IBOutlet UIButton* addPoint;
+@property (retain, nonatomic) IBOutlet UIButton* addLine;
+@property (retain, nonatomic) IBOutlet UIButton* addSegment;
+@property (retain, nonatomic) IBOutlet UIImageView* addSegm;
 @property (nonatomic, assign) id <SettingsViewDelegate> delegate;
 @property (nonatomic) ActionType senderActionType;
 - (IBAction)pressButton:(UIButton*)sender;

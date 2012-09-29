@@ -63,9 +63,10 @@
     self.bgView.hidden = NO;
     UIView* settingSmallView = self.settingViewController.view;
   
-    settingSmallView.frame = CGRectMake(10, 200, 300, 150);
-    settingSmallView.backgroundColor = [UIColor redColor];
-   // settingSmallView.alpha = 1.0f;
+    settingSmallView.frame = CGRectMake(10, 100, 300, 150);
+    settingSmallView.backgroundColor = [UIColor redColor] ;
+    settingSmallView.alpha = 1.0f;
+    settingSmallView.opaque = YES;
     
     [self.bgView addSubview:settingSmallView];
  
