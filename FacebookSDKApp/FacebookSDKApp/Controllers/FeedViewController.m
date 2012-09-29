@@ -19,17 +19,23 @@
 @property(retain, nonatomic) NSString *nextPage;//older messages
 @property(retain, nonatomic) NSString *previousPage;//new message
 @property(assign, nonatomic) BOOL updatePreviousPage;
+@property(retain, nonatomic) NSMutableSet* idPost;
 
 @end
 
 @implementation FeedViewController
-
+@synthesize idPost;
+@synthesize allPosts;
+@synthesize nextPage;
+@synthesize previousPage;
+@synthesize statusesArr;
 - (void)dealloc
 {
     self.statusesArr = nil;
     self.allPosts = nil;
     self.nextPage = nil;
     self.previousPage = nil;
+    self.idPost = nil;
     [super dealloc];
 }
 - (void)viewDidLoad
@@ -41,9 +47,9 @@
     ODRefreshControl *refreshControl = [[[ODRefreshControl alloc] initInScrollView:self.tableView] autorelease];
     [refreshControl addTarget:self action:@selector(dropViewDidBeginRefreshing:) forControlEvents:UIControlEventValueChanged];
     
+    self.idPost = [[NSMutableSet alloc]init];
     self.updatePreviousPage = NO;
     [self statusLoading];
-    
 }
 - (void)viewDidUnload
 {
@@ -137,8 +143,8 @@
     // пустой
     if(![self.allPosts count]) {
         self.previousPage = [pageDict valueForKey:kPrevious];
-        self.allPosts = [self onlyHasMessagePost:dataArr];
-        NSLog(@" last %@",[[self.allPosts lastObject] message]);
+        self.allPosts = [self updateDataInTable:[self onlyHasMessagePost:dataArr]];
+        [self.tableView reloadData];
     }
     else{
         if(self.nextPage)
@@ -151,22 +157,40 @@
         [self userPrevPageStatusLoading:dataArr];
         self.previousPage = [pageDict valueForKey:kPrevious];
     }
-    if([self.allPosts count]){
-        [self.tableView reloadData];
-    //    [self.tableView reloadRowsAtIndexPaths:<#(NSArray *)#> withRowAnimation:<#(UITableViewRowAnimation)#>]
+}
+
+- (NSMutableArray*)updateDataInTable:(NSArray*)newPosts
+{
+    NSMutableArray* uniqPosts = [[NSMutableArray alloc] init];
+    NSMutableArray *updateIndexPaths = [[NSMutableArray alloc] init];
+    for (UserData* userData in newPosts) {
+        if(![self.idPost containsObject: userData.feedID]){
+            [uniqPosts addObject:userData];
+            [self.idPost addObject:userData.feedID];
+            NSUInteger i = [self indexOfAccessibilityElement:userData];
+            if(i != NSNotFound) {
+                [updateIndexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+            }
+        }
     }
+    [self.tableView reloadRowsAtIndexPaths:updateIndexPaths withRowAnimation: UITableViewRowAnimationTop];
+    [updateIndexPaths release];
+    return uniqPosts;
 }
 
 - (void)userPrevPageStatusLoading:(NSArray*) dataArr
 {
-    NSArray *add = [self onlyHasMessagePost:dataArr];
+    NSArray *add = [self updateDataInTable: [self onlyHasMessagePost:dataArr]];
+//  [self updateDataInTable: [self onlyHasMessagePost:dataArr]];  [self updateDataInTable:add];
     NSArray *tempArray = [add arrayByAddingObjectsFromArray:self.allPosts ];
     self.allPosts = (NSMutableArray *)tempArray;
+    //[self.allPosts sortUsingDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"time" ascending:YES]]];
 }
 
 -(void)userNextPageStatusLoading:(NSArray*) dataArr
 {
-    NSArray *add = [self onlyHasMessagePost:dataArr];
+    NSArray *add =   [self updateDataInTable:[self onlyHasMessagePost:dataArr]];
+    //[self updateDataInTable:add];
     NSArray *tempArray = [self.allPosts arrayByAddingObjectsFromArray:add];
     self.allPosts =  (NSMutableArray *)tempArray;
 
@@ -269,11 +293,12 @@
         NSUInteger row = [indexPath row];
         UserData *status = [self.allPosts objectAtIndex:row];
         
-        cell.name = status.userFromName;
-       
-        cell.time = [status.time dateStringWithFormat];
+        if(status.userFromName != status.userName) {
+            cell.nameLabel.text = status.userFromName;
+        }
+        cell.timeLabel.text = [status.time dateStringWithFormat];
         
-        cell.message = status.message;
+        cell.messageLabel.text = status.message;
         cell.messageLabel.font = [UIFont systemFontOfSize:(CGFloat)kFontMesage];
         
         if([status.likes valueForKey: kCount]){
@@ -288,8 +313,8 @@
         [cell.photoImageView loadImage:url ];//singleton cache
         //  if "global" cache
         //  [cell.photoImageView loadImage:url cashImages:self.imageCache];
-        if([self.allPosts count] < ([indexPath row] + 2)){
-        [self loadNextPage];
+        if([self.allPosts count] < ([indexPath row] + 7)){
+            [self loadNextPage];
         }
     }
     return cell;
@@ -300,8 +325,8 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString* text = [[self.allPosts objectAtIndex:indexPath.row] message];
-    CGSize textSize = [text sizeWithFont:[UIFont systemFontOfSize:kFontMesage]  constrainedToSize:CGSizeMake(280, 1000)];
-    return MAX(cellHeight, textSize.height + kCellOffset);
+    CGSize textSize = [text sizeWithFont:[UIFont systemFontOfSize:kFontMesage]  constrainedToSize:CGSizeMake(280, 2000)];
+    return MAX(cellHeight, textSize.height + kCellOffset) ;
 }
 
 @end

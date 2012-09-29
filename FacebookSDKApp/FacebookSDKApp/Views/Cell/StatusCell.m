@@ -48,7 +48,7 @@
 
     // Configure the view for the selected state
 }
-
+/*
 - (void)setTime:(NSDate *)c
 {
     if (![c isEqual:time]) {
@@ -72,4 +72,5 @@
         
     }
 }
+ */
 @end

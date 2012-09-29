@@ -67,9 +67,9 @@
 		6E8E6FCB16105D9A00545953 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E8E6FCA16105D9A00545953 /* Default-568h@2x.png */; };
 		6E8E6FCE1610620900545953 /* NSDate+DateFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8E6FCD1610620900545953 /* NSDate+DateFormat.m */; };
 		6EB7F3D71607B2D3007556A5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6EB7F3D51607B2D3007556A5 /* Localizable.strings */; };
-		6EE8E8881614916400668FFC /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE8E8871614916400668FFC /* Accounts.framework */; };
-		6EE8E88B1614917300668FFC /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE8E88A1614917300668FFC /* AdSupport.framework */; };
-		6EE8E88D1614917C00668FFC /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE8E88C1614917C00668FFC /* Social.framework */; };
+		6EE8E8881614916400668FFC /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE8E8871614916400668FFC /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		6EE8E88B1614917300668FFC /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE8E88A1614917300668FFC /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		6EE8E88D1614917C00668FFC /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE8E88C1614917C00668FFC /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		6EE8E8951614940700668FFC /* StatusCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EE8E8931614940700668FFC /* StatusCell.m */; };
 		6EE8E8961614940700668FFC /* StatusCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EE8E8941614940700668FFC /* StatusCell.xib */; };
 		6EE8E8A316149BF600668FFC /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE8E8A216149BF600668FFC /* FacebookSDK.framework */; };
