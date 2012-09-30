@@ -281,13 +281,19 @@
         }
         //segment
         if([shape isKindOfClass:[SSegment class]]) {
+              
             CGContextStrokePath(context);
             SSegment* shapeSegment = shape;
             CGContextSetStrokeColorWithColor(context, shapeSegment.color.CGColor);
             CGPoint firstPointScreen = [self dekartToScreen: shapeSegment.firstPointDekart];
             CGPoint lastPointScreen = [self dekartToScreen: shapeSegment.lastPointDekart];
+            
             CGContextMoveToPoint(context, firstPointScreen.x, firstPointScreen.y);
+            
             CGContextAddLineToPoint(context, lastPointScreen.x, lastPointScreen.y);
+            CGContextAddEllipseInRect(context,(CGRectMake (firstPointScreen.x - radPoint/2, firstPointScreen.y - radPoint/2,radPoint, radPoint)));
+          
+            CGContextAddEllipseInRect(context,(CGRectMake (lastPointScreen.x - radPoint/2, lastPointScreen.y - radPoint/2,radPoint, radPoint)));
         }
         //line
         if([shape isKindOfClass:[SLine class]]) {
@@ -303,4 +309,10 @@
     }
     CGContextStrokePath(context);
 }
+#pragma mark - add custom shapes
+- (void)addCustomPoint:(CGPoint)point
+{
+    
+}
+
 @end

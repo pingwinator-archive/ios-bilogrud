@@ -11,7 +11,7 @@
 #import "SettingsViewController.h"
 #import "UIImage+RoundedCorner.h"
 @interface ViewController ()
-@property(retain, nonatomic) UIView* settingSmallView;
+@property(retain, nonatomic) UIImageView* settingSmallView;
 @end
 
 @implementation ViewController
@@ -60,24 +60,24 @@
 
 - (void)showSetting
 {
-    self.bgView.backgroundColor = [[UIColor clearColor] colorWithAlphaComponent:0.5];
+     self.bgView.backgroundColor = [[UIColor clearColor] colorWithAlphaComponent:0.5];
     
-    [UIView animateWithDuration:0.4 animations:^{
+    [UIImageView animateWithDuration:0.5 animations:^{
         self.bgView.alpha = 1.0;
     }];
+    
     
     [self.settingViewController.view removeFromSuperview];
     self.settingViewController = [[SettingsViewController alloc]initWithNibName:@"SettingsViewController" bundle:nil];
     self.settingViewController.delegate = self;
     self.bgView.hidden = NO;
     
-    
     self.settingSmallView = self.settingViewController.view;
-    
-    UIImage* imageSegm = [[UIImage imageNamed:@"LineIcon.png" ] roundedCornerImage:7 borderSize:0];
-    self.settingViewController.addSegm.image = imageSegm;
-    self.settingSmallView.frame = CGRectMake(0, 100, 320, 130);
-    self.settingSmallView.backgroundColor = [UIColor redColor] ;
+    UIImage* white = [[UIImage imageNamed:@"White.jpeg"] roundedCornerImage:7 borderSize:0];
+
+    self.settingSmallView.image = [white roundedCornerImage:10 borderSize:1];
+    self.settingSmallView.frame = CGRectMake(40, 100, 240, 260);
+  //  self.settingSmallView.backgroundColor = [UIColor redColor] ;
   
     [self.bgView addSubview:self.settingSmallView];
  
@@ -89,7 +89,7 @@
     [self.settingViewController.view removeFromSuperview];
     self.bgView.hidden = YES;
     self.grid.userInteractionEnabled = YES;
-    //[self dismissModalViewControllerAnimated:YES];
+    [self.settingViewController dismissModalViewControllerAnimated:YES];
     if( senderActionType != kAddNone ) {
         self.grid.actionType = senderActionType;
     }

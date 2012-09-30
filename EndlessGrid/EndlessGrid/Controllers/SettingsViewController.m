@@ -7,9 +7,10 @@
 //
 
 #import "SettingsViewController.h"
-
+#import "UIImage+RoundedCorner.h"
+#import "CustomPointVIewController.h"
 @interface SettingsViewController ()
-
+@property (retain, nonatomic) CustomPointVIewController* customPointView;
 @end
 
 @implementation SettingsViewController
@@ -19,7 +20,16 @@
 @synthesize addPoint;
 @synthesize addSegment;
 @synthesize senderActionType;
-@synthesize addSegm;
+@synthesize addCustomLine;
+@synthesize addCustomPoint;
+@synthesize addCustomSegment;
+@synthesize changeColor;
+@synthesize clearBoard;
+//@synthesize addSegmentImageView;
+//@synthesize addLineImageView;
+//@synthesize addPointImageView;
+@synthesize bgImageView;
+@synthesize customPointView;
 - (void)dealloc
 {
     self.closeButton = nil;
@@ -27,7 +37,16 @@
     self.addLine = nil;
     self.addPoint = nil;
     self.addSegment = nil;
-    self.addSegm = nil;
+    self.addCustomPoint = nil;
+    self.addCustomSegment = nil;
+    self.addCustomLine = nil;
+    self.clearBoard = nil;
+    self.changeColor = nil;
+    //    self.addSegmentImageView = nil;
+//    self.addPointImageView = nil;
+//    self.addLineImageView = nil;
+    self.bgImageView = nil;
+    self.customPointView = nil;
     [super dealloc];
 }
 
@@ -43,9 +62,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
-  
-   }
+    UIImage* imagePoint = [[UIImage imageNamed:@"PointIcon.png" ] roundedCornerImage:7 borderSize:0];
+//    self.addPointImageView.image = imagePoint;
+    
+  }
 -(void)viewDidUnload
 {
     self.closeButton = nil;
@@ -53,7 +73,16 @@
     self.addLine = nil;
     self.addPoint = nil;
     self.addSegment = nil;
-    self.addSegm = nil;
+    self.addCustomPoint = nil;
+    self.addCustomSegment = nil;
+    self.addCustomLine = nil;
+    self.clearBoard = nil;
+    self.changeColor = nil;
+//    self.addSegmentImageView = nil;
+//    self.addPointImageView = nil;
+//    self.addLineImageView = nil;
+    self.bgImageView = nil;
+    self.customPointView = nil;
     [super viewDidUnload];
 }
 
@@ -66,6 +95,10 @@
 - (IBAction)pressButton:(UIButton*)sender
 {
     switch ([sender tag]) {
+        case kOnlyClose:{
+            self.senderActionType = kAddNone;
+        }
+            break;
         case kAddPointTag: {
             self.senderActionType = kAddPoint;
         }
@@ -74,12 +107,31 @@
             self.senderActionType = kAddLine;
         }
             break;
-        case kAddSegmentTag:{
+        case kAddSegmentTag: {
             self.senderActionType = kAddSegment;
         }
             break;
-        case kOnlyClose:{
-            self.senderActionType = kAddNone;
+        case kAddCustomPointTag: {
+            self.senderActionType = kAddCustomPoint;
+            self.customPointView = [[CustomPointVIewController alloc]init];
+            [self presentModalViewController:self.customPointView animated:YES];
+            self.customPointView.delegate = self;
+        }
+            break;
+        case kAddCustomLineTag: {
+            self.senderActionType = kAddCustomLine;
+        }
+            break;
+        case kAddCustomSegmentTag: {
+            self.senderActionType = kAddCustomSegment;
+        }
+            break;
+        case kClearBoardTag: {
+            self.senderActionType = kClearBoard;
+        }
+            break;
+        case kChangeColorTag: {
+            self.senderActionType = kChangeColor;
         }
             break;
         default:
@@ -87,7 +139,12 @@
     }
     
     if ([self.delegate respondsToSelector:@selector(hideSettingsView:)]) {
-        [self.delegate hideSettingsView:self.senderActionType];
+  //      [self.delegate hideSettingsView:self.senderActionType];
     }
+}
+- (void)hideCustomPointView:(CGPoint)point
+{
+    NSLog(@"%f %f", point.x, point.y);
+    [self.delegate hideSettingsView:self.senderActionType];
 }
 @end

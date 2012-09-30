@@ -13,13 +13,22 @@ typedef enum {
     kAddNone, 
     kAddPoint,
     kAddLine,
-    kAddSegment
+    kAddSegment,
+    kAddCustomPoint,
+    kAddCustomLine,
+    kAddCustomSegment,
+    kClearBoard,
+    kChangeColor
 } ActionType;
-
+#define kOnlyClose 0
 #define kAddPointTag 1
 #define kAddLineTag 2
 #define kAddSegmentTag 3
-#define kOnlyClose 0
+#define kAddCustomPointTag 4
+#define kAddCustomLineTag 5
+#define kAddCustomSegmentTag 6
+#define kClearBoardTag 7
+#define kChangeColorTag 8
 
 #define radPoint 4.0f
 
