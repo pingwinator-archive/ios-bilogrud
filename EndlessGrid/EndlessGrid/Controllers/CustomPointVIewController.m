@@ -90,19 +90,19 @@
     self.xCoordinate.text = @"4";
     [self.view addSubview:self.xCoordinate];
     
-    CGRect rectButton = CGRectMake(75, 180, 50, 30);
-    self.canselButton = [[[UIButton alloc] initWithFrame:rectButton] autorelease];
-    self.canselButton.backgroundColor = [UIColor redColor];
-    self.canselButton.titleLabel.text = @"Cansel";
+    CGRect rectButton = CGRectMake(75, 180, 80, 30);
+    self.canselButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    self.canselButton.frame = rectButton;
+    [self.canselButton setTitle:@"Cansel" forState:UIControlStateNormal];
     [self.canselButton addTarget:self action:@selector(cansel) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.canselButton];
     
     rectButton.origin.x += 100;
-    self.canselButton = [[[UIButton alloc] initWithFrame:rectButton] autorelease];
-    self.canselButton.backgroundColor = [UIColor blueColor];
-    self.canselButton.titleLabel.text = @"Save";
-    [self.canselButton addTarget:self action:@selector(save) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.canselButton];
+    self.saveButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    self.saveButton.frame = rectButton;
+    [self.saveButton setTitle:@"Save" forState:UIControlStateNormal];
+    [self.saveButton addTarget:self action:@selector(save) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.saveButton];
 }
 
 - (void)didReceiveMemoryWarning
@@ -122,6 +122,5 @@
         [self.delegate hideCustomPointView:CGPointMake([self.xCoordinate.text floatValue], [self.yCoordinate.text floatValue])];
     }
      [self dismissModalViewControllerAnimated:YES];
-
 }
 @end

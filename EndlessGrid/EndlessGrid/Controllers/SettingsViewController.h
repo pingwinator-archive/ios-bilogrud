@@ -24,7 +24,8 @@
 @property (retain, nonatomic) IBOutlet UIImageView* bgImageView;
 @property (nonatomic, assign) id <SettingsViewDelegate> delegate;
 @property (nonatomic) ActionType senderActionType;
-
+@property (nonatomic) ActionType beforeAddCustomShapeState;
+@property (retain, nonatomic) NSMutableArray* pointsOfCustomShape;
 - (IBAction)pressButton:(UIButton*)sender;
 - (void)hideCustomPointView:(CGPoint)point;
 @end

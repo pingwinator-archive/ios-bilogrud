@@ -18,5 +18,7 @@
 @property (assign, nonatomic) CGFloat gridOffsetY;
 
 @property (nonatomic) ActionType actionType;
-- (void)addCustomPoint:(CGPoint)point;
+
+- (void)addCustomShape:(NSMutableArray*)point;
+- (void)clearBoard;
 @end

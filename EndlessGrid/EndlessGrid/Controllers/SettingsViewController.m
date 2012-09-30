@@ -25,11 +25,11 @@
 @synthesize addCustomSegment;
 @synthesize changeColor;
 @synthesize clearBoard;
-//@synthesize addSegmentImageView;
-//@synthesize addLineImageView;
-//@synthesize addPointImageView;
 @synthesize bgImageView;
 @synthesize customPointView;
+@synthesize pointsOfCustomShape;
+@synthesize beforeAddCustomShapeState;
+
 - (void)dealloc
 {
     self.closeButton = nil;
@@ -42,11 +42,9 @@
     self.addCustomLine = nil;
     self.clearBoard = nil;
     self.changeColor = nil;
-    //    self.addSegmentImageView = nil;
-//    self.addPointImageView = nil;
-//    self.addLineImageView = nil;
     self.bgImageView = nil;
     self.customPointView = nil;
+    self.pointsOfCustomShape = nil;
     [super dealloc];
 }
 
@@ -62,10 +60,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UIImage* imagePoint = [[UIImage imageNamed:@"PointIcon.png" ] roundedCornerImage:7 borderSize:0];
+//    UIImage* imagePoint = [[UIImage imageNamed:@"PointIcon.png" ] roundedCornerImage:7 borderSize:0];
 //    self.addPointImageView.image = imagePoint;
-    
-  }
+    self.pointsOfCustomShape = [[[NSMutableArray alloc] init] autorelease];
+    self.beforeAddCustomShapeState = kAddPoint;
+   // self.senderActionType = kAddPoint;
+}
 -(void)viewDidUnload
 {
     self.closeButton = nil;
@@ -78,11 +78,9 @@
     self.addCustomLine = nil;
     self.clearBoard = nil;
     self.changeColor = nil;
-//    self.addSegmentImageView = nil;
-//    self.addPointImageView = nil;
-//    self.addLineImageView = nil;
     self.bgImageView = nil;
     self.customPointView = nil;
+    self.pointsOfCustomShape = nil;
     [super viewDidUnload];
 }
 
@@ -112,6 +110,7 @@
         }
             break;
         case kAddCustomPointTag: {
+            self.beforeAddCustomShapeState = self.senderActionType;
             self.senderActionType = kAddCustomPoint;
             self.customPointView = [[CustomPointVIewController alloc]init];
             [self presentModalViewController:self.customPointView animated:YES];
@@ -119,32 +118,46 @@
         }
             break;
         case kAddCustomLineTag: {
+            self.beforeAddCustomShapeState = self.senderActionType;
             self.senderActionType = kAddCustomLine;
         }
             break;
         case kAddCustomSegmentTag: {
+            self.beforeAddCustomShapeState = self.senderActionType;
             self.senderActionType = kAddCustomSegment;
         }
             break;
         case kClearBoardTag: {
+            self.beforeAddCustomShapeState = self.senderActionType;
             self.senderActionType = kClearBoard;
+            
         }
             break;
         case kChangeColorTag: {
+            
             self.senderActionType = kChangeColor;
         }
             break;
         default:
             break;
     }
-    
-    if ([self.delegate respondsToSelector:@selector(hideSettingsView:)]) {
-  //      [self.delegate hideSettingsView:self.senderActionType];
+    if ((self.senderActionType != kAddCustomPoint) &&
+        (self.senderActionType != kAddCustomLine) &&
+        (self.senderActionType != kAddCustomSegment)) {
+        if ([self.delegate respondsToSelector:@selector(hideSettingsView:)]) {
+            [self.delegate hideSettingsView:self.senderActionType];
+        }
     }
+   
 }
 - (void)hideCustomPointView:(CGPoint)point
 {
+    
     NSLog(@"%f %f", point.x, point.y);
-    [self.delegate hideSettingsView:self.senderActionType];
+    [self.pointsOfCustomShape addObject:[NSValue valueWithCGPoint:point]];
+  //  [self.delegate hideSettingsView:self.beforeAddCustomShapeState];
+    if ([self.delegate respondsToSelector:@selector(hideSettingsView:)]) {
+        [self.delegate hideSettingsView:self.beforeAddCustomShapeState];
+    }
 }
 @end

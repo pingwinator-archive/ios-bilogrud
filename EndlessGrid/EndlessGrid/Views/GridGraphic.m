@@ -232,6 +232,8 @@
     return dekart;
 }
 
+#pragma mark - Drawing
+
 - (void)drawRect:(CGRect)rect
 {
     UIColor *magentaColor = [UIColor colorWithRed:0.5f  green:0.0f blue:0.5f alpha:1.0f];
@@ -309,10 +311,31 @@
     }
     CGContextStrokePath(context);
 }
-#pragma mark - add custom shapes
-- (void)addCustomPoint:(CGPoint)point
+
+- (void)clearBoard
 {
-    
+    if(self.actionType == kClearBoard) {
+        [self.shapes removeAllObjects];
+        [self setNeedsDisplay];
+    }
 }
 
+#pragma mark - add custom shapes
+//call by view controller
+- (void)addCustomShape:(NSMutableArray*)point
+{
+    if(self.actionType == kAddCustomPoint) {
+        CGPoint pointFirst = [[point objectAtIndex:0] CGPointValue];
+        SPoint*  shapePoint = [[SPoint alloc] initWithPoint:pointFirst];
+        [self.shapes addObject:shapePoint];
+        [shapePoint release];
+        [self setNeedsDisplay];
+    }
+    if(self.actionType == kAddCustomLine) {
+        
+    }
+    if(self.actionType == kAddCustomSegment) {
+        
+    }
+}
 @end

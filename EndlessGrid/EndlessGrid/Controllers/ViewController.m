@@ -1,4 +1,4 @@
-//
+ //
 //  ViewController.m
 //  EndlessGrid
 //
@@ -55,7 +55,6 @@
     
     DBLog(@"awakeFromNib %f", self.grid.frame.size.height);
     [super awakeFromNib];
-    
 }
 
 - (void)showSetting
@@ -65,7 +64,6 @@
     [UIImageView animateWithDuration:0.5 animations:^{
         self.bgView.alpha = 1.0;
     }];
-    
     
     [self.settingViewController.view removeFromSuperview];
     self.settingViewController = [[SettingsViewController alloc]initWithNibName:@"SettingsViewController" bundle:nil];
@@ -77,22 +75,29 @@
 
     self.settingSmallView.image = [white roundedCornerImage:10 borderSize:1];
     self.settingSmallView.frame = CGRectMake(40, 100, 240, 260);
-  //  self.settingSmallView.backgroundColor = [UIColor redColor] ;
   
     [self.bgView addSubview:self.settingSmallView];
  
     self.grid.userInteractionEnabled = NO;
 }
 
-- (void)hideSettingsView:(ActionType)senderActionType
+- (void)hideSettingsView:(ActionType)senderActionType 
 {
-    [self.settingViewController.view removeFromSuperview];
-    self.bgView.hidden = YES;
-    self.grid.userInteractionEnabled = YES;
-    [self.settingViewController dismissModalViewControllerAnimated:YES];
+    [self.settingViewController.pointsOfCustomShape retain];
     if( senderActionType != kAddNone ) {
         self.grid.actionType = senderActionType;
     }
+    if( senderActionType == kClearBoard) {
+        [self.grid clearBoard];
+        self.grid.actionType = self.settingViewController.beforeAddCustomShapeState;
+    }
+    if([self.settingViewController.pointsOfCustomShape count]) {
+        [self.grid addCustomShape: self.settingViewController.pointsOfCustomShape];
+    }
+    [self.settingViewController.pointsOfCustomShape release];
+    [self.settingViewController.view removeFromSuperview];
+    self.bgView.hidden = YES;
+    self.grid.userInteractionEnabled = YES;
     self.bgView.alpha = 0.0f;
 }
 @end
