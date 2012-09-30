@@ -27,7 +27,7 @@
 @property (assign, nonatomic) CGPoint firstDekartLinePoint;
 @property (assign, nonatomic) CGPoint lastDekartLinePoint;
 @property (assign, nonatomic) CGFloat lastCellScale;
-
+@property (nonatomic) ActionType prevActonType;
 - (void)addGesture;
 - (void)performTapGesture: (UITapGestureRecognizer*)tapGestureRecognizer;
 - (void)performPinchGesture: (UIPinchGestureRecognizer*) pinchGestureRecognizer;
@@ -49,6 +49,7 @@
 @synthesize amountLinesY;
 @synthesize shapes;
 @synthesize actionType;
+@synthesize prevActonType;
 @synthesize existStartOfSegment;
 @synthesize firstDekartSegment;
 @synthesize lastDekartSegment;
@@ -56,6 +57,7 @@
 @synthesize firstDekartLinePoint;
 @synthesize lastDekartLinePoint;
 @synthesize lastCellScale;
+
 - (void) dealloc
 {
     self.cellHeight = nil;
@@ -139,7 +141,7 @@
             [self.shapes addObject:shapePoint];
             [shapePoint release];
             [self setNeedsDisplay];
-
+            self.prevActonType = self.actionType;
         }
             break;
         case kAddLine: {
@@ -157,6 +159,7 @@
                 self.firstDekartLinePoint = [self screenToDekart:firstTap];
                 self.existStartOfLine = YES;
             }
+             self.prevActonType = self.actionType;
         }
             break;
         case kAddSegment: {
@@ -173,6 +176,7 @@
                 self.firstDekartSegment = [self screenToDekart:firstTap];
                 self.existStartOfSegment = YES;
             }
+             self.prevActonType = self.actionType;
         }
             break;
         default: {
@@ -337,5 +341,6 @@
     if(self.actionType == kAddCustomSegment) {
         
     }
+     self.actionType = self.prevActonType;
 }
 @end

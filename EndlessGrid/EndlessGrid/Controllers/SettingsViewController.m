@@ -28,7 +28,6 @@
 @synthesize bgImageView;
 @synthesize customPointView;
 @synthesize pointsOfCustomShape;
-@synthesize beforeAddCustomShapeState;
 
 - (void)dealloc
 {
@@ -63,8 +62,6 @@
 //    UIImage* imagePoint = [[UIImage imageNamed:@"PointIcon.png" ] roundedCornerImage:7 borderSize:0];
 //    self.addPointImageView.image = imagePoint;
     self.pointsOfCustomShape = [[[NSMutableArray alloc] init] autorelease];
-    self.beforeAddCustomShapeState = kAddPoint;
-   // self.senderActionType = kAddPoint;
 }
 -(void)viewDidUnload
 {
@@ -110,31 +107,25 @@
         }
             break;
         case kAddCustomPointTag: {
-            self.beforeAddCustomShapeState = self.senderActionType;
             self.senderActionType = kAddCustomPoint;
-            self.customPointView = [[CustomPointVIewController alloc]init];
+            self.customPointView = [[[CustomPointVIewController alloc] init] autorelease];
             [self presentModalViewController:self.customPointView animated:YES];
             self.customPointView.delegate = self;
         }
             break;
         case kAddCustomLineTag: {
-            self.beforeAddCustomShapeState = self.senderActionType;
             self.senderActionType = kAddCustomLine;
         }
             break;
         case kAddCustomSegmentTag: {
-            self.beforeAddCustomShapeState = self.senderActionType;
             self.senderActionType = kAddCustomSegment;
         }
             break;
         case kClearBoardTag: {
-            self.beforeAddCustomShapeState = self.senderActionType;
             self.senderActionType = kClearBoard;
-            
         }
             break;
         case kChangeColorTag: {
-            
             self.senderActionType = kChangeColor;
         }
             break;
@@ -150,14 +141,16 @@
     }
    
 }
+
+#pragma mark - CustomPointViewDelegate Methods
+
 - (void)hideCustomPointView:(CGPoint)point
 {
-    
     NSLog(@"%f %f", point.x, point.y);
     [self.pointsOfCustomShape addObject:[NSValue valueWithCGPoint:point]];
-  //  [self.delegate hideSettingsView:self.beforeAddCustomShapeState];
+  
     if ([self.delegate respondsToSelector:@selector(hideSettingsView:)]) {
-        [self.delegate hideSettingsView:self.beforeAddCustomShapeState];
+        [self.delegate hideSettingsView:self.senderActionType];
     }
 }
 @end

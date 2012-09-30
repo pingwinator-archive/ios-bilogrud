@@ -32,13 +32,10 @@ typedef enum {
 
 #define radPoint 4.0f
 
-
-
 #ifdef DEBUGGING
 # define DBLog(fmt,...) NSLog(@"%@",[NSString stringWithFormat:(fmt), ##__VA_ARGS__]);
 #else
 # define DBLog(...)
 #endif
-
 
 #endif
