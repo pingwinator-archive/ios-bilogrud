@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-
+@class Shape;
 @protocol SettingsViewDelegate;
-@protocol CustomPointViewDelegate;
-@protocol CustomSegmentViewDelegate;
-@interface SettingsViewController : UIViewController <CustomPointViewDelegate, CustomSegmentViewDelegate>
+@protocol CustomShapeDelegate;
+
+@interface SettingsViewController : UIViewController <CustomShapeDelegate>
 @property (retain, nonatomic) IBOutlet UIButton* closeButton;
 @property (retain, nonatomic) IBOutlet UIButton* addPoint;
 @property (retain, nonatomic) IBOutlet UIButton* addLine;
@@ -27,12 +27,13 @@
 @property (nonatomic, assign) id <SettingsViewDelegate> delegate;
 @property (nonatomic) ActionType senderActionType;
 
-@property (retain, nonatomic) NSMutableArray* pointsOfCustomShape;
+
+//@property (retain, nonatomic) NSMutableArray* pointsOfCustomShape;
 - (IBAction)pressButton:(UIButton*)sender;
 @end
 
 @protocol SettingsViewDelegate <NSObject>
 
-- (void)hideSettingsView:(ActionType)actionType;
+- (void)hideSettingsView:(ActionType)actionType withCustomShape:(Shape*)shape;
 
 @end

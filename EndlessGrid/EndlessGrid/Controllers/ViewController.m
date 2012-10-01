@@ -10,8 +10,9 @@
 #import "GridGraphic.h"
 #import "SettingsViewController.h"
 #import "UIImage+RoundedCorner.h"
+#import "Shape.h"
 @interface ViewController ()
-@property(retain, nonatomic) UIImageView* settingSmallView;
+
 @end
 
 @implementation ViewController
@@ -19,7 +20,7 @@
 @synthesize settingViewController;
 @synthesize testButton;
 @synthesize bgView;
-@synthesize settingSmallView;
+
 
 - (void)dealloc
 {
@@ -27,7 +28,6 @@
     self.settingViewController = nil;
     self.testButton = nil;
     self.grid = nil;
-    self.settingSmallView = nil;
     [super dealloc];
 }
 
@@ -42,7 +42,6 @@
     self.settingViewController = nil;
     self.testButton = nil;
     self.grid = nil;
-    self.settingSmallView = nil;
     [super viewDidUnload];
 }
 - (void)didReceiveMemoryWarning
@@ -62,7 +61,7 @@
     //ui
     self.bgView.backgroundColor = [[UIColor clearColor] colorWithAlphaComponent:0.5];
     self.bgView.hidden = NO;
-    [UIImageView animateWithDuration:0.5 animations:^{
+    [UIImageView animateWithDuration:delayForSubView animations:^{
         self.bgView.alpha = 1.0;
     }];
    //reinit
@@ -84,23 +83,23 @@
 
 #pragma mark - SettingsViewDelegate Methods
 
-- (void)hideSettingsView:(ActionType)senderActionType
+- (void)hideSettingsView:(ActionType)actionType withCustomShape:(Shape*)shape
 {
-    [[self.settingViewController.pointsOfCustomShape retain] autorelease];
-    if(senderActionType != kAddNone) {
-        self.grid.actionType = senderActionType;
+    if(actionType != kAddNone) {
+        self.grid.actionType = actionType;
     }
     
-    if( senderActionType == kClearBoard) {
+    if( actionType == kClearBoard) {
         [self.grid clearBoard];
     }
-    if([self.settingViewController.pointsOfCustomShape count]) {
-        [self.grid addCustomShape: self.settingViewController.pointsOfCustomShape];
+    if(shape) {
+        [self.grid addCustomShape: shape];
     }
    
-   // self.bgView.alpha = 0.0f;
-    [UIImageView animateWithDuration:0.5 animations:^{
+    [UIImageView animateWithDuration:delayForSubView animations:^{
         self.bgView.alpha = 0.0;
+//??
+        self.settingViewController.settingButtonsView.alpha = 0;
     }];
     [self.settingViewController.view removeFromSuperview];
     self.bgView.hidden = YES;

@@ -9,13 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @class CustomShapeDelegate;
+
 @protocol CustomShapeDelegate;
-@interface CustomSegment : UIView
+
+@interface CustomSegment : UIView<UITextFieldDelegate>
 
 @property (nonatomic, assign) id <CustomShapeDelegate> delegate;
 @end
-//
-//@protocol CustomSegmentViewDelegate <NSObject>
-////- (void)closeView;
-////- (void)saveView: (Shape*)shape;
-//@end

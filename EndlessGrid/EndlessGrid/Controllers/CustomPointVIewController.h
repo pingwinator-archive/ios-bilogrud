@@ -7,14 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-@protocol CustomPointViewDelegate;
+@protocol CustomShapeDelegate;
+
 @interface CustomPointVIewController : UIViewController
-@property (nonatomic, assign) id <CustomPointViewDelegate> delegate;
+@property (nonatomic, assign) id <CustomShapeDelegate> delegate;
 - (void)close;
 - (void)save;
-@end
-
-@protocol CustomPointViewDelegate <NSObject>
-- (void)hideCustomPointView:(NSValue*)pointValue;
-- (void)closeCustomPointView;
 @end

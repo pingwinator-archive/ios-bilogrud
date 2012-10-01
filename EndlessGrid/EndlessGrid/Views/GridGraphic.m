@@ -101,6 +101,10 @@
         [self.shapes addObject:testSegment];
         [testSegment release];
         
+        SLine* testLine = [[SLine alloc] initWithFirstPoint:CGPointMake(1, -1) secondPoint:CGPointMake(2, -1)];
+        [self.shapes addObject:testLine];
+        [testLine release];
+        
         self.actionType = kAddPoint;
         self.lastCellScale = kCellHeight;
     }
@@ -303,7 +307,9 @@
         }
         //line
         if([shape isKindOfClass:[SLine class]]) {
-            
+            CGPoint p = [self intersectLine:shape withSecondLine:[[SLine alloc]initWithFirstPoint:CGPointMake(0, 0) secondPoint:CGPointMake(0, -1) ]];
+            NSLog(@"intersect: %f %f", p.x, p.y);
+                         
             
             CGContextStrokePath(context);
             SLine* shapeLine = shape;
@@ -313,7 +319,6 @@
             CGContextMoveToPoint(context, firstPointScreen.x, firstPointScreen.y);
             CGContextAddLineToPoint(context, lastPointScreen.x, lastPointScreen.y);
         }
-
     }
     CGContextStrokePath(context);
 }
@@ -326,23 +331,31 @@
     }
 }
 
-#pragma mark - add custom shapes
 //call by view controller
-- (void)addCustomShape:(NSMutableArray*)point
+- (void)addCustomShape:(Shape*)shape
 {
-    if(self.actionType == kAddCustomPoint) {
-        CGPoint pointFirst = [[point objectAtIndex:0] CGPointValue];
-        SPoint*  shapePoint = [[SPoint alloc] initWithPoint:pointFirst];
-        [self.shapes addObject:shapePoint];
-        [shapePoint release];
-        [self setNeedsDisplay];
+    [self.shapes addObject:shape];
+    [self setNeedsDisplay];
+}
+
+//lines
+- (CGPoint)intersectLine:(SLine*)firstLine withSecondLine:(SLine*)secondLine
+{
+    //first line : y = k1 * x + b1  
+    //k1 = y2 - y1
+    CGFloat k1 = firstLine.secondPoint.y - firstLine.firstPoint.y;
+    CGFloat b1 = (firstLine.secondPoint.x * firstLine.firstPoint.y - firstLine.firstPoint.x * firstLine.secondPoint.y) / (firstLine.secondPoint.x - firstLine.firstPoint.x);
+    
+    
+    CGFloat k2 = secondLine.secondPoint.y - secondLine.firstPoint.y;
+    CGFloat b2;
+    if((secondLine.secondPoint.x != secondLine.firstPoint.x)) {
+        b2 = (secondLine.secondPoint.x * secondLine.firstPoint.y - secondLine.firstPoint.x * secondLine.secondPoint.y) / (secondLine.secondPoint.x - secondLine.firstPoint.x);
+    } else {
+        b2 = 0;
     }
-    if(self.actionType == kAddCustomLine) {
-        
-    }
-    if(self.actionType == kAddCustomSegment) {
-        
-    }
-     self.actionType = self.prevActonType;
+    CGFloat x = (b2 - b1) / (k1 - k2);
+    CGFloat y = k1 * x + b1;
+    return CGPointMake(x, y);
 }
 @end

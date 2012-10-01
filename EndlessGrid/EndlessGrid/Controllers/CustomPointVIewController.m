@@ -113,21 +113,21 @@
 
 - (void)close
 {
-    if ([self.delegate respondsToSelector:@selector(closeCustomPointView)]) {
-        [self.delegate closeCustomPointView];
+    if ([self.delegate respondsToSelector:@selector(closeCustomShapeView)]) {
+        [self.delegate closeCustomShapeView];
     }
 }
 
 - (void)save
 {
-    if ([self.delegate respondsToSelector:@selector(hideCustomPointView:)]) {
-        if([self.xCoordinate.text length] && [self.yCoordinate.text length]) {
-            NSValue* val = [NSValue valueWithCGPoint:CGPointMake([self.xCoordinate.text floatValue], [self.yCoordinate.text floatValue])];
-            [self.delegate hideCustomPointView: val];
-        } else {
-             [self.delegate hideCustomPointView: nil];
-        }
-    }
+//    if ([self.delegate respondsToSelector:@selector(hideCustomPointView:)]) {
+//        if([self.xCoordinate.text length] && [self.yCoordinate.text length]) {
+//            NSValue* val = [NSValue valueWithCGPoint:CGPointMake([self.xCoordinate.text floatValue], [self.yCoordinate.text floatValue])];
+//            [self.delegate hideCustomPointView: val];
+//        } else {
+//             [self.delegate hideCustomPointView: nil];
+//        }
+//    }
 //     [self dismissModalViewControllerAnimated:YES];
 }
 @end

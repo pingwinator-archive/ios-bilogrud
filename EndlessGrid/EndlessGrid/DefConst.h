@@ -40,4 +40,5 @@ typedef enum {
 # define DBLog(...)
 #endif
 
+#define delayForSubView 0.3
 #endif

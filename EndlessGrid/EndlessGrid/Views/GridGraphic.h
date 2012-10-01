@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class SettingView;
+@class Shape;
 @protocol SettingsViewDelegate;
 
 @interface GridGraphic : UIView 
@@ -19,6 +20,6 @@
 
 @property (nonatomic) ActionType actionType;
 
-- (void)addCustomShape:(NSMutableArray*)point;
+- (void)addCustomShape:(Shape*)shape;
 - (void)clearBoard;
 @end

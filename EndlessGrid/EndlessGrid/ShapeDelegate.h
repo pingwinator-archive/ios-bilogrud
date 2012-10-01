@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @protocol CustomShapeDelegate <NSObject>
-- (void)closeCustomShapeView;
+- (void)closeCustomShapeView: (UIView*)curView;
 - (void)createPoint: (CGPoint)point;
 - (void)createSegment: (CGPoint)firstPoint secondPoint:(CGPoint)secondPoint;
 // ax+by+c = 0

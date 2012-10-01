@@ -10,9 +10,12 @@
 #import "UIImage+RoundedCorner.h"
 #import "CustomPoint.h"
 #import "CustomSegment.h"
+#import "ShapeDelegate.h"
+#import "SPoint.h"
+#import "SSegment.h"
 @interface SettingsViewController ()
 @property (retain, nonatomic) CustomPoint* customPointView;
-@property (retain, nonatomic) CustomSegment* customSegment;
+@property (retain, nonatomic) CustomSegment* customSegmentView;
 @end
 
 @implementation SettingsViewController
@@ -29,7 +32,6 @@
 @synthesize clearBoard;
 @synthesize bgImageView;
 @synthesize customPointView;
-@synthesize pointsOfCustomShape;
 @synthesize settingButtonsView;
 - (void)dealloc
 {
@@ -45,7 +47,6 @@
     self.changeColor = nil;
     self.bgImageView = nil;
     self.customPointView = nil;
-    self.pointsOfCustomShape = nil;
     self.settingButtonsView = nil;
     [super dealloc];
 }
@@ -64,7 +65,6 @@
     [super viewDidLoad];
 //    UIImage* imagePoint = [[UIImage imageNamed:@"PointIcon.png" ] roundedCornerImage:7 borderSize:0];
 //    self.addPointImageView.image = imagePoint;
-    self.pointsOfCustomShape = [[[NSMutableArray alloc] init] autorelease];
     UIImage* white = [[UIImage imageNamed:@"White.jpeg"] roundedCornerImage:7 borderSize:0];
     
       self.bgImageView.image = [white roundedCornerImage:10 borderSize:1];
@@ -83,7 +83,6 @@
     self.changeColor = nil;
     self.bgImageView = nil;
     self.customPointView = nil;
-    self.pointsOfCustomShape = nil;
     self.settingButtonsView = nil;
     [super viewDidUnload];
 }
@@ -132,12 +131,12 @@
             break;
         case kAddCustomSegmentTag: {
             self.senderActionType = kAddCustomSegment;
-            self.customSegment = [[[CustomSegment alloc] init] autorelease];
-            self.customSegment.alpha = 0;
-            [self.view addSubview:self.customSegment];
-            self.customSegment.delegate = self;
+            self.customSegmentView = [[[CustomSegment alloc] init] autorelease];
+            self.customSegmentView.alpha = 0;
+            [self.view addSubview:self.customSegmentView];
+            self.customSegmentView.delegate = self;
             [UIView animateWithDuration:1 animations:^(void){
-                self.customSegment.alpha = 1;
+                self.customSegmentView.alpha = 1;
                 self.settingButtonsView.alpha = 0;
             }
             completion:nil];
@@ -157,30 +156,50 @@
     if ((self.senderActionType != kAddCustomPoint) &&
         (self.senderActionType != kAddCustomLine) &&
         (self.senderActionType != kAddCustomSegment)) {
-        if ([self.delegate respondsToSelector:@selector(hideSettingsView:)]) {
-            [self.delegate hideSettingsView:self.senderActionType];
+        if ([self.delegate respondsToSelector:@selector(hideSettingsView:withCustomShape:)]) {
+            [self.delegate hideSettingsView:self.senderActionType withCustomShape:nil];
         }
     }
 }
 
 #pragma mark - CustomShapeDelegate Methods
-- (void)closeCustomShapeView
+- (void)closeCustomShapeView:(UIView*)curView
 {
-
+    if ([curView isKindOfClass:[self.customPointView class]]) {
+        [UIView animateWithDuration:delayForSubView animations:^(void){
+            self.customPointView.alpha = 0;
+            self.settingButtonsView.alpha = 1;
+        }completion:nil];
+        
+        [self.customPointView removeFromSuperview];
+    }
+    if ([self.delegate respondsToSelector:@selector(hideSettingsView:withCustomShape:)]) {
+        [self.delegate hideSettingsView:self.senderActionType withCustomShape:nil];
+    }
 }
 
 - (void)createPoint: (CGPoint)point
 {
-    [self.pointsOfCustomShape addObject:[NSValue valueWithCGPoint:point]];
+    [UIView animateWithDuration:delayForSubView animations:^(void){
+        self.customPointView.alpha = 0;
+    } completion:nil];
     [self.customPointView removeFromSuperview];
-    if ([self.delegate respondsToSelector:@selector(hideSettingsView:)]) {
-        [self.delegate hideSettingsView:self.senderActionType];
+    
+    if ([self.delegate respondsToSelector:@selector(hideSettingsView:withCustomShape:)]) {
+        [self.delegate hideSettingsView:self.senderActionType withCustomShape:[[SPoint alloc] initWithPoint:point]];
     }
-
 }
 
 - (void)createSegment: (CGPoint)firstPoint secondPoint:(CGPoint)secondPoint
 {
+    [UIView animateWithDuration:delayForSubView animations:^(void){
+        self.customPointView.alpha = 0;
+    } completion:nil];
+    [self.customPointView removeFromSuperview];
+    
+    if ([self.delegate respondsToSelector:@selector(hideSettingsView:withCustomShape:)]) {
+        [self.delegate hideSettingsView:self.senderActionType withCustomShape:[[SSegment alloc] initWithFirstPoint:firstPoint LastPoint:secondPoint]];
+    }
 
 }
 
@@ -188,16 +207,5 @@
 - (void)createLineWithKoeffA: (CGFloat)a B:(CGFloat)b C:(CGFloat)c
 {
 
-}
-
-
-- (void)closeCustomPointView
-{
-    [UIView animateWithDuration:1 animations:^(void){
-        self.customPointView.alpha = 0;
-        self.settingButtonsView.alpha = 1;
-    }completion:nil];
-    
-//    [self.customPointView.view removeFromSuperview];
 }
 @end

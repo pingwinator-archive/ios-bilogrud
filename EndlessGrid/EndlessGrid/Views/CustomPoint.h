@@ -9,11 +9,7 @@
 #import <UIKit/UIKit.h>
 @protocol CustomShapeDelegate;
 
-@interface CustomPoint : UIView
+@interface CustomPoint : UIView<CustomShapeDelegate, UITextFieldDelegate>
 @property (nonatomic, assign) id <CustomShapeDelegate> delegate;
 @end
 
-//@protocol CustomPointViewDelegate <NSObject>
-//- (void)hideCustomPointView:(NSValue*)pointValue;
-//- (void)closeCustomPointView;
-//@end
