@@ -303,6 +303,8 @@
         }
         //line
         if([shape isKindOfClass:[SLine class]]) {
+            
+            
             CGContextStrokePath(context);
             SLine* shapeLine = shape;
             CGContextSetStrokeColorWithColor(context, shapeLine.color.CGColor);

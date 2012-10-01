@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-
-@interface SSegment : NSObject
+#import "Shape.h"
+@interface SSegment : Shape
 @property(assign, nonatomic) CGPoint firstPointDekart;
 @property(assign, nonatomic) CGPoint lastPointDekart;
 @property(retain, nonatomic) UIColor* color;

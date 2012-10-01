@@ -48,6 +48,9 @@
 		6EE8E878161476C700668FFC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EE8E871161476C700668FFC /* ViewController.m */; };
 		6EE8E879161476C700668FFC /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EE8E874161476C700668FFC /* ViewController.xib */; };
 		6EE8E87A161476C700668FFC /* GridGraphic.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EE8E877161476C700668FFC /* GridGraphic.m */; };
+		6EE8E8C21619D34100668FFC /* CustomPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EE8E8C11619D34100668FFC /* CustomPoint.m */; };
+		6EE8E8C61619D9F700668FFC /* CustomSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EE8E8C51619D9F700668FFC /* CustomSegment.m */; };
+		6EE8E8C91619E4E800668FFC /* Shape.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EE8E8C81619E4E800668FFC /* Shape.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -107,6 +110,13 @@
 		6EE8E876161476C700668FFC /* GridGraphic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridGraphic.h; sourceTree = "<group>"; };
 		6EE8E877161476C700668FFC /* GridGraphic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridGraphic.m; sourceTree = "<group>"; };
 		6EE8E8BA1615B86D00668FFC /* DefConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefConst.h; sourceTree = "<group>"; };
+		6EE8E8C01619D34100668FFC /* CustomPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomPoint.h; sourceTree = "<group>"; };
+		6EE8E8C11619D34100668FFC /* CustomPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomPoint.m; sourceTree = "<group>"; };
+		6EE8E8C41619D9F700668FFC /* CustomSegment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSegment.h; sourceTree = "<group>"; };
+		6EE8E8C51619D9F700668FFC /* CustomSegment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSegment.m; sourceTree = "<group>"; };
+		6EE8E8C71619E4E800668FFC /* Shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shape.h; sourceTree = "<group>"; };
+		6EE8E8C81619E4E800668FFC /* Shape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shape.m; sourceTree = "<group>"; };
+		6EE8E8CA1619E58300668FFC /* ShapeDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShapeDelegate.h; path = EndlessGrid/ShapeDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +177,7 @@
 		6EE741E116109B4D00699999 = {
 			isa = PBXGroup;
 			children = (
+				6EE8E8CA1619E58300668FFC /* ShapeDelegate.h */,
 				6EB36C101618138C00CAB75E /* Categories */,
 				6EE8E87B161479E100668FFC /* Models */,
 				6EE8E86F161476C700668FFC /* Controllers */,
@@ -260,6 +271,10 @@
 			children = (
 				6EE8E876161476C700668FFC /* GridGraphic.h */,
 				6EE8E877161476C700668FFC /* GridGraphic.m */,
+				6EE8E8C01619D34100668FFC /* CustomPoint.h */,
+				6EE8E8C11619D34100668FFC /* CustomPoint.m */,
+				6EE8E8C41619D9F700668FFC /* CustomSegment.h */,
+				6EE8E8C51619D9F700668FFC /* CustomSegment.m */,
 			);
 			name = Views;
 			path = EndlessGrid/Views;
@@ -274,6 +289,8 @@
 				6E8EECB6161603B300B410C5 /* SLine.m */,
 				6E8EECB8161603C400B410C5 /* SSegment.h */,
 				6E8EECB9161603C400B410C5 /* SSegment.m */,
+				6EE8E8C71619E4E800668FFC /* Shape.h */,
+				6EE8E8C81619E4E800668FFC /* Shape.m */,
 			);
 			name = Models;
 			path = EndlessGrid/Models;
@@ -377,6 +394,9 @@
 				6EB36C181618138C00CAB75E /* UIImage+Resize.m in Sources */,
 				6EB36C191618138C00CAB75E /* UIImage+RoundedCorner.m in Sources */,
 				6EB36C39161872E400CAB75E /* CustomPointVIewController.m in Sources */,
+				6EE8E8C21619D34100668FFC /* CustomPoint.m in Sources */,
+				6EE8E8C61619D9F700668FFC /* CustomSegment.m in Sources */,
+				6EE8E8C91619E4E800668FFC /* Shape.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

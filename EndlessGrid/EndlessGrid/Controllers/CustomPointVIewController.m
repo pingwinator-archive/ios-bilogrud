@@ -1,4 +1,4 @@
-//
+  //
 //  CustomPointVIewController.m
 //  EndlessGrid
 //
@@ -93,8 +93,8 @@
     CGRect rectButton = CGRectMake(75, 180, 80, 30);
     self.canselButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     self.canselButton.frame = rectButton;
-    [self.canselButton setTitle:@"Cansel" forState:UIControlStateNormal];
-    [self.canselButton addTarget:self action:@selector(cansel) forControlEvents:UIControlEventTouchUpInside];
+    [self.canselButton setTitle:@"Cancel" forState:UIControlStateNormal];
+    [self.canselButton addTarget:self action:@selector(close) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.canselButton];
     
     rectButton.origin.x += 100;
@@ -111,16 +111,23 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)cansel
+- (void)close
 {
-    [self dismissModalViewControllerAnimated:YES];
+    if ([self.delegate respondsToSelector:@selector(closeCustomPointView)]) {
+        [self.delegate closeCustomPointView];
+    }
 }
 
 - (void)save
 {
     if ([self.delegate respondsToSelector:@selector(hideCustomPointView:)]) {
-        [self.delegate hideCustomPointView:CGPointMake([self.xCoordinate.text floatValue], [self.yCoordinate.text floatValue])];
+        if([self.xCoordinate.text length] && [self.yCoordinate.text length]) {
+            NSValue* val = [NSValue valueWithCGPoint:CGPointMake([self.xCoordinate.text floatValue], [self.yCoordinate.text floatValue])];
+            [self.delegate hideCustomPointView: val];
+        } else {
+             [self.delegate hideCustomPointView: nil];
+        }
     }
-     [self dismissModalViewControllerAnimated:YES];
+//     [self dismissModalViewControllerAnimated:YES];
 }
 @end

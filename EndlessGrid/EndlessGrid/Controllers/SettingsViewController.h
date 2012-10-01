@@ -11,7 +11,8 @@
 
 @protocol SettingsViewDelegate;
 @protocol CustomPointViewDelegate;
-@interface SettingsViewController : UIViewController <CustomPointViewDelegate>
+@protocol CustomSegmentViewDelegate;
+@interface SettingsViewController : UIViewController <CustomPointViewDelegate, CustomSegmentViewDelegate>
 @property (retain, nonatomic) IBOutlet UIButton* closeButton;
 @property (retain, nonatomic) IBOutlet UIButton* addPoint;
 @property (retain, nonatomic) IBOutlet UIButton* addLine;
@@ -22,12 +23,12 @@
 @property (retain, nonatomic) IBOutlet UIButton* clearBoard;
 @property (retain, nonatomic) IBOutlet UIButton* changeColor;
 @property (retain, nonatomic) IBOutlet UIImageView* bgImageView;
+@property (retain, nonatomic) IBOutlet UIView* settingButtonsView;
 @property (nonatomic, assign) id <SettingsViewDelegate> delegate;
 @property (nonatomic) ActionType senderActionType;
 
 @property (retain, nonatomic) NSMutableArray* pointsOfCustomShape;
 - (IBAction)pressButton:(UIButton*)sender;
-- (void)hideCustomPointView:(CGPoint)point;
 @end
 
 @protocol SettingsViewDelegate <NSObject>

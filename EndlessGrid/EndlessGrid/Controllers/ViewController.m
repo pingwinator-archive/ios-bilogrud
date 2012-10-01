@@ -70,13 +70,14 @@
     self.settingViewController = [[SettingsViewController alloc]initWithNibName:@"SettingsViewController" bundle:nil];
     self.settingViewController.delegate = self;
     
-    self.settingSmallView = (UIImageView*)self.settingViewController.view;
-    UIImage* white = [[UIImage imageNamed:@"White.jpeg"] roundedCornerImage:7 borderSize:0];
+//    self.settingSmallView = (UIImageView*)self.settingViewController.view;
+//    UIImage* white = [[UIImage imageNamed:@"White.jpeg"] roundedCornerImage:7 borderSize:0];
 
-    self.settingSmallView.image = [white roundedCornerImage:10 borderSize:1];
-    self.settingSmallView.frame = CGRectMake(40, 100, 240, 260);
+  //  self.settingSmallView.image = [white roundedCornerImage:10 borderSize:1];
+    self.settingViewController.bgImageView.backgroundColor = [UIColor redColor];
+    self.settingViewController.view.frame = CGRectMake(40, 100, 240, 260);
   
-    [self.bgView addSubview:self.settingSmallView];
+    [self.bgView addSubview:self.settingViewController.view];
     self.grid.userInteractionEnabled = NO;
 }
 
@@ -96,10 +97,14 @@
     if([self.settingViewController.pointsOfCustomShape count]) {
         [self.grid addCustomShape: self.settingViewController.pointsOfCustomShape];
     }
+   
+   // self.bgView.alpha = 0.0f;
+    [UIImageView animateWithDuration:0.5 animations:^{
+        self.bgView.alpha = 0.0;
+    }];
     [self.settingViewController.view removeFromSuperview];
     self.bgView.hidden = YES;
     self.grid.userInteractionEnabled = YES;
-    self.bgView.alpha = 0.0f;
 }
 
 - (BOOL)isCustomShape

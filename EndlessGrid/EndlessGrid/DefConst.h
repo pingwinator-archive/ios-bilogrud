@@ -32,6 +32,8 @@ typedef enum {
 
 #define radPoint 4.0f
 
+#define startFrameForSubview CGRectMake(0, 0, 240, 260)
+
 #ifdef DEBUGGING
 # define DBLog(fmt,...) NSLog(@"%@",[NSString stringWithFormat:(fmt), ##__VA_ARGS__]);
 #else

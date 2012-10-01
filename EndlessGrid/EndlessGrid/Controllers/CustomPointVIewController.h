@@ -10,12 +10,11 @@
 @protocol CustomPointViewDelegate;
 @interface CustomPointVIewController : UIViewController
 @property (nonatomic, assign) id <CustomPointViewDelegate> delegate;
-- (void)cansel;
+- (void)close;
 - (void)save;
 @end
 
 @protocol CustomPointViewDelegate <NSObject>
-
-- (void)hideCustomPointView:(CGPoint)point;
-
+- (void)hideCustomPointView:(NSValue*)pointValue;
+- (void)closeCustomPointView;
 @end
