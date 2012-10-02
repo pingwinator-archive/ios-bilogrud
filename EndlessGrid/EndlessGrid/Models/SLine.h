@@ -13,5 +13,9 @@
 @property (assign, nonatomic) CGPoint firstPoint;
 @property (assign, nonatomic) CGPoint secondPoint;
 @property (retain, nonatomic) UIColor* color;
+@property (assign, nonatomic) CGFloat aKoef;
+@property (assign, nonatomic) CGFloat bKoef;
+@property (assign, nonatomic) CGFloat cKoef;
 - (id)initWithFirstPoint: (CGPoint) fPoint secondPoint:(CGPoint) sPoint;
+- (id)initWithKoefA: (CGFloat)a B:(CGFloat)b C:(CGFloat)c;
 @end

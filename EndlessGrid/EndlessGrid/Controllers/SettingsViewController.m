@@ -10,12 +10,15 @@
 #import "UIImage+RoundedCorner.h"
 #import "CustomPoint.h"
 #import "CustomSegment.h"
+#import "CustomLine.h"
 #import "ShapeDelegate.h"
 #import "SPoint.h"
 #import "SSegment.h"
+#import "SLine.h"
 @interface SettingsViewController ()
 @property (retain, nonatomic) CustomPoint* customPointView;
 @property (retain, nonatomic) CustomSegment* customSegmentView;
+@property (retain, nonatomic) CustomLine* customLineView;
 @end
 
 @implementation SettingsViewController
@@ -33,6 +36,7 @@
 @synthesize bgImageView;
 @synthesize customPointView;
 @synthesize settingButtonsView;
+@synthesize customLineView;
 - (void)dealloc
 {
     self.closeButton = nil;
@@ -48,6 +52,7 @@
     self.bgImageView = nil;
     self.customPointView = nil;
     self.settingButtonsView = nil;
+    self.customLineView = nil;
     [super dealloc];
 }
 
@@ -127,6 +132,16 @@
             break;
         case kAddCustomLineTag: {
             self.senderActionType = kAddCustomLine;
+            self.customLineView = [[[CustomLine alloc] init] autorelease];
+            self.customLineView.alpha = 0;
+            [self.view addSubview:self.customLineView];
+            self.customLineView.delegate = self;
+            [UIView animateWithDuration:1 animations:^(void){
+                self.customLineView.alpha = 1;
+                self.settingButtonsView.alpha = 0;
+            }
+            completion:nil];
+
         }
             break;
         case kAddCustomSegmentTag: {
@@ -206,6 +221,15 @@
 // ax+by+c = 0
 - (void)createLineWithKoeffA: (CGFloat)a B:(CGFloat)b C:(CGFloat)c
 {
+    [UIView animateWithDuration:delayForSubView animations:^(void){
+        self.customLineView.alpha = 0;
+    } completion:nil];
+    [self.customLineView removeFromSuperview];
+    
+    if ([self.delegate respondsToSelector:@selector(hideSettingsView:withCustomShape:)]) {
+        [self.delegate hideSettingsView:self.senderActionType withCustomShape:[[SLine alloc] initWithKoefA:a B:b C:c]];
+    }
+
 
 }
 @end

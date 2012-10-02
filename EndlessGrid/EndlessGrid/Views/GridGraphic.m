@@ -28,6 +28,11 @@
 @property (assign, nonatomic) CGPoint lastDekartLinePoint;
 @property (assign, nonatomic) CGFloat lastCellScale;
 @property (nonatomic) ActionType prevActonType;
+
+@property (retain, nonatomic) SLine* xMinDekartLine;
+@property (retain, nonatomic) SLine* xMaxDekartLine;
+@property (retain, nonatomic) SLine* yMinDekartLine;
+@property (retain, nonatomic) SLine* yMaxDekartLine;
 - (void)addGesture;
 - (void)performTapGesture: (UITapGestureRecognizer*)tapGestureRecognizer;
 - (void)performPinchGesture: (UIPinchGestureRecognizer*) pinchGestureRecognizer;
@@ -57,6 +62,10 @@
 @synthesize firstDekartLinePoint;
 @synthesize lastDekartLinePoint;
 @synthesize lastCellScale;
+@synthesize xMaxDekartLine;
+@synthesize xMinDekartLine;
+@synthesize yMaxDekartLine;
+@synthesize yMinDekartLine;
 
 - (void) dealloc
 {
@@ -80,35 +89,40 @@
     self = [super initWithCoder:aDecoder];
     if(self) {
         [self addGesture];
-        self.cellHeight = [NSNumber numberWithDouble:kCellHeight];
-        self.cellWidth = [NSNumber numberWithDouble:kCellWidth];
-
-        self.amountLinesX = self.frame.size.width  / [self.cellWidth intValue];
-        self.amountLinesY = self.frame.size.height  / [self.cellHeight intValue];
-        
-        self.gridOffsetX =  0.0f;
-        self.gridOffsetY = - self.frame.size.height;
-        DBLog(@"offset y %f", self.gridOffsetY);
-        
-        self.shapes = [[NSMutableArray alloc] init];
-        
-        SPoint* testPoint = [[SPoint alloc] init];
-        testPoint.dekartPoint = CGPointMake(2, -3);
-        [self.shapes addObject:testPoint];
-        [testPoint release];
-        
-        SSegment* testSegment = [[SSegment alloc] initWithFirstPoint:CGPointMake(1, -1) LastPoint:CGPointMake(3, -2)];
-        [self.shapes addObject:testSegment];
-        [testSegment release];
-        
-        SLine* testLine = [[SLine alloc] initWithFirstPoint:CGPointMake(1, -1) secondPoint:CGPointMake(2, -1)];
-        [self.shapes addObject:testLine];
-        [testLine release];
-        
-        self.actionType = kAddPoint;
-        self.lastCellScale = kCellHeight;
+        [self addInitGraphic];
     }
     return self;
+}
+
+- (void)addInitGraphic
+{
+    self.cellHeight = [NSNumber numberWithDouble:kCellHeight];
+    self.cellWidth = [NSNumber numberWithDouble:kCellWidth];
+    
+    self.amountLinesX = self.frame.size.width  / [self.cellWidth intValue];
+    self.amountLinesY = self.frame.size.height  / [self.cellHeight intValue];
+    
+    self.gridOffsetX =  0.0f;
+    self.gridOffsetY = - self.frame.size.height;
+    DBLog(@"offset y %f", self.gridOffsetY);
+    
+    self.shapes = [[NSMutableArray alloc] init];
+    
+    SPoint* testPoint = [[SPoint alloc] init];
+    testPoint.dekartPoint = CGPointMake(2, -3);
+    [self.shapes addObject:testPoint];
+    [testPoint release];
+    
+    SSegment* testSegment = [[SSegment alloc] initWithFirstPoint:CGPointMake(1, -1) LastPoint:CGPointMake(3, -2)];
+    [self.shapes addObject:testSegment];
+    [testSegment release];
+    
+    SLine* testLine = [[SLine alloc] initWithFirstPoint:CGPointMake(1, -1) secondPoint:CGPointMake(2, 0)];
+    [self.shapes addObject:testLine];
+    [testLine release];
+    
+    self.actionType = kAddPoint;
+    self.lastCellScale = kCellHeight;
 }
 
 #pragma mark - GestureRecognizers Methods
@@ -154,6 +168,7 @@
                  CGPoint secondTap = [tapGestureRecognizer locationInView:self];
                 self.lastDekartLinePoint = [self screenToDekart:secondTap];
                 SLine* line = [[SLine alloc] initWithFirstPoint:self.firstDekartLinePoint secondPoint:self.lastDekartLinePoint];
+                
                 [self.shapes addObject:line];
                 [line release];
                 [self setNeedsDisplay];
@@ -261,25 +276,31 @@
     self.offsetForIntAsixX = self.gridOffsetX / -[self.cellWidth intValue];
     for(int i = rect.origin.x + offsetForCellX, j = 0; i < (rect.origin.x + rect.size.width) && j <= amountLinesX + 1; i += [self.cellWidth intValue], j++)
     {
+      
+
         CGContextMoveToPoint(context, i, 0);
         CGContextAddLineToPoint(context, i, rect.origin.y + self.frame.size.height);
     
         NSString *numberXStr = [NSString stringWithFormat:@"%d", j + self.offsetForIntAsixX];
         [numberXStr drawAtPoint:CGPointMake(i + 2., 2.) withFont:helveticaBold];
     }
+    self.xMinDekartLine = [[SLine alloc] initWithKoefA:1 B:0 C:-(gridOffsetX/[self.cellWidth intValue])];
+    self.xMaxDekartLine = [[SLine alloc] initWithKoefA:1 B:0 C:-((gridOffsetX + rect.size.width)/[self.cellWidth intValue])];
     
     float offsetForCellY = fmodf(self.gridOffsetY, [cellHeight floatValue]);
     
     self.offsetForIntAsixY = self.gridOffsetY / [self.cellHeight intValue];
     
     for (int i = rect.origin.y + offsetForCellY, j = self.amountLinesY; i < (rect.origin.y + rect.size.height) && j >= - 1; i += [self.cellHeight intValue], j--) {
+        
         CGContextMoveToPoint(context, 0, i);
         CGContextAddLineToPoint(context, self.frame.size.width, i);
         //text
         NSString *numberYStr = [NSString stringWithFormat:@"%d", j + self.offsetForIntAsixY];
         [numberYStr drawAtPoint:CGPointMake(2., i +2.) withFont:helveticaBold];
     }
-    
+    self.yMinDekartLine = [[SLine alloc] initWithKoefA:0 B:1 C:-(gridOffsetY/[self.cellHeight intValue])];
+    self.yMaxDekartLine = [[SLine alloc] initWithKoefA:0 B:1 C:-((gridOffsetY + rect.size.height)/[self.cellHeight intValue])];
     for (id shape in self.shapes) {
         //point
         if([shape isKindOfClass:[SPoint class]]) {
@@ -307,15 +328,71 @@
         }
         //line
         if([shape isKindOfClass:[SLine class]]) {
-            CGPoint p = [self intersectLine:shape withSecondLine:[[SLine alloc]initWithFirstPoint:CGPointMake(0, 0) secondPoint:CGPointMake(0, -1) ]];
-            NSLog(@"intersect: %f %f", p.x, p.y);
-                         
+            BOOL count = NO;
+            CGPoint firstIntersectWithAsix;
+            CGPoint secondIntersectWithAsix;
+            NSValue* val  = [self intersectLine:shape withSecondLine:self.xMinDekartLine];
+            if(val) {
+                CGPoint p = [val CGPointValue];//[self intersectLine:shape withSecondLine:[[SLine alloc]initWithFirstPoint:CGPointMake(0, 0) secondPoint:CGPointMake(0, -1) ]];
+                NSLog(@"intersect: %f %f", p.x, p.y);
+                if(count )  {
+                    secondIntersectWithAsix = p;
+                } else {
+                    if(p.x != 0) {
+                        firstIntersectWithAsix = p;
+                        count = YES;
+                    }
+                }
+            }
             
+            val  = [self intersectLine:shape withSecondLine:self.yMinDekartLine];
+            if(val) {
+                CGPoint p = [val CGPointValue];//[self intersectLine:shape withSecondLine:[[SLine alloc]initWithFirstPoint:CGPointMake(0, 0) secondPoint:CGPointMake(0, -1) ]];
+                NSLog(@"intersect: %f %f", p.x, p.y);
+                if(count) {
+                    secondIntersectWithAsix = p;
+                } else {
+                    if(p.x != 0) {
+                        firstIntersectWithAsix = p;
+                        count = YES;
+                    }
+                }
+            }
+
+            val  = [self intersectLine:shape withSecondLine:self.xMaxDekartLine];
+            if(val) {
+                CGPoint p = [val CGPointValue];//[self intersectLine:shape withSecondLine:[[SLine alloc]initWithFirstPoint:CGPointMake(0, 0) secondPoint:CGPointMake(0, -1) ]];
+                NSLog(@"intersect: %f %f", p.x, p.y);
+                if(count) {
+                    secondIntersectWithAsix = p;
+                } else {
+                     if(p.x != 0) {
+                         firstIntersectWithAsix = p;
+                         count = YES;
+                     }
+                }
+            }
+
+            val  = [self intersectLine:shape withSecondLine:self.yMaxDekartLine];
+            if(val) {
+                CGPoint p = [val CGPointValue];
+                NSLog(@"intersect: %f %f", p.x, p.y);
+                if(count) {
+                    secondIntersectWithAsix = p;
+                } else {
+                     if(p.x != 0) {
+                         firstIntersectWithAsix = p;
+                         count = YES;
+                     }
+                }
+            }
+
             CGContextStrokePath(context);
             SLine* shapeLine = shape;
             CGContextSetStrokeColorWithColor(context, shapeLine.color.CGColor);
-            CGPoint firstPointScreen = [self dekartToScreen: shapeLine.firstPoint];
-            CGPoint lastPointScreen = [self dekartToScreen: shapeLine.secondPoint];
+            //points intersect to screen
+            CGPoint firstPointScreen = [self dekartToScreen: firstIntersectWithAsix];
+            CGPoint lastPointScreen = [self dekartToScreen: secondIntersectWithAsix];
             CGContextMoveToPoint(context, firstPointScreen.x, firstPointScreen.y);
             CGContextAddLineToPoint(context, lastPointScreen.x, lastPointScreen.y);
         }
@@ -339,23 +416,32 @@
 }
 
 //lines
-- (CGPoint)intersectLine:(SLine*)firstLine withSecondLine:(SLine*)secondLine
+- (NSValue*)intersectLine:(SLine*)firstLine withSecondLine:(SLine*)secondLine
 {
+    NSValue* intersectPoint = nil;
+    
+   
     //first line : y = k1 * x + b1  
-    //k1 = y2 - y1
-    CGFloat k1 = firstLine.secondPoint.y - firstLine.firstPoint.y;
-    CGFloat b1 = (firstLine.secondPoint.x * firstLine.firstPoint.y - firstLine.firstPoint.x * firstLine.secondPoint.y) / (firstLine.secondPoint.x - firstLine.firstPoint.x);
-    
-    
-    CGFloat k2 = secondLine.secondPoint.y - secondLine.firstPoint.y;
-    CGFloat b2;
-    if((secondLine.secondPoint.x != secondLine.firstPoint.x)) {
-        b2 = (secondLine.secondPoint.x * secondLine.firstPoint.y - secondLine.firstPoint.x * secondLine.secondPoint.y) / (secondLine.secondPoint.x - secondLine.firstPoint.x);
-    } else {
-        b2 = 0;
+    //k1 = - a /b
+   // if(firstLine.bKoef != 0 && secondLine.bKoef != 0) {
+    if(firstLine.aKoef * secondLine.bKoef - secondLine.aKoef * firstLine.bKoef) {
+        CGFloat xIntersect;
+        CGFloat yIntersect;
+        if(firstLine.bKoef != 0 && secondLine.bKoef != 0) {
+            CGFloat k1 = - firstLine.aKoef / firstLine.bKoef;
+            CGFloat b1 = - firstLine.cKoef / firstLine.bKoef;
+            
+            CGFloat k2 = - secondLine.aKoef / secondLine.bKoef;
+            CGFloat b2 = - secondLine.cKoef / secondLine.bKoef;
+            
+            xIntersect = (b2 - b1)/(k1 - k2);
+            yIntersect = k1 * xIntersect + b1;
+        } else {
+            xIntersect = 0;
+            yIntersect = 0;
+        }
+        intersectPoint = [NSValue valueWithCGPoint:CGPointMake(xIntersect, yIntersect)];
     }
-    CGFloat x = (b2 - b1) / (k1 - k2);
-    CGFloat y = k1 * x + b1;
-    return CGPointMake(x, y);
+    return intersectPoint;
 }
 @end
