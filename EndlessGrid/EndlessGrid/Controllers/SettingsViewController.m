@@ -15,10 +15,13 @@
 #import "SPoint.h"
 #import "SSegment.h"
 #import "SLine.h"
+#import "HRColorPickerViewController.h"
+#import "CustomColor.h"
 @interface SettingsViewController ()
 @property (retain, nonatomic) CustomPoint* customPointView;
 @property (retain, nonatomic) CustomSegment* customSegmentView;
 @property (retain, nonatomic) CustomLine* customLineView;
+@property (retain, nonatomic) CustomColor* colorPicker;
 @end
 
 @implementation SettingsViewController
@@ -37,6 +40,7 @@
 @synthesize customPointView;
 @synthesize settingButtonsView;
 @synthesize customLineView;
+@synthesize colorPicker;
 - (void)dealloc
 {
     self.closeButton = nil;
@@ -53,6 +57,7 @@
     self.customPointView = nil;
     self.settingButtonsView = nil;
     self.customLineView = nil;
+    self.colorPicker = nil;
     [super dealloc];
 }
 
@@ -68,11 +73,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    UIImage* imagePoint = [[UIImage imageNamed:@"PointIcon.png" ] roundedCornerImage:7 borderSize:0];
-//    self.addPointImageView.image = imagePoint;
     UIImage* white = [[UIImage imageNamed:@"White.jpeg"] roundedCornerImage:7 borderSize:0];
-    
-      self.bgImageView.image = [white roundedCornerImage:10 borderSize:1];
+    self.bgImageView.image = [white roundedCornerImage:10 borderSize:1];
 }
 -(void)viewDidUnload
 {
@@ -89,6 +91,9 @@
     self.bgImageView = nil;
     self.customPointView = nil;
     self.settingButtonsView = nil;
+    self.customLineView = nil;
+    self.colorPicker = nil;
+
     [super viewDidUnload];
 }
 
@@ -141,7 +146,6 @@
                 self.settingButtonsView.alpha = 0;
             }
             completion:nil];
-
         }
             break;
         case kAddCustomSegmentTag: {
@@ -163,6 +167,16 @@
             break;
         case kChangeColorTag: {
             self.senderActionType = kChangeColor;
+         //   self.colorPicker = [[HRColorPickerViewController alloc] initWithColor:[UIColor redColor] fullColor:YES saveStyle:HCPCSaveStyleSaveAndCancel];
+            self.colorPicker = [[[CustomColor alloc] init] autorelease];
+            self.colorPicker.alpha = 0;
+            [UIView animateWithDuration:1 animations:^(void){
+                self.colorPicker.alpha = 1;
+                self.settingButtonsView.alpha = 0;
+            }
+            completion:nil];
+            //[self presentModalViewController:self.colorPicker animated:YES];
+            [self.view addSubview:self.colorPicker];
         }
             break;
         default:
@@ -170,7 +184,8 @@
     }
     if ((self.senderActionType != kAddCustomPoint) &&
         (self.senderActionType != kAddCustomLine) &&
-        (self.senderActionType != kAddCustomSegment)) {
+        (self.senderActionType != kAddCustomSegment) &&
+        (self.senderActionType != kChangeColor)) {
         if ([self.delegate respondsToSelector:@selector(hideSettingsView:withCustomShape:)]) {
             [self.delegate hideSettingsView:self.senderActionType withCustomShape:nil];
         }
@@ -217,7 +232,6 @@
     }
 
 }
-
 // ax+by+c = 0
 - (void)createLineWithKoeffA: (CGFloat)a B:(CGFloat)b C:(CGFloat)c
 {
@@ -229,7 +243,5 @@
     if ([self.delegate respondsToSelector:@selector(hideSettingsView:withCustomShape:)]) {
         [self.delegate hideSettingsView:self.senderActionType withCustomShape:[[SLine alloc] initWithKoefA:a B:b C:c]];
     }
-
-
 }
 @end
