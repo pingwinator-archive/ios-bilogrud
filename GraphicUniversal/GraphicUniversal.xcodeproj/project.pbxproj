@@ -121,6 +121,7 @@
 		6EE8E950161C4C9300668FFC /* CustomSegment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSegment.m; sourceTree = "<group>"; };
 		6EE8E951161C4C9300668FFC /* GridGraphic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridGraphic.h; sourceTree = "<group>"; };
 		6EE8E952161C4C9300668FFC /* GridGraphic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridGraphic.m; sourceTree = "<group>"; };
+		6EE8E978161C4E1800668FFC /* DefConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefConst.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,12 +141,12 @@
 		6EE8E8E0161C48C900668FFC = {
 			isa = PBXGroup;
 			children = (
+				6EE8E947161C4C9300668FFC /* ShapeDelegate.h */,
 				6EE8E916161C4C9300668FFC /* Categories */,
 				6EE8E91D161C4C9300668FFC /* Controllers */,
 				6EE8E922161C4C9300668FFC /* en.lproj */,
 				6EE8E925161C4C9300668FFC /* Models */,
 				6EE8E92E161C4C9300668FFC /* Resources */,
-				6EE8E947161C4C9300668FFC /* ShapeDelegate.h */,
 				6EE8E948161C4C9300668FFC /* Views */,
 				6EE8E8F5161C48C900668FFC /* GraphicUniversal */,
 				6EE8E8EE161C48C900668FFC /* Frameworks */,
@@ -184,6 +185,7 @@
 		6EE8E8F6161C48C900668FFC /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6EE8E978161C4E1800668FFC /* DefConst.h */,
 				6EE8E8F7161C48C900668FFC /* GraphicUniversal-Info.plist */,
 				6EE8E8F8161C48C900668FFC /* InfoPlist.strings */,
 				6EE8E8FB161C48C900668FFC /* main.m */,

@@ -19,7 +19,7 @@
 @implementation ViewController
 @synthesize grid;
 @synthesize settingViewController;
-@synthesize testButton;
+@synthesize showSettingButton;
 @synthesize bgView;
 
 
@@ -27,7 +27,7 @@
 {
     self.bgView = nil;
     self.settingViewController = nil;
-    self.testButton = nil;
+    self.showSettingButton = nil;
     self.grid = nil;
     [super dealloc];
 }
@@ -41,7 +41,7 @@
 {
     self.bgView = nil;
     self.settingViewController = nil;
-    self.testButton = nil;
+    self.showSettingButton = nil;
     self.grid = nil;
     [super viewDidUnload];
 }

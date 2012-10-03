@@ -13,7 +13,7 @@
 
 @property(retain, nonatomic) IBOutlet GridGraphic* grid;
 @property(retain, nonatomic)  SettingsViewController* settingViewController;
-@property(retain, nonatomic) IBOutlet UIButton* testButton;
+@property(retain, nonatomic) IBOutlet UIButton* showSettingButton;
 @property(retain, nonatomic) IBOutlet UIView* bgView;
 
 - (IBAction)showSetting;
