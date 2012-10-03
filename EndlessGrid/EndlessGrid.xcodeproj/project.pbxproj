@@ -8,12 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		6E162792161ACFC7004F8106 /* CustomLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E162791161ACFC7004F8106 /* CustomLine.m */; };
-		6E1627AB161B11F5004F8106 /* HRBrightnessCursor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E16279F161B11F5004F8106 /* HRBrightnessCursor.m */; };
-		6E1627AC161B11F5004F8106 /* HRCgUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E1627A1161B11F5004F8106 /* HRCgUtil.m */; };
-		6E1627AD161B11F5004F8106 /* HRColorCursor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E1627A3161B11F5004F8106 /* HRColorCursor.m */; };
-		6E1627AE161B11F5004F8106 /* HRColorPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E1627A6161B11F5004F8106 /* HRColorPickerView.m */; };
-		6E1627AF161B11F5004F8106 /* HRColorPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E1627A8161B11F5004F8106 /* HRColorPickerViewController.m */; };
-		6E1627B0161B11F5004F8106 /* HRColorUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E1627AA161B11F5004F8106 /* HRColorUtil.m */; };
 		6E1627B3161B2599004F8106 /* CustomColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E1627B2161B2598004F8106 /* CustomColor.m */; };
 		6E8EECAA1614F2F200B410C5 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8EECA91614F2F200B410C5 /* SettingsViewController.m */; };
 		6E8EECB3161603A100B410C5 /* SPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E8EECB2161603A100B410C5 /* SPoint.m */; };
@@ -43,7 +37,6 @@
 		6EB36C2F1618691000CAB75E /* Delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EB36C2D1618691000CAB75E /* Delete@2x.png */; };
 		6EB36C32161869F400CAB75E /* InvertIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EB36C30161869F400CAB75E /* InvertIcon@2x.png */; };
 		6EB36C33161869F400CAB75E /* InvertIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EB36C31161869F400CAB75E /* InvertIcon.png */; };
-		6EB36C39161872E400CAB75E /* CustomPointVIewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB36C38161872E400CAB75E /* CustomPointVIewController.m */; };
 		6EE741F116109B4D00699999 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE741F016109B4D00699999 /* UIKit.framework */; };
 		6EE741F316109B4D00699999 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE741F216109B4D00699999 /* Foundation.framework */; };
 		6EE741F516109B4D00699999 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE741F416109B4D00699999 /* CoreGraphics.framework */; };
@@ -64,19 +57,6 @@
 /* Begin PBXFileReference section */
 		6E162790161ACFC6004F8106 /* CustomLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomLine.h; sourceTree = "<group>"; };
 		6E162791161ACFC7004F8106 /* CustomLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomLine.m; sourceTree = "<group>"; };
-		6E16279E161B11F5004F8106 /* HRBrightnessCursor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRBrightnessCursor.h; sourceTree = "<group>"; };
-		6E16279F161B11F5004F8106 /* HRBrightnessCursor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRBrightnessCursor.m; sourceTree = "<group>"; };
-		6E1627A0161B11F5004F8106 /* HRCgUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRCgUtil.h; sourceTree = "<group>"; };
-		6E1627A1161B11F5004F8106 /* HRCgUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRCgUtil.m; sourceTree = "<group>"; };
-		6E1627A2161B11F5004F8106 /* HRColorCursor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRColorCursor.h; sourceTree = "<group>"; };
-		6E1627A3161B11F5004F8106 /* HRColorCursor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRColorCursor.m; sourceTree = "<group>"; };
-		6E1627A4161B11F5004F8106 /* HRColorPickerMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRColorPickerMacros.h; sourceTree = "<group>"; };
-		6E1627A5161B11F5004F8106 /* HRColorPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRColorPickerView.h; sourceTree = "<group>"; };
-		6E1627A6161B11F5004F8106 /* HRColorPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRColorPickerView.m; sourceTree = "<group>"; };
-		6E1627A7161B11F5004F8106 /* HRColorPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRColorPickerViewController.h; sourceTree = "<group>"; };
-		6E1627A8161B11F5004F8106 /* HRColorPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRColorPickerViewController.m; sourceTree = "<group>"; };
-		6E1627A9161B11F5004F8106 /* HRColorUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HRColorUtil.h; sourceTree = "<group>"; };
-		6E1627AA161B11F5004F8106 /* HRColorUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HRColorUtil.m; sourceTree = "<group>"; };
 		6E1627B1161B2598004F8106 /* CustomColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomColor.h; sourceTree = "<group>"; };
 		6E1627B2161B2598004F8106 /* CustomColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomColor.m; sourceTree = "<group>"; };
 		6E8EECA81614F2F200B410C5 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
@@ -114,8 +94,6 @@
 		6EB36C2D1618691000CAB75E /* Delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Delete@2x.png"; sourceTree = "<group>"; };
 		6EB36C30161869F400CAB75E /* InvertIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "InvertIcon@2x.png"; sourceTree = "<group>"; };
 		6EB36C31161869F400CAB75E /* InvertIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = InvertIcon.png; sourceTree = "<group>"; };
-		6EB36C37161872E400CAB75E /* CustomPointVIewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomPointVIewController.h; sourceTree = "<group>"; };
-		6EB36C38161872E400CAB75E /* CustomPointVIewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomPointVIewController.m; sourceTree = "<group>"; };
 		6EE741EC16109B4D00699999 /* EndlessGrid.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EndlessGrid.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EE741F016109B4D00699999 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6EE741F216109B4D00699999 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -134,7 +112,6 @@
 		6EE8E874161476C700668FFC /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
 		6EE8E876161476C700668FFC /* GridGraphic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridGraphic.h; sourceTree = "<group>"; };
 		6EE8E877161476C700668FFC /* GridGraphic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridGraphic.m; sourceTree = "<group>"; };
-		6EE8E8BA1615B86D00668FFC /* DefConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefConst.h; sourceTree = "<group>"; };
 		6EE8E8C01619D34100668FFC /* CustomPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomPoint.h; sourceTree = "<group>"; };
 		6EE8E8C11619D34100668FFC /* CustomPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomPoint.m; sourceTree = "<group>"; };
 		6EE8E8C41619D9F700668FFC /* CustomSegment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSegment.h; sourceTree = "<group>"; };
@@ -142,6 +119,7 @@
 		6EE8E8C71619E4E800668FFC /* Shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shape.h; sourceTree = "<group>"; };
 		6EE8E8C81619E4E800668FFC /* Shape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shape.m; sourceTree = "<group>"; };
 		6EE8E8CA1619E58300668FFC /* ShapeDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShapeDelegate.h; path = EndlessGrid/ShapeDelegate.h; sourceTree = "<group>"; };
+		6EE8E915161C4B9F00668FFC /* DefConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefConst.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,35 +137,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6E16279C161B11F5004F8106 /* Externals */ = {
-			isa = PBXGroup;
-			children = (
-				6E16279D161B11F5004F8106 /* ColorPicker */,
-			);
-			name = Externals;
-			path = EndlessGrid/Externals;
-			sourceTree = "<group>";
-		};
-		6E16279D161B11F5004F8106 /* ColorPicker */ = {
-			isa = PBXGroup;
-			children = (
-				6E16279E161B11F5004F8106 /* HRBrightnessCursor.h */,
-				6E16279F161B11F5004F8106 /* HRBrightnessCursor.m */,
-				6E1627A0161B11F5004F8106 /* HRCgUtil.h */,
-				6E1627A1161B11F5004F8106 /* HRCgUtil.m */,
-				6E1627A2161B11F5004F8106 /* HRColorCursor.h */,
-				6E1627A3161B11F5004F8106 /* HRColorCursor.m */,
-				6E1627A4161B11F5004F8106 /* HRColorPickerMacros.h */,
-				6E1627A5161B11F5004F8106 /* HRColorPickerView.h */,
-				6E1627A6161B11F5004F8106 /* HRColorPickerView.m */,
-				6E1627A7161B11F5004F8106 /* HRColorPickerViewController.h */,
-				6E1627A8161B11F5004F8106 /* HRColorPickerViewController.m */,
-				6E1627A9161B11F5004F8106 /* HRColorUtil.h */,
-				6E1627AA161B11F5004F8106 /* HRColorUtil.m */,
-			);
-			path = ColorPicker;
-			sourceTree = "<group>";
-		};
 		6EAEE2A416161E630048A0F5 /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -231,7 +180,6 @@
 		6EE741E116109B4D00699999 = {
 			isa = PBXGroup;
 			children = (
-				6E16279C161B11F5004F8106 /* Externals */,
 				6EE8E8CA1619E58300668FFC /* ShapeDelegate.h */,
 				6EB36C101618138C00CAB75E /* Categories */,
 				6EE8E87B161479E100668FFC /* Models */,
@@ -276,6 +224,7 @@
 		6EE741F716109B4D00699999 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6EE8E915161C4B9F00668FFC /* DefConst.h */,
 				6EE741F816109B4D00699999 /* EndlessGrid-Info.plist */,
 				6EE741F916109B4D00699999 /* InfoPlist.strings */,
 				6EE741FC16109B4D00699999 /* main.m */,
@@ -283,7 +232,6 @@
 				6EE7420216109B4E00699999 /* Default.png */,
 				6EE7420416109B4E00699999 /* Default@2x.png */,
 				6EE7420616109B4E00699999 /* Default-568h@2x.png */,
-				6EE8E8BA1615B86D00668FFC /* DefConst.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -295,8 +243,6 @@
 				6EE8E871161476C700668FFC /* ViewController.m */,
 				6E8EECA81614F2F200B410C5 /* SettingsViewController.h */,
 				6E8EECA91614F2F200B410C5 /* SettingsViewController.m */,
-				6EB36C37161872E400CAB75E /* CustomPointVIewController.h */,
-				6EB36C38161872E400CAB75E /* CustomPointVIewController.m */,
 			);
 			name = Controllers;
 			path = EndlessGrid/Controllers;
@@ -452,17 +398,10 @@
 				6EB36C171618138C00CAB75E /* UIImage+Alpha.m in Sources */,
 				6EB36C181618138C00CAB75E /* UIImage+Resize.m in Sources */,
 				6EB36C191618138C00CAB75E /* UIImage+RoundedCorner.m in Sources */,
-				6EB36C39161872E400CAB75E /* CustomPointVIewController.m in Sources */,
 				6EE8E8C21619D34100668FFC /* CustomPoint.m in Sources */,
 				6EE8E8C61619D9F700668FFC /* CustomSegment.m in Sources */,
 				6EE8E8C91619E4E800668FFC /* Shape.m in Sources */,
 				6E162792161ACFC7004F8106 /* CustomLine.m in Sources */,
-				6E1627AB161B11F5004F8106 /* HRBrightnessCursor.m in Sources */,
-				6E1627AC161B11F5004F8106 /* HRCgUtil.m in Sources */,
-				6E1627AD161B11F5004F8106 /* HRColorCursor.m in Sources */,
-				6E1627AE161B11F5004F8106 /* HRColorPickerView.m in Sources */,
-				6E1627AF161B11F5004F8106 /* HRColorPickerViewController.m in Sources */,
-				6E1627B0161B11F5004F8106 /* HRColorUtil.m in Sources */,
 				6E1627B3161B2599004F8106 /* CustomColor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
