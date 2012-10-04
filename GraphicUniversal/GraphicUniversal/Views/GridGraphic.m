@@ -21,9 +21,9 @@
 @property (assign, nonatomic) NSInteger amountLinesY;
 @property (retain, nonatomic) NSMutableArray* shapes;
 @property (assign, nonatomic) BOOL existStartOfSegment;
+@property (assign, nonatomic) BOOL existStartOfLine;
 @property (assign, nonatomic) CGPoint firstDekartSegment;
 @property (assign, nonatomic) CGPoint lastDekartSegment;
-@property (assign, nonatomic) BOOL existStartOfLine;
 @property (assign, nonatomic) CGPoint firstDekartLinePoint;
 @property (assign, nonatomic) CGPoint lastDekartLinePoint;
 @property (assign, nonatomic) CGFloat lastCellScale;
@@ -33,11 +33,11 @@
 @property (retain, nonatomic) SLine* xMaxDekartLine;
 @property (retain, nonatomic) SLine* yMinDekartLine;
 @property (retain, nonatomic) SLine* yMaxDekartLine;
+
 - (void)addGesture;
 - (void)performTapGesture: (UITapGestureRecognizer*)tapGestureRecognizer;
 - (void)performPinchGesture: (UIPinchGestureRecognizer*) pinchGestureRecognizer;
 - (void)performPanGesture: (UIPanGestureRecognizer*) panGestureRecognizer;
-
 - (CGPoint) screenToDekart: (CGPoint)screen;
 - (CGPoint) dekartToScreen: (CGPoint)dekart;
 @end
@@ -71,9 +71,11 @@
 {
     self.cellHeight = nil;
     self.cellWidth = nil;
-    self.shapes = nil;
-    
-    
+    self.xMaxDekartLine = nil;
+    self.xMinDekartLine = nil;
+    self.yMaxDekartLine = nil;
+    self.yMinDekartLine = nil;
+    self.shapeColor = nil;
     [super dealloc];
 }
 
@@ -286,8 +288,8 @@
         NSString *numberXStr = [NSString stringWithFormat:@"%d", j + self.offsetForIntAsixX];
         [numberXStr drawAtPoint:CGPointMake(i + 2., 2.) withFont:helveticaBold];
     }
-    self.xMinDekartLine = [[SLine alloc] initWithKoefA:1 B:0 C:-(gridOffsetX/[self.cellWidth intValue]) withColor:nil];
-    self.xMaxDekartLine = [[SLine alloc] initWithKoefA:1 B:0 C:-((gridOffsetX + rect.size.width)/[self.cellWidth intValue]) withColor:nil];
+    self.xMinDekartLine = [[[SLine alloc] initWithKoefA:1 B:0 C:-(gridOffsetX/[self.cellWidth intValue]) withColor:nil] autorelease];
+    self.xMaxDekartLine = [[[SLine alloc] initWithKoefA:1 B:0 C:-((gridOffsetX + rect.size.width)/[self.cellWidth intValue]) withColor:nil] autorelease];
     
     float offsetForCellY = fmodf(self.gridOffsetY, [cellHeight floatValue]);
     
@@ -302,7 +304,7 @@
         [numberYStr drawAtPoint:CGPointMake(2., i +2.) withFont:helveticaBold];
     }
     self.yMinDekartLine = [[SLine alloc] initWithKoefA:0 B:1 C:-(gridOffsetY/[self.cellHeight intValue]) withColor:nil];
-    self.yMaxDekartLine = [[SLine alloc] initWithKoefA:0 B:1 C:-((gridOffsetY + rect.size.height)/[self.cellHeight intValue]) withColor:nil];
+    self.yMaxDekartLine = [[[SLine alloc] initWithKoefA:0 B:1 C:-((gridOffsetY + rect.size.height)/[self.cellHeight intValue]) withColor:nil] autorelease];
     for (id shape in self.shapes) {
         //point
         if([shape isKindOfClass:[SPoint class]]) {

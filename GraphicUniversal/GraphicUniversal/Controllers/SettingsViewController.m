@@ -166,7 +166,6 @@
             break;
         case kChangeColorTag: {
             self.senderActionType = kChangeColor;
-         //   self.colorPicker = [[HRColorPickerViewController alloc] initWithColor:[UIColor redColor] fullColor:YES saveStyle:HCPCSaveStyleSaveAndCancel];
             self.colorPicker = [[[CustomColor alloc] init] autorelease];
             self.colorPicker.alpha = 0;
             self.colorPicker.delegate = self;

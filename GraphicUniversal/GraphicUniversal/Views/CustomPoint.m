@@ -71,7 +71,7 @@
     self.xCoordinate.borderStyle = UITextBorderStyleRoundedRect;
     self.xCoordinate.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     self.xCoordinate.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    self.xCoordinate.text = @"0";
+    self.xCoordinate.text = @"1";
     self.xCoordinate.delegate = self;
     //self.xCoordinate.keyboardType = UIKeyboardTypeNumberPad;
     [self addSubview:self.xCoordinate];
@@ -81,7 +81,7 @@
     self.yCoordinate.borderStyle = UITextBorderStyleRoundedRect;
     self.yCoordinate.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     self.yCoordinate.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    self.yCoordinate.text = @"0";
+    self.yCoordinate.text = @"1";
     self.yCoordinate.delegate = self;
     //self.yCoordinate.keyboardType = UIKeyboardTypeNumberPad;
     [self addSubview:self.yCoordinate];

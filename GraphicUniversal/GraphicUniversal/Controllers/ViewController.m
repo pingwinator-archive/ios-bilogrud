@@ -13,7 +13,7 @@
 #import "Shape.h"
 #import "ShapeDelegate.h"
 @interface ViewController ()
-
+@property (retain, nonatomic) UIPopoverController* popover;
 @end
 
 @implementation ViewController
@@ -21,7 +21,7 @@
 @synthesize settingViewController;
 @synthesize showSettingButton;
 @synthesize bgView;
-
+@synthesize popover;
 
 - (void)dealloc
 {
@@ -29,6 +29,7 @@
     self.settingViewController = nil;
     self.showSettingButton = nil;
     self.grid = nil;
+    self.popover = nil;
     [super dealloc];
 }
 
@@ -43,6 +44,7 @@
     self.settingViewController = nil;
     self.showSettingButton = nil;
     self.grid = nil;
+    self.popover = nil;
     [super viewDidUnload];
 }
 - (void)didReceiveMemoryWarning
@@ -66,19 +68,29 @@
         self.bgView.alpha = 1.0;
     }];
    //reinit
-    [self.settingViewController.view removeFromSuperview];
-    self.settingViewController = [[SettingsViewController alloc]initWithNibName:@"SettingsViewController" bundle:nil];
-    self.settingViewController.delegate = self;
-    
-//    self.settingSmallView = (UIImageView*)self.settingViewController.view;
-//    UIImage* white = [[UIImage imageNamed:@"White.jpeg"] roundedCornerImage:7 borderSize:0];
+     [self.settingViewController.view removeFromSuperview];
+        self.settingViewController = [[SettingsViewController alloc]initWithNibName:@"SettingsViewController" bundle:nil];
+        self.settingViewController.delegate = self;
 
-  //  self.settingSmallView.image = [white roundedCornerImage:10 borderSize:1];
-    self.settingViewController.bgImageView.backgroundColor = [UIColor redColor];
-    self.settingViewController.view.frame = CGRectMake(40, 100, 240, 260);
-  
-    [self.bgView addSubview:self.settingViewController.view];
-    self.grid.userInteractionEnabled = NO;
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+      
+        self.settingViewController.bgImageView.backgroundColor = [UIColor redColor];
+        self.settingViewController.view.frame = CGRectMake(40, 100, 240, 260);
+        [self.bgView addSubview:self.settingViewController.view];
+        self.grid.userInteractionEnabled = NO;
+        
+    } else {
+      
+        self.settingViewController.view.frame = CGRectMake(270, 250, 240, 260);
+        self.popover = [[[UIPopoverController alloc] initWithContentViewController:self.settingViewController] autorelease];
+        
+        popover.popoverContentSize = self.settingViewController.view.frame.size;
+        //self.settingViewController
+        [popover presentPopoverFromRect:self.settingViewController.view.bounds
+                                 inView:self.bgView
+               permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    }
 }
 
 
@@ -86,23 +98,27 @@
 
 - (void)hideSettingsView:(ActionType)actionType withCustomShape:(Shape*)shape
 {
-    if(actionType != kAddNone) {
-        self.grid.actionType = actionType;
+        
+        if(actionType != kAddNone && (shape || ![self isCustomShape:actionType])) {
+            self.grid.actionType = actionType;
+        }
+        if(actionType == kClearBoard) {
+            [self.grid clearBoard];
+        }
+        if(shape) {
+            [self.grid addCustomShape: shape];
+        }
+        
+        [UIImageView animateWithDuration:delayForSubView animations:^{
+            self.bgView.alpha = 0.0;
+            self.settingViewController.settingButtonsView.alpha = 0;
+        }];
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        [self.settingViewController.view removeFromSuperview];
+    } else {
+            [self.popover dismissPopoverAnimated:YES];
     }
-    
-    if( actionType == kClearBoard) {
-        [self.grid clearBoard];
-    }
-    if(shape) {
-        [self.grid addCustomShape: shape];
-    }
-   
-    [UIImageView animateWithDuration:delayForSubView animations:^{
-        self.bgView.alpha = 0.0;
-//??
-        self.settingViewController.settingButtonsView.alpha = 0;
-    }];
-    [self.settingViewController.view removeFromSuperview];
+  
     self.bgView.hidden = YES;
     self.grid.userInteractionEnabled = YES;
 }
@@ -113,5 +129,8 @@
         self.grid.shapeColor = color;
     }
 }
-
+- (BOOL)isCustomShape:(ActionType)actionType
+{
+    return ((actionType == kAddCustomPoint) || (actionType == kAddCustomSegment) || (actionType == kAddCustomLine));
+}
 @end
