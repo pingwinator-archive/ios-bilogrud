@@ -17,8 +17,8 @@
 @property (retain, nonatomic) NSNumber* cellWidth;
 @property (assign, nonatomic) CGFloat gridOffsetX;
 @property (assign, nonatomic) CGFloat gridOffsetY;
-
 @property (nonatomic) ActionType actionType;
+
 @property (retain, nonatomic) UIColor* shapeColor;
 - (void)addCustomShape:(Shape*)shape;
 - (void)clearBoard;

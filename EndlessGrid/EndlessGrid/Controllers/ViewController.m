@@ -86,7 +86,7 @@
 
 - (void)hideSettingsView:(ActionType)actionType withCustomShape:(Shape*)shape
 {
-    if(actionType != kAddNone) {
+    if(actionType != kAddNone && (shape || ![self isCustomShape:actionType])) {
         self.grid.actionType = actionType;
     }
     
@@ -114,4 +114,8 @@
     }
 }
 
+- (BOOL)isCustomShape:(ActionType)actionType
+{
+    return ((actionType == kAddCustomPoint) || (actionType == kAddCustomSegment) || (actionType == kAddCustomLine));
+}
 @end

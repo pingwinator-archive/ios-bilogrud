@@ -71,9 +71,11 @@
 {
     self.cellHeight = nil;
     self.cellWidth = nil;
-    self.shapes = nil;
-    
-    
+    self.xMaxDekartLine = nil;
+    self.xMinDekartLine = nil;
+    self.yMaxDekartLine = nil;
+    self.yMinDekartLine = nil;
+    self.shapeColor = nil;
     [super dealloc];
 }
 
@@ -98,7 +100,7 @@
 
 - (void)addInitGraphic
 {
-   // self.shapeColor = [UIColor blackColor];
+    self.shapeColor = [UIColor redColor];
     self.cellHeight = [NSNumber numberWithDouble:kCellHeight];
     self.cellWidth = [NSNumber numberWithDouble:kCellWidth];
     
