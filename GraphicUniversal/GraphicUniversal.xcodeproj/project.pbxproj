@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		6EC7BCF2161E976400066F23 /* GridGraphicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC7BCF1161E976400066F23 /* GridGraphicViewController.m */; };
 		6EC7BCF6161E9AFC00066F23 /* Grid.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC7BCF5161E9AFC00066F23 /* Grid.m */; };
+		6EC7BCFE161EE6F200066F23 /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC7BCFD161EE6F200066F23 /* InfoViewController.m */; };
+		6EC7BD00161EEA3F00066F23 /* InfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EC7BCFF161EEA3F00066F23 /* InfoViewController.xib */; };
 		6EE8E8F0161C48C900668FFC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE8E8EF161C48C900668FFC /* UIKit.framework */; };
 		6EE8E8F2161C48C900668FFC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE8E8F1161C48C900668FFC /* Foundation.framework */; };
 		6EE8E8F4161C48C900668FFC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE8E8F3161C48C900668FFC /* CoreGraphics.framework */; };
@@ -62,6 +64,9 @@
 		6EC7BCF1161E976400066F23 /* GridGraphicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridGraphicViewController.m; sourceTree = "<group>"; };
 		6EC7BCF4161E9AFC00066F23 /* Grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Grid.h; sourceTree = "<group>"; };
 		6EC7BCF5161E9AFC00066F23 /* Grid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Grid.m; sourceTree = "<group>"; };
+		6EC7BCFC161EE6F200066F23 /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
+		6EC7BCFD161EE6F200066F23 /* InfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
+		6EC7BCFF161EEA3F00066F23 /* InfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoViewController.xib; sourceTree = "<group>"; };
 		6EE8E8EB161C48C900668FFC /* GraphicUniversal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GraphicUniversal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EE8E8EF161C48C900668FFC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6EE8E8F1161C48C900668FFC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -226,6 +231,8 @@
 				6EE8E921161C4C9300668FFC /* ViewController.m */,
 				6EC7BCF0161E976400066F23 /* GridGraphicViewController.h */,
 				6EC7BCF1161E976400066F23 /* GridGraphicViewController.m */,
+				6EC7BCFC161EE6F200066F23 /* InfoViewController.h */,
+				6EC7BCFD161EE6F200066F23 /* InfoViewController.m */,
 			);
 			name = Controllers;
 			path = GraphicUniversal/Controllers;
@@ -259,6 +266,7 @@
 		6EE8E92E161C4C9300668FFC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6EE8E943161C4C9300668FFC /* Nibs */,
 				6EE8E92F161C4C9300668FFC /* Images */,
 			);
 			name = Resources;
@@ -268,7 +276,6 @@
 		6EE8E92F161C4C9300668FFC /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				6EE8E943161C4C9300668FFC /* Nibs */,
 				6EE8E930161C4C9300668FFC /* CustomLineIcon.png */,
 				6EE8E931161C4C9300668FFC /* CustomLineIcon@2x.png */,
 				6EE8E932161C4C9300668FFC /* CustomLineSetIcon.png */,
@@ -298,9 +305,9 @@
 				6EE8E944161C4C9300668FFC /* SettingsViewController.xib */,
 				6EE8E945161C4C9300668FFC /* ViewController_iPad.xib */,
 				6EE8E946161C4C9300668FFC /* ViewController_iPhone.xib */,
+				6EC7BCFF161EEA3F00066F23 /* InfoViewController.xib */,
 			);
-			name = Nibs;
-			path = ../Nibs;
+			path = Nibs;
 			sourceTree = "<group>";
 		};
 		6EE8E948161C4C9300668FFC /* Views */ = {
@@ -401,6 +408,7 @@
 				6EE8E970161C4C9300668FFC /* SettingsViewController.xib in Resources */,
 				6EE8E971161C4C9300668FFC /* ViewController_iPad.xib in Resources */,
 				6EE8E972161C4C9300668FFC /* ViewController_iPhone.xib in Resources */,
+				6EC7BD00161EEA3F00066F23 /* InfoViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,6 +437,7 @@
 				6EE8E977161C4C9300668FFC /* GridGraphic.m in Sources */,
 				6EC7BCF2161E976400066F23 /* GridGraphicViewController.m in Sources */,
 				6EC7BCF6161E9AFC00066F23 /* Grid.m in Sources */,
+				6EC7BCFE161EE6F200066F23 /* InfoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

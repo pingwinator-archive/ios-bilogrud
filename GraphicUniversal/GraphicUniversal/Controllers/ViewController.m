@@ -8,10 +8,11 @@
 
 #import "ViewController.h"
 #import "GridGraphic.h"
-#import "SettingsViewController.h"
 #import "UIImage+RoundedCorner.h"
 #import "Shape.h"
 #import "ShapeDelegate.h"
+#import "SettingsViewController.h"
+#import "InfoViewController.h"
 @interface ViewController ()
 
 @end
@@ -22,7 +23,8 @@
 @synthesize showSettingButton;
 @synthesize bgView;
 @synthesize popover;
-
+@synthesize popoverInfo;
+@synthesize infoViewController;
 - (void)dealloc
 {
     self.bgView = nil;
@@ -30,6 +32,8 @@
     self.showSettingButton = nil;
     self.grid = nil;
     self.popover = nil;
+    self.popoverInfo = nil;
+    self.infoViewController = nil;
     [super dealloc];
 }
 
@@ -45,6 +49,7 @@
     self.showSettingButton = nil;
     self.grid = nil;
     self.popover = nil;
+    self.popoverInfo = nil;
     [super viewDidUnload];
 }
 - (void)didReceiveMemoryWarning
@@ -52,6 +57,8 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - IBActions
 
 - (void)showSetting
 {
@@ -77,12 +84,26 @@
         self.settingViewController.view.frame = CGRectMake(277, 950, 240, 260);
         self.popover = [[[UIPopoverController alloc] initWithContentViewController:self.settingViewController] autorelease];
         self.popover.delegate = self; 
-        popover.popoverContentSize = self.settingViewController.view.frame.size;
+        self.popover.popoverContentSize = self.settingViewController.view.frame.size;
         
-        [popover presentPopoverFromRect:self.settingViewController.view.frame
+        [self.popover presentPopoverFromRect:self.settingViewController.view.frame
                                  inView:self.bgView
                permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
     }
+}
+
+- (void)showInfo
+{
+    self.infoViewController = [[InfoViewController alloc] init];
+    self.infoViewController.view.frame = CGRectMake(600, 950, 240, 260);
+    self.popoverInfo = [[[UIPopoverController alloc] initWithContentViewController:self.infoViewController] autorelease];
+    self.popoverInfo.delegate = self;
+    self.popoverInfo.popoverContentSize = self.infoViewController.view.frame.size;
+    
+    [self.popoverInfo presentPopoverFromRect:self.infoViewController.view.frame
+                             inView:self.bgView
+           permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
+    NSLog(@"infoButton");
 }
 
 #pragma mark - SettingsViewDelegate Methods
