@@ -13,8 +13,7 @@
 #import "Shape.h"
 #import "ShapeDelegate.h"
 @interface ViewController ()
-@property (retain, nonatomic) UIPopoverController* popover;
-@property (assign, nonatomic) NSInteger colorIndex;
+
 @end
 
 @implementation ViewController
@@ -23,7 +22,7 @@
 @synthesize showSettingButton;
 @synthesize bgView;
 @synthesize popover;
-@synthesize colorIndex;
+
 - (void)dealloc
 {
     self.bgView = nil;
@@ -37,7 +36,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-   
 }
 
 - (void)viewDidUnload
@@ -55,12 +53,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)awakeFromNib {
-    
-    DBLog(@"awakeFromNib %f", self.grid.frame.size.height);
-    [super awakeFromNib];
-}
-
 - (void)showSetting
 {
     //ui
@@ -70,37 +62,33 @@
         self.bgView.alpha = 1.0;
     }];
    //reinit
-     [self.settingViewController.view removeFromSuperview];
-        self.settingViewController = [[SettingsViewController alloc]initWithNibName:@"SettingsViewController" bundle:nil];
-        self.settingViewController.delegate = self;
-        self.settingViewController.curColorIndex = colorIndex;
+    [self.settingViewController.view removeFromSuperview];
+    self.settingViewController = [[SettingsViewController alloc]initWithNibName:@"SettingsViewController" bundle:nil];
     
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-      
+    self.settingViewController.delegate = self;
+    self.settingViewController.currentColor = self.grid.shapeColor;
+    
+    if (isiPhone) {
         self.settingViewController.bgImageView.backgroundColor = [UIColor redColor];
         self.settingViewController.view.frame = CGRectMake(40, 100, 240, 260);
         [self.bgView addSubview:self.settingViewController.view];
         self.grid.userInteractionEnabled = NO;
-        
     } else {
-      
-        self.settingViewController.view.frame = CGRectMake(270, 250, 240, 260);
+        self.settingViewController.view.frame = CGRectMake(277, 950, 240, 260);
         self.popover = [[[UIPopoverController alloc] initWithContentViewController:self.settingViewController] autorelease];
-        
+        self.popover.delegate = self; 
         popover.popoverContentSize = self.settingViewController.view.frame.size;
-        //self.settingViewController
-        [popover presentPopoverFromRect:self.settingViewController.view.bounds
+        
+        [popover presentPopoverFromRect:self.settingViewController.view.frame
                                  inView:self.bgView
-               permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+               permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
     }
 }
-
 
 #pragma mark - SettingsViewDelegate Methods
 
 - (void)hideSettingsView:(ActionType)actionType withCustomShape:(Shape*)shape
 {
-        
         if(actionType != kAddNone && (shape || ![self isCustomShape:actionType])) {
             self.grid.actionType = actionType;
         }
@@ -115,31 +103,35 @@
             self.bgView.alpha = 0.0;
             self.settingViewController.settingButtonsView.alpha = 0;
         } completion:^(BOOL finished){
-              if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+              if (isiPhone) {
                   [self.settingViewController.view removeFromSuperview];
                 
-              }
+              } else {
+            [self.popover dismissPopoverAnimated:YES];
+            }
+
             self.bgView.hidden = YES;
         }];
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        //
-    } else {
-            [self.popover dismissPopoverAnimated:YES];
-    }
-  
-  //
+
     self.grid.userInteractionEnabled = YES;
 }
 
-- (void)changeColor:(UIColor*)color withIndex:(NSInteger)index
+- (void)changeColor:(UIColor*)color 
 {
     if(color) {
         self.grid.shapeColor = color;
-        self.colorIndex = index;
     }
 }
+
 - (BOOL)isCustomShape:(ActionType)actionType
 {
     return ((actionType == kAddCustomPoint) || (actionType == kAddCustomSegment) || (actionType == kAddCustomLine));
+}
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
+{
+    [UIImageView animateWithDuration:delayForSubView animations:^{
+        self.bgView.alpha = 0.0;
+    }];
+
 }
 @end

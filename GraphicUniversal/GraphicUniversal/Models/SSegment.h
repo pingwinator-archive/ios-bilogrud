@@ -11,6 +11,5 @@
 @interface SSegment : Shape
 @property(assign, nonatomic) CGPoint firstPointDekart;
 @property(assign, nonatomic) CGPoint lastPointDekart;
-@property(retain, nonatomic) UIColor* color;
 - (id)initWithFirstPoint: (CGPoint) fPoint LastPoint:(CGPoint) lPoint withColor:(UIColor*)curColor;
 @end

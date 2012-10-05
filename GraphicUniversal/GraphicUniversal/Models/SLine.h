@@ -12,7 +12,7 @@
 @interface SLine : Shape
 @property (assign, nonatomic) CGPoint firstPoint;
 @property (assign, nonatomic) CGPoint secondPoint;
-@property (retain, nonatomic) UIColor* color;
+
 @property (assign, nonatomic) CGFloat aKoef;
 @property (assign, nonatomic) CGFloat bKoef;
 @property (assign, nonatomic) CGFloat cKoef;

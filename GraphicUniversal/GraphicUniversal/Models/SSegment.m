@@ -11,7 +11,6 @@
 @implementation SSegment
 @synthesize firstPointDekart;
 @synthesize lastPointDekart;
-@synthesize color;
 
 - (void)dealloc
 {

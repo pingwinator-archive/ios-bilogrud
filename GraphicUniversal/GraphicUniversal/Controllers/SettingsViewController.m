@@ -40,7 +40,7 @@
 @synthesize settingButtonsView;
 @synthesize customLineView;
 @synthesize colorPicker;
-@synthesize curColorIndex;
+@synthesize currentColor;
 - (void)dealloc
 {
     self.closeButton = nil;
@@ -58,6 +58,7 @@
     self.settingButtonsView = nil;
     self.customLineView = nil;
     self.colorPicker = nil;
+    self.currentColor = nil;
     [super dealloc];
 }
 
@@ -168,7 +169,7 @@
             break;
         case kChangeColorTag: {
             self.senderActionType = kChangeColor;
-            self.colorPicker = [[[CustomColor alloc] initWithIndexColor:self.curColorIndex] autorelease];
+            self.colorPicker = [[[CustomColor alloc] initWithColor:self.currentColor] autorelease];
             self.colorPicker.alpha = 0;
             self.colorPicker.delegate = self;
             [UIView animateWithDuration:1 animations:^(void){
@@ -265,13 +266,13 @@
 }
 
 #pragma mark - ColorPickerViewDelegate Methods
-- (void)closePickerViewWithColor:(UIColor*)color atIndex:(NSInteger)indexColor
+- (void)closePickerViewWithColor:(UIColor*)color 
 {
-    if ([self.delegate respondsToSelector: @selector(changeColor:withIndex:)]) {
-        [self.delegate changeColor: color withIndex:indexColor];
+    if ([self.delegate respondsToSelector: @selector(changeColor:)]) {
+        [self.delegate changeColor: color ];
        
         if(color) {
-            self.curColorIndex = indexColor;
+            self.currentColor = color;
         }
         [UIView animateWithDuration:delayForSubView animations:^(void){
             self.colorPicker.alpha = 0;

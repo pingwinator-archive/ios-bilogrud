@@ -22,4 +22,5 @@
 @property (retain, nonatomic) UIColor* shapeColor;
 - (void)addCustomShape:(Shape*)shape;
 - (void)clearBoard;
+- (Shape*)lastShape;
 @end

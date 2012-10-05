@@ -30,7 +30,13 @@ typedef enum {
 #define kClearBoardTag 7
 #define kChangeColorTag 8
 
-#define radPoint 4.0f
+#define radPoint 10.0f
+#define kCellHeight_iPhone 40.0
+#define kCellWidth_iPhone 40.0
+#define kCellHeight_iPad 40.0
+#define kCellWidth_iPad 40.0
+#define minZoom 20
+#define maxZoom 70
 
 #define startFrameForSubview CGRectMake(0, 0, 300, 260)
 
@@ -41,4 +47,5 @@ typedef enum {
 #endif
 
 #define delayForSubView 0.3
+#define isiPhone [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone
 #endif

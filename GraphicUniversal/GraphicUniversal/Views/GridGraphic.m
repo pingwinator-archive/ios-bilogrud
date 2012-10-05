@@ -10,8 +10,7 @@
 #import "SPoint.h"
 #import "SLine.h"
 #import "SSegment.h"
-#define kCellHeight 40.0
-#define kCellWidth 40.0
+
 
 @interface GridGraphic()
 @property (assign, nonatomic) CGPoint firstTouchPoint;
@@ -27,7 +26,6 @@
 @property (assign, nonatomic) CGPoint firstDekartLinePoint;
 @property (assign, nonatomic) CGPoint lastDekartLinePoint;
 @property (assign, nonatomic) CGFloat lastCellScale;
-@property (nonatomic) ActionType prevActonType;
 
 @property (retain, nonatomic) SLine* xMinDekartLine;
 @property (retain, nonatomic) SLine* xMaxDekartLine;
@@ -36,10 +34,13 @@
 
 - (void)addGesture;
 - (void)performTapGesture: (UITapGestureRecognizer*)tapGestureRecognizer;
-- (void)performPinchGesture: (UIPinchGestureRecognizer*) pinchGestureRecognizer;
-- (void)performPanGesture: (UIPanGestureRecognizer*) panGestureRecognizer;
-- (CGPoint) screenToDekart: (CGPoint)screen;
-- (CGPoint) dekartToScreen: (CGPoint)dekart;
+- (void)performPinchGesture: (UIPinchGestureRecognizer*)pinchGestureRecognizer;
+- (void)performPanGesture: (UIPanGestureRecognizer*)panGestureRecognizer;
+- (CGPoint)screenToDekart: (CGPoint)screen;
+- (CGPoint)dekartToScreen: (CGPoint)dekart;
+- (void)drawGrid:(CGRect)rect withContext: (CGContextRef)context;
+- (void)drawSegment: (SSegment*)shapeSegment withContext: (CGContextRef)context;
+- (void)drawLine: (SLine*)shapeLine withContext: (CGContextRef)context;
 @end
  
 @implementation GridGraphic
@@ -54,7 +55,6 @@
 @synthesize amountLinesY;
 @synthesize shapes;
 @synthesize actionType;
-@synthesize prevActonType;
 @synthesize existStartOfSegment;
 @synthesize firstDekartSegment;
 @synthesize lastDekartSegment;
@@ -100,9 +100,9 @@
 
 - (void)addInitGraphic
 {
-   // self.shapeColor = [UIColor blackColor];
-    self.cellHeight = [NSNumber numberWithDouble:kCellHeight];
-    self.cellWidth = [NSNumber numberWithDouble:kCellWidth];
+  
+    self.cellHeight = [NSNumber numberWithDouble:kCellHeight_iPhone];
+    self.cellWidth = [NSNumber numberWithDouble:kCellWidth_iPhone];
     
     self.amountLinesX = self.frame.size.width  / [self.cellWidth intValue];
     self.amountLinesY = self.frame.size.height  / [self.cellHeight intValue];
@@ -126,7 +126,8 @@
     [testLine release];
     
     self.actionType = kAddPoint;
-    self.lastCellScale = kCellHeight;
+    self.lastCellScale = kCellHeight_iPhone;
+    self.shapeColor = [self lastShape].color;
 }
 
 #pragma mark - GestureRecognizers Methods
@@ -163,7 +164,6 @@
             [self.shapes addObject:shapePoint];
             [shapePoint release];
             [self setNeedsDisplay];
-            self.prevActonType = self.actionType;
         }
             break;
         case kAddLine: {
@@ -182,7 +182,6 @@
                 self.firstDekartLinePoint = [self screenToDekart:firstTap];
                 self.existStartOfLine = YES;
             }
-             self.prevActonType = self.actionType;
         }
             break;
         case kAddSegment: {
@@ -199,7 +198,6 @@
                 self.firstDekartSegment = [self screenToDekart:firstTap];
                 self.existStartOfSegment = YES;
             }
-             self.prevActonType = self.actionType;
         }
             break;
         default: {
@@ -214,12 +212,13 @@
     DBLog(@"%f",[pinchGestureRecognizer scale ]);
 
     CGFloat newH = [pinchGestureRecognizer scale] * [self.cellHeight floatValue];
-        
-    if(newH < 20){
-        newH = 20;
+    DBLog(@"%f", newH);
+    
+    if(newH < minZoom){
+        newH = minZoom;
     }
-    if(newH > 70) {
-        newH = 70;
+    if(newH > maxZoom) {
+        newH = maxZoom;
     }
     self.cellHeight = [NSNumber numberWithFloat:newH];
     self.cellWidth = [NSNumber numberWithFloat:newH];
@@ -265,7 +264,6 @@
 {
     UIColor *magentaColor = [UIColor colorWithRed:0.5f  green:0.0f blue:0.5f alpha:1.0f];
     [magentaColor set];
-    UIFont *helveticaBold = [UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0f];
    
     self.amountLinesX = self.frame.size.width  / [self.cellWidth intValue];
     self.amountLinesY = self.frame.size.height  / [self.cellHeight intValue];
@@ -273,18 +271,40 @@
     // Drawing code
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, 2.0);
-    CGContextSetStrokeColorWithColor(context, [UIColor blackColor].CGColor);
-    float offsetForCellX = fmodf(self.gridOffsetX, [cellWidth floatValue]);
+ 
+    //grid
+    [self drawGrid:rect withContext:context];
     
+    self.yMinDekartLine = [[SLine alloc] initWithKoefA:0 B:1 C:-(gridOffsetY/[self.cellHeight intValue]) withColor:nil];
+    self.yMaxDekartLine = [[[SLine alloc] initWithKoefA:0 B:1 C:-((gridOffsetY + rect.size.height)/[self.cellHeight intValue]) withColor:nil] autorelease];
+    for (id shape in self.shapes) {
+        //point
+        if([shape isKindOfClass:[SPoint class]]) {
+            [self drawPoint:shape withContext:context];
+        }
+        //segment
+        if([shape isKindOfClass:[SSegment class]]) {
+            [self drawSegment:shape withContext:(CGContextRef)context];
+        }
+        //line
+        if([shape isKindOfClass:[SLine class]]) {
+           [self drawLine:shape withContext:context];
+        }
+    }
+    CGContextStrokePath(context);
+}
+
+- (void)drawGrid:(CGRect)rect withContext:(CGContextRef)context
+{
+    float offsetForCellX = fmodf(self.gridOffsetX, [cellWidth floatValue]);
+    UIFont *helveticaBold = [UIFont fontWithName:@"HelveticaNeue-Bold" size:15.0f];
     //vertical lines
     self.offsetForIntAsixX = self.gridOffsetX / -[self.cellWidth intValue];
     for(int i = rect.origin.x + offsetForCellX, j = 0; i < (rect.origin.x + rect.size.width) && j <= amountLinesX + 1; i += [self.cellWidth intValue], j++)
     {
-      
-
         CGContextMoveToPoint(context, i, 0);
         CGContextAddLineToPoint(context, i, rect.origin.y + self.frame.size.height);
-    
+        
         NSString *numberXStr = [NSString stringWithFormat:@"%d", j + self.offsetForIntAsixX];
         [numberXStr drawAtPoint:CGPointMake(i + 2., 2.) withFont:helveticaBold];
     }
@@ -296,121 +316,124 @@
     self.offsetForIntAsixY = self.gridOffsetY / [self.cellHeight intValue];
     
     for (int i = rect.origin.y + offsetForCellY, j = self.amountLinesY; i < (rect.origin.y + rect.size.height) && j >= - 1; i += [self.cellHeight intValue], j--) {
-        
         CGContextMoveToPoint(context, 0, i);
         CGContextAddLineToPoint(context, self.frame.size.width, i);
         //text
         NSString *numberYStr = [NSString stringWithFormat:@"%d", j + self.offsetForIntAsixY];
         [numberYStr drawAtPoint:CGPointMake(2., i +2.) withFont:helveticaBold];
     }
-    self.yMinDekartLine = [[SLine alloc] initWithKoefA:0 B:1 C:-(gridOffsetY/[self.cellHeight intValue]) withColor:nil];
-    self.yMaxDekartLine = [[[SLine alloc] initWithKoefA:0 B:1 C:-((gridOffsetY + rect.size.height)/[self.cellHeight intValue]) withColor:nil] autorelease];
-    for (id shape in self.shapes) {
-        //point
-        if([shape isKindOfClass:[SPoint class]]) {
-            CGContextStrokePath(context);
-            SPoint* shapePoint = shape;
-            CGContextSetStrokeColorWithColor(context, shapePoint.color.CGColor);
-            CGPoint screen = [self dekartToScreen:shapePoint.dekartPoint];
-            CGContextAddEllipseInRect(context,(CGRectMake (screen.x - radPoint/2, screen.y - radPoint/2,radPoint, radPoint)));
+}
+
+- (void)drawPoint:(SPoint*)shapePoint withContext:(CGContextRef)context
+{
+    CGContextStrokePath(context);
+    CGContextSetStrokeColorWithColor(context, shapePoint.color.CGColor);
+    [shapePoint.color setFill];
+    CGPoint screen = [self dekartToScreen:shapePoint.dekartPoint];
+    CGContextAddEllipseInRect(context,(CGRectMake (screen.x - radPoint/2, screen.y - radPoint/2,radPoint, radPoint)));
+    CGContextFillEllipseInRect(context, CGRectMake (screen.x - radPoint/2, screen.y - radPoint/2,radPoint, radPoint));
+    CGContextDrawPath(context, kCGPathFill);
+}
+
+- (void)drawSegment:(SSegment*)shapeSegment withContext:(CGContextRef)context
+{
+    CGContextStrokePath(context);
+    if(!shapeSegment.color) {
+        shapeSegment.color = self.shapeColor;
+    }
+    CGContextSetStrokeColorWithColor(context, shapeSegment.color.CGColor);
+    CGPoint firstPointScreen = [self dekartToScreen: shapeSegment.firstPointDekart];
+    CGPoint lastPointScreen = [self dekartToScreen: shapeSegment.lastPointDekart];
+    CGContextMoveToPoint(context, firstPointScreen.x, firstPointScreen.y);
+    CGContextAddLineToPoint(context, lastPointScreen.x, lastPointScreen.y);
+    CGContextStrokePath(context);
+    [shapeSegment.color setFill];
+    CGContextAddEllipseInRect(context,(CGRectMake (firstPointScreen.x - radPoint/2, firstPointScreen.y - radPoint/2,radPoint, radPoint)));
+    CGContextFillEllipseInRect(context, CGRectMake (firstPointScreen.x - radPoint/2, firstPointScreen.y - radPoint/2,radPoint, radPoint));
+    CGContextAddEllipseInRect(context,(CGRectMake (lastPointScreen.x - radPoint/2, lastPointScreen.y - radPoint/2,radPoint, radPoint)));
+    CGContextFillEllipseInRect(context, CGRectMake (lastPointScreen.x - radPoint/2, lastPointScreen.y - radPoint/2,radPoint, radPoint));
+    CGContextDrawPath(context, kCGPathFill);
+}
+
+- (void)drawLine:(SLine*)shapeLine withContext:(CGContextRef)context
+{
+    BOOL count = NO;
+    CGPoint firstIntersectWithAsix;
+    CGPoint secondIntersectWithAsix;
+    if(!shapeLine.color) {
+        shapeLine.color = self.shapeColor;
+    }
+
+    NSValue* val  = [SLine intersectLine:shapeLine withSecondLine:self.xMinDekartLine];
+    if(val) {
+        CGPoint p = [val CGPointValue];
+        if(count )  {
+            secondIntersectWithAsix = p;
+        } else {
+            if(p.x != 0) {
+                firstIntersectWithAsix = p;
+                count = YES;
+            }
         }
-        //segment
-        if([shape isKindOfClass:[SSegment class]]) {
-              
-            CGContextStrokePath(context);
-            SSegment* shapeSegment = shape;
-            CGContextSetStrokeColorWithColor(context, shapeSegment.color.CGColor);
-            CGPoint firstPointScreen = [self dekartToScreen: shapeSegment.firstPointDekart];
-            CGPoint lastPointScreen = [self dekartToScreen: shapeSegment.lastPointDekart];
-            
-            CGContextMoveToPoint(context, firstPointScreen.x, firstPointScreen.y);
-            
-            CGContextAddLineToPoint(context, lastPointScreen.x, lastPointScreen.y);
-            CGContextAddEllipseInRect(context,(CGRectMake (firstPointScreen.x - radPoint/2, firstPointScreen.y - radPoint/2,radPoint, radPoint)));
-          
-            CGContextAddEllipseInRect(context,(CGRectMake (lastPointScreen.x - radPoint/2, lastPointScreen.y - radPoint/2,radPoint, radPoint)));
+    }
+    val  = [SLine intersectLine:shapeLine withSecondLine:self.yMinDekartLine];
+    if(val) {
+        CGPoint p = [val CGPointValue];
+        if(count) {
+            secondIntersectWithAsix = p;
+        } else {
+            if(p.x != 0) {
+                firstIntersectWithAsix = p;
+                count = YES;
+            }
         }
-        //line
-        if([shape isKindOfClass:[SLine class]]) {
-            SLine* shapeLine = shape;
-            BOOL count = NO;
-            CGPoint firstIntersectWithAsix;
-            CGPoint secondIntersectWithAsix;
-            NSValue* val  = [SLine intersectLine:shape withSecondLine:self.xMinDekartLine];
-            if(val) {
-                CGPoint p = [val CGPointValue];//[self intersectLine:shape withSecondLine:[[SLine alloc]initWithFirstPoint:CGPointMake(0, 0) secondPoint:CGPointMake(0, -1) ]];
-                NSLog(@"intersect: %f %f", p.x, p.y);
-                if(count )  {
-                    secondIntersectWithAsix = p;
-                } else {
-                    if(p.x != 0) {
-                        firstIntersectWithAsix = p;
-                        count = YES;
-                    }
-                }
+    }
+    val  = [SLine intersectLine:shapeLine withSecondLine:self.xMaxDekartLine];
+    if(val) {
+        CGPoint p = [val CGPointValue];
+        if(count) {
+            secondIntersectWithAsix = p;
+        } else {
+            if(p.x != 0) {
+                firstIntersectWithAsix = p;
+                count = YES;
             }
-            
-            val  = [SLine intersectLine:shape withSecondLine:self.yMinDekartLine];
-            if(val) {
-                CGPoint p = [val CGPointValue];//[self intersectLine:shape withSecondLine:[[SLine alloc]initWithFirstPoint:CGPointMake(0, 0) secondPoint:CGPointMake(0, -1) ]];
-                NSLog(@"intersect: %f %f", p.x, p.y);
-                if(count) {
-                    secondIntersectWithAsix = p;
-                } else {
-                    if(p.x != 0) {
-                        firstIntersectWithAsix = p;
-                        count = YES;
-                    }
-                }
+        }
+    }
+    val  = [SLine intersectLine:shapeLine withSecondLine:self.yMaxDekartLine];
+    if(val) {
+        CGPoint p = [val CGPointValue];
+        if(count) {
+            secondIntersectWithAsix = p;
+        } else {
+            if(p.x != 0) {
+                firstIntersectWithAsix = p;
+                count = YES;
             }
-
-            val  = [SLine intersectLine:shape withSecondLine:self.xMaxDekartLine];
-            if(val) {
-                CGPoint p = [val CGPointValue];//[self intersectLine:shape withSecondLine:[[SLine alloc]initWithFirstPoint:CGPointMake(0, 0) secondPoint:CGPointMake(0, -1) ]];
-                NSLog(@"intersect: %f %f", p.x, p.y);
-                if(count) {
-                    secondIntersectWithAsix = p;
-                } else {
-                     if(p.x != 0) {
-                         firstIntersectWithAsix = p;
-                         count = YES;
-                     }
-                }
-            }
-
-            val  = [SLine intersectLine:shape withSecondLine:self.yMaxDekartLine];
-            if(val) {
-                CGPoint p = [val CGPointValue];
-                NSLog(@"intersect: %f %f", p.x, p.y);
-                if(count) {
-                    secondIntersectWithAsix = p;
-                } else {
-                     if(p.x != 0) {
-                         firstIntersectWithAsix = p;
-                         count = YES;
-                     }
-                }
-            }
-
-            CGContextStrokePath(context);
-        
-            CGContextSetStrokeColorWithColor(context, shapeLine.color.CGColor);
-            //points intersect to screen
-            CGPoint firstPointScreen = [self dekartToScreen: firstIntersectWithAsix];
-            CGPoint lastPointScreen = [self dekartToScreen: secondIntersectWithAsix];
-            CGContextMoveToPoint(context, firstPointScreen.x, firstPointScreen.y);
-            CGContextAddLineToPoint(context, lastPointScreen.x, lastPointScreen.y);
         }
     }
     CGContextStrokePath(context);
+    
+    CGContextSetStrokeColorWithColor(context, shapeLine.color.CGColor);
+    //points intersect to screen
+    CGPoint firstPointScreen = [self dekartToScreen: firstIntersectWithAsix];
+    CGPoint lastPointScreen = [self dekartToScreen: secondIntersectWithAsix];
+    CGContextMoveToPoint(context, firstPointScreen.x, firstPointScreen.y);
+    CGContextAddLineToPoint(context, lastPointScreen.x, lastPointScreen.y);
 }
 
 - (void)clearBoard
 {
     if(self.actionType == kClearBoard) {
         [self.shapes removeAllObjects];
+        self.shapeColor = [UIColor blackColor];
         [self setNeedsDisplay];
     }
+}
+
+- (Shape*)lastShape
+{
+    return [self.shapes lastObject];
 }
 
 //call by view controller

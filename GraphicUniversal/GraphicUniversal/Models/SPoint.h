@@ -10,6 +10,5 @@
 #import "Shape.h"
 @interface SPoint : Shape
 @property(assign, nonatomic) CGPoint dekartPoint;
-@property(retain, nonatomic) UIColor* color;
 - (id) initWithPoint: (CGPoint)point WithColor:(UIColor*)curColor;
 @end

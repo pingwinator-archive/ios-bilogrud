@@ -10,7 +10,7 @@
 
 @implementation SPoint
 @synthesize dekartPoint;
-@synthesize color;
+
 
 - (id) init
 {

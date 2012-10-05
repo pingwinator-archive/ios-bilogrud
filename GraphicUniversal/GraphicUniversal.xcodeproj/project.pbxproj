@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6EC7BCF2161E976400066F23 /* GridGraphicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC7BCF1161E976400066F23 /* GridGraphicViewController.m */; };
+		6EC7BCF6161E9AFC00066F23 /* Grid.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC7BCF5161E9AFC00066F23 /* Grid.m */; };
 		6EE8E8F0161C48C900668FFC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE8E8EF161C48C900668FFC /* UIKit.framework */; };
 		6EE8E8F2161C48C900668FFC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE8E8F1161C48C900668FFC /* Foundation.framework */; };
 		6EE8E8F4161C48C900668FFC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE8E8F3161C48C900668FFC /* CoreGraphics.framework */; };
@@ -56,6 +58,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6EC7BCF0161E976400066F23 /* GridGraphicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridGraphicViewController.h; sourceTree = "<group>"; };
+		6EC7BCF1161E976400066F23 /* GridGraphicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridGraphicViewController.m; sourceTree = "<group>"; };
+		6EC7BCF4161E9AFC00066F23 /* Grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Grid.h; sourceTree = "<group>"; };
+		6EC7BCF5161E9AFC00066F23 /* Grid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Grid.m; sourceTree = "<group>"; };
 		6EE8E8EB161C48C900668FFC /* GraphicUniversal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GraphicUniversal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EE8E8EF161C48C900668FFC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6EE8E8F1161C48C900668FFC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -218,6 +224,8 @@
 				6EE8E91F161C4C9300668FFC /* SettingsViewController.m */,
 				6EE8E920161C4C9300668FFC /* ViewController.h */,
 				6EE8E921161C4C9300668FFC /* ViewController.m */,
+				6EC7BCF0161E976400066F23 /* GridGraphicViewController.h */,
+				6EC7BCF1161E976400066F23 /* GridGraphicViewController.m */,
 			);
 			name = Controllers;
 			path = GraphicUniversal/Controllers;
@@ -252,7 +260,6 @@
 			isa = PBXGroup;
 			children = (
 				6EE8E92F161C4C9300668FFC /* Images */,
-				6EE8E943161C4C9300668FFC /* Nibs */,
 			);
 			name = Resources;
 			path = GraphicUniversal/Resources;
@@ -261,6 +268,7 @@
 		6EE8E92F161C4C9300668FFC /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6EE8E943161C4C9300668FFC /* Nibs */,
 				6EE8E930161C4C9300668FFC /* CustomLineIcon.png */,
 				6EE8E931161C4C9300668FFC /* CustomLineIcon@2x.png */,
 				6EE8E932161C4C9300668FFC /* CustomLineSetIcon.png */,
@@ -291,7 +299,8 @@
 				6EE8E945161C4C9300668FFC /* ViewController_iPad.xib */,
 				6EE8E946161C4C9300668FFC /* ViewController_iPhone.xib */,
 			);
-			path = Nibs;
+			name = Nibs;
+			path = ../Nibs;
 			sourceTree = "<group>";
 		};
 		6EE8E948161C4C9300668FFC /* Views */ = {
@@ -307,6 +316,8 @@
 				6EE8E950161C4C9300668FFC /* CustomSegment.m */,
 				6EE8E951161C4C9300668FFC /* GridGraphic.h */,
 				6EE8E952161C4C9300668FFC /* GridGraphic.m */,
+				6EC7BCF4161E9AFC00066F23 /* Grid.h */,
+				6EC7BCF5161E9AFC00066F23 /* Grid.m */,
 			);
 			name = Views;
 			path = GraphicUniversal/Views;
@@ -416,6 +427,8 @@
 				6EE8E975161C4C9300668FFC /* CustomPoint.m in Sources */,
 				6EE8E976161C4C9300668FFC /* CustomSegment.m in Sources */,
 				6EE8E977161C4C9300668FFC /* GridGraphic.m in Sources */,
+				6EC7BCF2161E976400066F23 /* GridGraphicViewController.m in Sources */,
+				6EC7BCF6161E9AFC00066F23 /* Grid.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,6 +509,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GraphicUniversal/GraphicUniversal-Prefix.pch";
 				INFOPLIST_FILE = "GraphicUniversal/GraphicUniversal-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -507,6 +521,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GraphicUniversal/GraphicUniversal-Prefix.pch";
 				INFOPLIST_FILE = "GraphicUniversal/GraphicUniversal-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -531,6 +546,7 @@
 				6EE8E914161C48CA00668FFC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

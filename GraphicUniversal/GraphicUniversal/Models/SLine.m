@@ -11,7 +11,6 @@
 @implementation SLine
 @synthesize firstPoint;
 @synthesize secondPoint;
-@synthesize color;
 @synthesize aKoef;
 @synthesize bKoef;
 @synthesize cKoef;
@@ -29,7 +28,7 @@
         self.aKoef = a;
         self.bKoef = b;
         self.cKoef = c;
-        NSLog(@"%f x + %f y + %f = 0", self.aKoef, self.bKoef, self.cKoef);
+        DBLog(@"%f x + %f y + %f = 0", self.aKoef, self.bKoef, self.cKoef);
 
     }
     return self;
@@ -44,17 +43,15 @@
         self.aKoef = sPoint.y - fPoint.y;
         self.bKoef = fPoint.x - sPoint.x;
         self.cKoef = - fPoint.x * sPoint.y + sPoint.x * fPoint.y;
-        NSLog(@"%f x + %f y + %f = 0", self.aKoef, self.bKoef, self.cKoef);
+        DBLog(@"%f x + %f y + %f = 0", self.aKoef, self.bKoef, self.cKoef);
     }
     return self;
 }
-
 
 //lines
 + (NSValue*)intersectLine:(SLine*)firstLine withSecondLine:(SLine*)secondLine
 {
     NSValue* intersectPoint = nil;
-    
     
     //first line : y = k1 * x + b1
     //k1 = - a /b

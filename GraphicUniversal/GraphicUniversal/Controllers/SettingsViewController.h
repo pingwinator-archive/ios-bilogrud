@@ -26,11 +26,12 @@
 @property (retain, nonatomic) IBOutlet UIView* settingButtonsView;
 @property (nonatomic, assign) id <SettingsViewDelegate> delegate;
 @property (nonatomic) ActionType senderActionType;
-@property (assign, nonatomic) NSInteger curColorIndex;
+@property (retain, nonatomic) UIColor* currentColor;
+//@property (assign, nonatomic) NSInteger curColorIndex;
 - (IBAction)pressButton:(UIButton*)sender;
 @end
 
 @protocol SettingsViewDelegate <NSObject> 
 - (void)hideSettingsView:(ActionType)actionType withCustomShape:(Shape*)shape;
-- (void)changeColor:(UIColor*)color withIndex:(NSInteger)indexColor;
+- (void)changeColor:(UIColor*)color;
 @end

@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface Shape : NSObject
-
+@property (retain, nonatomic) UIColor* color;
 @end

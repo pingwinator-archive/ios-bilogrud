@@ -42,11 +42,12 @@
     }
     return self;
 }
-- (id)initWithIndexColor:(NSInteger)startColor
+- (id)initWithColor:(UIColor*)startColor
 {
     self = [self initWithFrame:startFrameForSubview];
     if(self) {
-        [self.colorPickerView selectRow:startColor inComponent:0 animated:YES];
+        NSInteger indexStartColor = [self.colors indexOfObject:startColor];
+        [self.colorPickerView selectRow:indexStartColor inComponent:0 animated:YES];
     }
     return self;
 }
@@ -90,7 +91,7 @@
     self.saveButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     self.saveButton.frame = rectButton;
     [self.saveButton setTitle:@"Save" forState:UIControlStateNormal];
-    [self.saveButton addTarget:self action:@selector(close) forControlEvents:UIControlEventTouchUpInside];
+    [self.saveButton addTarget:self action:@selector(save) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.saveButton];
 }
 
@@ -139,17 +140,17 @@
 
 - (void)cancel
 {
-    if([self.delegate respondsToSelector:@selector(closePickerViewWithColor:atIndex:)]) {
+    if([self.delegate respondsToSelector:@selector(closePickerViewWithColor:)]) {
         if(self.currentColorIndex < [self.colors count]) {
-            [self.delegate closePickerViewWithColor:nil atIndex:0];
+            [self.delegate closePickerViewWithColor:nil];
         }
     }
 }
-- (void)close
+- (void)save
 {
-    if([self.delegate respondsToSelector:@selector(closePickerViewWithColor:atIndex:)]) {
+    if([self.delegate respondsToSelector:@selector(closePickerViewWithColor:)]) {
         if(self.currentColorIndex < [self.colors count]) {
-            [self.delegate closePickerViewWithColor: [self.colors objectAtIndex:self.currentColorIndex]atIndex:self.currentColorIndex];
+            [self.delegate closePickerViewWithColor: [self.colors objectAtIndex:self.currentColorIndex]];
         }
     }
 }

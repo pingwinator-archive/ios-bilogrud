@@ -9,5 +9,5 @@
 #import "Shape.h"
 
 @implementation Shape
-
+@synthesize color;
 @end
