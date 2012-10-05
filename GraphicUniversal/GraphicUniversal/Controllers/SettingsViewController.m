@@ -40,6 +40,7 @@
 @synthesize settingButtonsView;
 @synthesize customLineView;
 @synthesize colorPicker;
+@synthesize curColorIndex;
 - (void)dealloc
 {
     self.closeButton = nil;
@@ -74,6 +75,7 @@
     [super viewDidLoad];
     UIImage* white = [[UIImage imageNamed:@"White.jpeg"] roundedCornerImage:7 borderSize:0];
     self.bgImageView.image = [white roundedCornerImage:10 borderSize:1];
+   // self.curColorIndex = 2;
 }
 -(void)viewDidUnload
 {
@@ -166,7 +168,7 @@
             break;
         case kChangeColorTag: {
             self.senderActionType = kChangeColor;
-            self.colorPicker = [[[CustomColor alloc] init] autorelease];
+            self.colorPicker = [[[CustomColor alloc] initWithIndexColor:self.curColorIndex] autorelease];
             self.colorPicker.alpha = 0;
             self.colorPicker.delegate = self;
             [UIView animateWithDuration:1 animations:^(void){
@@ -263,17 +265,20 @@
 }
 
 #pragma mark - ColorPickerViewDelegate Methods
-- (void)closePickerViewWithColor:(UIColor*)color
+- (void)closePickerViewWithColor:(UIColor*)color atIndex:(NSInteger)indexColor
 {
-    if ([self.delegate respondsToSelector: @selector(changeColor:)]) {
-        [self.delegate changeColor: color];
+    if ([self.delegate respondsToSelector: @selector(changeColor:withIndex:)]) {
+        [self.delegate changeColor: color withIndex:indexColor];
        
-            [UIView animateWithDuration:delayForSubView animations:^(void){
-                self.colorPicker.alpha = 0;
-                self.settingButtonsView.alpha = 1;
-            }completion:nil];
+        if(color) {
+            self.curColorIndex = indexColor;
+        }
+        [UIView animateWithDuration:delayForSubView animations:^(void){
+            self.colorPicker.alpha = 0;
+            self.settingButtonsView.alpha = 1;
+        }completion:nil];
             
-            [self.colorPicker removeFromSuperview];
+        [self.colorPicker removeFromSuperview];
     }
 }
 

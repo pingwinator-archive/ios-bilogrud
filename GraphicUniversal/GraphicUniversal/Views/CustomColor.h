@@ -10,10 +10,11 @@
 @protocol ColorPickerViewDelegate;
 @interface CustomColor : UIView<UIPickerViewDelegate>
 @property (assign, nonatomic) id <ColorPickerViewDelegate> delegate;
+- (id)initWithIndexColor:(NSInteger)startColor;
 @end
 
 @protocol ColorPickerViewDelegate <NSObject>
 
-- (void)closePickerViewWithColor:(UIColor*)color;
+- (void)closePickerViewWithColor:(UIColor*)color atIndex:(NSInteger)indexColor;
 
 @end

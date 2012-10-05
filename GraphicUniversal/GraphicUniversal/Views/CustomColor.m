@@ -38,14 +38,15 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self addComponents];
+        
     }
     return self;
 }
-- (id)init
+- (id)initWithIndexColor:(NSInteger)startColor
 {
     self = [self initWithFrame:startFrameForSubview];
     if(self) {
-        
+        [self.colorPickerView selectRow:startColor inComponent:0 animated:YES];
     }
     return self;
 }
@@ -74,6 +75,7 @@
     self.colorPickerView = [[UIPickerView alloc] initWithFrame:cPickerRect];
     self.colorPickerView.delegate = self;
     self.colorPickerView.showsSelectionIndicator = YES;
+  //  [self.colorPickerView selectRow:2 inComponent:0 animated:NO];
     self.colorPickerView.frame = cPickerRect;
     [self addSubview:self.colorPickerView];
     
@@ -137,17 +139,17 @@
 
 - (void)cancel
 {
-    if([self.delegate respondsToSelector:@selector(closePickerViewWithColor:)]) {
+    if([self.delegate respondsToSelector:@selector(closePickerViewWithColor:atIndex:)]) {
         if(self.currentColorIndex < [self.colors count]) {
-            [self.delegate closePickerViewWithColor: nil];
+            [self.delegate closePickerViewWithColor:nil atIndex:0];
         }
     }
 }
 - (void)close
 {
-    if([self.delegate respondsToSelector:@selector(closePickerViewWithColor:)]) {
+    if([self.delegate respondsToSelector:@selector(closePickerViewWithColor:atIndex:)]) {
         if(self.currentColorIndex < [self.colors count]) {
-            [self.delegate closePickerViewWithColor: [self.colors objectAtIndex:self.currentColorIndex]];
+            [self.delegate closePickerViewWithColor: [self.colors objectAtIndex:self.currentColorIndex]atIndex:self.currentColorIndex];
         }
     }
 }

@@ -16,9 +16,10 @@
 		6E422F841616DD2B00066338 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E422F831616DD2B00066338 /* Default.png */; };
 		6E422F861616DD2B00066338 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E422F851616DD2B00066338 /* Default@2x.png */; };
 		6E422F881616DD2B00066338 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E422F871616DD2B00066338 /* Default-568h@2x.png */; };
-		6EB36BF61616DE2E00CAB75E /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EB36BF01616DE2E00CAB75E /* ViewController.xib */; };
 		6EB36BF71616DE2E00CAB75E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB36BF31616DE2E00CAB75E /* ViewController.m */; };
 		6EB36BFA1616DE5800CAB75E /* BoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB36BF91616DE5800CAB75E /* BoardView.m */; };
+		6EC7BCE8161DE7B100066F23 /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EC7BCE7161DE7B100066F23 /* ViewController_iPhone.xib */; };
+		6EC7BCEA161DE7CC00066F23 /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EC7BCE9161DE7CC00066F23 /* ViewController_iPad.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,12 +36,13 @@
 		6E422F831616DD2B00066338 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		6E422F851616DD2B00066338 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		6E422F871616DD2B00066338 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		6EB36BF01616DE2E00CAB75E /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
 		6EB36BF21616DE2E00CAB75E /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		6EB36BF31616DE2E00CAB75E /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		6EB36BF81616DE5800CAB75E /* BoardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardView.h; sourceTree = "<group>"; };
 		6EB36BF91616DE5800CAB75E /* BoardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoardView.m; sourceTree = "<group>"; };
 		6EB36C031616E3CD00CAB75E /* DefineConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefineConst.h; sourceTree = "<group>"; };
+		6EC7BCE7161DE7B100066F23 /* ViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController_iPhone.xib; sourceTree = "<group>"; };
+		6EC7BCE9161DE7CC00066F23 /* ViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController_iPad.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,7 +127,8 @@
 		6EB36BEF1616DE2E00CAB75E /* Nibs */ = {
 			isa = PBXGroup;
 			children = (
-				6EB36BF01616DE2E00CAB75E /* ViewController.xib */,
+				6EC7BCE7161DE7B100066F23 /* ViewController_iPhone.xib */,
+				6EC7BCE9161DE7CC00066F23 /* ViewController_iPad.xib */,
 			);
 			path = Nibs;
 			sourceTree = "<group>";
@@ -213,7 +216,8 @@
 				6E422F841616DD2B00066338 /* Default.png in Resources */,
 				6E422F861616DD2B00066338 /* Default@2x.png in Resources */,
 				6E422F881616DD2B00066338 /* Default-568h@2x.png in Resources */,
-				6EB36BF61616DE2E00CAB75E /* ViewController.xib in Resources */,
+				6EC7BCE8161DE7B100066F23 /* ViewController_iPhone.xib in Resources */,
+				6EC7BCEA161DE7CC00066F23 /* ViewController_iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,7 +302,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tetris/Tetris-Prefix.pch";
 				INFOPLIST_FILE = "Tetris/Tetris-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -309,7 +315,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tetris/Tetris-Prefix.pch";
 				INFOPLIST_FILE = "Tetris/Tetris-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

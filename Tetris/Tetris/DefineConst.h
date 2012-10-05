@@ -12,4 +12,12 @@
 #define boardBorderWidth 5
 #define boardGridWidth 3
 
+#define isiPhone [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone
+
+#ifdef DEBUGGING
+# define DBLog(fmt,...) NSLog(@"%@",[NSString stringWithFormat:(fmt), ##__VA_ARGS__]);
+#else
+# define DBLog(...)
+#endif
+
 #endif

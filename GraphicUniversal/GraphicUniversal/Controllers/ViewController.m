@@ -14,6 +14,7 @@
 #import "ShapeDelegate.h"
 @interface ViewController ()
 @property (retain, nonatomic) UIPopoverController* popover;
+@property (assign, nonatomic) NSInteger colorIndex;
 @end
 
 @implementation ViewController
@@ -22,7 +23,7 @@
 @synthesize showSettingButton;
 @synthesize bgView;
 @synthesize popover;
-
+@synthesize colorIndex;
 - (void)dealloc
 {
     self.bgView = nil;
@@ -36,6 +37,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+   
 }
 
 - (void)viewDidUnload
@@ -71,7 +73,7 @@
      [self.settingViewController.view removeFromSuperview];
         self.settingViewController = [[SettingsViewController alloc]initWithNibName:@"SettingsViewController" bundle:nil];
         self.settingViewController.delegate = self;
-
+        self.settingViewController.curColorIndex = colorIndex;
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
       
@@ -112,21 +114,28 @@
         [UIImageView animateWithDuration:delayForSubView animations:^{
             self.bgView.alpha = 0.0;
             self.settingViewController.settingButtonsView.alpha = 0;
+        } completion:^(BOOL finished){
+              if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+                  [self.settingViewController.view removeFromSuperview];
+                
+              }
+            self.bgView.hidden = YES;
         }];
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        [self.settingViewController.view removeFromSuperview];
+        //
     } else {
             [self.popover dismissPopoverAnimated:YES];
     }
   
-    self.bgView.hidden = YES;
+  //
     self.grid.userInteractionEnabled = YES;
 }
 
-- (void)changeColor:(UIColor*)color
+- (void)changeColor:(UIColor*)color withIndex:(NSInteger)index
 {
     if(color) {
         self.grid.shapeColor = color;
+        self.colorIndex = index;
     }
 }
 - (BOOL)isCustomShape:(ActionType)actionType

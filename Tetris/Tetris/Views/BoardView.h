@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+//from DefineConst: boardBorderWidth, boardGridWidth
 @interface BoardView : UIView
 @property (assign, nonatomic) NSInteger amountCellX;
 @end
