@@ -100,10 +100,13 @@
 
 - (void)addInitGraphic
 {
-  
-    self.cellHeight = [NSNumber numberWithDouble:kCellHeight_iPhone];
-    self.cellWidth = [NSNumber numberWithDouble:kCellWidth_iPhone];
-    
+    if(isiPhone) {
+        self.cellHeight = [NSNumber numberWithDouble:kCellHeight_iPhone];
+        self.cellWidth = [NSNumber numberWithDouble:kCellWidth_iPhone];
+    } else {
+        self.cellHeight = [NSNumber numberWithDouble:kCellHeight_iPad];
+        self.cellWidth = [NSNumber numberWithDouble:kCellWidth_iPad];
+    }
     self.amountLinesX = self.frame.size.width  / [self.cellWidth intValue];
     self.amountLinesY = self.frame.size.height  / [self.cellHeight intValue];
     
@@ -126,7 +129,7 @@
     [testLine release];
     
     self.actionType = kAddPoint;
-    self.lastCellScale = kCellHeight_iPhone;
+ //   self.lastCellScale = kCellHeight_iPhone;
     self.shapeColor = [self lastShape].color;
 }
 

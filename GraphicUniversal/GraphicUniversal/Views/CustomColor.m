@@ -14,7 +14,7 @@
 @property(retain, nonatomic) UIButton* saveButton;
 @property(retain ,nonatomic) NSMutableArray* colors;
 @property(assign, nonatomic) NSInteger currentColorIndex;
-- (void)close;
+- (void)save;
 - (void)cancel;
 @end
 

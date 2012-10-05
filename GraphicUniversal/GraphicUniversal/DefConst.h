@@ -33,8 +33,8 @@ typedef enum {
 #define radPoint 10.0f
 #define kCellHeight_iPhone 40.0
 #define kCellWidth_iPhone 40.0
-#define kCellHeight_iPad 40.0
-#define kCellWidth_iPad 40.0
+#define kCellHeight_iPad 60.0
+#define kCellWidth_iPad 60.0
 #define minZoom 20
 #define maxZoom 70
 
