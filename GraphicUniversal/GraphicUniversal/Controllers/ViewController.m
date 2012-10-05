@@ -14,7 +14,7 @@
 #import "SettingsViewController.h"
 #import "InfoViewController.h"
 @interface ViewController ()
-
+@property (nonatomic, assign) CGRect rectTest;
 @end
 
 @implementation ViewController
@@ -25,6 +25,7 @@
 @synthesize popover;
 @synthesize popoverInfo;
 @synthesize infoViewController;
+
 - (void)dealloc
 {
     self.bgView = nil;
@@ -52,13 +53,58 @@
     self.popoverInfo = nil;
     [super viewDidUnload];
 }
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+
 #pragma mark - IBActions
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+    return YES;
+}
+
+- (BOOL)shouldAutomaticallyForwardRotationMethods
+{
+    
+    return YES;
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+    [self.popover presentPopoverFromRect:self.showSettingButton.frame//self.settingViewController.view.frame
+                                  inView:self.bgView
+                permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
+}
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    [self.popover dismissPopoverAnimated:NO];
+    
+//    if(toInterfaceOrientation == UIInterfaceOrientationLandscapeRight ) {
+//        
+//        rectTest = CGRectMake(200, 200, 240, 260);
+//    } else {
+//        rectTest = CGRectMake(277, 950, 240, 260);
+//    }
+    [self.grid setNeedsDisplay];
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskAll;
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+{
+    return UIInterfaceOrientationPortrait;
+}
 
 - (void)showSetting
 {
@@ -85,8 +131,8 @@
         self.popover = [[[UIPopoverController alloc] initWithContentViewController:self.settingViewController] autorelease];
         self.popover.delegate = self; 
         self.popover.popoverContentSize = self.settingViewController.view.frame.size;
-        
-        [self.popover presentPopoverFromRect:self.settingViewController.view.frame
+
+        [self.popover presentPopoverFromRect:self.showSettingButton.frame
                                  inView:self.bgView
                permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
     }
@@ -110,29 +156,28 @@
 
 - (void)hideSettingsView:(ActionType)actionType withCustomShape:(Shape*)shape
 {
-        if(actionType != kAddNone && (shape || ![self isCustomShape:actionType])) {
-            self.grid.actionType = actionType;
-        }
-        if(actionType == kClearBoard) {
-            [self.grid clearBoard];
-        }
-        if(shape) {
-            [self.grid addCustomShape: shape];
-        }
+    if(actionType != kAddNone && (shape || ![self isCustomShape:actionType])) {
+        self.grid.actionType = actionType;
+    }
+    if(actionType == kClearBoard) {
+        [self.grid clearBoard];
+    }
+    if(shape) {
+        [self.grid addCustomShape: shape];
+    }
         
-        [UIImageView animateWithDuration:delayForSubView animations:^{
-            self.bgView.alpha = 0.0;
-            self.settingViewController.settingButtonsView.alpha = 0;
-        } completion:^(BOOL finished){
-              if (isiPhone) {
-                  [self.settingViewController.view removeFromSuperview];
-                
-              } else {
-            [self.popover dismissPopoverAnimated:YES];
-            }
+    [UIImageView animateWithDuration:delayForSubView animations:^{
+        self.bgView.alpha = 0.0;
+        self.settingViewController.settingButtonsView.alpha = 0;
+    } completion:^(BOOL finished){
+    if (isiPhone) {
+        [self.settingViewController.view removeFromSuperview];
+    } else {
+        [self.popover dismissPopoverAnimated:YES];
+    }
 
-            self.bgView.hidden = YES;
-        }];
+    self.bgView.hidden = YES;
+    }];
 
     self.grid.userInteractionEnabled = YES;
 }
@@ -148,6 +193,7 @@
 {
     return ((actionType == kAddCustomPoint) || (actionType == kAddCustomSegment) || (actionType == kAddCustomLine));
 }
+
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
 {
     [UIImageView animateWithDuration:delayForSubView animations:^{
