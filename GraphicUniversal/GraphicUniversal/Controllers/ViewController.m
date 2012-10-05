@@ -13,6 +13,7 @@
 #import "ShapeDelegate.h"
 #import "SettingsViewController.h"
 #import "InfoViewController.h"
+#import "UIPopoverManager.h"
 @interface ViewController ()
 @property (nonatomic, assign) CGRect rectTest;
 @end
@@ -25,7 +26,7 @@
 @synthesize popover;
 @synthesize popoverInfo;
 @synthesize infoViewController;
-
+@synthesize showInfoButton;
 - (void)dealloc
 {
     self.bgView = nil;
@@ -35,6 +36,7 @@
     self.popover = nil;
     self.popoverInfo = nil;
     self.infoViewController = nil;
+    self.showInfoButton = nil;
     [super dealloc];
 }
 
@@ -54,45 +56,20 @@
     [super viewDidUnload];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
-#pragma mark - IBActions
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
     return YES;
 }
 
-- (BOOL)shouldAutomaticallyForwardRotationMethods
-{
-    
-    return YES;
-}
-
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-    [self.popover presentPopoverFromRect:self.showSettingButton.frame//self.settingViewController.view.frame
-                                  inView:self.bgView
-                permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    [self.popover dismissPopoverAnimated:NO];
-    
-//    if(toInterfaceOrientation == UIInterfaceOrientationLandscapeRight ) {
-//        
-//        rectTest = CGRectMake(200, 200, 240, 260);
-//    } else {
-//        rectTest = CGRectMake(277, 950, 240, 260);
-//    }
     [self.grid setNeedsDisplay];
 }
 
@@ -105,6 +82,8 @@
 {
     return UIInterfaceOrientationPortrait;
 }
+
+#pragma mark - IBActions
 
 - (void)showSetting
 {
@@ -127,29 +106,18 @@
         [self.bgView addSubview:self.settingViewController.view];
         self.grid.userInteractionEnabled = NO;
     } else {
-        self.settingViewController.view.frame = CGRectMake(277, 950, 240, 260);
-        self.popover = [[[UIPopoverController alloc] initWithContentViewController:self.settingViewController] autorelease];
-        self.popover.delegate = self; 
-        self.popover.popoverContentSize = self.settingViewController.view.frame.size;
-
-        [self.popover presentPopoverFromRect:self.showSettingButton.frame
-                                 inView:self.bgView
-               permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
+        self.settingViewController.contentSizeForViewInPopover = CGSizeMake(240, 260);
+        [UIPopoverManager showControllerInPopover:self.settingViewController inView:bgView forTarget:self.showSettingButton dismissTarget:self dismissSelector:@selector(popoverControllerDidDismissPopover:)];
     }
 }
 
 - (void)showInfo
 {
-    self.infoViewController = [[InfoViewController alloc] init];
+    self.infoViewController = [[InfoViewController alloc] initWithNibName:@"InfoViewController" bundle:nil];
     self.infoViewController.view.frame = CGRectMake(600, 950, 240, 260);
-    self.popoverInfo = [[[UIPopoverController alloc] initWithContentViewController:self.infoViewController] autorelease];
-    self.popoverInfo.delegate = self;
-    self.popoverInfo.popoverContentSize = self.infoViewController.view.frame.size;
-    
-    [self.popoverInfo presentPopoverFromRect:self.infoViewController.view.frame
-                             inView:self.bgView
-           permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
-    NSLog(@"infoButton");
+    self.infoViewController.contentSizeForViewInPopover = CGSizeMake(200, 200);
+    [UIPopoverManager showControllerInPopover:self.infoViewController inView:self.bgView forTarget:self.showInfoButton dismissTarget:self dismissSelector:@selector(popoverControllerDidDismissPopover:)];
+    DBLog(@"infoButton");
 }
 
 #pragma mark - SettingsViewDelegate Methods
@@ -194,11 +162,12 @@
     return ((actionType == kAddCustomPoint) || (actionType == kAddCustomSegment) || (actionType == kAddCustomLine));
 }
 
+#pragma mark - UIPopoverControllerDelegate Methods
+
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
 {
     [UIImageView animateWithDuration:delayForSubView animations:^{
         self.bgView.alpha = 0.0;
     }];
-
 }
 @end

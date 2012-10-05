@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "SettingsViewController.h"
-@class InfoViewController;// "InfoViewController.h"
+@class InfoViewController;
 @class GridGraphic;
 @interface ViewController : UIViewController<SettingsViewDelegate, UIPopoverControllerDelegate>
 
@@ -16,6 +16,7 @@
 @property (retain, nonatomic) SettingsViewController* settingViewController;
 @property (retain, nonatomic) InfoViewController* infoViewController;
 @property (retain, nonatomic) IBOutlet UIButton* showSettingButton;
+@property (retain, nonatomic) IBOutlet UIButton* showInfoButton;
 @property (retain, nonatomic) IBOutlet UIView* bgView;
 @property (retain, nonatomic) UIPopoverController* popover;
 @property (retain, nonatomic) UIPopoverController* popoverInfo;

@@ -76,7 +76,6 @@
     [super viewDidLoad];
     UIImage* white = [[UIImage imageNamed:@"White.jpeg"] roundedCornerImage:7 borderSize:0];
     self.bgImageView.image = [white roundedCornerImage:10 borderSize:1];
-   // self.curColorIndex = 2;
 }
 -(void)viewDidUnload
 {
@@ -177,8 +176,7 @@
                 self.settingButtonsView.alpha = 0;
             }
             completion:nil];
-            //[self presentModalViewController:self.colorPicker animated:YES];
-            
+              
             [self.view addSubview:self.colorPicker];
         }
             break;

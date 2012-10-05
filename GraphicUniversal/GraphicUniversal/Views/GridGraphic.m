@@ -191,7 +191,7 @@
             if(self.existStartOfSegment) {
                 CGPoint secondTap = [tapGestureRecognizer locationInView:self];
                 self.lastDekartSegment = [self screenToDekart:secondTap];
-                SSegment* segment = [[SSegment alloc] initWithFirstPoint:self.firstDekartSegment LastPoint:self.lastDekartSegment withColor:self.shapeColor];//]hFirstPoint:firstDekart lastPoint:secondDekart];
+                SSegment* segment = [[SSegment alloc] initWithFirstPoint:self.firstDekartSegment LastPoint:self.lastDekartSegment withColor:self.shapeColor];
                 [self.shapes addObject:segment];
                 [segment release];
                 [self setNeedsDisplay];

@@ -73,7 +73,6 @@
     self.xCoordinate.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     self.xCoordinate.text = @"1";
     self.xCoordinate.delegate = self;
-    //self.xCoordinate.keyboardType = UIKeyboardTypeNumberPad;
     [self addSubview:self.xCoordinate];
     
     rectTextField.origin.y += 40;
@@ -83,7 +82,6 @@
     self.yCoordinate.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     self.yCoordinate.text = @"1";
     self.yCoordinate.delegate = self;
-    //self.yCoordinate.keyboardType = UIKeyboardTypeNumberPad;
     [self addSubview:self.yCoordinate];
     
     CGRect rectButton = CGRectMake(30, 190, 80, 30);

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E13F6BF161F2C17005BF66D /* UIPopoverManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E13F6BE161F2C17005BF66D /* UIPopoverManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		6EC7BCF2161E976400066F23 /* GridGraphicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC7BCF1161E976400066F23 /* GridGraphicViewController.m */; };
 		6EC7BCF6161E9AFC00066F23 /* Grid.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC7BCF5161E9AFC00066F23 /* Grid.m */; };
 		6EC7BCFE161EE6F200066F23 /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC7BCFD161EE6F200066F23 /* InfoViewController.m */; };
@@ -60,6 +61,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6E13F6BD161F2C17005BF66D /* UIPopoverManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPopoverManager.h; sourceTree = "<group>"; };
+		6E13F6BE161F2C17005BF66D /* UIPopoverManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPopoverManager.m; sourceTree = "<group>"; };
 		6EC7BCF0161E976400066F23 /* GridGraphicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridGraphicViewController.h; sourceTree = "<group>"; };
 		6EC7BCF1161E976400066F23 /* GridGraphicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridGraphicViewController.m; sourceTree = "<group>"; };
 		6EC7BCF4161E9AFC00066F23 /* Grid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Grid.h; sourceTree = "<group>"; };
@@ -149,9 +152,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6E13F6B3161F2205005BF66D /* Externals */ = {
+			isa = PBXGroup;
+			children = (
+				6E13F6B4161F2205005BF66D /* PopoverManager */,
+			);
+			name = Externals;
+			path = GraphicUniversal/Externals;
+			sourceTree = "<group>";
+		};
+		6E13F6B4161F2205005BF66D /* PopoverManager */ = {
+			isa = PBXGroup;
+			children = (
+				6E13F6BD161F2C17005BF66D /* UIPopoverManager.h */,
+				6E13F6BE161F2C17005BF66D /* UIPopoverManager.m */,
+			);
+			path = PopoverManager;
+			sourceTree = "<group>";
+		};
 		6EE8E8E0161C48C900668FFC = {
 			isa = PBXGroup;
 			children = (
+				6E13F6B3161F2205005BF66D /* Externals */,
 				6EE8E947161C4C9300668FFC /* ShapeDelegate.h */,
 				6EE8E916161C4C9300668FFC /* Categories */,
 				6EE8E91D161C4C9300668FFC /* Controllers */,
@@ -438,6 +460,7 @@
 				6EC7BCF2161E976400066F23 /* GridGraphicViewController.m in Sources */,
 				6EC7BCF6161E9AFC00066F23 /* Grid.m in Sources */,
 				6EC7BCFE161EE6F200066F23 /* InfoViewController.m in Sources */,
+				6E13F6BF161F2C17005BF66D /* UIPopoverManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
