@@ -20,4 +20,15 @@
 # define DBLog(...)
 #endif
 
+
+//tetris const
+typedef enum {
+    downDirectionMove,
+    rightDirectionMove,
+    leftDirectionMove
+} DirectionMove;
+typedef enum {
+    rightDirectionRotate,
+    leftDirectionRotate
+} DirectionRotate;
 #endif

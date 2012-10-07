@@ -16,10 +16,12 @@
 		6E422F841616DD2B00066338 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E422F831616DD2B00066338 /* Default.png */; };
 		6E422F861616DD2B00066338 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E422F851616DD2B00066338 /* Default@2x.png */; };
 		6E422F881616DD2B00066338 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E422F871616DD2B00066338 /* Default-568h@2x.png */; };
-		6EB36BF71616DE2E00CAB75E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB36BF31616DE2E00CAB75E /* ViewController.m */; };
-		6EB36BFA1616DE5800CAB75E /* BoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB36BF91616DE5800CAB75E /* BoardView.m */; };
-		6EC7BCE8161DE7B100066F23 /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EC7BCE7161DE7B100066F23 /* ViewController_iPhone.xib */; };
-		6EC7BCEA161DE7CC00066F23 /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EC7BCE9161DE7CC00066F23 /* ViewController_iPad.xib */; };
+		6EB36BF71616DE2E00CAB75E /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EB36BF31616DE2E00CAB75E /* GameViewController.m */; };
+		6EC7BCE8161DE7B100066F23 /* GameViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EC7BCE7161DE7B100066F23 /* GameViewController_iPhone.xib */; };
+		6EC7BCEA161DE7CC00066F23 /* GameViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EC7BCE9161DE7CC00066F23 /* GameViewController_iPad.xib */; };
+		6EC7BD0B1621CBB800066F23 /* Shape.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC7BD0A1621CBB800066F23 /* Shape.m */; };
+		6EC7BD141621D42D00066F23 /* BoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC7BD121621D42D00066F23 /* BoardViewController.m */; };
+		6EC7BD8A1621E76D00066F23 /* BoardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC7BD881621E76D00066F23 /* BoardView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,13 +38,17 @@
 		6E422F831616DD2B00066338 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		6E422F851616DD2B00066338 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		6E422F871616DD2B00066338 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		6EB36BF21616DE2E00CAB75E /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		6EB36BF31616DE2E00CAB75E /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		6EB36BF81616DE5800CAB75E /* BoardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardView.h; sourceTree = "<group>"; };
-		6EB36BF91616DE5800CAB75E /* BoardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoardView.m; sourceTree = "<group>"; };
+		6EB36BF21616DE2E00CAB75E /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
+		6EB36BF31616DE2E00CAB75E /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
 		6EB36C031616E3CD00CAB75E /* DefineConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefineConst.h; sourceTree = "<group>"; };
-		6EC7BCE7161DE7B100066F23 /* ViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController_iPhone.xib; sourceTree = "<group>"; };
-		6EC7BCE9161DE7CC00066F23 /* ViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController_iPad.xib; sourceTree = "<group>"; };
+		6EC7BCE7161DE7B100066F23 /* GameViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameViewController_iPhone.xib; sourceTree = "<group>"; };
+		6EC7BCE9161DE7CC00066F23 /* GameViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameViewController_iPad.xib; sourceTree = "<group>"; };
+		6EC7BD091621CBB800066F23 /* Shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shape.h; sourceTree = "<group>"; };
+		6EC7BD0A1621CBB800066F23 /* Shape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shape.m; sourceTree = "<group>"; };
+		6EC7BD111621D42D00066F23 /* BoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardViewController.h; sourceTree = "<group>"; };
+		6EC7BD121621D42D00066F23 /* BoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoardViewController.m; sourceTree = "<group>"; };
+		6EC7BD881621E76D00066F23 /* BoardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoardView.m; sourceTree = "<group>"; };
+		6EC7BD891621E76D00066F23 /* BoardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardView.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,8 +133,8 @@
 		6EB36BEF1616DE2E00CAB75E /* Nibs */ = {
 			isa = PBXGroup;
 			children = (
-				6EC7BCE7161DE7B100066F23 /* ViewController_iPhone.xib */,
-				6EC7BCE9161DE7CC00066F23 /* ViewController_iPad.xib */,
+				6EC7BCE7161DE7B100066F23 /* GameViewController_iPhone.xib */,
+				6EC7BCE9161DE7CC00066F23 /* GameViewController_iPad.xib */,
 			);
 			path = Nibs;
 			sourceTree = "<group>";
@@ -136,8 +142,10 @@
 		6EB36BF11616DE2E00CAB75E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				6EB36BF21616DE2E00CAB75E /* ViewController.h */,
-				6EB36BF31616DE2E00CAB75E /* ViewController.m */,
+				6EB36BF21616DE2E00CAB75E /* GameViewController.h */,
+				6EB36BF31616DE2E00CAB75E /* GameViewController.m */,
+				6EC7BD111621D42D00066F23 /* BoardViewController.h */,
+				6EC7BD121621D42D00066F23 /* BoardViewController.m */,
 			);
 			name = Controllers;
 			path = Tetris/Controllers;
@@ -146,8 +154,8 @@
 		6EB36BF41616DE2E00CAB75E /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				6EB36BF81616DE5800CAB75E /* BoardView.h */,
-				6EB36BF91616DE5800CAB75E /* BoardView.m */,
+				6EC7BD881621E76D00066F23 /* BoardView.m */,
+				6EC7BD891621E76D00066F23 /* BoardView.h */,
 			);
 			name = Views;
 			path = Tetris/Views;
@@ -156,6 +164,8 @@
 		6EB36BF51616DE2E00CAB75E /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				6EC7BD091621CBB800066F23 /* Shape.h */,
+				6EC7BD0A1621CBB800066F23 /* Shape.m */,
 			);
 			name = Models;
 			path = Tetris/Models;
@@ -216,8 +226,8 @@
 				6E422F841616DD2B00066338 /* Default.png in Resources */,
 				6E422F861616DD2B00066338 /* Default@2x.png in Resources */,
 				6E422F881616DD2B00066338 /* Default-568h@2x.png in Resources */,
-				6EC7BCE8161DE7B100066F23 /* ViewController_iPhone.xib in Resources */,
-				6EC7BCEA161DE7CC00066F23 /* ViewController_iPad.xib in Resources */,
+				6EC7BCE8161DE7B100066F23 /* GameViewController_iPhone.xib in Resources */,
+				6EC7BCEA161DE7CC00066F23 /* GameViewController_iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,8 +240,10 @@
 			files = (
 				6E422F7E1616DD2B00066338 /* main.m in Sources */,
 				6E422F821616DD2B00066338 /* AppDelegate.m in Sources */,
-				6EB36BF71616DE2E00CAB75E /* ViewController.m in Sources */,
-				6EB36BFA1616DE5800CAB75E /* BoardView.m in Sources */,
+				6EB36BF71616DE2E00CAB75E /* GameViewController.m in Sources */,
+				6EC7BD0B1621CBB800066F23 /* Shape.m in Sources */,
+				6EC7BD141621D42D00066F23 /* BoardViewController.m in Sources */,
+				6EC7BD8A1621E76D00066F23 /* BoardView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

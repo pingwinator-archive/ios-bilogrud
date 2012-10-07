@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 
-#import "ViewController.h"
+#import "GameViewController.h"
 
 @implementation AppDelegate
 
@@ -25,12 +25,11 @@
     // Override point for customization after application launch.
     
     if (isiPhone) {
-        self.viewController = [[[ViewController alloc] initWithNibName:@"ViewController_iPhone" bundle:nil] autorelease];
+        self.viewController = [[[GameViewController alloc] initWithNibName:@"ViewController_iPhone" bundle:nil] autorelease];
     } else {
-        self.viewController = [[[ViewController alloc] initWithNibName:@"ViewController_iPad" bundle:nil] autorelease];
+        self.viewController = [[[GameViewController alloc] initWithNibName:@"ViewController_iPad" bundle:nil] autorelease];
     }
-    
-//    self.viewController = [[[ViewController alloc] initWithNibName:@"ViewController" bundle:nil] autorelease];
+
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     return YES;

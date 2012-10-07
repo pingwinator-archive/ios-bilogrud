@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface ViewController : UIViewController
-
+@class BoardViewController;
+@interface GameViewController : UIViewController
+@property (retain, nonatomic) BoardViewController* boardViewController;
 @end

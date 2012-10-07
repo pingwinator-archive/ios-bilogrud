@@ -16,17 +16,26 @@
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self) {
+    if (self){
         // Initialization code
     }
     return self;
 }
 
+
+- (id) initWithFrame:(CGRect)frame andXCount:(NSInteger)amountX
+{
+    self = [self initWithFrame:frame];
+    if (self) {
+        self.amountCellX = amountX;
+    }
+    return self;
+}
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        self.amountCellX = 10.0f;
+        self.amountCellX = 5.0f;
         NSLog(@"%f", self.frame.size.width);
         self.cell = (self.frame.size.width - 2*boardBorderWidth) / self.amountCellX;
     }
