@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface BoardView : UIView
+@property (assign, nonatomic) NSInteger amountCellX;
+//width and height
+@property (assign, nonatomic) CGFloat cell;
 - (id)initWithFrame:(CGRect)frame amountCellX:(NSInteger)cellX;
 @end

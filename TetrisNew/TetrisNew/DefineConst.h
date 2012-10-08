@@ -32,7 +32,7 @@
 #define playSizeButton 30
 #define moveSizeButton 40
 #define textButtonFont [UIFont fontWithName:@"American Typewriter" size:12]
-#define labelMoveTextWidth 40
+#define labelMoveTextWidth 50
 #define labelMoveTextHeigth 20
 typedef enum {
     downDirectionMove,
@@ -43,4 +43,16 @@ typedef enum {
     rightDirectionRotate,
     leftDirectionRotate
 } DirectionRotate;
+
+typedef enum {
+    NoShape,
+    SquareShape,
+    ZShape,
+    SShape,
+    LShape,
+    JShape,
+    IShape,
+    TShape
+} TypeShape;
+
 #endif

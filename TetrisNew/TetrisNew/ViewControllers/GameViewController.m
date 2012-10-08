@@ -7,47 +7,58 @@
 //
 
 #import "GameViewController.h"
+#import "BoardViewController.h"
 #import "BoardView.h"
 #import "BGView.h"
 @interface GameViewController ()
-@property (retain, nonatomic) BoardView* boardView;
+//@property (retain, nonatomic) BoardView* boardView;
+@property (retain, nonatomic) BoardViewController* boardViewController;
 @property (retain, nonatomic) BGView* backgroundView;
 @property (retain, nonatomic) BoardView* nextShapeView;
 @property (retain, nonatomic) UIButton* playButton;
 @property (retain, nonatomic) UIButton* leftButton;
 @property (retain, nonatomic) UIButton* downButton;
 @property (retain, nonatomic) UIButton* rightButton;
+@property (retain, nonatomic) UIButton* rotateButton;
 @property (retain, nonatomic) UILabel* playLabel;
 @property (retain, nonatomic) UILabel* leftLabel;
 @property (retain, nonatomic) UILabel* downLabel;
 @property (retain, nonatomic) UILabel* rightLabel;
+@property (retain, nonatomic) UILabel* rotateLabel;
 @end
 
 @implementation GameViewController
-@synthesize boardView;
+//@synthesize boardView;
+@synthesize boardViewController;
 @synthesize backgroundView;
 @synthesize nextShapeView;
 @synthesize playButton;
 @synthesize rightButton;
 @synthesize downButton;
 @synthesize leftButton;
+@synthesize rotateButton;
 @synthesize playLabel;
 @synthesize leftLabel;
 @synthesize downLabel;
 @synthesize rightLabel;
+@synthesize rotateLabel;
+
 - (void)dealloc
 {
-    self.boardView = nil;
+//    self.boardView = nil;
+    self.boardViewController = nil;
     self.backgroundView = nil;
     self.nextShapeView = nil;
     self.playButton = nil;
     self.rightButton = nil;
     self.downButton = nil;
     self.leftButton = nil;
+    self.rotateButton = nil;
     self.playLabel = nil;
     self.leftLabel = nil;
     self.downLabel = nil;
     self.rightLabel = nil;
+    self,rotateLabel = nil;
     [super dealloc];
 }
 
@@ -69,9 +80,11 @@
     } else {
         boardRect = CGRectMake(15, 15, 650, 850);
     }
-    self.boardView = [[[BoardView alloc] initWithFrame:boardRect amountCellX:10] autorelease];
-    self.boardView.backgroundColor = [UIColor lightGrayColor];
-    [self.backgroundView addSubview:self.boardView];
+    self.boardViewController = [[[BoardViewController alloc] initWithFrame:boardRect amountCellX:10] autorelease];
+    
+    //self.boardView = [[[BoardView alloc] initWithFrame:boardRect amountCellX:10] autorelease];
+    //self.boardView.backgroundColor = [UIColor lightGrayColor];
+    [self.backgroundView addSubview:self.boardViewController.boardView];
 	
     //play button
     CGRect rectPlayButton = CGRectMake(boardRect.size.width + 30, boardRect.origin.y, playSizeButton, playSizeButton);
@@ -100,9 +113,9 @@
     [self.nextShapeView release];
     
     //left button
-    CGRect moveButton = CGRectMake(boardRect.origin.x + 10, boardRect.size.height + 30, moveSizeButton, moveSizeButton);
+    CGRect manageButton = CGRectMake(boardRect.origin.x + 10, boardRect.size.height + 30, moveSizeButton, moveSizeButton);
     self.leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.leftButton.frame = moveButton;
+    self.leftButton.frame = manageButton;
     UIImage* image = [UIImage imageNamed:@"SmallYellow.png"];
     [self.leftButton setImage:image forState:UIControlStateNormal];
     [self.leftButton addTarget:self action:@selector(moveLeft) forControlEvents:UIControlEventTouchUpInside];
@@ -110,7 +123,7 @@
     [self.leftButton release];
     
     //left label
-    CGRect rectLeftLabel = CGRectMake(moveButton.origin.x , moveButton.origin.y + moveButton.size.height , labelMoveTextWidth, labelMoveTextHeigth);
+    CGRect rectLeftLabel = CGRectMake(manageButton.origin.x , manageButton.origin.y + manageButton.size.height , labelMoveTextWidth, labelMoveTextHeigth);
     self.leftLabel = [[UILabel alloc] initWithFrame:rectLeftLabel];
     self.leftLabel.text = @"LEFT";
     [self.leftLabel setFont:textButtonFont];
@@ -120,16 +133,16 @@
     [self.leftLabel release];
     
     //down button
-    moveButton.origin.x += 80;
+    manageButton.origin.x += 75;
     self.downButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.downButton.frame = moveButton;
+    self.downButton.frame = manageButton;
     [self.downButton setImage:image forState:UIControlStateNormal];
     [self.downButton addTarget:self action:@selector(moveDown) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.downButton];
     [self.downButton release];
     
     //down label
-    CGRect rectDownLabel = CGRectMake(moveButton.origin.x, moveButton.origin.y + moveButton.size.height, labelMoveTextWidth, labelMoveTextHeigth);
+    CGRect rectDownLabel = CGRectMake(manageButton.origin.x, manageButton.origin.y + manageButton.size.height, labelMoveTextWidth, labelMoveTextHeigth);
     self.downLabel = [[UILabel alloc] initWithFrame:rectDownLabel];
     self.downLabel.text = @"DOWN";
     [self.downLabel setFont:textButtonFont];
@@ -138,17 +151,38 @@
     [self.view addSubview:self.downLabel];
     [self.downLabel release];
     
+    
+    
+    //rotate button
+    manageButton.origin.x += 75;
+    self.rotateButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.rotateButton.frame = manageButton;
+    [self.rotateButton setImage:image forState:UIControlStateNormal];
+    [self.rotateButton addTarget:self action:@selector(moveRight) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.rotateButton];
+    [self.rotateButton release];
+    
+    //rotate label
+    CGRect rectRotateLabel = CGRectMake(manageButton.origin.x, manageButton.size.height + manageButton.origin.y , labelMoveTextWidth, labelMoveTextHeigth);
+    self.rotateLabel = [[UILabel alloc] initWithFrame:rectRotateLabel];
+    self.rotateLabel.text = @"ROTATE";
+    [self.rotateLabel setFont:textButtonFont];
+    self.rotateLabel.backgroundColor=[UIColor clearColor];
+    self.rotateLabel.textColor = [UIColor whiteColor];
+    [self.view addSubview:self.rotateLabel];
+    [self.rotateLabel release];
+    
     //right button
-    moveButton.origin.x += 80;
+    manageButton.origin.x += 75;
     self.rightButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.rightButton.frame = moveButton;
+    self.rightButton.frame = manageButton;
     [self.rightButton setImage:image forState:UIControlStateNormal];
     [self.rightButton addTarget:self action:@selector(moveRight) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.rightButton];
     [self.rightButton release];
     
     //right label
-    CGRect rectRightLabel = CGRectMake(moveButton.origin.x, moveButton.size.height + moveButton.origin.y , labelMoveTextWidth, labelMoveTextHeigth);
+    CGRect rectRightLabel = CGRectMake(manageButton.origin.x, manageButton.size.height + manageButton.origin.y , labelMoveTextWidth, labelMoveTextHeigth);
     self.rightLabel = [[UILabel alloc] initWithFrame:rectRightLabel];
     self.rightLabel.text = @"RIGHT";
     [self.rightLabel setFont:textButtonFont];
@@ -156,14 +190,6 @@
     self.rightLabel.textColor = [UIColor whiteColor];
     [self.view addSubview:self.rightLabel];
     [self.rightLabel release];
-    
-    //rotate button
-//    CGRect rotateButton = CGRectMake(boardRect.origin.x + 10, boardRect.size.height + 30, moveSizeButton, moveSizeButton);
-//    self.downButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    self.downButton.frame = moveButton;
-//    [self.downButton setImage:image forState:UIControlStateNormal];
-//    [self.downButton addTarget:self action:@selector(moveDown) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:self.downButton];
 }
 
 - (void)didReceiveMemoryWarning
@@ -174,6 +200,7 @@
 
 - (void)play
 {
+    
     NSLog(@"play!");
 }
 
@@ -181,6 +208,7 @@
 {
     NSLog(@"left!");
 }
+
 - (void)moveDown
 {
     NSLog(@"down!");

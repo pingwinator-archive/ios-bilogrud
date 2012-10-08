@@ -9,5 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface TetrisShape : NSObject
-
+@property (retain, nonatomic) UIColor* shapeColor;
+- (id)initRandomShape;
 @end

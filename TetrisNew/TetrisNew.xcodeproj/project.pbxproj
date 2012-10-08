@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E13F6CA1622BCE4005BF66D /* BoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E13F6C91622BCE4005BF66D /* BoardViewController.m */; };
+		6E13F6CE1622CF1C005BF66D /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E13F6CD1622CF1C005BF66D /* Cell.m */; };
 		6EC7BD2A1621E23C00066F23 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EC7BD291621E23C00066F23 /* UIKit.framework */; };
 		6EC7BD2C1621E23C00066F23 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EC7BD2B1621E23C00066F23 /* Foundation.framework */; };
 		6EC7BD2E1621E23C00066F23 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EC7BD2D1621E23C00066F23 /* CoreGraphics.framework */; };
@@ -29,6 +31,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6E13F6C81622BCE4005BF66D /* BoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardViewController.h; sourceTree = "<group>"; };
+		6E13F6C91622BCE4005BF66D /* BoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoardViewController.m; sourceTree = "<group>"; };
+		6E13F6CC1622CF1C005BF66D /* Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
+		6E13F6CD1622CF1C005BF66D /* Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cell.m; sourceTree = "<group>"; };
 		6EC7BD251621E23C00066F23 /* TetrisNew.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TetrisNew.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EC7BD291621E23C00066F23 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6EC7BD2B1621E23C00066F23 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -145,6 +151,8 @@
 			children = (
 				6EC7BD641621E36900066F23 /* GameViewController.h */,
 				6EC7BD651621E36900066F23 /* GameViewController.m */,
+				6E13F6C81622BCE4005BF66D /* BoardViewController.h */,
+				6E13F6C91622BCE4005BF66D /* BoardViewController.m */,
 			);
 			name = ViewControllers;
 			path = TetrisNew/ViewControllers;
@@ -163,6 +171,8 @@
 			children = (
 				6EC7BD9E1622187D00066F23 /* TetrisShape.h */,
 				6EC7BD9F1622187D00066F23 /* TetrisShape.m */,
+				6E13F6CC1622CF1C005BF66D /* Cell.h */,
+				6E13F6CD1622CF1C005BF66D /* Cell.m */,
 			);
 			name = Models;
 			path = TetrisNew/Models;
@@ -284,6 +294,8 @@
 				6EC7BD831621E5D000066F23 /* BoardView.m in Sources */,
 				6EC7BD991621EEAD00066F23 /* BGView.m in Sources */,
 				6EC7BDA01622187D00066F23 /* TetrisShape.m in Sources */,
+				6E13F6CA1622BCE4005BF66D /* BoardViewController.m in Sources */,
+				6E13F6CE1622CF1C005BF66D /* Cell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

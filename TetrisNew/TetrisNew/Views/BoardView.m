@@ -9,9 +9,7 @@
 #import "BoardView.h"
 #import <QuartzCore/QuartzCore.h>
 @interface BoardView()
-@property (assign, nonatomic) NSInteger amountCellX;
-//width and height
-@property (assign, nonatomic) CGFloat cell;
+
 @end
 
 @implementation BoardView
@@ -36,6 +34,8 @@
     }
     return self;
 }
+
+
 
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
