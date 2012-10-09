@@ -27,7 +27,7 @@
 @synthesize fallenShapeSet;
 @synthesize nextShapeView;
 @synthesize nextShapeCells;
-@synthesize needUpdate;
+@synthesize newGame;
 - (void)setBoardCells:(NSMutableSet*)_boardCells
 {
     [boardCells release];
@@ -60,7 +60,7 @@
         self.boardView = [[BoardView alloc] initWithFrame:frame amountCellX:cellX amountCellY:cellY];
         self.boardView.backgroundColor = [UIColor lightGrayColor];
         self.gameOver = NO;
-        
+        self.newGame = NO;
         //shape
         self.startPoint = CGPointMake(5, -2);
         self.currentShape = [[TetrisShape alloc] initRandomShapeWithCenter:self.startPoint];
@@ -146,7 +146,7 @@
             for (Cell* c in self.boardCells) {
                 if(c.point.y == 1) {
                     self.gameOver = YES;
-                    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Game Over", @"")  message:nil delegate:self cancelButtonTitle:@"New game" otherButtonTitles:@"Cancel", nil];
+                    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Game Over", @"")  message:nil delegate:self cancelButtonTitle:@"New game" otherButtonTitles:nil, nil];
                     [alert show];
                 }
             }
@@ -215,7 +215,6 @@
 {
     NSMutableSet* set = [[NSMutableSet alloc] initWithSet:validateSet];
     [set intersectSet:self.borderSet];
-    NSLog(@"rr");
     return ![validateSet intersectsSet:self.borderSet] && ![validateSet intersectsSet:[Cell cellsToPoints: self.fallenShapeSet]];
 }
 
@@ -223,5 +222,17 @@
 {
     [self updateBoard];
     [self updateNextShape];
+}
+
+#pragma mark - UIAlertViewDelegate Methods
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSLog(@"ddd");
+    if(buttonIndex == 0) {
+        //new game
+        [self.boardView.boardCellsForDrawing removeAllObjects];
+        self.newGame = YES;
+    }
+ 
 }
 @end

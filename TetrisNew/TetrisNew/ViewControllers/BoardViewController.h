@@ -10,13 +10,14 @@
 @class BoardView;
 @class TetrisShape;
 
-@interface BoardViewController : UIViewController
+@interface BoardViewController : UIViewController<UIAlertViewDelegate>
 @property (retain, nonatomic) NSMutableSet* boardCells;
 @property (retain, nonatomic) NSMutableSet* nextShapeCells;
 @property (retain, nonatomic) BoardView* boardView;
 @property (retain, nonatomic) BoardView* nextShapeView;
 @property (assign, nonatomic) BOOL gameOver;
 @property (assign, nonatomic) BOOL needUpdate;
+@property (assign, nonatomic) BOOL newGame;
 @property (assign, nonatomic) CGPoint startPoint;
 @property (assign, nonatomic) CGPoint startPointNextShape;
 - (id)initWithFrame:(CGRect)frame amountCellX:(NSInteger)cellX amountCellY:(NSInteger)cellY;
