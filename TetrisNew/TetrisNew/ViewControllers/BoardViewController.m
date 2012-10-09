@@ -177,41 +177,14 @@
 - (NSMutableSet*)deleteLine:(NSMutableSet*)boardPoints line:(NSInteger)numberLine
 {
     NSMutableSet* tempSet = [NSMutableSet setWithSet:[self cellsToPoints:boardPoints]];
-    for (NSInteger i = 0; i < [self.boardPoints count]; i++) {
+   // for (NSInteger i = 0; i < [self.boardPoints count]; i++) {
       //  if(
-    [tempSet isa//intersectsSet:<#(NSSet *)#>]
+  //  [tempSet intersectsSet://
+     
         
-    }
+    //}
     return tempSet;
-                          /*
-     HashSet<Point> test = new HashSet<Point>(cellToPoint(boardPoints));
-     for(int i = 0; i < boardPoints.Count; i++)
-     {
-     if(test.Contains(new Point(i, numberLine)))
-     {
-     test.Remove(new Point(i, numberLine));
-     }
-     }
-     HashSet<Cell> final = new HashSet<Cell>();
-     foreach(Cell cell in boardPoints)
-     {
-     if(test.Contains(cell.cellPoint))
-     {
-     if(cell.cellPoint.Y < numberLine)
-     {
-     int y = cell.cellPoint.Y;
-     y++;
-     final.Add(new Cell(new Point(cell.cellPoint.X, y), cell.colorPoint));
-     }
-     else
-     {
-     final.Add(new Cell(new Point(cell.cellPoint.X, cell.cellPoint.Y), cell.colorPoint));
-     }
-     }
-     }
-     return final;
-     */
-}
+ }
 - (BOOL)validationMove:(NSMutableSet*)validateSet
 {
     return !([validateSet intersectsSet:self.borderSet] && [validateSet intersectsSet:self.fallenShapeSet]);
