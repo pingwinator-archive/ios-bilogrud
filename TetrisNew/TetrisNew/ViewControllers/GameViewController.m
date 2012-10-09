@@ -25,6 +25,7 @@
 @property (retain, nonatomic) UILabel* downLabel;
 @property (retain, nonatomic) UILabel* rightLabel;
 @property (retain, nonatomic) UILabel* rotateLabel;
+
 @end
 
 @implementation GameViewController
@@ -42,7 +43,8 @@
 @synthesize downLabel;
 @synthesize rightLabel;
 @synthesize rotateLabel;
-
+@synthesize isStart;
+@synthesize gameTimer;
 - (void)dealloc
 {
 //    self.boardView = nil;
@@ -58,7 +60,8 @@
     self.leftLabel = nil;
     self.downLabel = nil;
     self.rightLabel = nil;
-    self,rotateLabel = nil;
+    self.rotateLabel = nil;
+    self.gameTimer = nil;
     [super dealloc];
 }
 
@@ -106,12 +109,12 @@
     [self.view addSubview:self.playLabel];
     [self.playLabel release];
     
-    //next shape View
-    self.nextShapeView = [[BoardView alloc] initWithFrame:CGRectMake(rectPlayLabel.origin.x - 8, rectPlayLabel.origin.y + rectPlayLabel.size.height + 5, 50, 50) amountCellX:4];
-    self.nextShapeView.backgroundColor = [UIColor lightGrayColor];
-    [self.view addSubview:self.nextShapeView];
-    [self.nextShapeView release];
-    
+//    //next shape View
+//    self.nextShapeView = [[BoardView alloc] initWithFrame:CGRectMake(rectPlayLabel.origin.x - 8, rectPlayLabel.origin.y + rectPlayLabel.size.height + 5, 50, 50) amountCellX:4];
+//    self.nextShapeView.backgroundColor = [UIColor lightGrayColor];
+//    [self.view addSubview:self.nextShapeView];
+//    [self.nextShapeView release];
+//    
     //left button
     CGRect manageButton = CGRectMake(boardRect.origin.x + 10, boardRect.size.height + 30, moveSizeButton, moveSizeButton);
     self.leftButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -158,7 +161,7 @@
     self.rotateButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.rotateButton.frame = manageButton;
     [self.rotateButton setImage:image forState:UIControlStateNormal];
-    [self.rotateButton addTarget:self action:@selector(moveRight) forControlEvents:UIControlEventTouchUpInside];
+    [self.rotateButton addTarget:self action:@selector(rotate) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.rotateButton];
     [self.rotateButton release];
     
@@ -200,12 +203,25 @@
 
 - (void)play
 {
-    
+    //timer start
+    self.isStart = YES;
+    self.gameTimer = [NSTimer scheduledTimerWithTimeInterval:1  target:self selector:@selector(timerTick) userInfo:nil repeats:YES];
     NSLog(@"play!");
+}
+
+- (void)timerTick
+{
+    if(self.boardViewController.gameOver) {
+        [self.gameTimer invalidate];
+    } else {
+         [self.boardViewController moveShape:downDirectionMove];
+    }
+    [self.boardViewController.boardView setNeedsDisplay];
 }
 
 - (void)moveLeft
 {
+    [self.boardViewController moveShape:leftDirectionMove];
     NSLog(@"left!");
 }
 
@@ -216,6 +232,12 @@
 
 - (void)moveRight
 {
+    [self.boardViewController moveShape:rightDirectionMove];
     NSLog(@"right!");
+}
+
+- (void)rotate
+{
+    NSLog(@"rotate!");
 }
 @end

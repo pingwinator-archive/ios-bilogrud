@@ -25,4 +25,31 @@
     }
     return self;
 }
+- (id)initWithPoint:(CGPoint)_point andColor:(UIColor*)_color
+{
+    self = [super init];
+    if(self) {
+        self.point = _point;
+        self.colorCell = _color;
+    }
+    return self;
+}
+
+#pragma mark - Cell - Point
+
++ (NSValue*)cellToPointObj:(Cell*)cell
+{
+    return PointToObj(cell.point);
+}
+
++ (Cell*)pointToCell:(NSValue*)value
+{
+    return [[Cell alloc] initWithPoint: PointFromObj(value)];
+}
+
++ (Cell*)pointToCell:(NSValue*)value withColor: (UIColor*)color
+{
+    return [[Cell alloc] initWithPoint: PointFromObj(value) andColor:color];
+}
+
 @end

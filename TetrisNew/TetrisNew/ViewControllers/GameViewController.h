@@ -11,5 +11,6 @@
 @class BoardView;
 
 @interface GameViewController : UIViewController
-
+@property (assign, nonatomic) BOOL isStart;
+@property (retain, nonatomic) NSTimer* gameTimer;
 @end

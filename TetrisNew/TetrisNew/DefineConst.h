@@ -34,6 +34,10 @@
 #define textButtonFont [UIFont fontWithName:@"American Typewriter" size:12]
 #define labelMoveTextWidth 50
 #define labelMoveTextHeigth 20
+
+#define PointToObj(point) [NSValue valueWithCGPoint:point]
+#define PointFromObj(value) [value CGPointValue]
+
 typedef enum {
     downDirectionMove,
     rightDirectionMove,

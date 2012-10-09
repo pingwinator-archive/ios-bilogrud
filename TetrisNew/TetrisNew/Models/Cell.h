@@ -13,4 +13,9 @@
 @property (retain, nonatomic) UIColor* colorCell;
 
 - (id)initWithPoint:(CGPoint)_point;
+- (id)initWithPoint:(CGPoint)_point andColor:(UIColor*)_color;
+
++ (NSValue*)cellToPointObj:(Cell*)cell;
++ (Cell*)pointToCell:(NSValue*)value;
++ (Cell*)pointToCell:(NSValue*)value withColor: (UIColor*)color;
 @end
