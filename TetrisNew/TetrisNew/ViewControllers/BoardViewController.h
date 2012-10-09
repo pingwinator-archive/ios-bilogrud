@@ -16,7 +16,6 @@
 @property (retain, nonatomic) BoardView* boardView;
 @property (retain, nonatomic) BoardView* nextShapeView;
 @property (assign, nonatomic) BOOL gameOver;
-@property (assign, nonatomic) BOOL needUpdate;
 @property (assign, nonatomic) BOOL newGame;
 @property (assign, nonatomic) CGPoint startPoint;
 @property (assign, nonatomic) CGPoint startPointNextShape;
@@ -25,5 +24,4 @@
 //manage
 - (void)rotateShape:(DirectionRotate) directionRotate;
 - (void)moveShape:(DirectionMove) directionMove;
-- (NSMutableSet*)getBoard;
 @end

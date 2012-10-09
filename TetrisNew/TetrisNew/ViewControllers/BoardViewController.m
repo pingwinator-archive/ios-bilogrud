@@ -15,6 +15,8 @@
 @property (retain, nonatomic) TetrisShape* currentShape;
 @property (retain, nonatomic) NSMutableSet* borderSet;
 @property (retain, nonatomic) NSMutableSet* fallenShapeSet;
+- (NSMutableSet*)deleteLine:(NSMutableSet*)boardPoints line:(NSInteger)numberLine;
+- (BOOL)validationMove:(NSMutableSet*)validateSet;
 @end
 
 @implementation BoardViewController
@@ -28,6 +30,7 @@
 @synthesize nextShapeView;
 @synthesize nextShapeCells;
 @synthesize newGame;
+
 - (void)setBoardCells:(NSMutableSet*)_boardCells
 {
     [boardCells release];
@@ -74,21 +77,11 @@
             [borderSet addObject:PointToObj(CGPointMake(-1, j))];
             [borderSet addObject:PointToObj(CGPointMake(self.boardView.amountCellX, j))];
         }
-        
-        //next shape View
-//        self.nextShape = [[TetrisShape alloc] initRandomShapeWithCenter:CGPointMake(1, 1)];
-//        
-//        self.nextShapeCells = [Cell pointsToCells:[self.nextShape getShapePoints] withColor:self.nextShape.shapeColor];
-//     
-//        self.startPointNextShape = CGPointMake(1, 1);
        
         self.nextShapeView = [[[BoardView alloc] initWithFrame:CGRectMake(self.boardView.frame.size.width + self.boardView.frame.origin.x + 10, self.boardView.frame.size.height/2, 50, 50) amountCellX:4 amountCellY:4] autorelease];
         
         
         self.nextShapeView.backgroundColor = [UIColor lightGrayColor];
-
-        
-        
     }
     return self;
 }
@@ -115,19 +108,8 @@
     [self.nextShapeView setNeedsDisplay];
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 #pragma mark - Move Shape
+
 - (void)moveShape:(DirectionMove) directionMove
 {
     NSMutableSet* tempSet = [NSMutableSet setWithSet:[self.currentShape getMovedShape:directionMove]];
@@ -218,21 +200,19 @@
     return ![validateSet intersectsSet:self.borderSet] && ![validateSet intersectsSet:[Cell cellsToPoints: self.fallenShapeSet]];
 }
 
--(void)start
+- (void)start
 {
     [self updateBoard];
     [self updateNextShape];
 }
 
 #pragma mark - UIAlertViewDelegate Methods
--(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    NSLog(@"ddd");
     if(buttonIndex == 0) {
         //new game
         [self.boardView.boardCellsForDrawing removeAllObjects];
         self.newGame = YES;
     }
- 
 }
 @end
