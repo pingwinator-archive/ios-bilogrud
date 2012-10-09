@@ -11,12 +11,15 @@
 #import "stdlib.h"
 
 @interface TetrisShape()
-@property (assign, nonatomic) CGPoint centerPoint;
 @property (retain, nonatomic) NSMutableSet* shapePoints;
 @property (retain, nonatomic) NSMutableArray* shapesCollection;
 @property (retain, nonatomic) NSArray* colorsCollection;
-
+- (CGPoint)getNextCenter:(CGPoint)localCenter withDirection:(DirectionMove)direction;
+- (CGPoint)getRotatedPoint:(CGPoint)point withDirection:(DirectionRotate)directionRotate;
 - (void)randomTypeShape;
+- (NSInteger)randomNumberFrom:(NSInteger)from To:(NSInteger)to;
+- (NSMutableSet*)transformation:(NSSet*)localShapePoints withLocalCentre:(CGPoint)cntr;
+- (NSMutableSet*)rotate:(DirectionRotate)directionRotate;
 @end
 @implementation TetrisShape
 @synthesize centerPoint;
@@ -35,38 +38,26 @@
 
 - (id)initRandomShapeWithCenter:(CGPoint)center
 {
-    //?
     self.shapesCollection =  [NSMutableArray arrayWithObjects:
                               [NSMutableSet setWithObjects:PointToObj(CGPointMake(0, 0)), nil], //None
                               [NSMutableSet setWithObjects:PointToObj(CGPointMake(0, 0)), PointToObj(CGPointMake(1, 0)), PointToObj(CGPointMake(0, 1)), PointToObj(CGPointMake(1, 1)), nil], //SquareShape
-                              [NSMutableSet setWithObjects:PointToObj(CGPointMake(1, -1)), PointToObj(CGPointMake(0, 1)), PointToObj(CGPointMake(0, 0)), PointToObj(CGPointMake(1, 0)), nil], //ZShape
                               [NSMutableSet setWithObjects:PointToObj(CGPointMake(-1, 0)), PointToObj(CGPointMake(0, 0)), PointToObj(CGPointMake(0, 1)), PointToObj(CGPointMake(1, 1)), nil], //SShape
+                              [NSMutableSet setWithObjects:PointToObj(CGPointMake(-1, 1)), PointToObj(CGPointMake(0, 1)), PointToObj(CGPointMake(0, 0)), PointToObj(CGPointMake(1, 0)), nil], //ZShape
                               [NSMutableSet setWithObjects:PointToObj(CGPointMake(-1, -1)), PointToObj(CGPointMake(0, -1)), PointToObj(CGPointMake(0, 0)), PointToObj(CGPointMake(0, 1)), nil], //LShape
                               [NSMutableSet setWithObjects:PointToObj(CGPointMake(1, -1)), PointToObj(CGPointMake(0, -1)), PointToObj(CGPointMake(0, 0)), PointToObj(CGPointMake(0, 1)), nil], //JShape
                               [NSMutableSet setWithObjects:PointToObj(CGPointMake(0, -1)), PointToObj(CGPointMake(0, 0)), PointToObj(CGPointMake(0, 1)), PointToObj(CGPointMake(0, 2)), nil], //IShape
                               [NSMutableSet setWithObjects:PointToObj(CGPointMake(-1, 0)), PointToObj(CGPointMake(0, 0)), PointToObj(CGPointMake(1, 0)), PointToObj(CGPointMake(0, 1)), nil], //TShape
                               nil];
 
-    
-//    [NSMutableArray arrayWithObjects:
-//                            [NSMutableSet setWithObjects:[[Cell alloc] initWithPoint:CGPointMake(0, 0)], nil], //None
-//                            [NSMutableSet setWithObjects:[[Cell alloc] initWithPoint:CGPointMake(0, 0)], [[Cell alloc] initWithPoint:CGPointMake(1, 0)], [[Cell alloc] initWithPoint:CGPointMake(0, 1)], [[Cell alloc] initWithPoint:CGPointMake(1, 1)], nil], //SquareShape
-//                            [NSMutableSet setWithObjects:[[Cell alloc] initWithPoint:CGPointMake(1, -1)], [[Cell alloc] initWithPoint:CGPointMake(0, 1)], [[Cell alloc] initWithPoint:CGPointMake(0, 0)], [[Cell alloc] initWithPoint:CGPointMake(1, 0)], nil], //ZShape
-//                            [NSMutableSet setWithObjects:[[Cell alloc] initWithPoint:CGPointMake(-1, 0)], [[Cell alloc] initWithPoint:CGPointMake(0, 0)], [[Cell alloc] initWithPoint:CGPointMake(0, 1)], [[Cell alloc] initWithPoint:CGPointMake(1, 1)], nil], //SShape
-//                            [NSMutableSet setWithObjects:[[Cell alloc] initWithPoint:CGPointMake(-1, -1)], [[Cell alloc] initWithPoint:CGPointMake(0, -1)], [[Cell alloc] initWithPoint:CGPointMake(0, 0)], [[Cell alloc] initWithPoint:CGPointMake(0, 1)], nil], //LShape
-//                            [NSMutableSet setWithObjects:[[Cell alloc] initWithPoint:CGPointMake(1, -1)], [[Cell alloc] initWithPoint:CGPointMake(0, -1)], [[Cell alloc] initWithPoint:CGPointMake(0, 0)], [[Cell alloc] initWithPoint:CGPointMake(0, 1)], nil], //JShape
-//                            [NSMutableSet setWithObjects:[[Cell alloc] initWithPoint:CGPointMake(0, -1)], [[Cell alloc] initWithPoint:CGPointMake(0, 0)], [[Cell alloc] initWithPoint:CGPointMake(0, 1)], [[Cell alloc] initWithPoint:CGPointMake(0, 2)], nil], //IShape
-//                            [NSMutableSet setWithObjects:[[Cell alloc] initWithPoint:CGPointMake(-1, 0)], [[Cell alloc] initWithPoint:CGPointMake(0, 0)], [[Cell alloc] initWithPoint:CGPointMake(1, 0)], [[Cell alloc] initWithPoint:CGPointMake(0, 1)], nil], //TShape
-//                             nil];
     self.colorsCollection = [NSArray arrayWithObjects:
-                       [UIColor blackColor],
-                       [UIColor yellowColor],
-                       [UIColor brownColor],
-                       [UIColor blueColor],
-                       [UIColor purpleColor],
-                       [UIColor greenColor],
-                       [UIColor grayColor],
-                       [UIColor magentaColor],
+                       [UIColor blackColor],  
+                       [UIColor colorWithRed:255.0f/255.0f green:246.0f/255.0f blue:143.0f/255.0f alpha:1],//yellow                
+                       [UIColor colorWithRed:255.0f/255.0f green:130.0f/255.0f blue:71.0f/255.0f alpha:1],//orange 
+                       [UIColor colorWithRed:100.0f/255.0f green:149.0f/255.0f blue:237.0f/255.0f alpha:1],//blue
+                       [UIColor colorWithRed:222.0f/255.0f green:222.0f/255.0f blue:222.0f/255.0f alpha:1],//gray
+                       [UIColor colorWithRed:153.0f/255.0f green:204.0f/255.0f blue:50.0f/255.0f alpha:1],//green 
+                       [UIColor colorWithRed:255.0f/255.0f green:99.0f/255.0f blue:71.0f/255.0f alpha:1],//tomato
+                       [UIColor colorWithRed:205.0f/255.0f green:105.0f/255.0f blue:201.0f/255.0f alpha:1],//orchid
                        [UIColor redColor],
                        nil];
     self = [super init];
@@ -79,8 +70,6 @@
 
 - (NSInteger)randomNumberFrom:(NSInteger)from To:(NSInteger)to
 {
-   // NSLog(@"%d",from + rand() % (to - from));
-    //arc4random()
     return (from + arc4random() % to);
 }
 
@@ -98,30 +87,32 @@
     return [self transformation:self.shapePoints withLocalCentre:self.centerPoint];
 }
 
-//return absolute shape coordinates with current center
-- (NSMutableSet*)transformation:(NSSet*)localShapePoints withLocalCentre:(CGPoint)cntr
-{
-    NSMutableSet* shapeLocalSet = [[NSMutableSet alloc] init];
-    for (NSValue* v in localShapePoints) {
-        //shapePoints addObject:
-        CGPoint p = PointFromObj(v);
-        p.x += cntr.x;
-        p.y += cntr.y;
-        [shapeLocalSet addObject:PointToObj(p)];
-    }
-    return shapeLocalSet;
-}
 
 #pragma mark - Move Shape
+
 //deep move, change center of the shape
 - (void)deepMove:(DirectionMove)directionMove
 {
     self.centerPoint = [self getNextCenter:self.centerPoint withDirection:directionMove];
 }
+
 //get move shape for check
 - (NSMutableSet*)getMovedShape:(DirectionMove)directionMove
 {
     return [self transformation:self.shapePoints withLocalCentre:[self getNextCenter:self.centerPoint withDirection:directionMove]];
+}
+
+#pragma mark - Rotate Shape
+
+- (void)deepRotate:(DirectionRotate)directionRotate
+{
+    self.shapePoints = [self rotate: directionRotate];
+}
+
+//get rotated shape for check
+- (NSMutableSet*)getRotatedShape:(DirectionRotate)directionRotate
+{
+    return [self transformation:[self rotate: directionRotate] withLocalCentre:self.centerPoint];
 }
 
 - (CGPoint)getNextCenter:(CGPoint)localCenter withDirection:(DirectionMove)direction
@@ -147,5 +138,53 @@
             break;
     }
     return newCenter;
+}
+
+//return absolute shape coordinates with current center
+- (NSMutableSet*)transformation:(NSSet*)localShapePoints withLocalCentre:(CGPoint)cntr
+{
+    NSMutableSet* shapeLocalSet = [[NSMutableSet alloc] init];
+    for (NSValue* v in localShapePoints) {
+        //shapePoints addObject:
+        CGPoint p = PointFromObj(v);
+        p.x += cntr.x;
+        p.y += cntr.y;
+        [shapeLocalSet addObject:PointToObj(p)];
+    }
+    return shapeLocalSet;
+}
+
+//rotate relative coordinates
+- (NSMutableSet*)rotate:(DirectionRotate)directionRotate
+{
+    NSMutableArray* rotatedSet = [[NSMutableArray alloc] init];
+    for (NSValue* pointValue in self.shapePoints) {
+        NSLog(@"%f %f",  PointFromObj( pointValue).x, PointFromObj( pointValue).y);
+        NSLog(@"%f %f",  [self getRotatedPoint:PointFromObj(pointValue) withDirection:directionRotate].x,[self getRotatedPoint:PointFromObj(pointValue) withDirection:directionRotate].y);
+
+        [rotatedSet addObject: PointToObj( [self getRotatedPoint:PointFromObj(pointValue) withDirection:directionRotate] )];
+    }
+    return (NSMutableSet*)rotatedSet;
+}
+
+- (CGPoint)getRotatedPoint:(CGPoint)point withDirection:(DirectionRotate)directionRotate
+{
+    CGPoint rotatePoint;
+    switch (directionRotate) {
+        case rightDirectionRotate:
+        {
+            rotatePoint.x = point.y;
+            rotatePoint.y = - point.x;
+        }
+            break;
+        case leftDirectionRotate:
+        {
+            rotatePoint.x = - point.y;
+            rotatePoint.y = point.x;
+        }
+        default:
+            break;
+    }
+    return rotatePoint;
 }
 @end

@@ -12,13 +12,17 @@
 
 @interface BoardViewController : UIViewController
 @property (retain, nonatomic) NSMutableSet* boardCells;
+@property (retain, nonatomic) NSMutableSet* nextShapeCells;
 @property (retain, nonatomic) BoardView* boardView;
+@property (retain, nonatomic) BoardView* nextShapeView;
 @property (assign, nonatomic) BOOL gameOver;
+@property (assign, nonatomic) BOOL needUpdate;
 @property (assign, nonatomic) CGPoint startPoint;
-- (id)initWithFrame:(CGRect)frame amountCellX:(NSInteger)cellX;
+@property (assign, nonatomic) CGPoint startPointNextShape;
+- (id)initWithFrame:(CGRect)frame amountCellX:(NSInteger)cellX amountCellY:(NSInteger)cellY;
+- (void)start;
 //manage
 - (void)rotateShape:(DirectionRotate) directionRotate;
 - (void)moveShape:(DirectionMove) directionMove;
 - (NSMutableSet*)getBoard;
-
 @end

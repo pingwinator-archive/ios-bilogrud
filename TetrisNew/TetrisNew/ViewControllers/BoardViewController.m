@@ -15,7 +15,6 @@
 @property (retain, nonatomic) TetrisShape* currentShape;
 @property (retain, nonatomic) NSMutableSet* borderSet;
 @property (retain, nonatomic) NSMutableSet* fallenShapeSet;
-- (NSMutableSet*)cellsToPoints:(NSMutableSet*)cells;
 @end
 
 @implementation BoardViewController
@@ -26,12 +25,13 @@
 @synthesize boardCells;
 @synthesize borderSet;
 @synthesize fallenShapeSet;
-
-- (void)setBoardCells:(NSMutableSet *)_boardCells
+@synthesize nextShapeView;
+@synthesize nextShapeCells;
+@synthesize needUpdate;
+- (void)setBoardCells:(NSMutableSet*)_boardCells
 {
     [boardCells release];
     boardCells = [_boardCells retain];
-  
     self.boardView.boardCellsForDrawing = _boardCells;
 }
 
@@ -52,19 +52,18 @@
     return self;
 }
 
-- (id)initWithFrame:(CGRect)frame amountCellX:(NSInteger)cellX
+- (id)initWithFrame:(CGRect)frame amountCellX:(NSInteger)cellX amountCellY:(NSInteger)cellY
 {
     self = [super init];
     if(self) {
         
-        self.boardView = [[BoardView alloc] initWithFrame:frame amountCellX:cellX];
+        self.boardView = [[BoardView alloc] initWithFrame:frame amountCellX:cellX amountCellY:cellY];
         self.boardView.backgroundColor = [UIColor lightGrayColor];
         self.gameOver = NO;
         
         //shape
-        self.startPoint = CGPointMake(5, 2);
+        self.startPoint = CGPointMake(5, -2);
         self.currentShape = [[TetrisShape alloc] initRandomShapeWithCenter:self.startPoint];
-        
         self.fallenShapeSet = [[NSMutableSet alloc] init];
         
         self.borderSet = [[NSMutableSet alloc] init];
@@ -76,38 +75,44 @@
             [borderSet addObject:PointToObj(CGPointMake(self.boardView.amountCellX, j))];
         }
         
-        //
-        [self updateBoard];
-    //    [self.boardCells unionSet:self.currentShape.shapePoints];
+        //next shape View
+//        self.nextShape = [[TetrisShape alloc] initRandomShapeWithCenter:CGPointMake(1, 1)];
+//        
+//        self.nextShapeCells = [Cell pointsToCells:[self.nextShape getShapePoints] withColor:self.nextShape.shapeColor];
+//     
+//        self.startPointNextShape = CGPointMake(1, 1);
+       
+        self.nextShapeView = [[[BoardView alloc] initWithFrame:CGRectMake(self.boardView.frame.size.width + self.boardView.frame.origin.x + 10, self.boardView.frame.size.height/2, 50, 50) amountCellX:4 amountCellY:4] autorelease];
+        
+        
+        self.nextShapeView.backgroundColor = [UIColor lightGrayColor];
+
+        
+        
     }
     return self;
 }
 
+#pragma mark - 
+
 - (void)updateBoard
 {
-    NSMutableSet* cellsCurrentShape = [[NSMutableSet alloc] initWithSet:[self pointsToCells:[self.currentShape getShapePoints]]];
+    NSMutableSet* cellsCurrentShape = [[NSMutableSet alloc] initWithSet:[Cell pointsToCells:[self.currentShape getShapePoints] withColor:self.currentShape.shapeColor]];
     
     self.boardCells = [[NSMutableSet alloc] initWithSet:cellsCurrentShape];
     [self.boardCells unionSet:cellsCurrentShape];
     [self.boardCells unionSet:fallenShapeSet];
+    
 }
 
-- (NSMutableSet*)pointsToCells:(NSMutableSet*)points
+-(void)updateNextShape
 {
-    NSMutableSet* cells = [[NSMutableSet alloc] init];
-    for (NSValue* v in points) {
-       [cells addObject: [Cell pointToCell:v withColor:self.currentShape.shapeColor ]];
-    }
-    return cells;
-}
-
-- (NSMutableSet*)cellsToPoints:(NSMutableSet*)cells
-{
-    NSMutableSet* points = [[NSMutableSet alloc] init];
-    for (Cell* c in cells) {
-        [points addObject: [Cell cellToPointObj:c]];
-    }
-    return points;
+    
+    self.nextShape = [[TetrisShape alloc] initRandomShapeWithCenter:CGPointMake(1, 1)];
+    self.nextShapeCells = [Cell pointsToCells:[self.nextShape getShapePoints] withColor:self.nextShape.shapeColor];
+    self.nextShapeView.nextShapeCellsForDrawing =  self.nextShapeCells;
+    self.startPointNextShape = CGPointMake(1, 1);
+    [self.nextShapeView setNeedsDisplay];
 }
 
 - (void)viewDidLoad
@@ -131,17 +136,18 @@
         NSLog( @"valid to move");
         [self.currentShape deepMove:directionMove];
         [self updateBoard];
-        //[self.boardView setNeedsDisplay];
     } else {
         if (directionMove == downDirectionMove && !self.gameOver) {
             NSInteger amountDeleted = 0;
-            NSInteger minY = 0;
+            NSInteger minY = self.boardView.amountCellY;
             NSInteger maxY = 0;
-            [self.fallenShapeSet unionSet:[self pointsToCells:[self.currentShape getShapePoints]]];
+            [self.fallenShapeSet unionSet:[Cell pointsToCells:[self.currentShape getShapePoints] withColor:self.currentShape.shapeColor]];
             //check for game over
             for (Cell* c in self.boardCells) {
-                if( c.point.y == 2) {
+                if(c.point.y == 1) {
                     self.gameOver = YES;
+                    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Game Over", @"")  message:nil delegate:self cancelButtonTitle:@"New game" otherButtonTitles:@"Cancel", nil];
+                    [alert show];
                 }
             }
             //check line where shape was add
@@ -159,34 +165,63 @@
                     if(c.point.y == i + amountDeleted) {
                         count++;
                     }
+                }
                     if (count == self.boardView.amountCellX)
                     {
                         self.fallenShapeSet = [self deleteLine:self.fallenShapeSet line:i+amountDeleted];
                         amountDeleted++;
                     }
-                }
             }
             self.currentShape = self.nextShape;
-            self.nextShape = [[TetrisShape alloc] initRandomShapeWithCenter:self.startPoint];
+            self.currentShape.centerPoint =  self.startPoint;
+            [self updateNextShape];
         }
-        
-        NSLog( @"not valid to move");
+    }
+}
+
+- (void)rotateShape:(DirectionRotate) directionRotate
+{
+    NSMutableSet* tempSet = [NSMutableSet setWithSet:[self.currentShape getRotatedShape:directionRotate]];
+    
+    if([self validationMove:tempSet]) {
+        [self.currentShape deepRotate:directionRotate];
     }
 }
 
 - (NSMutableSet*)deleteLine:(NSMutableSet*)boardPoints line:(NSInteger)numberLine
 {
-    NSMutableSet* tempSet = [NSMutableSet setWithSet:[self cellsToPoints:boardPoints]];
-   // for (NSInteger i = 0; i < [self.boardPoints count]; i++) {
-      //  if(
-  //  [tempSet intersectsSet://
-     
-        
-    //}
-    return tempSet;
+    NSMutableSet* tempSet = [NSMutableSet setWithSet:[Cell cellsToPoints:boardPoints]];
+    for (NSInteger i = 0; i < [self.boardCells count]; i++) {
+        if([tempSet intersectsSet:[NSMutableSet setWithObjects:PointToObj(CGPointMake(i, numberLine)), nil]]) {
+            [tempSet removeObject:PointToObj(CGPointMake(i, numberLine))];
+        }
+    }
+    NSMutableSet* setResult = [[NSMutableSet alloc] init];
+    
+    for (Cell* c in self.boardCells) {
+        if([tempSet intersectsSet:[NSMutableSet setWithObject:[Cell cellToPointObj:c]]]) {
+            if(c.point.y < numberLine) {
+                [setResult addObject:[[Cell alloc] initWithPoint:CGPointMake(c.point.x, c.point.y + 1) andColor:c.colorCell]];
+            } else {
+                [setResult addObject:[[Cell alloc] initWithPoint:CGPointMake(c.point.x, c.point.y) andColor:c.colorCell]];
+            }
+        }
+    }
+    return setResult;
  }
+
+
 - (BOOL)validationMove:(NSMutableSet*)validateSet
 {
-    return !([validateSet intersectsSet:self.borderSet] && [validateSet intersectsSet:self.fallenShapeSet]);
+    NSMutableSet* set = [[NSMutableSet alloc] initWithSet:validateSet];
+    [set intersectSet:self.borderSet];
+    NSLog(@"rr");
+    return ![validateSet intersectsSet:self.borderSet] && ![validateSet intersectsSet:[Cell cellsToPoints: self.fallenShapeSet]];
+}
+
+-(void)start
+{
+    [self updateBoard];
+    [self updateNextShape];
 }
 @end

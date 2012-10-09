@@ -18,4 +18,6 @@
 + (NSValue*)cellToPointObj:(Cell*)cell;
 + (Cell*)pointToCell:(NSValue*)value;
 + (Cell*)pointToCell:(NSValue*)value withColor: (UIColor*)color;
++ (NSMutableSet*)cellsToPoints:(NSMutableSet*)cells;
++ (NSMutableSet*)pointsToCells:(NSMutableSet*)points withColor:(UIColor*)color;
 @end

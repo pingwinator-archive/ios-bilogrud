@@ -25,11 +25,7 @@
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
 {
-    // Drawing code
-   
-
     CGContextRef context = UIGraphicsGetCurrentContext();
-  //  CGContextClearRect(context, rect);
     CGContextSetLineWidth(context, borderThin);
     CGContextSetStrokeColorWithColor(context, [UIColor yellowColor].CGColor);
     
@@ -47,9 +43,6 @@
     
     CGContextAddRect(context, CGRectMake(rect.origin.x + offsetBorderThick, rect.origin.y + offsetBorderThick, rect.size.width - (rect.origin.x + offsetBorderThick ) * 2, rect.size.height - ( rect.origin.y + offsetBorderThick) * 2 - iPhoneAddOffset));
 
-  //  self.backgroundColor = [UIColor colorWithRed:39.0f/255.0f green:64.0f/255.0f blue:139.0f/255.0f alpha:1];
     CGContextStrokePath(context);
 }
-
-
 @end

@@ -10,13 +10,26 @@
 #import <QuartzCore/QuartzCore.h>
 #import "Cell.h"
 @interface BoardView()
-
+- (void)drawGrid:(CGRect)rect withContext:(CGContextRef)context;
+- (void)drawBoard:(CGContextRef)context;
+- (void)drawNextShape:(CGContextRef)context;
 @end
 
 @implementation BoardView
 @synthesize boardCellsForDrawing;
 @synthesize amountCellX;
 @synthesize amountCellY;
+@synthesize cellHeight;
+@synthesize cellWidth;
+@synthesize nextShapeCellsForDrawing;
+
+- (void)dealloc
+{
+    self.boardCellsForDrawing = nil;
+    self.nextShapeCellsForDrawing = nil;
+    [super dealloc];
+}
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -27,16 +40,14 @@
     return self;
 }
 
-- (id)initWithFrame:(CGRect)frame amountCellX:(NSInteger)cellX 
+- (id)initWithFrame:(CGRect)frame amountCellX:(NSInteger)cellX amountCellY:(NSInteger)cellY
 {
     self = [self initWithFrame:frame];
     if(self) {
         self.amountCellX = cellX;
-         self.cell = (self.frame.size.width - 2 * boardBorderWidth) / self.amountCellX;
-        NSInteger countCellY = 0;
-        NSInteger j = 0;
-        for (j = 0, countCellY = 0 ; j < self.frame.size.height - boardBorderWidth ; j += self.cell , countCellY++ );
-        self.amountCellY = countCellY;
+        self.amountCellY = cellY;
+        self.cellWidth = (self.frame.size.width - 2 * boardBorderWidth) / self.amountCellX;
+        self.cellHeight = (self.frame.size.height - 2 *  boardBorderWidth) / self.amountCellY;
     }
     return self;
 }
@@ -49,23 +60,34 @@
 
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, boardGridWidth);
-    CGContextSetStrokeColorWithColor(context, [UIColor blackColor].CGColor);
-    
-    for (CGFloat i = boardBorderWidth + self.cell ; i < self.frame.size.width - 2 * boardBorderWidth; i += self.cell) {
-        CGContextMoveToPoint(context, i, 0);
-        CGContextAddLineToPoint(context, i, self.frame.size.height);
+
+    [self drawGrid:rect withContext:context];
+    [self drawBoard:context];
+    if(self.nextShapeCellsForDrawing) {
+        [self drawNextShape:context];
     }
-    
-    for (NSInteger j = self.frame.size.height - boardBorderWidth - self.cell; j > 0; j -= self.cell  ) {
-        CGContextMoveToPoint(context, 0, j);
-        CGContextAddLineToPoint(context, self.frame.size.width, j);
-    }
-    
     self.layer.borderColor = [UIColor blackColor].CGColor;
     self.layer.borderWidth = boardBorderWidth;
     
-    [self drawBoard:context];
     CGContextStrokePath(context);
+}
+
+- (void)drawGrid:(CGRect)rect withContext:(CGContextRef)context
+{
+    CGContextStrokePath(context);
+    CGContextSetStrokeColorWithColor(context, [UIColor blackColor].CGColor);
+    
+    for (CGFloat i = boardBorderWidth ; i < rect.size.width; i += self.cellWidth) {
+        CGContextMoveToPoint(context, i, 0);
+        CGContextAddLineToPoint(context, i, rect.size.height);
+    }
+    
+    for (CGFloat j = boardBorderWidth; j < rect.size.height; j += self.cellHeight) {
+        CGContextMoveToPoint(context, 0, j);
+        CGContextAddLineToPoint(context, rect.size.width, j);
+    }
+     CGContextStrokePath(context);
+
 }
 
 - (void)drawBoard:(CGContextRef)context
@@ -73,20 +95,28 @@
     CGContextStrokePath(context);
     CGContextSetStrokeColorWithColor(context, [UIColor blackColor].CGColor);
     for (Cell* cell in self.boardCellsForDrawing) {
-        CGRect rect = CGRectMake(boardBorderWidth + self.cell * cell.point.x, boardBorderWidth + self.cell * cell.point.y, self.cell, self.cell);
+        CGRect rect = CGRectMake(boardBorderWidth + (self.cellWidth) * cell.point.x, boardBorderWidth + (self.cellHeight)* cell.point.y, self.cellWidth, self.cellHeight);
+       
         [cell.colorCell setFill];
+        CGContextSetLineWidth(context, boardGridWidth);
+
         CGContextAddRect(context, rect);
         CGContextFillRect(context, rect);
     }
-    CGContextDrawPath(context, kCGPathFill);
 }
 
-- (NSMutableSet*)transformation:(NSMutableSet*)localShape withCenter:(CGPoint)center
+- (void)drawNextShape:(CGContextRef)context
 {
-    NSMutableSet* setTransformShape = [[NSMutableSet alloc] init];
-    for (Cell* cell in localShape) {
-        [setTransformShape addObject:[[[Cell alloc] initWithPoint:CGPointMake(cell.point.x + center.x - 1, cell.point.y + center.y - 1)] autorelease]];
+    CGContextStrokePath(context);
+    CGContextSetStrokeColorWithColor(context, [UIColor blackColor].CGColor);
+    for (Cell* cell in self.nextShapeCellsForDrawing) {
+        CGRect rect = CGRectMake(boardBorderWidth + (self.cellWidth) * cell.point.x, boardBorderWidth + (self.cellHeight)* cell.point.y, self.cellWidth, self.cellHeight);
+        
+        [cell.colorCell setFill];
+        CGContextSetLineWidth(context, boardGridWidth);
+        
+        CGContextAddRect(context, rect);
+        CGContextFillRect(context, rect);
     }
-    return setTransformShape;
 }
 @end

@@ -48,8 +48,26 @@
 }
 
 + (Cell*)pointToCell:(NSValue*)value withColor: (UIColor*)color
-{
+{ 
     return [[Cell alloc] initWithPoint: PointFromObj(value) andColor:color];
+}
+
++ (NSMutableSet*)pointsToCells:(NSMutableSet*)points withColor:(UIColor*)color
+{
+    NSMutableSet* cells = [[NSMutableSet alloc] init];
+    for (NSValue* v in points) {
+        [cells addObject: [Cell pointToCell:v withColor:color ]];
+    }
+    return cells;
+}
+
++ (NSMutableSet*)cellsToPoints:(NSMutableSet*)cells
+{
+    NSMutableSet* points = [[NSMutableSet alloc] init];
+    for (Cell* c in cells) {
+        [points addObject: [Cell cellToPointObj:c]];
+    }
+    return points;
 }
 
 @end

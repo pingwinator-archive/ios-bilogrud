@@ -10,9 +10,14 @@
 
 @interface TetrisShape : NSObject
 @property (retain, nonatomic) UIColor* shapeColor;
-@property (readonly, assign, nonatomic) CGPoint centerPoint;
+@property (assign, nonatomic) CGPoint centerPoint;
 - (NSMutableSet*)getShapePoints;
 - (id)initRandomShapeWithCenter:(CGPoint)center;
-- (NSMutableSet*)getMovedShape:(DirectionMove)directionMove;
+
 - (void)deepMove:(DirectionMove)directionMove;
+- (NSMutableSet*)getMovedShape:(DirectionMove)directionMove;
+
+- (void)deepRotate:(DirectionRotate)directionRotate;
+- (NSMutableSet*)getRotatedShape:(DirectionRotate)directionRotate;
+
 @end

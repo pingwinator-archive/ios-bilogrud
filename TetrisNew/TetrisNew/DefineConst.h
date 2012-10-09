@@ -20,7 +20,7 @@
 
 
 //tetris const
-#define boardBorderWidth 3
+#define boardBorderWidth 2
 #define boardGridWidth 2
 
 #define offSetBorderThin 3
@@ -38,6 +38,7 @@
 #define PointToObj(point) [NSValue valueWithCGPoint:point]
 #define PointFromObj(value) [value CGPointValue]
 
+#define delayForButtonPressed 0.3
 typedef enum {
     downDirectionMove,
     rightDirectionMove,

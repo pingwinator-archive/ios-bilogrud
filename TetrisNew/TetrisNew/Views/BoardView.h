@@ -12,7 +12,8 @@
 @property (assign, nonatomic) NSInteger amountCellX;
 @property (assign, nonatomic) NSInteger amountCellY;
 @property (retain, nonatomic) NSMutableSet* boardCellsForDrawing;
-//width and height
-@property (assign, nonatomic) CGFloat cell;
-- (id)initWithFrame:(CGRect)frame amountCellX:(NSInteger)cellX;
+@property (retain, nonatomic) NSMutableSet* nextShapeCellsForDrawing;
+@property (assign, nonatomic) CGFloat cellWidth;
+@property (assign, nonatomic) CGFloat cellHeight;
+- (id)initWithFrame:(CGRect)frame amountCellX:(NSInteger)cellX amountCellY:(NSInteger)cellY;
 @end

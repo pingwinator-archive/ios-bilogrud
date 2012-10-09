@@ -12,5 +12,7 @@
 
 @interface GameViewController : UIViewController
 @property (assign, nonatomic) BOOL isStart;
-@property (retain, nonatomic) NSTimer* gameTimer;
+- (void)play;
+- (void)startGameTimer;
+- (void)stopGameTimer;
 @end
