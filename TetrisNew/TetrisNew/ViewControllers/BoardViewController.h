@@ -15,13 +15,23 @@
 @property (retain, nonatomic) NSMutableSet* nextShapeCells;
 @property (retain, nonatomic) BoardView* boardView;
 @property (retain, nonatomic) BoardView* nextShapeView;
+@property (retain, nonatomic) NSTimer* gameTimer;
 @property (assign, nonatomic) BOOL gameOver;
 @property (assign, nonatomic) BOOL newGame;
+
 @property (assign, nonatomic) CGPoint startPoint;
 @property (assign, nonatomic) CGPoint startPointNextShape;
+
 - (id)initWithFrame:(CGRect)frame amountCellX:(NSInteger)cellX amountCellY:(NSInteger)cellY;
 - (void)start;
 //manage
 - (void)rotateShape:(DirectionRotate) directionRotate;
 - (void)moveShape:(DirectionMove) directionMove;
+//timer
+- (void)startGameTimer;
+- (void)stopGameTimer;
+//grid
+- (void)showGrid:(BOOL)grid;
+
 @end
+

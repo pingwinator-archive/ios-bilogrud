@@ -17,6 +17,7 @@
 @property (retain, nonatomic) NSMutableSet* fallenShapeSet;
 - (NSMutableSet*)deleteLine:(NSMutableSet*)boardPoints line:(NSInteger)numberLine;
 - (BOOL)validationMove:(NSMutableSet*)validateSet;
+- (void)timerTick;
 @end
 
 @implementation BoardViewController
@@ -30,6 +31,7 @@
 @synthesize nextShapeView;
 @synthesize nextShapeCells;
 @synthesize newGame;
+@synthesize gameTimer;
 
 - (void)setBoardCells:(NSMutableSet*)_boardCells
 {
@@ -43,6 +45,7 @@
     self.boardView = nil;
     self.fallenShapeSet = nil;
     self.borderSet = nil;
+    self.gameTimer = nil;
     [super dealloc];
 }
 
@@ -64,6 +67,7 @@
         self.boardView.backgroundColor = [UIColor lightGrayColor];
         self.gameOver = NO;
         self.newGame = NO;
+
         //shape
         self.startPoint = CGPointMake(5, -2);
         self.currentShape = [[TetrisShape alloc] initRandomShapeWithCenter:self.startPoint];
@@ -100,7 +104,6 @@
 
 -(void)updateNextShape
 {
-    
     self.nextShape = [[TetrisShape alloc] initRandomShapeWithCenter:CGPointMake(1, 1)];
     self.nextShapeCells = [Cell pointsToCells:[self.nextShape getShapePoints] withColor:self.nextShape.shapeColor];
     self.nextShapeView.nextShapeCellsForDrawing =  self.nextShapeCells;
@@ -192,7 +195,6 @@
     return setResult;
  }
 
-
 - (BOOL)validationMove:(NSMutableSet*)validateSet
 {
     NSMutableSet* set = [[NSMutableSet alloc] initWithSet:validateSet];
@@ -215,4 +217,35 @@
         self.newGame = YES;
     }
 }
+
+#pragma mark - Timer
+
+- (void)timerTick
+{
+    if(self.gameOver) {
+        [self.gameTimer invalidate];
+    } else {
+        [self moveShape:downDirectionMove];
+    }
+    [self.boardView setNeedsDisplay];
+}
+
+#pragma mark - Timer
+
+- (void)startGameTimer
+{
+    self.gameTimer = [NSTimer scheduledTimerWithTimeInterval:1  target:self selector:@selector(timerTick) userInfo:nil repeats:YES];
+}
+
+- (void)stopGameTimer
+{
+    [self.gameTimer invalidate];
+}
+
+- (void)showGrid:(BOOL)grid
+{
+    self.boardView.showGrid = grid;
+    self.nextShapeView.showGrid = grid;
+}
+
 @end

@@ -22,7 +22,7 @@
 @synthesize cellHeight;
 @synthesize cellWidth;
 @synthesize nextShapeCellsForDrawing;
-
+@synthesize showGrid;
 - (void)dealloc
 {
     self.boardCellsForDrawing = nil;
@@ -44,6 +44,7 @@
 {
     self = [self initWithFrame:frame];
     if(self) {
+        self.showGrid = YES;
         self.amountCellX = cellX;
         self.amountCellY = cellY;
         self.cellWidth = (self.frame.size.width - 2 * boardBorderWidth) / self.amountCellX;
@@ -61,7 +62,9 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, boardGridWidth);
 
-    [self drawGrid:rect withContext:context];
+    if(self.showGrid) {
+        [self drawGrid:rect withContext:context];
+    }
     [self drawBoard:context];
     if(self.nextShapeCellsForDrawing) {
         [self drawNextShape:context];
@@ -87,7 +90,6 @@
         CGContextAddLineToPoint(context, rect.size.width, j);
     }
      CGContextStrokePath(context);
-
 }
 
 - (void)drawBoard:(CGContextRef)context

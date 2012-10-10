@@ -15,5 +15,7 @@
 @property (retain, nonatomic) NSMutableSet* nextShapeCellsForDrawing;
 @property (assign, nonatomic) CGFloat cellWidth;
 @property (assign, nonatomic) CGFloat cellHeight;
+@property (assign, nonatomic) BOOL showGrid;
 - (id)initWithFrame:(CGRect)frame amountCellX:(NSInteger)cellX amountCellY:(NSInteger)cellY;
+
 @end

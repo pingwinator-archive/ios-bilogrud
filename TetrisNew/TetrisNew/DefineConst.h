@@ -18,6 +18,9 @@
 # define DBLog(...)
 #endif
 
+//http://stackoverflow.com/questions/1902021/suppressing-is-deprecated-when-using-respondstoselector
+#define DISABLE_DEPRICADETED_WARNINGS_BEGIN _Pragma("clang diagnostic push") _Pragma("clang diagnostic ignored \"-Wdeprecated-declarations\" ")
+#define DISABLE_DEPRICADETED_WARNINGS_END _Pragma("clang diagnostic pop")
 
 //tetris const
 #define boardBorderWidth 2
@@ -29,6 +32,7 @@
 #define borderThick 3
 
 //buttons
+#define settingSizeButton 30
 #define playSizeButton 30
 #define moveSizeButton 40
 #define textButtonFont [UIFont fontWithName:@"American Typewriter" size:12]
@@ -39,6 +43,8 @@
 #define PointFromObj(value) [value CGPointValue]
 
 #define delayForButtonPressed 0.3
+
+#define kShowGrid @"grid"
 typedef enum {
     downDirectionMove,
     rightDirectionMove,

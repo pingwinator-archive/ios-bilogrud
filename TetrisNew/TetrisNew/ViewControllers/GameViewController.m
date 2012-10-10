@@ -8,12 +8,16 @@
 
 #import "GameViewController.h"
 #import "BoardViewController.h"
+#import "SettingViewController.h"
 #import "BoardView.h"
 #import "BGView.h"
+#import "UIViewController+Deprecated.h"
 @interface GameViewController ()
 @property (retain, nonatomic) BoardViewController* boardViewController;
+@property (retain, nonatomic) SettingViewController* settingViewController;
 @property (retain, nonatomic) BGView* backgroundView;
 @property (retain, nonatomic) BoardView* nextShapeView;
+@property (retain, nonatomic) UIButton* settingButton;
 @property (retain, nonatomic) UIButton* playButton;
 @property (retain, nonatomic) UIButton* leftButton;
 @property (retain, nonatomic) UIButton* downButton;
@@ -24,14 +28,14 @@
 @property (retain, nonatomic) UILabel* downLabel;
 @property (retain, nonatomic) UILabel* rightLabel;
 @property (retain, nonatomic) UILabel* rotateLabel;
-@property (assign, nonatomic) BOOL firstStart;
 @property (retain, nonatomic) NSTimer* buttonTimer;
-@property (retain, nonatomic) NSTimer* gameTimer;
+@property (assign, nonatomic) BOOL firstStart;
 @property (assign, nonatomic) CGRect boardRect;
-- (void)addUIControls;
-- (void)timerTick;
+@property (assign, nonatomic) BOOL settingIsVisible;
+- (void)addUIControlsForPhone;
+
 - (void)rotate;
-//
+//motion
 - (void)moveRightPressed;
 - (void)moveRightUnPressed;
 - (void)moveLeftPressed;
@@ -55,10 +59,13 @@
 @synthesize rightLabel;
 @synthesize rotateLabel;
 @synthesize isStart;
-@synthesize gameTimer;
 @synthesize firstStart;
 @synthesize buttonTimer;
 @synthesize boardRect;
+@synthesize settingButton;
+@synthesize settingIsVisible;
+@synthesize settingViewController;
+
 - (void)dealloc
 {
     self.boardViewController = nil;
@@ -74,16 +81,28 @@
     self.downLabel = nil;
     self.rightLabel = nil;
     self.rotateLabel = nil;
-    self.gameTimer = nil;
     self.buttonTimer = nil;
+    self.settingButton = nil;
+    self.settingViewController = nil;
     [super dealloc];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+//    if(self.settingViewController) {
+//        [self.boardViewController showGrid: self.settingViewController.showGrid];
+//    }
+    [self.boardViewController showGrid: [SettingViewController loadSettingGrid]];
+   // [self.boardViewController.nextShapeView showGrid: [SettingViewController loadSettingGrid]];
+    [self.boardViewController.boardView setNeedsDisplay];
+    [self.boardViewController.nextShapeView setNeedsDisplay];
+    [super viewWillAppear:YES];
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.firstStart = YES;
-    
+    self.settingIsVisible = NO;
     self.backgroundView = [[[BGView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)] autorelease];
     self.backgroundView.backgroundColor = [UIColor colorWithRed:39.0f/255.0f green:64.0f/255.0f blue:139.0f/255.0f alpha:1]; 
     [self.view addSubview:self.backgroundView];
@@ -99,13 +118,23 @@
     [self.backgroundView addSubview:self.boardViewController.boardView];
 	  //next shape View
     [self.backgroundView addSubview:self.boardViewController.nextShapeView];
-    [self addUIControls];
+    [self addUIControlsForPhone];
 }
 
-- (void)addUIControls
+- (void)addUIControlsForPhone
 {
+    //setting button
+    CGRect rectSettingButton = CGRectMake(self.boardRect.size.width + 30, self.boardRect.origin.y + 10, settingSizeButton, settingSizeButton);
+    self.settingButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.settingButton.frame = rectSettingButton;
+    UIImage* settingImage = [UIImage imageNamed:@"Setting.png"];
+    [self.settingButton setImage:settingImage forState:UIControlStateNormal];
+    [self.settingButton addTarget:self action:@selector(showSetting) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.settingButton];
+    [self.settingButton release];
+    
     //play button
-    CGRect rectPlayButton = CGRectMake(self.boardRect.size.width + 30, self.boardRect.origin.y, playSizeButton, playSizeButton);
+    CGRect rectPlayButton = CGRectMake(self.boardRect.size.width + 30, self.boardRect.origin.y + 70, playSizeButton, playSizeButton);
     self.playButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.playButton.frame = rectPlayButton;
     UIImage* im = [UIImage imageNamed:@"SmallYellow.png"];
@@ -114,11 +143,11 @@
     [self.view addSubview:self.playButton];
     [self.playButton release];
     
-    //play labe4
-    CGRect rectPlayLabel = CGRectMake(rectPlayButton.origin.x , rectPlayButton.size.height + 20, labelMoveTextWidth - 5, labelMoveTextHeigth*2);
+    //play label
+    CGRect rectPlayLabel = CGRectMake(rectPlayButton.origin.x , rectPlayButton.origin.y + 25, labelMoveTextWidth - 5, labelMoveTextHeigth*2);
     self.playLabel = [[UILabel alloc] initWithFrame:rectPlayLabel];
     self.playLabel.text = @"PLAY/ PAUSE";
-    self.playLabel.lineBreakMode = UILineBreakModeCharacterWrap;
+    self.playLabel.lineBreakMode = NSLineBreakByCharWrapping;//UILineBreakModeCharacterWrap;
     self.playLabel.numberOfLines = 2;
     
     [self.playLabel setFont:textButtonFont];
@@ -215,12 +244,23 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)showSetting
+{
+  
+        self.settingIsVisible = YES;
+        self.settingViewController = [[[SettingViewController alloc] init] autorelease];
+      
+    [self deprecatedPresentModalViewController:self.settingViewController animated:YES];
+    //presentModalViewController:settingViewController animated:YES];
+
+}
+
 - (void)play
 {
     //timer start
     if(self.isStart) {
         self.isStart = NO;
-        [self.gameTimer invalidate];
+        [self.boardViewController.gameTimer invalidate];
     } else {
         
         if(self.firstStart) {
@@ -228,32 +268,12 @@
             self.firstStart = NO;
         } 
         self.isStart = YES;
-        self.gameTimer = [NSTimer scheduledTimerWithTimeInterval:1  target:self selector:@selector(timerTick) userInfo:nil repeats:YES];
+        [self.boardViewController startGameTimer];
+        //  self.boardViewController.gameTimer = [NSTimer scheduledTimerWithTimeInterval:1  target:self selector:@selector(timerTick) userInfo:nil repeats:YES];
         NSLog(@"play!");
     }
 }
 
-#pragma mark - Timer
-
-- (void)startGameTimer
-{
-    self.gameTimer = [NSTimer scheduledTimerWithTimeInterval:1  target:self selector:@selector(timerTick) userInfo:nil repeats:YES];
-}
-
-- (void)stopGameTimer
-{
-    [self.gameTimer invalidate];
-}
-
-- (void)timerTick
-{
-    if(self.boardViewController.gameOver) {
-        [self.gameTimer invalidate];
-    } else {
-         [self.boardViewController moveShape:downDirectionMove];
-    }
-    [self.boardViewController.boardView setNeedsDisplay];
-}
 
 #pragma mark - Methods for TouchDown Timer
 
@@ -296,4 +316,17 @@
 {
     [self.boardViewController rotateShape:rightDirectionRotate];
 }
+
+#pragma mark - Timer
+- (void)resumptionGameTimer
+{
+    [self.boardViewController startGameTimer];
+}
+
+- (void)pauseGameTimer
+{
+    [self.boardViewController stopGameTimer];
+}
+
+
 @end
