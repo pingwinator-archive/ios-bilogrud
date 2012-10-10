@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @class BoardView;
 @class TetrisShape;
-
+@protocol DeleteLineDelegate;
 @interface BoardViewController : UIViewController<UIAlertViewDelegate>
 @property (retain, nonatomic) NSMutableSet* boardCells;
 @property (retain, nonatomic) NSMutableSet* nextShapeCells;
@@ -18,10 +18,10 @@
 @property (retain, nonatomic) NSTimer* gameTimer;
 @property (assign, nonatomic) BOOL gameOver;
 @property (assign, nonatomic) BOOL newGame;
-
 @property (assign, nonatomic) CGPoint startPoint;
 @property (assign, nonatomic) CGPoint startPointNextShape;
-
+@property (assign, nonatomic) NSInteger lines;
+@property (assign, nonatomic) id <DeleteLineDelegate>delegate;
 - (id)initWithFrame:(CGRect)frame amountCellX:(NSInteger)cellX amountCellY:(NSInteger)cellY;
 - (void)start;
 //manage
@@ -32,6 +32,12 @@
 - (void)stopGameTimer;
 //grid
 - (void)showGrid:(BOOL)grid;
+@end
+@protocol DeleteLineDelegate <NSObject>
+
+- (void)deleteLine:(NSInteger)amount;
 
 @end
+
+
 

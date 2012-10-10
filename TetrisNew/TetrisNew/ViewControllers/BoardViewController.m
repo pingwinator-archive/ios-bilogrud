@@ -15,9 +15,11 @@
 @property (retain, nonatomic) TetrisShape* currentShape;
 @property (retain, nonatomic) NSMutableSet* borderSet;
 @property (retain, nonatomic) NSMutableSet* fallenShapeSet;
+@property (assign, nonatomic) NSInteger gameTimerInterval;
 - (NSMutableSet*)deleteLine:(NSMutableSet*)boardPoints line:(NSInteger)numberLine;
 - (BOOL)validationMove:(NSMutableSet*)validateSet;
 - (void)timerTick;
+- (void)showGrid:(BOOL)grid;
 @end
 
 @implementation BoardViewController
@@ -32,7 +34,8 @@
 @synthesize nextShapeCells;
 @synthesize newGame;
 @synthesize gameTimer;
-
+@synthesize lines;
+@synthesize gameTimerInterval;
 - (void)setBoardCells:(NSMutableSet*)_boardCells
 {
     [boardCells release];
@@ -62,7 +65,8 @@
 {
     self = [super init];
     if(self) {
-        
+        self.gameTimerInterval = 1;
+        self.lines = 0;
         self.boardView = [[BoardView alloc] initWithFrame:frame amountCellX:cellX amountCellY:cellY];
         self.boardView.backgroundColor = [UIColor lightGrayColor];
         self.gameOver = NO;
@@ -82,9 +86,8 @@
             [borderSet addObject:PointToObj(CGPointMake(self.boardView.amountCellX, j))];
         }
        
-        self.nextShapeView = [[[BoardView alloc] initWithFrame:CGRectMake(self.boardView.frame.size.width + self.boardView.frame.origin.x + 10, self.boardView.frame.size.height/2, 50, 50) amountCellX:4 amountCellY:4] autorelease];
-        
-        
+        self.nextShapeView = [[[BoardView alloc] initWithFrame:CGRectMake(self.boardView.frame.size.width + self.boardView.frame.origin.x + 10, self.boardView.frame.size.height - 70, 50, 50) amountCellX:4 amountCellY:4] autorelease];
+
         self.nextShapeView.backgroundColor = [UIColor lightGrayColor];
     }
     return self;
@@ -118,7 +121,6 @@
     NSMutableSet* tempSet = [NSMutableSet setWithSet:[self.currentShape getMovedShape:directionMove]];
     if([self validationMove:tempSet])
     {
-        NSLog( @"valid to move");
         [self.currentShape deepMove:directionMove];
         [self updateBoard];
     } else {
@@ -175,6 +177,15 @@
 
 - (NSMutableSet*)deleteLine:(NSMutableSet*)boardPoints line:(NSInteger)numberLine
 {
+    //amount of deleted line
+    self.lines++;
+    if ([self.delegate respondsToSelector:@selector(deleteLine:)]) {
+        [self.delegate deleteLine:self.lines];
+    }
+    if(self.lines % 2 == 0) {
+        self.gameTimerInterval *= 0.9;
+    }
+    
     NSMutableSet* tempSet = [NSMutableSet setWithSet:[Cell cellsToPoints:boardPoints]];
     for (NSInteger i = 0; i < [self.boardCells count]; i++) {
         if([tempSet intersectsSet:[NSMutableSet setWithObjects:PointToObj(CGPointMake(i, numberLine)), nil]]) {
@@ -230,17 +241,17 @@
     [self.boardView setNeedsDisplay];
 }
 
-#pragma mark - Timer
-
 - (void)startGameTimer
 {
-    self.gameTimer = [NSTimer scheduledTimerWithTimeInterval:1  target:self selector:@selector(timerTick) userInfo:nil repeats:YES];
+    self.gameTimer = [NSTimer scheduledTimerWithTimeInterval:self.gameTimerInterval  target:self selector:@selector(timerTick) userInfo:nil repeats:YES];
 }
 
 - (void)stopGameTimer
 {
     [self.gameTimer invalidate];
 }
+
+#pragma mark - Settings 
 
 - (void)showGrid:(BOOL)grid
 {

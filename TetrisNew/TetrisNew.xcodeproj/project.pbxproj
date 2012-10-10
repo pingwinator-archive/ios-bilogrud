@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		6E13F6CA1622BCE4005BF66D /* BoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E13F6C91622BCE4005BF66D /* BoardViewController.m */; };
 		6E13F6CE1622CF1C005BF66D /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E13F6CD1622CF1C005BF66D /* Cell.m */; };
+		6E5F313B16260AC000274174 /* DisplayOTF.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E5F313816260AC000274174 /* DisplayOTF.otf */; };
+		6E5F313C16260AC000274174 /* DS-DIGIT.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6E5F313916260AC000274174 /* DS-DIGIT.ttf */; };
+		6E5F313D16260AC000274174 /* EHSMB_2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6E5F313A16260AC000274174 /* EHSMB_2.ttf */; };
 		6E9E3A72162592AB0082C51B /* Setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E9E3A70162592AB0082C51B /* Setting.png */; };
 		6E9E3A73162592AB0082C51B /* Setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E9E3A71162592AB0082C51B /* Setting@2x.png */; };
 		6E9E3A76162595560082C51B /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E9E3A75162595560082C51B /* SettingViewController.m */; };
@@ -38,6 +41,9 @@
 		6E13F6C91622BCE4005BF66D /* BoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoardViewController.m; sourceTree = "<group>"; };
 		6E13F6CC1622CF1C005BF66D /* Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
 		6E13F6CD1622CF1C005BF66D /* Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cell.m; sourceTree = "<group>"; };
+		6E5F313816260AC000274174 /* DisplayOTF.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DisplayOTF.otf; sourceTree = "<group>"; };
+		6E5F313916260AC000274174 /* DS-DIGIT.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DS-DIGIT.ttf"; sourceTree = "<group>"; };
+		6E5F313A16260AC000274174 /* EHSMB_2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EHSMB_2.ttf; sourceTree = "<group>"; };
 		6E9E3A4716258AC50082C51B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6E9E3A4816258AC50082C51B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		6E9E3A4916258AC50082C51B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -113,6 +119,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6E5F313716260AC000274174 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				6E5F313816260AC000274174 /* DisplayOTF.otf */,
+				6E5F313916260AC000274174 /* DS-DIGIT.ttf */,
+				6E5F313A16260AC000274174 /* EHSMB_2.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		6E9E3A4616258AC50082C51B /* TetrisNew */ = {
 			isa = PBXGroup;
 			children = (
@@ -312,6 +328,7 @@
 		6EC7BD691621E36900066F23 /* Resourses */ = {
 			isa = PBXGroup;
 			children = (
+				6E5F313716260AC000274174 /* Fonts */,
 				6EC7BD6A1621E36900066F23 /* Images */,
 				6EC7BD6B1621E36900066F23 /* Nibs */,
 			);
@@ -400,6 +417,9 @@
 				6EC7BD9D162208D400066F23 /* SmallYellow.png in Resources */,
 				6E9E3A72162592AB0082C51B /* Setting.png in Resources */,
 				6E9E3A73162592AB0082C51B /* Setting@2x.png in Resources */,
+				6E5F313B16260AC000274174 /* DisplayOTF.otf in Resources */,
+				6E5F313C16260AC000274174 /* DS-DIGIT.ttf in Resources */,
+				6E5F313D16260AC000274174 /* EHSMB_2.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

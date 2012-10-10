@@ -7,7 +7,6 @@
 //
 
 #import "GameViewController.h"
-#import "BoardViewController.h"
 #import "SettingViewController.h"
 #import "BoardView.h"
 #import "BGView.h"
@@ -28,6 +27,7 @@
 @property (retain, nonatomic) UILabel* downLabel;
 @property (retain, nonatomic) UILabel* rightLabel;
 @property (retain, nonatomic) UILabel* rotateLabel;
+@property (retain, nonatomic) UILabel* lineLabel;
 @property (retain, nonatomic) NSTimer* buttonTimer;
 @property (assign, nonatomic) BOOL firstStart;
 @property (assign, nonatomic) CGRect boardRect;
@@ -58,6 +58,7 @@
 @synthesize downLabel;
 @synthesize rightLabel;
 @synthesize rotateLabel;
+@synthesize lineLabel;
 @synthesize isStart;
 @synthesize firstStart;
 @synthesize buttonTimer;
@@ -84,6 +85,7 @@
     self.buttonTimer = nil;
     self.settingButton = nil;
     self.settingViewController = nil;
+    self.lineLabel = nil;
     [super dealloc];
 }
 
@@ -103,22 +105,24 @@
     [super viewDidLoad];
     self.firstStart = YES;
     self.settingIsVisible = NO;
-    self.backgroundView = [[[BGView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)] autorelease];
-    self.backgroundView.backgroundColor = [UIColor colorWithRed:39.0f/255.0f green:64.0f/255.0f blue:139.0f/255.0f alpha:1]; 
-    [self.view addSubview:self.backgroundView];
-    
+  
     //board
     if(isiPhone) {
+        self.backgroundView = [[[BGView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)] autorelease];
+        self.backgroundView.backgroundColor = [UIColor colorWithRed:39.0f/255.0f green:64.0f/255.0f blue:139.0f/255.0f alpha:1]; 
+        [self.view addSubview:self.backgroundView];
+    
         self.boardRect = CGRectMake(15, 15, 230, 342);
+        self.boardViewController = [[[BoardViewController alloc] initWithFrame:boardRect amountCellX:10 amountCellY:15] autorelease];
+        [self.backgroundView addSubview:self.boardViewController.boardView];
+        //next shape View
+        [self.backgroundView addSubview:self.boardViewController.nextShapeView];
+        [self addUIControlsForPhone];
     } else {
         self.boardRect = CGRectMake(15, 15, 650, 850);
     }
     
-    self.boardViewController = [[[BoardViewController alloc] initWithFrame:boardRect amountCellX:10 amountCellY:15] autorelease];
-    [self.backgroundView addSubview:self.boardViewController.boardView];
-	  //next shape View
-    [self.backgroundView addSubview:self.boardViewController.nextShapeView];
-    [self addUIControlsForPhone];
+   
 }
 
 - (void)addUIControlsForPhone
@@ -144,17 +148,30 @@
     [self.playButton release];
     
     //play label
-    CGRect rectPlayLabel = CGRectMake(rectPlayButton.origin.x , rectPlayButton.origin.y + 25, labelMoveTextWidth - 5, labelMoveTextHeigth*2);
+    CGRect rectPlayLabel = CGRectMake(rectPlayButton.origin.x , rectPlayButton.origin.y + 25, labelMoveTextWidth + 5, labelMoveTextHeigth*2);
     self.playLabel = [[UILabel alloc] initWithFrame:rectPlayLabel];
     self.playLabel.text = @"PLAY/ PAUSE";
     self.playLabel.lineBreakMode = NSLineBreakByCharWrapping;//UILineBreakModeCharacterWrap;
     self.playLabel.numberOfLines = 2;
-    
     [self.playLabel setFont:textButtonFont];
     self.playLabel.backgroundColor=[UIColor clearColor];
     self.playLabel.textColor = [UIColor whiteColor];
+   // self.playLabel.textAlignment = UITextAlignmentCenter;
     [self.view addSubview:self.playLabel];
     [self.playLabel release];
+    
+    //amount deleted lines label
+    CGRect rectLineLabel = CGRectMake(rectPlayLabel.origin.x , rectPlayLabel.origin.y + 35, labelMoveTextWidth - 5, labelMoveTextHeigth*2);
+    self.lineLabel = [[UILabel alloc] initWithFrame:rectLineLabel];
+    self.lineLabel.text = [NSString stringWithFormat:@"%d", self.boardViewController.lines];
+    self.lineLabel.lineBreakMode = NSLineBreakByCharWrapping;//UILineBreakModeCharacterWrap;
+    self.lineLabel.numberOfLines = 2;
+    [self.lineLabel setFont:[UIFont fontWithName:@"DS-DIGIT" size:25]];
+    self.lineLabel.backgroundColor=[UIColor clearColor];
+    self.lineLabel.textColor = [UIColor whiteColor];
+    self.lineLabel.textAlignment = UITextAlignmentCenter;
+    [self.view addSubview:self.lineLabel];
+    [self.lineLabel release];
     
     //left button
     CGRect manageButton = CGRectMake(self.boardRect.origin.x + 10, self.boardRect.size.height + 30, moveSizeButton, moveSizeButton);
@@ -174,6 +191,7 @@
     [self.leftLabel setFont:textButtonFont];
     self.leftLabel.backgroundColor=[UIColor clearColor];
     self.leftLabel.textColor = [UIColor whiteColor];
+    self.leftLabel.textAlignment = UITextAlignmentCenter;
     [self.view addSubview:self.leftLabel];
     [self.leftLabel release];
     
@@ -194,6 +212,7 @@
     [self.downLabel setFont:textButtonFont];
     self.downLabel.backgroundColor = [UIColor clearColor];
     self.downLabel.textColor = [UIColor whiteColor];
+    self.downLabel.textAlignment = UITextAlignmentCenter;
     [self.view addSubview:self.downLabel];
     [self.downLabel release];
     
@@ -207,12 +226,13 @@
     [self.rotateButton release];
     
     //rotate label
-    CGRect rectRotateLabel = CGRectMake(manageButton.origin.x, manageButton.size.height + manageButton.origin.y , labelMoveTextWidth, labelMoveTextHeigth);
+    CGRect rectRotateLabel = CGRectMake(manageButton.origin.x - 5, manageButton.size.height + manageButton.origin.y , labelMoveTextWidth + 10, labelMoveTextHeigth);
     self.rotateLabel = [[UILabel alloc] initWithFrame:rectRotateLabel];
     self.rotateLabel.text = @"ROTATE";
     [self.rotateLabel setFont:textButtonFont];
     self.rotateLabel.backgroundColor=[UIColor clearColor];
     self.rotateLabel.textColor = [UIColor whiteColor];
+    self.rotateLabel.textAlignment = UITextAlignmentCenter;
     [self.view addSubview:self.rotateLabel];
     [self.rotateLabel release];
     
@@ -233,9 +253,9 @@
     [self.rightLabel setFont:textButtonFont];
     self.rightLabel.backgroundColor=[UIColor clearColor];
     self.rightLabel.textColor = [UIColor whiteColor];
+    self.rightLabel.textAlignment = UITextAlignmentCenter;
     [self.view addSubview:self.rightLabel];
     [self.rightLabel release];
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -246,13 +266,10 @@
 
 - (void)showSetting
 {
-  
-        self.settingIsVisible = YES;
-        self.settingViewController = [[[SettingViewController alloc] init] autorelease];
-      
+    self.settingIsVisible = YES;
+    self.settingViewController = [[[SettingViewController alloc] init] autorelease];
     [self deprecatedPresentModalViewController:self.settingViewController animated:YES];
     //presentModalViewController:settingViewController animated:YES];
-
 }
 
 - (void)play
@@ -266,6 +283,7 @@
         if(self.firstStart) {
            [self.boardViewController start];
             self.firstStart = NO;
+            self.boardViewController.delegate = self;
         } 
         self.isStart = YES;
         [self.boardViewController startGameTimer];
@@ -317,7 +335,8 @@
     [self.boardViewController rotateShape:rightDirectionRotate];
 }
 
-#pragma mark - Timer
+#pragma mark - Timer 
+
 - (void)resumptionGameTimer
 {
     [self.boardViewController startGameTimer];
@@ -328,5 +347,10 @@
     [self.boardViewController stopGameTimer];
 }
 
+#pragma mark - DeleteLineDelegate Methods
 
+- (void)deleteLine:(NSInteger)amount
+{
+    self.lineLabel.text = [NSString stringWithFormat:@"%d", self.boardViewController.lines];
+}
 @end

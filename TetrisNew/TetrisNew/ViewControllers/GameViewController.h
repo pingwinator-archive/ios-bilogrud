@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 @class BGView;
 @class BoardView;
-
-@interface GameViewController : UIViewController
+#import "BoardViewController.h"
+@interface GameViewController : UIViewController<DeleteLineDelegate>
 @property (assign, nonatomic) BOOL isStart;
 - (void)play;
 ////timer

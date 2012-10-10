@@ -36,7 +36,7 @@
 #define playSizeButton 30
 #define moveSizeButton 40
 #define textButtonFont [UIFont fontWithName:@"American Typewriter" size:12]
-#define labelMoveTextWidth 50
+#define labelMoveTextWidth 40
 #define labelMoveTextHeigth 20
 
 #define PointToObj(point) [NSValue valueWithCGPoint:point]
