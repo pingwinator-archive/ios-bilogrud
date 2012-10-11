@@ -24,6 +24,7 @@
 @property (assign, nonatomic) id <DeleteLineDelegate>delegate;
 - (id)initWithFrame:(CGRect)frame amountCellX:(NSInteger)cellX amountCellY:(NSInteger)cellY;
 - (void)start;
+- (void)resetBoard;
 //manage
 - (void)rotateShape:(DirectionRotate) directionRotate;
 - (void)moveShape:(DirectionMove) directionMove;

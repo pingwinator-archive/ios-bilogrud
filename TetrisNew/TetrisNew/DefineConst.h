@@ -33,12 +33,18 @@
 
 //buttons
 #define settingSizeButton 30
-#define playSizeButton 30
+#define manageSizeButton 30
 #define moveSizeButton 40
+#define rotateSizeButton 60
+
+#define settingFont [UIFont fontWithName:@"American Typewriter" size:20]
 #define textButtonFont [UIFont fontWithName:@"American Typewriter" size:12]
+#define scoreFont [UIFont fontWithName:@"DS-Digital" size:45]
+
 #define labelMoveTextWidth 40
 #define labelMoveTextHeigth 20
-
+#define labelScoreWidth 50
+#define labelScoreHeigth 50
 #define PointToObj(point) [NSValue valueWithCGPoint:point]
 #define PointFromObj(value) [value CGPointValue]
 

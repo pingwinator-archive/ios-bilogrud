@@ -13,6 +13,7 @@
 @interface GameViewController : UIViewController<DeleteLineDelegate>
 @property (assign, nonatomic) BOOL isStart;
 - (void)play;
+- (void)reset;
 ////timer
 - (void)resumptionGameTimer;
 - (void)pauseGameTimer;

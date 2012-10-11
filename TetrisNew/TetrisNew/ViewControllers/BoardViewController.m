@@ -73,9 +73,7 @@
         self.newGame = NO;
 
         //shape
-        self.startPoint = CGPointMake(5, -2);
-        self.currentShape = [[TetrisShape alloc] initRandomShapeWithCenter:self.startPoint];
-        self.fallenShapeSet = [[NSMutableSet alloc] init];
+        [self updateShape];
         
         self.borderSet = [[NSMutableSet alloc] init];
         for (NSInteger i = 0; i < self.boardView.amountCellX ; i++) {
@@ -85,15 +83,23 @@
             [borderSet addObject:PointToObj(CGPointMake(-1, j))];
             [borderSet addObject:PointToObj(CGPointMake(self.boardView.amountCellX, j))];
         }
-       
-        self.nextShapeView = [[[BoardView alloc] initWithFrame:CGRectMake(self.boardView.frame.size.width + self.boardView.frame.origin.x + 10, self.boardView.frame.size.height - 70, 50, 50) amountCellX:4 amountCellY:4] autorelease];
-
+        if(isiPhone) {
+            self.nextShapeView = [[[BoardView alloc] initWithFrame:CGRectMake(self.boardView.frame.size.width + self.boardView.frame.origin.x + 10, self.boardView.frame.size.height - 70, 50, 50) amountCellX:4 amountCellY:4] autorelease];
+        } else {
+            self.nextShapeView = [[[BoardView alloc] initWithFrame:CGRectMake(self.boardView.frame.size.width + self.boardView.frame.origin.x + 10, self.boardView.frame.size.height - 200, self.boardView.cellWidth * 4, self.boardView.cellHeight * 4) amountCellX:4 amountCellY:4] autorelease];
+        }
         self.nextShapeView.backgroundColor = [UIColor lightGrayColor];
     }
     return self;
 }
 
 #pragma mark - 
+- (void)updateShape
+{
+    self.startPoint = CGPointMake(5, -2);
+    self.currentShape = [[TetrisShape alloc] initRandomShapeWithCenter:self.startPoint];
+    self.fallenShapeSet = [[NSMutableSet alloc] init];
+}
 
 - (void)updateBoard
 {
@@ -114,6 +120,18 @@
     [self.nextShapeView setNeedsDisplay];
 }
 
+- (void)resetBoard
+{
+    [self.nextShapeCells removeAllObjects];
+    [self.boardCells removeAllObjects];
+    [self.fallenShapeSet removeAllObjects];
+    self.lines = 0;
+    self.gameTimerInterval = 1;
+    [self stopGameTimer];
+    [self.boardView setNeedsDisplay];
+    [self.nextShapeView setNeedsDisplay];
+    self.currentShape = nil;
+}
 #pragma mark - Move Shape
 
 - (void)moveShape:(DirectionMove) directionMove
@@ -217,6 +235,7 @@
 {
     [self updateBoard];
     [self updateNextShape];
+    [self updateShape];
 }
 
 #pragma mark - UIAlertViewDelegate Methods

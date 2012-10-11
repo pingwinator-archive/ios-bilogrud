@@ -12,6 +12,7 @@
 @property (retain, nonatomic) UIButton* closeButton;
 @property (retain, nonatomic) UIButton* showGridCheckBox;
 @property (retain, nonatomic) UISwitch* toggleButton;
+@property (retain, nonatomic) UILabel* showGridLabel;
 @end
 
 @implementation SettingViewController 
@@ -19,6 +20,17 @@
 @synthesize showGrid;
 @synthesize showGridCheckBox;
 @synthesize toggleButton;
+@synthesize showGridLabel;
+
+- (void)dealloc
+{
+    self.closeButton = nil;
+    self.showGridCheckBox = nil;
+    self.showGridLabel = nil;
+    self.toggleButton = nil;
+    [super dealloc];
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -31,28 +43,30 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //close button
-    //self.showGrid = YES;
-    self.showGrid = [SettingViewController loadSettingGrid];
+      self.showGrid = [SettingViewController loadSettingGrid];
     
-    [self.view setBackgroundColor:[UIColor redColor]];
-    CGRect manageButton = CGRectMake(30, 100, 100, 40);
+    self.showGridLabel = [[UILabel alloc] initWithFrame:CGRectMake(200, 20, 100, 50)];
+    self.showGridLabel.text = @"Show grid";
+    [self.showGridLabel setFont:settingFont];
+    
+    [self.view addSubview:self.showGridLabel];
+    [self.showGridLabel release];
+    
+    self.toggleButton = [[UISwitch alloc] initWithFrame:CGRectMake(400, 30, 50, 50)];
+    [self.toggleButton setOn:[SettingViewController loadSettingGrid]];//.isSelected = self.showGrid;
+    [self.toggleButton addTarget:self action:@selector(changeToggle) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.toggleButton];
+    [self.toggleButton release];
+   
+    //close button
+    [self.view setBackgroundColor:[UIColor whiteColor]];
+    CGRect manageButton = CGRectMake(300, 100, 100, 40);
     self.closeButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     self.closeButton.frame = manageButton;
     [self.closeButton setTitle:@"Cancel" forState:UIControlStateNormal];
     [self.closeButton addTarget:self action:@selector(close) forControlEvents:UIControlEventTouchUpInside];
-   // [self.leftButton addTarget:self action:@selector(moveLeftUnPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.closeButton];
     [self.closeButton release];
-    
-    self.toggleButton = [[UISwitch alloc] initWithFrame:CGRectMake(20, 20, 20, 20)];
-    [self.toggleButton setOn:[SettingViewController loadSettingGrid]];//.isSelected = self.showGrid;
-   
-    [self.toggleButton addTarget:self action:@selector(changeToggle) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.view addSubview:self.toggleButton];
-    [self.toggleButton release];
-	// Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning
