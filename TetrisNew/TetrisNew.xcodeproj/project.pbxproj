@@ -11,8 +11,9 @@
 		6E13F6CE1622CF1C005BF66D /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E13F6CD1622CF1C005BF66D /* Cell.m */; };
 		6E2AEE6B16270AE2000D9561 /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E2AEE6A16270AE2000D9561 /* Default-Portrait.png */; };
 		6E2AEE6D16270B9B000D9561 /* iPad-Retina–Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E2AEE6C16270B9B000D9561 /* iPad-Retina–Portrait.png */; };
-		6E2AEE771627234D000D9561 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E2AEE761627234D000D9561 /* AudioToolbox.framework */; };
-		6E2AEE7A162724BE000D9561 /* Tetris - Tetris.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6E2AEE79162724BE000D9561 /* Tetris - Tetris.mp3 */; };
+		6E2AEE7A162724BE000D9561 /* Tetris.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6E2AEE79162724BE000D9561 /* Tetris.mp3 */; };
+		6E2B104316274392004C5D72 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E2B104216274392004C5D72 /* AVFoundation.framework */; };
+		6E2B104516274F11004C5D72 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E2B104416274F11004C5D72 /* AudioToolbox.framework */; };
 		6E5F313B16260AC000274174 /* DisplayOTF.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E5F313816260AC000274174 /* DisplayOTF.otf */; };
 		6E5F313C16260AC000274174 /* DS-DIGIT.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6E5F313916260AC000274174 /* DS-DIGIT.ttf */; };
 		6E5F313D16260AC000274174 /* EHSMB_2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6E5F313A16260AC000274174 /* EHSMB_2.ttf */; };
@@ -50,8 +51,9 @@
 		6E13F6CD1622CF1C005BF66D /* Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cell.m; sourceTree = "<group>"; };
 		6E2AEE6A16270AE2000D9561 /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = "<group>"; };
 		6E2AEE6C16270B9B000D9561 /* iPad-Retina–Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPad-Retina–Portrait.png"; sourceTree = "<group>"; };
-		6E2AEE761627234D000D9561 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		6E2AEE79162724BE000D9561 /* Tetris - Tetris.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Tetris - Tetris.mp3"; sourceTree = "<group>"; };
+		6E2AEE79162724BE000D9561 /* Tetris.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Tetris.mp3; sourceTree = "<group>"; };
+		6E2B104216274392004C5D72 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		6E2B104416274F11004C5D72 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		6E5F313816260AC000274174 /* DisplayOTF.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DisplayOTF.otf; sourceTree = "<group>"; };
 		6E5F313916260AC000274174 /* DS-DIGIT.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DS-DIGIT.ttf"; sourceTree = "<group>"; };
 		6E5F313A16260AC000274174 /* EHSMB_2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EHSMB_2.ttf; sourceTree = "<group>"; };
@@ -124,7 +126,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6E2AEE771627234D000D9561 /* AudioToolbox.framework in Frameworks */,
+				6E2B104516274F11004C5D72 /* AudioToolbox.framework in Frameworks */,
+				6E2B104316274392004C5D72 /* AVFoundation.framework in Frameworks */,
 				6EC7BD8E1621E86900066F23 /* QuartzCore.framework in Frameworks */,
 				6EC7BD2A1621E23C00066F23 /* UIKit.framework in Frameworks */,
 				6EC7BD2C1621E23C00066F23 /* Foundation.framework in Frameworks */,
@@ -138,7 +141,7 @@
 		6E2AEE78162724BE000D9561 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				6E2AEE79162724BE000D9561 /* Tetris - Tetris.mp3 */,
+				6E2AEE79162724BE000D9561 /* Tetris.mp3 */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 		6EC7BD1A1621E23C00066F23 = {
 			isa = PBXGroup;
 			children = (
+				6E2B104416274F11004C5D72 /* AudioToolbox.framework */,
 				6E9E3A7E16259FE20082C51B /* Categories */,
 				6EC7BD631621E36900066F23 /* ViewControllers */,
 				6EC7BD661621E36900066F23 /* Externals */,
@@ -270,7 +274,7 @@
 		6EC7BD281621E23C00066F23 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6E2AEE761627234D000D9561 /* AudioToolbox.framework */,
+				6E2B104216274392004C5D72 /* AVFoundation.framework */,
 				6EC7BD8D1621E86900066F23 /* QuartzCore.framework */,
 				6EC7BD291621E23C00066F23 /* UIKit.framework */,
 				6EC7BD2B1621E23C00066F23 /* Foundation.framework */,
@@ -456,7 +460,7 @@
 				6E9E3A9E1626E6D40082C51B /* forest.jpeg in Resources */,
 				6E2AEE6B16270AE2000D9561 /* Default-Portrait.png in Resources */,
 				6E2AEE6D16270B9B000D9561 /* iPad-Retina–Portrait.png in Resources */,
-				6E2AEE7A162724BE000D9561 /* Tetris - Tetris.mp3 in Resources */,
+				6E2AEE7A162724BE000D9561 /* Tetris.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

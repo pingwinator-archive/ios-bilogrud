@@ -67,7 +67,7 @@
     if(self) {
         self.gameTimerInterval = 1;
         self.lines = 0;
-        self.boardView = [[BoardView alloc] initWithFrame:frame amountCellX:cellX amountCellY:cellY];
+        self.boardView = [[[BoardView alloc] initWithFrame:frame amountCellX:cellX amountCellY:cellY] autorelease];
         self.boardView.backgroundColor = [UIColor lightGrayColor];
         self.gameOver = NO;
         self.newGame = NO;
@@ -75,7 +75,7 @@
         //shape
         [self updateShape];
         
-        self.borderSet = [[NSMutableSet alloc] init];
+        self.borderSet = [[[NSMutableSet alloc] init] autorelease];
         for (NSInteger i = 0; i < self.boardView.amountCellX ; i++) {
             [borderSet addObject:PointToObj(CGPointMake(i, self.boardView.amountCellY))];
         }
@@ -98,7 +98,7 @@
 {
     self.startPoint = CGPointMake(5, -2);
     self.currentShape = [[TetrisShape alloc] initRandomShapeWithCenter:self.startPoint];
-    self.fallenShapeSet = [[NSMutableSet alloc] init];
+    self.fallenShapeSet = [[[NSMutableSet alloc] init] autorelease];
 }
 
 - (void)updateBoard
@@ -108,6 +108,7 @@
     self.boardCells = [[NSMutableSet alloc] initWithSet:cellsCurrentShape];
     [self.boardCells unionSet:cellsCurrentShape];
     [self.boardCells unionSet:fallenShapeSet];
+    [self.boardCells release];
     
 }
 
@@ -118,6 +119,7 @@
     self.nextShapeView.nextShapeCellsForDrawing =  self.nextShapeCells;
     self.startPointNextShape = CGPointMake(1, 1);
     [self.nextShapeView setNeedsDisplay];
+    [self.nextShape release];
 }
 
 - (void)resetBoard
@@ -132,6 +134,7 @@
     [self.nextShapeView setNeedsDisplay];
     self.currentShape = nil;
 }
+
 #pragma mark - Move Shape
 
 - (void)moveShape:(DirectionMove) directionMove
@@ -151,7 +154,8 @@
             for (Cell* c in self.boardCells) {
                 if(c.point.y == 1) {
                     self.gameOver = YES;
-                    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Game Over", @"")  message:nil delegate:self cancelButtonTitle:@"New game" otherButtonTitles:nil, nil];
+                           
+                    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Game Over", @"")  message:nil delegate:self cancelButtonTitle:NSLocalizedString(@"New game", @"") otherButtonTitles:nil, nil];
                     [alert show];
                 }
             }
@@ -210,7 +214,7 @@
             [tempSet removeObject:PointToObj(CGPointMake(i, numberLine))];
         }
     }
-    NSMutableSet* setResult = [[NSMutableSet alloc] init];
+    NSMutableSet* setResult = [[[NSMutableSet alloc] init] autorelease];
     
     for (Cell* c in self.boardCells) {
         if([tempSet intersectsSet:[NSMutableSet setWithObject:[Cell cellToPointObj:c]]]) {
@@ -226,7 +230,7 @@
 
 - (BOOL)validationMove:(NSMutableSet*)validateSet
 {
-    NSMutableSet* set = [[NSMutableSet alloc] initWithSet:validateSet];
+    NSMutableSet* set = [[[NSMutableSet alloc] initWithSet:validateSet] autorelease];
     [set intersectSet:self.borderSet];
     return ![validateSet intersectsSet:self.borderSet] && ![validateSet intersectsSet:[Cell cellsToPoints: self.fallenShapeSet]];
 }
@@ -242,9 +246,10 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if(buttonIndex == 0) {
-        //new game
-        [self.boardView.boardCellsForDrawing removeAllObjects];
-        self.newGame = YES;
+        if([self.resetGameDelegate respondsToSelector:@selector(newGame)]) {
+            [self.resetGameDelegate newGame];
+        }
+            
     }
 }
 

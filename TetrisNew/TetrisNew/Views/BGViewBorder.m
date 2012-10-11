@@ -34,7 +34,7 @@
     self.superLabel.textColor = [UIColor whiteColor];
     self.superLabel.textAlignment = UITextAlignmentCenter;
     [self addSubview:self.superLabel];
-    
+    [self.superLabel release];
 }
 
 // Only override drawRect: if you perform custom drawing.

@@ -78,7 +78,7 @@
     TypeShape randomTypeShape = [self randomNumberFrom:1 To:[self.shapesCollection count] - 1];
     self.shapePoints = [self.shapesCollection objectAtIndex:randomTypeShape];
     self.shapeColor = [self.colorsCollection objectAtIndex:randomTypeShape];
-    NSLog(@"shape %u", randomTypeShape);
+    DBLog(@"shape %u", randomTypeShape);
     
 }
 
@@ -143,7 +143,7 @@
 //return absolute shape coordinates with current center
 - (NSMutableSet*)transformation:(NSSet*)localShapePoints withLocalCentre:(CGPoint)cntr
 {
-    NSMutableSet* shapeLocalSet = [[NSMutableSet alloc] init];
+    NSMutableSet* shapeLocalSet = [[[NSMutableSet alloc] init] autorelease];
     for (NSValue* v in localShapePoints) {
         //shapePoints addObject:
         CGPoint p = PointFromObj(v);
@@ -157,10 +157,10 @@
 //rotate relative coordinates
 - (NSMutableSet*)rotate:(DirectionRotate)directionRotate
 {
-    NSMutableArray* rotatedSet = [[NSMutableArray alloc] init];
+    NSMutableArray* rotatedSet = [[[NSMutableArray alloc] init] autorelease];
     for (NSValue* pointValue in self.shapePoints) {
-        NSLog(@"%f %f",  PointFromObj( pointValue).x, PointFromObj( pointValue).y);
-        NSLog(@"%f %f",  [self getRotatedPoint:PointFromObj(pointValue) withDirection:directionRotate].x,[self getRotatedPoint:PointFromObj(pointValue) withDirection:directionRotate].y);
+        DBLog(@"%f %f",  PointFromObj( pointValue).x, PointFromObj( pointValue).y);
+        DBLog(@"%f %f",  [self getRotatedPoint:PointFromObj(pointValue) withDirection:directionRotate].x,[self getRotatedPoint:PointFromObj(pointValue) withDirection:directionRotate].y);
 
         [rotatedSet addObject: PointToObj( [self getRotatedPoint:PointFromObj(pointValue) withDirection:directionRotate] )];
     }

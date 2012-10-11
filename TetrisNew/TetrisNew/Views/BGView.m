@@ -32,7 +32,7 @@
         BGViewBorder* viewBorder = [[[BGViewBorder alloc] initWithFrame:self.frame] autorelease ];
         [self addSubview:viewBorder];
     } else {
-        UIImageView* bgImage = [[UIImageView alloc] initWithFrame:self.frame];
+        UIImageView* bgImage = [[[UIImageView alloc] initWithFrame:self.frame] autorelease];
         [bgImage setImage:[UIImage imageNamed:@"forest.jpeg"]];
         
         [self addSubview:bgImage];

@@ -44,15 +44,21 @@
 {
     [super viewDidLoad];
       self.showGrid = [SettingViewController loadSettingGrid];
+    CGRect rect;
+    if(isiPhone) {
+        rect = CGRectMake(20, 20, 100, 20);
+    } else {
+        rect = CGRectMake(200, 20, 100, 50);
+    }
     
-    self.showGridLabel = [[UILabel alloc] initWithFrame:CGRectMake(200, 20, 100, 50)];
-    self.showGridLabel.text = @"Show grid";
+    self.showGridLabel = [[UILabel alloc] initWithFrame:rect/*CGRectMake(200, 20, 100, 50)*/];
+    self.showGridLabel.text = NSLocalizedString(@"Show grid", @"");
     [self.showGridLabel setFont:settingFont];
     
     [self.view addSubview:self.showGridLabel];
     [self.showGridLabel release];
     
-    self.toggleButton = [[UISwitch alloc] initWithFrame:CGRectMake(400, 30, 50, 50)];
+    self.toggleButton = [[UISwitch alloc] initWithFrame:CGRectMake(rect.origin.x + 200, rect.origin.y, 50, 50)];
     [self.toggleButton setOn:[SettingViewController loadSettingGrid]];//.isSelected = self.showGrid;
     [self.toggleButton addTarget:self action:@selector(changeToggle) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.toggleButton];
@@ -60,10 +66,10 @@
    
     //close button
     [self.view setBackgroundColor:[UIColor whiteColor]];
-    CGRect manageButton = CGRectMake(300, 100, 100, 40);
+    //CGRect manageButton = CGRectMake(300, 100, 100, 40);
     self.closeButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    self.closeButton.frame = manageButton;
-    [self.closeButton setTitle:@"Cancel" forState:UIControlStateNormal];
+    self.closeButton.frame = CGRectMake(self.view.frame.size.width/2 - 30, rect.origin.y + 50, 70, 30);// manageButton;
+    [self.closeButton setTitle:NSLocalizedString(@"Cancel", @"") forState:UIControlStateNormal];
     [self.closeButton addTarget:self action:@selector(close) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.closeButton];
     [self.closeButton release];
