@@ -11,7 +11,7 @@
 #import "BoardView.h"
 #import "BGView.h"
 #import "UIViewController+Deprecated.h"
-#import <AudioToolbox/AudioToolbox.h>
+//#import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
 @interface GameViewController ()
 @property (retain, nonatomic) BoardViewController* boardViewController;
@@ -107,17 +107,15 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:YES];
     [self.boardViewController showGrid: [SettingViewController loadSettingGrid]];
-   // [self.boardViewController.nextShapeView showGrid: [SettingViewController loadSettingGrid]];
     [self.boardViewController.boardView setNeedsDisplay];
     [self.boardViewController.nextShapeView setNeedsDisplay];
-    [super viewWillAppear:YES];
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    //[self. setNeedsDisplay];
 }
 
 - (NSUInteger)supportedInterfaceOrientations
@@ -129,7 +127,6 @@
 {
     return UIInterfaceOrientationPortrait;
 }
-
 
 - (void)viewDidLoad
 {
@@ -161,6 +158,8 @@
         [self addUIControlsForiPad];
     }
 }
+
+
 - (void)addUIControlsForiPad
 {
     UIImage* imageButton = [UIImage imageNamed:@"SmallYellow.png"];
@@ -172,7 +171,6 @@
     [self.settingButton setImage:settingImage forState:UIControlStateNormal];
     [self.settingButton addTarget:self action:@selector(showSetting) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.settingButton];
-    [self.settingButton release];
   
     //play button
     CGRect rectPlayButton = CGRectMake(self.boardRect.origin.x + 20, self.boardRect.size.height + self.boardRect.origin.y + 70, manageSizeButton, manageSizeButton);
@@ -181,11 +179,10 @@
     [self.playButton setImage:imageButton forState:UIControlStateNormal];
     [self.playButton addTarget:self action:@selector(play) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.playButton];
-    [self.playButton release];
-    
+       
     //play label
     CGRect rectPlayLabel = CGRectMake(rectPlayButton.origin.x , rectPlayButton.origin.y + 25, labelMoveTextWidth + 5, labelMoveTextHeigth*2);
-    self.playLabel = [[UILabel alloc] initWithFrame:rectPlayLabel];
+    self.playLabel = [[[UILabel alloc] initWithFrame:rectPlayLabel] autorelease];
     self.playLabel.text = NSLocalizedString(@"PLAY/ PAUSE",@"");
     self.playLabel.lineBreakMode = NSLineBreakByCharWrapping;
     self.playLabel.numberOfLines = 2;
@@ -193,7 +190,6 @@
     self.playLabel.backgroundColor=[UIColor clearColor];
     self.playLabel.textColor = [UIColor whiteColor];
     [self.view addSubview:self.playLabel];
-    [self.playLabel release];
     
     //reset button
     CGRect rectResetButton = CGRectMake(rectPlayButton.origin.x + 120, rectPlayButton.origin.y , manageSizeButton, manageSizeButton);
@@ -202,11 +198,10 @@
     [self.resetButton setImage:imageButton forState:UIControlStateNormal];
     [self.resetButton addTarget:self action:@selector(reset) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.resetButton];
-    [self.resetButton release];
     
     //reset label
     CGRect rectResetLabel = CGRectMake(rectResetButton.origin.x - 3 , rectResetButton.origin.y + rectResetButton.size.height + 5, labelMoveTextWidth, labelMoveTextHeigth);
-    self.resetLabel = [[UILabel alloc] initWithFrame:rectResetLabel];
+    self.resetLabel = [[[UILabel alloc] initWithFrame:rectResetLabel] autorelease];
     self.resetLabel.text = NSLocalizedString(@"RESET", @"");
     self.resetLabel.textAlignment = UITextAlignmentCenter;
     [self.resetLabel setFont:textButtonFont];
@@ -214,7 +209,6 @@
     self.resetLabel.textColor = [UIColor whiteColor];
     // self.playLabel.textAlignment = UITextAlignmentCenter;
     [self.view addSubview:self.resetLabel];
-    [self.resetLabel release];
 
     //sound button
     CGRect rectSoundButton = CGRectMake(rectResetButton.origin.x + 120, rectResetButton.origin.y , manageSizeButton, manageSizeButton);
@@ -223,8 +217,7 @@
     [self.soundButton setImage:imageButton forState:UIControlStateNormal];
     [self.soundButton addTarget:self action:@selector(sound) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.soundButton];
-    [self.soundButton release];
-    
+      
     //sound label
     CGRect rectSoundLabel = CGRectMake(rectSoundButton.origin.x - 5, rectSoundButton.origin.y + rectSoundButton.size.height + 5, labelMoveTextWidth + 10, labelMoveTextHeigth);
     self.soundLabel = [[UILabel alloc] initWithFrame:rectSoundLabel];
@@ -255,8 +248,7 @@
     [self.leftButton addTarget:self action:@selector(moveLeftPressed) forControlEvents:UIControlEventTouchDown];
     [self.leftButton addTarget:self action:@selector(moveLeftUnPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.leftButton];
-    [self.leftButton release];
-    
+
     //left label
     CGRect rectLeftLabel = CGRectMake(manageButton.origin.x , manageButton.origin.y + manageButton.size.height , labelMoveTextWidth, labelMoveTextHeigth);
     self.leftLabel = [[UILabel alloc] initWithFrame:rectLeftLabel];
@@ -276,7 +268,6 @@
     [self.rightButton addTarget:self action:@selector(moveRightUnPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.rightButton addTarget:self action:@selector(moveRightPressed) forControlEvents:UIControlEventTouchDown];
     [self.view addSubview:self.rightButton];
-    [self.rightButton release];
     
     //right label
     CGRect rectRightLabel = CGRectMake(manageButton.origin.x, manageButton.size.height + manageButton.origin.y , labelMoveTextWidth, labelMoveTextHeigth);
@@ -298,7 +289,6 @@
     [self.downButton addTarget:self action:@selector(moveDownPressed) forControlEvents:UIControlEventTouchDown];
     [self.downButton addTarget:self action:@selector(moveDownUnPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.downButton];
-    [self.downButton release];
     
     //down label
     CGRect rectDownLabel = CGRectMake(manageButton.origin.x, manageButton.origin.y + manageButton.size.height, labelMoveTextWidth, labelMoveTextHeigth);
@@ -319,7 +309,6 @@
      [self.rotateButton setImage:imageButton forState:UIControlStateNormal];
      [self.rotateButton addTarget:self action:@selector(rotate) forControlEvents:UIControlEventTouchUpInside];
      [self.view addSubview:self.rotateButton];
-     [self.rotateButton release];
      
      //rotate label
      CGRect rectRotateLabel = CGRectMake(rectRotate.origin.x + 5, rectRotate.size.height + rectRotate.origin.y , labelMoveTextWidth + 10, labelMoveTextHeigth);
@@ -344,8 +333,7 @@
     [self.settingButton setImage:settingImage forState:UIControlStateNormal];
     [self.settingButton addTarget:self action:@selector(showSetting) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.settingButton];
-    [self.settingButton release];
-    
+     
     //play button
     CGRect rectPlayButton = CGRectMake(self.boardRect.size.width + 30, self.boardRect.origin.y + 70, manageSizeButton, manageSizeButton);
     self.playButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -353,23 +341,21 @@
     [self.playButton setImage:imageButton forState:UIControlStateNormal];
     [self.playButton addTarget:self action:@selector(play) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.playButton];
-    [self.playButton release];
-    
+       
     //play label
     CGRect rectPlayLabel = CGRectMake(rectPlayButton.origin.x , rectPlayButton.origin.y + 25, labelMoveTextWidth + 5, labelMoveTextHeigth*2);
-    self.playLabel = [[UILabel alloc] initWithFrame:rectPlayLabel];
+    self.playLabel = [[[UILabel alloc] initWithFrame:rectPlayLabel] autorelease];
     self.playLabel.text = NSLocalizedString( @"PLAY/ PAUSE", @"");
-    self.playLabel.lineBreakMode = NSLineBreakByCharWrapping;//UILineBreakModeCharacterWrap;
+    self.playLabel.lineBreakMode = NSLineBreakByCharWrapping;
     self.playLabel.numberOfLines = 2;
     [self.playLabel setFont:textButtonFont];
     self.playLabel.backgroundColor=[UIColor clearColor];
     self.playLabel.textColor = [UIColor whiteColor];
     [self.view addSubview:self.playLabel];
-    [self.playLabel release];
     
     //amount deleted lines label
     CGRect rectLineLabel = CGRectMake(rectPlayLabel.origin.x , rectPlayLabel.origin.y + 35, labelMoveTextWidth - 5, labelMoveTextHeigth*2);
-    self.lineLabel = [[UILabel alloc] initWithFrame:rectLineLabel];
+    self.lineLabel = [[[UILabel alloc] initWithFrame:rectLineLabel] autorelease];
     self.lineLabel.text = [NSString stringWithFormat:@"%d", self.boardViewController.lines];
     self.lineLabel.lineBreakMode = NSLineBreakByCharWrapping;
     self.lineLabel.numberOfLines = 2;
@@ -378,7 +364,6 @@
     self.lineLabel.textColor = [UIColor whiteColor];
     self.lineLabel.textAlignment = UITextAlignmentCenter;
     [self.view addSubview:self.lineLabel];
-    [self.lineLabel release];
     
     //left button
     CGRect manageButton = CGRectMake(self.boardRect.origin.x + 10, self.boardRect.size.height + 30, moveSizeButton, moveSizeButton);
@@ -388,18 +373,17 @@
     [self.leftButton addTarget:self action:@selector(moveLeftPressed) forControlEvents:UIControlEventTouchDown];
     [self.leftButton addTarget:self action:@selector(moveLeftUnPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.leftButton];
-    [self.leftButton release];
+ 
     
     //left label
     CGRect rectLeftLabel = CGRectMake(manageButton.origin.x , manageButton.origin.y + manageButton.size.height , labelMoveTextWidth, labelMoveTextHeigth);
-    self.leftLabel = [[UILabel alloc] initWithFrame:rectLeftLabel];
+    self.leftLabel = [[[UILabel alloc] initWithFrame:rectLeftLabel] autorelease];
     self.leftLabel.text = NSLocalizedString(@"LEFT", @"");
     [self.leftLabel setFont:textButtonFont];
     self.leftLabel.backgroundColor=[UIColor clearColor];
     self.leftLabel.textColor = [UIColor whiteColor];
     self.leftLabel.textAlignment = UITextAlignmentCenter;
     [self.view addSubview:self.leftLabel];
-    [self.leftLabel release];
     
     //down button
     manageButton.origin.x += 75;
@@ -409,18 +393,17 @@
     [self.downButton addTarget:self action:@selector(moveDownPressed) forControlEvents:UIControlEventTouchDown];
     [self.downButton addTarget:self action:@selector(moveDownUnPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.downButton];
-    [self.downButton release];
+    
     
     //down label
     CGRect rectDownLabel = CGRectMake(manageButton.origin.x, manageButton.origin.y + manageButton.size.height, labelMoveTextWidth, labelMoveTextHeigth);
-    self.downLabel = [[UILabel alloc] initWithFrame:rectDownLabel];
+    self.downLabel = [[[UILabel alloc] initWithFrame:rectDownLabel]autorelease];
     self.downLabel.text = NSLocalizedString(@"DOWN", @"");
     [self.downLabel setFont:textButtonFont];
     self.downLabel.backgroundColor = [UIColor clearColor];
     self.downLabel.textColor = [UIColor whiteColor];
     self.downLabel.textAlignment = UITextAlignmentCenter;
     [self.view addSubview:self.downLabel];
-    [self.downLabel release];
     
     //rotate button
     manageButton.origin.x += 75;
@@ -429,18 +412,16 @@
     [self.rotateButton setImage:imageButton forState:UIControlStateNormal];
     [self.rotateButton addTarget:self action:@selector(rotate) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.rotateButton];
-    [self.rotateButton release];
     
     //rotate label
     CGRect rectRotateLabel = CGRectMake(manageButton.origin.x - 5, manageButton.size.height + manageButton.origin.y , labelMoveTextWidth + 10, labelMoveTextHeigth);
-    self.rotateLabel = [[UILabel alloc] initWithFrame:rectRotateLabel];
+    self.rotateLabel = [[[UILabel alloc] initWithFrame:rectRotateLabel] autorelease];
     self.rotateLabel.text = NSLocalizedString(@"ROTATE", @"");
     [self.rotateLabel setFont:textButtonFont];
     self.rotateLabel.backgroundColor=[UIColor clearColor];
     self.rotateLabel.textColor = [UIColor whiteColor];
     self.rotateLabel.textAlignment = UITextAlignmentCenter;
     [self.view addSubview:self.rotateLabel];
-    [self.rotateLabel release];
     
     //right button
     manageButton.origin.x += 75;
@@ -464,6 +445,15 @@
     [self.rightLabel release];
 }
 
+
+#pragma mark - Init components
+
+- (void)addPlayButton:(CGRect)rect
+{
+
+    
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -472,9 +462,9 @@
 
 - (void)showSetting
 {
-    self.settingIsVisible = YES;
-    self.settingViewController = [[[SettingViewController alloc] init] autorelease];
-    [self deprecatedPresentModalViewController:self.settingViewController animated:YES];
+   // self.settingIsVisible = YES;
+    SettingViewController* settingViewController1 = [[[SettingViewController alloc] init] autorelease];
+    [self deprecatedPresentModalViewController:settingViewController1 animated:YES];
     //presentModalViewController:settingViewController animated:YES];
 }
 
@@ -510,12 +500,13 @@
 {
     if ([self.avSound isPlaying]) {
         [self.avSound stop];
+        self.avSound = nil;
     } else {
-        NSURL *soundURL = [[[NSBundle mainBundle] URLForResource:@"Tetris"
-                                              withExtension:@"mp3"] autorelease];
+        NSURL *soundURL = [[NSBundle mainBundle] URLForResource:@"Tetris"
+                                              withExtension:@"mp3"];
         NSError* err = nil;
         self.avSound = [[[AVAudioPlayer alloc]
-               initWithContentsOfURL:soundURL error:&err] autorelease];
+               initWithContentsOfURL:soundURL error:nil] autorelease];
         if(!err){
             [self.avSound play];
         }

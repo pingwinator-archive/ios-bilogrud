@@ -97,29 +97,27 @@
 - (void)updateShape
 {
     self.startPoint = CGPointMake(5, -2);
-    self.currentShape = [[TetrisShape alloc] initRandomShapeWithCenter:self.startPoint];
+    self.currentShape = [[[TetrisShape alloc] initRandomShapeWithCenter:self.startPoint] autorelease];
     self.fallenShapeSet = [[[NSMutableSet alloc] init] autorelease];
 }
 
 - (void)updateBoard
 {
-    NSMutableSet* cellsCurrentShape = [[NSMutableSet alloc] initWithSet:[Cell pointsToCells:[self.currentShape getShapePoints] withColor:self.currentShape.shapeColor]];
-    
-    self.boardCells = [[NSMutableSet alloc] initWithSet:cellsCurrentShape];
+    NSMutableSet* cellsCurrentShape = [[[NSMutableSet alloc] initWithSet:[Cell pointsToCells:[self.currentShape getShapePoints] withColor:self.currentShape.shapeColor]] autorelease];
+    self.boardCells = [[[NSMutableSet alloc] initWithSet:cellsCurrentShape] autorelease];
     [self.boardCells unionSet:cellsCurrentShape];
     [self.boardCells unionSet:fallenShapeSet];
-    [self.boardCells release];
+   
     
 }
 
 -(void)updateNextShape
 {
-    self.nextShape = [[TetrisShape alloc] initRandomShapeWithCenter:CGPointMake(1, 1)];
+    self.nextShape = [[[TetrisShape alloc] initRandomShapeWithCenter:CGPointMake(1, 1)] autorelease];
     self.nextShapeCells = [Cell pointsToCells:[self.nextShape getShapePoints] withColor:self.nextShape.shapeColor];
     self.nextShapeView.nextShapeCellsForDrawing =  self.nextShapeCells;
     self.startPointNextShape = CGPointMake(1, 1);
     [self.nextShapeView setNeedsDisplay];
-    [self.nextShape release];
 }
 
 - (void)resetBoard
@@ -219,9 +217,9 @@
     for (Cell* c in self.boardCells) {
         if([tempSet intersectsSet:[NSMutableSet setWithObject:[Cell cellToPointObj:c]]]) {
             if(c.point.y < numberLine) {
-                [setResult addObject:[[Cell alloc] initWithPoint:CGPointMake(c.point.x, c.point.y + 1) andColor:c.colorCell]];
+                [setResult addObject:[[[Cell alloc] initWithPoint:CGPointMake(c.point.x, c.point.y + 1) andColor:c.colorCell] autorelease]];
             } else {
-                [setResult addObject:[[Cell alloc] initWithPoint:CGPointMake(c.point.x, c.point.y) andColor:c.colorCell]];
+                [setResult addObject:[[[Cell alloc] initWithPoint:CGPointMake(c.point.x, c.point.y) andColor:c.colorCell] autorelease]];
             }
         }
     }

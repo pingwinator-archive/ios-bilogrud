@@ -7,7 +7,7 @@
 //
 
 #import "BoardView.h"
-#import <QuartzCore/QuartzCore.h>
+//#import <QuartzCore/QuartzCore.h>
 #import "Cell.h"
 @interface BoardView()
 - (void)drawGrid:(CGRect)rect withContext:(CGContextRef)context;
@@ -69,9 +69,9 @@
     if(self.nextShapeCellsForDrawing) {
         [self drawNextShape:context];
     }
-    self.layer.borderColor = [UIColor blackColor].CGColor;
-    self.layer.borderWidth = boardBorderWidth;
-    
+//    self.layer.borderColor = [UIColor blackColor].CGColor;
+//    self.layer.borderWidth = boardBorderWidth;
+//    
     CGContextStrokePath(context);
 }
 

@@ -14,6 +14,13 @@
 @end
 @implementation BGViewBorder
 
+
+- (void)dealloc
+{
+    self.superLabel = nil;
+    [super dealloc];
+}
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -27,14 +34,13 @@
 
 - (void)addSuperLabel
 {
-    self.superLabel = [[UILabel alloc] initWithFrame:CGRectMake((self.frame.size.width - 50)/2, 0, 50, 12)];
+    self.superLabel = [[[UILabel alloc] initWithFrame:CGRectMake((self.frame.size.width - 50)/2, 0, 50, 12)] autorelease];
     self.superLabel.text = @"SUPER";
     [self.superLabel setFont:textButtonFont];
     self.superLabel.backgroundColor = [UIColor colorWithRed:39.0f/255.0f green:64.0f/255.0f blue:139.0f/255.0f alpha:1];
     self.superLabel.textColor = [UIColor whiteColor];
     self.superLabel.textAlignment = UITextAlignmentCenter;
     [self addSubview:self.superLabel];
-    [self.superLabel release];
 }
 
 // Only override drawRect: if you perform custom drawing.

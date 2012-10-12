@@ -14,4 +14,5 @@
 
 - (void)deprecatedDismissModalViewControllerAnimated:(BOOL)animated;
 
+- (UIViewController*)parent;
 @end
