@@ -1,2 +1,5 @@
 /* Localized versions of Info.plist keys */
 
+"Game Over" = "Game Over";
+
+"PLAY/ PAUSE" = "PLAY/ PAUSE";

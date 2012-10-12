@@ -113,24 +113,6 @@
     [self.boardViewController.nextShapeView setNeedsDisplay];
     [super viewWillAppear:YES];
 }
-
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    //[self. setNeedsDisplay];
-}
-
-- (NSUInteger)supportedInterfaceOrientations
-{
-    return UIInterfaceOrientationMaskAll;
-}
-
-- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
-{
-    return UIInterfaceOrientationPortrait;
-}
-
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];

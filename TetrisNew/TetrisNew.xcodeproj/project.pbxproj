@@ -14,6 +14,7 @@
 		6E2AEE7A162724BE000D9561 /* Tetris.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6E2AEE79162724BE000D9561 /* Tetris.mp3 */; };
 		6E2B104316274392004C5D72 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E2B104216274392004C5D72 /* AVFoundation.framework */; };
 		6E2B104516274F11004C5D72 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E2B104416274F11004C5D72 /* AudioToolbox.framework */; };
+		6E2B10501627E043004C5D72 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2B104F1627E043004C5D72 /* GameViewController.m */; };
 		6E5F313B16260AC000274174 /* DisplayOTF.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E5F313816260AC000274174 /* DisplayOTF.otf */; };
 		6E5F313C16260AC000274174 /* DS-DIGIT.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6E5F313916260AC000274174 /* DS-DIGIT.ttf */; };
 		6E5F313D16260AC000274174 /* EHSMB_2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6E5F313A16260AC000274174 /* EHSMB_2.ttf */; };
@@ -29,7 +30,6 @@
 		6EC7BD2E1621E23C00066F23 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EC7BD2D1621E23C00066F23 /* CoreGraphics.framework */; };
 		6EC7BD341621E23C00066F23 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6EC7BD321621E23C00066F23 /* InfoPlist.strings */; };
 		6EC7BD3A1621E23C00066F23 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC7BD391621E23C00066F23 /* AppDelegate.m */; };
-		6EC7BD731621E36900066F23 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC7BD651621E36900066F23 /* GameViewController.m */; };
 		6EC7BD741621E36900066F23 /* GameViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EC7BD6C1621E36900066F23 /* GameViewController_iPad.xib */; };
 		6EC7BD751621E36900066F23 /* GameViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EC7BD6D1621E36900066F23 /* GameViewController_iPhone.xib */; };
 		6EC7BD7D1621E3D400066F23 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EC7BD781621E3D400066F23 /* Default-568h@2x.png */; };
@@ -54,35 +54,11 @@
 		6E2AEE79162724BE000D9561 /* Tetris.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Tetris.mp3; sourceTree = "<group>"; };
 		6E2B104216274392004C5D72 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		6E2B104416274F11004C5D72 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		6E2B10461627D954004C5D72 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6E2B104F1627E043004C5D72 /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
 		6E5F313816260AC000274174 /* DisplayOTF.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DisplayOTF.otf; sourceTree = "<group>"; };
 		6E5F313916260AC000274174 /* DS-DIGIT.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DS-DIGIT.ttf"; sourceTree = "<group>"; };
 		6E5F313A16260AC000274174 /* EHSMB_2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EHSMB_2.ttf; sourceTree = "<group>"; };
-		6E9E3A4716258AC50082C51B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		6E9E3A4816258AC50082C51B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		6E9E3A4916258AC50082C51B /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		6E9E3A4A16258AC50082C51B /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		6E9E3A4B16258AC50082C51B /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		6E9E3A4C16258AC50082C51B /* DefineConst.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefineConst.h; sourceTree = "<group>"; };
-		6E9E3A4E16258AC50082C51B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		6E9E3A4F16258AC50082C51B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		6E9E3A5116258AC50082C51B /* Cell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
-		6E9E3A5216258AC50082C51B /* Cell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Cell.m; sourceTree = "<group>"; };
-		6E9E3A5316258AC50082C51B /* TetrisShape.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TetrisShape.h; sourceTree = "<group>"; };
-		6E9E3A5416258AC50082C51B /* TetrisShape.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TetrisShape.m; sourceTree = "<group>"; };
-		6E9E3A5716258AC50082C51B /* SmallYellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SmallYellow.png; sourceTree = "<group>"; };
-		6E9E3A5816258AC50082C51B /* SmallYellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SmallYellow@2x.png"; sourceTree = "<group>"; };
-		6E9E3A5A16258AC50082C51B /* GameViewController_iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameViewController_iPad.xib; sourceTree = "<group>"; };
-		6E9E3A5B16258AC50082C51B /* GameViewController_iPhone.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameViewController_iPhone.xib; sourceTree = "<group>"; };
-		6E9E3A5C16258AC50082C51B /* TetrisNew-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TetrisNew-Info.plist"; sourceTree = "<group>"; };
-		6E9E3A5D16258AC50082C51B /* TetrisNew-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TetrisNew-Prefix.pch"; sourceTree = "<group>"; };
-		6E9E3A5F16258AC50082C51B /* BoardViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BoardViewController.h; sourceTree = "<group>"; };
-		6E9E3A6016258AC50082C51B /* BoardViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BoardViewController.m; sourceTree = "<group>"; };
-		6E9E3A6116258AC50082C51B /* GameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
-		6E9E3A6216258AC50082C51B /* GameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
-		6E9E3A6416258AC50082C51B /* BGView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BGView.h; sourceTree = "<group>"; };
-		6E9E3A6516258AC50082C51B /* BGView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BGView.m; sourceTree = "<group>"; };
-		6E9E3A6616258AC50082C51B /* BoardView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BoardView.h; sourceTree = "<group>"; };
-		6E9E3A6716258AC50082C51B /* BoardView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BoardView.m; sourceTree = "<group>"; };
 		6E9E3A70162592AB0082C51B /* Setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Setting.png; sourceTree = "<group>"; };
 		6E9E3A71162592AB0082C51B /* Setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Setting@2x.png"; sourceTree = "<group>"; };
 		6E9E3A74162595560082C51B /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
@@ -101,7 +77,6 @@
 		6EC7BD381621E23C00066F23 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6EC7BD391621E23C00066F23 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		6EC7BD641621E36900066F23 /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
-		6EC7BD651621E36900066F23 /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
 		6EC7BD6C1621E36900066F23 /* GameViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameViewController_iPad.xib; sourceTree = "<group>"; };
 		6EC7BD6D1621E36900066F23 /* GameViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GameViewController_iPhone.xib; sourceTree = "<group>"; };
 		6EC7BD781621E3D400066F23 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -156,87 +131,6 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		6E9E3A4616258AC50082C51B /* TetrisNew */ = {
-			isa = PBXGroup;
-			children = (
-				6E9E3A4716258AC50082C51B /* AppDelegate.h */,
-				6E9E3A4816258AC50082C51B /* AppDelegate.m */,
-				6E9E3A4916258AC50082C51B /* Default-568h@2x.png */,
-				6E9E3A4A16258AC50082C51B /* Default.png */,
-				6E9E3A4B16258AC50082C51B /* Default@2x.png */,
-				6E9E3A4C16258AC50082C51B /* DefineConst.h */,
-				6E9E3A4D16258AC50082C51B /* InfoPlist.strings */,
-				6E9E3A4F16258AC50082C51B /* main.m */,
-				6E9E3A5016258AC50082C51B /* Models */,
-				6E9E3A5516258AC50082C51B /* Resourses */,
-				6E9E3A5C16258AC50082C51B /* TetrisNew-Info.plist */,
-				6E9E3A5D16258AC50082C51B /* TetrisNew-Prefix.pch */,
-				6E9E3A5E16258AC50082C51B /* ViewControllers */,
-				6E9E3A6316258AC50082C51B /* Views */,
-			);
-			name = TetrisNew;
-			sourceTree = "<group>";
-		};
-		6E9E3A5016258AC50082C51B /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				6E9E3A5116258AC50082C51B /* Cell.h */,
-				6E9E3A5216258AC50082C51B /* Cell.m */,
-				6E9E3A5316258AC50082C51B /* TetrisShape.h */,
-				6E9E3A5416258AC50082C51B /* TetrisShape.m */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		6E9E3A5516258AC50082C51B /* Resourses */ = {
-			isa = PBXGroup;
-			children = (
-				6E9E3A5616258AC50082C51B /* Images */,
-				6E9E3A5916258AC50082C51B /* Nibs */,
-			);
-			path = Resourses;
-			sourceTree = "<group>";
-		};
-		6E9E3A5616258AC50082C51B /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				6E9E3A5716258AC50082C51B /* SmallYellow.png */,
-				6E9E3A5816258AC50082C51B /* SmallYellow@2x.png */,
-			);
-			path = Images;
-			sourceTree = "<group>";
-		};
-		6E9E3A5916258AC50082C51B /* Nibs */ = {
-			isa = PBXGroup;
-			children = (
-				6E9E3A5A16258AC50082C51B /* GameViewController_iPad.xib */,
-				6E9E3A5B16258AC50082C51B /* GameViewController_iPhone.xib */,
-			);
-			path = Nibs;
-			sourceTree = "<group>";
-		};
-		6E9E3A5E16258AC50082C51B /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				6E9E3A5F16258AC50082C51B /* BoardViewController.h */,
-				6E9E3A6016258AC50082C51B /* BoardViewController.m */,
-				6E9E3A6116258AC50082C51B /* GameViewController.h */,
-				6E9E3A6216258AC50082C51B /* GameViewController.m */,
-			);
-			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		6E9E3A6316258AC50082C51B /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				6E9E3A6416258AC50082C51B /* BGView.h */,
-				6E9E3A6516258AC50082C51B /* BGView.m */,
-				6E9E3A6616258AC50082C51B /* BoardView.h */,
-				6E9E3A6716258AC50082C51B /* BoardView.m */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		6E9E3A7E16259FE20082C51B /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -250,7 +144,6 @@
 		6EC7BD1A1621E23C00066F23 = {
 			isa = PBXGroup;
 			children = (
-				6E2B104416274F11004C5D72 /* AudioToolbox.framework */,
 				6E9E3A7E16259FE20082C51B /* Categories */,
 				6EC7BD631621E36900066F23 /* ViewControllers */,
 				6EC7BD661621E36900066F23 /* Externals */,
@@ -274,6 +167,7 @@
 		6EC7BD281621E23C00066F23 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6E2B104416274F11004C5D72 /* AudioToolbox.framework */,
 				6E2B104216274392004C5D72 /* AVFoundation.framework */,
 				6EC7BD8D1621E86900066F23 /* QuartzCore.framework */,
 				6EC7BD291621E23C00066F23 /* UIKit.framework */,
@@ -298,14 +192,12 @@
 			children = (
 				6E2AEE6C16270B9B000D9561 /* iPad-Retina–Portrait.png */,
 				6E2AEE6A16270AE2000D9561 /* Default-Portrait.png */,
-				6E9E3A4616258AC50082C51B /* TetrisNew */,
 				6EC7BD8C1621E82D00066F23 /* DefineConst.h */,
 				6EC7BD781621E3D400066F23 /* Default-568h@2x.png */,
 				6EC7BD791621E3D400066F23 /* Default.png */,
 				6EC7BD7A1621E3D400066F23 /* Default@2x.png */,
 				6EC7BD7B1621E3D400066F23 /* main.m */,
 				6EC7BD7C1621E3D400066F23 /* TetrisNew-Prefix.pch */,
-				6EC7BD321621E23C00066F23 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -314,7 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				6EC7BD641621E36900066F23 /* GameViewController.h */,
-				6EC7BD651621E36900066F23 /* GameViewController.m */,
+				6E2B104F1627E043004C5D72 /* GameViewController.m */,
 				6E13F6C81622BCE4005BF66D /* BoardViewController.h */,
 				6E13F6C91622BCE4005BF66D /* BoardViewController.m */,
 				6E9E3A74162595560082C51B /* SettingViewController.h */,
@@ -361,6 +253,7 @@
 		6EC7BD691621E36900066F23 /* Resourses */ = {
 			isa = PBXGroup;
 			children = (
+				6EC7BD321621E23C00066F23 /* InfoPlist.strings */,
 				6E2AEE78162724BE000D9561 /* Sounds */,
 				6E5F313716260AC000274174 /* Fonts */,
 				6EC7BD6A1621E36900066F23 /* Images */,
@@ -427,6 +320,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				ru,
 			);
 			mainGroup = 6EC7BD1A1621E23C00066F23;
 			productRefGroup = 6EC7BD261621E23C00066F23 /* Products */;
@@ -472,7 +366,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6EC7BD3A1621E23C00066F23 /* AppDelegate.m in Sources */,
-				6EC7BD731621E36900066F23 /* GameViewController.m in Sources */,
 				6EC7BD801621E3D400066F23 /* main.m in Sources */,
 				6EC7BD831621E5D000066F23 /* BoardView.m in Sources */,
 				6EC7BD991621EEAD00066F23 /* BGView.m in Sources */,
@@ -482,26 +375,21 @@
 				6E9E3A76162595560082C51B /* SettingViewController.m in Sources */,
 				6E9E3A8116259FE20082C51B /* UIViewController+Deprecated.m in Sources */,
 				6E9E3AA11626F4770082C51B /* BGViewBorder.m in Sources */,
+				6E2B10501627E043004C5D72 /* GameViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		6E9E3A4D16258AC50082C51B /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6E9E3A4E16258AC50082C51B /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 		6EC7BD321621E23C00066F23 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				6EC7BD331621E23C00066F23 /* en */,
+				6E2B10461627D954004C5D72 /* ru */,
 			);
 			name = InfoPlist.strings;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
