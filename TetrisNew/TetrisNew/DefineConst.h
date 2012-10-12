@@ -41,6 +41,10 @@
 #define textButtonFont [UIFont fontWithName:@"American Typewriter" size:12]
 #define scoreFont [UIFont fontWithName:@"DS-Digital" size:45]
 
+#define scoreLabelWidth 50
+#define scoreLabelHeigth 50
+#define labelPlayTextWidth 45
+#define labelPlayTextHeigth 40
 #define labelMoveTextWidth 40
 #define labelMoveTextHeigth 20
 #define labelScoreWidth 50
