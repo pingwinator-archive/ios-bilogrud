@@ -1,0 +1,23 @@
+/* Localized versions of Info.plist keys */
+
+"Game Over" = "Game Over";
+
+"New game" = "New game";
+
+"PLAY/ PAUSE" = "PLAY/ PAUSE";
+
+"RESET" = "RESET";
+
+"SOUND" = "SOUND";
+
+"LEFT" = "LEFT"; 
+
+"RIGHT" = "RIGHT";
+
+"DOWN" = "DOWN";
+
+"ROTATE" = "ROTATE";
+
+"Show grid" = "Show grid";
+
+"Cancel" = "Cancel";

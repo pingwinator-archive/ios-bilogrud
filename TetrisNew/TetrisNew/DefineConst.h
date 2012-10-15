@@ -49,6 +49,8 @@
 #define labelMoveTextHeigth 20
 #define labelScoreWidth 50
 #define labelScoreHeigth 50
+
+
 #define PointToObj(point) [NSValue valueWithCGPoint:point]
 #define PointFromObj(value) [value CGPointValue]
 

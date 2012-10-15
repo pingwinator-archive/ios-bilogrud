@@ -28,7 +28,7 @@
 		6EC7BD2A1621E23C00066F23 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EC7BD291621E23C00066F23 /* UIKit.framework */; };
 		6EC7BD2C1621E23C00066F23 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EC7BD2B1621E23C00066F23 /* Foundation.framework */; };
 		6EC7BD2E1621E23C00066F23 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EC7BD2D1621E23C00066F23 /* CoreGraphics.framework */; };
-		6EC7BD341621E23C00066F23 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6EC7BD321621E23C00066F23 /* InfoPlist.strings */; };
+		6EC7BD341621E23C00066F23 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6EC7BD321621E23C00066F23 /* Localizable.strings */; };
 		6EC7BD3A1621E23C00066F23 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC7BD391621E23C00066F23 /* AppDelegate.m */; };
 		6EC7BD741621E36900066F23 /* GameViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EC7BD6C1621E36900066F23 /* GameViewController_iPad.xib */; };
 		6EC7BD751621E36900066F23 /* GameViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EC7BD6D1621E36900066F23 /* GameViewController_iPhone.xib */; };
@@ -54,7 +54,7 @@
 		6E2AEE79162724BE000D9561 /* Tetris.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Tetris.mp3; sourceTree = "<group>"; };
 		6E2B104216274392004C5D72 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		6E2B104416274F11004C5D72 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		6E2B10461627D954004C5D72 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6E2B10461627D954004C5D72 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6E2B104F1627E043004C5D72 /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
 		6E5F313816260AC000274174 /* DisplayOTF.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DisplayOTF.otf; sourceTree = "<group>"; };
 		6E5F313916260AC000274174 /* DS-DIGIT.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DS-DIGIT.ttf"; sourceTree = "<group>"; };
@@ -73,7 +73,7 @@
 		6EC7BD291621E23C00066F23 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6EC7BD2B1621E23C00066F23 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6EC7BD2D1621E23C00066F23 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		6EC7BD331621E23C00066F23 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6EC7BD331621E23C00066F23 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6EC7BD381621E23C00066F23 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6EC7BD391621E23C00066F23 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		6EC7BD641621E36900066F23 /* GameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
@@ -253,7 +253,7 @@
 		6EC7BD691621E36900066F23 /* Resourses */ = {
 			isa = PBXGroup;
 			children = (
-				6EC7BD321621E23C00066F23 /* InfoPlist.strings */,
+				6EC7BD321621E23C00066F23 /* Localizable.strings */,
 				6E2AEE78162724BE000D9561 /* Sounds */,
 				6E5F313716260AC000274174 /* Fonts */,
 				6EC7BD6A1621E36900066F23 /* Images */,
@@ -337,7 +337,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6EC7BD341621E23C00066F23 /* InfoPlist.strings in Resources */,
+				6EC7BD341621E23C00066F23 /* Localizable.strings in Resources */,
 				6EC7BD741621E36900066F23 /* GameViewController_iPad.xib in Resources */,
 				6EC7BD751621E36900066F23 /* GameViewController_iPhone.xib in Resources */,
 				6EC7BD7D1621E3D400066F23 /* Default-568h@2x.png in Resources */,
@@ -382,13 +382,13 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		6EC7BD321621E23C00066F23 /* InfoPlist.strings */ = {
+		6EC7BD321621E23C00066F23 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				6EC7BD331621E23C00066F23 /* en */,
 				6E2B10461627D954004C5D72 /* ru */,
 			);
-			name = InfoPlist.strings;
+			name = Localizable.strings;
 			path = ..;
 			sourceTree = "<group>";
 		};

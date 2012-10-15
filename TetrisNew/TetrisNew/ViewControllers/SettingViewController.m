@@ -43,9 +43,9 @@
       self.showGrid = [SettingViewController loadSettingGrid];
     CGRect rect;
     if(isiPhone) {
-        rect = CGRectMake(20, 20, 100, 20);
+        rect = CGRectMake(20, 20, 150, 20);
     } else {
-        rect = CGRectMake(200, 20, 100, 50);
+        rect = CGRectMake(200, 20, 150, 50);
     }
     
     self.showGridLabel = [[[UILabel alloc] initWithFrame:rect] autorelease];

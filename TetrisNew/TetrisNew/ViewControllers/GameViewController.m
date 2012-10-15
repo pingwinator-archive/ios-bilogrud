@@ -117,6 +117,7 @@
 {
     return YES;
 }
+
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
@@ -137,30 +138,26 @@
     [super viewDidLoad];
     self.firstStart = YES;
     self.settingIsVisible = NO;
+    
+    self.bgView = [[[BGView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)] autorelease];
+    [self.view addSubview:self.bgView];
   
     //board
     if(isiPhone) {
-        self.bgView = [[[BGView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)] autorelease];
-        [self.view addSubview:self.bgView];
-    
         self.boardRect = CGRectMake(15, 15, 230, 342);
-        self.boardViewController = [[[BoardViewController alloc] initWithFrame:boardRect amountCellX:10 amountCellY:15] autorelease];
-        [self.bgView addSubview:self.boardViewController.boardView];
-        //next shape View
-        [self.bgView addSubview:self.boardViewController.nextShapeView];
         [self addUIControlsForPhone];
     } else {
-        self.bgView = [[[BGView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)] autorelease];
-        [self.view addSubview:self.bgView];
-        
-        self.boardRect = CGRectMake(215, 130, 230, 342);
-        self.boardViewController = [[[BoardViewController alloc] initWithFrame:boardRect amountCellX:10 amountCellY:15] autorelease];
-        
-        [self.bgView addSubview:self.boardViewController.boardView];
-        //next shape View
-        [self.bgView addSubview:self.boardViewController.nextShapeView];
-        [self addUIControlsForiPad];
+    //    UIInterfaceOrientation h = [[UIApplication sharedApplication] statusBarOrientation];
+        if (UIInterfaceOrientationIsPortrait( [[UIApplication sharedApplication] statusBarOrientation])) {
+            self.boardRect = CGRectMake(215, 130, 230, 342);
+            [self addUIControlsForiPad];
+        } else {
+            self.boardRect = CGRectMake(10, 10, 100, 100);
+        }
     }
+    self.boardViewController = [[[BoardViewController alloc] initWithFrame:boardRect amountCellX:10 amountCellY:15] autorelease];
+    [self.bgView addSubview:self.boardViewController.boardView];
+    [self.bgView addSubview:self.boardViewController.nextShapeView];
 }
 
 
@@ -203,16 +200,16 @@
     [self addScoreLabel:CGRectMake(260, 150, scoreLabelWidth, scoreLabelHeigth)];
 
     //left button
-    [self addLeftMoveButton:CGRectMake(self.boardRect.origin.x + 10, self.boardRect.size.height + 30, moveSizeButton, moveSizeButton) withImage:imageButton];
+    [self addLeftMoveButton:CGRectMake(self.boardRect.origin.x + 10, self.boardRect.size.height + 40, moveSizeButton, moveSizeButton) withImage:imageButton];
 
     //down button
-    [self addDownMoveButton:CGRectMake(self.boardRect.origin.x + 85, self.boardRect.size.height + 30, moveSizeButton, moveSizeButton) withImage:imageButton];
+    [self addDownMoveButton:CGRectMake(self.boardRect.origin.x + 85, self.boardRect.size.height + 40, moveSizeButton, moveSizeButton) withImage:imageButton];
     
     //rotate button
-    [self addRotateButton:CGRectMake(self.boardRect.origin.x + 160, self.boardRect.size.height + 30, moveSizeButton, moveSizeButton) withImage:imageButton];
+    [self addRotateButton:CGRectMake(self.boardRect.origin.x + 160, self.boardRect.size.height + 40, moveSizeButton, moveSizeButton) withImage:imageButton];
     
     //right button
-    [self addRightMoveButton:CGRectMake(self.boardRect.origin.x + 235, self.boardRect.size.height + 30, moveSizeButton, moveSizeButton) withImage:imageButton];
+    [self addRightMoveButton:CGRectMake(self.boardRect.origin.x + 235, self.boardRect.size.height + 40, moveSizeButton, moveSizeButton) withImage:imageButton];
 }
 
 
@@ -242,7 +239,6 @@
 - (void)addResetButton:(CGRect)rect withImage:(UIImage*)imageButton
 {
     //reset button
-  //  CGRect rectResetButton = CGRectMake(rectPlayButton.origin.x + 120, rectPlayButton.origin.y , manageSizeButton, manageSizeButton);
     self.resetButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.resetButton.frame = rect;
     [self.resetButton setImage:imageButton forState:UIControlStateNormal];
@@ -257,7 +253,6 @@
     [self.resetLabel setFont:textButtonFont];
     self.resetLabel.backgroundColor=[UIColor clearColor];
     self.resetLabel.textColor = [UIColor whiteColor];
-    // self.playLabel.textAlignment = UITextAlignmentCenter;
     [self.view addSubview:self.resetLabel];
 }
 
@@ -314,9 +309,8 @@
     [self.leftButton addTarget:self action:@selector(moveLeftUnPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.leftButton];
     
-    
     //left label
-    CGRect rectLeftLabel = CGRectMake(rect.origin.x , rect.origin.y + rect.size.height , labelMoveTextWidth, labelMoveTextHeigth);
+    CGRect rectLeftLabel = CGRectMake(rect.origin.x , rect.origin.y + rect.size.height , labelMoveTextWidth + 5, labelMoveTextHeigth);
     self.leftLabel = [[[UILabel alloc] initWithFrame:rectLeftLabel] autorelease];
     self.leftLabel.text = NSLocalizedString(@"LEFT", @"");
     [self.leftLabel setFont:textButtonFont];
@@ -324,7 +318,6 @@
     self.leftLabel.textColor = [UIColor whiteColor];
     self.leftLabel.textAlignment = UITextAlignmentCenter;
     [self.view addSubview:self.leftLabel];
-
 }
 
 - (void)addRightMoveButton:(CGRect)rect withImage:(UIImage*)imageButton
@@ -338,7 +331,7 @@
     [self.view addSubview:self.rightButton];
     
     //right label
-    CGRect rectRightLabel = CGRectMake(rect.origin.x, rect.size.height + rect.origin.y , labelMoveTextWidth, labelMoveTextHeigth);
+    CGRect rectRightLabel = CGRectMake(rect.origin.x, rect.size.height + rect.origin.y , labelMoveTextWidth + 5, labelMoveTextHeigth);
     self.rightLabel = [[[UILabel alloc] initWithFrame:rectRightLabel] autorelease];
     self.rightLabel.text = NSLocalizedString(@"RIGHT", @"");
     [self.rightLabel setFont:textButtonFont];

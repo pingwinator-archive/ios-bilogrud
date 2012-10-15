@@ -1,0 +1,24 @@
+/* Localized versions of Info.plist keys */
+
+"Game Over" = "Конец игры";
+
+"New game" = "Новая игра";
+
+"PLAY/ PAUSE" = "ИГРА/ ПАУЗА";
+
+"RESET" = "СБРОС";
+
+"SOUND" = "МУЗЫКА";
+
+"LEFT" = "ВЛЕВО";
+
+"RIGHT" = "ВПРАВО";
+
+"DOWN" = "ВНИЗ";
+
+"ROTATE" = "ПОВОРОТ";
+
+"Show grid" = "Показать сетку";
+
+"Cancel" = "Выход";
+
