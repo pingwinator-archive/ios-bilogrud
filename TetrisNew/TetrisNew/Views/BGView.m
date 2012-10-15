@@ -35,8 +35,9 @@
         UIImageView* bgImage = [[[UIImageView alloc] initWithFrame:self.frame] autorelease];
         bgImage.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin;;
 
-        [bgImage setImage:[UIImage imageNamed:@"forest.jpeg"]];
-            [self addSubview:bgImage];
+        [bgImage setImage:[UIImage imageNamed:@"sea.jpeg"] ];
+        bgImage.alpha = 0.7f;
+        [self addSubview:bgImage];
         
 //        NSInteger offsetX = 150;
 //        NSInteger offsetY = 70;
@@ -53,12 +54,6 @@
     }
 }
 
-- (void)changeSize:(CGRect)frame
-{
-    UIImageView* bgImage = [[[UIImageView alloc] initWithFrame:frame] autorelease];
-    [bgImage setImage:[UIImage imageNamed:@"forest.jpeg"]];
-    [self addSubview:bgImage];
-}
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect

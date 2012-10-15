@@ -10,10 +10,12 @@
 
 @interface BGViewBorder()
 @property (retain, nonatomic) UILabel* superLabel;
+@property (assign, nonatomic) CGFloat offset;
 - (void)addSuperLabel;
 @end
 @implementation BGViewBorder
-
+@synthesize superLabel;
+@synthesize offset;
 
 - (void)dealloc
 {
@@ -21,11 +23,22 @@
     [super dealloc];
 }
 
-- (id)initWithFrame:(CGRect)frame
+- (id)initWithFrame:(CGRect)frame 
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor colorWithRed:39.0f/255.0f green:64.0f/255.0f blue:139.0f/255.0f alpha:1];
+        [self addSuperLabel];
+        self.offset = 0.f;
+    }
+    return self;
+}
+
+- (id)initWithFrame:(CGRect)frame andOffset:(CGFloat)_offset
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+      //  self.backgroundColor = [UIColor colorWithRed:39.0f/255.0f green:64.0f/255.0f blue:139.0f/255.0f alpha:1];
+        self.offset = _offset;
         [self addSuperLabel];
     }
     return self;
@@ -59,7 +72,7 @@
     
     CGContextSetStrokeColorWithColor(context, [UIColor yellowColor].CGColor);
     
-    CGContextAddRect(context, CGRectMake(rect.origin.x + offSetBorderThin, rect.origin.y + offSetBorderThin, rect.size.width - (rect.origin.x + offSetBorderThin ) * 2, rect.size.height - ( rect.origin.y + offSetBorderThin) * 2 - iPhoneAddOffset));
+    CGContextAddRect(context, CGRectMake(rect.origin.x + offSetBorderThin + self.offset, rect.origin.y + offSetBorderThin + self.offset, rect.size.width - (rect.origin.x + offSetBorderThin ) * 2, rect.size.height - ( rect.origin.y + offSetBorderThin) * 2 - iPhoneAddOffset));
     CGContextStrokePath(context);
     CGContextSetLineWidth(context, borderThick);
     CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);

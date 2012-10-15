@@ -10,5 +10,4 @@
 @class BGViewBorder;
 @interface BGView : UIView
 @property (retain, nonatomic) BGViewBorder* viewBorder;
-- (void)changeSize:(CGRect)frame;
 @end

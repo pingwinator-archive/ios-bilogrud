@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface BGViewBorder : UIView
-
+- (id)initWithFrame:(CGRect)frame andOffset:(CGFloat)_offset;
 @end
