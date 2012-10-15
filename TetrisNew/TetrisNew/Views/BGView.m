@@ -14,7 +14,7 @@
 
 @end
 @implementation BGView
-
+@synthesize viewBorder;
 
 - (id)initWithFrame:(CGRect)frame 
 {
@@ -29,8 +29,8 @@
 {
     if(isiPhone) {
         self.backgroundColor = [UIColor colorWithRed:39.0f/255.0f green:64.0f/255.0f blue:139.0f/255.0f alpha:1];
-        BGViewBorder* viewBorder = [[[BGViewBorder alloc] initWithFrame:self.frame] autorelease ];
-        [self addSubview:viewBorder];
+        self.viewBorder = [[[BGViewBorder alloc] initWithFrame:self.frame] autorelease ];
+        [self addSubview:self.viewBorder];
     } else {
         UIImageView* bgImage = [[[UIImageView alloc] initWithFrame:self.frame] autorelease];
         [bgImage setImage:[UIImage imageNamed:@"forest.jpeg"]];
@@ -41,13 +41,14 @@
         NSInteger offsetY = 70;
         CGRect rectForGround = CGRectMake(offsetX, offsetY, self.frame.size.width - offsetX * 2 , self.frame.size.height - offsetY * 2);
         UIView* groundView = [[[UIView alloc] initWithFrame:rectForGround] autorelease];
+        groundView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         groundView.backgroundColor = [UIColor colorWithRed:39.0f/255.0f green:64.0f/255.0f blue:139.0f/255.0f alpha:0.9];
         [bgImage addSubview:groundView];
         
         NSInteger offsetBoard = 30;
-        BGViewBorder* viewBorder = [[[BGViewBorder alloc] initWithFrame:CGRectMake(offsetBoard, offsetBoard, rectForGround.size.width - offsetBoard * 2, 410)] autorelease];
-        viewBorder.backgroundColor = [UIColor clearColor];
-        [groundView addSubview:viewBorder];
+        self.viewBorder = [[[BGViewBorder alloc] initWithFrame:CGRectMake(offsetBoard, offsetBoard, rectForGround.size.width - offsetBoard * 2, 410)] autorelease];
+        self.viewBorder.backgroundColor = [UIColor clearColor];
+        [groundView addSubview:self.viewBorder];
     }
 }
 

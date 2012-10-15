@@ -121,6 +121,19 @@
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+    if(UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
+     //   self.bgView.frame = CGRectMake(10, 10, 100, 100);
+     //   [self.bgView setNeedsDisplay];
+        
+        
+        self.boardViewController.boardView.backgroundColor = [[UIColor greenColor] colorWithAlphaComponent:1];
+        [self.boardViewController.boardView setNeedsDisplay];
+        
+        
+       // self.boardViewController.boardView.backgroundColor = [UIColor whiteColor];
+        self.boardViewController.boardView.backgroundColor = [[UIColor redColor] colorWithAlphaComponent:1];
+        [self.boardViewController.boardView setNeedsDisplay];
+    }
 }
 
 - (NSUInteger)supportedInterfaceOrientations
@@ -128,10 +141,10 @@
     return UIInterfaceOrientationMaskAll;
 }
 
-- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
-{
-    return UIInterfaceOrientationPortrait;
-}
+//- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+//{
+//    return UIInterfaceOrientationPortrait;
+//}
 
 - (void)viewDidLoad
 {
@@ -147,7 +160,7 @@
         self.boardRect = CGRectMake(15, 15, 230, 342);
         [self addUIControlsForPhone];
     } else {
-    //    UIInterfaceOrientation h = [[UIApplication sharedApplication] statusBarOrientation];
+        UIInterfaceOrientation h = [[UIApplication sharedApplication] statusBarOrientation];
         if (UIInterfaceOrientationIsPortrait( [[UIApplication sharedApplication] statusBarOrientation])) {
             self.boardRect = CGRectMake(215, 130, 230, 342);
             [self addUIControlsForiPad];

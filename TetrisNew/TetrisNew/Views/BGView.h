@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class BGViewBorder;
 @interface BGView : UIView
+@property (retain, nonatomic) BGViewBorder* viewBorder;
 @end
