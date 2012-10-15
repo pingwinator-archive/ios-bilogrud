@@ -33,25 +33,32 @@
         [self addSubview:self.viewBorder];
     } else {
         UIImageView* bgImage = [[[UIImageView alloc] initWithFrame:self.frame] autorelease];
+        bgImage.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin;;
+
         [bgImage setImage:[UIImage imageNamed:@"forest.jpeg"]];
+            [self addSubview:bgImage];
         
-        [self addSubview:bgImage];
-        
-        NSInteger offsetX = 150;
-        NSInteger offsetY = 70;
-        CGRect rectForGround = CGRectMake(offsetX, offsetY, self.frame.size.width - offsetX * 2 , self.frame.size.height - offsetY * 2);
-        UIView* groundView = [[[UIView alloc] initWithFrame:rectForGround] autorelease];
-        groundView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-        groundView.backgroundColor = [UIColor colorWithRed:39.0f/255.0f green:64.0f/255.0f blue:139.0f/255.0f alpha:0.9];
-        [bgImage addSubview:groundView];
-        
-        NSInteger offsetBoard = 30;
-        self.viewBorder = [[[BGViewBorder alloc] initWithFrame:CGRectMake(offsetBoard, offsetBoard, rectForGround.size.width - offsetBoard * 2, 410)] autorelease];
-        self.viewBorder.backgroundColor = [UIColor clearColor];
-        [groundView addSubview:self.viewBorder];
+//        NSInteger offsetX = 150;
+//        NSInteger offsetY = 70;
+//        CGRect rectForGround = CGRectMake(offsetX, offsetY, self.frame.size.width - offsetX * 2 , self.frame.size.height - offsetY * 2);
+//        UIView* groundView = [[[UIView alloc] initWithFrame:rectForGround] autorelease];
+//        groundView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+//        groundView.backgroundColor = [UIColor colorWithRed:39.0f/255.0f green:64.0f/255.0f blue:139.0f/255.0f alpha:0.9];
+//        [bgImage addSubview:groundView];
+//        
+//        NSInteger offsetBoard = 30;
+//        self.viewBorder = [[[BGViewBorder alloc] initWithFrame:CGRectMake(offsetBoard, offsetBoard, rectForGround.size.width - offsetBoard * 2, 410)] autorelease];
+//        self.viewBorder.backgroundColor = [UIColor clearColor];
+//        [groundView addSubview:self.viewBorder];
     }
 }
 
+- (void)changeSize:(CGRect)frame
+{
+    UIImageView* bgImage = [[[UIImageView alloc] initWithFrame:frame] autorelease];
+    [bgImage setImage:[UIImage imageNamed:@"forest.jpeg"]];
+    [self addSubview:bgImage];
+}
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
