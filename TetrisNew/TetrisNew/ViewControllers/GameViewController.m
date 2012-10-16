@@ -134,15 +134,21 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
-    return YES;
+    BOOL res = NO;
+    if (isiPad) {
+        res = YES;
+    } else {
+         if(toInterfaceOrientation == UIInterfaceOrientationPortrait) {
+             res = YES;
+         }
+    }
+    return res;
 }
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-//    CGRect testRect = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);// self.view.frame;
-//    [self.bgView changeSize:testRect];
-    //  NSLog(@"%f %f",self.view.frame.size.width, self.view.frame.size.height);
+     NSLog(@"%f %f",self.view.frame.size.width, self.view.frame.size.height);
     if(isiPad) {
         if(UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
              self.leftPanelView.frame = CGRectMake(100, 150, 200, 400);
@@ -160,13 +166,14 @@
 
 - (NSUInteger)supportedInterfaceOrientations
 {
-    return UIInterfaceOrientationMaskAll;
+    NSUInteger iOr;
+    if(isiPad) {
+        iOr = UIInterfaceOrientationMaskAll;
+    } else {
+        iOr = UIInterfaceOrientationMaskPortrait;
+    }
+    return iOr;
 }
-
-//- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
-//{
-//    return UIInterfaceOrientationPortrait;
-//}
 
 - (void)viewDidLoad
 {
@@ -176,26 +183,28 @@
     self.baseColor = [UIColor colorWithRed:39.0f/255.0f green:64.0f/255.0f blue:139.0f/255.0f alpha:0.9];
     
     self.bgView = [[[BGView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)] autorelease];
-    self.bgView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin;;
+    self.bgView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin;
     [self.view addSubview:self.bgView];
     
     if(isiPhone) {
         self.boardRect = CGRectMake(15, 15, 230, 342);
         [self addUIControlsForPhone];
         self.boardViewController = [[[BoardViewController alloc] initWithFrame:boardRect amountCellX:10 amountCellY:15] autorelease];
+        self.view.backgroundColor = self.baseColor;
         [self.bgView addSubview:self.boardViewController.boardView];
         [self.bgView addSubview:self.boardViewController.nextShapeView];
     } else {
-        self.boardPanelView = [[[BGViewBorder alloc] initWithFrame:CGRectMake(200, 100, 400, 400) andOffset:20 ] autorelease];//add offset
+        self.boardPanelView = [[[BGViewBorder alloc] initWithFrame:CGRectMake(159, 100, 450, 400) andOffset:15] autorelease];//add offset
         self.boardPanelView.backgroundColor = self.baseColor;
 
         self.boardRect = CGRectMake(30, 30, 230, 342);
         self.boardViewController = [[[BoardViewController alloc] initWithFrame:boardRect amountCellX:10 amountCellY:15] autorelease];
         [self.boardPanelView addSubview:self.boardViewController.boardView];
         [self.boardPanelView addSubview:self.boardViewController.nextShapeView];
-
+        [self addScoreLabel:CGRectMake(boardRect.origin.x + boardRect.size.width + 40, - 2 * boardRect.origin.y + boardRect.size.height, 40, 40) onView:self.boardPanelView];
         [self.view addSubview: self.boardPanelView];
-        CGRect leftPanelRect = CGRectMake(200, 500, 200, 400);
+        
+        CGRect leftPanelRect = CGRectMake(159, 500, 200, 400);
         self.leftPanelView = [[[UIView alloc] initWithFrame:leftPanelRect] autorelease];
         self.leftPanelView.backgroundColor = self.baseColor;
         [self addControllsOnLeftPanelWithFrame:leftPanelRect];
@@ -240,10 +249,8 @@
     [self addRotateButton:CGRectMake(rectMove.origin.x + 40, rectMove.origin.y + 150, rotateSizeButton, rotateSizeButton) withImage:imageButton onView:self.rightPanelView];
 }
 
-
 - (void)addUIControlsForPhone
-{
-    
+{ 
     UIImage* imageButton = [UIImage imageNamed:@"SmallYellow.png"];
     UIImage* settingImage = [UIImage imageNamed:@"Setting.png"];
     //setting button
@@ -479,10 +486,13 @@
 
 - (void)reset
 {
-    [self.boardViewController resetBoard];
-    self.firstStart = YES;
-    self.isStart = NO;
-    [self play];
+    if (isStart) {
+        [self.boardViewController resetBoard];
+        self.firstStart = YES;
+        self.isStart = NO;
+        [self play];
+    }
+    
 }
 
 - (void)sound

@@ -56,14 +56,14 @@
     [self.view addSubview:self.showGridLabel];
      
     self.toggleButton = [[[UISwitch alloc] initWithFrame:CGRectMake(rect.origin.x + 200, rect.origin.y, 50, 50)] autorelease];
-    [self.toggleButton setOn:[SettingViewController loadSettingGrid]];//.isSelected = self.showGrid;
+    [self.toggleButton setOn:[SettingViewController loadSettingGrid]];
     [self.toggleButton addTarget:self action:@selector(changeToggle) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.toggleButton];
     
     //close button
     [self.view setBackgroundColor:[UIColor whiteColor]];
     self.closeButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    self.closeButton.frame = CGRectMake(self.view.frame.size.width/2 - 30, rect.origin.y + 50, 70, 30);// manageButton;
+    self.closeButton.frame = CGRectMake(self.view.frame.size.width/2 - 30, rect.origin.y + 50, 70, 30);
     [self.closeButton setTitle:NSLocalizedString(@"Cancel", @"") forState:UIControlStateNormal];
     [self.closeButton addTarget:self action:@selector(close) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.closeButton];

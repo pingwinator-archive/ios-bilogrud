@@ -37,7 +37,6 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-      //  self.backgroundColor = [UIColor colorWithRed:39.0f/255.0f green:64.0f/255.0f blue:139.0f/255.0f alpha:1];
         self.offset = _offset;
         [self addSuperLabel];
     }
@@ -47,7 +46,7 @@
 
 - (void)addSuperLabel
 {
-    self.superLabel = [[[UILabel alloc] initWithFrame:CGRectMake((self.frame.size.width - 50)/2, 0, 50, 12)] autorelease];
+    self.superLabel = [[[UILabel alloc] initWithFrame:CGRectMake((self.frame.size.width - 60)/2, self.offset, 50, 12)] autorelease];
     self.superLabel.text = @"SUPER";
     [self.superLabel setFont:textButtonFont];
     self.superLabel.backgroundColor = [UIColor colorWithRed:39.0f/255.0f green:64.0f/255.0f blue:139.0f/255.0f alpha:1];
@@ -72,16 +71,13 @@
     
     CGContextSetStrokeColorWithColor(context, [UIColor yellowColor].CGColor);
     
-    CGContextAddRect(context, CGRectMake(rect.origin.x + offSetBorderThin + self.offset, rect.origin.y + offSetBorderThin + self.offset, rect.size.width - (rect.origin.x + offSetBorderThin ) * 2, rect.size.height - ( rect.origin.y + offSetBorderThin) * 2 - iPhoneAddOffset));
+    CGContextAddRect(context, CGRectMake(rect.origin.x + offSetBorderThin + self.offset, rect.origin.y + offSetBorderThin + self.offset, rect.size.width - (rect.origin.x + offSetBorderThin  + self.offset) * 2, rect.size.height - ( rect.origin.y + offSetBorderThin + self.offset) * 2 - iPhoneAddOffset));
     CGContextStrokePath(context);
     CGContextSetLineWidth(context, borderThick);
     CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
     
-    CGContextAddRect(context, CGRectMake(rect.origin.x + offsetBorderThick, rect.origin.y + offsetBorderThick, rect.size.width - (rect.origin.x + offsetBorderThick ) * 2, rect.size.height - ( rect.origin.y + offsetBorderThick) * 2 - iPhoneAddOffset));
+    CGContextAddRect(context, CGRectMake(rect.origin.x + offsetBorderThick + self.offset, rect.origin.y + offsetBorderThick + self.offset, rect.size.width - (rect.origin.x + offsetBorderThick + self.offset) * 2, rect.size.height - ( rect.origin.y + offsetBorderThick + self.offset) * 2 - iPhoneAddOffset));
     
     CGContextStrokePath(context);
-
 }
-
-
 @end
