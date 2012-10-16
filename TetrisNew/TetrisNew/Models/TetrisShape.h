@@ -19,5 +19,4 @@
 
 - (void)deepRotate:(DirectionRotate)directionRotate;
 - (NSMutableSet*)getRotatedShape:(DirectionRotate)directionRotate;
-
 @end

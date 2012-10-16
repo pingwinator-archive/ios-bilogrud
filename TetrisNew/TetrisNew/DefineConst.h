@@ -47,10 +47,13 @@
 #define labelPlayTextWidth 45
 #define labelPlayTextHeigth 40
 #define labelMoveTextWidth 60
+#define labelRotateTextWidth 60
 #define labelMoveTextHeigth 20
 #define labelScoreWidth 50
 #define labelScoreHeigth 50
-#define labelOffset 15
+#define labelManageOffset 15
+#define labelMoveOffset 10
+#define labelRotateOffset 10
 
 #define PointToObj(point) [NSValue valueWithCGPoint:point]
 #define PointFromObj(value) [value CGPointValue]

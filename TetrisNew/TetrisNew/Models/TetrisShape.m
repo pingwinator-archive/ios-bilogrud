@@ -13,7 +13,7 @@
 @interface TetrisShape()
 @property (retain, nonatomic) NSMutableSet* shapePoints;
 @property (retain, nonatomic) NSMutableArray* shapesCollection;
-@property (retain, nonatomic) NSArray* colorsCollection;
+@property (retain, nonatomic) NSMutableArray* colorsCollection;
 - (CGPoint)getNextCenter:(CGPoint)localCenter withDirection:(DirectionMove)direction;
 - (CGPoint)getRotatedPoint:(CGPoint)point withDirection:(DirectionRotate)directionRotate;
 - (void)randomTypeShape;
@@ -36,30 +36,43 @@
     [super dealloc];
 }
 
+- (NSMutableArray*)shapesCollection
+{
+    if (!shapesCollection) {
+        shapesCollection =  [[NSMutableArray alloc] initWithObjects:
+                             [NSMutableSet setWithObjects:PointToObj(CGPointMake(0, 0)), nil], //None
+                             [NSMutableSet setWithObjects:PointToObj(CGPointMake(0, 0)), PointToObj(CGPointMake(1, 0)), PointToObj(CGPointMake(0, 1)), PointToObj(CGPointMake(1, 1)), nil], //SquareShape
+                             [NSMutableSet setWithObjects:PointToObj(CGPointMake(-1, 0)), PointToObj(CGPointMake(0, 0)), PointToObj(CGPointMake(0, 1)), PointToObj(CGPointMake(1, 1)), nil], //SShape
+                             [NSMutableSet setWithObjects:PointToObj(CGPointMake(-1, 1)), PointToObj(CGPointMake(0, 1)), PointToObj(CGPointMake(0, 0)), PointToObj(CGPointMake(1, 0)), nil], //ZShape
+                             [NSMutableSet setWithObjects:PointToObj(CGPointMake(-1, -1)), PointToObj(CGPointMake(0, -1)), PointToObj(CGPointMake(0, 0)), PointToObj(CGPointMake(0, 1)), nil], //LShape
+                             [NSMutableSet setWithObjects:PointToObj(CGPointMake(1, -1)), PointToObj(CGPointMake(0, -1)), PointToObj(CGPointMake(0, 0)), PointToObj(CGPointMake(0, 1)), nil], //JShape
+                             [NSMutableSet setWithObjects:PointToObj(CGPointMake(0, -1)), PointToObj(CGPointMake(0, 0)), PointToObj(CGPointMake(0, 1)), PointToObj(CGPointMake(0, 2)), nil], //IShape
+                             [NSMutableSet setWithObjects:PointToObj(CGPointMake(-1, 0)), PointToObj(CGPointMake(0, 0)), PointToObj(CGPointMake(1, 0)), PointToObj(CGPointMake(0, 1)), nil], //TShape
+                             nil];
+    }
+    return shapesCollection;
+}
+
+- (NSMutableArray*)colorsCollection
+{
+    if (!colorsCollection) {
+        colorsCollection = [[NSMutableArray alloc] initWithObjects:
+                            [UIColor blackColor],
+                            [UIColor colorWithRed:255.0f/255.0f green:246.0f/255.0f blue:143.0f/255.0f alpha:1],//yellow
+                            [UIColor colorWithRed:255.0f/255.0f green:130.0f/255.0f blue:71.0f/255.0f alpha:1],//orange
+                            [UIColor colorWithRed:100.0f/255.0f green:149.0f/255.0f blue:237.0f/255.0f alpha:1],//blue
+                            [UIColor colorWithRed:222.0f/255.0f green:222.0f/255.0f blue:222.0f/255.0f alpha:1],//gray
+                            [UIColor colorWithRed:153.0f/255.0f green:204.0f/255.0f blue:50.0f/255.0f alpha:1],//green
+                            [UIColor colorWithRed:255.0f/255.0f green:99.0f/255.0f blue:71.0f/255.0f alpha:1],//tomato
+                            [UIColor colorWithRed:205.0f/255.0f green:105.0f/255.0f blue:201.0f/255.0f alpha:1],//orchid
+                            [UIColor redColor],
+                            nil];
+    }
+    return colorsCollection;
+}
+
 - (id)initRandomShapeWithCenter:(CGPoint)center
 {
-    self.shapesCollection =  [NSMutableArray arrayWithObjects:
-                              [NSMutableSet setWithObjects:PointToObj(CGPointMake(0, 0)), nil], //None
-                              [NSMutableSet setWithObjects:PointToObj(CGPointMake(0, 0)), PointToObj(CGPointMake(1, 0)), PointToObj(CGPointMake(0, 1)), PointToObj(CGPointMake(1, 1)), nil], //SquareShape
-                              [NSMutableSet setWithObjects:PointToObj(CGPointMake(-1, 0)), PointToObj(CGPointMake(0, 0)), PointToObj(CGPointMake(0, 1)), PointToObj(CGPointMake(1, 1)), nil], //SShape
-                              [NSMutableSet setWithObjects:PointToObj(CGPointMake(-1, 1)), PointToObj(CGPointMake(0, 1)), PointToObj(CGPointMake(0, 0)), PointToObj(CGPointMake(1, 0)), nil], //ZShape
-                              [NSMutableSet setWithObjects:PointToObj(CGPointMake(-1, -1)), PointToObj(CGPointMake(0, -1)), PointToObj(CGPointMake(0, 0)), PointToObj(CGPointMake(0, 1)), nil], //LShape
-                              [NSMutableSet setWithObjects:PointToObj(CGPointMake(1, -1)), PointToObj(CGPointMake(0, -1)), PointToObj(CGPointMake(0, 0)), PointToObj(CGPointMake(0, 1)), nil], //JShape
-                              [NSMutableSet setWithObjects:PointToObj(CGPointMake(0, -1)), PointToObj(CGPointMake(0, 0)), PointToObj(CGPointMake(0, 1)), PointToObj(CGPointMake(0, 2)), nil], //IShape
-                              [NSMutableSet setWithObjects:PointToObj(CGPointMake(-1, 0)), PointToObj(CGPointMake(0, 0)), PointToObj(CGPointMake(1, 0)), PointToObj(CGPointMake(0, 1)), nil], //TShape
-                              nil];
-
-    self.colorsCollection = [NSArray arrayWithObjects:
-                       [UIColor blackColor],  
-                       [UIColor colorWithRed:255.0f/255.0f green:246.0f/255.0f blue:143.0f/255.0f alpha:1],//yellow                
-                       [UIColor colorWithRed:255.0f/255.0f green:130.0f/255.0f blue:71.0f/255.0f alpha:1],//orange 
-                       [UIColor colorWithRed:100.0f/255.0f green:149.0f/255.0f blue:237.0f/255.0f alpha:1],//blue
-                       [UIColor colorWithRed:222.0f/255.0f green:222.0f/255.0f blue:222.0f/255.0f alpha:1],//gray
-                       [UIColor colorWithRed:153.0f/255.0f green:204.0f/255.0f blue:50.0f/255.0f alpha:1],//green 
-                       [UIColor colorWithRed:255.0f/255.0f green:99.0f/255.0f blue:71.0f/255.0f alpha:1],//tomato
-                       [UIColor colorWithRed:205.0f/255.0f green:105.0f/255.0f blue:201.0f/255.0f alpha:1],//orchid
-                       [UIColor redColor],
-                       nil];
     self = [super init];
     if(self) {
         [self randomTypeShape];

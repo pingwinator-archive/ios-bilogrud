@@ -20,6 +20,7 @@
 - (BOOL)validationMove:(NSMutableSet*)validateSet;
 - (void)timerTick;
 - (void)showGrid:(BOOL)grid;
+- (void)invokeDeleteLineDelegate;
 @end
 
 @implementation BoardViewController
@@ -107,8 +108,6 @@
     self.boardCells = [[[NSMutableSet alloc] initWithSet:cellsCurrentShape] autorelease];
     [self.boardCells unionSet:cellsCurrentShape];
     [self.boardCells unionSet:fallenShapeSet];
-   
-    
 }
 
 -(void)updateNextShape
@@ -126,11 +125,13 @@
     [self.boardCells removeAllObjects];
     [self.fallenShapeSet removeAllObjects];
     self.lines = 0;
+    [self invokeDeleteLineDelegate];
     self.gameTimerInterval = 1;
     [self stopGameTimer];
     [self.boardView setNeedsDisplay];
     [self.nextShapeView setNeedsDisplay];
     self.currentShape = nil;
+    self.gameOver = NO;
 }
 
 #pragma mark - Move Shape
@@ -149,10 +150,11 @@
             NSInteger maxY = 0;
             [self.fallenShapeSet unionSet:[Cell pointsToCells:[self.currentShape getShapePoints] withColor:self.currentShape.shapeColor]];
             //check for game over
+            BOOL showGameOverAlert = NO;
             for (Cell* c in self.boardCells) {
-                if(c.point.y == 1) {
+                if(c.point.y == 1 && !showGameOverAlert) {
                     self.gameOver = YES;
-                           
+                    showGameOverAlert = YES;
                     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Game Over", @"")  message:nil delegate:self cancelButtonTitle:NSLocalizedString(@"New game", @"") otherButtonTitles:nil, nil];
                     [alert show];
                 }
@@ -195,13 +197,18 @@
     }
 }
 
+- (void)invokeDeleteLineDelegate
+{
+    if ([self.delegate respondsToSelector:@selector(deleteLine:)]) {
+        [self.delegate deleteLine:self.lines];
+    }
+}
+
 - (NSMutableSet*)deleteLine:(NSMutableSet*)boardPoints line:(NSInteger)numberLine
 {
     //amount of deleted line
     self.lines++;
-    if ([self.delegate respondsToSelector:@selector(deleteLine:)]) {
-        [self.delegate deleteLine:self.lines];
-    }
+    [self invokeDeleteLineDelegate];
     if(self.lines % 2 == 0) {
         self.gameTimerInterval *= 0.9;
     }
@@ -247,7 +254,6 @@
         if([self.resetGameDelegate respondsToSelector:@selector(newGame)]) {
             [self.resetGameDelegate newGame];
         }
-            
     }
 }
 

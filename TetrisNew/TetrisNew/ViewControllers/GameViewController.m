@@ -204,14 +204,14 @@
         [self addScoreLabel:CGRectMake(boardRect.origin.x + boardRect.size.width + 40, - 2 * boardRect.origin.y + boardRect.size.height, 40, 40) onView:self.boardPanelView];
         [self.view addSubview: self.boardPanelView];
         
-        CGRect leftPanelRect = CGRectMake(159, 500, 200, 400);
+        CGRect leftPanelRect = CGRectMake(159, 500, 225, 400);
         self.leftPanelView = [[[UIView alloc] initWithFrame:leftPanelRect] autorelease];
         self.leftPanelView.backgroundColor = self.baseColor;
         [self addControllsOnLeftPanelWithFrame:leftPanelRect];
         [self.view addSubview:self.leftPanelView];
 
-        CGRect rightPanelRect = CGRectMake(400, 500, 200, 400);
-        self.rightPanelView = [[[UIView alloc] initWithFrame:CGRectMake(400, 500, 200, 400)] autorelease];
+        CGRect rightPanelRect = CGRectMake(384, 500, 225, 400);
+        self.rightPanelView = [[[UIView alloc] initWithFrame:rightPanelRect] autorelease];
         self.rightPanelView.backgroundColor = self.baseColor;
         [self addControllsOnRightPanelWithFrame:rightPanelRect];
         [self.view addSubview:self.rightPanelView];
@@ -224,7 +224,7 @@
     //play button
     [self addPlayButton:CGRectMake(20, 50, manageSizeButton, manageSizeButton) withImage:imageButton onView:self.leftPanelView];
     //reset button
-    [self addResetButton:CGRectMake(120, 50 , manageSizeButton, manageSizeButton) withImage:imageButton onView:self.leftPanelView];
+    [self addResetButton:CGRectMake(130, 50 , manageSizeButton, manageSizeButton) withImage:imageButton onView:self.leftPanelView];
    
     CGRect rectMove = CGRectMake(20, 200, moveSizeButton, moveSizeButton);
     //left button
@@ -308,7 +308,7 @@
     [view addSubview:self.resetButton];
     
     //reset label
-    CGRect rectResetLabel = CGRectMake(rect.origin.x - labelOffset , rect.origin.y + rect.size.height , labelMoveTextWidth, labelMoveTextHeigth);
+    CGRect rectResetLabel = CGRectMake(rect.origin.x - labelManageOffset , rect.origin.y + rect.size.height , labelMoveTextWidth, labelMoveTextHeigth);
     self.resetLabel = [[[UILabel alloc] initWithFrame:rectResetLabel] autorelease];
     self.resetLabel.text = NSLocalizedString(@"RESET", @"");
     self.resetLabel.textAlignment = UITextAlignmentCenter;
@@ -328,7 +328,7 @@
     [view addSubview:self.soundButton];
     
     //sound label
-    CGRect rectSoundLabel = CGRectMake(rect.origin.x - labelOffset, rect.origin.y + rect.size.height, labelMoveTextWidth, labelMoveTextHeigth);
+    CGRect rectSoundLabel = CGRectMake(rect.origin.x - labelManageOffset, rect.origin.y + rect.size.height, labelMoveTextWidth, labelMoveTextHeigth);
     self.soundLabel = [[[UILabel alloc] initWithFrame:rectSoundLabel] autorelease];
     self.soundLabel.text = NSLocalizedString(@"SOUND", @"");
     self.soundLabel.textAlignment = UITextAlignmentCenter;
@@ -347,7 +347,7 @@
     [view addSubview:self.settingButton];
     
     //sound label
-    CGRect rectSetLabel = CGRectMake(rect.origin.x - labelOffset - 10, rect.origin.y + rect.size.height, labelMoveTextWidth + 20, labelMoveTextHeigth);
+    CGRect rectSetLabel = CGRectMake(rect.origin.x - labelManageOffset - 10, rect.origin.y + rect.size.height, labelMoveTextWidth + 20, labelMoveTextHeigth);
     self.settingLabel = [[[UILabel alloc] initWithFrame:rectSetLabel] autorelease];
     self.settingLabel.text = NSLocalizedString(@"SETTINGS", @"");
     self.settingLabel.textAlignment = UITextAlignmentCenter;
@@ -382,7 +382,7 @@
     [view addSubview:self.leftButton];
     
     //left label
-    CGRect rectLeftLabel = CGRectMake(rect.origin.x - labelOffset, rect.origin.y + rect.size.height , labelMoveTextWidth , labelMoveTextHeigth);
+    CGRect rectLeftLabel = CGRectMake(rect.origin.x - labelMoveOffset, rect.origin.y + rect.size.height , labelMoveTextWidth , labelMoveTextHeigth);
     self.leftLabel = [[[UILabel alloc] initWithFrame:rectLeftLabel] autorelease];
     self.leftLabel.text = NSLocalizedString(@"LEFT", @"");
     [self.leftLabel setFont:textButtonFont];
@@ -403,7 +403,7 @@
     [view addSubview:self.rightButton];
     
     //right label
-    CGRect rectRightLabel = CGRectMake(rect.origin.x - labelOffset, rect.size.height + rect.origin.y , labelMoveTextWidth, labelMoveTextHeigth);
+    CGRect rectRightLabel = CGRectMake(rect.origin.x - labelMoveOffset, rect.size.height + rect.origin.y , labelMoveTextWidth, labelMoveTextHeigth);
     self.rightLabel = [[[UILabel alloc] initWithFrame:rectRightLabel] autorelease];
     self.rightLabel.text = NSLocalizedString(@"RIGHT", @"");
     [self.rightLabel setFont:textButtonFont];
@@ -424,8 +424,9 @@
     [view addSubview:self.downButton];
     
     //down label
-    CGRect rectDownLabel = CGRectMake(rect.origin.x - labelOffset, rect.origin.y + rect.size.height, labelMoveTextWidth, labelMoveTextHeigth);
+    CGRect rectDownLabel = CGRectMake(rect.origin.x - labelMoveOffset, rect.origin.y + rect.size.height, labelMoveTextWidth, labelMoveTextHeigth);
     self.downLabel = [[[UILabel alloc] initWithFrame:rectDownLabel]autorelease];
+    [self.downLabel setTextAlignment:NSTextAlignmentCenter];
     self.downLabel.text = NSLocalizedString(@"DOWN", @"");
     [self.downLabel setFont:textButtonFont];
     self.downLabel.backgroundColor = [UIColor clearColor];
@@ -443,13 +444,14 @@
     [view addSubview:self.rotateButton];
     
     //rotate label
-    CGRect rectRotateLabel = CGRectMake(rect.origin.x, rect.size.height + rect.origin.y , labelMoveTextWidth , labelMoveTextHeigth);
+    CGRect rectRotateLabel = CGRectMake(CGRectGetMidX(rect) - labelRotateTextWidth/2, rect.size.height + rect.origin.y , labelRotateTextWidth , labelMoveTextHeigth);
     self.rotateLabel = [[[UILabel alloc] initWithFrame:rectRotateLabel] autorelease];
     self.rotateLabel.text = NSLocalizedString(@"ROTATE", @"");
     [self.rotateLabel setFont:textButtonFont];
     self.rotateLabel.backgroundColor=[UIColor clearColor];
     self.rotateLabel.textColor = [UIColor whiteColor];
     self.rotateLabel.textAlignment = UITextAlignmentCenter;
+    
     [view addSubview:self.rotateLabel];
 }
 
@@ -470,9 +472,10 @@
     //timer start
     if(self.isStart) {
         self.isStart = NO;
-        [self.boardViewController.gameTimer invalidate];
+        [self pauseGameTimer];
+         //[self.boardViewController.gameTimer invalidate];
     } else {
-        if(self.firstStart) {
+        if(self.firstStart && self.boardViewController) {
            [self.boardViewController start];
             self.firstStart = NO;
             self.boardViewController.delegate = self;
@@ -492,7 +495,6 @@
         self.isStart = NO;
         [self play];
     }
-    
 }
 
 - (void)sound
@@ -516,8 +518,10 @@
 
 - (void)moveRightPressed
 {
-    [self.boardViewController moveShape:rightDirectionMove];
-    [self performSelector:@selector(moveRightPressed) withObject:nil afterDelay:delayForButtonPressed];
+    if(isStart) {
+        [self.boardViewController moveShape:rightDirectionMove];
+        [self performSelector:@selector(moveRightPressed) withObject:nil afterDelay:delayForButtonPressed];
+    }
 }
 
 - (void)moveRightUnPressed
@@ -527,8 +531,10 @@
 
 - (void)moveLeftPressed
 {
-    [self.boardViewController moveShape:leftDirectionMove];
-    [self performSelector:@selector(moveLeftPressed) withObject:nil afterDelay:delayForButtonPressed];
+    if(isStart){
+        [self.boardViewController moveShape:leftDirectionMove];
+        [self performSelector:@selector(moveLeftPressed) withObject:nil afterDelay:delayForButtonPressed];
+    }
 }
 
 - (void)moveLeftUnPressed
@@ -538,8 +544,10 @@
 
 - (void)moveDownPressed
 {
-    [self.boardViewController moveShape:downDirectionMove];
-    [self performSelector:@selector(moveDownPressed) withObject:nil afterDelay:delayForButtonPressed];
+    if(isStart) {
+        [self.boardViewController moveShape:downDirectionMove];
+        [self performSelector:@selector(moveDownPressed) withObject:nil afterDelay:delayForButtonPressed];
+    }
 }
 
 - (void)moveDownUnPressed
@@ -551,7 +559,9 @@
 
 - (void)rotate
 {
-    [self.boardViewController rotateShape:rightDirectionRotate];
+    if (isStart) {
+        [self.boardViewController rotateShape:rightDirectionRotate];
+    }
 }
 
 #pragma mark - Timer 
@@ -577,6 +587,6 @@
 
 - (void)newGame
 {
-    [self reset];
+    [self reset];   
 }
 @end
