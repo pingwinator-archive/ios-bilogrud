@@ -16,12 +16,12 @@
 @property (retain, nonatomic) NSMutableArray* colorsCollection;
 @property (assign, nonatomic) TypeShape curTypeShape;
 - (CGPoint)getNextCenter:(CGPoint)localCenter withDirection:(DirectionMove)direction;
-//- (CGPoint)getRotatedPoint:(CGPoint)point withDirection:(DirectionRotate)directionRotate;
 - (void)randomTypeShape;
 - (NSInteger)randomNumberFrom:(NSInteger)from To:(NSInteger)to;
 - (NSMutableSet*)transformation:(NSSet*)localShapePoints withLocalCentre:(CGPoint)cntr;
-//- (NSMutableSet*)rotate:(DirectionRotate)directionRotate;
-
+- (NSMutableSet*)rotateShape:(DirectionRotate)directionRotate;
+- (NSMutableSet*)tryRotateCurrentShape;
+- (NSMutableArray*)initRotatingShapeArray;
 @end
 @implementation TetrisShape
 @synthesize centerPoint;
@@ -108,7 +108,6 @@
     return [self transformation:self.shapePoints withLocalCentre:self.centerPoint];
 }
 
-
 #pragma mark - Move Shape
 
 //deep move, change center of the shape
@@ -133,10 +132,10 @@
 //get rotated shape for check
 - (NSMutableSet*)getRotatedShape:(DirectionRotate)directionRotate
 {
-    return [self transformation:[self rotateTest] withLocalCentre:self.centerPoint];
+    return [self transformation:[self tryRotateCurrentShape] withLocalCentre:self.centerPoint];
 }
 
-
+//private
 - (NSMutableArray*)initRotatingShapeArray
 {
     NSMutableArray* test = [NSMutableArray array];
@@ -167,7 +166,6 @@
             [test addObject:[NSMutableSet setWithObjects:PointToObj(CGPointMake(0, 0)), PointToObj(CGPointMake(-1, -1)), PointToObj(CGPointMake(-1, 0)), PointToObj(CGPointMake(1, 0)), nil]];
             [test addObject:[NSMutableSet setWithObjects:PointToObj(CGPointMake(0, -1)), PointToObj(CGPointMake(0, 0)), PointToObj(CGPointMake(0, 1)), PointToObj(CGPointMake(-1, 1)), nil]];
             [test addObject:[NSMutableSet setWithObjects:PointToObj(CGPointMake(1, -1)), PointToObj(CGPointMake(0, -1)), PointToObj(CGPointMake(-1, -1)), PointToObj(CGPointMake(1, 0)), nil]];
-
         }
             break;
         case IShape: {
@@ -188,7 +186,6 @@
     return test;
 }
 
-//private
 - (NSMutableSet*)rotateShape:(DirectionRotate)directionRotate
 {
     if(directionRotate == leftDirectionRotate) {
@@ -208,7 +205,7 @@
     return [self.rotateShapeCollection objectAtIndex:self.numbState];
 }
 
-- (NSMutableSet*)rotateTest
+- (NSMutableSet*)tryRotateCurrentShape
 {
  return [self.rotateShapeCollection objectAtIndex:self.numbState];
 }
