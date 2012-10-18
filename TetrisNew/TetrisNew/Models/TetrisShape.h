@@ -10,7 +10,9 @@
 
 @interface TetrisShape : NSObject
 @property (retain, nonatomic) UIColor* shapeColor;
+@property (retain, nonatomic) NSMutableArray* rotateShapeCollection;
 @property (assign, nonatomic) CGPoint centerPoint;
+@property (assign, nonatomic) NSInteger numbState;
 - (NSMutableSet*)getShapePoints;
 - (id)initRandomShapeWithCenter:(CGPoint)center;
 

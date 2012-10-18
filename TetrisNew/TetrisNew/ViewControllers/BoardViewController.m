@@ -15,7 +15,7 @@
 @property (retain, nonatomic) TetrisShape* currentShape;
 @property (retain, nonatomic) NSMutableSet* borderSet;
 @property (retain, nonatomic) NSMutableSet* fallenShapeSet;
-@property (assign, nonatomic) NSInteger gameTimerInterval;
+@property (assign, nonatomic) CGFloat gameTimerInterval;
 - (NSMutableSet*)deleteLine:(NSMutableSet*)boardPoints line:(NSInteger)numberLine;
 - (BOOL)validationMove:(NSMutableSet*)validateSet;
 - (void)timerTick;
@@ -66,7 +66,7 @@
 {
     self = [super init];
     if(self) {
-        self.gameTimerInterval = 1;
+        self.gameTimerInterval = 1.0f;
         self.lines = 0;
         self.boardView = [[[BoardView alloc] initWithFrame:frame amountCellX:cellX amountCellY:cellY] autorelease];
         self.boardView.backgroundColor = [UIColor lightGrayColor];
@@ -74,7 +74,7 @@
         self.newGame = NO;
 
         //shape
-        [self updateShape];
+        //[self updateShape];
         
         self.borderSet = [[[NSMutableSet alloc] init] autorelease];
         for (NSInteger i = 0; i < self.boardView.amountCellX ; i++) {
@@ -94,7 +94,8 @@
     return self;
 }
 
-#pragma mark - 
+#pragma mark - Update
+
 - (void)updateShape
 {
     self.startPoint = CGPointMake(5, -2);
@@ -126,8 +127,9 @@
     [self.fallenShapeSet removeAllObjects];
     self.lines = 0;
     [self invokeDeleteLineDelegate];
-    self.gameTimerInterval = 1;
+   
     [self stopGameTimer];
+    self.gameTimerInterval = 1.0f;
     [self.boardView setNeedsDisplay];
     [self.nextShapeView setNeedsDisplay];
     self.currentShape = nil;
@@ -210,7 +212,10 @@
     self.lines++;
     [self invokeDeleteLineDelegate];
     if(self.lines % 2 == 0) {
-        self.gameTimerInterval *= 0.9;
+        self.gameTimerInterval *= 0.95f;//*= @0.9;
+        [self stopGameTimer];
+        [self startGameTimer];
+        NSLog(@"%f", self.gameTimerInterval);
     }
     
     NSMutableSet* tempSet = [NSMutableSet setWithSet:[Cell cellsToPoints:boardPoints]];
@@ -242,6 +247,7 @@
 
 - (void)start
 {
+    self.gameTimerInterval = 1.0f;
     [self updateBoard];
     [self updateNextShape];
     [self updateShape];
@@ -271,7 +277,7 @@
 
 - (void)startGameTimer
 {
-    self.gameTimer = [NSTimer scheduledTimerWithTimeInterval:self.gameTimerInterval  target:self selector:@selector(timerTick) userInfo:nil repeats:YES];
+    self.gameTimer = [NSTimer scheduledTimerWithTimeInterval:self.gameTimerInterval target:self selector:@selector(timerTick) userInfo:nil repeats:YES];
 }
 
 - (void)stopGameTimer

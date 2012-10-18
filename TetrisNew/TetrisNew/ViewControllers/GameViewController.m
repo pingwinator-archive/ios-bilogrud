@@ -480,7 +480,7 @@
             self.firstStart = NO;
             self.boardViewController.delegate = self;
             self.boardViewController.resetGameDelegate = self;
-        } 
+        }
         self.isStart = YES;
         [self.boardViewController startGameTimer];
         DBLog(@"play!");
@@ -491,6 +491,7 @@
 {
     if (isStart) {
         [self.boardViewController resetBoard];
+   //     self.b
         self.firstStart = YES;
         self.isStart = NO;
         [self play];
@@ -521,6 +522,7 @@
     if(isStart) {
         [self.boardViewController moveShape:rightDirectionMove];
         [self performSelector:@selector(moveRightPressed) withObject:nil afterDelay:delayForButtonPressed];
+        [self reDrawBoard];
     }
 }
 
@@ -534,6 +536,7 @@
     if(isStart){
         [self.boardViewController moveShape:leftDirectionMove];
         [self performSelector:@selector(moveLeftPressed) withObject:nil afterDelay:delayForButtonPressed];
+        [self reDrawBoard];
     }
 }
 
@@ -547,12 +550,18 @@
     if(isStart) {
         [self.boardViewController moveShape:downDirectionMove];
         [self performSelector:@selector(moveDownPressed) withObject:nil afterDelay:delayForButtonPressed];
+        [self reDrawBoard];
     }
 }
 
 - (void)moveDownUnPressed
 {
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(moveDownPressed) object:nil];
+}
+
+- (void)reDrawBoard
+{
+   [self.boardViewController.boardView setNeedsDisplay];
 }
 
 #pragma mark - Rotate shape
