@@ -175,6 +175,10 @@
     return iOr;
 }
 
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    NSLog(@" preferred called");//This method is never called. WHY?
+    return UIInterfaceOrientationLandscapeRight;
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
