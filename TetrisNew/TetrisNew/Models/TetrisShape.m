@@ -16,11 +16,11 @@
 @property (retain, nonatomic) NSMutableArray* colorsCollection;
 @property (assign, nonatomic) TypeShape curTypeShape;
 - (CGPoint)getNextCenter:(CGPoint)localCenter withDirection:(DirectionMove)direction;
-- (CGPoint)getRotatedPoint:(CGPoint)point withDirection:(DirectionRotate)directionRotate;
+//- (CGPoint)getRotatedPoint:(CGPoint)point withDirection:(DirectionRotate)directionRotate;
 - (void)randomTypeShape;
 - (NSInteger)randomNumberFrom:(NSInteger)from To:(NSInteger)to;
 - (NSMutableSet*)transformation:(NSSet*)localShapePoints withLocalCentre:(CGPoint)cntr;
-- (NSMutableSet*)rotate:(DirectionRotate)directionRotate;
+//- (NSMutableSet*)rotate:(DirectionRotate)directionRotate;
 
 @end
 @implementation TetrisShape
@@ -96,7 +96,7 @@
 
 - (void)randomTypeShape
 {
-    TypeShape randomTypeShape = 2;// [self randomNumberFrom:1 To:[self.shapesCollection count] - 1];
+    TypeShape randomTypeShape = [self randomNumberFrom:1 To:[self.shapesCollection count] - 1];
     self.curTypeShape = (TypeShape)randomTypeShape;
     self.shapePoints = [self.shapesCollection objectAtIndex:randomTypeShape];
     self.shapeColor = [self.colorsCollection objectAtIndex:randomTypeShape];
@@ -127,11 +127,69 @@
 
 - (void)deepRotate:(DirectionRotate)directionRotate
 {
-    self.shapePoints = [self getRotatedShape:directionRotate];//[self rotate: directionRotate];
+    self.shapePoints = [self rotateShape:directionRotate];//[self rotate: directionRotate];
 }
 
 //get rotated shape for check
 - (NSMutableSet*)getRotatedShape:(DirectionRotate)directionRotate
+{
+    return [self transformation:[self rotateTest] withLocalCentre:self.centerPoint];
+}
+
+
+- (NSMutableArray*)initRotatingShapeArray
+{
+    NSMutableArray* test = [NSMutableArray array];
+    switch (self.curTypeShape) {
+        case (NSInteger)SquareShape: {
+            [test addObject: self.shapePoints];
+        }
+            break;
+        case ZShape: {
+            [test addObject: [NSMutableSet setWithObjects:PointToObj(CGPointMake(-1, 0)), PointToObj(CGPointMake(0, 0)), PointToObj(CGPointMake(0, 1)), PointToObj(CGPointMake(1, 1)), nil]];
+            [test addObject: [NSMutableSet setWithObjects:PointToObj(CGPointMake(-1, 1)), PointToObj(CGPointMake(-1, 0)), PointToObj(CGPointMake(0, 0)),PointToObj(CGPointMake(0, -1)), nil]];
+        }
+            break;
+        case SShape: {
+            [test addObject:[NSMutableSet setWithObjects:PointToObj(CGPointMake(-1, 1)), PointToObj(CGPointMake(0, 1)), PointToObj(CGPointMake(0, 0)), PointToObj(CGPointMake(1, 0)), nil]];
+            [test addObject:[NSMutableSet setWithObjects:PointToObj(CGPointMake(-1, 1)), PointToObj(CGPointMake(0, 1)), PointToObj(CGPointMake(-1, 0)), PointToObj(CGPointMake(0, 2)), nil]];
+        }
+            break;
+        case LShape: {
+            [test addObject:  [NSMutableSet setWithObjects:PointToObj(CGPointMake(-1, -1)), PointToObj(CGPointMake(0, -1)), PointToObj(CGPointMake(0, 0)), PointToObj(CGPointMake(0, 1)), nil]];
+            [test addObject:  [NSMutableSet setWithObjects:PointToObj(CGPointMake(-1, -1)), PointToObj(CGPointMake(0, -1)), PointToObj(CGPointMake(-1, 0)), PointToObj(CGPointMake(1, -1)), nil]];
+            [test addObject:  [NSMutableSet setWithObjects:PointToObj(CGPointMake(-1, -1)), PointToObj(CGPointMake(-1, 0)), PointToObj(CGPointMake(-1, 1)), PointToObj(CGPointMake(0, 1)), nil]];
+            [test addObject:  [NSMutableSet setWithObjects:PointToObj(CGPointMake(-1, 0)), PointToObj(CGPointMake(0, 0)), PointToObj(CGPointMake(1, 0)), PointToObj(CGPointMake(1, -1)), nil]];
+        }
+            break;
+        case JShape: {
+            [test addObject:[NSMutableSet setWithObjects:PointToObj(CGPointMake(1, -1)), PointToObj(CGPointMake(0, -1)), PointToObj(CGPointMake(0, 0)), PointToObj(CGPointMake(0, 1)), nil]];
+            [test addObject:[NSMutableSet setWithObjects:PointToObj(CGPointMake(0, 0)), PointToObj(CGPointMake(-1, -1)), PointToObj(CGPointMake(-1, 0)), PointToObj(CGPointMake(1, 0)), nil]];
+            [test addObject:[NSMutableSet setWithObjects:PointToObj(CGPointMake(0, -1)), PointToObj(CGPointMake(0, 0)), PointToObj(CGPointMake(0, 1)), PointToObj(CGPointMake(-1, 1)), nil]];
+            [test addObject:[NSMutableSet setWithObjects:PointToObj(CGPointMake(1, -1)), PointToObj(CGPointMake(0, -1)), PointToObj(CGPointMake(-1, -1)), PointToObj(CGPointMake(1, 0)), nil]];
+
+        }
+            break;
+        case IShape: {
+            [test addObject: [NSMutableSet setWithObjects:PointToObj(CGPointMake(0, -1)), PointToObj(CGPointMake(0, 0)), PointToObj(CGPointMake(0, 1)), PointToObj(CGPointMake(0, 2)), nil]];
+            [test addObject: [NSMutableSet setWithObjects:PointToObj(CGPointMake(-1, 0)), PointToObj(CGPointMake(0, 0)), PointToObj(CGPointMake(1, 0)), PointToObj(CGPointMake(2, 0)), nil]];
+        }
+            break;
+        case TShape: {
+            [test addObject:[NSMutableSet setWithObjects:PointToObj(CGPointMake(-1, 0)), PointToObj(CGPointMake(0, 0)), PointToObj(CGPointMake(1, 0)), PointToObj(CGPointMake(0, 1)), nil]];
+            [test addObject:[NSMutableSet setWithObjects:PointToObj(CGPointMake(0, -1)), PointToObj(CGPointMake(0, 0)), PointToObj(CGPointMake(0, 1)), PointToObj(CGPointMake(1, 0)), nil]];
+            [test addObject:[NSMutableSet setWithObjects:PointToObj(CGPointMake(-1, 0)), PointToObj(CGPointMake(0, 0)), PointToObj(CGPointMake(1, 0)), PointToObj(CGPointMake(0, -1)), nil]];
+            [test addObject:[NSMutableSet setWithObjects:PointToObj(CGPointMake(-1, 0)), PointToObj(CGPointMake(0, 0)), PointToObj(CGPointMake(0, -1)), PointToObj(CGPointMake(0, 1)), nil]];
+        }
+            break;
+        default:
+            break;
+    }
+    return test;
+}
+
+//private
+- (NSMutableSet*)rotateShape:(DirectionRotate)directionRotate
 {
     if(directionRotate == leftDirectionRotate) {
         if(numbState == 0) {
@@ -140,15 +198,19 @@
             self.numbState--;
         }
     } else {
-        if(numbState == [self.rotateShapeCollection count] - 1) {
+        self.numbState++;
+      //  NSInteger i = [self.rotateShapeCollection count];
+        if(self.numbState  == [self.rotateShapeCollection count]) {
             self.numbState = 0;
-        } else {
-            self.numbState++;
         }
     }
-    return [self transformation:[self.rotateShapeCollection objectAtIndex:self.numbState] withLocalCentre:self.centerPoint];
-    
-   // return [self transformation:[self rotate: directionRotate] withLocalCentre:self.centerPoint];
+    NSLog(@"%d", self.numbState);
+    return [self.rotateShapeCollection objectAtIndex:self.numbState];
+}
+
+- (NSMutableSet*)rotateTest
+{
+ return [self.rotateShapeCollection objectAtIndex:self.numbState];
 }
 
 - (CGPoint)getNextCenter:(CGPoint)localCenter withDirection:(DirectionMove)direction
@@ -188,66 +250,6 @@
         [shapeLocalSet addObject:PointToObj(p)];
     }
     return shapeLocalSet;
-}
-
-//rotate relative coordinates
-- (NSMutableSet*)rotate:(DirectionRotate)directionRotate
-{
-  /*  NSMutableArray* rotatedPoints = [[[NSMutableArray alloc] init] autorelease];
-    if(self.curTypeShape == (NSInteger)SquareShape) {
-        return self.shapePoints;
-    }
-   
-    for (NSValue* pointValue in self.shapePoints) {
-        DBLog(@"%f %f",  PointFromObj( pointValue).x, PointFromObj( pointValue).y);
-        DBLog(@"%f %f",  [self getRotatedPoint:PointFromObj(pointValue) withDirection:directionRotate].x,[self getRotatedPoint:PointFromObj(pointValue) withDirection:directionRotate].y);
-
-        [rotatedPoints addObject: PointToObj( [self getRotatedPoint:PointFromObj(pointValue) withDirection:directionRotate] )];
-    }
-    return (NSMutableSet*)rotatedPoints;*/
-    
-    
-}
-
-- (CGPoint)getRotatedPoint:(CGPoint)point withDirection:(DirectionRotate)directionRotate
-{
-    CGPoint rotatePoint;
-    switch (directionRotate) {
-        case rightDirectionRotate:
-        {
-            rotatePoint.x = point.y;
-            rotatePoint.y = - point.x;
-        }
-            break;
-        case leftDirectionRotate:
-        {
-            rotatePoint.x = - point.y;
-            rotatePoint.y = point.x;
-        }
-        default:
-            break;
-    }
-    return rotatePoint;
-}
-
-- (NSMutableArray*)initRotatingShapeArray
-{
-    NSMutableArray* test = [NSMutableArray array];
-      switch (self.curTypeShape) {
-          case (NSInteger)SquareShape: {
-            [test addObject: self.shapePoints];
-          }
-            break;
-        case ZShape: {
-            [test addObject: [NSMutableSet setWithObjects:PointToObj(CGPointMake(-1, 0)), PointToObj(CGPointMake(0, 0)), PointToObj(CGPointMake(0, 1)), PointToObj(CGPointMake(1, 1)), nil]];
-             [test addObject: [NSMutableSet setWithObjects:PointToObj(CGPointMake(-1, 0)), PointToObj(CGPointMake(0, 0)), PointToObj(CGPointMake(0, 1)), PointToObj(CGPointMake(1, 1)), nil]];
-//            [test addObject: [NSMutableSet setWithObjects:PointToObj(CGPointMake(-1, 1)), PointToObj(CGPointMake(-1, 0)), PointToObj(CGPointMake(0, 0)),PointToObj(CGPointMake(0, -1)), nil]];
-          }
-            break;
-        default:
-            break;
-    }
-    return test;
 }
 
 @end
