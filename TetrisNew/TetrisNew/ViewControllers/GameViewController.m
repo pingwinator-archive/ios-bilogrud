@@ -12,7 +12,7 @@
 #import "BGView.h"
 #import "UIViewController+Deprecated.h"
 #import "BGViewBorder.h"
-//#import <AudioToolbox/AudioToolbox.h>
+#import "UIApplication+CheckVersion.h"
 #import <AVFoundation/AVFoundation.h>
 @interface GameViewController ()<AVAudioPlayerDelegate>
 @property (retain, nonatomic) BoardViewController* boardViewController;
@@ -47,6 +47,7 @@
 
 @property (retain, nonatomic) UIColor* baseColor;
 - (void)addUIControlsForPhone;
+- (void)addUIControlsForLargePhone;
 - (void)addControllsOnLeftPanelWithFrame:(CGRect)rect;
 - (void)rotate;
 //motion
@@ -190,18 +191,23 @@
     self.settingIsVisible = NO;
     self.baseColor = [UIColor colorWithRed:39.0f/255.0f green:64.0f/255.0f blue:139.0f/255.0f alpha:0.9];
     
-    self.bgView = [[[BGView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)] autorelease];
+    self.bgView = [[[BGView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)] autorelease];
     self.bgView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin;
     [self.view addSubview:self.bgView];
     
     if(isiPhone) {
-        self.boardRect = CGRectMake(15, 15, 230, 342);
-        [self addUIControlsForPhone];
-        self.boardViewController = [[[BoardViewController alloc] initWithFrame:boardRect amountCellX:10 amountCellY:15] autorelease];
-        self.view.backgroundColor = self.baseColor;
-        [self.bgView addSubview:self.boardViewController.boardView];
-        [self.bgView addSubview:self.boardViewController.nextShapeView];
-    } else {
+            self.boardRect = CGRectMake(15, 15, 230, 342);
+            self.boardViewController = [[[BoardViewController alloc] initWithFrame:boardRect amountCellX:10 amountCellY:15] autorelease];
+            self.view.backgroundColor = self.baseColor;
+            [self.bgView addSubview:self.boardViewController.boardView];
+            [self.bgView addSubview:self.boardViewController.nextShapeView];
+        
+        if([[UIApplication sharedApplication] has4inchDisplay]) {
+            [self addUIControlsForLargePhone];
+        } else {
+            [self addUIControlsForPhone];
+        }
+            } else {
         self.boardPanelView = [[[BGViewBorder alloc] initWithFrame:CGRectMake(159, 100, 450, 400) andOffset:15] autorelease];//add offset
         self.boardPanelView.backgroundColor = self.baseColor;
 
@@ -256,6 +262,31 @@
     [self addSettingButton:CGRectMake(rectMove.origin.x + 100, rectMove.origin.y, manageSizeButton, manageSizeButton) withImage:imageButton onView:self.rightPanelView];
     //rotate button
     [self addRotateButton:CGRectMake(rectMove.origin.x + 40, rectMove.origin.y + 150, rotateSizeButton, rotateSizeButton) withImage:imageButton onView:self.rightPanelView];
+}
+
+- (void)addUIControlsForLargePhone
+{
+    UIImage* imageButton = [UIImage imageNamed:@"SmallYellow.png"];
+    UIImage* settingImage = [UIImage imageNamed:@"Setting.png"];
+    //setting button
+    [self addSettingButton:CGRectMake(self.boardRect.size.width + 30, self.boardRect.origin.y + 10, settingSizeButton, settingSizeButton) withImage:settingImage onView:self.view];
+    //play button
+    [self addPlayButton:CGRectMake(self.boardRect.size.width + 30, self.boardRect.origin.y + 70, manageSizeButton, manageSizeButton) withImage:imageButton onView:self.view];
+    
+    //score label
+    [self addScoreLabel:CGRectMake(260, 150, scoreLabelWidth, scoreLabelHeigth) onView:self.view];
+    
+    //left button
+    [self addLeftMoveButton:CGRectMake(self.boardRect.origin.x + 10, self.boardRect.size.height + 50, moveSizeButton, moveSizeButton) withImage:imageButton onView:self.view];
+    
+      //right button
+    [self addRightMoveButton:CGRectMake(self.boardRect.origin.x + 85, self.boardRect.size.height + 50, moveSizeButton, moveSizeButton) withImage:imageButton onView:self.view];
+    
+    //down button
+    [self addDownMoveButton:CGRectMake(self.boardRect.origin.x + 45, self.boardRect.size.height + 110, moveSizeButton, moveSizeButton) withImage:imageButton onView:self.view];
+    
+    //rotate button
+    [self addRotateButton:CGRectMake(self.boardRect.origin.x + 200, self.boardRect.size.height + 60, rotateSizeButton, rotateSizeButton) withImage:imageButton onView:self.view];  
 }
 
 - (void)addUIControlsForPhone

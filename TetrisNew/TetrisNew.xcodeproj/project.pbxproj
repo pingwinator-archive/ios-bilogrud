@@ -43,6 +43,7 @@
 		6EC7BD9C162208D400066F23 /* SmallYellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EC7BD9A162208D400066F23 /* SmallYellow@2x.png */; };
 		6EC7BD9D162208D400066F23 /* SmallYellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EC7BD9B162208D400066F23 /* SmallYellow.png */; };
 		6EC7BDA01622187D00066F23 /* TetrisShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC7BD9F1622187D00066F23 /* TetrisShape.m */; };
+		6EEF2F1F1631850E00D38368 /* UIApplication+CheckVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EEF2F1E1631850E00D38368 /* UIApplication+CheckVersion.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,6 +97,8 @@
 		6EC7BD9B162208D400066F23 /* SmallYellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SmallYellow.png; sourceTree = "<group>"; };
 		6EC7BD9E1622187D00066F23 /* TetrisShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TetrisShape.h; sourceTree = "<group>"; };
 		6EC7BD9F1622187D00066F23 /* TetrisShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TetrisShape.m; sourceTree = "<group>"; };
+		6EEF2F1D1631850E00D38368 /* UIApplication+CheckVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+CheckVersion.h"; sourceTree = "<group>"; };
+		6EEF2F1E1631850E00D38368 /* UIApplication+CheckVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+CheckVersion.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +141,8 @@
 			children = (
 				6E9E3A7F16259FE20082C51B /* UIViewController+Deprecated.h */,
 				6E9E3A8016259FE20082C51B /* UIViewController+Deprecated.m */,
+				6EEF2F1D1631850E00D38368 /* UIApplication+CheckVersion.h */,
+				6EEF2F1E1631850E00D38368 /* UIApplication+CheckVersion.m */,
 			);
 			name = Categories;
 			path = TetrisNew/Categories;
@@ -380,6 +385,7 @@
 				6E9E3A8116259FE20082C51B /* UIViewController+Deprecated.m in Sources */,
 				6E9E3AA11626F4770082C51B /* BGViewBorder.m in Sources */,
 				6E2B10501627E043004C5D72 /* GameViewController.m in Sources */,
+				6EEF2F1F1631850E00D38368 /* UIApplication+CheckVersion.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,7 +7,7 @@
 //
 
 #import "BGViewBorder.h"
-
+#import "UIApplication+CheckVersion.h"
 @interface BGViewBorder()
 @property (retain, nonatomic) UILabel* superLabel;
 @property (assign, nonatomic) CGFloat offset;
@@ -60,23 +60,17 @@
 - (void)drawRect:(CGRect)rect
 {
     // Drawing code
-    NSInteger iPhoneAddOffset;
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetLineWidth(context, borderThin);
-    if(isiPhone && rect.size.height > 480) {
-        iPhoneAddOffset = 67;
-    } else {
-        iPhoneAddOffset = 0;
-    }
     
     CGContextSetStrokeColorWithColor(context, [UIColor yellowColor].CGColor);
     
-    CGContextAddRect(context, CGRectMake(rect.origin.x + offSetBorderThin + self.offset, rect.origin.y + offSetBorderThin + self.offset, rect.size.width - (rect.origin.x + offSetBorderThin  + self.offset) * 2, rect.size.height - ( rect.origin.y + offSetBorderThin + self.offset) * 2 - iPhoneAddOffset));
+    CGContextAddRect(context, CGRectMake(rect.origin.x + offSetBorderThin + self.offset, rect.origin.y + offSetBorderThin + self.offset, rect.size.width - (rect.origin.x + offSetBorderThin  + self.offset) * 2, rect.size.height - ( rect.origin.y + offSetBorderThin + self.offset) * 2));
     CGContextStrokePath(context);
     CGContextSetLineWidth(context, borderThick);
     CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
     
-    CGContextAddRect(context, CGRectMake(rect.origin.x + offsetBorderThick + self.offset, rect.origin.y + offsetBorderThick + self.offset, rect.size.width - (rect.origin.x + offsetBorderThick + self.offset) * 2, rect.size.height - ( rect.origin.y + offsetBorderThick + self.offset) * 2 - iPhoneAddOffset));
+    CGContextAddRect(context, CGRectMake(rect.origin.x + offsetBorderThick + self.offset, rect.origin.y + offsetBorderThick + self.offset, rect.size.width - (rect.origin.x + offsetBorderThick + self.offset) * 2, rect.size.height - ( rect.origin.y + offsetBorderThick + self.offset) * 2 ));
     
     CGContextStrokePath(context);
 }
