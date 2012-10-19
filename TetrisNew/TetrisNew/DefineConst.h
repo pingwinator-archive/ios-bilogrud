@@ -24,7 +24,9 @@
 
 //tetris const
 #define boardBorderWidth 2
-#define boardGridWidth 2
+#define boardGridWidth 1
+#define cellGridWidth 2
+#define cellDistance 2
 
 #define offSetBorderThin 3
 #define borderThin 2

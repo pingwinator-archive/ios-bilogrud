@@ -57,7 +57,7 @@
      
     self.toggleButton = [[[UISwitch alloc] initWithFrame:CGRectMake(rect.origin.x + 200, rect.origin.y, 50, 50)] autorelease];
     [self.toggleButton setOn:[SettingViewController loadSettingGrid]];
-    [self.toggleButton addTarget:self action:@selector(changeToggle) forControlEvents:UIControlEventTouchUpInside];
+    [self.toggleButton addTarget:self action:@selector(changeShowGridToggle) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.toggleButton];
     
     //close button
@@ -80,7 +80,7 @@
     [[self parent] deprecatedDismissModalViewControllerAnimated:YES];
 }
 
--(void)changeToggle
+-(void)changeShowGridToggle
 {
     self.showGrid = !self.showGrid;
     
