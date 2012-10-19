@@ -72,9 +72,6 @@
         self.boardView.backgroundColor = [UIColor lightGrayColor];
         self.gameOver = NO;
         self.newGame = NO;
-
-        //shape
-        //[self updateShape];
         
         self.borderSet = [[[NSMutableSet alloc] init] autorelease];
         for (NSInteger i = 0; i < self.boardView.amountCellX ; i++) {
@@ -212,7 +209,7 @@
     self.lines++;
     [self invokeDeleteLineDelegate];
     if(self.lines % 2 == 0) {
-        self.gameTimerInterval *= 0.95f;//*= @0.9;
+        self.gameTimerInterval *= 0.95f;
         [self stopGameTimer];
         [self startGameTimer];
         NSLog(@"%f", self.gameTimerInterval);

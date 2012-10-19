@@ -40,12 +40,10 @@ DISABLE_DEPRICADETED_WARNINGS_END
     if (self.parentViewController)
     {
         viewController = self.parentViewController;
-  //      [self.parentViewController deprecatedDismissModalViewControllerAnimated:YES];
     }
     else if( [self respondsToSelector: @selector( presentingViewController )] && [self presentingViewController])
     {
         viewController = self.presentingViewController;
-     //   [self.presentingViewController deprecatedDismissModalViewControllerAnimated:YES];
     }
     return viewController;
 }
