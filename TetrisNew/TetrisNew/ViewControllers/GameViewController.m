@@ -14,7 +14,7 @@
 #import "BGViewBorder.h"
 //#import <AudioToolbox/AudioToolbox.h>
 #import <AVFoundation/AVFoundation.h>
-@interface GameViewController ()
+@interface GameViewController ()<AVAudioPlayerDelegate>
 @property (retain, nonatomic) BoardViewController* boardViewController;
 @property (retain, nonatomic) SettingViewController* settingViewController;
 @property (retain, nonatomic) BoardView* nextShapeView;
@@ -35,7 +35,6 @@
 @property (retain, nonatomic) UILabel* resetLabel;
 @property (retain, nonatomic) UILabel* soundLabel;
 @property (retain, nonatomic) UILabel* settingLabel;
-@property (retain, nonatomic) NSTimer* buttonTimer;
 @property (assign, nonatomic) BOOL firstStart;
 @property (assign, nonatomic) CGRect boardRect;
 @property (assign, nonatomic) BOOL settingIsVisible;
@@ -80,7 +79,6 @@
 @synthesize settingLabel;
 @synthesize isStart;
 @synthesize firstStart;
-@synthesize buttonTimer;
 @synthesize boardRect;
 @synthesize settingButton;
 @synthesize settingIsVisible;
@@ -112,7 +110,6 @@
     self.rightLabel = nil;
     self.rotateLabel = nil;
     self.soundLabel = nil;
-    self.buttonTimer = nil;
     self.settingViewController = nil;
     self.lineLabel = nil;
     self.resetLabel = nil;
@@ -149,19 +146,20 @@
 {
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
      NSLog(@"%f %f",self.view.frame.size.width, self.view.frame.size.height);
+    [UIView animateWithDuration:duration animations:^(void) {
     if(isiPad) {
         if(UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
              self.leftPanelView.frame = CGRectMake(100, 150, 200, 400);
             self.boardPanelView.frame = CGRectMake(300, 150, 400, 400);
             self.rightPanelView.frame = CGRectMake(700, 150, 200, 400);
         }
-        if(UIInterfaceOrientationIsPortrait(toInterfaceOrientation)) {
-              
+        if(UIInterfaceOrientationIsPortrait(toInterfaceOrientation)) {     
             self.leftPanelView.frame = CGRectMake(200, 500, 200, 400);
             self.boardPanelView.frame = CGRectMake(200, 100, 400, 400);
             self.rightPanelView.frame = CGRectMake(400, 500, 200, 400);
         }
     }
+    }];
 }
 
 - (NSUInteger)supportedInterfaceOrientations
@@ -175,10 +173,16 @@
     return iOr;
 }
 
-- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
-    NSLog(@" preferred called");//This method is never called. WHY?
-    return UIInterfaceOrientationLandscapeRight;
+-(BOOL)shouldAutorotate
+{
+    return YES;
 }
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    NSLog(@" preferred called");
+    return UIInterfaceOrientationPortrait;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -219,6 +223,7 @@
         self.rightPanelView.backgroundColor = self.baseColor;
         [self addControllsOnRightPanelWithFrame:rightPanelRect];
         [self.view addSubview:self.rightPanelView];
+        [self willRotateToInterfaceOrientation:[[UIApplication sharedApplication] statusBarOrientation] duration:0];
     }
 }
 
@@ -477,7 +482,8 @@
     if(self.isStart) {
         self.isStart = NO;
         [self pauseGameTimer];
-         //[self.boardViewController.gameTimer invalidate];
+        [self.boardViewController.gameTimer invalidate];
+        self.boardViewController.gameTimer = nil;
     } else {
         if(self.firstStart && self.boardViewController) {
            [self.boardViewController start];
@@ -495,7 +501,6 @@
 {
     if (isStart) {
         [self.boardViewController resetBoard];
-   //     self.b
         self.firstStart = YES;
         self.isStart = NO;
         [self play];
@@ -512,12 +517,21 @@
             NSURL *soundURL = [[NSBundle mainBundle] URLForResource:@"Tetris" withExtension:@"mp3"];
             NSError* err = nil;
             self.avSound = [[[AVAudioPlayer alloc] initWithContentsOfURL:soundURL error:&err] autorelease];
+            self.avSound.delegate = self;
             if(!err){
                 [self.avSound play];
             }
         }
     }
 }
+
+#pragma mark - AVAudioPlayerDelegate Methods
+
+- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
+{
+    [self.avSound play];
+}
+
 
 #pragma mark - Methods for TouchDown Timer
 

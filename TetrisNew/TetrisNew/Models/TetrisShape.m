@@ -1,4 +1,4 @@
-//
+ //
 //  TetrisShape.m
 //  TetrisNew
 //
@@ -19,8 +19,9 @@
 - (void)randomTypeShape;
 - (NSInteger)randomNumberFrom:(NSInteger)from To:(NSInteger)to;
 - (NSMutableSet*)transformation:(NSSet*)localShapePoints withLocalCentre:(CGPoint)cntr;
-- (NSMutableSet*)rotateShape:(DirectionRotate)directionRotate;
-- (NSMutableSet*)tryRotateCurrentShape;
+- (NSMutableSet*)rotateShape:(DirectionRotate)directionRotate withChanges:(BOOL)isDeepRotate;
+- (NSMutableSet*)tryRotateCurrentShape:(DirectionRotate)direction;
+//- (NSMutableSet*)tryRotateCurrentShape;
 - (NSMutableArray*)initRotatingShapeArray;
 @end
 @implementation TetrisShape
@@ -126,13 +127,13 @@
 
 - (void)deepRotate:(DirectionRotate)directionRotate
 {
-    self.shapePoints = [self rotateShape:directionRotate];//[self rotate: directionRotate];
+    self.shapePoints = [self rotateShape:directionRotate withChanges:YES];//[self rotate: directionRotate];
 }
 
 //get rotated shape for check
 - (NSMutableSet*)getRotatedShape:(DirectionRotate)directionRotate
 {
-    return [self transformation:[self tryRotateCurrentShape] withLocalCentre:self.centerPoint];
+    return [self transformation:[self tryRotateCurrentShape: directionRotate] withLocalCentre:self.centerPoint];
 }
 
 //private
@@ -186,28 +187,33 @@
     return test;
 }
 
-- (NSMutableSet*)rotateShape:(DirectionRotate)directionRotate
+- (NSMutableSet*)rotateShape:(DirectionRotate)directionRotate withChanges:(BOOL)isDeepRotate
 {
+    NSInteger tempNumbState = self.numbState;
     if(directionRotate == leftDirectionRotate) {
-        if(numbState == 0) {
-            self.numbState = [self.rotateShapeCollection count] - 1;
+        if(tempNumbState == 0) {
+           tempNumbState = [self.rotateShapeCollection count] - 1;
         } else {
-            self.numbState--;
+           tempNumbState--;
         }
     } else {
-        self.numbState++;
+        tempNumbState++;
       //  NSInteger i = [self.rotateShapeCollection count];
-        if(self.numbState  == [self.rotateShapeCollection count]) {
-            self.numbState = 0;
+        if(tempNumbState  == [self.rotateShapeCollection count]) {
+            tempNumbState = 0;
         }
     }
-    NSLog(@"%d", self.numbState);
-    return [self.rotateShapeCollection objectAtIndex:self.numbState];
+    NSLog(@"%d", tempNumbState);
+    if(isDeepRotate) {
+        self.numbState = tempNumbState;
+    }
+    return [self.rotateShapeCollection objectAtIndex:tempNumbState];
 }
 
-- (NSMutableSet*)tryRotateCurrentShape
+- (NSMutableSet*)tryRotateCurrentShape:(DirectionRotate)direction
 {
- return [self.rotateShapeCollection objectAtIndex:self.numbState];
+
+    return [self rotateShape:direction withChanges:NO];//[[self.rotateShapeCollection objectAtIndex:self.numbState] rotateShape:direction withChanges:NO];
 }
 
 - (CGPoint)getNextCenter:(CGPoint)localCenter withDirection:(DirectionMove)direction

@@ -129,7 +129,6 @@
     [self invokeDeleteLineDelegate];
    
     [self stopGameTimer];
-    self.gameTimerInterval = 1.0f;
     [self.boardView setNeedsDisplay];
     [self.nextShapeView setNeedsDisplay];
     self.currentShape = nil;
@@ -193,6 +192,7 @@
 - (void)rotateShape:(DirectionRotate) directionRotate
 {
     NSMutableSet* tempSet = [NSMutableSet setWithSet:[self.currentShape getRotatedShape:directionRotate]];
+    NSMutableSet* test = [self.currentShape getShapePoints];
     
     if([self validationMove:tempSet]) {
         [self.currentShape deepRotate:directionRotate];
@@ -269,6 +269,7 @@
 {
     if(self.gameOver) {
         [self.gameTimer invalidate];
+        self.gameTimer = nil;
     } else {
         [self moveShape:downDirectionMove];
     }
@@ -277,12 +278,15 @@
 
 - (void)startGameTimer
 {
-    self.gameTimer = [NSTimer scheduledTimerWithTimeInterval:self.gameTimerInterval target:self selector:@selector(timerTick) userInfo:nil repeats:YES];
-}
+    if(!self.gameTimer) {
+       self.gameTimer = [NSTimer scheduledTimerWithTimeInterval:self.gameTimerInterval target:self selector:@selector(timerTick) userInfo:nil repeats:YES];
+    }
+ }
 
 - (void)stopGameTimer
 {
     [self.gameTimer invalidate];
+    self.gameTimer = nil;
 }
 
 #pragma mark - Settings 

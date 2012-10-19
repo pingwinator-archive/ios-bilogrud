@@ -10,6 +10,7 @@
 @class BGView;
 @class BoardView;
 #import "BoardViewController.h"
+
 @interface GameViewController : UIViewController<DeleteLineDelegate, GameOverDelegate>
 @property (assign, nonatomic) BOOL isStart;
 - (void)play;
