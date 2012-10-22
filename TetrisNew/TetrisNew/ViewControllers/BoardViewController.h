@@ -36,6 +36,7 @@
 - (void)stopGameTimer;
 //grid
 - (void)showGrid:(BOOL)grid;
+- (void)showColor:(BOOL)isColor;
 @end
 
 @protocol DeleteLineDelegate <NSObject>

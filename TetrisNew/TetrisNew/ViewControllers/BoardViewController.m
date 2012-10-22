@@ -293,4 +293,9 @@
     self.nextShapeView.showGrid = grid;
 }
 
+- (void)showColor:(BOOL)isColor
+{
+    self.boardView.showColor = isColor;
+    self.nextShapeView.showColor = isColor;
+}
 @end

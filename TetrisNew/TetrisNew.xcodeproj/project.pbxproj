@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E0979841635154F001B7433 /* button_up.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E0979821635154F001B7433 /* button_up.png */; };
+		6E0979851635154F001B7433 /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E0979831635154F001B7433 /* button.png */; };
 		6E13F6CA1622BCE4005BF66D /* BoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E13F6C91622BCE4005BF66D /* BoardViewController.m */; };
 		6E13F6CE1622CF1C005BF66D /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E13F6CD1622CF1C005BF66D /* Cell.m */; };
 		6E272BB5162CA708002D6FB8 /* sea.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 6E272BB4162CA708002D6FB8 /* sea.jpeg */; };
@@ -47,6 +49,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6E0979821635154F001B7433 /* button_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_up.png; sourceTree = "<group>"; };
+		6E0979831635154F001B7433 /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
 		6E13F6C81622BCE4005BF66D /* BoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardViewController.h; sourceTree = "<group>"; };
 		6E13F6C91622BCE4005BF66D /* BoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoardViewController.m; sourceTree = "<group>"; };
 		6E13F6CC1622CF1C005BF66D /* Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
@@ -118,6 +122,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6E09798016351530001B7433 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				6E0979821635154F001B7433 /* button_up.png */,
+				6E0979831635154F001B7433 /* button.png */,
+			);
+			name = Buttons;
+			sourceTree = "<group>";
+		};
 		6E2AEE78162724BE000D9561 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
@@ -273,6 +286,7 @@
 		6EC7BD6A1621E36900066F23 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6E09798016351530001B7433 /* Buttons */,
 				6E272BB4162CA708002D6FB8 /* sea.jpeg */,
 				6E9E3A9D1626E6D40082C51B /* forest.jpeg */,
 				6E9E3A9B1626E5C00082C51B /* bg.jpeg */,
@@ -364,6 +378,8 @@
 				6E2AEE6D16270B9B000D9561 /* iPad-Retina–Portrait.png in Resources */,
 				6E2AEE7A162724BE000D9561 /* Tetris.mp3 in Resources */,
 				6E272BB5162CA708002D6FB8 /* sea.jpeg in Resources */,
+				6E0979841635154F001B7433 /* button_up.png in Resources */,
+				6E0979851635154F001B7433 /* button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

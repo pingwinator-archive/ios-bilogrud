@@ -126,6 +126,7 @@
 {
     [super viewWillAppear:YES];
     [self.boardViewController showGrid: [SettingViewController loadSettingGrid]];
+    [self.boardViewController showColor: [SettingViewController loadSettingColor]];
     [self.boardViewController.boardView setNeedsDisplay];
     [self.boardViewController.nextShapeView setNeedsDisplay];
 }
@@ -235,7 +236,7 @@
 
 - (void)addControllsOnLeftPanelWithFrame:(CGRect)rect
 {
-    UIImage* imageButton = [UIImage imageNamed:@"SmallYellow.png"];
+    UIImage* imageButton = [UIImage imageNamed:@"button_up.png"];//[UIImage imageNamed:@"SmallYellow.png"];
     //play button
     [self addPlayButton:CGRectMake(20, 50, manageSizeButton, manageSizeButton) withImage:imageButton onView:self.leftPanelView];
     //reset button
@@ -291,7 +292,7 @@
 
 - (void)addUIControlsForPhone
 { 
-    UIImage* imageButton = [UIImage imageNamed:@"SmallYellow.png"];
+    UIImage* imageButton = [UIImage imageNamed:@"button_up.png"];//[UIImage imageNamed:@"SmallYellow.png"];
     UIImage* settingImage = [UIImage imageNamed:@"Setting.png"];
     //setting button
     [self addSettingButton:CGRectMake(self.boardRect.size.width + 30, self.boardRect.origin.y + 10, settingSizeButton, settingSizeButton) withImage:settingImage onView:self.view];

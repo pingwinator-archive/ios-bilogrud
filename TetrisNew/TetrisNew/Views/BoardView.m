@@ -23,6 +23,7 @@
 @synthesize cellWidth;
 @synthesize nextShapeCellsForDrawing;
 @synthesize showGrid;
+@synthesize showColor;
 - (void)dealloc
 {
     self.boardCellsForDrawing = nil;
@@ -45,6 +46,7 @@
     self = [self initWithFrame:frame];
     if(self) {
         self.showGrid = YES;
+        self.showColor = NO;
         self.amountCellX = cellX;
         self.amountCellY = cellY;
         self.cellWidth = (self.frame.size.width - 2 * boardBorderWidth) / self.amountCellX;
@@ -92,29 +94,19 @@
         CGContextAddRect(context, rect);
         CGContextStrokePath(context);
         
-         [c setFill];
+        [c setFill];
         
         CGRect filledRect = CGRectMake(rect.origin.x + cellGridWidth + cellDistance, rect.origin.y + cellGridWidth + cellDistance, rect.size.width - (cellGridWidth + cellDistance) * 2, rect.size.height - (cellGridWidth + cellDistance) * 2);
         CGContextAddRect(context, filledRect);
-        CGContextFillRect(context, filledRect);
-//        CGContextMoveToPoint(context, i, 0);
-//        CGContextAddLineToPoint(context, i, rect.size.height);
-  
+        CGContextFillRect(context, filledRect);  
         }
     }
-    
-//    for (CGFloat j = boardBorderWidth; j < rect.size.height; j += self.cellHeight) {
-//        CGContextMoveToPoint(context, 0, j);
-//        CGContextAddLineToPoint(context, rect.size.width, j);
-//    }
      CGContextStrokePath(context);
 }
 
 - (void)drawBoard:(CGContextRef)context
 {
     CGContextStrokePath(context);
-    
-   
      for (Cell* cell in self.boardCellsForDrawing) {
         UIColor* shapeColor = cell.colorCell;
          CGContextSetStrokeColorWithColor(context, [UIColor blackColor].CGColor);
@@ -126,9 +118,12 @@
         CGContextAddRect(context, rect);
         CGContextStrokePath(context);
         
-        
-       // [[UIColor blackColor] setFill];
-        [shapeColor setFill];
+        if (self.showColor) {
+            [shapeColor setFill];
+        } else {
+            [[UIColor blackColor] setFill];
+        }
+   
        CGRect filledRect = CGRectMake(rect.origin.x + cellGridWidth + cellDistance, rect.origin.y + cellGridWidth + cellDistance, rect.size.width - (cellGridWidth + cellDistance) * 2, rect.size.height - (cellGridWidth + cellDistance) * 2);
        CGContextAddRect(context, filledRect);
        CGContextFillRect(context, filledRect);
@@ -142,11 +137,20 @@
     for (Cell* cell in self.nextShapeCellsForDrawing) {
         CGRect rect = CGRectMake(boardBorderWidth + (self.cellWidth) * cell.point.x, boardBorderWidth + (self.cellHeight)* cell.point.y, self.cellWidth, self.cellHeight);
         
-        [cell.colorCell setFill];
-        CGContextSetLineWidth(context, boardGridWidth);
+        CGContextSetLineWidth(context, cellGridWidth);
         
         CGContextAddRect(context, rect);
-        CGContextFillRect(context, rect);
+        CGContextStrokePath(context);
+        
+        if (self.showColor) {
+            [cell.colorCell setFill];
+        } else {
+            [[UIColor blackColor] setFill];
+        }
+        
+        CGRect filledRect = CGRectMake(rect.origin.x + cellGridWidth + cellDistanceForNext, rect.origin.y + cellGridWidth + cellDistanceForNext, rect.size.width - (cellGridWidth + cellDistanceForNext) * 2, rect.size.height - (cellGridWidth + cellDistanceForNext) * 2);
+        CGContextAddRect(context, filledRect);
+        CGContextFillRect(context, filledRect);
     }
 }
 @end

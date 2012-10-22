@@ -10,6 +10,9 @@
 
 @interface SettingViewController : UIViewController
 @property (assign, nonatomic) BOOL showGrid;
+@property (assign, nonatomic) BOOL showColor;
 + (BOOL)loadSettingGrid;
 + (void)saveSettingGrid:(BOOL)grid;
++ (BOOL)loadSettingColor;
++ (void)saveSettingColor:(BOOL)showColor;
 @end

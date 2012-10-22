@@ -27,6 +27,7 @@
 #define boardGridWidth 1
 #define cellGridWidth 2
 #define cellDistance 2
+#define cellDistanceForNext 0.5
 
 #define offSetBorderThin 3
 #define borderThin 2
@@ -63,6 +64,7 @@
 #define delayForButtonPressed 0.3
 
 #define kShowGrid @"grid"
+#define kShowColor @"showColorShape"
 typedef enum {
     downDirectionMove,
     rightDirectionMove,
