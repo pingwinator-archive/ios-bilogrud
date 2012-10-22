@@ -26,7 +26,7 @@
 #define boardBorderWidth 2
 #define boardGridWidth 1
 #define cellGridWidth 2
-#define cellDistance 2
+#define cellDistance 1
 #define cellDistanceForNext 0.5
 
 #define offSetBorderThin 3

@@ -71,8 +71,8 @@
     if(self.nextShapeCellsForDrawing) {
         [self drawNextShape:context];
     }
-    self.layer.borderColor = [UIColor blackColor].CGColor;
-    self.layer.borderWidth = boardBorderWidth;
+//    self.layer.borderColor = [UIColor blackColor].CGColor;
+//    self.layer.borderWidth = boardBorderWidth;
     
     CGContextStrokePath(context);
 }

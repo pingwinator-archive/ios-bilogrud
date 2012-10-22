@@ -197,7 +197,7 @@
     [self.view addSubview:self.bgView];
     
     if(isiPhone) {
-            self.boardRect = CGRectMake(15, 15, 230, 342);
+            self.boardRect = CGRectMake(58, 20, 144, 230);
             self.boardViewController = [[[BoardViewController alloc] initWithFrame:boardRect amountCellX:10 amountCellY:15] autorelease];
             self.view.backgroundColor = self.baseColor;
             [self.bgView addSubview:self.boardViewController.boardView];
@@ -237,8 +237,10 @@
 - (void)addControllsOnLeftPanelWithFrame:(CGRect)rect
 {
     UIImage* imageButton = [UIImage imageNamed:@"button_up.png"];//[UIImage imageNamed:@"SmallYellow.png"];
+    UIImage* highlightedImage = [UIImage imageNamed:@"button.png"];
+    
     //play button
-    [self addPlayButton:CGRectMake(20, 50, manageSizeButton, manageSizeButton) withImage:imageButton onView:self.leftPanelView];
+    [self addPlayButton:CGRectMake(20, 50, manageSizeButton, manageSizeButton) withImage:imageButton andHighlighted:highlightedImage onView:self.leftPanelView];
     //reset button
     [self addResetButton:CGRectMake(130, 50 , manageSizeButton, manageSizeButton) withImage:imageButton onView:self.leftPanelView];
    
@@ -253,8 +255,8 @@
 
 - (void)addControllsOnRightPanelWithFrame:(CGRect)rect
 {
-    UIImage* imageButton = [UIImage imageNamed:@"SmallYellow.png"];
-    
+    //UIImage* imageButton = [UIImage imageNamed:@"SmallYellow.png"];
+    UIImage* imageButton = [UIImage imageNamed:@"button_up.png"];
     CGRect rectMove = CGRectMake(30, 50, manageSizeButton, manageSizeButton);
     
     //sound button
@@ -267,12 +269,14 @@
 
 - (void)addUIControlsForLargePhone
 {
-    UIImage* imageButton = [UIImage imageNamed:@"SmallYellow.png"];
+    //UIImage* imageButton = [UIImage imageNamed:@"SmallYellow.png"];
+    UIImage* imageButton = [UIImage imageNamed:@"button_up.png"];
     UIImage* settingImage = [UIImage imageNamed:@"Setting.png"];
+    UIImage* highlightedImage = [UIImage imageNamed:@"button.png"];
     //setting button
     [self addSettingButton:CGRectMake(self.boardRect.size.width + 30, self.boardRect.origin.y + 10, settingSizeButton, settingSizeButton) withImage:settingImage onView:self.view];
     //play button
-    [self addPlayButton:CGRectMake(self.boardRect.size.width + 30, self.boardRect.origin.y + 70, manageSizeButton, manageSizeButton) withImage:imageButton onView:self.view];
+    [self addPlayButton:CGRectMake(self.boardRect.size.width + 30, self.boardRect.origin.y + 70, manageSizeButton, manageSizeButton) withImage:imageButton andHighlighted:highlightedImage onView:self.view];
     
     //score label
     [self addScoreLabel:CGRectMake(260, 150, scoreLabelWidth, scoreLabelHeigth) onView:self.view];
@@ -294,36 +298,53 @@
 { 
     UIImage* imageButton = [UIImage imageNamed:@"button_up.png"];//[UIImage imageNamed:@"SmallYellow.png"];
     UIImage* settingImage = [UIImage imageNamed:@"Setting.png"];
+    UIImage* highlightedImage = [UIImage imageNamed:@"button.png"];
     //setting button
-    [self addSettingButton:CGRectMake(self.boardRect.size.width + 30, self.boardRect.origin.y + 10, settingSizeButton, settingSizeButton) withImage:settingImage onView:self.view];
-    //play button
-    [self addPlayButton:CGRectMake(self.boardRect.size.width + 30, self.boardRect.origin.y + 70, manageSizeButton, manageSizeButton) withImage:imageButton onView:self.view];
+//    [self addSettingButton:CGRectMake(self.boardRect.size.width + 30, self.boardRect.origin.y + 10, settingSizeButton, settingSizeButton) withImage:settingImage onView:self.view];
+   
+    CGRect rectManage = CGRectMake(150, self.boardRect.size.height + 50, 100, 20);
+     //play button
+    [self addPlayButton:CGRectMake(rectManage.origin.x , rectManage.origin.y, manageSizeButton, manageSizeButton) withImage:imageButton andHighlighted:highlightedImage onView:self.view];
+    
+    //reset button
+    [self addResetButton:CGRectMake(rectManage.origin.x + 50, rectManage.origin.y , manageSizeButton, manageSizeButton) withImage:imageButton onView:self.view];
+    
+    //sound button
+    [self addSoundButton:CGRectMake(rectManage.origin.x + 100, rectManage.origin.y , manageSizeButton, manageSizeButton) withImage:imageButton onView:self.view];
 
-    //score label
-    [self addScoreLabel:CGRectMake(260, 150, scoreLabelWidth, scoreLabelHeigth) onView:self.view];
-
-    //left button
-    [self addLeftMoveButton:CGRectMake(self.boardRect.origin.x + 10, self.boardRect.size.height + 40, moveSizeButton, moveSizeButton) withImage:imageButton onView:self.view];
-
-    //down button
-    [self addDownMoveButton:CGRectMake(self.boardRect.origin.x + 85, self.boardRect.size.height + 40, moveSizeButton, moveSizeButton) withImage:imageButton onView:self.view];
     
     //rotate button
-    [self addRotateButton:CGRectMake(self.boardRect.origin.x + 160, self.boardRect.size.height + 40, moveSizeButton, moveSizeButton) withImage:imageButton onView:self.view];
+    [self addRotateButton:CGRectMake(rectManage.origin.x + 60, rectManage.origin.y + 70, rotateSizeButton, rotateSizeButton) withImage:imageButton onView:self.view];
+//
     
+//
+//    //score label
+//    [self addScoreLabel:CGRectMake(260, 150, scoreLabelWidth, scoreLabelHeigth) onView:self.view];
+//
+    
+    CGRect rectMove = CGRectMake(30, self.boardRect.size.height + 130, 100, 20);
+    
+    //left button
+    [self addLeftMoveButton:CGRectMake(rectMove.origin.x, rectMove.origin.y, moveSizeButton, moveSizeButton) withImage:imageButton onView:self.view];
+
+    //down button
+    [self addDownMoveButton:CGRectMake(rectMove.origin.x + 40, rectMove.origin.y + 40, moveSizeButton, moveSizeButton) withImage:imageButton onView:self.view];
+    
+ 
     //right button
-    [self addRightMoveButton:CGRectMake(self.boardRect.origin.x + 235, self.boardRect.size.height + 40, moveSizeButton, moveSizeButton) withImage:imageButton onView:self.view];
+    [self addRightMoveButton:CGRectMake(rectMove.origin.x + 80, rectMove.origin.y, moveSizeButton, moveSizeButton) withImage:imageButton onView:self.view];
 }
 
 
 #pragma mark - Init components
 
-- (void)addPlayButton:(CGRect)rect withImage:(UIImage*)imageButton onView:(UIView*)view
+- (void)addPlayButton:(CGRect)rect withImage:(UIImage*)imageButton andHighlighted:(UIImage*)highlightedImage onView:(UIView*)view
 {
     //play button
     self.playButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.playButton.frame = rect;
     [self.playButton setImage:imageButton forState:UIControlStateNormal];
+    [self.playButton setImage:highlightedImage forState:UIControlStateHighlighted];
     [self.playButton addTarget:self action:@selector(play) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:self.playButton];
     
