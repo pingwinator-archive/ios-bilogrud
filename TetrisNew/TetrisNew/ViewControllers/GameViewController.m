@@ -206,7 +206,7 @@
             [self addUIControlsForLargePhone];
         } else {
             self.boardRect = CGRectMake(61, 22, 139, 270);
-            self.boardViewController = [[[BoardViewController alloc] initWithFrame:boardRect amountCellX:10 amountCellY:15] autorelease];
+            self.boardViewController = [[[BoardViewController alloc] initWithFrame:boardRect amountCellX:10 amountCellY:18] autorelease];
              
             [self.bgView addSubview:self.boardViewController.boardView];
             [self.bgView addSubview:self.boardViewController.nextShapeView];
@@ -261,7 +261,7 @@
 {
     UIImage* imageButton = [UIImage imageNamed:@"button_up.png"];
     UIImage* highlightedImage = [UIImage imageNamed:@"button.png"];
-    UIImage* rotateButton = [UIImage imageNamed:@"rotatebutton_up.png"];
+    UIImage* rotateButtonImage = [UIImage imageNamed:@"rotatebutton_up.png"];
     UIImage* highlightedImageRotate = [UIImage imageNamed:@"rotatebutton.png"];
     CGRect rectManage = CGRectMake(50, self.boardRect.size.height + 60, 100, 20);
     //play button
@@ -277,7 +277,7 @@
     [self addSettingButton:CGRectMake(rectManage.origin.x + 180, rectManage.origin.y , manageSizeButton, manageSizeButton) withImage:imageButton onView:self.view];
     
     //rotate button
-    [self addRotateButton:CGRectMake(rectManage.origin.x + 150, rectManage.origin.y + 90, rotateSizeButton, rotateSizeButton) withImage:rotateButton andHighlighted:highlightedImageRotate onView:self.view];
+    [self addRotateButton:CGRectMake(rectManage.origin.x + 150, rectManage.origin.y + 90, rotateSizeButton, rotateSizeButton) withImage:rotateButtonImage andHighlighted:highlightedImageRotate onView:self.view];
     
     //score label
     [self addScoreLabel:CGRectMake(self.boardRect.size.width + self.boardRect.origin.x + 5, 20, scoreLabelWidth, scoreLabelHeigth) onView:self.view];
@@ -298,7 +298,7 @@
 { 
     UIImage* imageButton = [UIImage imageNamed:@"button_up.png"];
     UIImage* highlightedImage = [UIImage imageNamed:@"button.png"];
-    UIImage* rotateButton = [UIImage imageNamed:@"rotatebutton_up.png"];
+    UIImage* rotateButtonImage = [UIImage imageNamed:@"rotatebutton_up.png"];
     UIImage* highlightedImageRotate = [UIImage imageNamed:@"rotatebutton.png"];
     
     CGRect rectManage = CGRectMake(50, self.boardRect.size.height + 50, 100, 20);
@@ -315,7 +315,7 @@
     [self addSettingButton:CGRectMake(rectManage.origin.x + 180, rectManage.origin.y , manageSizeButton, manageSizeButton) withImage:imageButton onView:self.view];
     
     //rotate button
-    [self addRotateButton:CGRectMake(rectManage.origin.x + 150, rectManage.origin.y + 70, rotateSizeButton, rotateSizeButton) withImage:rotateButton andHighlighted:highlightedImageRotate onView:self.view];
+    [self addRotateButton:CGRectMake(rectManage.origin.x + 150, rectManage.origin.y + 70, rotateSizeButton, rotateSizeButton) withImage:rotateButtonImage andHighlighted:highlightedImageRotate onView:self.view];
 
     //score label
     [self addScoreLabel:CGRectMake(self.boardRect.size.width + self.boardRect.origin.x + 10, 20, scoreLabelWidth, scoreLabelHeigth) onView:self.view];
@@ -336,7 +336,7 @@
 {
     UIImage* imageButton = [UIImage imageNamed:@"button_up.png"];
     UIImage* highlightedImage = [UIImage imageNamed:@"button.png"];
-    UIImage* rotateButton = [UIImage imageNamed:@"rotatebutton_up.png"];
+    UIImage* rotateButtonImage = [UIImage imageNamed:@"rotatebutton_up.png"];
     UIImage* highlightedImageRotate = [UIImage imageNamed:@"rotatebutton.png"];
     
     CGRect rectManage = CGRectMake(220, self.boardRect.size.height + 120, 100, 20);
@@ -353,7 +353,7 @@
     [self addSettingButton:CGRectMake(rectManage.origin.x + 300, rectManage.origin.y , manageSizeButton, manageSizeButton) withImage:imageButton onView:self.view];
     
     //rotate button
-    [self addRotateButton:CGRectMake(rectManage.origin.x + 300, rectManage.origin.y + 100, rotateSizeButtoniPad, rotateSizeButtoniPad) withImage:rotateButton andHighlighted:highlightedImageRotate onView:self.view];
+    [self addRotateButton:CGRectMake(rectManage.origin.x + 300, rectManage.origin.y + 100, rotateSizeButtoniPad, rotateSizeButtoniPad) withImage:rotateButtonImage andHighlighted:highlightedImageRotate onView:self.view];
     
     //score label
     [self addScoreLabel:CGRectMake(self.boardRect.size.width + self.boardRect.origin.x + 5, 50, 150, scoreLabelHeigth) onView:self.view];
@@ -369,7 +369,6 @@
     //right button
     [self addRightMoveButton:CGRectMake(rectMove.origin.x + 120, rectMove.origin.y, moveSizeButtoniPad, moveSizeButtoniPad) withImage:imageButton onView:self.view];
 }
-
 
 #pragma mark - Init components
 
@@ -584,11 +583,15 @@
         self.isStart = NO;
         [self pauseGameTimer];
         [self.boardViewController.gameTimer invalidate];
+        if(self.avSound.isPlaying) {
+            [self.avSound pause];
+        }
         self.boardViewController.gameTimer = nil;
     } else {
         if(self.firstStart && self.boardViewController) {
             self.gameCount++;
            [Flurry logEvent:@"StartGame"];
+            
            [self.boardViewController start];
             self.firstStart = NO;
             self.boardViewController.delegate = self;
@@ -596,6 +599,9 @@
         }
         self.isStart = YES;
         [self.boardViewController startGameTimer];
+        if (self.avSound) {
+                [self.avSound play];
+        }
         DBLog(@"play!");
     }
 }

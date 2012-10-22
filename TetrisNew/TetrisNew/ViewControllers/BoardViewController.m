@@ -189,7 +189,6 @@
 - (void)rotateShape:(DirectionRotate) directionRotate
 {
     NSMutableSet* tempSet = [NSMutableSet setWithSet:[self.currentShape getRotatedShape:directionRotate]];
-    
     if([self validationMove:tempSet]) {
         [self.currentShape deepRotate:directionRotate];
     }
