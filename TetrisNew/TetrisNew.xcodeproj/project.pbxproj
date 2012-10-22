@@ -16,6 +16,7 @@
 		6E2B104316274392004C5D72 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E2B104216274392004C5D72 /* AVFoundation.framework */; };
 		6E2B104516274F11004C5D72 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E2B104416274F11004C5D72 /* AudioToolbox.framework */; };
 		6E2B10501627E043004C5D72 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2B104F1627E043004C5D72 /* GameViewController.m */; };
+		6E5D87281635A11300E95323 /* back-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E5D87271635A11300E95323 /* back-ipad.png */; };
 		6E5F313B16260AC000274174 /* DisplayOTF.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E5F313816260AC000274174 /* DisplayOTF.otf */; };
 		6E5F313C16260AC000274174 /* DS-DIGIT.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6E5F313916260AC000274174 /* DS-DIGIT.ttf */; };
 		6E5F313D16260AC000274174 /* EHSMB_2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6E5F313A16260AC000274174 /* EHSMB_2.ttf */; };
@@ -48,8 +49,13 @@
 		6EEF2F4816352C1100D38368 /* Setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EEF2F4016352C1100D38368 /* Setting@2x.png */; };
 		6EEF2F4916352C1100D38368 /* SmallYellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EEF2F4116352C1100D38368 /* SmallYellow.png */; };
 		6EEF2F4A16352C1100D38368 /* SmallYellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EEF2F4216352C1100D38368 /* SmallYellow@2x.png */; };
-		6EEF2F4D16352FEF00D38368 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EEF2F4B16352FEF00D38368 /* back.png */; };
-		6EEF2F4E16352FEF00D38368 /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EEF2F4C16352FEF00D38368 /* back@2x.png */; };
+		6EEF2F5116358B2500D38368 /* rotatebutton_up.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EEF2F4F16358B2400D38368 /* rotatebutton_up.png */; };
+		6EEF2F5216358B2500D38368 /* rotatebutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EEF2F5016358B2400D38368 /* rotatebutton.png */; };
+		6EEF2F561635955300D38368 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EEF2F551635955300D38368 /* libFlurry.a */; };
+		6EEF2F581635976600D38368 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EEF2F571635976600D38368 /* SystemConfiguration.framework */; };
+		6EEF2F5C16359E9700D38368 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EEF2F5916359E9600D38368 /* back.png */; };
+		6EEF2F5D16359E9700D38368 /* back@2x-h568.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EEF2F5A16359E9600D38368 /* back@2x-h568.png */; };
+		6EEF2F5E16359E9700D38368 /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EEF2F5B16359E9700D38368 /* back@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +71,7 @@
 		6E2B104416274F11004C5D72 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		6E2B10461627D954004C5D72 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6E2B104F1627E043004C5D72 /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
+		6E5D87271635A11300E95323 /* back-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-ipad.png"; sourceTree = "<group>"; };
 		6E5F313816260AC000274174 /* DisplayOTF.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DisplayOTF.otf; sourceTree = "<group>"; };
 		6E5F313916260AC000274174 /* DS-DIGIT.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DS-DIGIT.ttf"; sourceTree = "<group>"; };
 		6E5F313A16260AC000274174 /* EHSMB_2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EHSMB_2.ttf; sourceTree = "<group>"; };
@@ -109,8 +116,14 @@
 		6EEF2F4016352C1100D38368 /* Setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Setting@2x.png"; sourceTree = "<group>"; };
 		6EEF2F4116352C1100D38368 /* SmallYellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SmallYellow.png; sourceTree = "<group>"; };
 		6EEF2F4216352C1100D38368 /* SmallYellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SmallYellow@2x.png"; sourceTree = "<group>"; };
-		6EEF2F4B16352FEF00D38368 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
-		6EEF2F4C16352FEF00D38368 /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
+		6EEF2F4F16358B2400D38368 /* rotatebutton_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rotatebutton_up.png; sourceTree = "<group>"; };
+		6EEF2F5016358B2400D38368 /* rotatebutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rotatebutton.png; sourceTree = "<group>"; };
+		6EEF2F541635955300D38368 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
+		6EEF2F551635955300D38368 /* libFlurry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry.a; sourceTree = "<group>"; };
+		6EEF2F571635976600D38368 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		6EEF2F5916359E9600D38368 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
+		6EEF2F5A16359E9600D38368 /* back@2x-h568.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x-h568.png"; sourceTree = "<group>"; };
+		6EEF2F5B16359E9700D38368 /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,12 +131,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EEF2F581635976600D38368 /* SystemConfiguration.framework in Frameworks */,
 				6E2B104516274F11004C5D72 /* AudioToolbox.framework in Frameworks */,
 				6E2B104316274392004C5D72 /* AVFoundation.framework in Frameworks */,
 				6EC7BD8E1621E86900066F23 /* QuartzCore.framework in Frameworks */,
 				6EC7BD2A1621E23C00066F23 /* UIKit.framework in Frameworks */,
 				6EC7BD2C1621E23C00066F23 /* Foundation.framework in Frameworks */,
 				6EC7BD2E1621E23C00066F23 /* CoreGraphics.framework in Frameworks */,
+				6EEF2F561635955300D38368 /* libFlurry.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,6 +201,7 @@
 		6EC7BD281621E23C00066F23 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6EEF2F571635976600D38368 /* SystemConfiguration.framework */,
 				6E2B104416274F11004C5D72 /* AudioToolbox.framework */,
 				6E2B104216274392004C5D72 /* AVFoundation.framework */,
 				6EC7BD8D1621E86900066F23 /* QuartzCore.framework */,
@@ -272,6 +288,7 @@
 		6EC7BD691621E36900066F23 /* Resourses */ = {
 			isa = PBXGroup;
 			children = (
+				6EEF2F531635955300D38368 /* Flurry */,
 				6EC7BD321621E23C00066F23 /* Localizable.strings */,
 				6E2AEE78162724BE000D9561 /* Sounds */,
 				6E5F313716260AC000274174 /* Fonts */,
@@ -285,9 +302,11 @@
 		6EC7BD6A1621E36900066F23 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6E5D87271635A11300E95323 /* back-ipad.png */,
+				6EEF2F5916359E9600D38368 /* back.png */,
+				6EEF2F5A16359E9600D38368 /* back@2x-h568.png */,
+				6EEF2F5B16359E9700D38368 /* back@2x.png */,
 				6EEF2F3A16352C1100D38368 /* Buttons */,
-				6EEF2F4B16352FEF00D38368 /* back.png */,
-				6EEF2F4C16352FEF00D38368 /* back@2x.png */,
 				6E272BB4162CA708002D6FB8 /* sea.jpeg */,
 				6E9E3A9D1626E6D40082C51B /* forest.jpeg */,
 				6E9E3A9B1626E5C00082C51B /* bg.jpeg */,
@@ -307,6 +326,8 @@
 		6EEF2F3A16352C1100D38368 /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
+				6EEF2F4F16358B2400D38368 /* rotatebutton_up.png */,
+				6EEF2F5016358B2400D38368 /* rotatebutton.png */,
 				6EEF2F3B16352C1100D38368 /* button.png */,
 				6EEF2F3C16352C1100D38368 /* button@2x.png */,
 				6EEF2F3D16352C1100D38368 /* button_up.png */,
@@ -317,6 +338,15 @@
 				6EEF2F4216352C1100D38368 /* SmallYellow@2x.png */,
 			);
 			path = Buttons;
+			sourceTree = "<group>";
+		};
+		6EEF2F531635955300D38368 /* Flurry */ = {
+			isa = PBXGroup;
+			children = (
+				6EEF2F541635955300D38368 /* Flurry.h */,
+				6EEF2F551635955300D38368 /* libFlurry.a */,
+			);
+			path = Flurry;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -394,8 +424,12 @@
 				6EEF2F4816352C1100D38368 /* Setting@2x.png in Resources */,
 				6EEF2F4916352C1100D38368 /* SmallYellow.png in Resources */,
 				6EEF2F4A16352C1100D38368 /* SmallYellow@2x.png in Resources */,
-				6EEF2F4D16352FEF00D38368 /* back.png in Resources */,
-				6EEF2F4E16352FEF00D38368 /* back@2x.png in Resources */,
+				6EEF2F5116358B2500D38368 /* rotatebutton_up.png in Resources */,
+				6EEF2F5216358B2500D38368 /* rotatebutton.png in Resources */,
+				6EEF2F5C16359E9700D38368 /* back.png in Resources */,
+				6EEF2F5D16359E9700D38368 /* back@2x-h568.png in Resources */,
+				6EEF2F5E16359E9700D38368 /* back@2x.png in Resources */,
+				6E5D87281635A11300E95323 /* back-ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -494,6 +528,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TetrisNew/TetrisNew-Prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/TetrisNew/Resourses/Flurry\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -505,6 +543,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TetrisNew/TetrisNew-Prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/TetrisNew/Resourses/Flurry\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

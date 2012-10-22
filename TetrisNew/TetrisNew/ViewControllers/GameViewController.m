@@ -41,11 +41,11 @@
 @property (retain, nonatomic) BGView* bgView;
 @property (retain, nonatomic) AVAudioPlayer* avSound;
 
-@property (retain, nonatomic) BGViewBorder* boardPanelView;
+@property (retain, nonatomic) UIView* boardPanelView;
 @property (retain, nonatomic) UIView* leftPanelView;
 @property (retain, nonatomic) UIView* rightPanelView;
 
-@property (retain, nonatomic) UIColor* baseColor;
+
 - (void)addUIControlsForPhone;
 - (void)addUIControlsForLargePhone;
 - (void)addControllsOnLeftPanelWithFrame:(CGRect)rect;
@@ -91,7 +91,6 @@
 @synthesize leftPanelView;
 @synthesize rightPanelView;
 
-@synthesize baseColor;
 - (void)dealloc
 {
     self.boardViewController = nil;
@@ -135,7 +134,9 @@
 {
     BOOL res = NO;
     if (isiPad) {
-        res = YES;
+        if(UIInterfaceOrientationIsPortrait(toInterfaceOrientation)) {
+            res = YES;
+        }
     } else {
          if(toInterfaceOrientation == UIInterfaceOrientationPortrait) {
              res = YES;
@@ -190,53 +191,42 @@
     [super viewDidLoad];
     self.firstStart = YES;
     self.settingIsVisible = NO;
-    self.baseColor = [UIColor colorWithRed:39.0f/255.0f green:64.0f/255.0f blue:139.0f/255.0f alpha:0.9];
-    
+    self.gameCount = 0;
     self.bgView = [[[BGView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)] autorelease];
     self.bgView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin;
     [self.view addSubview:self.bgView];
     
     if(isiPhone) {
-            self.boardRect = CGRectMake(58, 20, 144, 230);
-            self.boardViewController = [[[BoardViewController alloc] initWithFrame:boardRect amountCellX:10 amountCellY:15] autorelease];
-            self.view.backgroundColor = self.baseColor;
+        if([[UIApplication sharedApplication] has4inchDisplay]) {
+            self.boardRect = CGRectMake(61, 22, 139, 270);
+            self.boardViewController = [[[BoardViewController alloc] initWithFrame:boardRect amountCellX:10 amountCellY:18] autorelease];
+           
             [self.bgView addSubview:self.boardViewController.boardView];
             [self.bgView addSubview:self.boardViewController.nextShapeView];
-        
-        if([[UIApplication sharedApplication] has4inchDisplay]) {
             [self addUIControlsForLargePhone];
         } else {
+            self.boardRect = CGRectMake(61, 22, 139, 270);
+            self.boardViewController = [[[BoardViewController alloc] initWithFrame:boardRect amountCellX:10 amountCellY:15] autorelease];
+             
+            [self.bgView addSubview:self.boardViewController.boardView];
+            [self.bgView addSubview:self.boardViewController.nextShapeView];
             [self addUIControlsForPhone];
         }
-            } else {
-        self.boardPanelView = [[[BGViewBorder alloc] initWithFrame:CGRectMake(159, 100, 450, 400) andOffset:15] autorelease];//add offset
-        self.boardPanelView.backgroundColor = self.baseColor;
-
-        self.boardRect = CGRectMake(30, 30, 230, 342);
-        self.boardViewController = [[[BoardViewController alloc] initWithFrame:boardRect amountCellX:10 amountCellY:15] autorelease];
-        [self.boardPanelView addSubview:self.boardViewController.boardView];
-        [self.boardPanelView addSubview:self.boardViewController.nextShapeView];
-        [self addScoreLabel:CGRectMake(boardRect.origin.x + boardRect.size.width + 40, - 2 * boardRect.origin.y + boardRect.size.height, 40, 40) onView:self.boardPanelView];
-        [self.view addSubview: self.boardPanelView];
-        
-        CGRect leftPanelRect = CGRectMake(159, 500, 225, 400);
-        self.leftPanelView = [[[UIView alloc] initWithFrame:leftPanelRect] autorelease];
-        self.leftPanelView.backgroundColor = self.baseColor;
-        [self addControllsOnLeftPanelWithFrame:leftPanelRect];
-        [self.view addSubview:self.leftPanelView];
-
-        CGRect rightPanelRect = CGRectMake(384, 500, 225, 400);
-        self.rightPanelView = [[[UIView alloc] initWithFrame:rightPanelRect] autorelease];
-        self.rightPanelView.backgroundColor = self.baseColor;
-        [self addControllsOnRightPanelWithFrame:rightPanelRect];
-        [self.view addSubview:self.rightPanelView];
-        [self willRotateToInterfaceOrientation:[[UIApplication sharedApplication] statusBarOrientation] duration:0];
+    } else {
+        //iPad
+        self.boardRect = CGRectMake(146, 52, 333, 637);
+        self.boardViewController = [[[BoardViewController alloc] initWithFrame:boardRect amountCellX:10 amountCellY:18] autorelease];
+        self.boardViewController.boardView.backgroundColor = [UIColor clearColor];
+        [self.bgView addSubview:self.boardViewController.boardView];
+        [self.bgView addSubview:self.boardViewController.nextShapeView];
+       
+        [self addUIControlsForiPad];
     }
 }
-
+ 
 - (void)addControllsOnLeftPanelWithFrame:(CGRect)rect
 {
-    UIImage* imageButton = [UIImage imageNamed:@"button_up.png"];//[UIImage imageNamed:@"SmallYellow.png"];
+    UIImage* imageButton = [UIImage imageNamed:@"button_up.png"];
     UIImage* highlightedImage = [UIImage imageNamed:@"button.png"];
     
     //play button
@@ -264,65 +254,73 @@
     //setting button
     [self addSettingButton:CGRectMake(rectMove.origin.x + 100, rectMove.origin.y, manageSizeButton, manageSizeButton) withImage:imageButton onView:self.rightPanelView];
     //rotate button
-    [self addRotateButton:CGRectMake(rectMove.origin.x + 40, rectMove.origin.y + 150, rotateSizeButton, rotateSizeButton) withImage:imageButton onView:self.rightPanelView];
+    [self addRotateButton:CGRectMake(rectMove.origin.x + 40, rectMove.origin.y + 150, rotateSizeButton, rotateSizeButton) withImage:imageButton andHighlighted:nil onView:self.rightPanelView];
 }
 
 - (void)addUIControlsForLargePhone
 {
-    //UIImage* imageButton = [UIImage imageNamed:@"SmallYellow.png"];
     UIImage* imageButton = [UIImage imageNamed:@"button_up.png"];
-    UIImage* settingImage = [UIImage imageNamed:@"Setting.png"];
     UIImage* highlightedImage = [UIImage imageNamed:@"button.png"];
-    //setting button
-    [self addSettingButton:CGRectMake(self.boardRect.size.width + 30, self.boardRect.origin.y + 10, settingSizeButton, settingSizeButton) withImage:settingImage onView:self.view];
+    UIImage* rotateButton = [UIImage imageNamed:@"rotatebutton_up.png"];
+    UIImage* highlightedImageRotate = [UIImage imageNamed:@"rotatebutton.png"];
+    CGRect rectManage = CGRectMake(50, self.boardRect.size.height + 60, 100, 20);
     //play button
-    [self addPlayButton:CGRectMake(self.boardRect.size.width + 30, self.boardRect.origin.y + 70, manageSizeButton, manageSizeButton) withImage:imageButton andHighlighted:highlightedImage onView:self.view];
+    [self addPlayButton:CGRectMake(rectManage.origin.x , rectManage.origin.y, manageSizeButton, manageSizeButton) withImage:imageButton andHighlighted:highlightedImage onView:self.view];
     
-    //score label
-    [self addScoreLabel:CGRectMake(260, 150, scoreLabelWidth, scoreLabelHeigth) onView:self.view];
+    //reset button
+    [self addResetButton:CGRectMake(rectManage.origin.x + 60, rectManage.origin.y , manageSizeButton, manageSizeButton) withImage:imageButton onView:self.view];
     
-    //left button
-    [self addLeftMoveButton:CGRectMake(self.boardRect.origin.x + 10, self.boardRect.size.height + 50, moveSizeButton, moveSizeButton) withImage:imageButton onView:self.view];
+    //sound button
+    [self addSoundButton:CGRectMake(rectManage.origin.x + 120, rectManage.origin.y , manageSizeButton, manageSizeButton) withImage:imageButton onView:self.view];
     
-      //right button
-    [self addRightMoveButton:CGRectMake(self.boardRect.origin.x + 85, self.boardRect.size.height + 50, moveSizeButton, moveSizeButton) withImage:imageButton onView:self.view];
-    
-    //down button
-    [self addDownMoveButton:CGRectMake(self.boardRect.origin.x + 45, self.boardRect.size.height + 110, moveSizeButton, moveSizeButton) withImage:imageButton onView:self.view];
+    //setting button
+    [self addSettingButton:CGRectMake(rectManage.origin.x + 180, rectManage.origin.y , manageSizeButton, manageSizeButton) withImage:imageButton onView:self.view];
     
     //rotate button
-    [self addRotateButton:CGRectMake(self.boardRect.origin.x + 200, self.boardRect.size.height + 60, rotateSizeButton, rotateSizeButton) withImage:imageButton onView:self.view];  
+    [self addRotateButton:CGRectMake(rectManage.origin.x + 150, rectManage.origin.y + 90, rotateSizeButton, rotateSizeButton) withImage:rotateButton andHighlighted:highlightedImageRotate onView:self.view];
+    
+    //score label
+    [self addScoreLabel:CGRectMake(self.boardRect.size.width + self.boardRect.origin.x + 5, 20, scoreLabelWidth, scoreLabelHeigth) onView:self.view];
+    
+    CGRect rectMove = CGRectMake(30, self.boardRect.size.height + 150, 100, 20);
+    
+    //left button
+    [self addLeftMoveButton:CGRectMake(rectMove.origin.x, rectMove.origin.y, moveSizeButton, moveSizeButton) withImage:imageButton onView:self.view];
+    
+    //down button
+    [self addDownMoveButton:CGRectMake(rectMove.origin.x + 40, rectMove.origin.y + 40, moveSizeButton, moveSizeButton) withImage:imageButton onView:self.view];
+    
+    //right button
+    [self addRightMoveButton:CGRectMake(rectMove.origin.x + 80, rectMove.origin.y, moveSizeButton, moveSizeButton) withImage:imageButton onView:self.view];
 }
 
 - (void)addUIControlsForPhone
 { 
-    UIImage* imageButton = [UIImage imageNamed:@"button_up.png"];//[UIImage imageNamed:@"SmallYellow.png"];
-    UIImage* settingImage = [UIImage imageNamed:@"Setting.png"];
+    UIImage* imageButton = [UIImage imageNamed:@"button_up.png"];
     UIImage* highlightedImage = [UIImage imageNamed:@"button.png"];
-    //setting button
-//    [self addSettingButton:CGRectMake(self.boardRect.size.width + 30, self.boardRect.origin.y + 10, settingSizeButton, settingSizeButton) withImage:settingImage onView:self.view];
-   
-    CGRect rectManage = CGRectMake(150, self.boardRect.size.height + 50, 100, 20);
+    UIImage* rotateButton = [UIImage imageNamed:@"rotatebutton_up.png"];
+    UIImage* highlightedImageRotate = [UIImage imageNamed:@"rotatebutton.png"];
+    
+    CGRect rectManage = CGRectMake(50, self.boardRect.size.height + 50, 100, 20);
      //play button
     [self addPlayButton:CGRectMake(rectManage.origin.x , rectManage.origin.y, manageSizeButton, manageSizeButton) withImage:imageButton andHighlighted:highlightedImage onView:self.view];
     
     //reset button
-    [self addResetButton:CGRectMake(rectManage.origin.x + 50, rectManage.origin.y , manageSizeButton, manageSizeButton) withImage:imageButton onView:self.view];
+    [self addResetButton:CGRectMake(rectManage.origin.x + 60, rectManage.origin.y , manageSizeButton, manageSizeButton) withImage:imageButton onView:self.view];
     
     //sound button
-    [self addSoundButton:CGRectMake(rectManage.origin.x + 100, rectManage.origin.y , manageSizeButton, manageSizeButton) withImage:imageButton onView:self.view];
+    [self addSoundButton:CGRectMake(rectManage.origin.x + 120, rectManage.origin.y , manageSizeButton, manageSizeButton) withImage:imageButton onView:self.view];
 
+    //setting button
+    [self addSettingButton:CGRectMake(rectManage.origin.x + 180, rectManage.origin.y , manageSizeButton, manageSizeButton) withImage:imageButton onView:self.view];
     
     //rotate button
-    [self addRotateButton:CGRectMake(rectManage.origin.x + 60, rectManage.origin.y + 70, rotateSizeButton, rotateSizeButton) withImage:imageButton onView:self.view];
-//
+    [self addRotateButton:CGRectMake(rectManage.origin.x + 150, rectManage.origin.y + 70, rotateSizeButton, rotateSizeButton) withImage:rotateButton andHighlighted:highlightedImageRotate onView:self.view];
+
+    //score label
+    [self addScoreLabel:CGRectMake(self.boardRect.size.width + self.boardRect.origin.x + 10, 20, scoreLabelWidth, scoreLabelHeigth) onView:self.view];
     
-//
-//    //score label
-//    [self addScoreLabel:CGRectMake(260, 150, scoreLabelWidth, scoreLabelHeigth) onView:self.view];
-//
-    
-    CGRect rectMove = CGRectMake(30, self.boardRect.size.height + 130, 100, 20);
+    CGRect rectMove = CGRectMake(30, self.boardRect.size.height + 110, 100, 20);
     
     //left button
     [self addLeftMoveButton:CGRectMake(rectMove.origin.x, rectMove.origin.y, moveSizeButton, moveSizeButton) withImage:imageButton onView:self.view];
@@ -330,9 +328,46 @@
     //down button
     [self addDownMoveButton:CGRectMake(rectMove.origin.x + 40, rectMove.origin.y + 40, moveSizeButton, moveSizeButton) withImage:imageButton onView:self.view];
     
- 
     //right button
     [self addRightMoveButton:CGRectMake(rectMove.origin.x + 80, rectMove.origin.y, moveSizeButton, moveSizeButton) withImage:imageButton onView:self.view];
+}
+
+- (void)addUIControlsForiPad
+{
+    UIImage* imageButton = [UIImage imageNamed:@"button_up.png"];
+    UIImage* highlightedImage = [UIImage imageNamed:@"button.png"];
+    UIImage* rotateButton = [UIImage imageNamed:@"rotatebutton_up.png"];
+    UIImage* highlightedImageRotate = [UIImage imageNamed:@"rotatebutton.png"];
+    
+    CGRect rectManage = CGRectMake(220, self.boardRect.size.height + 120, 100, 20);
+    //play button
+    [self addPlayButton:CGRectMake(rectManage.origin.x , rectManage.origin.y, manageSizeButton, manageSizeButton) withImage:imageButton andHighlighted:highlightedImage onView:self.view];
+    
+    //reset button
+    [self addResetButton:CGRectMake(rectManage.origin.x + 100, rectManage.origin.y , manageSizeButton, manageSizeButton) withImage:imageButton onView:self.view];
+    
+    //sound button
+    [self addSoundButton:CGRectMake(rectManage.origin.x + 200, rectManage.origin.y , manageSizeButton, manageSizeButton) withImage:imageButton onView:self.view];
+    
+    //setting button
+    [self addSettingButton:CGRectMake(rectManage.origin.x + 300, rectManage.origin.y , manageSizeButton, manageSizeButton) withImage:imageButton onView:self.view];
+    
+    //rotate button
+    [self addRotateButton:CGRectMake(rectManage.origin.x + 300, rectManage.origin.y + 100, rotateSizeButtoniPad, rotateSizeButtoniPad) withImage:rotateButton andHighlighted:highlightedImageRotate onView:self.view];
+    
+    //score label
+    [self addScoreLabel:CGRectMake(self.boardRect.size.width + self.boardRect.origin.x + 5, 50, 150, scoreLabelHeigth) onView:self.view];
+    
+    CGRect rectMove = CGRectMake(150, self.boardRect.size.height + 220, 100, 20);
+    
+    //left button
+    [self addLeftMoveButton:CGRectMake(rectMove.origin.x, rectMove.origin.y, moveSizeButtoniPad, moveSizeButtoniPad) withImage:imageButton onView:self.view];
+    
+    //down button
+    [self addDownMoveButton:CGRectMake(rectMove.origin.x + 60, rectMove.origin.y + 50, moveSizeButtoniPad, moveSizeButtoniPad) withImage:imageButton onView:self.view];
+    
+    //right button
+    [self addRightMoveButton:CGRectMake(rectMove.origin.x + 120, rectMove.origin.y, moveSizeButtoniPad, moveSizeButtoniPad) withImage:imageButton onView:self.view];
 }
 
 
@@ -349,14 +384,14 @@
     [view addSubview:self.playButton];
     
     //play label
-    CGRect rectPlayLabel = CGRectMake(rect.origin.x , rect.origin.y + 25, labelPlayTextWidth , labelPlayTextHeigth);
+    CGRect rectPlayLabel = CGRectMake(rect.origin.x , rect.origin.y + distanceManageButtonAndLabel, labelPlayTextWidth , labelPlayTextHeigth);
     self.playLabel = [[[UILabel alloc] initWithFrame:rectPlayLabel] autorelease];
     self.playLabel.text = NSLocalizedString( @"PLAY/ PAUSE", @"");
     self.playLabel.lineBreakMode = NSLineBreakByCharWrapping;
     self.playLabel.numberOfLines = 2;
     [self.playLabel setFont:textButtonFont];
     self.playLabel.backgroundColor=[UIColor clearColor];
-    self.playLabel.textColor = [UIColor whiteColor];
+    self.playLabel.textColor = [UIColor blackColor];
     [view addSubview:self.playLabel];
 }
 
@@ -370,33 +405,32 @@
     [view addSubview:self.resetButton];
     
     //reset label
-    CGRect rectResetLabel = CGRectMake(rect.origin.x - labelManageOffset , rect.origin.y + rect.size.height , labelMoveTextWidth, labelMoveTextHeigth);
+    CGRect rectResetLabel = CGRectMake(rect.origin.x - labelManageOffset , rect.origin.y + distanceManageButtonAndLabel, labelMoveTextWidth, labelMoveTextHeigth);
     self.resetLabel = [[[UILabel alloc] initWithFrame:rectResetLabel] autorelease];
     self.resetLabel.text = NSLocalizedString(@"RESET", @"");
     self.resetLabel.textAlignment = UITextAlignmentCenter;
     [self.resetLabel setFont:textButtonFont];
     self.resetLabel.backgroundColor=[UIColor clearColor];
-    self.resetLabel.textColor = [UIColor whiteColor];
+    self.resetLabel.textColor = [UIColor blackColor];
     [view addSubview:self.resetLabel];
 }
 
 - (void)addSoundButton:(CGRect)rect withImage:(UIImage*)imageButton onView:(UIView*)view
 {
-    CGRect rectSoundButton = CGRectMake(rect.origin.x , rect.origin.y , manageSizeButton, manageSizeButton);
     self.soundButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.soundButton.frame = rectSoundButton;
+    self.soundButton.frame = rect;
     [self.soundButton setImage:imageButton forState:UIControlStateNormal];
     [self.soundButton addTarget:self action:@selector(sound) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:self.soundButton];
     
     //sound label
-    CGRect rectSoundLabel = CGRectMake(rect.origin.x - labelManageOffset, rect.origin.y + rect.size.height, labelMoveTextWidth, labelMoveTextHeigth);
+    CGRect rectSoundLabel = CGRectMake(rect.origin.x - labelManageOffset, rect.origin.y + distanceManageButtonAndLabel, labelMoveTextWidth, labelMoveTextHeigth);
     self.soundLabel = [[[UILabel alloc] initWithFrame:rectSoundLabel] autorelease];
     self.soundLabel.text = NSLocalizedString(@"SOUND", @"");
     self.soundLabel.textAlignment = UITextAlignmentCenter;
     [self.soundLabel setFont:textButtonFont];
-    self.soundLabel.backgroundColor=[UIColor clearColor];
-    self.soundLabel.textColor = [UIColor whiteColor];
+    self.soundLabel.backgroundColor = [UIColor clearColor];
+    self.soundLabel.textColor = [UIColor blackColor];
     [view addSubview:self.soundLabel];
 
 }
@@ -409,26 +443,39 @@
     [view addSubview:self.settingButton];
     
     //sound label
-    CGRect rectSetLabel = CGRectMake(rect.origin.x - labelManageOffset - 10, rect.origin.y + rect.size.height, labelMoveTextWidth + 20, labelMoveTextHeigth);
+    CGRect rectSetLabel = CGRectMake(rect.origin.x - labelManageOffset - 10, rect.origin.y + distanceManageButtonAndLabel, labelMoveTextWidth + 20, labelMoveTextHeigth);
     self.settingLabel = [[[UILabel alloc] initWithFrame:rectSetLabel] autorelease];
     self.settingLabel.text = NSLocalizedString(@"SETTINGS", @"");
     self.settingLabel.textAlignment = UITextAlignmentCenter;
     [self.settingLabel setFont:textButtonFont];
     self.settingLabel.backgroundColor = [UIColor clearColor];
-    self.settingLabel.textColor = [UIColor whiteColor];
+    self.settingLabel.textColor = [UIColor blackColor];
     [view addSubview:self.settingLabel];
-
 }
 
 - (void)addScoreLabel:(CGRect)rect onView:(UIView*)view
 {
-    self.lineLabel = [[[UILabel alloc] initWithFrame:rect] autorelease];
+    UILabel* labelText = [[[UILabel alloc] initWithFrame:rect] autorelease];
+    labelText.text = @"SCORE";
+    if(isiPhone) {
+        labelText.font = scoreFont;
+    } else {
+        labelText.font = scoreFontiPad;
+    }
+    labelText.backgroundColor = [UIColor clearColor];
+    [view addSubview:labelText];
+    
+    self.lineLabel = [[[UILabel alloc] initWithFrame:CGRectMake(rect.origin.x, rect.origin.y + 25, rect.size.width, rect.size.height)] autorelease];
     self.lineLabel.text = [NSString stringWithFormat:@"%d", self.boardViewController.lines];
     self.lineLabel.lineBreakMode = NSLineBreakByCharWrapping;
     self.lineLabel.numberOfLines = 2;
-    [self.lineLabel setFont:scoreFont];
-    self.lineLabel.backgroundColor=[UIColor clearColor];
-    self.lineLabel.textColor = [UIColor whiteColor];
+    if(isiPhone) {
+        self.lineLabel.font = scoreFont;
+    } else {
+        self.lineLabel.font = scoreFontiPad;
+    }
+    self.lineLabel.backgroundColor = [UIColor clearColor];
+    self.lineLabel.textColor = [UIColor blackColor];
     self.lineLabel.textAlignment = UITextAlignmentCenter;
     [view addSubview:self.lineLabel];
 }
@@ -444,12 +491,12 @@
     [view addSubview:self.leftButton];
     
     //left label
-    CGRect rectLeftLabel = CGRectMake(rect.origin.x - labelMoveOffset, rect.origin.y + rect.size.height , labelMoveTextWidth , labelMoveTextHeigth);
+    CGRect rectLeftLabel = CGRectMake(rect.origin.x - labelMoveOffset, rect.origin.y + distanceMoveButtonAndLabel , labelMoveTextWidth , labelMoveTextHeigth);
     self.leftLabel = [[[UILabel alloc] initWithFrame:rectLeftLabel] autorelease];
     self.leftLabel.text = NSLocalizedString(@"LEFT", @"");
     [self.leftLabel setFont:textButtonFont];
     self.leftLabel.backgroundColor=[UIColor clearColor];
-    self.leftLabel.textColor = [UIColor whiteColor];
+    self.leftLabel.textColor = [UIColor blackColor];
     self.leftLabel.textAlignment = UITextAlignmentCenter;
     [view addSubview:self.leftLabel];
 }
@@ -465,12 +512,12 @@
     [view addSubview:self.rightButton];
     
     //right label
-    CGRect rectRightLabel = CGRectMake(rect.origin.x - labelMoveOffset, rect.size.height + rect.origin.y , labelMoveTextWidth, labelMoveTextHeigth);
+    CGRect rectRightLabel = CGRectMake(rect.origin.x - labelMoveOffset, distanceMoveButtonAndLabel + rect.origin.y , labelMoveTextWidth, labelMoveTextHeigth);
     self.rightLabel = [[[UILabel alloc] initWithFrame:rectRightLabel] autorelease];
     self.rightLabel.text = NSLocalizedString(@"RIGHT", @"");
     [self.rightLabel setFont:textButtonFont];
     self.rightLabel.backgroundColor=[UIColor clearColor];
-    self.rightLabel.textColor = [UIColor whiteColor];
+    self.rightLabel.textColor = [UIColor blackColor];
     self.rightLabel.textAlignment = UITextAlignmentCenter;
     [view addSubview:self.rightLabel];
 
@@ -486,32 +533,33 @@
     [view addSubview:self.downButton];
     
     //down label
-    CGRect rectDownLabel = CGRectMake(rect.origin.x - labelMoveOffset, rect.origin.y + rect.size.height, labelMoveTextWidth, labelMoveTextHeigth);
+    CGRect rectDownLabel = CGRectMake(rect.origin.x - labelMoveOffset, rect.origin.y + distanceMoveButtonAndLabel, labelMoveTextWidth, labelMoveTextHeigth);
     self.downLabel = [[[UILabel alloc] initWithFrame:rectDownLabel]autorelease];
     [self.downLabel setTextAlignment:NSTextAlignmentCenter];
     self.downLabel.text = NSLocalizedString(@"DOWN", @"");
     [self.downLabel setFont:textButtonFont];
     self.downLabel.backgroundColor = [UIColor clearColor];
-    self.downLabel.textColor = [UIColor whiteColor];
+    self.downLabel.textColor = [UIColor blackColor];
     self.downLabel.textAlignment = UITextAlignmentCenter;
     [view addSubview:self.downLabel];
 }
 
-- (void)addRotateButton:(CGRect)rect withImage:(UIImage*)imageButton onView:(UIView*)view
+- (void)addRotateButton:(CGRect)rect withImage:(UIImage*)imageButton andHighlighted:(UIImage*)highlightedImage  onView:(UIView*)view
 {
     self.rotateButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.rotateButton.frame = rect;
     [self.rotateButton setImage:imageButton forState:UIControlStateNormal];
+    [self.rotateButton setImage:highlightedImage forState:UIControlStateHighlighted];
     [self.rotateButton addTarget:self action:@selector(rotate) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:self.rotateButton];
     
     //rotate label
-    CGRect rectRotateLabel = CGRectMake(CGRectGetMidX(rect) - labelRotateTextWidth/2, rect.size.height + rect.origin.y , labelRotateTextWidth , labelMoveTextHeigth);
+    CGRect rectRotateLabel = CGRectMake(CGRectGetMidX(rect) - labelRotateTextWidth/2, rect.size.height + rect.origin.y -10 , labelRotateTextWidth , labelMoveTextHeigth);
     self.rotateLabel = [[[UILabel alloc] initWithFrame:rectRotateLabel] autorelease];
     self.rotateLabel.text = NSLocalizedString(@"ROTATE", @"");
     [self.rotateLabel setFont:textButtonFont];
     self.rotateLabel.backgroundColor=[UIColor clearColor];
-    self.rotateLabel.textColor = [UIColor whiteColor];
+    self.rotateLabel.textColor = [UIColor blackColor];
     self.rotateLabel.textAlignment = UITextAlignmentCenter;
     
     [view addSubview:self.rotateLabel];
@@ -539,6 +587,8 @@
         self.boardViewController.gameTimer = nil;
     } else {
         if(self.firstStart && self.boardViewController) {
+            self.gameCount++;
+           [Flurry logEvent:@"StartGame"];
            [self.boardViewController start];
             self.firstStart = NO;
             self.boardViewController.delegate = self;
@@ -667,6 +717,6 @@
 
 - (void)newGame
 {
-    [self reset];   
+    [self reset];
 }
 @end

@@ -27,7 +27,8 @@
 #define boardGridWidth 1
 #define cellGridWidth 2
 #define cellDistance 1
-#define cellDistanceForNext 0.5
+#define cellDistanceiPad 2
+#define cellDistanceForNext 0.8
 
 #define offSetBorderThin 3
 #define borderThin 2
@@ -39,15 +40,22 @@
 #define manageSizeButton 30
 #define moveSizeButton 40
 #define rotateSizeButton 60
+#define manageSizeButtoniPad 40
+#define moveSizeButtoniPad 40
+#define rotateSizeButtoniPad 80
 
+#define distanceManageButtonAndLabel (manageSizeButton - 5)
+#define distanceMoveButtonAndLabel (moveSizeButton - 5)
+#define distanceRotateButtonAndLabel (rotateSizeButton - 5)
 
 #define settingFont [UIFont fontWithName:@"American Typewriter" size:20]
-#define textButtonFont [UIFont fontWithName:@"American Typewriter" size:12]
-#define scoreFont [UIFont fontWithName:@"DS-Digital" size:45]
+#define textButtonFont [UIFont fontWithName:@"American Typewriter" size:10]
+#define scoreFont [UIFont fontWithName:@"DS-Digital" size:15]
+#define scoreFontiPad [UIFont fontWithName:@"DS-Digital" size:25]
 
 #define scoreLabelWidth 50
 #define scoreLabelHeigth 50
-#define labelPlayTextWidth 45
+#define labelPlayTextWidth 35
 #define labelPlayTextHeigth 40
 #define labelMoveTextWidth 60
 #define labelRotateTextWidth 60

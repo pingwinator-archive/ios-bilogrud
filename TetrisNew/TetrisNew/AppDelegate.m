@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-
 #import "GameViewController.h"
 
 @implementation AppDelegate
@@ -21,6 +20,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [Flurry startSession:@"STPJ6GDXJCNGWT7FR2JH"];
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {

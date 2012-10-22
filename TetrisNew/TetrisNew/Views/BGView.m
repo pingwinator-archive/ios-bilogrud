@@ -8,6 +8,7 @@
 
 #import "BGView.h"
 #import "BGViewBorder.h"
+#import "UIApplication+CheckVersion.h"
 @interface BGView()
 
 - (void)customInit;
@@ -41,15 +42,19 @@
         //[self addSubview:self.viewBorder];
         UIImageView* bgImage = [[[UIImageView alloc] initWithFrame:self.frame] autorelease];
         bgImage.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin;;
-        
-        [bgImage setImage:[UIImage imageNamed:@"back.png"] ];
+        if([[UIApplication sharedApplication] has4inchDisplay]) {
+            [bgImage setImage:[UIImage imageNamed:@"back@2x-h568.png"] ];
+        } else {
+           [bgImage setImage:[UIImage imageNamed:@"back.png"]]; 
+        }
         bgImage.alpha = 0.7f;
         [self addSubview:bgImage];
     } else {
+        //iPad
         UIImageView* bgImage = [[[UIImageView alloc] initWithFrame:self.frame] autorelease];
         bgImage.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin;;
 
-        [bgImage setImage:[UIImage imageNamed:@"sea.jpeg"] ];
+        [bgImage setImage:[UIImage imageNamed:@"back-ipad.png"] ];
         bgImage.alpha = 0.7f;
         [self addSubview:bgImage];
     }

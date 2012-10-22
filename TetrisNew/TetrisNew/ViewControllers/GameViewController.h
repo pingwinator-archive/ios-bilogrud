@@ -13,6 +13,7 @@
 
 @interface GameViewController : UIViewController<DeleteLineDelegate, GameOverDelegate>
 @property (assign, nonatomic) BOOL isStart;
+@property (assign, nonatomic) NSInteger gameCount;
 - (void)play;
 - (void)reset;
 ////timer

@@ -123,8 +123,13 @@
         } else {
             [[UIColor blackColor] setFill];
         }
-   
-       CGRect filledRect = CGRectMake(rect.origin.x + cellGridWidth + cellDistance, rect.origin.y + cellGridWidth + cellDistance, rect.size.width - (cellGridWidth + cellDistance) * 2, rect.size.height - (cellGridWidth + cellDistance) * 2);
+         NSInteger curCellDistance;
+         if(isiPhone) {
+             curCellDistance = cellDistance;
+         } else {
+             curCellDistance = cellDistanceiPad;
+         }
+       CGRect filledRect = CGRectMake(rect.origin.x + cellGridWidth + curCellDistance, rect.origin.y + cellGridWidth + curCellDistance, rect.size.width - (cellGridWidth + curCellDistance) * 2, rect.size.height - (cellGridWidth + curCellDistance) * 2);
        CGContextAddRect(context, filledRect);
        CGContextFillRect(context, filledRect);
     }
@@ -148,7 +153,13 @@
             [[UIColor blackColor] setFill];
         }
         
-        CGRect filledRect = CGRectMake(rect.origin.x + cellGridWidth + cellDistanceForNext, rect.origin.y + cellGridWidth + cellDistanceForNext, rect.size.width - (cellGridWidth + cellDistanceForNext) * 2, rect.size.height - (cellGridWidth + cellDistanceForNext) * 2);
+        CGFloat curCellDistanceForNext;
+        if(isiPhone) {
+            curCellDistanceForNext = cellDistanceForNext;
+        } else {
+            curCellDistanceForNext = cellDistanceiPad;
+        }
+        CGRect filledRect = CGRectMake(rect.origin.x + cellGridWidth + curCellDistanceForNext, rect.origin.y + cellGridWidth + curCellDistanceForNext, rect.size.width - (cellGridWidth + curCellDistanceForNext) * 2, rect.size.height - (cellGridWidth + curCellDistanceForNext) * 2);
         CGContextAddRect(context, filledRect);
         CGContextFillRect(context, filledRect);
     }
