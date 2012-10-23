@@ -35,11 +35,6 @@
 - (void)customInit
 {
     if(isiPhone) {
-        //self.viewBorder = [[[BGViewBorder alloc] initWithFrame:self.bounds andOffset:0] autorelease ];
-        //self.viewBorder.backgroundColor = [UIColor colorWithRed:39.0f/255.0f green:64.0f/255.0f blue:139.0f/255.0f alpha:1];
-        
-        //self.viewBorder.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin;
-        //[self addSubview:self.viewBorder];
         UIImageView* bgImage = [[[UIImageView alloc] initWithFrame:self.frame] autorelease];
         bgImage.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin;;
         if([[UIApplication sharedApplication] has4inchDisplay]) {

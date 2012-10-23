@@ -244,7 +244,6 @@
 
 - (void)addControllsOnRightPanelWithFrame:(CGRect)rect
 {
-    //UIImage* imageButton = [UIImage imageNamed:@"SmallYellow.png"];
     UIImage* imageButton = [UIImage imageNamed:@"button_up.png"];
     CGRect rectMove = CGRectMake(30, 50, manageSizeButton, manageSizeButton);
     
@@ -601,12 +600,6 @@
     if(self.isStart) {
         self.isStart = NO;
         [self pauseGame];
-//        [self pauseGameTimer];
-//        [self.boardViewController.gameTimer invalidate];
-//        if(self.avSound.isPlaying) {
-//            [self.avSound pause];
-//        }
-//        self.boardViewController.gameTimer = nil;
     } else {
         if(self.firstStart && self.boardViewController) {
             self.gameCount++;
@@ -618,7 +611,7 @@
                 //score label
                 [self addScoreLabel:CGRectMake(self.boardRect.size.width + self.boardRect.origin.x + 10, 20, scoreLabelWidth, scoreLabelHeigth) onView:self.view];
             }
-//           [Flurry logEvent:@"StartGame"];
+           [Flurry logEvent:@"StartGame"];
             
            [self.boardViewController start];
             self.firstStart = NO;
@@ -628,10 +621,6 @@
         self.isStart = YES;
         
         [self continueGame];
-//        [self.boardViewController startGameTimer];
-//        if (self.avSound) {
-//                [self.avSound play];
-//        }
         DBLog(@"play!");
     }
 }

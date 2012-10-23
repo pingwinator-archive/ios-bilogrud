@@ -198,7 +198,7 @@
         }
     } else {
         tempNumbState++;
-      //  NSInteger i = [self.rotateShapeCollection count];
+
         if(tempNumbState  == [self.rotateShapeCollection count]) {
             tempNumbState = 0;
         }
@@ -212,8 +212,7 @@
 
 - (NSMutableSet*)tryRotateCurrentShape:(DirectionRotate)direction
 {
-
-    return [self rotateShape:direction withChanges:NO];//[[self.rotateShapeCollection objectAtIndex:self.numbState] rotateShape:direction withChanges:NO];
+    return [self rotateShape:direction withChanges:NO];
 }
 
 - (CGPoint)getNextCenter:(CGPoint)localCenter withDirection:(DirectionMove)direction
@@ -246,7 +245,6 @@
 {
     NSMutableSet* shapeLocalSet = [[[NSMutableSet alloc] init] autorelease];
     for (NSValue* v in localShapePoints) {
-        //shapePoints addObject:
         CGPoint p = PointFromObj(v);
         p.x += cntr.x;
         p.y += cntr.y;
