@@ -41,10 +41,8 @@
 @property (retain, nonatomic) BGView* bgView;
 @property (retain, nonatomic) AVAudioPlayer* avSound;
 
-@property (retain, nonatomic) UIView* boardPanelView;
-@property (retain, nonatomic) UIView* leftPanelView;
-@property (retain, nonatomic) UIView* rightPanelView;
-
+@property (retain, nonatomic) UIImageView* pauseImageView;
+@property (retain, nonatomic) UIImageView* soundImageView;
 
 - (void)addUIControlsForPhone;
 - (void)addUIControlsForLargePhone;
@@ -87,9 +85,8 @@
 @synthesize bgView;
 @synthesize avSound;
 
-@synthesize boardPanelView;
-@synthesize leftPanelView;
-@synthesize rightPanelView;
+@synthesize pauseImageView;
+@synthesize soundImageView;
 
 - (void)dealloc
 {
@@ -114,9 +111,8 @@
     self.resetLabel = nil;
     self.bgView = nil;
     self.avSound = nil;
-    self.boardPanelView = nil;
-    self.leftPanelView = nil;
-    self.rightPanelView = nil;
+    self.soundImageView = nil;
+    self.pauseImageView = nil;
     [super dealloc];
 }
 
@@ -148,20 +144,6 @@
 {
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
      NSLog(@"%f %f",self.view.frame.size.width, self.view.frame.size.height);
-    [UIView animateWithDuration:duration animations:^(void) {
-    if(isiPad) {
-        if(UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
-             self.leftPanelView.frame = CGRectMake(100, 150, 200, 400);
-            self.boardPanelView.frame = CGRectMake(300, 150, 400, 400);
-            self.rightPanelView.frame = CGRectMake(700, 150, 200, 400);
-        }
-        if(UIInterfaceOrientationIsPortrait(toInterfaceOrientation)) {     
-            self.leftPanelView.frame = CGRectMake(200, 500, 200, 400);
-            self.boardPanelView.frame = CGRectMake(200, 100, 400, 400);
-            self.rightPanelView.frame = CGRectMake(400, 500, 200, 400);
-        }
-    }
-    }];
 }
 
 - (NSUInteger)supportedInterfaceOrientations
@@ -181,7 +163,7 @@
 }
 
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
-    NSLog(@" preferred called");
+    DBLog(@" preferred called");
     return UIInterfaceOrientationPortrait;
 }
 
@@ -222,38 +204,6 @@
         [self addUIControlsForiPad];
     }
 }
- 
-- (void)addControllsOnLeftPanelWithFrame:(CGRect)rect
-{
-    UIImage* imageButton = [UIImage imageNamed:@"button_up.png"];
-    UIImage* highlightedImage = [UIImage imageNamed:@"button.png"];
-    
-    //play button
-    [self addPlayButton:CGRectMake(20, 50, manageSizeButton, manageSizeButton) withImage:imageButton andHighlighted:highlightedImage onView:self.leftPanelView];
-    //reset button
-    [self addResetButton:CGRectMake(130, 50 , manageSizeButton, manageSizeButton) withImage:imageButton onView:self.leftPanelView];
-   
-    CGRect rectMove = CGRectMake(20, 200, moveSizeButton, moveSizeButton);
-    //left button
-    [self addLeftMoveButton:rectMove withImage:imageButton onView:self.leftPanelView];
-    //down button
-    [self addDownMoveButton:CGRectMake(rectMove.origin.x + 50, rectMove.origin.y + 70, moveSizeButton, moveSizeButton) withImage:imageButton onView:self.leftPanelView];
-    //right button
-    [self addRightMoveButton:CGRectMake(rectMove.origin.x + 100, rectMove.origin.y, moveSizeButton, moveSizeButton) withImage:imageButton onView:self.leftPanelView];
-}
-
-- (void)addControllsOnRightPanelWithFrame:(CGRect)rect
-{
-    UIImage* imageButton = [UIImage imageNamed:@"button_up.png"];
-    CGRect rectMove = CGRectMake(30, 50, manageSizeButton, manageSizeButton);
-    
-    //sound button
-    [self addSoundButton:rectMove withImage:imageButton onView:self.rightPanelView];
-    //setting button
-    [self addSettingButton:CGRectMake(rectMove.origin.x + 100, rectMove.origin.y, manageSizeButton, manageSizeButton) withImage:imageButton onView:self.rightPanelView];
-    //rotate button
-    [self addRotateButton:CGRectMake(rectMove.origin.x + 40, rectMove.origin.y + 150, rotateSizeButton, rotateSizeButton) withImage:imageButton andHighlighted:nil onView:self.rightPanelView];
-}
 
 - (void)addUIControlsForLargePhone
 {
@@ -261,7 +211,20 @@
     UIImage* highlightedImage = [UIImage imageNamed:@"button.png"];
     UIImage* rotateButtonImage = [UIImage imageNamed:@"rotatebutton_up.png"];
     UIImage* highlightedImageRotate = [UIImage imageNamed:@"rotatebutton.png"];
+    //pauseImage
+    self.pauseImageView = [[[UIImageView alloc] initWithFrame:CGRectMake(self.boardRect.origin.x + self.boardRect.size.width + imageOffsetHeight, 250, 40, 40)] autorelease];
+    [self.pauseImageView setImage:[UIImage imageNamed:@"pause.png"]];
+    self.pauseImageView.hidden = YES;
+    [self.view addSubview:self.pauseImageView];
+    
+    //soundImage
+    self.soundImageView = [[[UIImageView alloc] initWithFrame:CGRectMake(self.boardRect.origin.x + self.boardRect.size.width + imageOffsetHeight, 200, 25, 25)] autorelease];
+    [self.soundImageView setImage:[UIImage imageNamed:@"music.png"]];
+    self.soundImageView.hidden = YES;
+    [self.view addSubview:self.soundImageView];
+
     CGRect rectManage = CGRectMake(50, self.boardRect.size.height + 60, 100, 20);
+    
     //play button
     [self addPlayButton:CGRectMake(rectManage.origin.x , rectManage.origin.y, manageSizeButton, manageSizeButton) withImage:imageButton andHighlighted:highlightedImage onView:self.view];
     
@@ -296,6 +259,18 @@
     UIImage* rotateButtonImage = [UIImage imageNamed:@"rotatebutton_up.png"];
     UIImage* highlightedImageRotate = [UIImage imageNamed:@"rotatebutton.png"];
     
+    //pauseImage
+    self.pauseImageView = [[[UIImageView alloc] initWithFrame:CGRectMake(self.boardRect.origin.x + self.boardRect.size.width + imageOffsetHeight, 250, 40, 40)] autorelease];
+    [self.pauseImageView setImage:[UIImage imageNamed:@"pause.png"]];
+    self.pauseImageView.hidden = YES;
+    [self.view addSubview:self.pauseImageView];
+    
+    //soundImage
+    self.soundImageView = [[[UIImageView alloc] initWithFrame:CGRectMake(self.boardRect.origin.x + self.boardRect.size.width + imageOffsetHeight, 200, 25, 25)] autorelease];
+    [self.soundImageView setImage:[UIImage imageNamed:@"music.png"]];
+    self.soundImageView.hidden = YES;
+    [self.view addSubview:self.soundImageView];
+ 
     CGRect rectManage = CGRectMake(50, self.boardRect.size.height + 50, 100, 20);
      //play button
     [self addPlayButton:CGRectMake(rectManage.origin.x , rectManage.origin.y, manageSizeButton, manageSizeButton) withImage:imageButton andHighlighted:highlightedImage onView:self.view];
@@ -330,7 +305,18 @@
     UIImage* highlightedImage = [UIImage imageNamed:@"button.png"];
     UIImage* rotateButtonImage = [UIImage imageNamed:@"rotatebutton_up.png"];
     UIImage* highlightedImageRotate = [UIImage imageNamed:@"rotatebutton.png"];
+    //pauseImage
+    self.pauseImageView = [[[UIImageView alloc] initWithFrame:CGRectMake(self.boardRect.origin.x + self.boardRect.size.width + imageOffsetHeightiPad, 600, 100, 100)] autorelease];
+    [self.pauseImageView setImage:[UIImage imageNamed:@"pause.png"]];
+    self.pauseImageView.hidden = YES;
+    [self.view addSubview:self.pauseImageView];
     
+    //soundImage
+    self.soundImageView = [[[UIImageView alloc] initWithFrame:CGRectMake(self.boardRect.origin.x + self.boardRect.size.width + imageOffsetHeightiPad*2, 550, 50, 50)] autorelease];
+    [self.soundImageView setImage:[UIImage imageNamed:@"music.png"]];
+    self.soundImageView.hidden = YES;
+    [self.view addSubview:self.soundImageView];
+
     CGRect rectManage = CGRectMake(220, self.boardRect.size.height + 120, 100, 20);
     //play button
     [self addPlayButton:CGRectMake(rectManage.origin.x , rectManage.origin.y, manageSizeButton, manageSizeButton) withImage:imageButton andHighlighted:highlightedImage onView:self.view];
@@ -448,13 +434,19 @@
     if(isiPhone) {
         labelText.font = scoreFont;
     } else {
-        labelText.font = scoreFontLarge;
+        labelText.font = scoreFontiPad;
     }
     labelText.backgroundColor = [UIColor clearColor];
     [view addSubview:labelText];
     
-    self.lineLabel = [[[UILabel alloc] initWithFrame:CGRectMake(rect.origin.x, rect.origin.y + 25, rect.size.width, rect.size.height)] autorelease];
-    self.lineLabel.font = scoreFontLarge;
+        if(isiPhone) {
+        self.lineLabel = [[[UILabel alloc] initWithFrame:CGRectMake(rect.origin.x, rect.origin.y + 25, rect.size.width, rect.size.height)] autorelease];
+        self.lineLabel.font = scoreFontLarge;
+    } else {
+        self.lineLabel = [[[UILabel alloc] initWithFrame:CGRectMake(rect.origin.x, rect.origin.y + 35, rect.size.width, rect.size.height)] autorelease];
+         self.lineLabel.font = scoreFontiPad;
+    }
+   
     self.lineLabel.text = [NSString stringWithFormat:@"%d", self.boardViewController.lines];
     self.lineLabel.lineBreakMode = NSLineBreakByCharWrapping;
     self.lineLabel.numberOfLines = 2;
@@ -579,6 +571,7 @@
 {
     [self pauseGameTimer];
     [self.boardViewController.gameTimer invalidate];
+     self.pauseImageView.hidden = NO;
     if(self.avSound.isPlaying) {
         [self.avSound pause];
     }
@@ -588,10 +581,11 @@
 - (void)continueGame
 {
     [self.boardViewController startGameTimer];
+     self.pauseImageView.hidden = YES;
     if (self.avSound) {
         [self.avSound play];
+        self.soundImageView.hidden = NO;
     }
-
 }
 
 - (void)play
@@ -599,11 +593,12 @@
     //timer start
     if(self.isStart) {
         self.isStart = NO;
+        self.pauseImageView.hidden = NO;
         [self pauseGame];
     } else {
         if(self.firstStart && self.boardViewController) {
             self.gameCount++;
-            
+           
             if (isiPad) {
                 //score label
                 [self addScoreLabel:CGRectMake(self.boardRect.size.width + self.boardRect.origin.x + 5, 50, 150, scoreLabelHeigth) onView:self.view];
@@ -612,8 +607,8 @@
                 [self addScoreLabel:CGRectMake(self.boardRect.size.width + self.boardRect.origin.x + 10, 20, scoreLabelWidth, scoreLabelHeigth) onView:self.view];
             }
            [Flurry logEvent:@"StartGame"];
-            
-           [self.boardViewController start];
+           
+            [self.boardViewController start];
             self.firstStart = NO;
             self.boardViewController.delegate = self;
             self.boardViewController.resetGameDelegate = self;
@@ -639,6 +634,7 @@
 {
     if(self.isStart) {
         if ([self.avSound isPlaying]) {
+            self.soundImageView.hidden = YES;
             [self.avSound stop];
             self.avSound = nil;
         } else {
@@ -648,6 +644,7 @@
             self.avSound.delegate = self;
             if(!err){
                 [self.avSound play];
+                self.soundImageView.hidden = NO;
             }
         }
     }

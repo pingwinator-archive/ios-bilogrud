@@ -84,7 +84,7 @@
         if(isiPhone) {
             self.nextShapeView = [[[BoardView alloc] initWithFrame:CGRectMake(self.boardView.frame.size.width + self.boardView.frame.origin.x + 5, self.boardView.frame.size.height - 130, 50, 50) amountCellX:4 amountCellY:4] autorelease];
         } else {
-            self.nextShapeView = [[[BoardView alloc] initWithFrame:CGRectMake(self.boardView.frame.size.width + self.boardView.frame.origin.x + 10, self.boardView.frame.size.height - 200, self.boardView.cellWidth * 4, self.boardView.cellHeight * 4) amountCellX:4 amountCellY:4] autorelease];
+            self.nextShapeView = [[[BoardView alloc] initWithFrame:CGRectMake(self.boardView.frame.size.width + self.boardView.frame.origin.x + 10, self.boardView.frame.size.height - 250, self.boardView.cellWidth * 4, self.boardView.cellHeight * 4) amountCellX:4 amountCellY:4] autorelease];
         }
         self.nextShapeView.backgroundColor = [UIColor clearColor];
     }

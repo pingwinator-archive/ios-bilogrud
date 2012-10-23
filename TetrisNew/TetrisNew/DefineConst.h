@@ -52,6 +52,7 @@
 #define textButtonFont [UIFont fontWithName:@"American Typewriter" size:10]
 #define scoreFont [UIFont fontWithName:@"DS-Digital" size:15]
 #define scoreFontLarge [UIFont fontWithName:@"DS-Digital" size:25]
+#define scoreFontiPad [UIFont fontWithName:@"DS-Digital" size:40]
 
 #define scoreLabelWidth 50
 #define scoreLabelHeigth 50
@@ -68,6 +69,8 @@
 #define labelRotateOffset 10
 
 #define labelOffsetHeight 10
+#define imageOffsetHeight 10
+#define imageOffsetHeightiPad 30
 #define PointToObj(point) [NSValue valueWithCGPoint:point]
 #define PointFromObj(value) [value CGPointValue]
 
