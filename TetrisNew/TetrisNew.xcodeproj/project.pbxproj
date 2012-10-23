@@ -16,6 +16,9 @@
 		6E2B104316274392004C5D72 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E2B104216274392004C5D72 /* AVFoundation.framework */; };
 		6E2B104516274F11004C5D72 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E2B104416274F11004C5D72 /* AudioToolbox.framework */; };
 		6E2B10501627E043004C5D72 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2B104F1627E043004C5D72 /* GameViewController.m */; };
+		6E55181316367FEF00B00424 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E55181216367FEF00B00424 /* icon.png */; };
+		6E5518151636801F00B00424 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E5518141636801F00B00424 /* icon@2x.png */; };
+		6E55181D1636854B00B00424 /* UIPopoverManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E55181C1636854B00B00424 /* UIPopoverManager.m */; };
 		6E5D87281635A11300E95323 /* back-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E5D87271635A11300E95323 /* back-ipad.png */; };
 		6E5F313B16260AC000274174 /* DisplayOTF.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E5F313816260AC000274174 /* DisplayOTF.otf */; };
 		6E5F313C16260AC000274174 /* DS-DIGIT.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6E5F313916260AC000274174 /* DS-DIGIT.ttf */; };
@@ -71,6 +74,10 @@
 		6E2B104416274F11004C5D72 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		6E2B10461627D954004C5D72 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6E2B104F1627E043004C5D72 /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
+		6E55181216367FEF00B00424 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		6E5518141636801F00B00424 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
+		6E55181B1636854B00B00424 /* UIPopoverManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPopoverManager.h; sourceTree = "<group>"; };
+		6E55181C1636854B00B00424 /* UIPopoverManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPopoverManager.m; sourceTree = "<group>"; };
 		6E5D87271635A11300E95323 /* back-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-ipad.png"; sourceTree = "<group>"; };
 		6E5F313816260AC000274174 /* DisplayOTF.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DisplayOTF.otf; sourceTree = "<group>"; };
 		6E5F313916260AC000274174 /* DS-DIGIT.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DS-DIGIT.ttf"; sourceTree = "<group>"; };
@@ -153,6 +160,15 @@
 			path = Sounds;
 			sourceTree = "<group>";
 		};
+		6E55181A1636854B00B00424 /* PopoverManager */ = {
+			isa = PBXGroup;
+			children = (
+				6E55181B1636854B00B00424 /* UIPopoverManager.h */,
+				6E55181C1636854B00B00424 /* UIPopoverManager.m */,
+			);
+			path = PopoverManager;
+			sourceTree = "<group>";
+		};
 		6E5F313716260AC000274174 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -178,6 +194,8 @@
 		6EC7BD1A1621E23C00066F23 = {
 			isa = PBXGroup;
 			children = (
+				6E5518141636801F00B00424 /* icon@2x.png */,
+				6E55181216367FEF00B00424 /* icon.png */,
 				6E9E3A7E16259FE20082C51B /* Categories */,
 				6EC7BD631621E36900066F23 /* ViewControllers */,
 				6EC7BD661621E36900066F23 /* Externals */,
@@ -254,6 +272,7 @@
 		6EC7BD661621E36900066F23 /* Externals */ = {
 			isa = PBXGroup;
 			children = (
+				6E55181A1636854B00B00424 /* PopoverManager */,
 			);
 			name = Externals;
 			path = TetrisNew/Externals;
@@ -430,6 +449,8 @@
 				6EEF2F5D16359E9700D38368 /* back@2x-h568.png in Resources */,
 				6EEF2F5E16359E9700D38368 /* back@2x.png in Resources */,
 				6E5D87281635A11300E95323 /* back-ipad.png in Resources */,
+				6E55181316367FEF00B00424 /* icon.png in Resources */,
+				6E5518151636801F00B00424 /* icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,6 +473,7 @@
 				6E9E3AA11626F4770082C51B /* BGViewBorder.m in Sources */,
 				6E2B10501627E043004C5D72 /* GameViewController.m in Sources */,
 				6EEF2F1F1631850E00D38368 /* UIApplication+CheckVersion.m in Sources */,
+				6E55181D1636854B00B00424 /* UIPopoverManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -73,6 +73,9 @@
 
 #define kShowGrid @"grid"
 #define kShowColor @"showColorShape"
+
+#define delayForSubView 0.3
+
 typedef enum {
     downDirectionMove,
     rightDirectionMove,

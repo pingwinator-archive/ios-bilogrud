@@ -46,41 +46,62 @@
     CGRect rect;
     if(isiPhone) {
         rect = CGRectMake(20, 20, 150, 20);
+        UILabel* showGridLabel = [[[UILabel alloc] initWithFrame:rect] autorelease];
+        showGridLabel.text = NSLocalizedString(@"Show grid", @"");
+        [showGridLabel setFont:settingFont];
+        [self.view addSubview: showGridLabel];
+        
+        self.toggleShowGridButton = [[[UISwitch alloc] initWithFrame:CGRectMake(rect.origin.x + 200, rect.origin.y, 50, 50)] autorelease];
+        [self.toggleShowGridButton setOn:[SettingViewController loadSettingGrid]];
+        [self.toggleShowGridButton addTarget:self action:@selector(changeShowGridToggle) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:self.toggleShowGridButton];
+        
+        
+        //color setting
+        CGRect rectForColor = CGRectMake(rect.origin.x, rect.origin.y + 50, 150, 20);
+        UILabel* showColorLabel = [[[UILabel alloc] initWithFrame:rectForColor] autorelease];
+        showColorLabel.text = NSLocalizedString(@"Add color", @"");
+        [showColorLabel setFont:settingFont];
+        [self.view addSubview:showColorLabel];
+        
+        self.toggleAddColorButton = [[[UISwitch alloc] initWithFrame:CGRectMake(rectForColor.origin.x + 200, rectForColor.origin.y, 50, 50)] autorelease];
+        [self.toggleAddColorButton setOn:[SettingViewController loadSettingColor]];
+        [self.toggleAddColorButton addTarget:self action:@selector(changeColorToggle) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:self.toggleAddColorButton];
+        
+        //close button
+        [self.view setBackgroundColor:[UIColor whiteColor]];
+        self.closeButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        self.closeButton.frame = CGRectMake(self.view.frame.size.width/2 - 30, rectForColor.origin.y + 50, 70, 30);
+        [self.closeButton setTitle:NSLocalizedString(@"Cancel", @"") forState:UIControlStateNormal];
+        [self.closeButton addTarget:self action:@selector(close) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:self.closeButton];
     } else {
-        rect = CGRectMake(200, 20, 150, 50);
+        rect = CGRectMake(20, 20, 100, 50);
+        [self.view setBackgroundColor:[UIColor whiteColor]];
+        
+        UILabel* showGridLabel = [[[UILabel alloc] initWithFrame:rect] autorelease];
+        showGridLabel.text = NSLocalizedString(@"Show grid", @"");
+        [showGridLabel setFont:settingFont];
+        [self.view addSubview: showGridLabel];
+        
+        self.toggleShowGridButton = [[[UISwitch alloc] initWithFrame:CGRectMake(rect.origin.x + 120, rect.origin.y, 50, 50)] autorelease];
+        [self.toggleShowGridButton setOn:[SettingViewController loadSettingGrid]];
+        [self.toggleShowGridButton addTarget:self action:@selector(changeShowGridToggle) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:self.toggleShowGridButton];
+        
+        //color setting
+        CGRect rectForColor = CGRectMake(rect.origin.x, rect.origin.y + 50, 150, 20);
+        UILabel* showColorLabel = [[[UILabel alloc] initWithFrame:rectForColor] autorelease];
+        showColorLabel.text = NSLocalizedString(@"Add color", @"");
+        [showColorLabel setFont:settingFont];
+        [self.view addSubview:showColorLabel];
+        
+        self.toggleAddColorButton = [[[UISwitch alloc] initWithFrame:CGRectMake(rectForColor.origin.x + 120, rectForColor.origin.y, 50, 50)] autorelease];
+        [self.toggleAddColorButton setOn:[SettingViewController loadSettingColor]];
+        [self.toggleAddColorButton addTarget:self action:@selector(changeColorToggle) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:self.toggleAddColorButton];
     }
-    
-    UILabel* showGridLabel = [[[UILabel alloc] initWithFrame:rect] autorelease];
-    showGridLabel.text = NSLocalizedString(@"Show grid", @"");
-    [showGridLabel setFont:settingFont];
-    [self.view addSubview: showGridLabel];
-     
-    self.toggleShowGridButton = [[[UISwitch alloc] initWithFrame:CGRectMake(rect.origin.x + 200, rect.origin.y, 50, 50)] autorelease];
-    [self.toggleShowGridButton setOn:[SettingViewController loadSettingGrid]];
-    [self.toggleShowGridButton addTarget:self action:@selector(changeShowGridToggle) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.toggleShowGridButton];
-    
-    
-    //color setting
-    CGRect rectForColor = CGRectMake(rect.origin.x, rect.origin.y + 50, 150, 20);
-    UILabel* showColorLabel = [[[UILabel alloc] initWithFrame:rectForColor] autorelease];
-    showColorLabel.text = NSLocalizedString(@"Add color", @"");
-    [showColorLabel setFont:settingFont];
-    [self.view addSubview:showColorLabel];
-    
-    self.toggleAddColorButton = [[[UISwitch alloc] initWithFrame:CGRectMake(rectForColor.origin.x + 200, rectForColor.origin.y, 50, 50)] autorelease];
-    [self.toggleAddColorButton setOn:[SettingViewController loadSettingColor]];
-    [self.toggleAddColorButton addTarget:self action:@selector(changeColorToggle) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.toggleAddColorButton];
-
-    //close button
-    [self.view setBackgroundColor:[UIColor whiteColor]];
-    self.closeButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    self.closeButton.frame = CGRectMake(self.view.frame.size.width/2 - 30, rectForColor.origin.y + 50, 70, 30);
-    [self.closeButton setTitle:NSLocalizedString(@"Cancel", @"") forState:UIControlStateNormal];
-    [self.closeButton addTarget:self action:@selector(close) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:self.closeButton];
-    
 }
 
 - (void)didReceiveMemoryWarning

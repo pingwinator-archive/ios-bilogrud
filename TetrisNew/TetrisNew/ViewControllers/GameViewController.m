@@ -13,6 +13,7 @@
 #import "UIViewController+Deprecated.h"
 #import "BGViewBorder.h"
 #import "UIApplication+CheckVersion.h"
+#import "UIPopoverManager.h"
 #import <AVFoundation/AVFoundation.h>
 @interface GameViewController ()<AVAudioPlayerDelegate>
 @property (retain, nonatomic) BoardViewController* boardViewController;
@@ -317,9 +318,9 @@
     //rotate button
     [self addRotateButton:CGRectMake(rectManage.origin.x + 150, rectManage.origin.y + 70, rotateSizeButton, rotateSizeButton) withImage:rotateButtonImage andHighlighted:highlightedImageRotate onView:self.view];
 
-    //score label
-    [self addScoreLabel:CGRectMake(self.boardRect.size.width + self.boardRect.origin.x + 10, 20, scoreLabelWidth, scoreLabelHeigth) onView:self.view];
-    
+//    //score label
+//    [self addScoreLabel:CGRectMake(self.boardRect.size.width + self.boardRect.origin.x + 10, 20, scoreLabelWidth, scoreLabelHeigth) onView:self.view];
+//    
     CGRect rectMove = CGRectMake(30, self.boardRect.size.height + 110, 100, 20);
     
     //left button
@@ -355,9 +356,9 @@
     //rotate button
     [self addRotateButton:CGRectMake(rectManage.origin.x + 300, rectManage.origin.y + 100, rotateSizeButtoniPad, rotateSizeButtoniPad) withImage:rotateButtonImage andHighlighted:highlightedImageRotate onView:self.view];
     
-    //score label
-    [self addScoreLabel:CGRectMake(self.boardRect.size.width + self.boardRect.origin.x + 5, 50, 150, scoreLabelHeigth) onView:self.view];
-    
+//    //score label
+//    [self addScoreLabel:CGRectMake(self.boardRect.size.width + self.boardRect.origin.x + 5, 50, 150, scoreLabelHeigth) onView:self.view];
+//    
     CGRect rectMove = CGRectMake(150, self.boardRect.size.height + 220, 100, 20);
     
     //left button
@@ -573,7 +574,12 @@
 - (void)showSetting
 {
     SettingViewController* settingViewController1 = [[[SettingViewController alloc] init] autorelease];
-    [self deprecatedPresentModalViewController:settingViewController1 animated:YES];
+    if(isiPhone) {
+        [self deprecatedPresentModalViewController:settingViewController1 animated:YES];
+    } else {
+        settingViewController1.contentSizeForViewInPopover = CGSizeMake(240, 120);
+        [UIPopoverManager showControllerInPopover:settingViewController1 inView:self.view forTarget:self.settingButton dismissTarget:self dismissSelector:@selector(popoverControllerDidDismissPopover:)];
+    }
 }
 
 - (void)play
@@ -590,6 +596,15 @@
     } else {
         if(self.firstStart && self.boardViewController) {
             self.gameCount++;
+            
+            
+            if (isiPad) {
+                //score label
+                [self addScoreLabel:CGRectMake(self.boardRect.size.width + self.boardRect.origin.x + 5, 50, 150, scoreLabelHeigth) onView:self.view];
+            } else {
+                //score label
+                [self addScoreLabel:CGRectMake(self.boardRect.size.width + self.boardRect.origin.x + 10, 20, scoreLabelWidth, scoreLabelHeigth) onView:self.view];
+            }
            [Flurry logEvent:@"StartGame"];
             
            [self.boardViewController start];
@@ -724,5 +739,13 @@
 - (void)newGame
 {
     [self reset];
+}
+
+#pragma mark - UIPopoverControllerDelegate Methods
+
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
+{
+    [UIImageView animateWithDuration:delayForSubView animations:^{
+    }];
 }
 @end
