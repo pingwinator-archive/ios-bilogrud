@@ -77,7 +77,7 @@
         [self.closeButton addTarget:self action:@selector(close) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:self.closeButton];
     } else {
-        rect = CGRectMake(20, 20, 100, 50);
+        rect = CGRectMake(20, 20, 150, 50);
         [self.view setBackgroundColor:[UIColor whiteColor]];
         
         UILabel* showGridLabel = [[[UILabel alloc] initWithFrame:rect] autorelease];
@@ -85,7 +85,7 @@
         [showGridLabel setFont:settingFont];
         [self.view addSubview: showGridLabel];
         
-        self.toggleShowGridButton = [[[UISwitch alloc] initWithFrame:CGRectMake(rect.origin.x + 120, rect.origin.y, 50, 50)] autorelease];
+        self.toggleShowGridButton = [[[UISwitch alloc] initWithFrame:CGRectMake(rect.origin.x + 180, rect.origin.y, 50, 50)] autorelease];
         [self.toggleShowGridButton setOn:[SettingViewController loadSettingGrid]];
         [self.toggleShowGridButton addTarget:self action:@selector(changeShowGridToggle) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:self.toggleShowGridButton];
@@ -97,7 +97,7 @@
         [showColorLabel setFont:settingFont];
         [self.view addSubview:showColorLabel];
         
-        self.toggleAddColorButton = [[[UISwitch alloc] initWithFrame:CGRectMake(rectForColor.origin.x + 120, rectForColor.origin.y, 50, 50)] autorelease];
+        self.toggleAddColorButton = [[[UISwitch alloc] initWithFrame:CGRectMake(rectForColor.origin.x + 180, rectForColor.origin.y, 50, 50)] autorelease];
         [self.toggleAddColorButton setOn:[SettingViewController loadSettingColor]];
         [self.toggleAddColorButton addTarget:self action:@selector(changeColorToggle) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:self.toggleAddColorButton];
@@ -119,12 +119,18 @@
 {
     self.showGrid = !self.showGrid;
     [SettingViewController saveSettingGrid:self.showGrid];
+    if(self.competitionBlock) {
+        self.competitionBlock();
+    }
 }
 
 - (void)changeColorToggle
 {
     self.showColor = !self.showColor;
     [SettingViewController saveSettingColor:self.showColor];
+    if(self.competitionBlock) {
+        self.competitionBlock();
+    }
 }
 
 + (void)saveSettingGrid:(BOOL)grid

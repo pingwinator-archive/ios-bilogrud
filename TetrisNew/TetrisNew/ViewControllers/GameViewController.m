@@ -17,7 +17,6 @@
 #import <AVFoundation/AVFoundation.h>
 @interface GameViewController ()<AVAudioPlayerDelegate>
 @property (retain, nonatomic) BoardViewController* boardViewController;
-@property (retain, nonatomic) SettingViewController* settingViewController;
 @property (retain, nonatomic) BoardView* nextShapeView;
 @property (retain, nonatomic) UIButton* settingButton;
 @property (retain, nonatomic) UIButton* playButton;
@@ -84,7 +83,7 @@
 @synthesize boardRect;
 @synthesize settingButton;
 @synthesize settingIsVisible;
-@synthesize settingViewController;
+
 @synthesize bgView;
 @synthesize avSound;
 
@@ -111,7 +110,6 @@
     self.rightLabel = nil;
     self.rotateLabel = nil;
     self.soundLabel = nil;
-    self.settingViewController = nil;
     self.lineLabel = nil;
     self.resetLabel = nil;
     self.bgView = nil;
@@ -170,7 +168,7 @@
 {
     NSUInteger iOr;
     if(isiPad) {
-        iOr = UIInterfaceOrientationMaskAll;
+        iOr = UIInterfaceOrientationMaskPortrait;
     } else {
         iOr = UIInterfaceOrientationMaskPortrait;
     }
@@ -573,13 +571,40 @@
 
 - (void)showSetting
 {
-    SettingViewController* settingViewController1 = [[[SettingViewController alloc] init] autorelease];
+    SettingViewController* settingViewController = [[[SettingViewController alloc] init] autorelease];
     if(isiPhone) {
-        [self deprecatedPresentModalViewController:settingViewController1 animated:YES];
+        [self deprecatedPresentModalViewController:settingViewController animated:YES];
     } else {
-        settingViewController1.contentSizeForViewInPopover = CGSizeMake(240, 120);
-        [UIPopoverManager showControllerInPopover:settingViewController1 inView:self.view forTarget:self.settingButton dismissTarget:self dismissSelector:@selector(popoverControllerDidDismissPopover:)];
+        settingViewController.competitionBlock = ^(void) {
+            [self.boardViewController showGrid: [SettingViewController loadSettingGrid]];
+            [self.boardViewController showColor: [SettingViewController loadSettingColor]];
+            
+            [self.boardViewController.boardView setNeedsDisplay];
+            [self.boardViewController.nextShapeView setNeedsDisplay];
+        };
+        settingViewController.contentSizeForViewInPopover = CGSizeMake(280, 120);
+        [UIPopoverManager showControllerInPopover:settingViewController inView:self.view forTarget:self.settingButton dismissTarget:self dismissSelector:@selector(popoverControllerDidDismissPopover:)];
+        [self pauseGame];
     }
+}
+
+- (void)pauseGame
+{
+    [self pauseGameTimer];
+    [self.boardViewController.gameTimer invalidate];
+    if(self.avSound.isPlaying) {
+        [self.avSound pause];
+    }
+    self.boardViewController.gameTimer = nil;
+}
+
+- (void)continueGame
+{
+    [self.boardViewController startGameTimer];
+    if (self.avSound) {
+        [self.avSound play];
+    }
+
 }
 
 - (void)play
@@ -587,16 +612,16 @@
     //timer start
     if(self.isStart) {
         self.isStart = NO;
-        [self pauseGameTimer];
-        [self.boardViewController.gameTimer invalidate];
-        if(self.avSound.isPlaying) {
-            [self.avSound pause];
-        }
-        self.boardViewController.gameTimer = nil;
+        [self pauseGame];
+//        [self pauseGameTimer];
+//        [self.boardViewController.gameTimer invalidate];
+//        if(self.avSound.isPlaying) {
+//            [self.avSound pause];
+//        }
+//        self.boardViewController.gameTimer = nil;
     } else {
         if(self.firstStart && self.boardViewController) {
             self.gameCount++;
-            
             
             if (isiPad) {
                 //score label
@@ -613,10 +638,12 @@
             self.boardViewController.resetGameDelegate = self;
         }
         self.isStart = YES;
-        [self.boardViewController startGameTimer];
-        if (self.avSound) {
-                [self.avSound play];
-        }
+        
+        [self continueGame];
+//        [self.boardViewController startGameTimer];
+//        if (self.avSound) {
+//                [self.avSound play];
+//        }
         DBLog(@"play!");
     }
 }
@@ -746,6 +773,7 @@
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
 {
     [UIImageView animateWithDuration:delayForSubView animations:^{
+        [self continueGame];
     }];
 }
 @end

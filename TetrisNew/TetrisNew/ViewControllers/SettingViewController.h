@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+typedef void(^CompetitionBlock)(void);
 @interface SettingViewController : UIViewController
 @property (assign, nonatomic) BOOL showGrid;
 @property (assign, nonatomic) BOOL showColor;
+@property (copy, nonatomic) CompetitionBlock competitionBlock;
 + (BOOL)loadSettingGrid;
 + (void)saveSettingGrid:(BOOL)grid;
 + (BOOL)loadSettingColor;

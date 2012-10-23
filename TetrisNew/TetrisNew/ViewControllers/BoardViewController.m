@@ -77,7 +77,7 @@
         for (NSInteger i = 0; i < self.boardView.amountCellX ; i++) {
             [borderSet addObject:PointToObj(CGPointMake(i, self.boardView.amountCellY))];
         }
-        for (NSInteger j = 0; j < self.boardView.amountCellY; j++) {
+        for (NSInteger j = -2; j < self.boardView.amountCellY; j++) {
             [borderSet addObject:PointToObj(CGPointMake(-1, j))];
             [borderSet addObject:PointToObj(CGPointMake(self.boardView.amountCellX, j))];
         }
@@ -150,11 +150,13 @@
             //check for game over
             BOOL showGameOverAlert = NO;
             for (Cell* c in self.boardCells) {
-                if(c.point.y == 1 && !showGameOverAlert) {
+                if(c.point.y == 1 && [self.boardCells count]>10 && !showGameOverAlert) {
                     self.gameOver = YES;
                     showGameOverAlert = YES;
                     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Game Over", @"")  message:nil delegate:self cancelButtonTitle:NSLocalizedString(@"New game", @"") otherButtonTitles:nil, nil];
                     [alert show];
+                    [self.gameTimer invalidate];
+                    self.gameTimer = nil;
                 }
             }
             //check line where shape was add
@@ -237,6 +239,9 @@
 {
     NSMutableSet* set = [[[NSMutableSet alloc] initWithSet:validateSet] autorelease];
     [set intersectSet:self.borderSet];
+    if([set count] >= 1) {
+        NSLog(@"ffff");
+    }
     return ![validateSet intersectsSet:self.borderSet] && ![validateSet intersectsSet:[Cell cellsToPoints: self.fallenShapeSet]];
 }
 

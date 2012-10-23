@@ -74,8 +74,8 @@
 		6E2B104416274F11004C5D72 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		6E2B10461627D954004C5D72 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6E2B104F1627E043004C5D72 /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
-		6E55181216367FEF00B00424 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
-		6E5518141636801F00B00424 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
+		6E55181216367FEF00B00424 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../../../icon.png; sourceTree = "<group>"; };
+		6E5518141636801F00B00424 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon@2x.png"; path = "../../../icon@2x.png"; sourceTree = "<group>"; };
 		6E55181B1636854B00B00424 /* UIPopoverManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPopoverManager.h; sourceTree = "<group>"; };
 		6E55181C1636854B00B00424 /* UIPopoverManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPopoverManager.m; sourceTree = "<group>"; };
 		6E5D87271635A11300E95323 /* back-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-ipad.png"; sourceTree = "<group>"; };
@@ -194,8 +194,6 @@
 		6EC7BD1A1621E23C00066F23 = {
 			isa = PBXGroup;
 			children = (
-				6E5518141636801F00B00424 /* icon@2x.png */,
-				6E55181216367FEF00B00424 /* icon.png */,
 				6E9E3A7E16259FE20082C51B /* Categories */,
 				6EC7BD631621E36900066F23 /* ViewControllers */,
 				6EC7BD661621E36900066F23 /* Externals */,
@@ -321,6 +319,8 @@
 		6EC7BD6A1621E36900066F23 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6E5518141636801F00B00424 /* icon@2x.png */,
+				6E55181216367FEF00B00424 /* icon.png */,
 				6E5D87271635A11300E95323 /* back-ipad.png */,
 				6EEF2F5916359E9600D38368 /* back.png */,
 				6EEF2F5A16359E9600D38368 /* back@2x-h568.png */,
@@ -540,7 +540,7 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
