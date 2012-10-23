@@ -16,6 +16,7 @@
 		6E2B104316274392004C5D72 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E2B104216274392004C5D72 /* AVFoundation.framework */; };
 		6E2B104516274F11004C5D72 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E2B104416274F11004C5D72 /* AudioToolbox.framework */; };
 		6E2B10501627E043004C5D72 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2B104F1627E043004C5D72 /* GameViewController.m */; };
+		6E519B421636F5F300DF3E3D /* defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E519B411636F5F300DF3E3D /* defaults.plist */; };
 		6E55181316367FEF00B00424 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E55181216367FEF00B00424 /* icon.png */; };
 		6E5518151636801F00B00424 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E5518141636801F00B00424 /* icon@2x.png */; };
 		6E55181D1636854B00B00424 /* UIPopoverManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E55181C1636854B00B00424 /* UIPopoverManager.m */; };
@@ -48,10 +49,6 @@
 		6EEF2F4416352C1100D38368 /* button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EEF2F3C16352C1100D38368 /* button@2x.png */; };
 		6EEF2F4516352C1100D38368 /* button_up.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EEF2F3D16352C1100D38368 /* button_up.png */; };
 		6EEF2F4616352C1100D38368 /* button_up@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EEF2F3E16352C1100D38368 /* button_up@2x.png */; };
-		6EEF2F4716352C1100D38368 /* Setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EEF2F3F16352C1100D38368 /* Setting.png */; };
-		6EEF2F4816352C1100D38368 /* Setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EEF2F4016352C1100D38368 /* Setting@2x.png */; };
-		6EEF2F4916352C1100D38368 /* SmallYellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EEF2F4116352C1100D38368 /* SmallYellow.png */; };
-		6EEF2F4A16352C1100D38368 /* SmallYellow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EEF2F4216352C1100D38368 /* SmallYellow@2x.png */; };
 		6EEF2F5116358B2500D38368 /* rotatebutton_up.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EEF2F4F16358B2400D38368 /* rotatebutton_up.png */; };
 		6EEF2F5216358B2500D38368 /* rotatebutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EEF2F5016358B2400D38368 /* rotatebutton.png */; };
 		6EEF2F561635955300D38368 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EEF2F551635955300D38368 /* libFlurry.a */; };
@@ -74,6 +71,7 @@
 		6E2B104416274F11004C5D72 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		6E2B10461627D954004C5D72 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6E2B104F1627E043004C5D72 /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
+		6E519B411636F5F300DF3E3D /* defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = defaults.plist; sourceTree = "<group>"; };
 		6E55181216367FEF00B00424 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../../../icon.png; sourceTree = "<group>"; };
 		6E5518141636801F00B00424 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon@2x.png"; path = "../../../icon@2x.png"; sourceTree = "<group>"; };
 		6E55181B1636854B00B00424 /* UIPopoverManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPopoverManager.h; sourceTree = "<group>"; };
@@ -119,10 +117,6 @@
 		6EEF2F3C16352C1100D38368 /* button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button@2x.png"; sourceTree = "<group>"; };
 		6EEF2F3D16352C1100D38368 /* button_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_up.png; sourceTree = "<group>"; };
 		6EEF2F3E16352C1100D38368 /* button_up@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_up@2x.png"; sourceTree = "<group>"; };
-		6EEF2F3F16352C1100D38368 /* Setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Setting.png; sourceTree = "<group>"; };
-		6EEF2F4016352C1100D38368 /* Setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Setting@2x.png"; sourceTree = "<group>"; };
-		6EEF2F4116352C1100D38368 /* SmallYellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SmallYellow.png; sourceTree = "<group>"; };
-		6EEF2F4216352C1100D38368 /* SmallYellow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SmallYellow@2x.png"; sourceTree = "<group>"; };
 		6EEF2F4F16358B2400D38368 /* rotatebutton_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rotatebutton_up.png; sourceTree = "<group>"; };
 		6EEF2F5016358B2400D38368 /* rotatebutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rotatebutton.png; sourceTree = "<group>"; };
 		6EEF2F541635955300D38368 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
@@ -311,6 +305,7 @@
 				6E5F313716260AC000274174 /* Fonts */,
 				6EC7BD6A1621E36900066F23 /* Images */,
 				6EC7BD6B1621E36900066F23 /* Nibs */,
+				6E519B411636F5F300DF3E3D /* defaults.plist */,
 			);
 			name = Resourses;
 			path = TetrisNew/Resourses;
@@ -351,10 +346,6 @@
 				6EEF2F3C16352C1100D38368 /* button@2x.png */,
 				6EEF2F3D16352C1100D38368 /* button_up.png */,
 				6EEF2F3E16352C1100D38368 /* button_up@2x.png */,
-				6EEF2F3F16352C1100D38368 /* Setting.png */,
-				6EEF2F4016352C1100D38368 /* Setting@2x.png */,
-				6EEF2F4116352C1100D38368 /* SmallYellow.png */,
-				6EEF2F4216352C1100D38368 /* SmallYellow@2x.png */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -439,10 +430,6 @@
 				6EEF2F4416352C1100D38368 /* button@2x.png in Resources */,
 				6EEF2F4516352C1100D38368 /* button_up.png in Resources */,
 				6EEF2F4616352C1100D38368 /* button_up@2x.png in Resources */,
-				6EEF2F4716352C1100D38368 /* Setting.png in Resources */,
-				6EEF2F4816352C1100D38368 /* Setting@2x.png in Resources */,
-				6EEF2F4916352C1100D38368 /* SmallYellow.png in Resources */,
-				6EEF2F4A16352C1100D38368 /* SmallYellow@2x.png in Resources */,
 				6EEF2F5116358B2500D38368 /* rotatebutton_up.png in Resources */,
 				6EEF2F5216358B2500D38368 /* rotatebutton.png in Resources */,
 				6EEF2F5C16359E9700D38368 /* back.png in Resources */,
@@ -451,6 +438,7 @@
 				6E5D87281635A11300E95323 /* back-ipad.png in Resources */,
 				6E55181316367FEF00B00424 /* icon.png in Resources */,
 				6E5518151636801F00B00424 /* icon@2x.png in Resources */,
+				6E519B421636F5F300DF3E3D /* defaults.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -540,7 +528,7 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Vasyl Liutikov (EMDT4NTTTF)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -555,6 +543,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "TetrisNew/TetrisNew-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FB04087E-311C-437C-A3E2-D43EDA58C562";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

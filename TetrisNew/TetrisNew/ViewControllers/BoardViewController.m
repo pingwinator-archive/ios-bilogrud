@@ -155,8 +155,7 @@
                     showGameOverAlert = YES;
                     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Game Over", @"")  message:nil delegate:self cancelButtonTitle:NSLocalizedString(@"New game", @"") otherButtonTitles:nil, nil];
                     [alert show];
-                    [self.gameTimer invalidate];
-                    self.gameTimer = nil;
+                    [self stopGameTimer];
                 }
             }
             //check line where shape was add
@@ -239,9 +238,6 @@
 {
     NSMutableSet* set = [[[NSMutableSet alloc] initWithSet:validateSet] autorelease];
     [set intersectSet:self.borderSet];
-    if([set count] >= 1) {
-        NSLog(@"ffff");
-    }
     return ![validateSet intersectsSet:self.borderSet] && ![validateSet intersectsSet:[Cell cellsToPoints: self.fallenShapeSet]];
 }
 
@@ -268,8 +264,7 @@
 - (void)timerTick
 {
     if(self.gameOver) {
-        [self.gameTimer invalidate];
-        self.gameTimer = nil;
+        [self stopGameTimer];
     } else {
         [self moveShape:downDirectionMove];
     }

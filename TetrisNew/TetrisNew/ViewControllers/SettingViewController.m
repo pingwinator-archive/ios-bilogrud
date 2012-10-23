@@ -73,7 +73,7 @@
         [self.view setBackgroundColor:[UIColor whiteColor]];
         self.closeButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         self.closeButton.frame = CGRectMake(self.view.frame.size.width/2 - 30, rectForColor.origin.y + 50, 70, 30);
-        [self.closeButton setTitle:NSLocalizedString(@"Cancel", @"") forState:UIControlStateNormal];
+        [self.closeButton setTitle:NSLocalizedString(@"Ok", @"") forState:UIControlStateNormal];
         [self.closeButton addTarget:self action:@selector(close) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:self.closeButton];
     } else {

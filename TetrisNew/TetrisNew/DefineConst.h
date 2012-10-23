@@ -36,13 +36,13 @@
 #define borderThick 3
 
 //buttons
-#define settingSizeButton 30
-#define manageSizeButton 30
-#define moveSizeButton 40
-#define rotateSizeButton 60
-#define manageSizeButtoniPad 40
-#define moveSizeButtoniPad 40
-#define rotateSizeButtoniPad 80
+#define settingSizeButton 40
+#define manageSizeButton 40
+#define moveSizeButton 50
+#define rotateSizeButton 70
+#define manageSizeButtoniPad 60
+#define moveSizeButtoniPad 60
+#define rotateSizeButtoniPad 100
 
 #define distanceManageButtonAndLabel (manageSizeButton - 5)
 #define distanceMoveButtonAndLabel (moveSizeButton - 5)

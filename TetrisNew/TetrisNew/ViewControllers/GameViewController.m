@@ -278,9 +278,6 @@
     //rotate button
     [self addRotateButton:CGRectMake(rectManage.origin.x + 150, rectManage.origin.y + 90, rotateSizeButton, rotateSizeButton) withImage:rotateButtonImage andHighlighted:highlightedImageRotate onView:self.view];
     
-    //score label
-    [self addScoreLabel:CGRectMake(self.boardRect.size.width + self.boardRect.origin.x + 5, 20, scoreLabelWidth, scoreLabelHeigth) onView:self.view];
-    
     CGRect rectMove = CGRectMake(30, self.boardRect.size.height + 150, 100, 20);
     
     //left button
@@ -315,10 +312,7 @@
     
     //rotate button
     [self addRotateButton:CGRectMake(rectManage.origin.x + 150, rectManage.origin.y + 70, rotateSizeButton, rotateSizeButton) withImage:rotateButtonImage andHighlighted:highlightedImageRotate onView:self.view];
-
-//    //score label
-//    [self addScoreLabel:CGRectMake(self.boardRect.size.width + self.boardRect.origin.x + 10, 20, scoreLabelWidth, scoreLabelHeigth) onView:self.view];
-//    
+  
     CGRect rectMove = CGRectMake(30, self.boardRect.size.height + 110, 100, 20);
     
     //left button
@@ -353,10 +347,7 @@
     
     //rotate button
     [self addRotateButton:CGRectMake(rectManage.origin.x + 300, rectManage.origin.y + 100, rotateSizeButtoniPad, rotateSizeButtoniPad) withImage:rotateButtonImage andHighlighted:highlightedImageRotate onView:self.view];
-    
-//    //score label
-//    [self addScoreLabel:CGRectMake(self.boardRect.size.width + self.boardRect.origin.x + 5, 50, 150, scoreLabelHeigth) onView:self.view];
-//    
+
     CGRect rectMove = CGRectMake(150, self.boardRect.size.height + 220, 100, 20);
     
     //left button
@@ -510,7 +501,7 @@
     [view addSubview:self.rightButton];
     
     //right label
-    CGRect rectRightLabel = CGRectMake(rect.origin.x - labelMoveOffset, distanceMoveButtonAndLabel + rect.origin.y , labelMoveTextWidth, labelMoveTextHeigth);
+    CGRect rectRightLabel = CGRectMake(rect.origin.x - labelMoveOffset, rect.size.height + rect.origin.y , labelMoveTextWidth, labelMoveTextHeigth);
     self.rightLabel = [[[UILabel alloc] initWithFrame:rectRightLabel] autorelease];
     self.rightLabel.text = NSLocalizedString(@"RIGHT", @"");
     [self.rightLabel setFont:textButtonFont];
