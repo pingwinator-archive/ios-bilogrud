@@ -17,9 +17,11 @@
 		6E2B104516274F11004C5D72 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E2B104416274F11004C5D72 /* AudioToolbox.framework */; };
 		6E2B10501627E043004C5D72 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2B104F1627E043004C5D72 /* GameViewController.m */; };
 		6E519B421636F5F300DF3E3D /* defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E519B411636F5F300DF3E3D /* defaults.plist */; };
-		6E55181316367FEF00B00424 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E55181216367FEF00B00424 /* icon.png */; };
-		6E5518151636801F00B00424 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E5518141636801F00B00424 /* icon@2x.png */; };
-		6E55181D1636854B00B00424 /* UIPopoverManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E55181C1636854B00B00424 /* UIPopoverManager.m */; };
+		6E55181D1636854B00B00424 /* UIPopoverManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E55181C1636854B00B00424 /* UIPopoverManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		6E55183116373D9E00B00424 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E55182D16373D9E00B00424 /* Icon-72.png */; };
+		6E55183216373D9E00B00424 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E55182E16373D9E00B00424 /* Icon-72@2x.png */; };
+		6E55183316373D9E00B00424 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E55182F16373D9E00B00424 /* icon.png */; };
+		6E55183416373D9E00B00424 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E55183016373D9E00B00424 /* icon@2x.png */; };
 		6E5D87281635A11300E95323 /* back-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E5D87271635A11300E95323 /* back-ipad.png */; };
 		6E5F313B16260AC000274174 /* DisplayOTF.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E5F313816260AC000274174 /* DisplayOTF.otf */; };
 		6E5F313C16260AC000274174 /* DS-DIGIT.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6E5F313916260AC000274174 /* DS-DIGIT.ttf */; };
@@ -72,10 +74,12 @@
 		6E2B10461627D954004C5D72 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6E2B104F1627E043004C5D72 /* GameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
 		6E519B411636F5F300DF3E3D /* defaults.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = defaults.plist; sourceTree = "<group>"; };
-		6E55181216367FEF00B00424 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = ../../../icon.png; sourceTree = "<group>"; };
-		6E5518141636801F00B00424 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon@2x.png"; path = "../../../icon@2x.png"; sourceTree = "<group>"; };
 		6E55181B1636854B00B00424 /* UIPopoverManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPopoverManager.h; sourceTree = "<group>"; };
 		6E55181C1636854B00B00424 /* UIPopoverManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPopoverManager.m; sourceTree = "<group>"; };
+		6E55182D16373D9E00B00424 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
+		6E55182E16373D9E00B00424 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
+		6E55182F16373D9E00B00424 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		6E55183016373D9E00B00424 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		6E5D87271635A11300E95323 /* back-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-ipad.png"; sourceTree = "<group>"; };
 		6E5F313816260AC000274174 /* DisplayOTF.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DisplayOTF.otf; sourceTree = "<group>"; };
 		6E5F313916260AC000274174 /* DS-DIGIT.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DS-DIGIT.ttf"; sourceTree = "<group>"; };
@@ -161,6 +165,17 @@
 				6E55181C1636854B00B00424 /* UIPopoverManager.m */,
 			);
 			path = PopoverManager;
+			sourceTree = "<group>";
+		};
+		6E55182C16373D9E00B00424 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				6E55182D16373D9E00B00424 /* Icon-72.png */,
+				6E55182E16373D9E00B00424 /* Icon-72@2x.png */,
+				6E55182F16373D9E00B00424 /* icon.png */,
+				6E55183016373D9E00B00424 /* icon@2x.png */,
+			);
+			path = Icons;
 			sourceTree = "<group>";
 		};
 		6E5F313716260AC000274174 /* Fonts */ = {
@@ -314,8 +329,7 @@
 		6EC7BD6A1621E36900066F23 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				6E5518141636801F00B00424 /* icon@2x.png */,
-				6E55181216367FEF00B00424 /* icon.png */,
+				6E55182C16373D9E00B00424 /* Icons */,
 				6E5D87271635A11300E95323 /* back-ipad.png */,
 				6EEF2F5916359E9600D38368 /* back.png */,
 				6EEF2F5A16359E9600D38368 /* back@2x-h568.png */,
@@ -436,9 +450,11 @@
 				6EEF2F5D16359E9700D38368 /* back@2x-h568.png in Resources */,
 				6EEF2F5E16359E9700D38368 /* back@2x.png in Resources */,
 				6E5D87281635A11300E95323 /* back-ipad.png in Resources */,
-				6E55181316367FEF00B00424 /* icon.png in Resources */,
-				6E5518151636801F00B00424 /* icon@2x.png in Resources */,
 				6E519B421636F5F300DF3E3D /* defaults.plist in Resources */,
+				6E55183116373D9E00B00424 /* Icon-72.png in Resources */,
+				6E55183216373D9E00B00424 /* Icon-72@2x.png in Resources */,
+				6E55183316373D9E00B00424 /* icon.png in Resources */,
+				6E55183416373D9E00B00424 /* icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -575,6 +591,7 @@
 		6EC7BD4D1621E23C00066F23 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TetrisNew/TetrisNew-Prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
@@ -583,6 +600,7 @@
 					"\"$(SRCROOT)/TetrisNew/Resourses/Flurry\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;

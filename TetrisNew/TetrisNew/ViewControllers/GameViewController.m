@@ -276,7 +276,7 @@
     [self addSettingButton:CGRectMake(rectManage.origin.x + 180, rectManage.origin.y , manageSizeButton, manageSizeButton) withImage:imageButton onView:self.view];
     
     //rotate button
-    [self addRotateButton:CGRectMake(rectManage.origin.x + 150, rectManage.origin.y + 90, rotateSizeButton, rotateSizeButton) withImage:rotateButtonImage andHighlighted:highlightedImageRotate onView:self.view];
+    [self addRotateButton:CGRectMake(rectManage.origin.x + 170, rectManage.origin.y + 90, rotateSizeButton, rotateSizeButton) withImage:rotateButtonImage andHighlighted:highlightedImageRotate onView:self.view];
     
     CGRect rectMove = CGRectMake(30, self.boardRect.size.height + 150, 100, 20);
     
@@ -311,7 +311,7 @@
     [self addSettingButton:CGRectMake(rectManage.origin.x + 180, rectManage.origin.y , manageSizeButton, manageSizeButton) withImage:imageButton onView:self.view];
     
     //rotate button
-    [self addRotateButton:CGRectMake(rectManage.origin.x + 150, rectManage.origin.y + 70, rotateSizeButton, rotateSizeButton) withImage:rotateButtonImage andHighlighted:highlightedImageRotate onView:self.view];
+    [self addRotateButton:CGRectMake(rectManage.origin.x + 170, rectManage.origin.y + 65, rotateSizeButton, rotateSizeButton) withImage:rotateButtonImage andHighlighted:highlightedImageRotate onView:self.view];
   
     CGRect rectMove = CGRectMake(30, self.boardRect.size.height + 110, 100, 20);
     
@@ -373,7 +373,7 @@
     [view addSubview:self.playButton];
     
     //play label
-    CGRect rectPlayLabel = CGRectMake(rect.origin.x , rect.origin.y + distanceManageButtonAndLabel, labelPlayTextWidth , labelPlayTextHeigth);
+    CGRect rectPlayLabel = CGRectMake(CGRectGetMidX(rect) - labelPlayTextWidth/2 , rect.origin.y + rect.size.height - labelOffsetHeight, labelPlayTextWidth , labelPlayTextHeigth);
     self.playLabel = [[[UILabel alloc] initWithFrame:rectPlayLabel] autorelease];
     self.playLabel.text = NSLocalizedString( @"PLAY/ PAUSE", @"");
     self.playLabel.lineBreakMode = NSLineBreakByCharWrapping;
@@ -394,7 +394,7 @@
     [view addSubview:self.resetButton];
     
     //reset label
-    CGRect rectResetLabel = CGRectMake(rect.origin.x - labelManageOffset , rect.origin.y + distanceManageButtonAndLabel, labelMoveTextWidth, labelMoveTextHeigth);
+    CGRect rectResetLabel = CGRectMake(CGRectGetMidX(rect) - labelManageTextWidth/2 , rect.origin.y + rect.size.height - labelOffsetHeight, labelManageTextWidth, labelTextHeigth);
     self.resetLabel = [[[UILabel alloc] initWithFrame:rectResetLabel] autorelease];
     self.resetLabel.text = NSLocalizedString(@"RESET", @"");
     self.resetLabel.textAlignment = UITextAlignmentCenter;
@@ -413,7 +413,7 @@
     [view addSubview:self.soundButton];
     
     //sound label
-    CGRect rectSoundLabel = CGRectMake(rect.origin.x - labelManageOffset, rect.origin.y + distanceManageButtonAndLabel, labelMoveTextWidth, labelMoveTextHeigth);
+    CGRect rectSoundLabel = CGRectMake(CGRectGetMidX(rect) - labelManageTextWidth/2, rect.origin.y + rect.size.height - labelOffsetHeight, labelManageTextWidth, labelTextHeigth);
     self.soundLabel = [[[UILabel alloc] initWithFrame:rectSoundLabel] autorelease];
     self.soundLabel.text = NSLocalizedString(@"SOUND", @"");
     self.soundLabel.textAlignment = UITextAlignmentCenter;
@@ -431,8 +431,8 @@
     [self.settingButton addTarget:self action:@selector(showSetting) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:self.settingButton];
     
-    //sound label
-    CGRect rectSetLabel = CGRectMake(rect.origin.x - labelManageOffset - 10, rect.origin.y + distanceManageButtonAndLabel, labelMoveTextWidth + 20, labelMoveTextHeigth);
+    //sound label 
+    CGRect rectSetLabel = CGRectMake(CGRectGetMidX(rect) - labelManageTextWidth/2, rect.origin.y + rect.size.height - labelOffsetHeight, labelManageTextWidth, labelTextHeigth);
     self.settingLabel = [[[UILabel alloc] initWithFrame:rectSetLabel] autorelease];
     self.settingLabel.text = NSLocalizedString(@"SETTINGS", @"");
     self.settingLabel.textAlignment = UITextAlignmentCenter;
@@ -445,24 +445,21 @@
 - (void)addScoreLabel:(CGRect)rect onView:(UIView*)view
 {
     UILabel* labelText = [[[UILabel alloc] initWithFrame:rect] autorelease];
-    labelText.text = @"SCORE";
+    labelText.text = NSLocalizedString(@"SCORE", @"");
     if(isiPhone) {
         labelText.font = scoreFont;
     } else {
-        labelText.font = scoreFontiPad;
+        labelText.font = scoreFontLarge;
     }
     labelText.backgroundColor = [UIColor clearColor];
     [view addSubview:labelText];
     
     self.lineLabel = [[[UILabel alloc] initWithFrame:CGRectMake(rect.origin.x, rect.origin.y + 25, rect.size.width, rect.size.height)] autorelease];
+    self.lineLabel.font = scoreFontLarge;
     self.lineLabel.text = [NSString stringWithFormat:@"%d", self.boardViewController.lines];
     self.lineLabel.lineBreakMode = NSLineBreakByCharWrapping;
     self.lineLabel.numberOfLines = 2;
-    if(isiPhone) {
-        self.lineLabel.font = scoreFont;
-    } else {
-        self.lineLabel.font = scoreFontiPad;
-    }
+   
     self.lineLabel.backgroundColor = [UIColor clearColor];
     self.lineLabel.textColor = [UIColor blackColor];
     self.lineLabel.textAlignment = UITextAlignmentCenter;
@@ -480,7 +477,7 @@
     [view addSubview:self.leftButton];
     
     //left label
-    CGRect rectLeftLabel = CGRectMake(rect.origin.x - labelMoveOffset, rect.origin.y + distanceMoveButtonAndLabel , labelMoveTextWidth , labelMoveTextHeigth);
+    CGRect rectLeftLabel = CGRectMake(CGRectGetMidX(rect) - labelMoveTextWidth/2, rect.origin.y + rect.size.height - labelOffsetHeight , labelMoveTextWidth , labelTextHeigth);
     self.leftLabel = [[[UILabel alloc] initWithFrame:rectLeftLabel] autorelease];
     self.leftLabel.text = NSLocalizedString(@"LEFT", @"");
     [self.leftLabel setFont:textButtonFont];
@@ -501,11 +498,11 @@
     [view addSubview:self.rightButton];
     
     //right label
-    CGRect rectRightLabel = CGRectMake(rect.origin.x - labelMoveOffset, rect.size.height + rect.origin.y , labelMoveTextWidth, labelMoveTextHeigth);
+    CGRect rectRightLabel = CGRectMake(CGRectGetMidX(rect) - labelMoveTextWidth/2 , rect.size.height + rect.origin.y - labelOffsetHeight, labelMoveTextWidth, labelTextHeigth);
     self.rightLabel = [[[UILabel alloc] initWithFrame:rectRightLabel] autorelease];
     self.rightLabel.text = NSLocalizedString(@"RIGHT", @"");
     [self.rightLabel setFont:textButtonFont];
-    self.rightLabel.backgroundColor=[UIColor clearColor];
+    self.rightLabel.backgroundColor = [UIColor clearColor];
     self.rightLabel.textColor = [UIColor blackColor];
     self.rightLabel.textAlignment = UITextAlignmentCenter;
     [view addSubview:self.rightLabel];
@@ -522,7 +519,7 @@
     [view addSubview:self.downButton];
     
     //down label
-    CGRect rectDownLabel = CGRectMake(rect.origin.x - labelMoveOffset, rect.origin.y + distanceMoveButtonAndLabel, labelMoveTextWidth, labelMoveTextHeigth);
+    CGRect rectDownLabel = CGRectMake(CGRectGetMidX(rect) - labelMoveTextWidth/2, rect.origin.y + rect.size.height - labelOffsetHeight, labelMoveTextWidth, labelTextHeigth);
     self.downLabel = [[[UILabel alloc] initWithFrame:rectDownLabel]autorelease];
     [self.downLabel setTextAlignment:NSTextAlignmentCenter];
     self.downLabel.text = NSLocalizedString(@"DOWN", @"");
@@ -543,7 +540,7 @@
     [view addSubview:self.rotateButton];
     
     //rotate label
-    CGRect rectRotateLabel = CGRectMake(CGRectGetMidX(rect) - labelRotateTextWidth/2, rect.size.height + rect.origin.y -10 , labelRotateTextWidth , labelMoveTextHeigth);
+    CGRect rectRotateLabel = CGRectMake(CGRectGetMidX(rect) - labelRotateTextWidth/2, rect.size.height + rect.origin.y -10 , labelRotateTextWidth , labelTextHeigth);
     self.rotateLabel = [[[UILabel alloc] initWithFrame:rectRotateLabel] autorelease];
     self.rotateLabel.text = NSLocalizedString(@"ROTATE", @"");
     [self.rotateLabel setFont:textButtonFont];
@@ -621,7 +618,7 @@
                 //score label
                 [self addScoreLabel:CGRectMake(self.boardRect.size.width + self.boardRect.origin.x + 10, 20, scoreLabelWidth, scoreLabelHeigth) onView:self.view];
             }
-           [Flurry logEvent:@"StartGame"];
+//           [Flurry logEvent:@"StartGame"];
             
            [self.boardViewController start];
             self.firstStart = NO;
