@@ -97,6 +97,8 @@
 {
     self.startPoint = CGPointMake(5, -2);
     self.currentShape = [[[TetrisShape alloc] initRandomShapeWithCenter:self.startPoint] autorelease];
+    [self stopGameTimer];
+    [self startGameTimer];
     self.fallenShapeSet = [[[NSMutableSet alloc] init] autorelease];
 }
 
@@ -113,6 +115,8 @@
     self.nextShape = [[[TetrisShape alloc] initRandomShapeWithCenter:CGPointMake(1, 1)] autorelease];
     self.nextShapeCells = [Cell pointsToCells:[self.nextShape getShapePoints] withColor:self.nextShape.shapeColor];
     self.nextShapeView.nextShapeCellsForDrawing =  self.nextShapeCells;
+    [self stopGameTimer];
+    [self startGameTimer];
     self.startPointNextShape = CGPointMake(1, 1);
     [self.nextShapeView setNeedsDisplay];
 }
@@ -123,6 +127,7 @@
     [self.boardCells removeAllObjects];
     [self.fallenShapeSet removeAllObjects];
     self.lines = 0;
+    self.gameTimerInterval = 1.0f;
     [self invokeDeleteLineDelegate];
    
     [self stopGameTimer];

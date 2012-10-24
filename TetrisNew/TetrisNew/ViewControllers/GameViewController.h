@@ -16,7 +16,7 @@
 @property (assign, nonatomic) NSInteger gameCount;
 - (void)play;
 - (void)reset;
+- (void)continueGame;
 ////timer
-- (void)resumptionGameTimer;
 - (void)pauseGameTimer;
 @end

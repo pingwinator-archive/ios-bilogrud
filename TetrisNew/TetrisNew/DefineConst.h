@@ -40,9 +40,9 @@
 #define manageSizeButton 40
 #define moveSizeButton 50
 #define rotateSizeButton 70
-#define manageSizeButtoniPad 60
-#define moveSizeButtoniPad 60
-#define rotateSizeButtoniPad 100
+#define manageSizeButtoniPad 50
+#define moveSizeButtoniPad 70
+#define rotateSizeButtoniPad 110
 
 #define distanceManageButtonAndLabel (manageSizeButton - 5)
 #define distanceMoveButtonAndLabel (moveSizeButton - 5)
@@ -52,7 +52,7 @@
 #define textButtonFont [UIFont fontWithName:@"American Typewriter" size:10]
 #define scoreFont [UIFont fontWithName:@"DS-Digital" size:15]
 #define scoreFontLarge [UIFont fontWithName:@"DS-Digital" size:25]
-#define scoreFontiPad [UIFont fontWithName:@"DS-Digital" size:40]
+#define scoreFontiPad [UIFont fontWithName:@"DS-Digital" size:30]
 
 #define scoreLabelWidth 50
 #define scoreLabelHeigth 50

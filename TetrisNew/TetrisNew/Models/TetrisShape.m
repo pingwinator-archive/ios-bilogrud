@@ -101,7 +101,7 @@
     self.curTypeShape = (TypeShape)randomTypeShape;
     self.shapePoints = [self.shapesCollection objectAtIndex:randomTypeShape];
     self.shapeColor = [self.colorsCollection objectAtIndex:randomTypeShape];
-    DBLog(@"shape %u", self.curTypeShape);
+  //  DBLog(@"shape %u", self.curTypeShape);
 }
 
 - (NSMutableSet*)getShapePoints

@@ -46,7 +46,6 @@
 
 - (void)addUIControlsForPhone;
 - (void)addUIControlsForLargePhone;
-- (void)addControllsOnLeftPanelWithFrame:(CGRect)rect;
 - (void)rotate;
 //motion
 - (void)moveRightPressed;
@@ -319,16 +318,16 @@
 
     CGRect rectManage = CGRectMake(220, self.boardRect.size.height + 120, 100, 20);
     //play button
-    [self addPlayButton:CGRectMake(rectManage.origin.x , rectManage.origin.y, manageSizeButton, manageSizeButton) withImage:imageButton andHighlighted:highlightedImage onView:self.view];
+    [self addPlayButton:CGRectMake(rectManage.origin.x , rectManage.origin.y, manageSizeButtoniPad, manageSizeButtoniPad) withImage:imageButton andHighlighted:highlightedImage onView:self.view];
     
     //reset button
-    [self addResetButton:CGRectMake(rectManage.origin.x + 100, rectManage.origin.y , manageSizeButton, manageSizeButton) withImage:imageButton onView:self.view];
+    [self addResetButton:CGRectMake(rectManage.origin.x + 100, rectManage.origin.y , manageSizeButtoniPad, manageSizeButtoniPad) withImage:imageButton onView:self.view];
     
     //sound button
-    [self addSoundButton:CGRectMake(rectManage.origin.x + 200, rectManage.origin.y , manageSizeButton, manageSizeButton) withImage:imageButton onView:self.view];
+    [self addSoundButton:CGRectMake(rectManage.origin.x + 200, rectManage.origin.y , manageSizeButtoniPad, manageSizeButtoniPad) withImage:imageButton onView:self.view];
     
     //setting button
-    [self addSettingButton:CGRectMake(rectManage.origin.x + 300, rectManage.origin.y , manageSizeButton, manageSizeButton) withImage:imageButton onView:self.view];
+    [self addSettingButton:CGRectMake(rectManage.origin.x + 300, rectManage.origin.y , manageSizeButtoniPad, manageSizeButtoniPad) withImage:imageButton onView:self.view];
     
     //rotate button
     [self addRotateButton:CGRectMake(rectManage.origin.x + 300, rectManage.origin.y + 100, rotateSizeButtoniPad, rotateSizeButtoniPad) withImage:rotateButtonImage andHighlighted:highlightedImageRotate onView:self.view];
@@ -429,22 +428,23 @@
 
 - (void)addScoreLabel:(CGRect)rect onView:(UIView*)view
 {
+    [self.lineLabel removeFromSuperview];
     UILabel* labelText = [[[UILabel alloc] initWithFrame:rect] autorelease];
     labelText.text = NSLocalizedString(@"SCORE", @"");
     if(isiPhone) {
         labelText.font = scoreFont;
     } else {
-        labelText.font = scoreFontiPad;
+        labelText.font = scoreFontLarge;
     }
     labelText.backgroundColor = [UIColor clearColor];
     [view addSubview:labelText];
     
         if(isiPhone) {
-        self.lineLabel = [[[UILabel alloc] initWithFrame:CGRectMake(rect.origin.x, rect.origin.y + 25, rect.size.width, rect.size.height)] autorelease];
-        self.lineLabel.font = scoreFontLarge;
-    } else {
-        self.lineLabel = [[[UILabel alloc] initWithFrame:CGRectMake(rect.origin.x, rect.origin.y + 35, rect.size.width, rect.size.height)] autorelease];
-         self.lineLabel.font = scoreFontiPad;
+            self.lineLabel = [[[UILabel alloc] initWithFrame:CGRectMake(rect.origin.x, rect.origin.y + 25, rect.size.width, rect.size.height)] autorelease];
+            self.lineLabel.font = scoreFontLarge;
+        } else {
+            self.lineLabel = [[[UILabel alloc] initWithFrame:CGRectMake(rect.origin.x +35, rect.origin.y, rect.size.width,     rect.size.height)] autorelease];
+            self.lineLabel.font = scoreFontiPad;
     }
    
     self.lineLabel.text = [NSString stringWithFormat:@"%d", self.boardViewController.lines];
@@ -551,6 +551,7 @@
 - (void)showSetting
 {
     SettingViewController* settingViewController = [[[SettingViewController alloc] init] autorelease];
+  
     if(isiPhone) {
         [self deprecatedPresentModalViewController:settingViewController animated:YES];
     } else {
@@ -561,7 +562,7 @@
             [self.boardViewController.boardView setNeedsDisplay];
             [self.boardViewController.nextShapeView setNeedsDisplay];
         };
-        settingViewController.contentSizeForViewInPopover = CGSizeMake(280, 120);
+        settingViewController.contentSizeForViewInPopover = CGSizeMake(290, 120);
         [UIPopoverManager showControllerInPopover:settingViewController inView:self.view forTarget:self.settingButton dismissTarget:self dismissSelector:@selector(popoverControllerDidDismissPopover:)];
         [self pauseGame];
     }
@@ -718,11 +719,6 @@
 
 #pragma mark - Timer 
 
-- (void)resumptionGameTimer
-{
-    [self.boardViewController startGameTimer];
-}
-
 - (void)pauseGameTimer
 {
     [self.boardViewController stopGameTimer];
@@ -732,7 +728,8 @@
 
 - (void)deleteLine:(NSInteger)amount
 {
-    self.lineLabel.text = [NSString stringWithFormat:@"%d", self.boardViewController.lines];
+    self.lineLabel.text = [NSString stringWithFormat:@"%d", amount];
+    NSLog(@"amount  %d", amount);
 }
 
 #pragma mark - GameOverDelegate Methods
