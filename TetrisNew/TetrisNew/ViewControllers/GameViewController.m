@@ -195,7 +195,7 @@
     } else {
         //iPad
         self.boardRect = CGRectMake(146, 52, 333, 637);
-        self.boardViewController = [[[BoardViewController alloc] initWithFrame:boardRect amountCellX:10 amountCellY:18] autorelease];
+        self.boardViewController = [[[BoardViewController alloc] initWithFrame:boardRect amountCellX:2 amountCellY:4] autorelease];
         self.boardViewController.boardView.backgroundColor = [UIColor clearColor];
         [self.bgView addSubview:self.boardViewController.boardView];
         [self.bgView addSubview:self.boardViewController.nextShapeView];
@@ -415,7 +415,7 @@
     [self.settingButton addTarget:self action:@selector(showSetting) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:self.settingButton];
     
-    //sound label 
+    //ssetting label 
     CGRect rectSetLabel = CGRectMake(CGRectGetMidX(rect) - labelManageTextWidth/2, rect.origin.y + rect.size.height - labelOffsetHeight, labelManageTextWidth, labelTextHeigth);
     self.settingLabel = [[[UILabel alloc] initWithFrame:rectSetLabel] autorelease];
     self.settingLabel.text = NSLocalizedString(@"SETTINGS", @"");
@@ -465,6 +465,7 @@
     [self.leftButton setImage:imageButton forState:UIControlStateNormal];
     [self.leftButton addTarget:self action:@selector(moveLeftPressed) forControlEvents:UIControlEventTouchDown];
     [self.leftButton addTarget:self action:@selector(moveLeftUnPressed) forControlEvents:UIControlEventTouchUpInside];
+    [self.leftButton addTarget:self action:@selector(moveLeftUnPressed) forControlEvents:UIControlEventTouchDragOutside];
     [view addSubview:self.leftButton];
     
     //left label
@@ -485,6 +486,7 @@
     self.rightButton.frame = rect;
     [self.rightButton setImage:imageButton forState:UIControlStateNormal];
     [self.rightButton addTarget:self action:@selector(moveRightUnPressed) forControlEvents:UIControlEventTouchUpInside];
+    [self.rightButton addTarget:self action:@selector(moveRightUnPressed) forControlEvents:UIControlEventTouchDragOutside];
     [self.rightButton addTarget:self action:@selector(moveRightPressed) forControlEvents:UIControlEventTouchDown];
     [view addSubview:self.rightButton];
     
@@ -507,6 +509,7 @@
     [self.downButton setImage:imageButton forState:UIControlStateNormal];
     [self.downButton addTarget:self action:@selector(moveDownPressed) forControlEvents:UIControlEventTouchDown];
     [self.downButton addTarget:self action:@selector(moveDownUnPressed) forControlEvents:UIControlEventTouchUpInside];
+    [self.downButton addTarget:self action:@selector(moveDownUnPressed) forControlEvents:UIControlEventTouchDragOutside];
     [view addSubview:self.downButton];
     
     //down label
@@ -551,8 +554,9 @@
 - (void)showSetting
 {
     SettingViewController* settingViewController = [[[SettingViewController alloc] init] autorelease];
-  
+    [self pauseGame];
     if(isiPhone) {
+       
         [self deprecatedPresentModalViewController:settingViewController animated:YES];
     } else {
         settingViewController.competitionBlock = ^(void) {
@@ -564,7 +568,6 @@
         };
         settingViewController.contentSizeForViewInPopover = CGSizeMake(290, 120);
         [UIPopoverManager showControllerInPopover:settingViewController inView:self.view forTarget:self.settingButton dismissTarget:self dismissSelector:@selector(popoverControllerDidDismissPopover:)];
-        [self pauseGame];
     }
 }
 

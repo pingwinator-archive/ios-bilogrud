@@ -58,7 +58,7 @@
 #define scoreLabelHeigth 50
 #define labelPlayTextWidth 35
 #define labelPlayTextHeigth 40
-#define labelManageTextWidth 60
+#define labelManageTextWidth 70
 #define labelMoveTextWidth 60
 #define labelRotateTextWidth 60
 #define labelTextHeigth 20
