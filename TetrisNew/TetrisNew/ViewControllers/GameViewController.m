@@ -32,21 +32,25 @@
 @property (retain, nonatomic) UILabel* rightLabel;
 @property (retain, nonatomic) UILabel* rotateLabel;
 @property (retain, nonatomic) UILabel* lineLabel;
+@property (retain, nonatomic) UILabel* speedLabel;
 @property (retain, nonatomic) UILabel* resetLabel;
 @property (retain, nonatomic) UILabel* soundLabel;
 @property (retain, nonatomic) UILabel* settingLabel;
+
+@property (retain, nonatomic) BGView* bgView;
+@property (retain, nonatomic) AVAudioPlayer* avSound;
+
 @property (assign, nonatomic) BOOL firstStart;
 @property (assign, nonatomic) CGRect boardRect;
 @property (assign, nonatomic) BOOL settingIsVisible;
-@property (retain, nonatomic) BGView* bgView;
-@property (retain, nonatomic) AVAudioPlayer* avSound;
+@property (assign, nonatomic) NSInteger speedValue;
 
 @property (retain, nonatomic) UIImageView* pauseImageView;
 @property (retain, nonatomic) UIImageView* soundImageView;
 
 - (void)addUIControlsForPhone;
 - (void)addUIControlsForLargePhone;
-- (void)rotate;
+- (void)rotateUnPressed;
 //motion
 - (void)moveRightPressed;
 - (void)moveRightUnPressed;
@@ -73,6 +77,7 @@
 @synthesize rotateLabel;
 @synthesize resetLabel;
 @synthesize lineLabel;
+@synthesize speedLabel;
 @synthesize soundLabel;
 @synthesize settingLabel;
 @synthesize isStart;
@@ -80,6 +85,7 @@
 @synthesize boardRect;
 @synthesize settingButton;
 @synthesize settingIsVisible;
+@synthesize speedValue;
 
 @synthesize bgView;
 @synthesize avSound;
@@ -107,6 +113,7 @@
     self.rotateLabel = nil;
     self.soundLabel = nil;
     self.lineLabel = nil;
+    self.speedLabel = nil;
     self.resetLabel = nil;
     self.bgView = nil;
     self.avSound = nil;
@@ -172,6 +179,7 @@
     self.firstStart = YES;
     self.settingIsVisible = NO;
     self.gameCount = 0;
+    self.speedValue = 0;
     self.bgView = [[[BGView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)] autorelease];
     self.bgView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin;
     [self.view addSubview:self.bgView];
@@ -195,7 +203,7 @@
     } else {
         //iPad
         self.boardRect = CGRectMake(146, 52, 333, 637);
-        self.boardViewController = [[[BoardViewController alloc] initWithFrame:boardRect amountCellX:2 amountCellY:4] autorelease];
+        self.boardViewController = [[[BoardViewController alloc] initWithFrame:boardRect amountCellX:5 amountCellY:9 ] autorelease];
         self.boardViewController.boardView.backgroundColor = [UIColor clearColor];
         [self.bgView addSubview:self.boardViewController.boardView];
         [self.bgView addSubview:self.boardViewController.nextShapeView];
@@ -270,6 +278,8 @@
     self.soundImageView.hidden = YES;
     [self.view addSubview:self.soundImageView];
  
+     [self addSpeedLabel: CGRectMake(self.boardRect.size.width + self.boardRect.origin.x + 10, 70, speedLabelWidth, speedLabelHeigth) onView:self.view];
+    
     CGRect rectManage = CGRectMake(50, self.boardRect.size.height + 50, 100, 20);
      //play button
     [self addPlayButton:CGRectMake(rectManage.origin.x , rectManage.origin.y, manageSizeButton, manageSizeButton) withImage:imageButton andHighlighted:highlightedImage onView:self.view];
@@ -440,7 +450,7 @@
     [view addSubview:labelText];
     
         if(isiPhone) {
-            self.lineLabel = [[[UILabel alloc] initWithFrame:CGRectMake(rect.origin.x, rect.origin.y + 25, rect.size.width, rect.size.height)] autorelease];
+            self.lineLabel = [[[UILabel alloc] initWithFrame:CGRectMake(rect.origin.x, rect.origin.y + 20, rect.size.width, rect.size.height)] autorelease];
             self.lineLabel.font = scoreFontLarge;
         } else {
             self.lineLabel = [[[UILabel alloc] initWithFrame:CGRectMake(rect.origin.x +35, rect.origin.y, rect.size.width,     rect.size.height)] autorelease];
@@ -448,13 +458,40 @@
     }
    
     self.lineLabel.text = [NSString stringWithFormat:@"%d", self.boardViewController.lines];
-    self.lineLabel.lineBreakMode = NSLineBreakByCharWrapping;
-    self.lineLabel.numberOfLines = 2;
    
     self.lineLabel.backgroundColor = [UIColor clearColor];
     self.lineLabel.textColor = [UIColor blackColor];
     self.lineLabel.textAlignment = UITextAlignmentCenter;
     [view addSubview:self.lineLabel];
+}
+
+
+- (void)addSpeedLabel:(CGRect)rect onView:(UIView*)view
+{
+    [self.lineLabel removeFromSuperview];
+    UILabel* labelText = [[[UILabel alloc] initWithFrame:rect] autorelease];
+    labelText.text = NSLocalizedString(@"SPEED", @"");
+    if(isiPhone) {
+        labelText.font = scoreFont;
+    } else {
+        labelText.font = scoreFontLarge;
+    }
+    labelText.backgroundColor = [UIColor clearColor];
+    [view addSubview:labelText];
+    
+    if(isiPhone) {
+        self.speedLabel = [[[UILabel alloc] initWithFrame:CGRectMake(rect.origin.x, rect.origin.y + 20, rect.size.width, rect.size.height)] autorelease];
+        self.speedLabel.font = scoreFontLarge;
+    } else {
+        self.speedLabel = [[[UILabel alloc] initWithFrame:CGRectMake(rect.origin.x +35, rect.origin.y, rect.size.width,     rect.size.height)] autorelease];
+        self.speedLabel.font = scoreFontiPad;
+    }
+    
+    self.speedLabel.text = [NSString stringWithFormat:@"%d", self.speedValue];
+    self.speedLabel.backgroundColor = [UIColor clearColor];
+    self.speedLabel.textColor = [UIColor blackColor];
+    self.speedLabel.textAlignment = UITextAlignmentCenter;
+    [view addSubview:self.speedLabel];
 }
 
 - (void)addLeftMoveButton:(CGRect)rect withImage:(UIImage*)imageButton onView:(UIView*)view
@@ -530,7 +567,7 @@
     self.rotateButton.frame = rect;
     [self.rotateButton setImage:imageButton forState:UIControlStateNormal];
     [self.rotateButton setImage:highlightedImage forState:UIControlStateHighlighted];
-    [self.rotateButton addTarget:self action:@selector(rotate) forControlEvents:UIControlEventTouchUpInside];
+    [self.rotateButton addTarget:self action:@selector(rotateUnPressed) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:self.rotateButton];
     
     //rotate label
@@ -670,6 +707,9 @@
         [self.boardViewController moveShape:rightDirectionMove];
         [self performSelector:@selector(moveRightPressed) withObject:nil afterDelay:delayForButtonPressed];
         [self reDrawBoard];
+    } else {
+        self.speedValue++;
+        self.speedLabel.text = [NSString stringWithFormat:@"%d", self.speedValue];
     }
 }
 
@@ -713,10 +753,11 @@
 
 #pragma mark - Rotate shape
 
-- (void)rotate
+- (void)rotateUnPressed
 {
     if (isStart) {
         [self.boardViewController rotateShape:rightDirectionRotate];
+        [self reDrawBoard];
     }
 }
 

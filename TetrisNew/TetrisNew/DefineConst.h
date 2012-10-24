@@ -26,9 +26,7 @@
 #define boardBorderWidth 2
 #define boardGridWidth 1
 #define cellGridWidth 2
-#define cellDistance 1
-#define cellDistanceiPad 2
-#define cellDistanceForNext 0.8
+
 
 #define offSetBorderThin 3
 #define borderThin 2
@@ -51,11 +49,13 @@
 #define settingFont [UIFont fontWithName:@"American Typewriter" size:20]
 #define textButtonFont [UIFont fontWithName:@"American Typewriter" size:10]
 #define scoreFont [UIFont fontWithName:@"DS-Digital" size:15]
-#define scoreFontLarge [UIFont fontWithName:@"DS-Digital" size:25]
+#define scoreFontLarge [UIFont fontWithName:@"DS-Digital" size:20]
 #define scoreFontiPad [UIFont fontWithName:@"DS-Digital" size:30]
 
 #define scoreLabelWidth 50
 #define scoreLabelHeigth 50
+#define speedLabelWidth 50
+#define speedLabelHeigth 50
 #define labelPlayTextWidth 35
 #define labelPlayTextHeigth 40
 #define labelManageTextWidth 70

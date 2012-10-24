@@ -13,6 +13,7 @@
 - (void)drawGrid:(CGRect)rect withContext:(CGContextRef)context;
 - (void)drawBoard:(CGContextRef)context;
 - (void)drawNextShape:(CGContextRef)context;
+@property (assign, nonatomic) CGFloat cellDistance;
 @end
 
 @implementation BoardView
@@ -51,6 +52,7 @@
         self.amountCellY = cellY;
         self.cellWidth = (self.frame.size.width - 2 * boardBorderWidth) / self.amountCellX;
         self.cellHeight = (self.frame.size.height - 2 *  boardBorderWidth) / self.amountCellY;
+        self.cellDistance = self.cellWidth / 10;
     }
     return self;
 }
@@ -76,7 +78,9 @@
     
     CGContextStrokePath(context);
 }
-
+//#define cellDistance 1
+//#define cellDistanceiPad 2
+//#define cellDistanceForNext 0.8
 - (void)drawGrid:(CGRect)rect withContext:(CGContextRef)context
 {
     CGContextStrokePath(context);
@@ -96,7 +100,7 @@
         
         [c setFill];
         
-        CGRect filledRect = CGRectMake(rect.origin.x + cellGridWidth + cellDistance, rect.origin.y + cellGridWidth + cellDistance, rect.size.width - (cellGridWidth + cellDistance) * 2, rect.size.height - (cellGridWidth + cellDistance) * 2);
+        CGRect filledRect = CGRectMake(rect.origin.x + cellGridWidth + self.cellDistance, rect.origin.y + cellGridWidth + self.cellDistance, rect.size.width - (cellGridWidth + self.cellDistance) * 2, rect.size.height - (cellGridWidth + self.cellDistance) * 2);
         CGContextAddRect(context, filledRect);
         CGContextFillRect(context, filledRect);  
         }
@@ -123,13 +127,13 @@
         } else {
             [[UIColor blackColor] setFill];
         }
-         NSInteger curCellDistance;
-         if(isiPhone) {
-             curCellDistance = cellDistance;
-         } else {
-             curCellDistance = cellDistanceiPad;
-         }
-       CGRect filledRect = CGRectMake(rect.origin.x + cellGridWidth + curCellDistance, rect.origin.y + cellGridWidth + curCellDistance, rect.size.width - (cellGridWidth + curCellDistance) * 2, rect.size.height - (cellGridWidth + curCellDistance) * 2);
+        // NSInteger curCellDistance;
+//         if(isiPhone) {
+//             curCellDistance = self.cellDistance;
+//         } else {
+//             curCellDistance = self.cellDistance;;//cellDistanceiPad;
+//         }
+       CGRect filledRect = CGRectMake(rect.origin.x + cellGridWidth + self.cellDistance, rect.origin.y + cellGridWidth + self.cellDistance, rect.size.width - (cellGridWidth + self.cellDistance) * 2, rect.size.height - (cellGridWidth + self.cellDistance) * 2);
        CGContextAddRect(context, filledRect);
        CGContextFillRect(context, filledRect);
     }
@@ -153,13 +157,13 @@
             [[UIColor blackColor] setFill];
         }
         
-        CGFloat curCellDistanceForNext;
-        if(isiPhone) {
-            curCellDistanceForNext = cellDistanceForNext;
-        } else {
-            curCellDistanceForNext = cellDistanceiPad;
-        }
-        CGRect filledRect = CGRectMake(rect.origin.x + cellGridWidth + curCellDistanceForNext, rect.origin.y + cellGridWidth + curCellDistanceForNext, rect.size.width - (cellGridWidth + curCellDistanceForNext) * 2, rect.size.height - (cellGridWidth + curCellDistanceForNext) * 2);
+       // CGFloat curCellDistanceForNext;
+//        if(isiPhone) {
+//            curCellDistanceForNext = cellDistanceForNext;
+//        } else {
+//            curCellDistanceForNext = cellDistanceiPad;
+//        }
+        CGRect filledRect = CGRectMake(rect.origin.x + cellGridWidth + self.cellDistance, rect.origin.y + cellGridWidth + self.cellDistance, rect.size.width - (cellGridWidth + self.cellDistance) * 2, rect.size.height - (cellGridWidth + self.cellDistance) * 2);
         CGContextAddRect(context, filledRect);
         CGContextFillRect(context, filledRect);
     }
