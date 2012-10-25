@@ -78,9 +78,7 @@
     
     CGContextStrokePath(context);
 }
-//#define cellDistance 1
-//#define cellDistanceiPad 2
-//#define cellDistanceForNext 0.8
+
 - (void)drawGrid:(CGRect)rect withContext:(CGContextRef)context
 {
     CGContextStrokePath(context);
@@ -127,12 +125,6 @@
         } else {
             [[UIColor blackColor] setFill];
         }
-        // NSInteger curCellDistance;
-//         if(isiPhone) {
-//             curCellDistance = self.cellDistance;
-//         } else {
-//             curCellDistance = self.cellDistance;;//cellDistanceiPad;
-//         }
        CGRect filledRect = CGRectMake(rect.origin.x + cellGridWidth + self.cellDistance, rect.origin.y + cellGridWidth + self.cellDistance, rect.size.width - (cellGridWidth + self.cellDistance) * 2, rect.size.height - (cellGridWidth + self.cellDistance) * 2);
        CGContextAddRect(context, filledRect);
        CGContextFillRect(context, filledRect);
@@ -157,12 +149,6 @@
             [[UIColor blackColor] setFill];
         }
         
-       // CGFloat curCellDistanceForNext;
-//        if(isiPhone) {
-//            curCellDistanceForNext = cellDistanceForNext;
-//        } else {
-//            curCellDistanceForNext = cellDistanceiPad;
-//        }
         CGRect filledRect = CGRectMake(rect.origin.x + cellGridWidth + self.cellDistance, rect.origin.y + cellGridWidth + self.cellDistance, rect.size.width - (cellGridWidth + self.cellDistance) * 2, rect.size.height - (cellGridWidth + self.cellDistance) * 2);
         CGContextAddRect(context, filledRect);
         CGContextFillRect(context, filledRect);
