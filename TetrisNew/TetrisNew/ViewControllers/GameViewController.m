@@ -320,7 +320,7 @@
     self.soundImageView.hidden = YES;
     [self.view addSubview:self.soundImageView];
 
-    CGRect rectManage = CGRectMake(220, self.boardRect.size.height + 120, 100, 20);
+    CGRect rectManage = CGRectMake(205, self.boardRect.size.height + 120, 100, 20);
     //play button
     [self addPlayButton:CGRectMake(rectManage.origin.x , rectManage.origin.y, manageSizeButtoniPad, manageSizeButtoniPad) withImage:imageButton andHighlighted:highlightedImage onView:self.view];
     
