@@ -647,7 +647,7 @@
             [self.avSound stop];
             self.avSound = nil;
         } else {
-            NSURL *soundURL = [[NSBundle mainBundle] URLForResource:@"Tetris" withExtension:@"mp3"];
+            NSURL *soundURL = [[NSBundle mainBundle] URLForResource:@"Tetris" withExtension:@"caf"];
             NSError* err = nil;
             self.avSound = [[[AVAudioPlayer alloc] initWithContentsOfURL:soundURL error:&err] autorelease];
             self.avSound.delegate = self;
