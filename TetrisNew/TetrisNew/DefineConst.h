@@ -27,7 +27,6 @@
 #define boardGridWidth 1
 #define cellGridWidth 2
 
-
 #define offSetBorderThin 3
 #define borderThin 2
 #define offsetBorderThick 8
@@ -78,7 +77,7 @@
 
 #define kShowGrid @"grid"
 #define kShowColor @"showColorShape"
-
+#define kShowTutorial @"showTutorial"
 #define delayForSubView 0.3
 
 typedef enum {

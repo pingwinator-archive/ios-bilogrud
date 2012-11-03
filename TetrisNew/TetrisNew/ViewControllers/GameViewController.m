@@ -14,6 +14,7 @@
 #import "BGViewBorder.h"
 #import "UIApplication+CheckVersion.h"
 #import "UIPopoverManager.h"
+#import "TutorialView.h"
 #import <AVFoundation/AVFoundation.h>
 @interface GameViewController ()<AVAudioPlayerDelegate>
 @property (retain, nonatomic) BoardViewController* boardViewController;
@@ -41,10 +42,12 @@
 @property (assign, nonatomic) BOOL firstStart;
 @property (assign, nonatomic) CGRect boardRect;
 @property (assign, nonatomic) BOOL settingIsVisible;
-
+@property (assign, nonatomic) BOOL showTutorial;
 @property (retain, nonatomic) UIImageView* pauseImageView;
 @property (retain, nonatomic) UIImageView* soundImageView;
+@property (retain, nonatomic) NSArray* arrayTextforTutorial;
 
+- (void)addGameHint;
 - (void)addUIControlsForPhone;
 - (void)addUIControlsForLargePhone;
 - (void)rotateUnPressed;
@@ -85,9 +88,12 @@
 @synthesize bgView;
 @synthesize avSound;
 
+@synthesize showTutorial;
+
 @synthesize pauseImageView;
 @synthesize soundImageView;
 
+@synthesize arrayTextforTutorial;
 - (void)dealloc
 {
     self.boardViewController = nil;
@@ -173,6 +179,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.showTutorial = [SettingViewController loadSettingTutorial];
+    NSLog(@"!!!!!! %c",self.showTutorial);
     self.firstStart = YES;
     self.settingIsVisible = NO;
     self.gameCount = 0;
@@ -206,8 +214,31 @@
        
         [self addUIControlsForiPad];
     }
-}
+  
+    self.arrayTextforTutorial = [NSArray arrayWithObjects:@"Tab here to start game", nil];
+    [self addGameHint];
+    
+   }
 
+- (void)addGameHint
+{
+    //tutorial for play button
+    if(self.showTutorial) {
+        CGRect rectManage = CGRectMake(50, self.boardRect.size.height + 50, 100, 20);
+        
+        TutorialView* tutorialPlayTest = [[TutorialView alloc] initWithFrame:self.view.bounds withText:[arrayTextforTutorial objectAtIndex:0] andTargetFrame:CGRectMake(rectManage.origin.x , rectManage.origin.y, manageSizeButton, manageSizeButton)];
+        NSLog(@"%f %f %f %f", self.view.bounds.origin.x, self.view.bounds.origin.y, self.view.bounds.size.width, self.view.bounds.size.height);
+        [self.view addSubview:tutorialPlayTest];
+        [self.view bringSubviewToFront:tutorialPlayTest];
+        
+        //play button
+        UIImage* imageButton = [UIImage imageNamed:@"button_up.png"];
+        UIImage* highlightedImage = [UIImage imageNamed:@"button.png"];
+        
+        [self addPlayButton:CGRectMake(rectManage.origin.x , rectManage.origin.y, manageSizeButton, manageSizeButton) withImage:imageButton andHighlighted:highlightedImage onView:tutorialPlayTest];
+        
+    }
+}
 - (void)addUIControlsForLargePhone
 {
     UIImage* imageButton = [UIImage imageNamed:@"button_up.png"];
@@ -501,7 +532,6 @@
     self.rightLabel.textColor = [UIColor blackColor];
     self.rightLabel.textAlignment = UITextAlignmentCenter;
     [view addSubview:self.rightLabel];
-
 }
 
 - (void)addDownMoveButton:(CGRect)rect withImage:(UIImage*)imageButton onView:(UIView*)view
@@ -556,14 +586,21 @@
 - (void)showSetting
 {
     SettingViewController* settingViewController = [[[SettingViewController alloc] init] autorelease];
-    [self pauseGame];
+    if(isStart) {
+        [self pauseGame];
+    }
     if(isiPhone) {
-       
+        self.showTutorial = [SettingViewController loadSettingTutorial];
         [self deprecatedPresentModalViewController:settingViewController animated:YES];
+       
+        
     } else {
         settingViewController.competitionBlock = ^(void) {
             [self.boardViewController showGrid: [SettingViewController loadSettingGrid]];
             [self.boardViewController showColor: [SettingViewController loadSettingColor]];
+            self.showTutorial = [SettingViewController loadSettingTutorial];
+            [self addGameHint];
+//            ??
             
             [self.boardViewController.boardView setNeedsDisplay];
             [self.boardViewController.nextShapeView setNeedsDisplay];

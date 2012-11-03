@@ -12,20 +12,23 @@
 @property (retain, nonatomic) UIButton* closeButton;
 @property (retain, nonatomic) UISwitch* toggleShowGridButton;
 @property (retain, nonatomic) UISwitch* toggleAddColorButton;
+@property (retain, nonatomic) UISwitch* toggleShowTutorial;
 @end
 
 @implementation SettingViewController 
 @synthesize closeButton;
 @synthesize showGrid;
 @synthesize showColor;
+@synthesize showTutorial;
 @synthesize toggleShowGridButton;
 @synthesize toggleAddColorButton;
-
+@synthesize toggleShowTutorial;
 - (void)dealloc
 {
     self.closeButton = nil;
     self.toggleAddColorButton = nil;
     self.toggleShowGridButton = nil;
+    self.toggleShowTutorial = nil;
     [super dealloc];
 }
 
@@ -43,6 +46,7 @@
     [super viewDidLoad];
     self.showGrid = [SettingViewController loadSettingGrid];
     self.showColor = [SettingViewController loadSettingColor];
+    self.showTutorial = [SettingViewController loadSettingTutorial];
     CGRect rect;
     if(isiPhone) {
         rect = CGRectMake(20, 20, 150, 20);
@@ -69,10 +73,22 @@
         [self.toggleAddColorButton addTarget:self action:@selector(changeColorToggle) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:self.toggleAddColorButton];
         
+        //tutorial setting
+        CGRect rectForTutorial = CGRectMake(rect.origin.x, rect.origin.y + 100, 150, 20);
+        UILabel* showTutorLabel = [[[UILabel alloc] initWithFrame:rectForTutorial] autorelease];
+        showTutorLabel.text = NSLocalizedString(@"Show hints", @"");
+        [showTutorLabel setFont:settingFont];
+        [self.view addSubview:showTutorLabel];
+        
+        self.toggleShowTutorial = [[[UISwitch alloc] initWithFrame:CGRectMake(rectForTutorial.origin.x + 200, rectForTutorial.origin.y, 50, 50)] autorelease];
+        [self.toggleShowTutorial setOn:[SettingViewController loadSettingTutorial]];
+        [self.toggleShowTutorial addTarget:self action:@selector(changeTutorialToggle) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:self.toggleShowTutorial];
+        
         //close button
         [self.view setBackgroundColor:[UIColor whiteColor]];
         self.closeButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        self.closeButton.frame = CGRectMake(self.view.frame.size.width/2 - 30, rectForColor.origin.y + 50, 70, 30);
+        self.closeButton.frame = CGRectMake(self.view.frame.size.width/2 - 30, rectForColor.origin.y + 150, 70, 30);
         [self.closeButton setTitle:NSLocalizedString(@"Ok", @"") forState:UIControlStateNormal];
         [self.closeButton addTarget:self action:@selector(close) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:self.closeButton];
@@ -134,6 +150,16 @@
     }
 }
 
+- (void)changeTutorialToggle
+{
+    self.showTutorial = !self.showTutorial;
+    NSLog(@"show tut %@", (self.showTutorial)?@"yes":@"no");
+    [SettingViewController saveSettingTutorial:self.showTutorial];
+    if(self.competitionBlock) {
+        self.competitionBlock();
+    }
+}
+
 + (void)saveSettingGrid:(BOOL)grid
 {
     NSUserDefaults* def = [NSUserDefaults standardUserDefaults];
@@ -146,6 +172,14 @@
     [def setBool:showColor forKey:kShowColor];
 }
 
++ (void)saveSettingTutorial:(BOOL)showTutorial
+{
+    NSLog(@"show tut %@", (showTutorial)?@"yes":@"no");
+    
+    NSUserDefaults* def = [NSUserDefaults standardUserDefaults];
+    [def setBool:showTutorial forKey:kShowTutorial];
+}
+
 + (BOOL)loadSettingGrid
 {
     NSUserDefaults* def = [NSUserDefaults standardUserDefaults];
@@ -156,5 +190,11 @@
 {
     NSUserDefaults* def = [NSUserDefaults standardUserDefaults];
     return [def boolForKey:kShowColor];
+}
+
++ (BOOL)loadSettingTutorial
+{
+    NSUserDefaults* def = [NSUserDefaults standardUserDefaults];
+    return [def boolForKey:kShowTutorial];
 }
 @end
