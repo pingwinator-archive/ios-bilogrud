@@ -7,6 +7,6 @@
 	<key>showColorShape</key>
 	<false/>
 	<key>showTutorial</key>
-	<false/>
+	<true/>
 </dict>
 </plist>

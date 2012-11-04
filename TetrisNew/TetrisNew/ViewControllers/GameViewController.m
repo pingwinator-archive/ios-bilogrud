@@ -16,6 +16,14 @@
 #import "UIPopoverManager.h"
 #import "TutorialView.h"
 #import <AVFoundation/AVFoundation.h>
+
+
+typedef enum {
+    TutorialStepStart = 0,
+    TutorialStepLeft,
+    TutorialStepCount
+} TutorialSteps;
+
 @interface GameViewController ()<AVAudioPlayerDelegate>
 @property (retain, nonatomic) BoardViewController* boardViewController;
 @property (retain, nonatomic) BoardView* nextShapeView;
@@ -42,10 +50,15 @@
 @property (assign, nonatomic) BOOL firstStart;
 @property (assign, nonatomic) CGRect boardRect;
 @property (assign, nonatomic) BOOL settingIsVisible;
-@property (assign, nonatomic) BOOL showTutorial;
+
 @property (retain, nonatomic) UIImageView* pauseImageView;
 @property (retain, nonatomic) UIImageView* soundImageView;
+//for tutorial
 @property (retain, nonatomic) NSArray* arrayTextforTutorial;
+@property (retain, nonatomic) NSArray* arrayButtonsForTutorial;
+@property (assign, nonatomic) BOOL showTutorial;
+@property (assign, nonatomic) TutorialSteps currentTutorialStep;
+@property (retain, nonatomic) TutorialView* tutorialView;
 
 - (void)addGameHint;
 - (void)addUIControlsForPhone;
@@ -88,12 +101,15 @@
 @synthesize bgView;
 @synthesize avSound;
 
-@synthesize showTutorial;
-
 @synthesize pauseImageView;
 @synthesize soundImageView;
 
 @synthesize arrayTextforTutorial;
+@synthesize arrayButtonsForTutorial;
+@synthesize currentTutorialStep;
+@synthesize showTutorial;
+@synthesize tutorialView;
+
 - (void)dealloc
 {
     self.boardViewController = nil;
@@ -119,6 +135,9 @@
     self.avSound = nil;
     self.soundImageView = nil;
     self.pauseImageView = nil;
+    self.arrayButtonsForTutorial = nil;
+    self.arrayTextforTutorial = nil;
+    self.tutorialView = nil;
     [super dealloc];
 }
 
@@ -214,31 +233,70 @@
        
         [self addUIControlsForiPad];
     }
+    self.showTutorial = YES; // read this value from setting
   
-    self.arrayTextforTutorial = [NSArray arrayWithObjects:@"Tab here to start game", nil];
-    [self addGameHint];
+    if (self.showTutorial) {
+        self.arrayTextforTutorial = [NSArray arrayWithObjects:
+                                     @"Tap here to start game", //need use NSLocalizedString in future
+                                     @"Tap here to move left",
+                                     nil];
+        self.arrayButtonsForTutorial = [NSArray arrayWithObjects:
+                                        self.playButton,
+                                        self.leftButton,
+                                        nil];
+        self.currentTutorialStep = TutorialStepStart;
+    }
+   
+    [self performSelector:@selector(addGameHint) withObject:nil afterDelay:1.f];
+    //[self addGameHint];
     
-   }
+}
 
+#pragma mark - tutorial 
 - (void)addGameHint
 {
     //tutorial for play button
     if(self.showTutorial) {
-        CGRect rectManage = CGRectMake(50, self.boardRect.size.height + 50, 100, 20);
-        
-        TutorialView* tutorialPlayTest = [[TutorialView alloc] initWithFrame:self.view.bounds withText:[arrayTextforTutorial objectAtIndex:0] andTargetFrame:CGRectMake(rectManage.origin.x , rectManage.origin.y, manageSizeButton, manageSizeButton)];
-        NSLog(@"%f %f %f %f", self.view.bounds.origin.x, self.view.bounds.origin.y, self.view.bounds.size.width, self.view.bounds.size.height);
-        [self.view addSubview:tutorialPlayTest];
-        [self.view bringSubviewToFront:tutorialPlayTest];
-        
-        //play button
-        UIImage* imageButton = [UIImage imageNamed:@"button_up.png"];
-        UIImage* highlightedImage = [UIImage imageNamed:@"button.png"];
-        
-        [self addPlayButton:CGRectMake(rectManage.origin.x , rectManage.origin.y, manageSizeButton, manageSizeButton) withImage:imageButton andHighlighted:highlightedImage onView:tutorialPlayTest];
-        
+        NSString* hintText = [self.arrayTextforTutorial objectAtIndex:self.currentTutorialStep];
+        UIButton* hintButton = [self.arrayButtonsForTutorial objectAtIndex:self.currentTutorialStep];
+        CGRect targetFrame = hintButton.frame;
+        self.tutorialView = [[[TutorialView alloc] initWithFrame:self.view.bounds withText:hintText andTargetFrame:targetFrame] autorelease];
+        UITapGestureRecognizer* pan = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideGameHint:)];
+        [self.tutorialView addGestureRecognizer:pan];
+        [pan release];
+        self.tutorialView.alpha = 0;
+        [self.view addSubview:self.tutorialView];
+        [UIView animateWithDuration:0.3f animations:^(void) {
+            self.tutorialView.alpha = 1;
+        }];
+        [self.view bringSubviewToFront:self.tutorialView];
+        [self.view bringSubviewToFront:hintButton];
+        [self pauseGame];
     }
 }
+
+- (void)hideGameHint
+{
+    [UIView animateWithDuration:0.3f animations:^(void){
+        self.tutorialView.alpha = 0.f;
+    }
+                     completion:^(BOOL finished){
+                         [self.tutorialView removeFromSuperview];
+                         self.tutorialView = nil;
+                         self.currentTutorialStep++;
+                         if (self.currentTutorialStep < TutorialStepCount) {
+                             [self performSelector:@selector(addGameHint) withObject:nil afterDelay:1.f];
+                         }
+                         if(self.isStart) {
+                             [self continueGame];
+                         }
+    }];
+    
+    
+}
+
+#pragma mark - init ui
+
 - (void)addUIControlsForLargePhone
 {
     UIImage* imageButton = [UIImage imageNamed:@"button_up.png"];
@@ -633,6 +691,9 @@
 
 - (void)play
 {
+    if (self.tutorialView) {
+        [self hideGameHint];
+    }
     //timer start
     if(self.isStart) {
         self.isStart = NO;
@@ -731,6 +792,9 @@
 
 - (void)moveLeftUnPressed
 {
+    if (self.tutorialView) {
+        [self hideGameHint];
+    }
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(moveLeftPressed) object:nil];
 }
 
