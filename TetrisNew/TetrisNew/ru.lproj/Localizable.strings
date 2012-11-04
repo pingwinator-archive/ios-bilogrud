@@ -27,3 +27,13 @@
 "Add color" = "Добавить цвет";
 
 "SCORE" = "СЧЕТ";
+
+"Tap here to start game" = "Нажмите для старта игры";
+
+"Tap here to move left" = "Нажмите для передвижения влево";
+
+"Tap here to move right" = "Нажмите для передвижения вправо";
+
+"Tap here to move down" = "Нажмите для ускорения движения вниз";
+
+"Tap here to rotate shape" = "Нажмите для поворота фигуры";

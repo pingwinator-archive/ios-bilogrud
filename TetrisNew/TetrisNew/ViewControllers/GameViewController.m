@@ -21,6 +21,9 @@
 typedef enum {
     TutorialStepStart = 0,
     TutorialStepLeft,
+    TutorialStepRight,
+    TutorialStepDown,
+    TutorialStepRotate,
     TutorialStepCount
 } TutorialSteps;
 
@@ -199,7 +202,7 @@ typedef enum {
 {
     [super viewDidLoad];
     self.showTutorial = [SettingViewController loadSettingTutorial];
-    NSLog(@"!!!!!! %c",self.showTutorial);
+//    NSLog(@"!!!!!! %c",self.showTutorial);
     self.firstStart = YES;
     self.settingIsVisible = NO;
     self.gameCount = 0;
@@ -233,37 +236,42 @@ typedef enum {
        
         [self addUIControlsForiPad];
     }
-    self.showTutorial = YES; // read this value from setting
+    self.showTutorial = [SettingViewController loadSettingTutorial];
+    //?? read this value from setting
   
     if (self.showTutorial) {
         self.arrayTextforTutorial = [NSArray arrayWithObjects:
-                                     @"Tap here to start game", //need use NSLocalizedString in future
-                                     @"Tap here to move left",
+                                     NSLocalizedString(@"Tap here to start game", @""),
+                                     NSLocalizedString(@"Tap here to move left", @""),
+                                     NSLocalizedString(@"Tap here to move right", @""),
+                                     NSLocalizedString(@"Tap here to move down", @""),
+                                     NSLocalizedString(@"Tap here to rotate shape", @""),
                                      nil];
         self.arrayButtonsForTutorial = [NSArray arrayWithObjects:
                                         self.playButton,
                                         self.leftButton,
+                                        self.rightButton,
+                                        self.downButton,
+                                        self.rotateButton,
                                         nil];
         self.currentTutorialStep = TutorialStepStart;
     }
    
     [self performSelector:@selector(addGameHint) withObject:nil afterDelay:1.f];
-    //[self addGameHint];
-    
 }
 
-#pragma mark - tutorial 
+#pragma mark - Tutorial Methods 
+
 - (void)addGameHint
 {
-    //tutorial for play button
     if(self.showTutorial) {
         NSString* hintText = [self.arrayTextforTutorial objectAtIndex:self.currentTutorialStep];
         UIButton* hintButton = [self.arrayButtonsForTutorial objectAtIndex:self.currentTutorialStep];
         CGRect targetFrame = hintButton.frame;
         self.tutorialView = [[[TutorialView alloc] initWithFrame:self.view.bounds withText:hintText andTargetFrame:targetFrame] autorelease];
-        UITapGestureRecognizer* pan = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideGameHint:)];
-        [self.tutorialView addGestureRecognizer:pan];
-        [pan release];
+        UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideGameHint)];
+        [self.tutorialView addGestureRecognizer:tapGesture];
+        [tapGesture release];
         self.tutorialView.alpha = 0;
         [self.view addSubview:self.tutorialView];
         [UIView animateWithDuration:0.3f animations:^(void) {
@@ -280,22 +288,20 @@ typedef enum {
     [UIView animateWithDuration:0.3f animations:^(void){
         self.tutorialView.alpha = 0.f;
     }
-                     completion:^(BOOL finished){
-                         [self.tutorialView removeFromSuperview];
-                         self.tutorialView = nil;
-                         self.currentTutorialStep++;
-                         if (self.currentTutorialStep < TutorialStepCount) {
-                             [self performSelector:@selector(addGameHint) withObject:nil afterDelay:1.f];
-                         }
-                         if(self.isStart) {
-                             [self continueGame];
-                         }
-    }];
-    
-    
+        completion:^(BOOL finished){
+             [self.tutorialView removeFromSuperview];
+             self.tutorialView = nil;
+             self.currentTutorialStep++;
+             if (self.currentTutorialStep < TutorialStepCount) {
+                 [self performSelector:@selector(addGameHint) withObject:nil afterDelay:1.f];
+             }
+             if(self.isStart) {
+                 [self continueGame];
+             }
+    }];    
 }
 
-#pragma mark - init ui
+#pragma mark - init UI
 
 - (void)addUIControlsForLargePhone
 {
@@ -363,8 +369,8 @@ typedef enum {
     self.soundImageView.hidden = YES;
     [self.view addSubview:self.soundImageView];
  
-    CGRect rectManage = CGRectMake(50, self.boardRect.size.height + 50, 100, 20);
-     //play button
+    CGRect rectManage = CGRectMake(50, self.boardRect.size.height + 40, 100, 20);
+    //play button
     [self addPlayButton:CGRectMake(rectManage.origin.x , rectManage.origin.y, manageSizeButton, manageSizeButton) withImage:imageButton andHighlighted:highlightedImage onView:self.view];
     
     //reset button
@@ -379,7 +385,7 @@ typedef enum {
     //rotate button
     [self addRotateButton:CGRectMake(rectManage.origin.x + 170, rectManage.origin.y + 65, rotateSizeButton, rotateSizeButton) withImage:rotateButtonImage andHighlighted:highlightedImageRotate onView:self.view];
   
-    CGRect rectMove = CGRectMake(30, self.boardRect.size.height + 110, 100, 20);
+    CGRect rectMove = CGRectMake(30, self.boardRect.size.height + 95, 100, 20);
     
     //left button
     [self addLeftMoveButton:CGRectMake(rectMove.origin.x, rectMove.origin.y, moveSizeButton, moveSizeButton) withImage:imageButton onView:self.view];
@@ -493,7 +499,7 @@ typedef enum {
     CGRect rectSoundLabel = CGRectMake(CGRectGetMidX(rect) - labelManageTextWidth/2, rect.origin.y + rect.size.height - labelOffsetHeight, labelManageTextWidth, labelTextHeigth);
     self.soundLabel = [[[UILabel alloc] initWithFrame:rectSoundLabel] autorelease];
     self.soundLabel.text = NSLocalizedString(@"SOUND", @"");
-    self.soundLabel.textAlignment = UITextAlignmentCenter;
+    self.soundLabel.textAlignment = NSTextAlignmentCenter;
     [self.soundLabel setFont:textButtonFont];
     self.soundLabel.backgroundColor = [UIColor clearColor];
     self.soundLabel.textColor = [UIColor blackColor];
@@ -778,6 +784,9 @@ typedef enum {
 
 - (void)moveRightUnPressed
 {
+    if (self.tutorialView) {
+        [self hideGameHint];
+    }
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(moveRightPressed) object:nil];
 }
 
@@ -809,6 +818,9 @@ typedef enum {
 
 - (void)moveDownUnPressed
 {
+    if (self.tutorialView) {
+        [self hideGameHint];
+    }
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(moveDownPressed) object:nil];
 }
 
@@ -821,6 +833,9 @@ typedef enum {
 
 - (void)rotateUnPressed
 {
+    if (self.tutorialView) {
+        [self hideGameHint];
+    }
     if (isStart) {
         [self.boardViewController rotateShape:rightDirectionRotate];
         [self reDrawBoard];

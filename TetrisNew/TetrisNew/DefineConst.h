@@ -35,8 +35,8 @@
 //buttons
 #define settingSizeButton 40
 #define manageSizeButton 40
-#define moveSizeButton 50
-#define rotateSizeButton 70
+#define moveSizeButton 60
+#define rotateSizeButton 80
 #define manageSizeButtoniPad 50
 #define moveSizeButtoniPad 70
 #define rotateSizeButtoniPad 110

@@ -31,6 +31,12 @@
         
         UILabel* textLabel = [[UILabel alloc] initWithFrame:CGRectMake(frame.size.width/2 - 100, 100, 200, 100)];
         textLabel.text = text;
+        textLabel.backgroundColor = [[UIColor whiteColor]colorWithAlphaComponent:0.8f];
+        //?
+        textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        textLabel.numberOfLines = 2;
+        //NSLineBreakByCharWrapping;
+        textLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview: textLabel];
         [textLabel release];
         
@@ -39,9 +45,6 @@
         arrow.frame = CGRectMake(CGRectGetMidX(rect) - arrowSize.width/2, CGRectGetMinY(rect) - arrowSize.height, arrowSize.width, arrowSize.height);
         [self addSubview:arrow];
         [arrow release];
-        
-        
-        // Initialization code
     }
     return self;
 }
