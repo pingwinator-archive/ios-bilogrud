@@ -14,7 +14,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.alpha = 0.5f;
+        //self.alpha = 0.5f;
         self.backgroundColor = [UIColor redColor];
         // Initialization code
     }
@@ -25,8 +25,8 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.alpha = 0.5f;
-        self.backgroundColor = [UIColor redColor];
+        //self.alpha = 0.5f;
+        self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
         
         UILabel* textLabel = [[UILabel alloc] initWithFrame:CGRectMake(frame.size.width/2 - 100, 100, 200, 100)];
         textLabel.text = text;
