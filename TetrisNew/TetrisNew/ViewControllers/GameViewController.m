@@ -262,7 +262,8 @@ typedef enum {
 - (void)addGameHint
 {
     if(self.showTutorial) {
-//        if(isStart){
+        if (self.currentTutorialStep < TutorialStepCount) {
+         
         NSString* hintText = [self.arrayTextforTutorial objectAtIndex:self.currentTutorialStep];
         UIButton* hintButton = [self.arrayButtonsForTutorial objectAtIndex:self.currentTutorialStep];
         CGRect targetFrame = hintButton.frame;
@@ -283,12 +284,6 @@ typedef enum {
         if(isStart) {
             [self pauseGame];
         }
-//        }
-            } else {
-        if(isStart) {
-            
-//            self.currentTutorialStep = 1;
-//            [self performSelector:@selector(addGameHint) withObject:nil afterDelay:delayForHintStart];
         }
     }
 }
@@ -301,9 +296,8 @@ typedef enum {
         completion:^(BOOL finished){
              [self.tutorialView removeFromSuperview];
              self.tutorialView = nil;
-            if(self.currentTutorialStep <= TutorialStepCount) {
-                self.currentTutorialStep++;
-            }
+             self.currentTutorialStep++;
+            
              if (self.currentTutorialStep < TutorialStepCount) {
                  CGFloat delay;
                  if(self.currentTutorialStep == 1) {
@@ -311,10 +305,7 @@ typedef enum {
                  } else {
                      delay = delayForHint;
                  }
-                 [self performSelector:@selector(addGameHint) withObject:nil afterDelay:delay];
-             }
-             if (self.currentTutorialStep == TutorialStepCount) {
-                 [SettingViewController saveSettingTutorial:![SettingViewController loadSettingTutorial]];
+                [self performSelector:@selector(addGameHint) withObject:nil afterDelay:delay];
              }
              if(self.isStart) {
                  [self continueGame];
@@ -514,15 +505,11 @@ typedef enum {
     self.resetLabel = [[[UILabel alloc] initWithFrame:rectResetLabel] autorelease];
     self.resetLabel.text = NSLocalizedString(@"RESET", @"");
     self.resetLabel.textAlignment = UITextAlignmentCenter;
-   // UIFont* font = [[UIFont alloc] init];
     if(isiPhone) {
         [self.resetLabel setFont:textButtonFont];
-        // font = textButtonFont;
     } else {
         [self.resetLabel setFont:textButtonFontIPad];
-        //font = textButtonFontIPad;
     }
-    //[self.resetLabel setFont:font];
     
     self.resetLabel.backgroundColor = [UIColor clearColor];
     self.resetLabel.textColor = [UIColor blackColor];
@@ -570,8 +557,7 @@ typedef enum {
     } else {
         self.settingLabel.font = textButtonFontIPad;
     }
-    
-    //[self.settingLabel setFont:textButtonFont];
+
     self.settingLabel.backgroundColor = [UIColor clearColor];
     self.settingLabel.textColor = [UIColor blackColor];
     [view addSubview:self.settingLabel];
@@ -627,7 +613,6 @@ typedef enum {
     } else {
         self.leftLabel.font = textButtonFontIPad;
     }
-    // [self.leftLabel setFont:textButtonFont];
     self.leftLabel.backgroundColor=[UIColor clearColor];
     self.leftLabel.textColor = [UIColor blackColor];
     self.leftLabel.textAlignment = UITextAlignmentCenter;
@@ -655,8 +640,6 @@ typedef enum {
     } else {
         self.rightLabel.font = textButtonFontIPad;
     }
-
-    // [self.rightLabel setFont:textButtonFont];
     self.rightLabel.backgroundColor = [UIColor clearColor];
     self.rightLabel.textColor = [UIColor blackColor];
     self.rightLabel.textAlignment = UITextAlignmentCenter;
@@ -684,8 +667,6 @@ typedef enum {
     } else {
         self.downLabel.font = textButtonFontIPad;
     }
-
-    //[self.downLabel setFont:textButtonFont];
     self.downLabel.backgroundColor = [UIColor clearColor];
     self.downLabel.textColor = [UIColor blackColor];
     self.downLabel.textAlignment = UITextAlignmentCenter;
@@ -732,33 +713,21 @@ typedef enum {
         [self pauseGame];
     }
     if(isiPhone) {
-        self.showTutorial = [SettingViewController loadSettingTutorial];
         if(self.showTutorial) {
-            if(self.currentTutorialStep > TutorialStepCount) {
-                self.currentTutorialStep = 1;
-            }
-            
-//            [self addGameHint];
-           // [self pauseGame];
             [self performSelector:@selector(addGameHint) withObject:nil afterDelay:delayForHintStart];
         } else {
             [self.tutorialView removeFromSuperview];
             self.tutorialView = nil;
-            self.currentTutorialStep = 100;
         }
         [self deprecatedPresentModalViewController:settingViewController animated:YES];
-        
-        
     } else {
         settingViewController.competitionBlock = ^(void) {
             [self.boardViewController showGrid: [SettingViewController loadSettingGrid]];
             [self.boardViewController showColor: [SettingViewController loadSettingColor]];
-            self.showTutorial = [SettingViewController loadSettingTutorial];
-            
-            self.currentTutorialStep = 1;
-
+    
             if(self.showTutorial) {
-                [self addGameHint];
+                [self performSelector:@selector(addGameHint) withObject:nil afterDelay:delayForHintStart];
+
             } else {
                 [self.tutorialView removeFromSuperview];
                 self.tutorialView = nil;
@@ -767,7 +736,7 @@ typedef enum {
             [self.boardViewController.boardView setNeedsDisplay];
             [self.boardViewController.nextShapeView setNeedsDisplay];
         };
-        settingViewController.contentSizeForViewInPopover = CGSizeMake(340, 180);
+        settingViewController.contentSizeForViewInPopover = CGSizeMake(340, 130);
         [UIPopoverManager showControllerInPopover:settingViewController inView:self.view forTarget:self.settingButton dismissTarget:self dismissSelector:@selector(popoverControllerDidDismissPopover:)];
     }
 }
@@ -802,6 +771,8 @@ typedef enum {
     if(self.isStart) {
         self.isStart = NO;
         self.pauseImageView.hidden = NO;
+         [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(addGameHint)
+                                                    object:nil];
         [self pauseGame];
     } else {
         if(self.firstStart && self.boardViewController) {
