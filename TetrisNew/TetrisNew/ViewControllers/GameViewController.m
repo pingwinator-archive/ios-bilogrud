@@ -727,8 +727,14 @@ typedef enum {
     }
     if(isiPhone) {
         self.showTutorial = [SettingViewController loadSettingTutorial];
+//        if(self.showTutorial) {
+//            [self addGameHint];
+//        } else {
+//            [self.tutorialView removeFromSuperview];
+//            self.tutorialView = nil;
+//        }
         [self deprecatedPresentModalViewController:settingViewController animated:YES];
-       
+        
         
     } else {
         settingViewController.competitionBlock = ^(void) {
@@ -745,7 +751,6 @@ typedef enum {
                 self.tutorialView = nil;
             }
 
-            
             [self.boardViewController.boardView setNeedsDisplay];
             [self.boardViewController.nextShapeView setNeedsDisplay];
         };
