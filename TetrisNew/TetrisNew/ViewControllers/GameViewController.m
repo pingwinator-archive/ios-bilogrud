@@ -263,27 +263,26 @@ typedef enum {
 {
     if(self.showTutorial) {
         if (self.currentTutorialStep < TutorialStepCount) {
-         
-        NSString* hintText = [self.arrayTextforTutorial objectAtIndex:self.currentTutorialStep];
-        UIButton* hintButton = [self.arrayButtonsForTutorial objectAtIndex:self.currentTutorialStep];
-        CGRect targetFrame = hintButton.frame;
-        self.tutorialView = [[[TutorialView alloc] initWithFrame:self.view.bounds withText:hintText andTargetFrame:targetFrame] autorelease];
-        if(self.currentTutorialStep > 0) {
-            UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideGameHint)];
-                [self.tutorialView addGestureRecognizer:tapGesture];
-             [tapGesture release];
-        }
-        self.tutorialView.alpha = 0;
-        [self.view addSubview:self.tutorialView];
-        
-        [UIView animateWithDuration:delayForAnimation animations:^(void) {
-            self.tutorialView.alpha = 1;
-        }];
-        [self.view bringSubviewToFront:self.tutorialView];
-        [self.view bringSubviewToFront:hintButton];
-        if(isStart) {
-            [self pauseGame];
-        }
+            NSString* hintText = [self.arrayTextforTutorial objectAtIndex:self.currentTutorialStep];
+            UIButton* hintButton = [self.arrayButtonsForTutorial objectAtIndex:self.currentTutorialStep];
+            CGRect targetFrame = hintButton.frame;
+            self.tutorialView = [[[TutorialView alloc] initWithFrame:self.view.bounds withText:hintText andTargetFrame:targetFrame] autorelease];
+            if(self.currentTutorialStep > 0) {
+                UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideGameHint)];
+                    [self.tutorialView addGestureRecognizer:tapGesture];
+                 [tapGesture release];
+            }
+            self.tutorialView.alpha = 0;
+            [self.view addSubview:self.tutorialView];
+            
+            [UIView animateWithDuration:delayForAnimation animations:^(void) {
+                self.tutorialView.alpha = 1;
+            }];
+            [self.view bringSubviewToFront:self.tutorialView];
+            [self.view bringSubviewToFront:hintButton];
+            if(isStart) {
+                [self pauseGame];
+            }
         }
     }
 }
@@ -306,6 +305,8 @@ typedef enum {
                      delay = delayForHint;
                  }
                 [self performSelector:@selector(addGameHint) withObject:nil afterDelay:delay];
+             } else {
+                 [SettingViewController saveSettingTutorial:NO];
              }
              if(self.isStart) {
                  [self continueGame];
