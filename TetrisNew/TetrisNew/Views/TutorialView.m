@@ -23,27 +23,40 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5f];
-        CGRect labelRect;
+        CGRect cloudRect;
+        CGRect textRect;
         if(isiPhone) {
-            labelRect = CGRectMake(frame.size.width/2 - 100 , 100, 200, 100);
+            cloudRect = CGRectMake(frame.size.width/2 - 120 , 100, 240, 150);
+            textRect = CGRectMake(30, 25, 180, 100);
         } else {
-            labelRect = CGRectMake(frame.size.width/2 - 238 , 330, 480, 100);
+            cloudRect = CGRectMake(frame.size.width/2 - 238 , 330, 480, 200);
+            textRect = CGRectMake(60, 50, 380, 100);
         }
-        UILabel* textLabel = [[UILabel alloc] initWithFrame:labelRect];
+        
+        UIImageView* hintImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cloud2.png"]];
+        hintImageView.frame = cloudRect;
+        [self addSubview:hintImageView];
+        [hintImageView release];
+        
+        UILabel* textLabel = [[UILabel alloc] initWithFrame:textRect];
         
         textLabel.text = [text uppercaseString];
-        textLabel.backgroundColor = [[UIColor whiteColor]colorWithAlphaComponent:0.8f];
-        textLabel.font = settingFont;
+        textLabel.backgroundColor = [[UIColor redColor]colorWithAlphaComponent:0.f];
+        
+        if(isiPhone) {
+            textLabel.font = tutorialFont;
+        } else {
+            textLabel.font = settingFont;
+        }
         textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        textLabel.numberOfLines = 2;
-        //NSLineBreakByCharWrapping;
+        textLabel.numberOfLines = 3;
         textLabel.textAlignment = NSTextAlignmentCenter;
-        [self addSubview: textLabel];
+        [hintImageView addSubview: textLabel];
         [textLabel release];
         
-        UIImageView* arrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"hintArrow.png"]];
-        CGSize arrowSize = CGSizeMake(35, 75);
-        arrow.frame = CGRectMake(CGRectGetMidX(rect) - arrowSize.width/2, CGRectGetMinY(rect) - arrowSize.height, arrowSize.width, arrowSize.height);
+        UIImageView* arrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"arrow.png"]];
+        CGSize arrowSize = CGSizeMake(64, 64);
+        arrow.frame = CGRectMake(CGRectGetMidX(rect) - arrowSize.width/2, CGRectGetMinY(rect) - arrowSize.height + 10, arrowSize.width, arrowSize.height);
         [self addSubview:arrow];
         [arrow release];
     }

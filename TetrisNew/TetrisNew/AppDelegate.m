@@ -33,7 +33,7 @@
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     
-    [[GCTurnBasedMatchHelper sharedInstance] authenticateLocalUser];
+  //  [[GCTurnBasedMatchHelper sharedInstance] authenticateLocalUser];
     return YES;
 }
 

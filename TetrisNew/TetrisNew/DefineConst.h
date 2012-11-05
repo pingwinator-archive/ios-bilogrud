@@ -53,6 +53,7 @@ return _sharedObject;
 #define distanceRotateButtonAndLabel (rotateSizeButton - 5)
 
 #define settingFont [UIFont fontWithName:@"American Typewriter" size:20]
+#define tutorialFont [UIFont fontWithName:@"American Typewriter" size:15]
 #define textButtonFont [UIFont fontWithName:@"American Typewriter" size:10]
 #define scoreFont [UIFont fontWithName:@"DS-Digital" size:15]
 #define scoreFontLarge [UIFont fontWithName:@"DS-Digital" size:20]
@@ -86,7 +87,7 @@ return _sharedObject;
 #define kShowColor @"showColorShape"
 #define kShowTutorial @"showTutorial"
 #define delayForSubView 0.3
-
+#define delayForHint 0.5
 typedef enum {
     downDirectionMove,
     rightDirectionMove,

@@ -254,7 +254,7 @@ typedef enum {
         self.currentTutorialStep = TutorialStepStart;
     }
    
-    [self performSelector:@selector(addGameHint) withObject:nil afterDelay:1.f];
+    [self performSelector:@selector(addGameHint) withObject:nil afterDelay:1.5f];
 }
 
 #pragma mark - Tutorial Methods 
@@ -271,18 +271,20 @@ typedef enum {
         [tapGesture release];
         self.tutorialView.alpha = 0;
         [self.view addSubview:self.tutorialView];
-        [UIView animateWithDuration:0.3f animations:^(void) {
+        [UIView animateWithDuration:delayForHint animations:^(void) {
             self.tutorialView.alpha = 1;
         }];
         [self.view bringSubviewToFront:self.tutorialView];
         [self.view bringSubviewToFront:hintButton];
-        [self pauseGame];
+        if(isStart) {
+            [self pauseGame];
+        }
     }
 }
 
 - (void)hideGameHint
 {
-    [UIView animateWithDuration:0.3f animations:^(void){
+    [UIView animateWithDuration:delayForHint animations:^(void){
         self.tutorialView.alpha = 0.f;
     }
         completion:^(BOOL finished){
@@ -291,6 +293,9 @@ typedef enum {
              self.currentTutorialStep++;
              if (self.currentTutorialStep < TutorialStepCount) {
                  [self performSelector:@selector(addGameHint) withObject:nil afterDelay:1.f];
+             }
+             if (self.currentTutorialStep == TutorialStepCount) {
+                 [SettingViewController saveSettingTutorial:![SettingViewController loadSettingTutorial]];
              }
              if(self.isStart) {
                  [self continueGame];
