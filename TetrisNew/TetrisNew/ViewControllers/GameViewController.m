@@ -254,7 +254,7 @@ typedef enum {
         self.currentTutorialStep = TutorialStepStart;
     }
    
-    [self performSelector:@selector(addGameHint) withObject:nil afterDelay:1.5f];
+    [self performSelector:@selector(addGameHint) withObject:nil afterDelay:delayForHintStart];
 }
 
 #pragma mark - Tutorial Methods 
@@ -262,16 +262,20 @@ typedef enum {
 - (void)addGameHint
 {
     if(self.showTutorial) {
+//        if(isStart){
         NSString* hintText = [self.arrayTextforTutorial objectAtIndex:self.currentTutorialStep];
         UIButton* hintButton = [self.arrayButtonsForTutorial objectAtIndex:self.currentTutorialStep];
         CGRect targetFrame = hintButton.frame;
         self.tutorialView = [[[TutorialView alloc] initWithFrame:self.view.bounds withText:hintText andTargetFrame:targetFrame] autorelease];
-        UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideGameHint)];
-        [self.tutorialView addGestureRecognizer:tapGesture];
-        [tapGesture release];
+        if(self.currentTutorialStep > 0) {
+            UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideGameHint)];
+                [self.tutorialView addGestureRecognizer:tapGesture];
+             [tapGesture release];
+        }
         self.tutorialView.alpha = 0;
         [self.view addSubview:self.tutorialView];
-        [UIView animateWithDuration:delayForHint animations:^(void) {
+        
+        [UIView animateWithDuration:delayForAnimation animations:^(void) {
             self.tutorialView.alpha = 1;
         }];
         [self.view bringSubviewToFront:self.tutorialView];
@@ -279,20 +283,34 @@ typedef enum {
         if(isStart) {
             [self pauseGame];
         }
+//        }
+            } else {
+        if(isStart) {
+            
+//            self.currentTutorialStep = 1;
+//            [self performSelector:@selector(addGameHint) withObject:nil afterDelay:delayForHintStart];
+        }
     }
 }
 
 - (void)hideGameHint
 {
-    [UIView animateWithDuration:delayForHint animations:^(void){
+    [UIView animateWithDuration:delayForAnimation animations:^(void){
         self.tutorialView.alpha = 0.f;
     }
         completion:^(BOOL finished){
              [self.tutorialView removeFromSuperview];
              self.tutorialView = nil;
              self.currentTutorialStep++;
+            
              if (self.currentTutorialStep < TutorialStepCount) {
-                 [self performSelector:@selector(addGameHint) withObject:nil afterDelay:1.f];
+                 CGFloat delay;
+                 if(self.currentTutorialStep == 1) {
+                     delay = delayForHintLong;
+                 } else {
+                     delay = delayForHint;
+                 }
+                 [self performSelector:@selector(addGameHint) withObject:nil afterDelay:delay];
              }
              if (self.currentTutorialStep == TutorialStepCount) {
                  [SettingViewController saveSettingTutorial:![SettingViewController loadSettingTutorial]];
@@ -338,7 +356,7 @@ typedef enum {
     [self addSettingButton:CGRectMake(rectManage.origin.x + 180, rectManage.origin.y , manageSizeButton, manageSizeButton) withImage:imageButton onView:self.view];
     
     //rotate button
-    [self addRotateButton:CGRectMake(rectManage.origin.x + 170, rectManage.origin.y + 90, rotateSizeButton, rotateSizeButton) withImage:rotateButtonImage andHighlighted:highlightedImageRotate onView:self.view];
+    [self addRotateButton:CGRectMake(rectManage.origin.x + 170, rectManage.origin.y + 100, rotateSizeButton, rotateSizeButton) withImage:rotateButtonImage andHighlighted:highlightedImageRotate onView:self.view];
     
     CGRect rectMove = CGRectMake(30, self.boardRect.size.height + 150, 100, 20);
     
@@ -346,7 +364,7 @@ typedef enum {
     [self addLeftMoveButton:CGRectMake(rectMove.origin.x, rectMove.origin.y, moveSizeButton, moveSizeButton) withImage:imageButton onView:self.view];
     
     //down button
-    [self addDownMoveButton:CGRectMake(rectMove.origin.x + 40, rectMove.origin.y + 40, moveSizeButton, moveSizeButton) withImage:imageButton onView:self.view];
+    [self addDownMoveButton:CGRectMake(rectMove.origin.x + 40, rectMove.origin.y + 50, moveSizeButton, moveSizeButton) withImage:imageButton onView:self.view];
     
     //right button
     [self addRightMoveButton:CGRectMake(rectMove.origin.x + 80, rectMove.origin.y, moveSizeButton, moveSizeButton) withImage:imageButton onView:self.view];
@@ -458,13 +476,25 @@ typedef enum {
     [view addSubview:self.playButton];
     
     //play label
+    CGFloat labelPlayTextWidth;
+    if(isiPhone) {
+        labelPlayTextWidth = labelPlayTextWidthIPhone;
+    } else {
+        labelPlayTextWidth = labelPlayTextWidthIPad;
+    }
     CGRect rectPlayLabel = CGRectMake(CGRectGetMidX(rect) - labelPlayTextWidth/2 , rect.origin.y + rect.size.height - labelOffsetHeight, labelPlayTextWidth , labelPlayTextHeigth);
     self.playLabel = [[[UILabel alloc] initWithFrame:rectPlayLabel] autorelease];
     self.playLabel.text = NSLocalizedString( @"PLAY/ PAUSE", @"");
     self.playLabel.lineBreakMode = NSLineBreakByCharWrapping;
     self.playLabel.numberOfLines = 2;
-    [self.playLabel setFont:textButtonFont];
-    self.playLabel.backgroundColor=[UIColor clearColor];
+    
+    if(isiPhone) {
+        self.playLabel.font = textButtonFont;
+    } else {
+        self.playLabel.font = textButtonFontIPad;
+    }
+   // [self.playLabel setFont:textButtonFont];
+    self.playLabel.backgroundColor=[UIColor redColor];
     self.playLabel.textColor = [UIColor blackColor];
     [view addSubview:self.playLabel];
 }
@@ -483,8 +513,12 @@ typedef enum {
     self.resetLabel = [[[UILabel alloc] initWithFrame:rectResetLabel] autorelease];
     self.resetLabel.text = NSLocalizedString(@"RESET", @"");
     self.resetLabel.textAlignment = UITextAlignmentCenter;
-    [self.resetLabel setFont:textButtonFont];
-    self.resetLabel.backgroundColor=[UIColor clearColor];
+    if(isiPhone) {
+        self.resetLabel.font = textButtonFont;
+    } else {
+        self.resetLabel.font = textButtonFontIPad;
+    }
+    self.resetLabel.backgroundColor=[UIColor redColor];
     self.resetLabel.textColor = [UIColor blackColor];
     [view addSubview:self.resetLabel];
 }
@@ -502,12 +536,16 @@ typedef enum {
     self.soundLabel = [[[UILabel alloc] initWithFrame:rectSoundLabel] autorelease];
     self.soundLabel.text = NSLocalizedString(@"SOUND", @"");
     self.soundLabel.textAlignment = NSTextAlignmentCenter;
-    [self.soundLabel setFont:textButtonFont];
+    if(isiPhone) {
+        self.soundLabel.font = textButtonFont;
+    } else {
+        self.soundLabel.font = textButtonFontIPad;
+    }
     self.soundLabel.backgroundColor = [UIColor clearColor];
     self.soundLabel.textColor = [UIColor blackColor];
     [view addSubview:self.soundLabel];
-
 }
+
 - (void)addSettingButton:(CGRect)rect withImage:(UIImage*)imageButton onView:(UIView*)view
 {
     self.settingButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -516,12 +554,18 @@ typedef enum {
     [self.settingButton addTarget:self action:@selector(showSetting) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:self.settingButton];
     
-    //ssetting label 
+    //setting label 
     CGRect rectSetLabel = CGRectMake(CGRectGetMidX(rect) - labelManageTextWidth/2, rect.origin.y + rect.size.height - labelOffsetHeight, labelManageTextWidth, labelTextHeigth);
     self.settingLabel = [[[UILabel alloc] initWithFrame:rectSetLabel] autorelease];
     self.settingLabel.text = NSLocalizedString(@"SETTINGS", @"");
     self.settingLabel.textAlignment = UITextAlignmentCenter;
-    [self.settingLabel setFont:textButtonFont];
+    if(isiPhone) {
+        self.settingLabel.font = textButtonFont;
+    } else {
+        self.settingLabel.font = textButtonFontIPad;
+    }
+    
+    //[self.settingLabel setFont:textButtonFont];
     self.settingLabel.backgroundColor = [UIColor clearColor];
     self.settingLabel.textColor = [UIColor blackColor];
     [view addSubview:self.settingLabel];
@@ -571,7 +615,13 @@ typedef enum {
     CGRect rectLeftLabel = CGRectMake(CGRectGetMidX(rect) - labelMoveTextWidth/2, rect.origin.y + rect.size.height - labelOffsetHeight , labelMoveTextWidth , labelTextHeigth);
     self.leftLabel = [[[UILabel alloc] initWithFrame:rectLeftLabel] autorelease];
     self.leftLabel.text = NSLocalizedString(@"LEFT", @"");
-    [self.leftLabel setFont:textButtonFont];
+   
+    if(isiPhone) {
+        self.leftLabel.font = textButtonFont;
+    } else {
+        self.leftLabel.font = textButtonFontIPad;
+    }
+    // [self.leftLabel setFont:textButtonFont];
     self.leftLabel.backgroundColor=[UIColor clearColor];
     self.leftLabel.textColor = [UIColor blackColor];
     self.leftLabel.textAlignment = UITextAlignmentCenter;
@@ -593,7 +643,14 @@ typedef enum {
     CGRect rectRightLabel = CGRectMake(CGRectGetMidX(rect) - labelMoveTextWidth/2 , rect.size.height + rect.origin.y - labelOffsetHeight, labelMoveTextWidth, labelTextHeigth);
     self.rightLabel = [[[UILabel alloc] initWithFrame:rectRightLabel] autorelease];
     self.rightLabel.text = NSLocalizedString(@"RIGHT", @"");
-    [self.rightLabel setFont:textButtonFont];
+   
+    if(isiPhone) {
+        self.rightLabel.font = textButtonFont;
+    } else {
+        self.rightLabel.font = textButtonFontIPad;
+    }
+
+    // [self.rightLabel setFont:textButtonFont];
     self.rightLabel.backgroundColor = [UIColor clearColor];
     self.rightLabel.textColor = [UIColor blackColor];
     self.rightLabel.textAlignment = UITextAlignmentCenter;
@@ -615,7 +672,14 @@ typedef enum {
     self.downLabel = [[[UILabel alloc] initWithFrame:rectDownLabel]autorelease];
     [self.downLabel setTextAlignment:NSTextAlignmentCenter];
     self.downLabel.text = NSLocalizedString(@"DOWN", @"");
-    [self.downLabel setFont:textButtonFont];
+    
+    if(isiPhone) {
+        self.downLabel.font = textButtonFont;
+    } else {
+        self.downLabel.font = textButtonFontIPad;
+    }
+
+    //[self.downLabel setFont:textButtonFont];
     self.downLabel.backgroundColor = [UIColor clearColor];
     self.downLabel.textColor = [UIColor blackColor];
     self.downLabel.textAlignment = UITextAlignmentCenter;
@@ -635,7 +699,13 @@ typedef enum {
     CGRect rectRotateLabel = CGRectMake(CGRectGetMidX(rect) - labelRotateTextWidth/2, rect.size.height + rect.origin.y -10 , labelRotateTextWidth , labelTextHeigth);
     self.rotateLabel = [[[UILabel alloc] initWithFrame:rectRotateLabel] autorelease];
     self.rotateLabel.text = NSLocalizedString(@"ROTATE", @"");
-    [self.rotateLabel setFont:textButtonFont];
+   
+    if(isiPhone) {
+        self.rotateLabel.font = textButtonFont;
+    } else {
+        self.rotateLabel.font = textButtonFontIPad;
+    }
+
     self.rotateLabel.backgroundColor=[UIColor clearColor];
     self.rotateLabel.textColor = [UIColor blackColor];
     self.rotateLabel.textAlignment = UITextAlignmentCenter;
@@ -665,13 +735,21 @@ typedef enum {
             [self.boardViewController showGrid: [SettingViewController loadSettingGrid]];
             [self.boardViewController showColor: [SettingViewController loadSettingColor]];
             self.showTutorial = [SettingViewController loadSettingTutorial];
-            [self addGameHint];
-//            ??
+            
+            self.currentTutorialStep = 1;
+
+            if(self.showTutorial) {
+                [self addGameHint];
+            } else {
+                [self.tutorialView removeFromSuperview];
+                self.tutorialView = nil;
+            }
+
             
             [self.boardViewController.boardView setNeedsDisplay];
             [self.boardViewController.nextShapeView setNeedsDisplay];
         };
-        settingViewController.contentSizeForViewInPopover = CGSizeMake(290, 180);
+        settingViewController.contentSizeForViewInPopover = CGSizeMake(340, 180);
         [UIPopoverManager showControllerInPopover:settingViewController inView:self.view forTarget:self.settingButton dismissTarget:self dismissSelector:@selector(popoverControllerDidDismissPopover:)];
     }
 }
@@ -872,6 +950,9 @@ typedef enum {
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
 {
     [UIImageView animateWithDuration:delayForSubView animations:^{
+        if (self.tutorialView) {
+            [self hideGameHint];
+        }
         [self continueGame];
     }];
 }

@@ -49,7 +49,7 @@
     self.showTutorial = [SettingViewController loadSettingTutorial];
     CGRect rect;
     if(isiPhone) {
-        rect = CGRectMake(20, 20, 150, 20);
+        rect = CGRectMake(20, 20, 170, 20);
         UILabel* showGridLabel = [[[UILabel alloc] initWithFrame:rect] autorelease];
         showGridLabel.text = NSLocalizedString(@"Show grid", @"");
         [showGridLabel setFont:settingFont];
@@ -61,7 +61,7 @@
         [self.view addSubview:self.toggleShowGridButton];
         
         //color setting
-        CGRect rectForColor = CGRectMake(rect.origin.x, rect.origin.y + 50, 150, 20);
+        CGRect rectForColor = CGRectMake(rect.origin.x, rect.origin.y + 50, 170, 20);
         UILabel* showColorLabel = [[[UILabel alloc] initWithFrame:rectForColor] autorelease];
         showColorLabel.text = NSLocalizedString(@"Add color", @"");
         [showColorLabel setFont:settingFont];
@@ -74,10 +74,13 @@
         [self.view addSubview:self.toggleAddColorButton];
         
         //tutorial setting
-        CGRect rectForTutorial = CGRectMake(rect.origin.x, rect.origin.y + 100, 150, 20);
+        CGRect rectForTutorial = CGRectMake(rect.origin.x, rect.origin.y + 100, 170, 20);
         UILabel* showTutorLabel = [[[UILabel alloc] initWithFrame:rectForTutorial] autorelease];
+     
         showTutorLabel.text = NSLocalizedString(@"Show hints", @"");
         [showTutorLabel setFont:settingFont];
+        showTutorLabel.font = settingFont;
+   
         [self.view addSubview:showTutorLabel];
         
         self.toggleShowTutorial = [[[UISwitch alloc] initWithFrame:CGRectMake(rectForTutorial.origin.x + 200, rectForTutorial.origin.y, 50, 50)] autorelease];
@@ -94,7 +97,7 @@
         [self.view addSubview:self.closeButton];
     } else {
         CGSize viewSize = self.contentSizeForViewInPopover;
-        rect = CGRectMake(20, 20, 150, 30);
+        rect = CGRectMake(20, 20, 200, 30);
         [self.view setBackgroundColor:[UIColor whiteColor]];
         
         UILabel* showGridLabel = [[[UILabel alloc] initWithFrame:rect] autorelease];
@@ -108,7 +111,7 @@
         [self.view addSubview:self.toggleShowGridButton];
         
         //color setting
-        CGRect rectForColor = CGRectMake(rect.origin.x, rect.origin.y + 50 , 150, 30);
+        CGRect rectForColor = CGRectMake(rect.origin.x, rect.origin.y + 50 , 200, 30);
         UILabel* showColorLabel = [[[UILabel alloc] initWithFrame:rectForColor] autorelease];
         showColorLabel.text = NSLocalizedString(@"Add color", @"");
         [showColorLabel setFont:settingFont];
@@ -120,9 +123,10 @@
         [self.view addSubview:self.toggleAddColorButton];
         
         //tutorial setting
-        CGRect rectForTutorial = CGRectMake(rect.origin.x, rect.origin.y + 100, 150, 30);
+        CGRect rectForTutorial = CGRectMake(rect.origin.x, rect.origin.y + 100, 200, 30);
         UILabel* showTutorLabel = [[[UILabel alloc] initWithFrame:rectForTutorial] autorelease];
         showTutorLabel.text = NSLocalizedString(@"Show hints", @"");
+        showTutorLabel.font = settingFont;
         [showTutorLabel setFont:settingFont];
         [self.view addSubview:showTutorLabel];
         

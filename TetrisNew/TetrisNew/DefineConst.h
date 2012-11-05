@@ -44,9 +44,9 @@ return _sharedObject;
 #define manageSizeButton 45
 #define moveSizeButton 60
 #define rotateSizeButton 80
-#define manageSizeButtoniPad 50
-#define moveSizeButtoniPad 70
-#define rotateSizeButtoniPad 110
+#define manageSizeButtoniPad 60
+#define moveSizeButtoniPad 80
+#define rotateSizeButtoniPad 120
 
 #define distanceManageButtonAndLabel (manageSizeButton - 5)
 #define distanceMoveButtonAndLabel (moveSizeButton - 5)
@@ -55,6 +55,7 @@ return _sharedObject;
 #define settingFont [UIFont fontWithName:@"American Typewriter" size:20]
 #define tutorialFont [UIFont fontWithName:@"American Typewriter" size:15]
 #define textButtonFont [UIFont fontWithName:@"American Typewriter" size:10]
+#define textButtonFontIPad [UIFont fontWithName:@"American Typewriter" size:12]
 #define scoreFont [UIFont fontWithName:@"DS-Digital" size:15]
 #define scoreFontLarge [UIFont fontWithName:@"DS-Digital" size:20]
 #define scoreFontiPad [UIFont fontWithName:@"DS-Digital" size:30]
@@ -63,9 +64,10 @@ return _sharedObject;
 #define scoreLabelHeigth 50
 #define speedLabelWidth 50
 #define speedLabelHeigth 50
-#define labelPlayTextWidth 35
+#define labelPlayTextWidthIPad 45
+#define labelPlayTextWidthIPhone 35
 #define labelPlayTextHeigth 40
-#define labelManageTextWidth 70
+#define labelManageTextWidth 80
 #define labelMoveTextWidth 60
 #define labelRotateTextWidth 60
 #define labelTextHeigth 20
@@ -87,7 +89,13 @@ return _sharedObject;
 #define kShowColor @"showColorShape"
 #define kShowTutorial @"showTutorial"
 #define delayForSubView 0.3
-#define delayForHint 0.5
+#define delayForHint 1.5
+#define delayForHintStart 0.5
+#define delayForHintLong 5.0
+#define delayForAnimation 0.5
+
+#define flurryKey @"STPJ6GDXJCNGWT7FR2JH"
+
 typedef enum {
     downDirectionMove,
     rightDirectionMove,

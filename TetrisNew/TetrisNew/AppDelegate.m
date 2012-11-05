@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import "GameViewController.h"
-#import "GCTurnBasedMatchHelper.h"
 @implementation AppDelegate
 
 - (void)dealloc
@@ -20,7 +19,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [Flurry startSession:@"STPJ6GDXJCNGWT7FR2JH"];
+    [Flurry startSession: flurryKey];
     NSDictionary* appDefaults = [[[NSDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"defaults" ofType:@"plist"]] autorelease];
     [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
@@ -33,7 +32,6 @@
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     
-  //  [[GCTurnBasedMatchHelper sharedInstance] authenticateLocalUser];
     return YES;
 }
 
