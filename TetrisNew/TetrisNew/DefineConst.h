@@ -90,7 +90,7 @@ return _sharedObject;
 #define kShowTutorial @"showTutorial"
 #define delayForSubView 0.3
 #define delayForHint 1.5
-#define delayForHintStart 0.5
+#define delayForHintStart 1
 #define delayForHintLong 5.0
 #define delayForAnimation 0.5
 

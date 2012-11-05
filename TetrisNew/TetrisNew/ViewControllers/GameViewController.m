@@ -301,8 +301,9 @@ typedef enum {
         completion:^(BOOL finished){
              [self.tutorialView removeFromSuperview];
              self.tutorialView = nil;
-             self.currentTutorialStep++;
-            
+            if(self.currentTutorialStep <= TutorialStepCount) {
+                self.currentTutorialStep++;
+            }
              if (self.currentTutorialStep < TutorialStepCount) {
                  CGFloat delay;
                  if(self.currentTutorialStep == 1) {
@@ -487,14 +488,14 @@ typedef enum {
     self.playLabel.text = NSLocalizedString( @"PLAY/ PAUSE", @"");
     self.playLabel.lineBreakMode = NSLineBreakByCharWrapping;
     self.playLabel.numberOfLines = 2;
-    
+    UIFont* font;
     if(isiPhone) {
-        self.playLabel.font = textButtonFont;
+        font = textButtonFont;
     } else {
-        self.playLabel.font = textButtonFontIPad;
+        font = textButtonFontIPad;
     }
-   // [self.playLabel setFont:textButtonFont];
-    self.playLabel.backgroundColor=[UIColor redColor];
+    [self.playLabel setFont:font];
+    self.playLabel.backgroundColor = [UIColor clearColor];
     self.playLabel.textColor = [UIColor blackColor];
     [view addSubview:self.playLabel];
 }
@@ -513,12 +514,17 @@ typedef enum {
     self.resetLabel = [[[UILabel alloc] initWithFrame:rectResetLabel] autorelease];
     self.resetLabel.text = NSLocalizedString(@"RESET", @"");
     self.resetLabel.textAlignment = UITextAlignmentCenter;
+   // UIFont* font = [[UIFont alloc] init];
     if(isiPhone) {
-        self.resetLabel.font = textButtonFont;
+        [self.resetLabel setFont:textButtonFont];
+        // font = textButtonFont;
     } else {
-        self.resetLabel.font = textButtonFontIPad;
+        [self.resetLabel setFont:textButtonFontIPad];
+        //font = textButtonFontIPad;
     }
-    self.resetLabel.backgroundColor=[UIColor redColor];
+    //[self.resetLabel setFont:font];
+    
+    self.resetLabel.backgroundColor = [UIColor clearColor];
     self.resetLabel.textColor = [UIColor blackColor];
     [view addSubview:self.resetLabel];
 }
@@ -727,12 +733,19 @@ typedef enum {
     }
     if(isiPhone) {
         self.showTutorial = [SettingViewController loadSettingTutorial];
-//        if(self.showTutorial) {
+        if(self.showTutorial) {
+            if(self.currentTutorialStep > TutorialStepCount) {
+                self.currentTutorialStep = 1;
+            }
+            
 //            [self addGameHint];
-//        } else {
-//            [self.tutorialView removeFromSuperview];
-//            self.tutorialView = nil;
-//        }
+           // [self pauseGame];
+            [self performSelector:@selector(addGameHint) withObject:nil afterDelay:delayForHintStart];
+        } else {
+            [self.tutorialView removeFromSuperview];
+            self.tutorialView = nil;
+            self.currentTutorialStep = 100;
+        }
         [self deprecatedPresentModalViewController:settingViewController animated:YES];
         
         
