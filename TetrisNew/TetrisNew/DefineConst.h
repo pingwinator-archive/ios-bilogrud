@@ -9,6 +9,13 @@
 #ifndef Tetris_DefineConst_h
 #define Tetris_DefineConst_h
 
+#define DEFINE_SHARED_INSTANCE_USING_BLOCK(block) \
+static dispatch_once_t pred = 0; \
+__strong static id _sharedObject = nil; \
+dispatch_once(&pred, ^{ \
+_sharedObject = block(); \
+}); \
+return _sharedObject;
 
 #define isiPhone [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone
 #define isiPad [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad
@@ -34,7 +41,7 @@
 
 //buttons
 #define settingSizeButton 40
-#define manageSizeButton 40
+#define manageSizeButton 45
 #define moveSizeButton 60
 #define rotateSizeButton 80
 #define manageSizeButtoniPad 50

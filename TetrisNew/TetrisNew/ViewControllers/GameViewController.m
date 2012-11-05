@@ -201,8 +201,6 @@ typedef enum {
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.showTutorial = [SettingViewController loadSettingTutorial];
-//    NSLog(@"!!!!!! %c",self.showTutorial);
     self.firstStart = YES;
     self.settingIsVisible = NO;
     self.gameCount = 0;
@@ -236,9 +234,8 @@ typedef enum {
        
         [self addUIControlsForiPad];
     }
-    self.showTutorial = [SettingViewController loadSettingTutorial];
-    //?? read this value from setting
-  
+    self.showTutorial = [SettingViewController loadSettingTutorial];//from settings
+    
     if (self.showTutorial) {
         self.arrayTextforTutorial = [NSArray arrayWithObjects:
                                      NSLocalizedString(@"Tap here to start game", @""),
@@ -385,7 +382,7 @@ typedef enum {
     //rotate button
     [self addRotateButton:CGRectMake(rectManage.origin.x + 170, rectManage.origin.y + 65, rotateSizeButton, rotateSizeButton) withImage:rotateButtonImage andHighlighted:highlightedImageRotate onView:self.view];
   
-    CGRect rectMove = CGRectMake(30, self.boardRect.size.height + 95, 100, 20);
+    CGRect rectMove = CGRectMake(30, self.boardRect.size.height + 103, 100, 20);
     
     //left button
     [self addLeftMoveButton:CGRectMake(rectMove.origin.x, rectMove.origin.y, moveSizeButton, moveSizeButton) withImage:imageButton onView:self.view];
@@ -669,7 +666,7 @@ typedef enum {
             [self.boardViewController.boardView setNeedsDisplay];
             [self.boardViewController.nextShapeView setNeedsDisplay];
         };
-        settingViewController.contentSizeForViewInPopover = CGSizeMake(290, 120);
+        settingViewController.contentSizeForViewInPopover = CGSizeMake(290, 180);
         [UIPopoverManager showControllerInPopover:settingViewController inView:self.view forTarget:self.settingButton dismissTarget:self dismissSelector:@selector(popoverControllerDidDismissPopover:)];
     }
 }

@@ -14,9 +14,6 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        //self.alpha = 0.5f;
-        self.backgroundColor = [UIColor redColor];
-        // Initialization code
     }
     return self;
 }
@@ -25,14 +22,18 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        //self.alpha = 0.5f;
-
         self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5f];
+        CGRect labelRect;
+        if(isiPhone) {
+            labelRect = CGRectMake(frame.size.width/2 - 100 , 100, 200, 100);
+        } else {
+            labelRect = CGRectMake(frame.size.width/2 - 238 , 330, 480, 100);
+        }
+        UILabel* textLabel = [[UILabel alloc] initWithFrame:labelRect];
         
-        UILabel* textLabel = [[UILabel alloc] initWithFrame:CGRectMake(frame.size.width/2 - 100, 100, 200, 100)];
-        textLabel.text = text;
+        textLabel.text = [text uppercaseString];
         textLabel.backgroundColor = [[UIColor whiteColor]colorWithAlphaComponent:0.8f];
-        //?
+        textLabel.font = settingFont;
         textLabel.lineBreakMode = NSLineBreakByWordWrapping;
         textLabel.numberOfLines = 2;
         //NSLineBreakByCharWrapping;

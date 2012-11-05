@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "GameViewController.h"
-
+#import "GCTurnBasedMatchHelper.h"
 @implementation AppDelegate
 
 - (void)dealloc
@@ -32,6 +32,8 @@
     }
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
+    
+    [[GCTurnBasedMatchHelper sharedInstance] authenticateLocalUser];
     return YES;
 }
 

@@ -88,13 +88,13 @@
         //close button
         [self.view setBackgroundColor:[UIColor whiteColor]];
         self.closeButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        self.closeButton.frame = CGRectMake(self.view.frame.size.width/2 - 30, rectForColor.origin.y + 150, 70, 30);
+        self.closeButton.frame = CGRectMake(self.view.frame.size.width/2 - 30, rectForColor.origin.y + 100, 70, 30);
         [self.closeButton setTitle:NSLocalizedString(@"Ok", @"") forState:UIControlStateNormal];
         [self.closeButton addTarget:self action:@selector(close) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:self.closeButton];
     } else {
         CGSize viewSize = self.contentSizeForViewInPopover;
-        rect = CGRectMake(20, 20, 150, 50);
+        rect = CGRectMake(20, 20, 150, 30);
         [self.view setBackgroundColor:[UIColor whiteColor]];
         
         UILabel* showGridLabel = [[[UILabel alloc] initWithFrame:rect] autorelease];
@@ -108,7 +108,7 @@
         [self.view addSubview:self.toggleShowGridButton];
         
         //color setting
-        CGRect rectForColor = CGRectMake(rect.origin.x, rect.origin.y + 50, 150, 20);
+        CGRect rectForColor = CGRectMake(rect.origin.x, rect.origin.y + 50 , 150, 30);
         UILabel* showColorLabel = [[[UILabel alloc] initWithFrame:rectForColor] autorelease];
         showColorLabel.text = NSLocalizedString(@"Add color", @"");
         [showColorLabel setFont:settingFont];
@@ -118,6 +118,18 @@
         [self.toggleAddColorButton setOn:[SettingViewController loadSettingColor]];
         [self.toggleAddColorButton addTarget:self action:@selector(changeColorToggle) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:self.toggleAddColorButton];
+        
+        //tutorial setting
+        CGRect rectForTutorial = CGRectMake(rect.origin.x, rect.origin.y + 100, 150, 30);
+        UILabel* showTutorLabel = [[[UILabel alloc] initWithFrame:rectForTutorial] autorelease];
+        showTutorLabel.text = NSLocalizedString(@"Show hints", @"");
+        [showTutorLabel setFont:settingFont];
+        [self.view addSubview:showTutorLabel];
+        
+        self.toggleShowTutorial = [[[UISwitch alloc] initWithFrame:CGRectMake(viewSize.width - 100, rectForTutorial.origin.y, 50, 50)] autorelease];
+        [self.toggleShowTutorial setOn:[SettingViewController loadSettingTutorial]];
+        [self.toggleShowTutorial addTarget:self action:@selector(changeTutorialToggle) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:self.toggleShowTutorial];
     }
 }
 

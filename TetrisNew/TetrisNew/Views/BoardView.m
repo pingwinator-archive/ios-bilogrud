@@ -87,7 +87,7 @@
     CGContextSetStrokeColorWithColor(context, c.CGColor);
     
     for (CGFloat i = boardBorderWidth ; i <= rect.size.width; i += self.cellWidth) {
-        for (CGFloat j = 0; j <= amountCellY; j ++) {
+        for (CGFloat j = 0; j <= amountCellY; j++) {
         
         CGRect rect = CGRectMake(i, boardBorderWidth + (self.cellHeight)*j, self.cellWidth, self.cellHeight);
         
