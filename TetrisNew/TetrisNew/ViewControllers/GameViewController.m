@@ -266,6 +266,7 @@ typedef enum {
             NSString* hintText = [self.arrayTextforTutorial objectAtIndex:self.currentTutorialStep];
             UIButton* hintButton = [self.arrayButtonsForTutorial objectAtIndex:self.currentTutorialStep];
             CGRect targetFrame = hintButton.frame;
+            [self.tutorialView removeFromSuperview];
             self.tutorialView = [[[TutorialView alloc] initWithFrame:self.view.bounds withText:hintText andTargetFrame:targetFrame] autorelease];
             if(self.currentTutorialStep > 0) {
                 UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideGameHint)];
