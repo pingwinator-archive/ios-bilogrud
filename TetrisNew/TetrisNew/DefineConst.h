@@ -42,8 +42,8 @@ return _sharedObject;
 //buttons
 #define settingSizeButton 40
 #define manageSizeButton 45
-#define moveSizeButton 60
-#define rotateSizeButton 80
+#define moveSizeButton 70
+#define rotateSizeButton 90
 #define manageSizeButtoniPad 60
 #define moveSizeButtoniPad 80
 #define rotateSizeButtoniPad 120

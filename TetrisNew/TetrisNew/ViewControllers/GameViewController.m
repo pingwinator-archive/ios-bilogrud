@@ -351,16 +351,16 @@ typedef enum {
     //rotate button
     [self addRotateButton:CGRectMake(rectManage.origin.x + 170, rectManage.origin.y + 100, rotateSizeButton, rotateSizeButton) withImage:rotateButtonImage andHighlighted:highlightedImageRotate onView:self.view];
     
-    CGRect rectMove = CGRectMake(30, self.boardRect.size.height + 150, 100, 20);
+    CGRect rectMove = CGRectMake(30, self.boardRect.size.height + 140, 100, 20);
     
     //left button
     [self addLeftMoveButton:CGRectMake(rectMove.origin.x, rectMove.origin.y, moveSizeButton, moveSizeButton) withImage:imageButton onView:self.view];
     
     //down button
-    [self addDownMoveButton:CGRectMake(rectMove.origin.x + 40, rectMove.origin.y + 50, moveSizeButton, moveSizeButton) withImage:imageButton onView:self.view];
+    [self addDownMoveButton:CGRectMake(rectMove.origin.x + 50, rectMove.origin.y + 60, moveSizeButton, moveSizeButton) withImage:imageButton onView:self.view];
     
     //right button
-    [self addRightMoveButton:CGRectMake(rectMove.origin.x + 80, rectMove.origin.y, moveSizeButton, moveSizeButton) withImage:imageButton onView:self.view];
+    [self addRightMoveButton:CGRectMake(rectMove.origin.x + 100, rectMove.origin.y, moveSizeButton, moveSizeButton) withImage:imageButton onView:self.view];
 }
 
 - (void)addUIControlsForPhone
@@ -398,16 +398,16 @@ typedef enum {
     //rotate button
     [self addRotateButton:CGRectMake(rectManage.origin.x + 170, rectManage.origin.y + 65, rotateSizeButton, rotateSizeButton) withImage:rotateButtonImage andHighlighted:highlightedImageRotate onView:self.view];
   
-    CGRect rectMove = CGRectMake(30, self.boardRect.size.height + 103, 100, 20);
+    CGRect rectMove = CGRectMake(30, self.boardRect.size.height + 95, 100, 20);
     
     //left button
     [self addLeftMoveButton:CGRectMake(rectMove.origin.x, rectMove.origin.y, moveSizeButton, moveSizeButton) withImage:imageButton onView:self.view];
 
     //down button
-    [self addDownMoveButton:CGRectMake(rectMove.origin.x + 40, rectMove.origin.y + 40, moveSizeButton, moveSizeButton) withImage:imageButton onView:self.view];
+    [self addDownMoveButton:CGRectMake(rectMove.origin.x + 50, rectMove.origin.y + 40, moveSizeButton, moveSizeButton) withImage:imageButton onView:self.view];
     
     //right button
-    [self addRightMoveButton:CGRectMake(rectMove.origin.x + 80, rectMove.origin.y, moveSizeButton, moveSizeButton) withImage:imageButton onView:self.view];
+    [self addRightMoveButton:CGRectMake(rectMove.origin.x + 100, rectMove.origin.y, moveSizeButton, moveSizeButton) withImage:imageButton onView:self.view];
 }
 
 - (void)addUIControlsForiPad
