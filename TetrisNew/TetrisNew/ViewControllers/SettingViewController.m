@@ -149,12 +149,14 @@
 {
     NSUserDefaults* def = [NSUserDefaults standardUserDefaults];
     [def setBool:grid forKey:kShowGrid];
+    [def synchronize];
 }
 
 + (void)saveSettingColor:(BOOL)showColor
 {
     NSUserDefaults* def = [NSUserDefaults standardUserDefaults];
     [def setBool:showColor forKey:kShowColor];
+    [def synchronize];
 }
 
 + (void)saveSettingTutorial:(BOOL)showTutorial
@@ -163,6 +165,7 @@
     
     NSUserDefaults* def = [NSUserDefaults standardUserDefaults];
     [def setBool:showTutorial forKey:kShowTutorial];
+    [def synchronize];
 }
 
 + (BOOL)loadSettingGrid
