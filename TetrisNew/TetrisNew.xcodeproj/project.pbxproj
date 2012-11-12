@@ -54,6 +54,8 @@
 		6EC7BD8E1621E86900066F23 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EC7BD8D1621E86900066F23 /* QuartzCore.framework */; };
 		6EC7BD991621EEAD00066F23 /* BGView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC7BD981621EEAD00066F23 /* BGView.m */; };
 		6EC7BDA01622187D00066F23 /* TetrisShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EC7BD9F1622187D00066F23 /* TetrisShape.m */; };
+		6EDC489A16512D0700753F90 /* cell.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EDC489816512D0700753F90 /* cell.png */; };
+		6EDC489B16512D0700753F90 /* empty.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EDC489916512D0700753F90 /* empty.png */; };
 		6EEF2F1F1631850E00D38368 /* UIApplication+CheckVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EEF2F1E1631850E00D38368 /* UIApplication+CheckVersion.m */; };
 		6EEF2F4316352C1100D38368 /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EEF2F3B16352C1100D38368 /* button.png */; };
 		6EEF2F4416352C1100D38368 /* button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EEF2F3C16352C1100D38368 /* button@2x.png */; };
@@ -132,6 +134,8 @@
 		6EC7BD981621EEAD00066F23 /* BGView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BGView.m; sourceTree = "<group>"; };
 		6EC7BD9E1622187D00066F23 /* TetrisShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TetrisShape.h; sourceTree = "<group>"; };
 		6EC7BD9F1622187D00066F23 /* TetrisShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TetrisShape.m; sourceTree = "<group>"; };
+		6EDC489816512D0700753F90 /* cell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cell.png; sourceTree = "<group>"; };
+		6EDC489916512D0700753F90 /* empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = empty.png; sourceTree = "<group>"; };
 		6EEF2F1D1631850E00D38368 /* UIApplication+CheckVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+CheckVersion.h"; sourceTree = "<group>"; };
 		6EEF2F1E1631850E00D38368 /* UIApplication+CheckVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+CheckVersion.m"; sourceTree = "<group>"; };
 		6EEF2F3B16352C1100D38368 /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
@@ -350,6 +354,8 @@
 		6EC7BD6A1621E36900066F23 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6EDC489816512D0700753F90 /* cell.png */,
+				6EDC489916512D0700753F90 /* empty.png */,
 				6E16EB4A164782B3003CCA00 /* arrow.png */,
 				6E16EB4B164782B4003CCA00 /* arrow@2x.png */,
 				6E16EB441647746B003CCA00 /* cloud2.png */,
@@ -488,6 +494,8 @@
 				6E16EB451647746B003CCA00 /* cloud2.png in Resources */,
 				6E16EB4C164782B4003CCA00 /* arrow.png in Resources */,
 				6E16EB4D164782B4003CCA00 /* arrow@2x.png in Resources */,
+				6EDC489A16512D0700753F90 /* cell.png in Resources */,
+				6EDC489B16512D0700753F90 /* empty.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

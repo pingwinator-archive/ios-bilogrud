@@ -11,10 +11,17 @@
 @implementation Cell
 @synthesize point;
 @synthesize colorCell;
+
+
 - (void)dealloc
 {
     self.colorCell = nil;
     [super dealloc];
+}
+
+- (NSString*)description
+{
+    return [NSString stringWithFormat:@"cell (%f,%f) hash %d",self.point.x, self.point.y, [self hash] ];
 }
 
 - (id)initWithPoint:(CGPoint)_point
@@ -34,7 +41,20 @@
     }
     return self;
 }
+- (NSUInteger)hash
+{
+    return [[Cell cellToPointObj:self] hash];
+}
 
+- (BOOL)isEqual:(id)object
+{
+    if ([object isKindOfClass:[self class]]) {
+        Cell* cell = (Cell*)object;
+        return ([self hash] == [cell hash]);
+    } else {
+        return NO;
+    }
+}
 #pragma mark - Cell - Point
 
 + (NSValue*)cellToPointObj:(Cell*)cell
