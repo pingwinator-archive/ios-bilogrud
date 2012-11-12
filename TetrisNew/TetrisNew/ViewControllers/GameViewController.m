@@ -152,7 +152,8 @@ typedef enum {
     }
     [self.boardViewController showGrid: [SettingViewController loadSettingGrid]];
     [self.boardViewController showColor: [SettingViewController loadSettingColor]];
-    [self.boardViewController.boardView setNeedsDisplay];
+    [self.boardViewController.boardView reDraw];
+    //[self.boardViewController.boardView setNeedsDisplay];
     [self.boardViewController.nextShapeView setNeedsDisplay];
 }
 
@@ -174,7 +175,7 @@ typedef enum {
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-     DBLog(@"%f %f",self.view.frame.size.width, self.view.frame.size.height);
+    // DBLog(@"%f %f",self.view.frame.size.width, self.view.frame.size.height);
 }
 
 - (NSUInteger)supportedInterfaceOrientations
@@ -194,7 +195,6 @@ typedef enum {
 }
 
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
-    DBLog(@" preferred called");
     return UIInterfaceOrientationPortrait;
 }
 
@@ -897,7 +897,8 @@ typedef enum {
 
 - (void)reDrawBoard
 {
-   [self.boardViewController.boardView setNeedsDisplay];
+    [self.boardViewController.boardView reDraw];
+    //[self.boardViewController.boardView setNeedsDisplay];
 }
 
 #pragma mark - Rotate shape
@@ -909,11 +910,8 @@ typedef enum {
     }
     if (isStart) {
         [self.boardViewController rotateShape:rightDirectionRotate];
-        DBLog(@"5")
         [self reDrawBoard];
-        DBLog(@"6");
     }
-    DBLog(@"7");
 }
 
 #pragma mark - Timer 

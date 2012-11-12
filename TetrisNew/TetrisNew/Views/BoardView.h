@@ -18,5 +18,5 @@
 @property (assign, nonatomic) BOOL showGrid;
 @property (assign, nonatomic) BOOL showColor;
 - (id)initWithFrame:(CGRect)frame amountCellX:(NSInteger)cellX amountCellY:(NSInteger)cellY;
-
+- (void)reDraw;
 @end

@@ -16,6 +16,7 @@
 //with ImageView
 - (void)drawImageBoard;
 - (void)drawImageNextBoard;
+
 @property (assign, nonatomic) CGFloat cellDistance;
 @property (retain, nonatomic) NSIndexPath* cellIndexPath;
 @property (retain, nonatomic) NSMutableArray* cellImageViewCollection;
@@ -83,15 +84,26 @@
     return self;
 }
 
+
+- (void)reDraw
+{
+    if(self.nextShapeCellsForDrawing) {
+        [self drawImageNextBoard];
+    }
+    [self drawImageBoard];
+}
+
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
 {
     // Drawing code
-    if(self.nextShapeCellsForDrawing) {
-        [self drawImageNextBoard];
-    }
-    [self drawImageBoard];
+//    if(self.nextShapeCellsForDrawing) {
+//        [self drawImageNextBoard];
+//    }
+//    [self drawImageBoard];
+    
+    
 //    CGContextRef context = UIGraphicsGetCurrentContext();
 //    CGContextSetLineWidth(context, boardGridWidth);
 //
@@ -104,7 +116,7 @@
 //    }    
 //    CGContextStrokePath(context);
 }
-
+/*
 - (void)drawGrid:(CGRect)rect withContext:(CGContextRef)context
 {
     CGContextStrokePath(context);
@@ -180,7 +192,7 @@
         CGContextFillRect(context, filledRect);
     }
 }
-
+*/
 - (void)drawImageBoard
 {
     if([self.prevBoardState count]) {
@@ -188,21 +200,20 @@
         [diffPrev minusSet:self.boardCellsForDrawing];
         NSLog(@"diff Prev %d", [diffPrev count]);
 //        
-        for (Cell* cell in diffPrev) {
-            UIImageView* imageViewCurCell = [self cellImageViewForPoint:cell.point];
-            if(imageViewCurCell) {
-                NSLog(@"(%f, %f) position %d", cell.point.x, cell.point.y, [self.cellImageViewCollection indexOfObject:imageViewCurCell]);
-                imageViewCurCell.highlighted = NO;
-            }
-        }
+//        for (Cell* cell in diffPrev) {
+//            UIImageView* imageViewCurCell = [self cellImageViewForPoint:cell.point];
+//            if(imageViewCurCell) {
+//               // NSLog(@"(%f, %f) position %d", cell.point.x, cell.point.y, [self.cellImageViewCollection indexOfObject:imageViewCurCell]);
+//                imageViewCurCell.highlighted = NO;
+//            }
+//        }
 
-//        NSMutableSet* diff = [NSMutableSet setWithSet:self.prevBoardState];
-//        [diff minusSet:self.boardCellsForDrawing];
         
+ 
         NSMutableSet* diff = [NSMutableSet setWithSet:self.boardCellsForDrawing];
         [diff minusSet:self.prevBoardState];
 
-        NSLog(@"diff %@", [diff allObjects]);
+      //  NSLog(@"diff %@", [diff allObjects]);
         for (Cell* cell in diff) {
             UIImageView* imageViewCurCell = [self cellImageViewForPoint:cell.point];
             if(imageViewCurCell) {
@@ -212,11 +223,7 @@
     }
     for (Cell* cell in self.boardCellsForDrawing) {
         for (UIImageView* cellImageView in self.cellImageViewCollection) {
-           
-//            if(boardBorderWidth + cell.point.x * self.cellWidth == cellImageView.frame.origin.x &&
-//               boardBorderWidth + cell.point.y * self.cellHeight == cellImageView.frame.origin.y) {
-//                cellImageView.highlighted = YES;
-//            }
+
         }
     }
     self.prevBoardState = self.boardCellsForDrawing;

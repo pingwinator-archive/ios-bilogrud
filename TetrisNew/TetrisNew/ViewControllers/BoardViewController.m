@@ -276,7 +276,8 @@
     } else {
         [self moveShape:downDirectionMove];
     }
-    [self.boardView setNeedsDisplay];
+    [self.boardView reDraw];
+    //[self.boardView setNeedsDisplay];
 }
 
 - (void)startGameTimer
