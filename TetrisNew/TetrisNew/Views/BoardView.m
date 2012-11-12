@@ -88,7 +88,7 @@
         
         CGRect rect = CGRectMake(i, boardBorderWidth + (self.cellHeight)*j, self.cellWidth, self.cellHeight);
         
-        CGContextSetLineWidth(context, cellGridWidth);
+            CGContextSetLineWidth(context, cellGridWidth);
         
         CGContextAddRect(context, rect);
         CGContextStrokePath(context);
@@ -108,7 +108,7 @@
     CGContextStrokePath(context);
      for (Cell* cell in self.boardCellsForDrawing) {
         UIColor* shapeColor = cell.colorCell;
-         CGContextSetStrokeColorWithColor(context, [UIColor blackColor].CGColor);
+        CGContextSetStrokeColorWithColor(context, [UIColor blackColor].CGColor);
   
         CGRect rect = CGRectMake(boardBorderWidth + (self.cellWidth) * cell.point.x, boardBorderWidth + (self.cellHeight) * cell.point.y, self.cellWidth, self.cellHeight);
        

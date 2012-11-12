@@ -138,7 +138,6 @@
 - (void)changeTutorialToggle
 {
     self.showTutorial = !self.showTutorial;
-    NSLog(@"show tut %@", (self.showTutorial)?@"yes":@"no");
     [SettingViewController saveSettingTutorial:self.showTutorial];
     if(self.competitionBlock) {
         self.competitionBlock();
@@ -161,8 +160,6 @@
 
 + (void)saveSettingTutorial:(BOOL)showTutorial
 {
-    NSLog(@"show tut %@", (showTutorial)?@"yes":@"no");
-    
     NSUserDefaults* def = [NSUserDefaults standardUserDefaults];
     [def setBool:showTutorial forKey:kShowTutorial];
     [def synchronize];

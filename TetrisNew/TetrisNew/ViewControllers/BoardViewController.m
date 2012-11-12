@@ -194,10 +194,14 @@
 
 - (void)rotateShape:(DirectionRotate) directionRotate
 {
+    NSLog(@"1");
     NSMutableSet* tempSet = [NSMutableSet setWithSet:[self.currentShape getRotatedShape:directionRotate]];
+    DBLog(@"2");
     if([self validationMove:tempSet]) {
         [self.currentShape deepRotate:directionRotate];
+        DBLog(@"3");
     }
+    DBLog(@"4");
 }
 
 - (void)invokeDeleteLineDelegate
@@ -216,7 +220,6 @@
         self.gameTimerInterval *= 0.95f;
         [self stopGameTimer];
         [self startGameTimer];
-        NSLog(@"%f", self.gameTimerInterval);
     }
     
     NSMutableSet* tempSet = [NSMutableSet setWithSet:[Cell cellsToPoints:boardPoints]];

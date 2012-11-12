@@ -32,7 +32,7 @@ return _sharedObject;
 //tetris const
 #define boardBorderWidth 2
 #define boardGridWidth 1
-#define cellGridWidth 2
+#define cellGridWidth 2.5
 
 #define offSetBorderThin 3
 #define borderThin 2
@@ -66,11 +66,12 @@ return _sharedObject;
 #define speedLabelHeigth 50
 #define labelPlayTextWidthIPad 45
 #define labelPlayTextWidthIPhone 35
-#define labelPlayTextHeigth 40
+#define labelPlayTextHeigth 35
 #define labelManageTextWidth 80
 #define labelMoveTextWidth 60
 #define labelRotateTextWidth 60
-#define labelTextHeigth 20
+#define labelManageTextHeigth 20
+#define labelTextHeigth 15
 #define labelScoreWidth 50
 #define labelScoreHeigth 50
 #define labelManageOffset 15

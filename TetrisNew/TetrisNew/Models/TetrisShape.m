@@ -203,7 +203,6 @@
             tempNumbState = 0;
         }
     }
-    NSLog(@"%d", tempNumbState);
     if(isDeepRotate) {
         self.numbState = tempNumbState;
     }

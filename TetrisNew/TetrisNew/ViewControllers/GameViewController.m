@@ -174,7 +174,7 @@ typedef enum {
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-     NSLog(@"%f %f",self.view.frame.size.width, self.view.frame.size.height);
+     DBLog(@"%f %f",self.view.frame.size.width, self.view.frame.size.height);
 }
 
 - (NSUInteger)supportedInterfaceOrientations
@@ -503,7 +503,7 @@ typedef enum {
     [view addSubview:self.resetButton];
     
     //reset label
-    CGRect rectResetLabel = CGRectMake(CGRectGetMidX(rect) - labelManageTextWidth/2 , rect.origin.y + rect.size.height - labelOffsetHeight, labelManageTextWidth, labelTextHeigth);
+    CGRect rectResetLabel = CGRectMake(CGRectGetMidX(rect) - labelManageTextWidth/2 , rect.origin.y + rect.size.height - labelOffsetHeight, labelManageTextWidth, labelManageTextHeigth);
     self.resetLabel = [[[UILabel alloc] initWithFrame:rectResetLabel] autorelease];
     self.resetLabel.text = NSLocalizedString(@"RESET", @"");
     self.resetLabel.textAlignment = UITextAlignmentCenter;
@@ -527,7 +527,7 @@ typedef enum {
     [view addSubview:self.soundButton];
     
     //sound label
-    CGRect rectSoundLabel = CGRectMake(CGRectGetMidX(rect) - labelManageTextWidth/2, rect.origin.y + rect.size.height - labelOffsetHeight, labelManageTextWidth, labelTextHeigth);
+    CGRect rectSoundLabel = CGRectMake(CGRectGetMidX(rect) - labelManageTextWidth/2, rect.origin.y + rect.size.height - labelOffsetHeight, labelManageTextWidth, labelManageTextHeigth);
     self.soundLabel = [[[UILabel alloc] initWithFrame:rectSoundLabel] autorelease];
     self.soundLabel.text = NSLocalizedString(@"SOUND", @"");
     self.soundLabel.textAlignment = NSTextAlignmentCenter;
@@ -550,7 +550,7 @@ typedef enum {
     [view addSubview:self.settingButton];
     
     //setting label 
-    CGRect rectSetLabel = CGRectMake(CGRectGetMidX(rect) - labelManageTextWidth/2, rect.origin.y + rect.size.height - labelOffsetHeight, labelManageTextWidth, labelTextHeigth);
+    CGRect rectSetLabel = CGRectMake(CGRectGetMidX(rect) - labelManageTextWidth/2, rect.origin.y + rect.size.height - labelOffsetHeight, labelManageTextWidth, labelManageTextHeigth);
     self.settingLabel = [[[UILabel alloc] initWithFrame:rectSetLabel] autorelease];
     self.settingLabel.text = NSLocalizedString(@"SETTINGS", @"");
     self.settingLabel.textAlignment = UITextAlignmentCenter;
@@ -681,7 +681,7 @@ typedef enum {
     self.rotateButton.frame = rect;
     [self.rotateButton setImage:imageButton forState:UIControlStateNormal];
     [self.rotateButton setImage:highlightedImage forState:UIControlStateHighlighted];
-    [self.rotateButton addTarget:self action:@selector(rotateUnPressed) forControlEvents:UIControlEventTouchUpInside];
+    [self.rotateButton addTarget:self action:@selector(rotateUnPressed) forControlEvents:UIControlEventTouchDown];//UpInside];
     [view addSubview:self.rotateButton];
     
     //rotate label
@@ -909,8 +909,11 @@ typedef enum {
     }
     if (isStart) {
         [self.boardViewController rotateShape:rightDirectionRotate];
+        DBLog(@"5")
         [self reDrawBoard];
+        DBLog(@"6");
     }
+    DBLog(@"7");
 }
 
 #pragma mark - Timer 
@@ -925,7 +928,7 @@ typedef enum {
 - (void)deleteLine:(NSInteger)amount
 {
     self.lineLabel.text = [NSString stringWithFormat:@"%d", amount];
-    NSLog(@"amount  %d", amount);
+    DBLog(@"amount  %d", amount);
 }
 
 #pragma mark - GameOverDelegate Methods

@@ -28,7 +28,6 @@
 
 - (void)setFrame:(CGRect)frame
 {
-    NSLog(@"hhh %f",frame.size.height);
     [super setFrame:frame];
 }
 
