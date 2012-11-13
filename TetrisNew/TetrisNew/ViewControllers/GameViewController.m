@@ -152,9 +152,6 @@ typedef enum {
     }
     [self.boardViewController showGrid: [SettingViewController loadSettingGrid]];
     [self.boardViewController showColor: [SettingViewController loadSettingColor]];
-    [self.boardViewController.boardView reDraw];
-    //[self.boardViewController.boardView setNeedsDisplay];
-    [self.boardViewController.nextShapeView setNeedsDisplay];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
@@ -175,7 +172,7 @@ typedef enum {
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-    // DBLog(@"%f %f",self.view.frame.size.width, self.view.frame.size.height);
+     DBLog(@"%f %f",self.view.frame.size.width, self.view.frame.size.height);
 }
 
 - (NSUInteger)supportedInterfaceOrientations
@@ -734,9 +731,6 @@ typedef enum {
                 [self.tutorialView removeFromSuperview];
                 self.tutorialView = nil;
             }
-
-            [self.boardViewController.boardView setNeedsDisplay];
-            [self.boardViewController.nextShapeView setNeedsDisplay];
         };
         settingViewController.contentSizeForViewInPopover = CGSizeMake(340, 130);
         [UIPopoverManager showControllerInPopover:settingViewController inView:self.view forTarget:self.settingButton dismissTarget:self dismissSelector:@selector(popoverControllerDidDismissPopover:)];
@@ -809,7 +803,7 @@ typedef enum {
         [self.boardViewController stopGameTimer];
         [self.boardViewController startGameTimer];
         self.firstStart = YES;
-        self.isStart = NO;
+        self.isStart = NO; 
         [self play];
     }
 }
@@ -849,7 +843,7 @@ typedef enum {
     if(isStart) {
         [self.boardViewController moveShape:rightDirectionMove];
         [self performSelector:@selector(moveRightPressed) withObject:nil afterDelay:delayForButtonPressed];
-        [self reDrawBoard];
+     
     }
 }
 
@@ -866,7 +860,6 @@ typedef enum {
     if(isStart){
         [self.boardViewController moveShape:leftDirectionMove];
         [self performSelector:@selector(moveLeftPressed) withObject:nil afterDelay:delayForButtonPressed];
-        [self reDrawBoard];
     }
 }
 
@@ -883,7 +876,6 @@ typedef enum {
     if(isStart) {
         [self.boardViewController moveShape:downDirectionMove];
         [self performSelector:@selector(moveDownPressed) withObject:nil afterDelay:delayForButtonPressed];
-        [self reDrawBoard];
     }
 }
 
@@ -895,11 +887,6 @@ typedef enum {
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(moveDownPressed) object:nil];
 }
 
-- (void)reDrawBoard
-{
-    [self.boardViewController.boardView reDraw];
-    //[self.boardViewController.boardView setNeedsDisplay];
-}
 
 #pragma mark - Rotate shape
 
@@ -910,7 +897,6 @@ typedef enum {
     }
     if (isStart) {
         [self.boardViewController rotateShape:rightDirectionRotate];
-        [self reDrawBoard];
     }
 }
 

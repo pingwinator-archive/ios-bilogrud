@@ -45,12 +45,12 @@
 {
     return [[Cell cellToPointObj:self] hash];
 }
-
+//
 - (BOOL)isEqual:(id)object
 {
     if ([object isKindOfClass:[self class]]) {
         Cell* cell = (Cell*)object;
-        return ([self hash] == [cell hash]);
+        return [[Cell cellToPointObj:self] isEqual:[Cell cellToPointObj:cell]];
     } else {
         return NO;
     }

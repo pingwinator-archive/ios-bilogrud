@@ -37,6 +37,7 @@
 @synthesize gameTimer;
 @synthesize lines;
 @synthesize gameTimerInterval;
+
 - (void)setBoardCells:(NSMutableSet*)_boardCells
 {
     [boardCells release];
@@ -104,10 +105,9 @@
 
 - (void)updateBoard
 {
-    NSMutableSet* cellsCurrentShape = [[[NSMutableSet alloc] initWithSet:[Cell pointsToCells:[self.currentShape getShapePoints] withColor:self.currentShape.shapeColor]] autorelease];
-    self.boardCells = [[[NSMutableSet alloc] initWithSet:cellsCurrentShape] autorelease];
-    [self.boardCells unionSet:cellsCurrentShape];
-    [self.boardCells unionSet:fallenShapeSet];
+    NSMutableSet* cellsCurrentBoard = [[[NSMutableSet alloc] initWithSet:[Cell pointsToCells:[self.currentShape getShapePoints] withColor:self.currentShape.shapeColor]] autorelease];
+    [cellsCurrentBoard unionSet:self.fallenShapeSet];
+    self.boardCells = cellsCurrentBoard;
 }
 
 -(void)updateNextShape
@@ -118,21 +118,20 @@
     [self stopGameTimer];
     [self startGameTimer];
     self.startPointNextShape = CGPointMake(1, 1);
-    [self.nextShapeView setNeedsDisplay];
 }
 
 - (void)resetBoard
 {
-    [self.nextShapeCells removeAllObjects];
-    [self.boardCells removeAllObjects];
+    self.boardCells = [NSMutableSet set];
+    self.nextShapeCells = [NSMutableSet set];
     [self.fallenShapeSet removeAllObjects];
+  
     self.lines = 0;
     self.gameTimerInterval = 1.0f;
     [self invokeDeleteLineDelegate];
    
     [self stopGameTimer];
-    [self.boardView setNeedsDisplay];
-    [self.nextShapeView setNeedsDisplay];
+
     self.currentShape = nil;
     self.gameOver = NO;
 }
@@ -194,11 +193,11 @@
 
 - (void)rotateShape:(DirectionRotate) directionRotate
 {
-    NSLog(@"1");
     NSMutableSet* tempSet = [NSMutableSet setWithSet:[self.currentShape getRotatedShape:directionRotate]];
     DBLog(@"2");
     if([self validationMove:tempSet]) {
         [self.currentShape deepRotate:directionRotate];
+         [self updateBoard];
         DBLog(@"3");
     }
     DBLog(@"4");
@@ -276,8 +275,6 @@
     } else {
         [self moveShape:downDirectionMove];
     }
-    [self.boardView reDraw];
-    //[self.boardView setNeedsDisplay];
 }
 
 - (void)startGameTimer
