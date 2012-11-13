@@ -7,7 +7,6 @@
 //
 
 #import "GameViewController.h"
-#import "SettingViewController.h"
 #import "BoardView.h"
 #import "BGView.h"
 #import "UIViewController+Deprecated.h"
@@ -16,7 +15,7 @@
 #import "UIPopoverManager.h"
 #import "TutorialView.h"
 #import <AVFoundation/AVFoundation.h>
-
+#import "SettingViewController.h"
 
 typedef enum {
     TutorialStepStart = 0,
@@ -30,7 +29,6 @@ typedef enum {
 @interface GameViewController ()<AVAudioPlayerDelegate>
 @property (retain, nonatomic) BoardViewController* boardViewController;
 @property (retain, nonatomic) BoardView* nextShapeView;
-@property (retain, nonatomic) UIButton* settingButton;
 @property (retain, nonatomic) UIButton* playButton;
 @property (retain, nonatomic) UIButton* resetButton;
 @property (retain, nonatomic) UIButton* leftButton;
@@ -46,13 +44,11 @@ typedef enum {
 @property (retain, nonatomic) UILabel* lineLabel;
 @property (retain, nonatomic) UILabel* resetLabel;
 @property (retain, nonatomic) UILabel* soundLabel;
-@property (retain, nonatomic) UILabel* settingLabel;
 @property (retain, nonatomic) BGView* bgView;
 @property (retain, nonatomic) AVAudioPlayer* avSound;
 
 @property (assign, nonatomic) BOOL firstStart;
 @property (assign, nonatomic) CGRect boardRect;
-@property (assign, nonatomic) BOOL settingIsVisible;
 
 @property (retain, nonatomic) UIImageView* pauseImageView;
 @property (retain, nonatomic) UIImageView* soundImageView;
@@ -94,12 +90,9 @@ typedef enum {
 @synthesize resetLabel;
 @synthesize lineLabel;
 @synthesize soundLabel;
-@synthesize settingLabel;
 @synthesize isStart;
 @synthesize firstStart;
 @synthesize boardRect;
-@synthesize settingButton;
-@synthesize settingIsVisible;
 
 @synthesize bgView;
 @synthesize avSound;
@@ -123,12 +116,10 @@ typedef enum {
     self.leftButton = nil;
     self.resetButton = nil;
     self.rotateButton = nil;
-    self.settingButton = nil;
     self.soundButton = nil;
     self.playLabel = nil;
     self.leftLabel = nil;
     self.downLabel = nil;
-    self.settingLabel = nil;
     self.rightLabel = nil;
     self.rotateLabel = nil;
     self.soundLabel = nil;
@@ -150,8 +141,6 @@ typedef enum {
     if(self.isStart) {
         [self continueGame];
     }
-    [self.boardViewController showGrid: [SettingViewController loadSettingGrid]];
-    [self.boardViewController showColor: [SettingViewController loadSettingColor]];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
@@ -199,7 +188,6 @@ typedef enum {
 {
     [super viewDidLoad];
     self.firstStart = YES;
-    self.settingIsVisible = NO;
     self.gameCount = 0;
     self.bgView = [[[BGView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)] autorelease];
     self.bgView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin;
@@ -338,13 +326,10 @@ typedef enum {
     [self addPlayButton:CGRectMake(rectManage.origin.x , rectManage.origin.y, manageSizeButton, manageSizeButton) withImage:imageButton andHighlighted:highlightedImage onView:self.view];
     
     //reset button
-    [self addResetButton:CGRectMake(rectManage.origin.x + 60, rectManage.origin.y , manageSizeButton, manageSizeButton) withImage:imageButton onView:self.view];
+    [self addResetButton:CGRectMake(rectManage.origin.x + 90, rectManage.origin.y , manageSizeButton, manageSizeButton) withImage:imageButton onView:self.view];
     
     //sound button
-    [self addSoundButton:CGRectMake(rectManage.origin.x + 120, rectManage.origin.y , manageSizeButton, manageSizeButton) withImage:imageButton onView:self.view];
-    
-    //setting button
-    [self addSettingButton:CGRectMake(rectManage.origin.x + 180, rectManage.origin.y , manageSizeButton, manageSizeButton) withImage:imageButton onView:self.view];
+    [self addSoundButton:CGRectMake(rectManage.origin.x + 180, rectManage.origin.y , manageSizeButton, manageSizeButton) withImage:imageButton onView:self.view];
     
     //rotate button
     [self addRotateButton:CGRectMake(rectManage.origin.x + 170, rectManage.origin.y + 100, rotateSizeButton, rotateSizeButton) withImage:rotateButtonImage andHighlighted:highlightedImageRotate onView:self.view];
@@ -385,14 +370,11 @@ typedef enum {
     [self addPlayButton:CGRectMake(rectManage.origin.x , rectManage.origin.y, manageSizeButton, manageSizeButton) withImage:imageButton andHighlighted:highlightedImage onView:self.view];
     
     //reset button
-    [self addResetButton:CGRectMake(rectManage.origin.x + 60, rectManage.origin.y , manageSizeButton, manageSizeButton) withImage:imageButton onView:self.view];
+    [self addResetButton:CGRectMake(rectManage.origin.x + 90, rectManage.origin.y , manageSizeButton, manageSizeButton) withImage:imageButton onView:self.view];
     
     //sound button
-    [self addSoundButton:CGRectMake(rectManage.origin.x + 120, rectManage.origin.y , manageSizeButton, manageSizeButton) withImage:imageButton onView:self.view];
-
-    //setting button
-    [self addSettingButton:CGRectMake(rectManage.origin.x + 180, rectManage.origin.y , manageSizeButton, manageSizeButton) withImage:imageButton onView:self.view];
-    
+    [self addSoundButton:CGRectMake(rectManage.origin.x + 180, rectManage.origin.y , manageSizeButton, manageSizeButton) withImage:imageButton onView:self.view];
+ 
     //rotate button
     [self addRotateButton:CGRectMake(rectManage.origin.x + 170, rectManage.origin.y + 65, rotateSizeButton, rotateSizeButton) withImage:rotateButtonImage andHighlighted:highlightedImageRotate onView:self.view];
   
@@ -431,13 +413,10 @@ typedef enum {
     [self addPlayButton:CGRectMake(rectManage.origin.x , rectManage.origin.y, manageSizeButtoniPad, manageSizeButtoniPad) withImage:imageButton andHighlighted:highlightedImage onView:self.view];
     
     //reset button
-    [self addResetButton:CGRectMake(rectManage.origin.x + 100, rectManage.origin.y , manageSizeButtoniPad, manageSizeButtoniPad) withImage:imageButton onView:self.view];
+    [self addResetButton:CGRectMake(rectManage.origin.x + 150, rectManage.origin.y , manageSizeButtoniPad, manageSizeButtoniPad) withImage:imageButton onView:self.view];
     
     //sound button
-    [self addSoundButton:CGRectMake(rectManage.origin.x + 200, rectManage.origin.y , manageSizeButtoniPad, manageSizeButtoniPad) withImage:imageButton onView:self.view];
-    
-    //setting button
-    [self addSettingButton:CGRectMake(rectManage.origin.x + 300, rectManage.origin.y , manageSizeButtoniPad, manageSizeButtoniPad) withImage:imageButton onView:self.view];
+    [self addSoundButton:CGRectMake(rectManage.origin.x + 300, rectManage.origin.y , manageSizeButtoniPad, manageSizeButtoniPad) withImage:imageButton onView:self.view];
     
     //rotate button
     [self addRotateButton:CGRectMake(rectManage.origin.x + 300, rectManage.origin.y + 100, rotateSizeButtoniPad, rotateSizeButtoniPad) withImage:rotateButtonImage andHighlighted:highlightedImageRotate onView:self.view];
@@ -536,30 +515,6 @@ typedef enum {
     self.soundLabel.backgroundColor = [UIColor clearColor];
     self.soundLabel.textColor = [UIColor blackColor];
     [view addSubview:self.soundLabel];
-}
-
-- (void)addSettingButton:(CGRect)rect withImage:(UIImage*)imageButton onView:(UIView*)view
-{
-    self.settingButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.settingButton.frame = rect;
-    [self.settingButton setImage:imageButton forState:UIControlStateNormal];
-    [self.settingButton addTarget:self action:@selector(showSetting) forControlEvents:UIControlEventTouchUpInside];
-    [view addSubview:self.settingButton];
-    
-    //setting label 
-    CGRect rectSetLabel = CGRectMake(CGRectGetMidX(rect) - labelManageTextWidth/2, rect.origin.y + rect.size.height - labelOffsetHeight, labelManageTextWidth, labelManageTextHeigth);
-    self.settingLabel = [[[UILabel alloc] initWithFrame:rectSetLabel] autorelease];
-    self.settingLabel.text = NSLocalizedString(@"SETTINGS", @"");
-    self.settingLabel.textAlignment = UITextAlignmentCenter;
-    if(isiPhone) {
-        self.settingLabel.font = textButtonFont;
-    } else {
-        self.settingLabel.font = textButtonFontIPad;
-    }
-
-    self.settingLabel.backgroundColor = [UIColor clearColor];
-    self.settingLabel.textColor = [UIColor blackColor];
-    [view addSubview:self.settingLabel];
 }
 
 - (void)addScoreLabel:(CGRect)rect onView:(UIView*)view
@@ -703,38 +658,6 @@ typedef enum {
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)showSetting
-{
-    SettingViewController* settingViewController = [[[SettingViewController alloc] init] autorelease];
-    if(isStart) {
-        [self pauseGame];
-    }
-    if(isiPhone) {
-        if(self.showTutorial) {
-            [self performSelector:@selector(addGameHint) withObject:nil afterDelay:delayForHintStart];
-        } else {
-            [self.tutorialView removeFromSuperview];
-            self.tutorialView = nil;
-        }
-        [self deprecatedPresentModalViewController:settingViewController animated:YES];
-    } else {
-        settingViewController.competitionBlock = ^(void) {
-            [self.boardViewController showGrid: [SettingViewController loadSettingGrid]];
-            [self.boardViewController showColor: [SettingViewController loadSettingColor]];
-    
-            if(self.showTutorial) {
-                [self performSelector:@selector(addGameHint) withObject:nil afterDelay:delayForHintStart];
-
-            } else {
-                [self.tutorialView removeFromSuperview];
-                self.tutorialView = nil;
-            }
-        };
-        settingViewController.contentSizeForViewInPopover = CGSizeMake(340, 130);
-        [UIPopoverManager showControllerInPopover:settingViewController inView:self.view forTarget:self.settingButton dismissTarget:self dismissSelector:@selector(popoverControllerDidDismissPopover:)];
-    }
 }
 
 - (void)pauseGame
