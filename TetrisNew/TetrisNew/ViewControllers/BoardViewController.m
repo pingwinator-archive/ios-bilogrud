@@ -199,6 +199,7 @@
     DBLog(@"2");
     if([self validationMove:tempSet]) {
         [self.currentShape deepRotate:directionRotate];
+        [self updateBoard];
         DBLog(@"3");
     }
     DBLog(@"4");
