@@ -16,7 +16,7 @@
 #import "TutorialView.h"
 #import <AVFoundation/AVFoundation.h>
 #import "SettingViewController.h"
-
+#import "StatisticManager.h"
 typedef enum {
     TutorialStepStart = 0,
     TutorialStepLeft,
@@ -662,6 +662,7 @@ typedef enum {
 
 - (void)pauseGame
 {
+    [StatisticManager logMessage:pauseGameMessage];
     [self pauseGameTimer];
     [self.boardViewController.gameTimer invalidate];
      self.pauseImageView.hidden = NO;
@@ -704,9 +705,9 @@ typedef enum {
                 //score label
                 [self addScoreLabel:CGRectMake(self.boardRect.size.width + self.boardRect.origin.x + 10, 20, scoreLabelWidth, scoreLabelHeigth) onView:self.view];
             }
-           [Flurry logEvent:@"StartGame"];
+            [StatisticManager logMessage:startGameMessage];
            
-            [self.boardViewController start];
+           [self.boardViewController start];
             self.firstStart = NO;
             self.boardViewController.delegate = self;
             self.boardViewController.resetGameDelegate = self;
@@ -721,7 +722,7 @@ typedef enum {
 - (void)reset
 {
     if (isStart) {
-        
+        [StatisticManager logMessage:resetGameMessage];
         [self.boardViewController resetBoard];
         [self.boardViewController stopGameTimer];
         [self.boardViewController startGameTimer];
@@ -798,7 +799,7 @@ typedef enum {
 {
     if(isStart) {
         [self.boardViewController moveShape:downDirectionMove];
-        [self performSelector:@selector(moveDownPressed) withObject:nil afterDelay:delayForButtonPressed];
+        [self performSelector:@selector(moveDownPressed) withObject:nil afterDelay:delayForDownButtonPressed];
     }
 }
 
@@ -809,7 +810,6 @@ typedef enum {
     }
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(moveDownPressed) object:nil];
 }
-
 
 #pragma mark - Rotate shape
 
@@ -842,6 +842,7 @@ typedef enum {
 
 - (void)newGame
 {
+    [StatisticManager logMessage:startGameMessage];
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
     [self reset];
 }

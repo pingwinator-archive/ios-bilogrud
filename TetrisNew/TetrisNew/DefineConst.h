@@ -84,7 +84,8 @@ return _sharedObject;
 #define PointToObj(point) [NSValue valueWithCGPoint:point]
 #define PointFromObj(value) [value CGPointValue]
 
-#define delayForButtonPressed 0.3
+#define delayForButtonPressed 0.2
+#define delayForDownButtonPressed 0.1
 
 #define kShowGrid @"grid"
 #define kShowColor @"showColorShape"
@@ -94,8 +95,6 @@ return _sharedObject;
 #define delayForHintStart 1
 #define delayForHintLong 5.0
 #define delayForAnimation 0.5
-
-#define flurryKey @"STPJ6GDXJCNGWT7FR2JH"
 
 typedef enum {
     downDirectionMove,

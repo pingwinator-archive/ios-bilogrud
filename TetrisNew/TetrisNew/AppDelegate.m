@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "GameViewController.h"
+#import "StatisticManager.h"
+
 @implementation AppDelegate
 
 - (void)dealloc
@@ -19,7 +21,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [Flurry startSession: flurryKey];
+   [StatisticManager sharedInstance];
+
     NSDictionary* appDefaults = [[[NSDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"defaults" ofType:@"plist"]] autorelease];
     [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
@@ -57,7 +60,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    NSLog(@"applicationDidBecomeActive");
+    DBLog(@"applicationDidBecomeActive");
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     if(self.viewController.isStart) {
           [self.viewController continueGame];

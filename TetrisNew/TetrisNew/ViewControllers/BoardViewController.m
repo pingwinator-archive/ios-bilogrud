@@ -10,6 +10,7 @@
 #import "BoardView.h"
 #import "TetrisShape.h"
 #import "Cell.h"
+#import "StatisticManager.h"
 @interface BoardViewController ()
 @property (retain, nonatomic) TetrisShape* nextShape;
 @property (retain, nonatomic) TetrisShape* currentShape;
@@ -216,7 +217,7 @@
     self.lines++;
     [self invokeDeleteLineDelegate];
     if(self.lines % 2 == 0) {
-        self.gameTimerInterval *= 0.95f;
+        self.gameTimerInterval *= 0.91f;
         [self stopGameTimer];
         [self startGameTimer];
     }
@@ -271,6 +272,8 @@
 - (void)timerTick
 {
     if(self.gameOver) {
+        [StatisticManager logMessage:gameOverMessage];
+        [StatisticManager sendScoreGame:self.lines];
         [self stopGameTimer];
     } else {
         [self moveShape:downDirectionMove];

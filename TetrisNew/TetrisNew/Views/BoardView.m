@@ -28,6 +28,7 @@
 @synthesize cellIndexPath;
 @synthesize cellImageViewCollection;
 @synthesize prevBoardState;
+
 - (void)dealloc
 {
     self.boardCellsForDrawing = nil;
@@ -61,7 +62,6 @@
         self.cellDistance = self.cellWidth / 10;
         self.cellImageViewCollection = [NSMutableArray array];
         self.prevBoardState = [NSMutableSet set];
-        
         
         for (int i = 0; i < self.amountCellY; i++) {
             for (int j = 0; j < self.amountCellX; j++) {

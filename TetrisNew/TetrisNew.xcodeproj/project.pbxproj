@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E0E44C21652B77E0055DD7E /* StatisticManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E0E44C11652B77E0055DD7E /* StatisticManager.m */; };
 		6E13589416393C9000953402 /* Tetris.caf in Resources */ = {isa = PBXBuildFile; fileRef = 6E13589316393C8F00953402 /* Tetris.caf */; };
 		6E13F6CA1622BCE4005BF66D /* BoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E13F6C91622BCE4005BF66D /* BoardViewController.m */; };
 		6E13F6CE1622CF1C005BF66D /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E13F6CD1622CF1C005BF66D /* Cell.m */; };
@@ -71,6 +72,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6E0E44C01652B77E0055DD7E /* StatisticManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisticManager.h; sourceTree = "<group>"; };
+		6E0E44C11652B77E0055DD7E /* StatisticManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisticManager.m; sourceTree = "<group>"; };
 		6E13589316393C8F00953402 /* Tetris.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Tetris.caf; sourceTree = "<group>"; };
 		6E13F6C81622BCE4005BF66D /* BoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardViewController.h; sourceTree = "<group>"; };
 		6E13F6C91622BCE4005BF66D /* BoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoardViewController.m; sourceTree = "<group>"; };
@@ -172,6 +175,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6E0E44BE1652B6950055DD7E /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				6E0E44C01652B77E0055DD7E /* StatisticManager.h */,
+				6E0E44C11652B77E0055DD7E /* StatisticManager.m */,
+			);
+			name = Managers;
+			path = TetrisNew/Managers;
+			sourceTree = "<group>";
+		};
 		6E2AEE78162724BE000D9561 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
@@ -225,6 +238,7 @@
 		6EC7BD1A1621E23C00066F23 = {
 			isa = PBXGroup;
 			children = (
+				6E0E44BE1652B6950055DD7E /* Managers */,
 				6E9E3A7E16259FE20082C51B /* Categories */,
 				6EC7BD631621E36900066F23 /* ViewControllers */,
 				6EC7BD661621E36900066F23 /* Externals */,
@@ -520,6 +534,7 @@
 				6EEF2F1F1631850E00D38368 /* UIApplication+CheckVersion.m in Sources */,
 				6E55181D1636854B00B00424 /* UIPopoverManager.m in Sources */,
 				6E28D51016455BCB001502CA /* TutorialView.m in Sources */,
+				6E0E44C21652B77E0055DD7E /* StatisticManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
