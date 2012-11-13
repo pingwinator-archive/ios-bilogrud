@@ -909,11 +909,8 @@ typedef enum {
     }
     if (isStart) {
         [self.boardViewController rotateShape:rightDirectionRotate];
-        DBLog(@"5")
         [self reDrawBoard];
-        DBLog(@"6");
     }
-    DBLog(@"7");
 }
 
 #pragma mark - Timer 

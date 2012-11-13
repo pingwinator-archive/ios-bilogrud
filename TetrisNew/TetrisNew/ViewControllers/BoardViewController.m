@@ -194,15 +194,11 @@
 
 - (void)rotateShape:(DirectionRotate) directionRotate
 {
-    NSLog(@"1");
     NSMutableSet* tempSet = [NSMutableSet setWithSet:[self.currentShape getRotatedShape:directionRotate]];
-    DBLog(@"2");
     if([self validationMove:tempSet]) {
         [self.currentShape deepRotate:directionRotate];
         [self updateBoard];
-        DBLog(@"3");
     }
-    DBLog(@"4");
 }
 
 - (void)invokeDeleteLineDelegate
