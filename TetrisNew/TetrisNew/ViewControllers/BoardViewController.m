@@ -225,12 +225,8 @@
     NSMutableSet* tempSet = [NSMutableSet setWithSet:[Cell cellsToPoints:boardPoints]];
     for (NSInteger i = 0; i < [self.boardCells count]; i++) {
         if([tempSet intersectsSet:[NSMutableSet setWithObjects:PointToObj(CGPointMake(i, numberLine)), nil]]) {
-            //?
-            [UIView animateWithDuration:0.1 animations:^(void) {
                 [tempSet removeObject:PointToObj(CGPointMake(i, numberLine))];
-                [self updateBoard];
-            }];
-            
+                [self updateBoard];            
         }
     }
     NSMutableSet* setResult = [[[NSMutableSet alloc] init] autorelease];
