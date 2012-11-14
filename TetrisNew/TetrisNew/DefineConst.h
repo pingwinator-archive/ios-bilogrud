@@ -96,6 +96,7 @@ return _sharedObject;
 #define delayForHintLong 5.0
 #define delayForAnimation 0.5
 
+#define kLeaderboardID @"com.iosappsbuilder.tetris.score"
 typedef enum {
     downDirectionMove,
     rightDirectionMove,

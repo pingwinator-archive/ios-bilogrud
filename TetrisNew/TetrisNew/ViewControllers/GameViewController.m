@@ -17,6 +17,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "SettingViewController.h"
 #import "StatisticManager.h"
+#import "GameCenterViewController.h"
 typedef enum {
     TutorialStepStart = 0,
     TutorialStepLeft,
@@ -58,7 +59,10 @@ typedef enum {
 @property (assign, nonatomic) BOOL showTutorial;
 @property (assign, nonatomic) TutorialSteps currentTutorialStep;
 @property (retain, nonatomic) TutorialView* tutorialView;
-
+@property (retain, nonatomic) GKLeaderboardViewController* leaderboardController;
+@property (nonatomic, retain) GameCenterManager *gameCenterManager;
+@property (nonatomic, assign) NSInteger currentScore;
+@property (nonatomic, retain) NSString* currentLeaderBoard;
 - (void)addGameHint;
 - (void)addUIControlsForPhone;
 - (void)addUIControlsForLargePhone;
@@ -105,6 +109,7 @@ typedef enum {
 @synthesize currentTutorialStep;
 @synthesize showTutorial;
 @synthesize tutorialView;
+@synthesize currentLeaderBoard;
 
 - (void)dealloc
 {
@@ -132,6 +137,7 @@ typedef enum {
     self.arrayButtonsForTutorial = nil;
     self.arrayTextforTutorial = nil;
     self.tutorialView = nil;
+    self.leaderboardController = nil;
     [super dealloc];
 }
 
@@ -187,6 +193,13 @@ typedef enum {
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    //?
+    self.leaderboardController = [[GKLeaderboardViewController alloc] init];
+    
+    self.currentLeaderBoard = kLeaderboardID;
+    self.currentScore = 0;
+    
+   
     self.firstStart = YES;
     self.gameCount = 0;
     self.bgView = [[[BGView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)] autorelease];
@@ -377,7 +390,14 @@ typedef enum {
  
     //rotate button
     [self addRotateButton:CGRectMake(rectManage.origin.x + 170, rectManage.origin.y + 65, rotateSizeButton, rotateSizeButton) withImage:rotateButtonImage andHighlighted:highlightedImageRotate onView:self.view];
-  
+   
+    //add score to GameCenter
+    UIButton* score = [[UIButton alloc] initWithFrame:CGRectMake(rectManage.origin.x + 145, rectManage.origin.y + 50, 40, 40)];
+    [score setTitle:@"GC" forState:UIControlStateNormal];
+    score.backgroundColor = [UIColor redColor];
+    [score addTarget:self action:@selector(showGameCenter) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:score];
+    
     CGRect rectMove = CGRectMake(30, self.boardRect.size.height + 95, 100, 20);
     
     //left button
@@ -388,6 +408,22 @@ typedef enum {
     
     //right button
     [self addRightMoveButton:CGRectMake(rectMove.origin.x + 105, rectMove.origin.y, moveSizeButton, moveSizeButton) withImage:imageButton onView:self.view];
+   
+}
+
+- (void)showGameCenter
+{
+    NSLog(@"showGameCenter");
+    GKLeaderboardViewController *leaderboardController = [[GKLeaderboardViewController alloc] init];
+    if (leaderboardController != NULL)
+    {
+        leaderboardController.category = kLeaderboardID;//self.currentLeaderBoard;
+        leaderboardController.timeScope = GKLeaderboardTimeScopeWeek;
+       // leaderboardController.leaderboardDelegate = self;
+        [self presentModalViewController: leaderboardController animated: YES];
+    }
+
+
 }
 
 - (void)addUIControlsForiPad
@@ -403,7 +439,7 @@ typedef enum {
     [self.view addSubview:self.pauseImageView];
     
     //soundImage
-    self.soundImageView = [[[UIImageView alloc] initWithFrame:CGRectMake(self.boardRect.origin.x + self.boardRect.size.width + imageOffsetHeightiPad*2, 550, 50, 50)] autorelease];
+    self.soundImageView = [[[UIImageView alloc] initWithFrame:CGRectMake(self.boardRect.origin.x + self.boardRect.size.width + imageOffsetHeightiPad * 2, 550, 50, 50)] autorelease];
     [self.soundImageView setImage:[UIImage imageNamed:@"music.png"]];
     self.soundImageView.hidden = YES;
     [self.view addSubview:self.soundImageView];
