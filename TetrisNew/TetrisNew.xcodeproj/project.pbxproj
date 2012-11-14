@@ -652,7 +652,7 @@
 		6EC7BD4D1621E23C00066F23 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Vasyl Liutikov (294UEQB3Z2)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TetrisNew/TetrisNew-Prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
@@ -662,7 +662,7 @@
 				);
 				OTHER_CPLUSPLUSFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9EADC715-C559-4031-8889-85471FFC4D71";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
