@@ -30,6 +30,7 @@
 		6E55183416373D9E00B00424 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E55183016373D9E00B00424 /* icon@2x.png */; };
 		6E55183B16374C5600B00424 /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E55183916374C5600B00424 /* pause.png */; };
 		6E55183C16374C5600B00424 /* music.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E55183A16374C5600B00424 /* music.png */; };
+		6E5C04E21653A8B400077F88 /* GameCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E5C04E11653A8B400077F88 /* GameCenterViewController.m */; };
 		6E5D87281635A11300E95323 /* back-ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E5D87271635A11300E95323 /* back-ipad.png */; };
 		6E5F313B16260AC000274174 /* DisplayOTF.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E5F313816260AC000274174 /* DisplayOTF.otf */; };
 		6E5F313C16260AC000274174 /* DS-DIGIT.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6E5F313916260AC000274174 /* DS-DIGIT.ttf */; };
@@ -101,6 +102,8 @@
 		6E55183016373D9E00B00424 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		6E55183916374C5600B00424 /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause.png; sourceTree = "<group>"; };
 		6E55183A16374C5600B00424 /* music.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = music.png; sourceTree = "<group>"; };
+		6E5C04E01653A8B400077F88 /* GameCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCenterViewController.h; sourceTree = "<group>"; };
+		6E5C04E11653A8B400077F88 /* GameCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameCenterViewController.m; sourceTree = "<group>"; };
 		6E5D87271635A11300E95323 /* back-ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back-ipad.png"; sourceTree = "<group>"; };
 		6E5F313816260AC000274174 /* DisplayOTF.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DisplayOTF.otf; sourceTree = "<group>"; };
 		6E5F313916260AC000274174 /* DS-DIGIT.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DS-DIGIT.ttf"; sourceTree = "<group>"; };
@@ -308,6 +311,8 @@
 				6E13F6C91622BCE4005BF66D /* BoardViewController.m */,
 				6E9E3A74162595560082C51B /* SettingViewController.h */,
 				6E9E3A75162595560082C51B /* SettingViewController.m */,
+				6E5C04E01653A8B400077F88 /* GameCenterViewController.h */,
+				6E5C04E11653A8B400077F88 /* GameCenterViewController.m */,
 			);
 			name = ViewControllers;
 			path = TetrisNew/ViewControllers;
@@ -535,6 +540,7 @@
 				6E55181D1636854B00B00424 /* UIPopoverManager.m in Sources */,
 				6E28D51016455BCB001502CA /* TutorialView.m in Sources */,
 				6E0E44C21652B77E0055DD7E /* StatisticManager.m in Sources */,
+				6E5C04E21653A8B400077F88 /* GameCenterViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
