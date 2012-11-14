@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Flurry.h"
+
 #define flurryKey @"STPJ6GDXJCNGWT7FR2JH"
 #define startGameMessage @"StartGame"
 #define gameOverMessage @"GameOver"
@@ -14,6 +16,7 @@
 #define resetGameMessage @"ResetGame"
 #define scoreGameKey @"ScoreGameKey"
 #define scoreGameMessage @"ScoreGame"
+
 @interface StatisticManager : NSObject
 + (void)logMessage:(NSString*)message;
 + (void)sendScoreGame:(NSInteger)score;
