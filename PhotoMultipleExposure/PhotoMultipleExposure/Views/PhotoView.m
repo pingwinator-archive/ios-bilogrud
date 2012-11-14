@@ -17,7 +17,9 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.firstLayerImageView = [[[UIImageView alloc] initWithFrame:self.bounds] autorelease];
+        [self addSubview:self.firstLayerImageView];
         self.secondLayerImageView = [[[UIImageView alloc] initWithFrame:self.bounds] autorelease];
+        [self addSubview:self.secondLayerImageView];
     }
     return self;
 }

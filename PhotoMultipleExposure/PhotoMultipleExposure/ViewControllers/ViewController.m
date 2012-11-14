@@ -18,11 +18,12 @@
 @property (retain, nonatomic) UIButton* preViewSecond;
 @property (retain, nonatomic) UISlider* firstImageSlider;
 @property (retain, nonatomic) UISlider* secondImageSlider;
-@property (assign, nonatomic) BOOL hasCamera;
 @property (retain, nonatomic) UIImage* firstImage;
 @property (retain, nonatomic) UIImage* secondImage;
 @property (retain, nonatomic) UIImage* choosenImage;
+@property (retain, nonatomic) UIButton* saveResult;
 @property (assign, nonatomic) PhotoSliderNumber activeSlider;
+@property (assign, nonatomic) BOOL hasCamera;
 @end
 
 @implementation ViewController
@@ -39,6 +40,7 @@
 @synthesize commonPhotoView;
 @synthesize choosenImage;
 @synthesize activeSlider;
+@synthesize saveResult;
 - (void)dealloc
 {
     self.firstImageSlider = nil;
@@ -52,6 +54,7 @@
     self.resultImage = nil;
     self.commonPhotoView = nil;
     self.choosenImage = nil;
+    self.saveResult = nil;
     [super dealloc];
 }
 - (void)viewDidLoad
@@ -71,8 +74,8 @@
 - (void)addControllsForIPhone
 {
     
-    CGRect buttonRect = CGRectMake(20, 20, 70, 70);
-    CGRect sliderRect = CGRectMake(110, 20, 170, 70);
+    CGRect buttonRect = CGRectMake(20, 20, 40, 40);
+    CGRect sliderRect = CGRectMake(110, 20, 170, 50);
     self.preViewFirst = [[[UIButton alloc] initWithFrame:buttonRect] autorelease];
     self.preViewFirst.contentMode = UIViewContentModeScaleAspectFill;
     [self.preViewFirst setImage:[UIImage imageNamed:@"camera.png"] forState:UIControlStateNormal];
@@ -91,18 +94,18 @@
     self.firstImageSlider.value = 100.0f;
     [self.view addSubview:self.firstImageSlider];
     
-    buttonRect.origin.y += 80;
+    buttonRect.origin.y += 50;
     self.preViewSecond = [[[UIButton alloc] initWithFrame:buttonRect] autorelease];
     self.preViewSecond.contentMode = UIViewContentModeScaleAspectFill;
     [self.preViewSecond setImage:[UIImage imageNamed:@"camera.png"] forState:UIControlStateNormal];
     [self.preViewSecond addTarget:self action:@selector(secondPreViewPressed) forControlEvents:UIControlEventTouchUpInside];
     
-    UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(doLongPress:)];
+    UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(doLongPressGesture:)];
     [self.preViewSecond addGestureRecognizer:longPressGesture];
     [longPressGesture release];
     [self.view addSubview:self.preViewSecond];
     
-    sliderRect.origin.y += 80;
+    sliderRect.origin.y += 50;
     self.secondImageSlider = [[[UISlider alloc] initWithFrame:sliderRect] autorelease];
     [self.secondImageSlider addTarget:self action:@selector(secondSliderMove) forControlEvents:UIControlEventValueChanged];
    // self.secondImageSlider.userInteractionEnabled = NO;
@@ -112,10 +115,22 @@
 
     [self.view addSubview:self.secondImageSlider];
 
+    CGRect saveRect = CGRectMake(110, 120, 100, 40);
+    self.saveResult = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    self.saveResult.frame = saveRect;
+    [self.saveResult setTitle:@"Save" forState:UIControlStateNormal];
+    [self.saveResult addTarget:self action:@selector(saveResultImage) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:self.saveResult];
+    
     CGRect rect = CGRectMake(20, 190, 280, 250);
     self.commonPhotoView = [[PhotoView alloc] initWithFrame:rect];
     self.commonPhotoView.backgroundColor = [UIColor redColor];
     [self.view addSubview:self.commonPhotoView];
+}
+
+- (void)saveResultImage
+{
+    NSLog(@"save");
 }
 
 - (void)firstPreViewPressed
@@ -139,14 +154,15 @@
 
 - (void)firstSliderMove
 {
-    NSLog(@"ddd");
     self.preViewFirst.alpha = self.firstImageSlider.value/100;
+
+    self.commonPhotoView.firstLayerImageView.alpha = self.firstImageSlider.value/100;
 }
 
 - (void)secondSliderMove
 {
-    NSLog(@"rrr");
     self.preViewSecond.alpha = self.secondImageSlider.value/100;
+    self.commonPhotoView.secondLayerImageView.alpha = self.secondImageSlider.value/100;
 }
 
 - (void)didReceiveMemoryWarning
@@ -161,6 +177,15 @@
     [self.view bringSubviewToFront:[recognizer view]];
     [self.preViewFirst setImage:[UIImage imageNamed:@"camera.png"] forState:UIControlStateNormal];
     self.firstImageSlider.enabled = NO;
+    self.commonPhotoView.firstLayerImageView.image = nil;
+    [self reloadInputViews];
+}
+
+- (void)doLongPressGesture: (UILongPressGestureRecognizer *) recognizer{
+    [self.view bringSubviewToFront:[recognizer view]];
+    [self.preViewSecond setImage:[UIImage imageNamed:@"camera.png"] forState:UIControlStateNormal];
+    self.secondImageSlider.enabled = NO;
+    self.commonPhotoView.secondLayerImageView.image = nil;
     [self reloadInputViews];
 }
 
@@ -186,8 +211,9 @@
                 self.firstImageSlider.enabled = YES;
                 [self.preViewFirst setImage:self.firstImage forState:UIControlStateNormal];
                 [self.commonPhotoView.firstLayerImageView setImage:self.firstImage];
+                self.commonPhotoView.firstLayerImageView.backgroundColor = [UIColor brownColor];
+                //[self.commonPhotoView.firstLayerImageView setImage:self.firstImage];
             }
-                
                 break;
             case secondPhotoSlider: {
                 self.secondImage = [self.choosenImage roundedCornerImage:kRoundedCornerImageSize borderSize:kBorderSize];
@@ -200,6 +226,7 @@
                 break;
         }
       }
+    
     [picker dismissModalViewControllerAnimated:YES];
 }
 
