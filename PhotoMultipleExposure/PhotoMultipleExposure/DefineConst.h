@@ -38,7 +38,7 @@ return _sharedObject;
 #define scoreFontLarge [UIFont fontWithName:@"DS-Digital" size:20]
 #define scoreFontiPad [UIFont fontWithName:@"DS-Digital" size:30]
 
-#define kRoundedCornerImageSize 10
+#define kRoundedCornerImageSize 5
 #define kBorderSize 1
 #define cameraIndexButton 1
 #endif

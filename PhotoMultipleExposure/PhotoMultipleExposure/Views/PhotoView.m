@@ -24,6 +24,16 @@
     return self;
 }
 
+- (void)reset
+{
+    self.firstLayerImageView.image = nil;
+    self.secondLayerImageView.image = nil;
+}
+
+- (void)defPhoto
+{
+    self.firstLayerImageView.image = [UIImage imageNamed:@"IPhoto.png"];
+}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

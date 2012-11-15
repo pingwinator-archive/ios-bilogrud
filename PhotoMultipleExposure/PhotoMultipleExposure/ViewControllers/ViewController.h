@@ -12,6 +12,6 @@ typedef enum {
     secondPhotoSlider,
     nonePhoto
 } PhotoSliderNumber;
-@interface ViewController : UIViewController<UIActionSheetDelegate, UIImagePickerControllerDelegate>
+@interface ViewController : UIViewController<UIActionSheetDelegate, UIImagePickerControllerDelegate, UIAlertViewDelegate>
 @property (assign, nonatomic) UIImage* resultImage;
 @end

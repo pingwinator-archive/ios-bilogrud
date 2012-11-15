@@ -92,7 +92,6 @@
     self.firstImageSlider.maximumValue = 100.0f;
     self.firstImageSlider.minimumValue = 0.0f;
   //  self.firstImageSlider.enabled = NO;
-  //  self.firstImageSlider.hidden = NO;
     self.firstImageSlider.value = 100.0f;
     [self.view addSubview:self.firstImageSlider];
     
@@ -120,17 +119,34 @@
     CGRect saveRect = CGRectMake(110, 120, 100, 40);
     self.saveResult = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     self.saveResult.frame = saveRect;
-    [self.saveResult setTitle:@"Save" forState:UIControlStateNormal];
+    [self.saveResult setTitle: @"Save" forState:UIControlStateNormal];
     [self.saveResult addTarget:self action:@selector(saveResultImage) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.saveResult];
     
     CGRect rect = CGRectMake(20, 190, 280, 250);
     self.commonPhotoView = [[[PhotoView alloc] initWithFrame:rect] autorelease];
     self.commonPhotoView.backgroundColor = [UIColor clearColor];
-    [self checkForhoto];
+    [self checkForPhoto];
     [self.view addSubview:self.commonPhotoView];
     
 }
+
+
+- (void)resetByDefault
+{
+    self.secondImageSlider.enabled = NO;
+    self.firstImageSlider.enabled = NO;
+    
+    [self.preViewFirst setImage:[UIImage imageNamed:@"camera.png"] forState:UIControlStateNormal];
+    [self.preViewSecond setImage:[UIImage imageNamed:@"camera.png"] forState:UIControlStateNormal];
+    self.firstImageSlider.value = 100;
+    [self performSelector:@selector(firstSliderMove)];
+    self.secondImageSlider.value = 100;
+    [self performSelector:@selector(secondImageSlider)];
+    [self checkForPhoto];
+    [self.commonPhotoView reset];
+}
+
 
 - (void)saveResultImage
 {
@@ -138,23 +154,26 @@
 	[commonPhotoView.layer renderInContext:UIGraphicsGetCurrentContext()];
 	UIImage* res = UIGraphicsGetImageFromCurrentImageContext();
     
-    UIImageWriteToSavedPhotosAlbum(res, self, @selector(finishSave), nil);
+    UIImageWriteToSavedPhotosAlbum(res, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
    // [imageData writeToFile:basePath atomically:YES];
 	UIGraphicsEndImageContext();
     
     NSLog(@"save");
 }
 
-- (void)finishSave
+- (void)image: (UIImage *) image didFinishSavingWithError: (NSError *) error contextInfo: (void *) contextInfo
 {
+    NSString* message;
+    if(error) {
+        message = NSLocalizedString(@"Image wasn't save", @"");
+    } else {
+       message = NSLocalizedString(@"Image was save", @"");
+    }
+    
+    UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:message delegate:self cancelButtonTitle:@"Try again" otherButtonTitles:nil, nil];
+    [alert show];
+    
     NSLog(@"finish");
-}
-
-- (void)               image: (UIImage *) image
-    didFinishSavingWithError: (NSError *) error
-                 contextInfo: (void *) contextInfo
-{
-
 }
 - (void)firstPreViewPressed
 {
@@ -205,7 +224,7 @@
     
     self.firstImageSlider.value = 100;
     [self performSelector:@selector(firstSliderMove)];
-    [self checkForhoto];
+    [self checkForPhoto];
     [self reloadInputViews];
 }
 
@@ -216,16 +235,17 @@
     self.commonPhotoView.secondLayerImageView.image = nil;
     self.secondImageSlider.value = 100;
     [self performSelector:@selector(secondSliderMove)];
-    [self checkForhoto];
+    [self checkForPhoto];
     [self reloadInputViews];
 }
 
-- (void)checkForhoto
+- (void)checkForPhoto
 {
     if (!(self.commonPhotoView.firstLayerImageView.image || self.commonPhotoView.secondLayerImageView.image)) {
-         self.commonPhotoView.firstLayerImageView.image = [UIImage imageNamed:@"IPhoto.png"];
+        [self.commonPhotoView defPhoto];
     }
 }
+
 #pragma mark - UIActionSheetDelegate Methods
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
@@ -251,7 +271,6 @@
                 self.firstImageSlider.enabled = YES;
                 [self.preViewFirst setImage:self.firstImage forState:UIControlStateNormal];
                 [self.commonPhotoView.firstLayerImageView setImage:self.firstImage];
-            //  //  self.commonPhotoView.firstLayerImageView.image = [UIImage imageNamed:@"IPhoto.png"];//backgroundColor = [UIColor brownColor];
             }
                 break;
             case secondPhotoSlider: {
@@ -291,6 +310,14 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"") message:NSLocalizedString(@"Device doesn’t support that media source", @"") delegate:nil cancelButtonTitle:NSLocalizedString(@"Ok", @"") otherButtonTitles:nil, nil ];
         [alert show];
         [alert release];
+    }
+}
+
+#pragma mark - UIAlertViewDelegate Methods
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 0) {
+        [self resetByDefault];
     }
 }
 @end
