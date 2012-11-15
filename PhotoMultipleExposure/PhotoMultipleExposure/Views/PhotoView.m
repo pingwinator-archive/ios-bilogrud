@@ -32,7 +32,8 @@
 
 - (void)defPhoto
 {
-    self.firstLayerImageView.image =  [[UIImage imageNamed:@"IPhoto.png"] roundedCornerImage:kRoundedCornerImageSize borderSize:kBorderSize];
+    self.firstLayerImageView.image = [[UIImage imageNamed:@"IPhoto.png"] roundedCornerImage:kRoundedCornerImageSize borderSize:kBorderSize];
+    self.secondLayerImageView.image = [[UIImage imageNamed:@"IPhoto.png"] roundedCornerImage:kRoundedCornerImageSize borderSize:kBorderSize];
 }
 /*
 // Only override drawRect: if you perform custom drawing.

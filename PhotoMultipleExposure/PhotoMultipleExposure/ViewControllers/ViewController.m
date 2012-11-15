@@ -30,6 +30,7 @@
 
 - (void)saveResultImage;
 - (void)image:(UIImage*)image didFinishSavingWithError:(NSError*)error contextInfo:(void*)contextInfo;
+
 - (void)firstPreViewPressed;
 - (void)secondPreViewPressed;
 - (void)firstSliderMove;
@@ -37,6 +38,7 @@
 - (void)doLongPress:(UILongPressGestureRecognizer *)recognizer;
 - (void)doLongPressGesture:(UILongPressGestureRecognizer*)recognizer;
 - (void)checkForPhoto;
+//- (void)checkForEnableSlider;
 @end
 
 @implementation ViewController
@@ -92,7 +94,8 @@
     CGRect sliderRect = CGRectMake(110, 20, 170, 50);
     self.preViewFirst = [[[UIButton alloc] initWithFrame:buttonRect] autorelease];
     self.preViewFirst.contentMode = UIViewContentModeScaleToFill;
-    [self.preViewFirst setImage:[UIImage imageNamed:nameOfDefImage] forState:UIControlStateNormal];
+    self.firstImage = [UIImage imageNamed:nameOfDefImage];
+    [self.preViewFirst setImage:self.firstImage forState:UIControlStateNormal];
     [self.preViewFirst addTarget:self action:@selector(firstPreViewPressed) forControlEvents:UIControlEventTouchUpInside];
     
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(doLongPress:)];
@@ -104,14 +107,15 @@
     [self.firstImageSlider addTarget:self action:@selector(firstSliderMove) forControlEvents:UIControlEventValueChanged];
     self.firstImageSlider.maximumValue = 100.0f;
     self.firstImageSlider.minimumValue = 0.0f;
-  //  self.firstImageSlider.enabled = NO;
+    self.firstImageSlider.enabled = NO;
     self.firstImageSlider.value = 100.0f;
     [self.view addSubview:self.firstImageSlider];
     
     buttonRect.origin.y += 50;
     self.preViewSecond = [[[UIButton alloc] initWithFrame:buttonRect] autorelease];
     self.preViewSecond.contentMode = UIViewContentModeScaleToFill;
-    [self.preViewSecond setImage:[UIImage imageNamed:nameOfDefImage] forState:UIControlStateNormal];
+    self.secondImage = [UIImage imageNamed:nameOfDefImage];
+    [self.preViewSecond setImage:self.secondImage forState:UIControlStateNormal];
     [self.preViewSecond addTarget:self action:@selector(secondPreViewPressed) forControlEvents:UIControlEventTouchUpInside];
     
     UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(doLongPressGesture:)];
@@ -122,13 +126,14 @@
     sliderRect.origin.y += 50;
     self.secondImageSlider = [[[UISlider alloc] initWithFrame:sliderRect] autorelease];
     [self.secondImageSlider addTarget:self action:@selector(secondSliderMove) forControlEvents:UIControlEventValueChanged];
-   // self.secondImageSlider.enabled = NO;
+    self.secondImageSlider.enabled = NO;
     self.secondImageSlider.maximumValue = 100.0f;
     self.secondImageSlider.minimumValue = 0.0f;
     self.secondImageSlider.value = 100.0f;
 
     [self.view addSubview:self.secondImageSlider];
-
+    //[self checkForEnableSlider];
+    
     CGRect saveRect = CGRectMake(110, 120, 100, 40);
     self.saveResult = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     self.saveResult.frame = saveRect;
@@ -155,19 +160,22 @@
     self.secondImageSlider.value = 100;
     [self performSelector:@selector(secondImageSlider)];
     [self checkForPhoto];
-    [self.commonPhotoView reset];
+    [self.commonPhotoView defPhoto];
 }
 
 - (void)saveResultImage
 {
-    UIGraphicsBeginImageContext(commonPhotoView.bounds.size);
-	[commonPhotoView.layer renderInContext:UIGraphicsGetCurrentContext()];
-	UIImage* res = UIGraphicsGetImageFromCurrentImageContext();
-    
-    UIImageWriteToSavedPhotosAlbum(res, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-   // [imageData writeToFile:basePath atomically:YES];
-	UIGraphicsEndImageContext();
-    NSLog(@"save");
+    if (self.firstImageSlider.enabled && self.secondImageSlider.enabled) {
+        UIGraphicsBeginImageContext(commonPhotoView.bounds.size);
+        [commonPhotoView.layer renderInContext:UIGraphicsGetCurrentContext()];
+        UIImage* res = UIGraphicsGetImageFromCurrentImageContext();
+        UIImageWriteToSavedPhotosAlbum(res, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+        UIGraphicsEndImageContext();
+        NSLog(@"save");
+    } else {
+        UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:NSLocalizedString(@"Attention! Select images", @"") delegate:self cancelButtonTitle: NSLocalizedString(@"Ok", @"") otherButtonTitles:nil, nil];
+        [alert show];
+    }
 }
 
 - (void)image:(UIImage*)image didFinishSavingWithError:(NSError*)error contextInfo:(void*)contextInfo
@@ -216,6 +224,7 @@
     self.commonPhotoView.secondLayerImageView.alpha = self.secondImageSlider.value/100;
 }
 
+
 #pragma mark - Long Press Guester
 
 - (void)doLongPress:(UILongPressGestureRecognizer*)recognizer
@@ -249,6 +258,7 @@
         [self.commonPhotoView defPhoto];
     }
 }
+
 
 #pragma mark - UIActionSheetDelegate Methods
 
