@@ -7,7 +7,7 @@
 //
 
 #import "PhotoView.h"
-
+#import "UIImage+RoundedCorner.h"
 @implementation PhotoView
 @synthesize firstLayerImageView;
 @synthesize secondLayerImageView;
@@ -32,7 +32,7 @@
 
 - (void)defPhoto
 {
-    self.firstLayerImageView.image = [UIImage imageNamed:@"IPhoto.png"];
+    self.firstLayerImageView.image =  [[UIImage imageNamed:@"IPhoto.png"] roundedCornerImage:kRoundedCornerImageSize borderSize:kBorderSize];
 }
 /*
 // Only override drawRect: if you perform custom drawing.

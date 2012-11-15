@@ -25,6 +25,18 @@
 @property (retain, nonatomic) UIButton* saveResult;
 @property (assign, nonatomic) PhotoSliderNumber activeSlider;
 @property (assign, nonatomic) BOOL hasCamera;
+- (void)addControllsForIPhone;
+- (void)resetByDefault;
+
+- (void)saveResultImage;
+- (void)image:(UIImage*)image didFinishSavingWithError:(NSError*)error contextInfo:(void*)contextInfo;
+- (void)firstPreViewPressed;
+- (void)secondPreViewPressed;
+- (void)firstSliderMove;
+- (void)secondSliderMove;
+- (void)doLongPress:(UILongPressGestureRecognizer *)recognizer;
+- (void)doLongPressGesture:(UILongPressGestureRecognizer*)recognizer;
+- (void)checkForPhoto;
 @end
 
 @implementation ViewController
@@ -58,6 +70,7 @@
     self.saveResult = nil;
     [super dealloc];
 }
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -79,7 +92,7 @@
     CGRect sliderRect = CGRectMake(110, 20, 170, 50);
     self.preViewFirst = [[[UIButton alloc] initWithFrame:buttonRect] autorelease];
     self.preViewFirst.contentMode = UIViewContentModeScaleToFill;
-    [self.preViewFirst setImage:[UIImage imageNamed:@"camera.png"] forState:UIControlStateNormal];
+    [self.preViewFirst setImage:[UIImage imageNamed:nameOfDefImage] forState:UIControlStateNormal];
     [self.preViewFirst addTarget:self action:@selector(firstPreViewPressed) forControlEvents:UIControlEventTouchUpInside];
     
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(doLongPress:)];
@@ -98,7 +111,7 @@
     buttonRect.origin.y += 50;
     self.preViewSecond = [[[UIButton alloc] initWithFrame:buttonRect] autorelease];
     self.preViewSecond.contentMode = UIViewContentModeScaleToFill;
-    [self.preViewSecond setImage:[UIImage imageNamed:@"camera.png"] forState:UIControlStateNormal];
+    [self.preViewSecond setImage:[UIImage imageNamed:nameOfDefImage] forState:UIControlStateNormal];
     [self.preViewSecond addTarget:self action:@selector(secondPreViewPressed) forControlEvents:UIControlEventTouchUpInside];
     
     UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(doLongPressGesture:)];
@@ -119,7 +132,7 @@
     CGRect saveRect = CGRectMake(110, 120, 100, 40);
     self.saveResult = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     self.saveResult.frame = saveRect;
-    [self.saveResult setTitle: @"Save" forState:UIControlStateNormal];
+    [self.saveResult setTitle: NSLocalizedString(@"Save", @"") forState:UIControlStateNormal];
     [self.saveResult addTarget:self action:@selector(saveResultImage) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.saveResult];
     
@@ -128,17 +141,15 @@
     self.commonPhotoView.backgroundColor = [UIColor clearColor];
     [self checkForPhoto];
     [self.view addSubview:self.commonPhotoView];
-    
 }
-
 
 - (void)resetByDefault
 {
     self.secondImageSlider.enabled = NO;
     self.firstImageSlider.enabled = NO;
     
-    [self.preViewFirst setImage:[UIImage imageNamed:@"camera.png"] forState:UIControlStateNormal];
-    [self.preViewSecond setImage:[UIImage imageNamed:@"camera.png"] forState:UIControlStateNormal];
+    [self.preViewFirst setImage:[UIImage imageNamed:nameOfDefImage] forState:UIControlStateNormal];
+    [self.preViewSecond setImage:[UIImage imageNamed:nameOfDefImage] forState:UIControlStateNormal];
     self.firstImageSlider.value = 100;
     [self performSelector:@selector(firstSliderMove)];
     self.secondImageSlider.value = 100;
@@ -146,7 +157,6 @@
     [self checkForPhoto];
     [self.commonPhotoView reset];
 }
-
 
 - (void)saveResultImage
 {
@@ -157,24 +167,24 @@
     UIImageWriteToSavedPhotosAlbum(res, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
    // [imageData writeToFile:basePath atomically:YES];
 	UIGraphicsEndImageContext();
-    
     NSLog(@"save");
 }
 
-- (void)image: (UIImage *) image didFinishSavingWithError: (NSError *) error contextInfo: (void *) contextInfo
+- (void)image:(UIImage*)image didFinishSavingWithError:(NSError*)error contextInfo:(void*)contextInfo
 {
     NSString* message;
     if(error) {
-        message = NSLocalizedString(@"Image wasn't save", @"");
+       message = NSLocalizedString(@"Image wasn't save", @"");
     } else {
        message = NSLocalizedString(@"Image was save", @"");
     }
     
-    UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:message delegate:self cancelButtonTitle:@"Try again" otherButtonTitles:nil, nil];
+    UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"" message:message delegate:self cancelButtonTitle: NSLocalizedString(@"Try again", @"") otherButtonTitles:nil, nil];
     [alert show];
     
     NSLog(@"finish");
 }
+
 - (void)firstPreViewPressed
 {
     self.activeSlider = firstPhotoSlider;
@@ -194,8 +204,6 @@
     NSLog(@"second preView clicked!");
 }
 
-
-
 - (void)firstSliderMove
 {
     self.preViewFirst.alpha = self.firstImageSlider.value/100;
@@ -208,17 +216,12 @@
     self.commonPhotoView.secondLayerImageView.alpha = self.secondImageSlider.value/100;
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 #pragma mark - Long Press Guester
 
-- (void)doLongPress: (UILongPressGestureRecognizer *) recognizer{
+- (void)doLongPress:(UILongPressGestureRecognizer*)recognizer
+{
     [self.view bringSubviewToFront:[recognizer view]];
-    [self.preViewFirst setImage:[UIImage imageNamed:@"camera.png"] forState:UIControlStateNormal];
+    [self.preViewFirst setImage:[UIImage imageNamed:nameOfDefImage] forState:UIControlStateNormal];
     self.firstImageSlider.enabled = NO;
     self.commonPhotoView.firstLayerImageView.image = nil;
     
@@ -228,9 +231,10 @@
     [self reloadInputViews];
 }
 
-- (void)doLongPressGesture: (UILongPressGestureRecognizer *) recognizer{
+- (void)doLongPressGesture:(UILongPressGestureRecognizer*)recognizer
+{
     [self.view bringSubviewToFront:[recognizer view]];
-    [self.preViewSecond setImage:[UIImage imageNamed:@"camera.png"] forState:UIControlStateNormal];
+    [self.preViewSecond setImage:[UIImage imageNamed:nameOfDefImage] forState:UIControlStateNormal];
     self.secondImageSlider.enabled = NO;
     self.commonPhotoView.secondLayerImageView.image = nil;
     self.secondImageSlider.value = 100;
@@ -256,7 +260,6 @@
         [self imageFromSource:UIImagePickerControllerSourceTypeCamera];
     }
 }
-
 
 #pragma mark - UIImagePickerController delegate methods
 
