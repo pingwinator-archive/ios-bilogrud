@@ -20,6 +20,7 @@
         [self addSubview:self.firstLayerImageView];
         self.secondLayerImageView = [[[UIImageView alloc] initWithFrame:self.bounds] autorelease];
         [self addSubview:self.secondLayerImageView];
+        [self defPhoto];
     }
     return self;
 }
@@ -30,10 +31,20 @@
     self.secondLayerImageView.image = nil;
 }
 
+- (void)resetDefImage
+{
+    if(self.firstLayerImageView.image == [UIImage imageNamed:@"IPhoto.png"]) {
+        self.firstLayerImageView.image = nil;
+    }
+    if(self.secondLayerImageView.image == [UIImage imageNamed:@"IPhoto.png"]) {
+        self.secondLayerImageView.image = nil;
+    }
+}
+
 - (void)defPhoto
 {
-    self.firstLayerImageView.image = [[UIImage imageNamed:@"IPhoto.png"] roundedCornerImage:kRoundedCornerImageSize borderSize:kBorderSize];
-    self.secondLayerImageView.image = [[UIImage imageNamed:@"IPhoto.png"] roundedCornerImage:kRoundedCornerImageSize borderSize:kBorderSize];
+    self.firstLayerImageView.image = [UIImage imageNamed:@"IPhoto.png"] ;// roundedCornerImage:kRoundedCornerImageSize borderSize:kBorderSize];
+    self.secondLayerImageView.image = [UIImage imageNamed:@"IPhoto.png"] ;//] roundedCornerImage:kRoundedCornerImageSize borderSize:kBorderSize];
 }
 /*
 // Only override drawRect: if you perform custom drawing.

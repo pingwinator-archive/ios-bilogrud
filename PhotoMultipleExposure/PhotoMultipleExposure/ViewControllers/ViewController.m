@@ -284,6 +284,7 @@
                 self.firstImageSlider.enabled = YES;
                 [self.preViewFirst setImage:self.firstImage forState:UIControlStateNormal];
                 [self.commonPhotoView.firstLayerImageView setImage:self.firstImage];
+                [self.commonPhotoView resetDefImage];
             }
                 break;
             case secondPhotoSlider: {
@@ -291,6 +292,7 @@
                 self.secondImageSlider.enabled = YES;
                 [self.preViewSecond setImage:self.secondImage forState:UIControlStateNormal];
                 [self.commonPhotoView.secondLayerImageView setImage:self.secondImage];
+                [self.commonPhotoView resetDefImage];
             }
                 break;
             default:

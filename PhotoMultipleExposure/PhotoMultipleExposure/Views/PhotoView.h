@@ -13,4 +13,5 @@
 @property (retain, nonatomic) UIImageView* secondLayerImageView;
 - (void)reset;
 - (void)defPhoto;
+- (void)resetDefImage;
 @end
