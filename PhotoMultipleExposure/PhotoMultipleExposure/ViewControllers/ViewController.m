@@ -10,6 +10,7 @@
 #import <MobileCoreServices/UTCoreTypes.h>
 #import "UIImage+RoundedCorner.h"
 #import "PhotoView.h"
+#include <QuartzCore/QuartzCore.h>
 @interface ViewController ()
 @property (retain, nonatomic) PhotoView* commonPhotoView;
 @property (retain, nonatomic) UIImageView* firstLayerImageView;
@@ -73,11 +74,11 @@
 
 - (void)addControllsForIPhone
 {
-    
+ 
     CGRect buttonRect = CGRectMake(20, 20, 40, 40);
     CGRect sliderRect = CGRectMake(110, 20, 170, 50);
     self.preViewFirst = [[[UIButton alloc] initWithFrame:buttonRect] autorelease];
-    self.preViewFirst.contentMode = UIViewContentModeScaleAspectFill;
+    self.preViewFirst.contentMode = UIViewContentModeScaleToFill;
     [self.preViewFirst setImage:[UIImage imageNamed:@"camera.png"] forState:UIControlStateNormal];
     [self.preViewFirst addTarget:self action:@selector(firstPreViewPressed) forControlEvents:UIControlEventTouchUpInside];
     
@@ -88,15 +89,16 @@
     
     self.firstImageSlider = [[[UISlider alloc] initWithFrame:sliderRect] autorelease];
     [self.firstImageSlider addTarget:self action:@selector(firstSliderMove) forControlEvents:UIControlEventValueChanged];
-   //self.firstImageSlider.userInteractionEnabled = NO;
     self.firstImageSlider.maximumValue = 100.0f;
     self.firstImageSlider.minimumValue = 0.0f;
+  //  self.firstImageSlider.enabled = NO;
+  //  self.firstImageSlider.hidden = NO;
     self.firstImageSlider.value = 100.0f;
     [self.view addSubview:self.firstImageSlider];
     
     buttonRect.origin.y += 50;
     self.preViewSecond = [[[UIButton alloc] initWithFrame:buttonRect] autorelease];
-    self.preViewSecond.contentMode = UIViewContentModeScaleAspectFill;
+    self.preViewSecond.contentMode = UIViewContentModeScaleToFill;
     [self.preViewSecond setImage:[UIImage imageNamed:@"camera.png"] forState:UIControlStateNormal];
     [self.preViewSecond addTarget:self action:@selector(secondPreViewPressed) forControlEvents:UIControlEventTouchUpInside];
     
@@ -108,7 +110,7 @@
     sliderRect.origin.y += 50;
     self.secondImageSlider = [[[UISlider alloc] initWithFrame:sliderRect] autorelease];
     [self.secondImageSlider addTarget:self action:@selector(secondSliderMove) forControlEvents:UIControlEventValueChanged];
-   // self.secondImageSlider.userInteractionEnabled = NO;
+   // self.secondImageSlider.enabled = NO;
     self.secondImageSlider.maximumValue = 100.0f;
     self.secondImageSlider.minimumValue = 0.0f;
     self.secondImageSlider.value = 100.0f;
@@ -123,16 +125,37 @@
     [self.view addSubview:self.saveResult];
     
     CGRect rect = CGRectMake(20, 190, 280, 250);
-    self.commonPhotoView = [[PhotoView alloc] initWithFrame:rect];
-    self.commonPhotoView.backgroundColor = [UIColor redColor];
+    self.commonPhotoView = [[[PhotoView alloc] initWithFrame:rect] autorelease];
+    self.commonPhotoView.backgroundColor = [UIColor clearColor];
+    [self checkForhoto];
     [self.view addSubview:self.commonPhotoView];
+    
 }
 
 - (void)saveResultImage
 {
+    UIGraphicsBeginImageContext(commonPhotoView.bounds.size);
+	[commonPhotoView.layer renderInContext:UIGraphicsGetCurrentContext()];
+	UIImage* res = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIImageWriteToSavedPhotosAlbum(res, self, @selector(finishSave), nil);
+   // [imageData writeToFile:basePath atomically:YES];
+	UIGraphicsEndImageContext();
+    
     NSLog(@"save");
 }
 
+- (void)finishSave
+{
+    NSLog(@"finish");
+}
+
+- (void)               image: (UIImage *) image
+    didFinishSavingWithError: (NSError *) error
+                 contextInfo: (void *) contextInfo
+{
+
+}
 - (void)firstPreViewPressed
 {
     self.activeSlider = firstPhotoSlider;
@@ -152,10 +175,11 @@
     NSLog(@"second preView clicked!");
 }
 
+
+
 - (void)firstSliderMove
 {
     self.preViewFirst.alpha = self.firstImageSlider.value/100;
-
     self.commonPhotoView.firstLayerImageView.alpha = self.firstImageSlider.value/100;
 }
 
@@ -178,6 +202,10 @@
     [self.preViewFirst setImage:[UIImage imageNamed:@"camera.png"] forState:UIControlStateNormal];
     self.firstImageSlider.enabled = NO;
     self.commonPhotoView.firstLayerImageView.image = nil;
+    
+    self.firstImageSlider.value = 100;
+    [self performSelector:@selector(firstSliderMove)];
+    [self checkForhoto];
     [self reloadInputViews];
 }
 
@@ -186,14 +214,26 @@
     [self.preViewSecond setImage:[UIImage imageNamed:@"camera.png"] forState:UIControlStateNormal];
     self.secondImageSlider.enabled = NO;
     self.commonPhotoView.secondLayerImageView.image = nil;
+    self.secondImageSlider.value = 100;
+    [self performSelector:@selector(secondSliderMove)];
+    [self checkForhoto];
     [self reloadInputViews];
 }
 
+- (void)checkForhoto
+{
+    if (!(self.commonPhotoView.firstLayerImageView.image || self.commonPhotoView.secondLayerImageView.image)) {
+         self.commonPhotoView.firstLayerImageView.image = [UIImage imageNamed:@"IPhoto.png"];
+    }
+}
 #pragma mark - UIActionSheetDelegate Methods
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     if(actionSheet.firstOtherButtonIndex == buttonIndex ){
         [self imageFromSource:UIImagePickerControllerSourceTypePhotoLibrary];
+    }
+    if(buttonIndex == cameraIndexButton){
+        [self imageFromSource:UIImagePickerControllerSourceTypeCamera];
     }
 }
 
@@ -211,8 +251,7 @@
                 self.firstImageSlider.enabled = YES;
                 [self.preViewFirst setImage:self.firstImage forState:UIControlStateNormal];
                 [self.commonPhotoView.firstLayerImageView setImage:self.firstImage];
-                self.commonPhotoView.firstLayerImageView.backgroundColor = [UIColor brownColor];
-                //[self.commonPhotoView.firstLayerImageView setImage:self.firstImage];
+            //  //  self.commonPhotoView.firstLayerImageView.image = [UIImage imageNamed:@"IPhoto.png"];//backgroundColor = [UIColor brownColor];
             }
                 break;
             case secondPhotoSlider: {

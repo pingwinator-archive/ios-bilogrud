@@ -17,6 +17,9 @@
 		6E2950D21653EB0B007C23D2 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2950CE1653EB0B007C23D2 /* UIImage+Resize.m */; };
 		6E2950D31653EB0B007C23D2 /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2950D01653EB0B007C23D2 /* UIImage+RoundedCorner.m */; };
 		6E2950DE1653F9E5007C23D2 /* PhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2950DD1653F9E5007C23D2 /* PhotoView.m */; };
+		6E5906F81654D5DF00D2E0D0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E5906F71654D5DF00D2E0D0 /* QuartzCore.framework */; };
+		6E5907001654DDE200D2E0D0 /* IPhoto@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E5906FE1654DDE200D2E0D0 /* IPhoto@2x.png */; };
+		6E5907011654DDE200D2E0D0 /* IPhoto.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E5906FF1654DDE200D2E0D0 /* IPhoto.png */; };
 		6E5C050F1653CFC400077F88 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E5C050E1653CFC400077F88 /* UIKit.framework */; };
 		6E5C05111653CFC400077F88 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E5C05101653CFC400077F88 /* Foundation.framework */; };
 		6E5C05131653CFC400077F88 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E5C05121653CFC400077F88 /* CoreGraphics.framework */; };
@@ -45,6 +48,9 @@
 		6E2950D01653EB0B007C23D2 /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
 		6E2950DC1653F9E5007C23D2 /* PhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoView.h; sourceTree = "<group>"; };
 		6E2950DD1653F9E5007C23D2 /* PhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoView.m; sourceTree = "<group>"; };
+		6E5906F71654D5DF00D2E0D0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		6E5906FE1654DDE200D2E0D0 /* IPhoto@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IPhoto@2x.png"; sourceTree = "<group>"; };
+		6E5906FF1654DDE200D2E0D0 /* IPhoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IPhoto.png; sourceTree = "<group>"; };
 		6E5C050A1653CFC400077F88 /* PhotoMultipleExposure.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoMultipleExposure.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E5C050E1653CFC400077F88 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6E5C05101653CFC400077F88 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -65,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E5906F81654D5DF00D2E0D0 /* QuartzCore.framework in Frameworks */,
 				6E2950C91653E5D3007C23D2 /* MobileCoreServices.framework in Frameworks */,
 				6E5C050F1653CFC400077F88 /* UIKit.framework in Frameworks */,
 				6E5C05111653CFC400077F88 /* Foundation.framework in Frameworks */,
@@ -96,6 +103,8 @@
 		6E2950B41653DAA4007C23D2 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6E5906FE1654DDE200D2E0D0 /* IPhoto@2x.png */,
+				6E5906FF1654DDE200D2E0D0 /* IPhoto.png */,
 				6E2950C41653DEBE007C23D2 /* camera.png */,
 				6E2950C51653DEBE007C23D2 /* camera@2x.png */,
 			);
@@ -170,6 +179,7 @@
 		6E5C050D1653CFC400077F88 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6E5906F71654D5DF00D2E0D0 /* QuartzCore.framework */,
 				6E2950C81653E5D3007C23D2 /* MobileCoreServices.framework */,
 				6E5C050E1653CFC400077F88 /* UIKit.framework */,
 				6E5C05101653CFC400077F88 /* Foundation.framework */,
@@ -262,6 +272,8 @@
 				6E2950BD1653DAA4007C23D2 /* ViewController_iPhone.xib in Resources */,
 				6E2950C61653DEBE007C23D2 /* camera.png in Resources */,
 				6E2950C71653DEBE007C23D2 /* camera@2x.png in Resources */,
+				6E5907001654DDE200D2E0D0 /* IPhoto@2x.png in Resources */,
+				6E5907011654DDE200D2E0D0 /* IPhoto.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

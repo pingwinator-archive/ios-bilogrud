@@ -40,4 +40,5 @@ return _sharedObject;
 
 #define kRoundedCornerImageSize 10
 #define kBorderSize 1
+#define cameraIndexButton 1
 #endif
