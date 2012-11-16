@@ -62,12 +62,4 @@
     [sourcePicture processImage];
 }
 
-
-/*
- self.title = @"Add Blend";
- self.filterSettingsSlider.hidden = YES;
- needsSecondImage = YES;
- 
- filter = [[GPUImageAddBlendFilter alloc] init];
- */
 @end
