@@ -38,7 +38,11 @@
 
 - (void)updateSliderValue
 {
-//...
+    CGFloat midpoint = self.imageSlider.value;//[(UISlider *)sender value];
+    [(GPUImageTiltShiftFilter *)self.shaderFilter setTopFocusLevel:midpoint - 0.1];
+    [(GPUImageTiltShiftFilter *)self.shaderFilter setBottomFocusLevel:midpoint + 0.1];
+    
+    [sourcePicture processImage];
 }
 
 
@@ -51,6 +55,7 @@
     
     sourcePicture = [[GPUImagePicture alloc] initWithImage:inputImage smoothlyScaleOutput:YES];
     //    sepiaFilter = [[GPUImageSepiaFilter alloc] init];
+    
     self.shaderFilter = [[GPUImageAddBlendFilter alloc] init];//GPUImageTiltShiftFilter
     
     GPUImageView *imageView = (GPUImageView *)self.view;
