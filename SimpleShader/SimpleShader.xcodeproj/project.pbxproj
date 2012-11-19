@@ -28,6 +28,7 @@
 		6E59077D1656403B00D2E0D0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E59077C1656403B00D2E0D0 /* QuartzCore.framework */; };
 		6E5909A6165688B300D2E0D0 /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E5909A5165688B300D2E0D0 /* libGPUImage.a */; };
 		6E5909AA16568B4100D2E0D0 /* WID-small.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6E5909A916568B4100D2E0D0 /* WID-small.jpg */; };
+		6E8C27E4165A371A004F1E48 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E8C27E3165A371A004F1E48 /* MobileCoreServices.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		6E5907D0165677D200D2E0D0 /* GPUImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GPUImage.xcodeproj; path = SimpleShader/externals/GPUImage/GPUImage.xcodeproj; sourceTree = SOURCE_ROOT; };
 		6E5909A5165688B300D2E0D0 /* libGPUImage.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGPUImage.a; path = "../../../Library/Developer/Xcode/DerivedData/SimpleShader-bdkgnrducvqhlybbhjlqwcaocgtb/Build/Products/Debug-iphoneos/libGPUImage.a"; sourceTree = "<group>"; };
 		6E5909A916568B4100D2E0D0 /* WID-small.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "WID-small.jpg"; sourceTree = "<group>"; };
+		6E8C27E3165A371A004F1E48 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E8C27E4165A371A004F1E48 /* MobileCoreServices.framework in Frameworks */,
 				6E5909A6165688B300D2E0D0 /* libGPUImage.a in Frameworks */,
 				6E59077D1656403B00D2E0D0 /* QuartzCore.framework in Frameworks */,
 				6E59077B1656403200D2E0D0 /* AVFoundation.framework in Frameworks */,
@@ -120,6 +123,7 @@
 		6E59073416563B7300D2E0D0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6E8C27E3165A371A004F1E48 /* MobileCoreServices.framework */,
 				6E5909A5165688B300D2E0D0 /* libGPUImage.a */,
 				6E59077C1656403B00D2E0D0 /* QuartzCore.framework */,
 				6E59077A1656403200D2E0D0 /* AVFoundation.framework */,

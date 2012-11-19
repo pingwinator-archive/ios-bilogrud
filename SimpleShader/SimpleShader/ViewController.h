@@ -10,8 +10,6 @@
 //#import <GLKit/GLKit.h>
 #import "GPUImage.h"
 
-@interface ViewController : UIViewController
-@property (retain, nonatomic) UISlider* imageSlider;
-@property (retain, nonatomic) GPUImagePicture* sourcePicture;
-@property (retain, nonatomic) GPUImageOutput<GPUImageInput> *shaderFilter;
+@interface ViewController : UIViewController<UIActionSheetDelegate, UIImagePickerControllerDelegate, UIAlertViewDelegate>
+
 @end
