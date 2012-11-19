@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "UIImage+Resize.h"
 #import <MobileCoreServices/UTCoreTypes.h>
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
 #define buttonWidth 80
@@ -35,6 +36,7 @@
 {
     [super viewDidLoad];
     self.hasCamera = [UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerSourceTypeCamera];
+    self.choosenImage = [self currentImage];
     
     CGRect mainScreenFrame = [[UIScreen mainScreen] applicationFrame];
 	self.imageView = [[GPUImageView alloc] initWithFrame:CGRectMake(25.0, 20.0, mainScreenFrame.size.width - 50.0, mainScreenFrame.size.height - 150)];//mainScreenFrame];
@@ -134,26 +136,29 @@
         [alert show];
     }
 }
-
+- (UIImage *)crop:(CGRect)rect {
+    if (self.choosenImage.scale > 1.0f) {
+        rect = CGRectMake(rect.origin.x * self.choosenImage.scale,
+                          rect.origin.y * self.choosenImage.scale,
+                          rect.size.width * self.choosenImage.scale,
+                          rect.size.height * self.choosenImage.scale);
+    }
+    
+    CGImageRef imageRef = CGImageCreateWithImageInRect(self.choosenImage.CGImage, rect);
+    UIImage *result = [UIImage imageWithCGImage:imageRef scale:self.choosenImage.scale orientation:self.choosenImage.imageOrientation];
+    CGImageRelease(imageRef);
+    return result;
+}
 #pragma mark -
 #pragma mark Image filtering
 
 - (void)setupDisplayFiltering;
 {
-    
-    UIImage *inputImage = [self currentImage]; //  The WID.jpg example is greater than 2048 pixels tall, so it fails on older devices
-    
-    GPUImageSepiaFilter *stillImageFilter2 = [[GPUImageSepiaFilter alloc] init];
-    UIImage *quickFilteredImage = [stillImageFilter2 imageByFilteringImage:inputImage];
-    self.choosenImage = quickFilteredImage;
-    
-    /*sourcePicture = [[GPUImagePicture alloc] initWithImage:inputImage smoothlyScaleOutput:YES];
-    
-    
-    
-    
-    
-    
+    NSLog(@"size %f %f", self.choosenImage.size.height, self.choosenImage.size.width);
+    CGRect testRect = CGRectMake(100, 100, 150, 150);
+    UIImage *inputImage = [self.choosenImage croppedImage:testRect];//[self crop:CGRectMake(20, 20, 100, 100)];//[self currentImage]; //  The WID.jpg example is greater than 2048 pixels tall, so it fails on older device
+  
+    sourcePicture = [[GPUImagePicture alloc] initWithImage:inputImage smoothlyScaleOutput:YES];
     
     self.shaderFilter  = [[GPUImageSepiaFilter alloc] init];
     
@@ -170,11 +175,42 @@
     GPUImageView *tempImageView = (GPUImageView *)self.imageView;//self.view;
     [self.shaderFilter forceProcessingAtSize:tempImageView.sizeInPixels]; // This is now needed to make the filter run at the smaller output size
     
-    
     [sourcePicture addTarget:self.shaderFilter];
     [self.shaderFilter addTarget:tempImageView];
     
-    [sourcePicture processImage];*/
+    
+    
+    [sourcePicture processImage];
+    
+    
+    CGContextRef contextOriginalImage = UIGraphicsGetCurrentContext();
+    CGContextDrawImage(contextOriginalImage, CGRectMake(0, 0, self.choosenImage.size.width, self.choosenImage.size.height), self.choosenImage.CGImage);
+//      CGContextDrawTiledImage(contextOriginalImage, testRect, sourcePicture.newCGImageFromCurrentlyProcessedOutput);
+//
+    UIImage* res = UIGraphicsGetImageFromCurrentImageContext();
+    self.choosenImage = res;
+
 }
+
+//add linear effect
+//- (void)addBorder {
+//    if (currentBorder != kBorderInitialValue) {
+//        GPUImageAlphaBlendFilter *blendFilter = [[GPUImageAlphaBlendFilter alloc] init];
+//        GPUImagePicture *imageToProcess = [[GPUImagePicture alloc] initWithImage:self.imageToWorkWithView.image];
+//        GPUImagePicture *border = [[GPUImagePicture alloc] initWithImage:self.imageBorder];
+//        
+//        blendFilter.mix = 1.0f;
+//        [imageToProcess addTarget:blendFilter];
+//        [border addTarget:blendFilter];
+//        
+//        [imageToProcess processImage];
+//        [border processImage];
+//        self.imageToWorkWithView.image = [blendFilter imageFromCurrentlyProcessedOutput];
+//        
+//        [blendFilter release];
+//        [imageToProcess release];
+//        [border release];
+//    }
+//}
 
 @end

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E130010165ADFF10077EE2A /* UIImage+Alpha.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E13000B165ADFF10077EE2A /* UIImage+Alpha.m */; };
+		6E130011165ADFF10077EE2A /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E13000D165ADFF10077EE2A /* UIImage+Resize.m */; };
+		6E130012165ADFF10077EE2A /* UIImage+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E13000F165ADFF10077EE2A /* UIImage+RoundedCorner.m */; };
 		6E59073616563B7300D2E0D0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E59073516563B7300D2E0D0 /* UIKit.framework */; };
 		6E59073816563B7300D2E0D0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E59073716563B7300D2E0D0 /* Foundation.framework */; };
 		6E59073A16563B7300D2E0D0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E59073916563B7300D2E0D0 /* CoreGraphics.framework */; };
@@ -49,6 +52,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6E13000A165ADFF10077EE2A /* UIImage+Alpha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Alpha.h"; sourceTree = "<group>"; };
+		6E13000B165ADFF10077EE2A /* UIImage+Alpha.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Alpha.m"; sourceTree = "<group>"; };
+		6E13000C165ADFF10077EE2A /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
+		6E13000D165ADFF10077EE2A /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
+		6E13000E165ADFF10077EE2A /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
+		6E13000F165ADFF10077EE2A /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
 		6E59073116563B7300D2E0D0 /* SimpleShader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleShader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E59073516563B7300D2E0D0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6E59073716563B7300D2E0D0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -101,9 +110,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6E130009165ADFF10077EE2A /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				6E13000A165ADFF10077EE2A /* UIImage+Alpha.h */,
+				6E13000B165ADFF10077EE2A /* UIImage+Alpha.m */,
+				6E13000C165ADFF10077EE2A /* UIImage+Resize.h */,
+				6E13000D165ADFF10077EE2A /* UIImage+Resize.m */,
+				6E13000E165ADFF10077EE2A /* UIImage+RoundedCorner.h */,
+				6E13000F165ADFF10077EE2A /* UIImage+RoundedCorner.m */,
+			);
+			name = Categories;
+			path = SimpleShader/Categories;
+			sourceTree = "<group>";
+		};
 		6E59072616563B7300D2E0D0 = {
 			isa = PBXGroup;
 			children = (
+				6E130009165ADFF10077EE2A /* Categories */,
 				6E5909A716568B4100D2E0D0 /* Resources */,
 				6E5907CE165677D200D2E0D0 /* externals */,
 				6E59073F16563B7300D2E0D0 /* SimpleShader */,
@@ -305,6 +329,9 @@
 				6E59074616563B7300D2E0D0 /* main.m in Sources */,
 				6E59074A16563B7300D2E0D0 /* AppDelegate.m in Sources */,
 				6E59075716563B7300D2E0D0 /* ViewController.m in Sources */,
+				6E130010165ADFF10077EE2A /* UIImage+Alpha.m in Sources */,
+				6E130011165ADFF10077EE2A /* UIImage+Resize.m in Sources */,
+				6E130012165ADFF10077EE2A /* UIImage+RoundedCorner.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
