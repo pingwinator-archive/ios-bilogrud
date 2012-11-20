@@ -10,6 +10,6 @@
 //#import <GLKit/GLKit.h>
 #import "GPUImage.h"
 
-@interface ViewController : UIViewController<UIActionSheetDelegate, UIImagePickerControllerDelegate, UIAlertViewDelegate>
+@interface ViewController : UIViewController<UIActionSheetDelegate, UIImagePickerControllerDelegate, UIAlertViewDelegate, UINavigationControllerDelegate>
 
 @end

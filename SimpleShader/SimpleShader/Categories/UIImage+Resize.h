@@ -4,6 +4,8 @@
 // No warranty is expressed or implied.
 
 // Extends the UIImage class to support resizing/cropping
+
+@class GPUImageFilter;
 @interface UIImage (Resize)
 - (UIImage *)croppedImage:(CGRect)bounds;
 - (UIImage *)thumbnailImage:(NSInteger)thumbnailSize
@@ -15,4 +17,7 @@
 - (UIImage *)resizedImageWithContentMode:(UIViewContentMode)contentMode
                                   bounds:(CGSize)bounds
                     interpolationQuality:(CGInterpolationQuality)quality;
+
+- (UIImage*)combineImage:(UIImage*)aImage inRect:(CGRect)frame;
+- (UIImage*)processInRect:(CGRect)rect filter:(GPUImageFilter*)embossFilter;
 @end

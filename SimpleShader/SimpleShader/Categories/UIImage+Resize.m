@@ -6,6 +6,7 @@
 #import "UIImage+Resize.h"
 #import "UIImage+RoundedCorner.h"
 #import "UIImage+Alpha.h"
+#import "GPUImage.h"
 
 // Private helper methods
 @interface UIImage ()
@@ -183,6 +184,30 @@
     }
     
     return transform;
+}
+
+- (UIImage*)combineImage:(UIImage*)aImage inRect:(CGRect)frame
+{
+     UIGraphicsBeginImageContext(self.size);
+     [self drawInRect: CGRectMake(0, 0, self.size.width, self.size.height)];
+     [aImage drawInRect: frame];
+    
+    
+     UIImage* combinedImage = UIGraphicsGetImageFromCurrentImageContext(); //
+     UIGraphicsEndImageContext();
+     return combinedImage;
+}
+
+- (UIImage*)processInRect:(CGRect)rect filter:(GPUImageFilter*)embossFilter
+{
+
+    CGRect testRect = rect;
+    UIImage *inputImage =[self croppedImage:testRect];
+
+    inputImage = [embossFilter imageByFilteringImage:inputImage];
+
+   return [self combineImage:inputImage inRect:testRect];
+
 }
 
 @end
