@@ -21,8 +21,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-   [StatisticManager sharedInstance];
-
     NSDictionary* appDefaults = [[[NSDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"defaults" ofType:@"plist"]] autorelease];
     [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
@@ -34,7 +32,7 @@
     }
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
-    
+    [StatisticManager initStatistic];
     return YES;
 }
 

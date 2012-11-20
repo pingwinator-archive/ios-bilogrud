@@ -8,44 +8,26 @@
 
 #import "StatisticManager.h"
 
-@interface StatisticManager()
-- (void)initStatistic;
-@end
 
 @implementation StatisticManager
-+ (id)sharedInstance
-{
-    DEFINE_SHARED_INSTANCE_USING_BLOCK(^{
-        DBLog(@"sharedInstance");
-        return [[self alloc] init];
-    });
-}
 
-- (id)init
++ (void)initStatistic
 {
-    self = [super init];
-    if (self) {
-        [self initStatistic];
-    }
-    return self;
-}
-- (void)initStatistic
-{
+#ifndef DEBUG
     [Flurry startSession: flurryKey];
+#endif
 }
 
 + (void)logMessage:(NSString*)message
 {
-#ifdef RELEASE
-    [self sharedInstance];
+#ifndef DEBUG
     [Flurry logEvent:message];
 #endif
 }
 
 + (void)sendScoreGame:(NSInteger)score
 {
-#ifdef RELEASE
-    [self sharedInstance];
+#ifndef DEBUG
     NSString *tmpString = [NSString stringWithFormat:@"Total Score: %d", score, nil];
     NSDictionary* scoreParametrs = [NSDictionary dictionaryWithObjectsAndKeys: tmpString, scoreGameKey, nil];
     [Flurry logEvent:scoreGameMessage withParameters:scoreParametrs];
