@@ -17,7 +17,7 @@
 @implementation ItemMenuView
 @synthesize itemImageView;
 
-- (id)initWithFrame:(CGRect)frame andImage:(UIImage*)itemImage
+- (id)initWithFrame:(CGRect)frame andImage:(UIImage*)itemImage withName:(NSString*)nameImage
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -27,6 +27,15 @@
         self.itemImageView = [[UIImageView alloc] initWithFrame:frameImage];
         self.itemImageView.image =  [itemImage roundedCornerImage:kRoundedCornerImageSize borderSize:kBorderSize];
         [self addSubview:self.itemImageView];
+        
+        UILabel* nameFilterLabel = [[UILabel alloc] initWithFrame:CGRectMake(frameImage.origin.x, frameImage.origin.y + (frameImage.size.height), frameImage.size.width, 30)];
+        nameFilterLabel.text = nameImage;//@"Sepia";
+        nameFilterLabel.lineBreakMode = NSLineBreakByWordWrapping;//CharWrapping;
+        nameFilterLabel.numberOfLines = 2;
+        nameFilterLabel.backgroundColor = [UIColor yellowColor];
+        nameFilterLabel.textAlignment = NSTextAlignmentCenter;
+        nameFilterLabel.font = filterNameFont;
+        [self addSubview:nameFilterLabel];
     }
     return self;
 }

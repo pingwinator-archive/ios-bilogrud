@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface ItemMenuView : UIView
-- (id)initWithFrame:(CGRect)frame andImage:(UIImage*)image;
+- (id)initWithFrame:(CGRect)frame andImage:(UIImage*)itemImage withName:(NSString*)nameImage;
 @end

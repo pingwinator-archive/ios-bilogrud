@@ -14,8 +14,8 @@
 #define buttonWidth 80
 #define buttonHeight 40
 
-#define menuItemWidth 90
-#define menuItemHeight 90
+#define menuItemWidth 80
+#define menuItemHeight 80
 
 #define imagePreViewWidth 80
 #define imagePreViewHeight 80
@@ -26,7 +26,7 @@
 
 #define offsetControllX 20.0f
 #define offsetControllY 20.0f
-#define imageViewHeight 300.0f
+#define imageViewHeight 290.0f
 #define sliderHeight 40.0f
 
 typedef enum {
@@ -83,7 +83,7 @@ typedef enum {
 //    GPUIMAGE_CLOSING,
     GPUIMAGE_PERLINNOISE,
     GPUIMAGE_MOSAIC,
-    
+      /*
     GPUIMAGE_LOCALBINARYPATTERN,
 //    GPUIMAGE_DISSOLVE,
 //    GPUIMAGE_CHROMAKEY, // need for 2 image
@@ -102,14 +102,15 @@ typedef enum {
 //    GPUIMAGE_HARDLIGHTBLEND,
 //    GPUIMAGE_SOFTLIGHTBLEND,
 //    GPUIMAGE_NORMALBLEND,
-    GPUIMAGE_OPACITY,
+  GPUIMAGE_OPACITY,
 
     
     GPUIMAGE_UIELEMENT,
     
     GPUIMAGE_FILTERGROUP,
-    GPUIMAGE_FACES,
-    GPUIMAGE_NUMFILTERS
+    GPUIMAGE_FACES,*/
+    GPUIMAGE_NUMFILTERS 
+    
     /*
     GPUIMAGE_SATURATION,
     GPUIMAGE_CONTRAST,
@@ -158,7 +159,7 @@ typedef enum {
 @property (assign, nonatomic) BOOL hasCamera;
 @property (strong, nonatomic) UIImage* choosenImage;
 - (void)doTapImageView;
-- (void)doTapFilterItem;
+- (void)doTapFilterItem:(id)sender;
 @end
 
 @implementation ViewController
@@ -183,10 +184,6 @@ typedef enum {
     
     self.imageView.backgroundColor = [UIColor redColor];
     self.imageView.image = defImage;
-   
-    
- 
-    
     self.view.userInteractionEnabled = YES;
     self.imageView.userInteractionEnabled = YES;
     
@@ -204,59 +201,38 @@ typedef enum {
 //    [self.saveButton addTarget:self action:@selector(saveResult) forControlEvents:UIControlEventTouchUpInside];
 //    [self.view addSubview:self.saveButton];
     
-    self.horisontalScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(10, 330, 300, 100)];
+    self.horisontalScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(10, 320, 300, 110)];
     self.horisontalScrollView.backgroundColor = [UIColor redColor];
     self.horisontalScrollView.pagingEnabled = YES;
  
     [self.horisontalScrollView setShowsHorizontalScrollIndicator:YES];
    // self.horisontalScrollView.delegate = self;
-    self.horisontalScrollView.contentSize = CGSizeMake(menuItemWidth * GPUIMAGE_NUMFILTERS , menuItemHeight);
+    self.horisontalScrollView.contentSize = CGSizeMake(menuItemWidth * (GPUIMAGE_NUMFILTERS - 1) , menuItemHeight);
+    
+      NSLog(@"horisontalScrollView %f %f", horisontalScrollView.contentSize.width, horisontalScrollView.contentSize.height);
+    
     [self.view addSubview:self.horisontalScrollView];
-    
- /*   //first - SepiaFilter
-    ItemMenuView* itemImage = [[ItemMenuView alloc]initWithFrame:CGRectMake(0, 0, 80 , 80) andImage:defImage];
-    itemImage.backgroundColor = [UIColor blueColor];
-     UITapGestureRecognizer* tapFilter = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(doTapFilterItem)];
-    [itemImage addGestureRecognizer:tapFilter];
-    [self.horisontalScrollView addSubview:itemImage];
-    
-    UILabel* nameFilter = [[UILabel alloc] initWithFrame:CGRectMake(0, 80, 80, 20)];
-    nameFilter.text = @"Sepia";
-    nameFilter.backgroundColor = [UIColor yellowColor];
-    nameFilter.textAlignment = NSTextAlignmentCenter;
-    
-    [self.horisontalScrollView addSubview:nameFilter];
-    
-    //second - EmbossFilter
-    ItemMenuView* itemImage_ = [[ItemMenuView alloc]initWithFrame:CGRectMake(80, 0, 80 , 80) andImage:defImage];
-    itemImage_.backgroundColor = [UIColor blueColor];
-    UITapGestureRecognizer* tapFilter_ = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(doTapFilterItem)];
-    [itemImage_ addGestureRecognizer:tapFilter_];
-    [self.horisontalScrollView addSubview:itemImage_];
- */
-    
-    for (NSInteger i = 0; i < GPUIMAGE_NUMFILTERS; i++) {
-        NSLog(@"GPUIMAGE_NUMFILTERS  %d",GPUIMAGE_NUMFILTERS);
+     UIImage* preView =  [self.choosenImage resizedImage:CGSizeMake(imagePreViewWidth, imagePreViewWidth) interpolationQuality:kCGInterpolationLow];
+    for (NSInteger i = 0; i < GPUIMAGE_NUMFILTERS - 1; i++) {
+        NSLog(@"%d from GPUIMAGE_NUMFILTERS  %d",i, GPUIMAGE_NUMFILTERS);
+        
         //second - EmbossFilter
-        ItemMenuView* itemImage_ = [[ItemMenuView alloc]initWithFrame:CGRectMake(i * imagePreViewWidth, 0, imagePreViewWidth , imagePreViewWidth) andImage:defImage];
+      //  [self setupDisplayFiltering];
+       
+        self.activeFilter = (GPUImageollectionFilterType)i;
+        [self initFilter];
+        ItemMenuView* itemImage_ = [[ItemMenuView alloc]initWithFrame:CGRectMake(i * imagePreViewWidth, 0, imagePreViewWidth , imagePreViewWidth) andImage:[self imageWithFilter:preView] withName: [self nameFilter:i]];//[self.choosenImage processInRect:testRect filter:(GPUImageFilter*)self.filter];
        // itemImage_.backgroundColor = [UIColor blueColor];
-        UITapGestureRecognizer* tapFilter_ = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(doTapFilterItem)];
+        NSLog(@"%f %f", itemImage_.frame.origin.x, itemImage_.frame.origin.y);
+        UITapGestureRecognizer* tapFilter_ = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(doTapFilterItem:)];
         [itemImage_ addGestureRecognizer:tapFilter_];
         [self.horisontalScrollView addSubview:itemImage_];
         
-        UILabel* nameFilter = [[UILabel alloc] initWithFrame:CGRectMake(i * imagePreViewWidth, imagePreViewHeight, imagePreViewWidth, 20)];
-        nameFilter.text = [self nameFilter:i];//@"Sepia";
-        nameFilter.backgroundColor = [UIColor yellowColor];
-        nameFilter.textAlignment = NSTextAlignmentCenter;
-        nameFilter.font = filterNameFont;
-        [self.horisontalScrollView addSubview:nameFilter];
+       
     }
     
-    
-    
     NSLog(@" mainScreenFrame %f %f %f %f", mainScreenFrame.origin.x, mainScreenFrame.origin.y, mainScreenFrame.size.width, mainScreenFrame.size.height);
-    
-    
+      
     self.filterSettingsSlider = [[UISlider alloc] initWithFrame:CGRectMake(offsetControllX, mainScreenFrame.size.height + 40, mainScreenFrame.size.width - offsetControllX * 2, sliderHeight)];
     [self.filterSettingsSlider addTarget:self action:@selector(updateSliderValue) forControlEvents:UIControlEventValueChanged];
 	self.filterSettingsSlider.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
@@ -268,6 +244,11 @@ typedef enum {
     [self.view addSubview:self.filterSettingsSlider];
     
    // [self setupDisplayFiltering];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
 }
 
 - (NSString*)nameFilter:(NSInteger)index
@@ -301,7 +282,7 @@ typedef enum {
 //		case GPUIMAGE_TILTSHIFT: name = @"Tilt shift"; break;
 		case GPUIMAGE_CGA: name = @"CGA colorspace"; break;
        
-       
+      
         case GPUIMAGE_POSTERIZE: name = @"Posterize"; break;
 		case GPUIMAGE_CONVOLUTION: name = @"3x3 convolution"; break;
 		case GPUIMAGE_EMBOSS: name = @"Emboss"; break;
@@ -330,7 +311,9 @@ typedef enum {
 //		case GPUIMAGE_CLOSING: name = @"Closing"; break;
         case GPUIMAGE_PERLINNOISE: name = @"Perlin noise"; break;
         case GPUIMAGE_MOSAIC: name = @"Mosaic"; break;
-		case GPUIMAGE_LOCALBINARYPATTERN: name = @"Local binary pattern"; break;
+ //!!       case GPUIMAGE_LOCALBINARYPATTERN: name = @"Local binary pattern"; break;
+       
+       
 //		case GPUIMAGE_DISSOLVE: name = @"Dissolve blend"; break;
 //      case GPUIMAGE_CHROMAKEY: name = @"Chroma key blend (green)"; break;
 //		case GPUIMAGE_ADD: name = @"Add blend"; break;
@@ -348,19 +331,17 @@ typedef enum {
 //	    case GPUIMAGE_HARDLIGHTBLEND: name = @"Hard light blend"; break;
 //	    case GPUIMAGE_SOFTLIGHTBLEND: name = @"Soft light blend"; break;
 //	    case GPUIMAGE_NORMALBLEND: name = @"Normal blend"; break;
-	    case GPUIMAGE_OPACITY: name = @"Opacity adjustment"; break;
-      
-        
             
-        case GPUIMAGE_UIELEMENT: name = @"UI element"; break;
+            
 
-        case GPUIMAGE_FILTERGROUP: name = @"Filter Group"; break;
-//        case GPUIMAGE_FACES: name = @"Face Detection"; break;
+// !!
+//	    case GPUIMAGE_OPACITY: name = @"Opacity adjustment"; break;
+//        case GPUIMAGE_UIELEMENT: name = @"UI element"; break;
+//        case GPUIMAGE_FILTERGROUP: name = @"Filter Group"; break;
+       
  
-	   
-		
-	
-/*
+//        case GPUIMAGE_FACES: name = @"Face Detection"; break;
+ /*
 		case GPUIMAGE_SATURATION: name = @"Saturation"; break;
 		case GPUIMAGE_CONTRAST: name = @"Contrast"; break;
 		case GPUIMAGE_BRIGHTNESS: name = @"Brightness"; break;
@@ -398,11 +379,17 @@ typedef enum {
 	}
     return name;
 }
--(void)doTapFilterItem
+
+
+
+-(void)doTapFilterItem:(UITapGestureRecognizer*)sender
 {
-    NSLog(@"tap filter");
-    self.activeFilter = GPUIMAGE_OPACITY;
+    NSLog(@"tap filter %@", sender);
+    
+    
+    self.activeFilter = GPUIMAGE_SEPIA;
     [self setupDisplayFiltering];
+//    self.horisontalScrollView.co
 }
 
 - (UIImage*)currentImage
@@ -493,7 +480,40 @@ typedef enum {
   
     NSLog(@"scale %f", self.choosenImage.scale);
    
+    [self initFilter];
+  
+//    GPUImageEmbossFilter *embossFilter = [[GPUImageEmbossFilter alloc] init];
+//    embossFilter.intensity = 2.0;
     
+    self.imageView.image = [self.choosenImage processInRect:testRect filter:(GPUImageFilter*)self.filter];
+//    UIImageView* tt = [[UIImageView alloc] initWithFrame:self.imageView.frame];
+//    tt.image = [self.choosenImage processInRect:testRect filter:embossFilter];
+//    [self.view addSubview:tt];
+}
+
+- (UIImage*)imageWithFilter:(UIImage*)image
+{
+    NSLog(@"size %f %f", image.size.height, image.size.width);
+    
+    CGRect testRect = CGRectMake(0, 0, image.size.width, image.size.height);
+    
+    
+    NSLog(@"scale %f", image.scale);
+    
+    [self initFilter];
+    
+    //    GPUImageEmbossFilter *embossFilter = [[GPUImageEmbossFilter alloc] init];
+    //    embossFilter.intensity = 2.0;
+    
+    return [image processInRect:testRect filter:(GPUImageFilter*)self.filter];
+    //    UIImageView* tt = [[UIImageView alloc] initWithFrame:self.imageView.frame];
+    //    tt.image = [self.choosenImage processInRect:testRect filter:embossFilter];
+    //    [self.view addSubview:tt];
+}
+
+
+- (void)initFilter
+{
     switch (self.activeFilter)
     {
         case GPUIMAGE_SEPIA:
@@ -509,186 +529,186 @@ typedef enum {
         }; break;
         case GPUIMAGE_PIXELLATE:
         {
-             self.title = @"Pixellate";
-             self.filterSettingsSlider.hidden = NO;
-             
-             [self.filterSettingsSlider setValue:0.15];
-             [self.filterSettingsSlider setMinimumValue:0.0];
-             [self.filterSettingsSlider setMaximumValue:0.3];
-             
-             self.filter = [[GPUImagePixellateFilter alloc] init];
+            self.title = @"Pixellate";
+            self.filterSettingsSlider.hidden = NO;
+            
+            [self.filterSettingsSlider setValue:0.15];
+            [self.filterSettingsSlider setMinimumValue:0.0];
+            [self.filterSettingsSlider setMaximumValue:0.3];
+            
+            self.filter = [[GPUImagePixellateFilter alloc] init];
         }; break;
         case GPUIMAGE_POLARPIXELLATE:
         {
-             self.title = @"Polar Pixellate";
-             self.filterSettingsSlider.hidden = NO;
-             
-             [self.filterSettingsSlider setValue:0.05];
-             [self.filterSettingsSlider setMinimumValue:-0.1];
-             [self.filterSettingsSlider setMaximumValue:0.1];
-             
-             self.filter = [[GPUImagePolarPixellateFilter alloc] init];
+            self.title = @"Polar Pixellate";
+            self.filterSettingsSlider.hidden = NO;
+            
+            [self.filterSettingsSlider setValue:0.05];
+            [self.filterSettingsSlider setMinimumValue:-0.1];
+            [self.filterSettingsSlider setMaximumValue:0.1];
+            
+            self.filter = [[GPUImagePolarPixellateFilter alloc] init];
         }; break;
         case GPUIMAGE_POLKADOT:
-             {
-             self.title = @"Polka Dot";
-             self.filterSettingsSlider.hidden = NO;
-             
-             [self.filterSettingsSlider setValue:0.05];
-             [self.filterSettingsSlider setMinimumValue:0.0];
-             [self.filterSettingsSlider setMaximumValue:0.3];
-             
-             self.filter = [[GPUImagePolkaDotFilter alloc] init];
-             }; break;
-        case GPUIMAGE_HALFTONE:
-             {
-             self.title = @"Halftone";
-             self.filterSettingsSlider.hidden = NO;
-             
-             [self.filterSettingsSlider setValue:0.01];
-             [self.filterSettingsSlider setMinimumValue:0.0];
-             [self.filterSettingsSlider setMaximumValue:0.05];
-             
-             self.filter = [[GPUImageHalftoneFilter alloc] init];
-             }; break;
-            case GPUIMAGE_CROSSHATCH:
-             {
-             self.title = @"Crosshatch";
-             self.filterSettingsSlider.hidden = NO;
-             
-             [self.filterSettingsSlider setValue:0.03];
-             [self.filterSettingsSlider setMinimumValue:0.01];
-             [self.filterSettingsSlider setMaximumValue:0.06];
-             
-             self.filter = [[GPUImageCrosshatchFilter alloc] init];
-             }; break;
+        {
+            self.title = @"Polka Dot";
+            self.filterSettingsSlider.hidden = NO;
             
-      
-//            case GPUIMAGE_SOBELEDGEDETECTION:
-//            {
-//            self.title = @"Sobel Edge Detection";
-//            self.filterSettingsSlider.hidden = YES;
-//            
-//            filter = [[GPUImageSobelEdgeDetectionFilter alloc] init];
-//            }; break;
-//        case GPUIMAGE_PREWITTEDGEDETECTION:
-//        {
-//            self.title = @"Prewitt Edge Detection";
-//            self.filterSettingsSlider.hidden = YES;
-//            
-//            filter = [[GPUImagePrewittEdgeDetectionFilter alloc] init];
-//        }; break;
-//       
-//        case GPUIMAGE_THRESHOLDEDGEDETECTION:
-//        {
-//            self.title = @"Threshold Edge Detection";
-//            self.filterSettingsSlider.hidden = NO;
-//            
-//            [self.filterSettingsSlider setMinimumValue:0.0];
-//            [self.filterSettingsSlider setMaximumValue:1.0];
-//            [self.filterSettingsSlider setValue:0.5];
-//            
-//            filter = [[GPUImageThresholdEdgeDetectionFilter alloc] init];
-//        }; break;
-//        case GPUIMAGE_XYGRADIENT:
-//        {
-//            self.title = @"XY Derivative";
-//            self.filterSettingsSlider.hidden = YES;
-//            
-//            filter = [[GPUImageXYDerivativeFilter alloc] init];
-//        }; break;
-//        case GPUIMAGE_HARRISCORNERDETECTION:
-//        {
-//            self.title = @"Harris Corner Detection";
-//            self.filterSettingsSlider.hidden = NO;
-//            
-//            [self.filterSettingsSlider setMinimumValue:0.01];
-//            [self.filterSettingsSlider setMaximumValue:0.70];
-//            [self.filterSettingsSlider setValue:0.20];
-//            
-//            filter = [[GPUImageHarrisCornerDetectionFilter alloc] init];
-//            [(GPUImageHarrisCornerDetectionFilter *)filter setThreshold:0.20];
-//        }; break;
-//        case GPUIMAGE_NOBLECORNERDETECTION:
-//        {
-//            self.title = @"Noble Corner Detection";
-//            self.filterSettingsSlider.hidden = NO;
-//            
-//            [self.filterSettingsSlider setMinimumValue:0.01];
-//            [self.filterSettingsSlider setMaximumValue:0.70];
-//            [self.filterSettingsSlider setValue:0.20];
-//            
-//            filter = [[GPUImageNobleCornerDetectionFilter alloc] init];
-//            [(GPUImageNobleCornerDetectionFilter *)filter setThreshold:0.20];
-//        }; break;
-//        case GPUIMAGE_SHITOMASIFEATUREDETECTION:
-//        {
-//            self.title = @"Shi-Tomasi Feature Detection";
-//            self.filterSettingsSlider.hidden = NO;
-//            
-//            [self.filterSettingsSlider setMinimumValue:0.01];
-//            [self.filterSettingsSlider setMaximumValue:0.70];
-//            [self.filterSettingsSlider setValue:0.20];
-//            
-//            filter = [[GPUImageShiTomasiFeatureDetectionFilter alloc] init];
-//            [(GPUImageShiTomasiFeatureDetectionFilter *)filter setThreshold:0.20];
-//        }; break;
-//        case GPUIMAGE_HOUGHTRANSFORMLINEDETECTOR:
-//        {
-//            self.title = @"Line Detection";
-//            self.filterSettingsSlider.hidden = NO;
-//            
-//            [self.filterSettingsSlider setMinimumValue:0.2];
-//            [self.filterSettingsSlider setMaximumValue:1.0];
-//            [self.filterSettingsSlider setValue:0.6];
-//            
-//            filter = [[GPUImageHoughTransformLineDetector alloc] init];
-//            [(GPUImageHoughTransformLineDetector *)filter setLineDetectionThreshold:0.60];
-//        }; break;
-//        case GPUIMAGE_BUFFER:
-//        {
-//            self.title = @"Image Buffer";
-//            self.filterSettingsSlider.hidden = YES;
-//            
-//            filter = [[GPUImageBuffer alloc] init];
-//        }; break;
+            [self.filterSettingsSlider setValue:0.05];
+            [self.filterSettingsSlider setMinimumValue:0.0];
+            [self.filterSettingsSlider setMaximumValue:0.3];
+            
+            self.filter = [[GPUImagePolkaDotFilter alloc] init];
+        }; break;
+        case GPUIMAGE_HALFTONE:
+        {
+            self.title = @"Halftone";
+            self.filterSettingsSlider.hidden = NO;
+            
+            [self.filterSettingsSlider setValue:0.01];
+            [self.filterSettingsSlider setMinimumValue:0.0];
+            [self.filterSettingsSlider setMaximumValue:0.05];
+            
+            self.filter = [[GPUImageHalftoneFilter alloc] init];
+        }; break;
+        case GPUIMAGE_CROSSHATCH:
+        {
+            self.title = @"Crosshatch";
+            self.filterSettingsSlider.hidden = NO;
+            
+            [self.filterSettingsSlider setValue:0.03];
+            [self.filterSettingsSlider setMinimumValue:0.01];
+            [self.filterSettingsSlider setMaximumValue:0.06];
+            
+            self.filter = [[GPUImageCrosshatchFilter alloc] init];
+        }; break;
+            
+            
+            //            case GPUIMAGE_SOBELEDGEDETECTION:
+            //            {
+            //            self.title = @"Sobel Edge Detection";
+            //            self.filterSettingsSlider.hidden = YES;
+            //
+            //            filter = [[GPUImageSobelEdgeDetectionFilter alloc] init];
+            //            }; break;
+            //        case GPUIMAGE_PREWITTEDGEDETECTION:
+            //        {
+            //            self.title = @"Prewitt Edge Detection";
+            //            self.filterSettingsSlider.hidden = YES;
+            //
+            //            filter = [[GPUImagePrewittEdgeDetectionFilter alloc] init];
+            //        }; break;
+            //
+            //        case GPUIMAGE_THRESHOLDEDGEDETECTION:
+            //        {
+            //            self.title = @"Threshold Edge Detection";
+            //            self.filterSettingsSlider.hidden = NO;
+            //
+            //            [self.filterSettingsSlider setMinimumValue:0.0];
+            //            [self.filterSettingsSlider setMaximumValue:1.0];
+            //            [self.filterSettingsSlider setValue:0.5];
+            //
+            //            filter = [[GPUImageThresholdEdgeDetectionFilter alloc] init];
+            //        }; break;
+            //        case GPUIMAGE_XYGRADIENT:
+            //        {
+            //            self.title = @"XY Derivative";
+            //            self.filterSettingsSlider.hidden = YES;
+            //
+            //            filter = [[GPUImageXYDerivativeFilter alloc] init];
+            //        }; break;
+            //        case GPUIMAGE_HARRISCORNERDETECTION:
+            //        {
+            //            self.title = @"Harris Corner Detection";
+            //            self.filterSettingsSlider.hidden = NO;
+            //
+            //            [self.filterSettingsSlider setMinimumValue:0.01];
+            //            [self.filterSettingsSlider setMaximumValue:0.70];
+            //            [self.filterSettingsSlider setValue:0.20];
+            //
+            //            filter = [[GPUImageHarrisCornerDetectionFilter alloc] init];
+            //            [(GPUImageHarrisCornerDetectionFilter *)filter setThreshold:0.20];
+            //        }; break;
+            //        case GPUIMAGE_NOBLECORNERDETECTION:
+            //        {
+            //            self.title = @"Noble Corner Detection";
+            //            self.filterSettingsSlider.hidden = NO;
+            //
+            //            [self.filterSettingsSlider setMinimumValue:0.01];
+            //            [self.filterSettingsSlider setMaximumValue:0.70];
+            //            [self.filterSettingsSlider setValue:0.20];
+            //
+            //            filter = [[GPUImageNobleCornerDetectionFilter alloc] init];
+            //            [(GPUImageNobleCornerDetectionFilter *)filter setThreshold:0.20];
+            //        }; break;
+            //        case GPUIMAGE_SHITOMASIFEATUREDETECTION:
+            //        {
+            //            self.title = @"Shi-Tomasi Feature Detection";
+            //            self.filterSettingsSlider.hidden = NO;
+            //
+            //            [self.filterSettingsSlider setMinimumValue:0.01];
+            //            [self.filterSettingsSlider setMaximumValue:0.70];
+            //            [self.filterSettingsSlider setValue:0.20];
+            //
+            //            filter = [[GPUImageShiTomasiFeatureDetectionFilter alloc] init];
+            //            [(GPUImageShiTomasiFeatureDetectionFilter *)filter setThreshold:0.20];
+            //        }; break;
+            //        case GPUIMAGE_HOUGHTRANSFORMLINEDETECTOR:
+            //        {
+            //            self.title = @"Line Detection";
+            //            self.filterSettingsSlider.hidden = NO;
+            //
+            //            [self.filterSettingsSlider setMinimumValue:0.2];
+            //            [self.filterSettingsSlider setMaximumValue:1.0];
+            //            [self.filterSettingsSlider setValue:0.6];
+            //
+            //            filter = [[GPUImageHoughTransformLineDetector alloc] init];
+            //            [(GPUImageHoughTransformLineDetector *)filter setLineDetectionThreshold:0.60];
+            //        }; break;
+            //        case GPUIMAGE_BUFFER:
+            //        {
+            //            self.title = @"Image Buffer";
+            //            self.filterSettingsSlider.hidden = YES;
+            //
+            //            filter = [[GPUImageBuffer alloc] init];
+            //        }; break;
             
             //group
-//        case GPUIMAGE_LOWPASS:
-//        {
-//            self.title = @"Low Pass";
-//            self.filterSettingsSlider.hidden = NO;
-//            
-//            [self.filterSettingsSlider setMinimumValue:0.0];
-//            [self.filterSettingsSlider setMaximumValue:1.0];
-//            [self.filterSettingsSlider setValue:0.5];
-//            
-//            filter = [[GPUImageLowPassFilter alloc] init];
-//        }; break;
-//        case GPUIMAGE_HIGHPASS:
-//        {
-//            self.title = @"High Pass";
-//            self.filterSettingsSlider.hidden = NO;
-//            
-//            [self.filterSettingsSlider setMinimumValue:0.0];
-//            [self.filterSettingsSlider setMaximumValue:1.0];
-//            [self.filterSettingsSlider setValue:0.5];
-//            
-//            filter = [[GPUImageHighPassFilter alloc] init];
-//        }; break;
-//        case GPUIMAGE_MOTIONDETECTOR:
-//        {
-//            [videoCamera rotateCamera];
-//            
-//            self.title = @"Motion Detector";
-//            self.filterSettingsSlider.hidden = NO;
-//            
-//            [self.filterSettingsSlider setMinimumValue:0.0];
-//            [self.filterSettingsSlider setMaximumValue:1.0];
-//            [self.filterSettingsSlider setValue:0.5];
-//            
-//            filter = [[GPUImageMotionDetector alloc] init];
-//        }; break;
+            //        case GPUIMAGE_LOWPASS:
+            //        {
+            //            self.title = @"Low Pass";
+            //            self.filterSettingsSlider.hidden = NO;
+            //
+            //            [self.filterSettingsSlider setMinimumValue:0.0];
+            //            [self.filterSettingsSlider setMaximumValue:1.0];
+            //            [self.filterSettingsSlider setValue:0.5];
+            //
+            //            filter = [[GPUImageLowPassFilter alloc] init];
+            //        }; break;
+            //        case GPUIMAGE_HIGHPASS:
+            //        {
+            //            self.title = @"High Pass";
+            //            self.filterSettingsSlider.hidden = NO;
+            //
+            //            [self.filterSettingsSlider setMinimumValue:0.0];
+            //            [self.filterSettingsSlider setMaximumValue:1.0];
+            //            [self.filterSettingsSlider setValue:0.5];
+            //
+            //            filter = [[GPUImageHighPassFilter alloc] init];
+            //        }; break;
+            //        case GPUIMAGE_MOTIONDETECTOR:
+            //        {
+            //            [videoCamera rotateCamera];
+            //
+            //            self.title = @"Motion Detector";
+            //            self.filterSettingsSlider.hidden = NO;
+            //
+            //            [self.filterSettingsSlider setMinimumValue:0.0];
+            //            [self.filterSettingsSlider setMaximumValue:1.0];
+            //            [self.filterSettingsSlider setValue:0.5];
+            //
+            //            filter = [[GPUImageMotionDetector alloc] init];
+            //        }; break;
         case GPUIMAGE_SKETCH:
         {
             self.title = @"Sketch";
@@ -714,31 +734,31 @@ typedef enum {
             
             filter = [[GPUImageToonFilter alloc] init];
         }; break;
-//        case GPUIMAGE_SMOOTHTOON:
-//        {
-//            self.title = @"Smooth Toon";
-//            self.filterSettingsSlider.hidden = NO;
-//            
-//            [self.filterSettingsSlider setMinimumValue:0.0];
-//            [self.filterSettingsSlider setMaximumValue:1.0];
-//            [self.filterSettingsSlider setValue:0.5];
-//            
-//            filter = [[GPUImageSmoothToonFilter alloc] init];
-//        }; break;
-//        case GPUIMAGE_TILTSHIFT:
-//        {
-//            self.title = @"Tilt Shift";
-//            self.filterSettingsSlider.hidden = NO;
-//            
-//            [self.filterSettingsSlider setMinimumValue:0.2];
-//            [self.filterSettingsSlider setMaximumValue:0.8];
-//            [self.filterSettingsSlider setValue:0.5];
-//            
-//            filter = [[GPUImageTiltShiftFilter alloc] init];
-//            [(GPUImageTiltShiftFilter *)filter setTopFocusLevel:0.4];
-//            [(GPUImageTiltShiftFilter *)filter setBottomFocusLevel:0.6];
-//            [(GPUImageTiltShiftFilter *)filter setFocusFallOffRate:0.2];
-//        }; break;
+            //        case GPUIMAGE_SMOOTHTOON:
+            //        {
+            //            self.title = @"Smooth Toon";
+            //            self.filterSettingsSlider.hidden = NO;
+            //
+            //            [self.filterSettingsSlider setMinimumValue:0.0];
+            //            [self.filterSettingsSlider setMaximumValue:1.0];
+            //            [self.filterSettingsSlider setValue:0.5];
+            //
+            //            filter = [[GPUImageSmoothToonFilter alloc] init];
+            //        }; break;
+            //        case GPUIMAGE_TILTSHIFT:
+            //        {
+            //            self.title = @"Tilt Shift";
+            //            self.filterSettingsSlider.hidden = NO;
+            //
+            //            [self.filterSettingsSlider setMinimumValue:0.2];
+            //            [self.filterSettingsSlider setMaximumValue:0.8];
+            //            [self.filterSettingsSlider setValue:0.5];
+            //
+            //            filter = [[GPUImageTiltShiftFilter alloc] init];
+            //            [(GPUImageTiltShiftFilter *)filter setTopFocusLevel:0.4];
+            //            [(GPUImageTiltShiftFilter *)filter setBottomFocusLevel:0.6];
+            //            [(GPUImageTiltShiftFilter *)filter setFocusFallOffRate:0.2];
+            //        }; break;
         case GPUIMAGE_CGA:
         {
             self.title = @"CGA Colorspace";
@@ -746,7 +766,7 @@ typedef enum {
             
             filter = [[GPUImageCGAColorspaceFilter alloc] init];
         }; break;
-            
+
         case GPUIMAGE_POSTERIZE:
         {
             self.title = @"Posterize";
@@ -801,7 +821,7 @@ typedef enum {
         {
             self.title = @"Chroma Key (Green)";
             self.filterSettingsSlider.hidden = NO;
-          //  needsSecondImage = YES;
+            //  needsSecondImage = YES;
             
             [self.filterSettingsSlider setMinimumValue:0.0];
             [self.filterSettingsSlider setMaximumValue:1.0];
@@ -844,18 +864,18 @@ typedef enum {
             
             filter = [[GPUImageGaussianBlurFilter alloc] init];
         }; break;
-//        case GPUIMAGE_GAUSSIAN_SELECTIVE:
-//        {
-//            self.title = @"Selective Blur";
-//            self.filterSettingsSlider.hidden = NO;
-//            
-//            [self.filterSettingsSlider setMinimumValue:0.0];
-//            [self.filterSettingsSlider setMaximumValue:.75f];
-//            [self.filterSettingsSlider setValue:40.0/320.0];
-//            
-//            filter = [[GPUImageGaussianSelectiveBlurFilter alloc] init];
-//            [(GPUImageGaussianSelectiveBlurFilter*)filter setExcludeCircleRadius:40.0/320.0];
-//        }; break;
+            //        case GPUIMAGE_GAUSSIAN_SELECTIVE:
+            //        {
+            //            self.title = @"Selective Blur";
+            //            self.filterSettingsSlider.hidden = NO;
+            //
+            //            [self.filterSettingsSlider setMinimumValue:0.0];
+            //            [self.filterSettingsSlider setMaximumValue:.75f];
+            //            [self.filterSettingsSlider setValue:40.0/320.0];
+            //
+            //            filter = [[GPUImageGaussianSelectiveBlurFilter alloc] init];
+            //            [(GPUImageGaussianSelectiveBlurFilter*)filter setExcludeCircleRadius:40.0/320.0];
+            //        }; break;
         case GPUIMAGE_FASTBLUR:
         {
             self.title = @"Fast Blur";
@@ -971,20 +991,20 @@ typedef enum {
             
             filter = [[GPUImageRGBErosionFilter alloc] initWithRadius:4];
         }; break;
-//        case GPUIMAGE_OPENING:
-//        {
-//            self.title = @"Opening";
-//            self.filterSettingsSlider.hidden = YES;
-//            
-//            filter = [[GPUImageRGBOpeningFilter alloc] initWithRadius:4];
-//        }; break;
-//        case GPUIMAGE_CLOSING:
-//        {
-//            self.title = @"Closing";
-//            self.filterSettingsSlider.hidden = YES;
-//            
-//            filter = [[GPUImageRGBClosingFilter alloc] initWithRadius:4];
-//        }; break;
+            //        case GPUIMAGE_OPENING:
+            //        {
+            //            self.title = @"Opening";
+            //            self.filterSettingsSlider.hidden = YES;
+            //
+            //            filter = [[GPUImageRGBOpeningFilter alloc] initWithRadius:4];
+            //        }; break;
+            //        case GPUIMAGE_CLOSING:
+            //        {
+            //            self.title = @"Closing";
+            //            self.filterSettingsSlider.hidden = YES;
+            //
+            //            filter = [[GPUImageRGBClosingFilter alloc] initWithRadius:4];
+            //        }; break;
             
         case GPUIMAGE_PERLINNOISE:
         {
@@ -1015,6 +1035,8 @@ typedef enum {
             [filter setInputRotation:kGPUImageRotateRight atIndex:0];
             
         }; break;
+  //!!
+            /*
         case GPUIMAGE_LOCALBINARYPATTERN:
         {
             self.title = @"Local Binary Pattern";
@@ -1026,154 +1048,155 @@ typedef enum {
             
             filter = [[GPUImageLocalBinaryPatternFilter alloc] init];
         }; break;
-//        case GPUIMAGE_DISSOLVE:
-//        {
-//            self.title = @"Dissolve Blend";
-//            self.filterSettingsSlider.hidden = NO;
-//            needsSecondImage = YES;
-//            
-//            [self.filterSettingsSlider setMinimumValue:0.0];
-//            [self.filterSettingsSlider setMaximumValue:1.0];
-//            [self.filterSettingsSlider setValue:0.5];
-//            
-//            filter = [[GPUImageDissolveBlendFilter alloc] init];
-//        }; break;
-//        case GPUIMAGE_CHROMAKEY:
-//        {
-//            self.title = @"Chroma Key (Green)";
-//            self.filterSettingsSlider.hidden = NO;
-//            needsSecondImage = YES;
-//            
-//            [self.filterSettingsSlider setMinimumValue:0.0];
-//            [self.filterSettingsSlider setMaximumValue:1.0];
-//            [self.filterSettingsSlider setValue:0.4];
-//            
-//            filter = [[GPUImageChromaKeyBlendFilter alloc] init];
-//            [(GPUImageChromaKeyBlendFilter *)filter setColorToReplaceRed:0.0 green:1.0 blue:0.0];
-//        }; break;
-//            
-//        case GPUIMAGE_ADD:
-//        {
-//            self.title = @"Add Blend";
-//            self.filterSettingsSlider.hidden = YES;
-//            needsSecondImage = YES;
-//            
-//            filter = [[GPUImageAddBlendFilter alloc] init];
-//        }; break;
-//        case GPUIMAGE_DIVIDE:
-//        {
-//            self.title = @"Divide Blend";
-//            self.filterSettingsSlider.hidden = YES;
-//            needsSecondImage = YES;
-//            
-//            filter = [[GPUImageDivideBlendFilter alloc] init];
-//        }; break;
-//        case GPUIMAGE_MULTIPLY:
-//        {
-//            self.title = @"Multiply Blend";
-//            self.filterSettingsSlider.hidden = YES;
-//            needsSecondImage = YES;
-//            
-//            filter = [[GPUImageMultiplyBlendFilter alloc] init];
-//        }; break;
-//        case GPUIMAGE_OVERLAY:
-//        {
-//            self.title = @"Overlay Blend";
-//            self.filterSettingsSlider.hidden = YES;
-//            needsSecondImage = YES;
-//            
-//            filter = [[GPUImageOverlayBlendFilter alloc] init];
-//        }; break;
-//        case GPUIMAGE_LIGHTEN:
-//        {
-//            self.title = @"Lighten Blend";
-//            self.filterSettingsSlider.hidden = YES;
-//            needsSecondImage = YES;
-//            
-//            filter = [[GPUImageLightenBlendFilter alloc] init];
-//        }; break;
-//        case GPUIMAGE_DARKEN:
-//        {
-//            self.title = @"Darken Blend";
-//            self.filterSettingsSlider.hidden = YES;
-//            
-//            needsSecondImage = YES;
-//            filter = [[GPUImageDarkenBlendFilter alloc] init];
-//        }; break;
-//        case GPUIMAGE_COLORBURN:
-//        {
-//            self.title = @"Color Burn Blend";
-//            self.filterSettingsSlider.hidden = YES;
-//            needsSecondImage = YES;
-//            
-//            filter = [[GPUImageColorBurnBlendFilter alloc] init];
-//        }; break;
-//        case GPUIMAGE_COLORDODGE:
-//        {
-//            self.title = @"Color Dodge Blend";
-//            self.filterSettingsSlider.hidden = YES;
-//            needsSecondImage = YES;
-//            
-//            filter = [[GPUImageColorDodgeBlendFilter alloc] init];
-//        }; break;
-//        case GPUIMAGE_SCREENBLEND:
-//        {
-//            self.title = @"Screen Blend";
-//            self.filterSettingsSlider.hidden = YES;
-//            needsSecondImage = YES;
-//            
-//            filter = [[GPUImageScreenBlendFilter alloc] init];
-//        }; break;
-//        case GPUIMAGE_DIFFERENCEBLEND:
-//        {
-//            self.title = @"Difference Blend";
-//            self.filterSettingsSlider.hidden = YES;
-//            needsSecondImage = YES;
-//            
-//            filter = [[GPUImageDifferenceBlendFilter alloc] init];
-//        }; break;
-//        case GPUIMAGE_SUBTRACTBLEND:
-//        {
-//            self.title = @"Subtract Blend";
-//            self.filterSettingsSlider.hidden = YES;
-//            needsSecondImage = YES;
-//            
-//            filter = [[GPUImageSubtractBlendFilter alloc] init];
-//        }; break;
-//        case GPUIMAGE_EXCLUSIONBLEND:
-//        {
-//            self.title = @"Exclusion Blend";
-//            self.filterSettingsSlider.hidden = YES;
-//            needsSecondImage = YES;
-//            
-//            filter = [[GPUImageExclusionBlendFilter alloc] init];
-//        }; break;
-//            
-//        case GPUIMAGE_HARDLIGHTBLEND:
-//        {
-//            self.title = @"Hard Light Blend";
-//            self.filterSettingsSlider.hidden = YES;
-//            needsSecondImage = YES;
-//            
-//            filter = [[GPUImageHardLightBlendFilter alloc] init];
-//        }; break;
-//        case GPUIMAGE_SOFTLIGHTBLEND:
-//        {
-//            self.title = @"Soft Light Blend";
-//            self.filterSettingsSlider.hidden = YES;
-//            needsSecondImage = YES;
-//            
-//            filter = [[GPUImageSoftLightBlendFilter alloc] init];
-//        }; break;
-//        case GPUIMAGE_NORMALBLEND:
-//        {
-//            self.title = @"Normal Blend";
-//            self.filterSettingsSlider.hidden = YES;
-//            needsSecondImage = YES;
-//            
-//            filter = [[GPUImageNormalBlendFilter alloc] init];
-//        }; break;
-            
+             */
+            //        case GPUIMAGE_DISSOLVE:
+            //        {
+            //            self.title = @"Dissolve Blend";
+            //            self.filterSettingsSlider.hidden = NO;
+            //            needsSecondImage = YES;
+            //
+            //            [self.filterSettingsSlider setMinimumValue:0.0];
+            //            [self.filterSettingsSlider setMaximumValue:1.0];
+            //            [self.filterSettingsSlider setValue:0.5];
+            //
+            //            filter = [[GPUImageDissolveBlendFilter alloc] init];
+            //        }; break;
+            //        case GPUIMAGE_CHROMAKEY:
+            //        {
+            //            self.title = @"Chroma Key (Green)";
+            //            self.filterSettingsSlider.hidden = NO;
+            //            needsSecondImage = YES;
+            //
+            //            [self.filterSettingsSlider setMinimumValue:0.0];
+            //            [self.filterSettingsSlider setMaximumValue:1.0];
+            //            [self.filterSettingsSlider setValue:0.4];
+            //
+            //            filter = [[GPUImageChromaKeyBlendFilter alloc] init];
+            //            [(GPUImageChromaKeyBlendFilter *)filter setColorToReplaceRed:0.0 green:1.0 blue:0.0];
+            //        }; break;
+            //
+            //        case GPUIMAGE_ADD:
+            //        {
+            //            self.title = @"Add Blend";
+            //            self.filterSettingsSlider.hidden = YES;
+            //            needsSecondImage = YES;
+            //
+            //            filter = [[GPUImageAddBlendFilter alloc] init];
+            //        }; break;
+            //        case GPUIMAGE_DIVIDE:
+            //        {
+            //            self.title = @"Divide Blend";
+            //            self.filterSettingsSlider.hidden = YES;
+            //            needsSecondImage = YES;
+            //
+            //            filter = [[GPUImageDivideBlendFilter alloc] init];
+            //        }; break;
+            //        case GPUIMAGE_MULTIPLY:
+            //        {
+            //            self.title = @"Multiply Blend";
+            //            self.filterSettingsSlider.hidden = YES;
+            //            needsSecondImage = YES;
+            //
+            //            filter = [[GPUImageMultiplyBlendFilter alloc] init];
+            //        }; break;
+            //        case GPUIMAGE_OVERLAY:
+            //        {
+            //            self.title = @"Overlay Blend";
+            //            self.filterSettingsSlider.hidden = YES;
+            //            needsSecondImage = YES;
+            //
+            //            filter = [[GPUImageOverlayBlendFilter alloc] init];
+            //        }; break;
+            //        case GPUIMAGE_LIGHTEN:
+            //        {
+            //            self.title = @"Lighten Blend";
+            //            self.filterSettingsSlider.hidden = YES;
+            //            needsSecondImage = YES;
+            //
+            //            filter = [[GPUImageLightenBlendFilter alloc] init];
+            //        }; break;
+            //        case GPUIMAGE_DARKEN:
+            //        {
+            //            self.title = @"Darken Blend";
+            //            self.filterSettingsSlider.hidden = YES;
+            //
+            //            needsSecondImage = YES;
+            //            filter = [[GPUImageDarkenBlendFilter alloc] init];
+            //        }; break;
+            //        case GPUIMAGE_COLORBURN:
+            //        {
+            //            self.title = @"Color Burn Blend";
+            //            self.filterSettingsSlider.hidden = YES;
+            //            needsSecondImage = YES;
+            //
+            //            filter = [[GPUImageColorBurnBlendFilter alloc] init];
+            //        }; break;
+            //        case GPUIMAGE_COLORDODGE:
+            //        {
+            //            self.title = @"Color Dodge Blend";
+            //            self.filterSettingsSlider.hidden = YES;
+            //            needsSecondImage = YES;
+            //
+            //            filter = [[GPUImageColorDodgeBlendFilter alloc] init];
+            //        }; break;
+            //        case GPUIMAGE_SCREENBLEND:
+            //        {
+            //            self.title = @"Screen Blend";
+            //            self.filterSettingsSlider.hidden = YES;
+            //            needsSecondImage = YES;
+            //
+            //            filter = [[GPUImageScreenBlendFilter alloc] init];
+            //        }; break;
+            //        case GPUIMAGE_DIFFERENCEBLEND:
+            //        {
+            //            self.title = @"Difference Blend";
+            //            self.filterSettingsSlider.hidden = YES;
+            //            needsSecondImage = YES;
+            //
+            //            filter = [[GPUImageDifferenceBlendFilter alloc] init];
+            //        }; break;
+            //        case GPUIMAGE_SUBTRACTBLEND:
+            //        {
+            //            self.title = @"Subtract Blend";
+            //            self.filterSettingsSlider.hidden = YES;
+            //            needsSecondImage = YES;
+            //
+            //            filter = [[GPUImageSubtractBlendFilter alloc] init];
+            //        }; break;
+            //        case GPUIMAGE_EXCLUSIONBLEND:
+            //        {
+            //            self.title = @"Exclusion Blend";
+            //            self.filterSettingsSlider.hidden = YES;
+            //            needsSecondImage = YES;
+            //
+            //            filter = [[GPUImageExclusionBlendFilter alloc] init];
+            //        }; break;
+            //
+            //        case GPUIMAGE_HARDLIGHTBLEND:
+            //        {
+            //            self.title = @"Hard Light Blend";
+            //            self.filterSettingsSlider.hidden = YES;
+            //            needsSecondImage = YES;
+            //
+            //            filter = [[GPUImageHardLightBlendFilter alloc] init];
+            //        }; break;
+            //        case GPUIMAGE_SOFTLIGHTBLEND:
+            //        {
+            //            self.title = @"Soft Light Blend";
+            //            self.filterSettingsSlider.hidden = YES;
+            //            needsSecondImage = YES;
+            //
+            //            filter = [[GPUImageSoftLightBlendFilter alloc] init];
+            //        }; break;
+            //        case GPUIMAGE_NORMALBLEND:
+            //        {
+            //            self.title = @"Normal Blend";
+            //            self.filterSettingsSlider.hidden = YES;
+            //            needsSecondImage = YES;
+            //
+            //            filter = [[GPUImageNormalBlendFilter alloc] init];
+            //        }; break;
+  /*
         case GPUIMAGE_OPACITY:
         {
             self.title = @"Opacity Adjustment";
@@ -1216,30 +1239,32 @@ typedef enum {
             [(GPUImageFilterGroup *)filter setInitialFilters:[NSArray arrayWithObject:sepiaFilter]];
             [(GPUImageFilterGroup *)filter setTerminalFilter:pixellateFilter];
         }; break;
-            
-//        case GPUIMAGE_FACES:
-//        {
-//            facesSwitch.hidden = NO;
-//            facesLabel.hidden = NO;
-//            
-//            [videoCamera rotateCamera];
-//            self.title = @"Face Detection";
-//            self.filterSettingsSlider.hidden = YES;
-//            
-//            [self.filterSettingsSlider setValue:1.0];
-//            [self.filterSettingsSlider setMinimumValue:0.0];
-//            [self.filterSettingsSlider setMaximumValue:2.0];
-//            
-//            filter = [[GPUImageSaturationFilter alloc] init];
-//            [videoCamera setDelegate:self];
-//            break;
-//        }
+        */
+            //        case GPUIMAGE_FACES:
+            //        {
+            //            facesSwitch.hidden = NO;
+            //            facesLabel.hidden = NO;
+            //
+            //            [videoCamera rotateCamera];
+            //            self.title = @"Face Detection";
+            //            self.filterSettingsSlider.hidden = YES;
+            //
+            //            [self.filterSettingsSlider setValue:1.0];
+            //            [self.filterSettingsSlider setMinimumValue:0.0];
+            //            [self.filterSettingsSlider setMaximumValue:2.0];
+            //
+            //            filter = [[GPUImageSaturationFilter alloc] init];
+            //            [videoCamera setDelegate:self];
+            //            break;
+            //        }
 
-          /*    case GPUIMAGE_COLORINVERT:
+            
+
+            /*    case GPUIMAGE_COLORINVERT:
              {
              self.title = @"Color Invert";
              self.filterSettingsSlider.hidden = YES;
-           
+             
              filter = [[GPUImageColorInvertFilter alloc] init];
              }; break;
              case GPUIMAGE_GRAYSCALE:
@@ -1557,43 +1582,16 @@ typedef enum {
              
              [(GPUImageTransformFilter *)filter setTransform3D:perspectiveTransform];
              }; break;
-                                               
-            
              
-           
-                        */
+             
+             
+             
+             */
         default: filter = [[GPUImageSepiaFilter alloc] init]; break;
     }
-    
-    //    switch (self.activeFilter) {
-    //        case SepiaFilter:
-    //        {
-    //             [(GPUImageSepiaFilter*)self.filter setIntensity:midpoint];
-    //        }
-    //            break;
-    //        case EmbossFilter:
-    //        {
-    //            
-    //        }
-    //            break;
-    //        case OverlayBlendFilter:
-    //        {
-    //            
-    //        }
-    //            break;
-    //        default:
-    //            break;
-    //    }
+ 
 
-//    GPUImageEmbossFilter *embossFilter = [[GPUImageEmbossFilter alloc] init];
-//    embossFilter.intensity = 2.0;
-    
-    self.imageView.image = [self.choosenImage processInRect:testRect filter:(GPUImageFilter*)self.filter];
-//    UIImageView* tt = [[UIImageView alloc] initWithFrame:self.imageView.frame];
-//    tt.image = [self.choosenImage processInRect:testRect filter:embossFilter];
-//    [self.view addSubview:tt];
 }
-
 
 - (void)addEmbossFilter
 {
