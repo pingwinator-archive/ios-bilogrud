@@ -65,6 +65,7 @@
 		6E13000D165ADFF10077EE2A /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
 		6E13000E165ADFF10077EE2A /* UIImage+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RoundedCorner.h"; sourceTree = "<group>"; };
 		6E13000F165ADFF10077EE2A /* UIImage+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RoundedCorner.m"; sourceTree = "<group>"; };
+		6E130023165C02910077EE2A /* DefineConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefineConst.h; sourceTree = "<group>"; };
 		6E59073116563B7300D2E0D0 /* SimpleShader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleShader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E59073516563B7300D2E0D0 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6E59073716563B7300D2E0D0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -192,6 +193,7 @@
 		6E59073F16563B7300D2E0D0 /* SimpleShader */ = {
 			isa = PBXGroup;
 			children = (
+				6E130023165C02910077EE2A /* DefineConst.h */,
 				6E59074816563B7300D2E0D0 /* AppDelegate.h */,
 				6E59074916563B7300D2E0D0 /* AppDelegate.m */,
 				6E59075116563B7300D2E0D0 /* Shader.fsh */,

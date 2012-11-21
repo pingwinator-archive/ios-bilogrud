@@ -21,11 +21,11 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-//        CGFloat offsetX = frame.size.width * 0.1f;
-//        CGFloat offsetY = frame.size.height * 0.1f;
-//        CGRect frameImage = CGRectMake(frame.origin.x + offsetX, frame.origin.y + offsetY, frame.size.width - offsetX * 2, frame.size.height - offsetY * 2);
-        self.itemImageView = [[UIImageView alloc] initWithFrame:self.bounds];
-        self.itemImageView.image = itemImage;
+        CGFloat offsetX = frame.size.width * 0.1f;
+        CGFloat offsetY = frame.size.height * 0.1f;
+         CGRect frameImage = CGRectMake(offsetX, offsetY, frame.size.width - offsetX * 2, frame.size.height - offsetY * 2);
+        self.itemImageView = [[UIImageView alloc] initWithFrame:frameImage];
+        self.itemImageView.image =  [itemImage roundedCornerImage:kRoundedCornerImageSize borderSize:kBorderSize];
         [self addSubview:self.itemImageView];
     }
     return self;
