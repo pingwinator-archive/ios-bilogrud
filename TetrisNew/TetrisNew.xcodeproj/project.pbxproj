@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E0C60171675D575000117BD /* BrickGame.caf in Resources */ = {isa = PBXBuildFile; fileRef = 6E0C60161675D575000117BD /* BrickGame.caf */; };
 		6E0E44C21652B77E0055DD7E /* StatisticManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E0E44C11652B77E0055DD7E /* StatisticManager.m */; };
-		6E13589416393C9000953402 /* Tetris.caf in Resources */ = {isa = PBXBuildFile; fileRef = 6E13589316393C8F00953402 /* Tetris.caf */; };
 		6E13F6CA1622BCE4005BF66D /* BoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E13F6C91622BCE4005BF66D /* BoardViewController.m */; };
 		6E13F6CE1622CF1C005BF66D /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E13F6CD1622CF1C005BF66D /* Cell.m */; };
 		6E16EB4216477330003CCA00 /* cloud.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E16EB4116477330003CCA00 /* cloud.png */; };
@@ -72,9 +72,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6E0C60161675D575000117BD /* BrickGame.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BrickGame.caf; sourceTree = "<group>"; };
 		6E0E44C01652B77E0055DD7E /* StatisticManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisticManager.h; sourceTree = "<group>"; };
 		6E0E44C11652B77E0055DD7E /* StatisticManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisticManager.m; sourceTree = "<group>"; };
-		6E13589316393C8F00953402 /* Tetris.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Tetris.caf; sourceTree = "<group>"; };
 		6E13F6C81622BCE4005BF66D /* BoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardViewController.h; sourceTree = "<group>"; };
 		6E13F6C91622BCE4005BF66D /* BoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoardViewController.m; sourceTree = "<group>"; };
 		6E13F6CC1622CF1C005BF66D /* Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
@@ -188,7 +188,7 @@
 		6E2AEE78162724BE000D9561 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				6E13589316393C8F00953402 /* Tetris.caf */,
+				6E0C60161675D575000117BD /* BrickGame.caf */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -503,13 +503,13 @@
 				6E55183416373D9E00B00424 /* icon@2x.png in Resources */,
 				6E55183B16374C5600B00424 /* pause.png in Resources */,
 				6E55183C16374C5600B00424 /* music.png in Resources */,
-				6E13589416393C9000953402 /* Tetris.caf in Resources */,
 				6E16EB4216477330003CCA00 /* cloud.png in Resources */,
 				6E16EB451647746B003CCA00 /* cloud2.png in Resources */,
 				6E16EB4C164782B4003CCA00 /* arrow.png in Resources */,
 				6E16EB4D164782B4003CCA00 /* arrow@2x.png in Resources */,
 				6EDC489A16512D0700753F90 /* cell.png in Resources */,
 				6EDC489B16512D0700753F90 /* empty.png in Resources */,
+				6E0C60171675D575000117BD /* BrickGame.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
