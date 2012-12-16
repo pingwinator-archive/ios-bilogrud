@@ -39,7 +39,7 @@
     }
 }
 
-- (void)increasePageNumber
+- (NSInteger)increasePageNumber
 {
     size_t pageCount = CGPDFDocumentGetNumberOfPages(self.document);
     if (self.currentPage == pageCount) {
@@ -49,9 +49,10 @@
         self.currentPage++;
         [self setNeedsDisplay];
     }
+    return self.currentPage;
 }
 
-- (void)decreasePageNumber
+- (NSInteger)decreasePageNumber
 {
     if (self.currentPage == 1) {
         // do nothing
@@ -60,6 +61,7 @@
         self.currentPage--;
         [self setNeedsDisplay];
     }
+    return self.currentPage;
 }
 
 @end

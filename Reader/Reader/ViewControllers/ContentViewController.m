@@ -22,7 +22,6 @@
 {
     self = [super init];
     if (self) {
-        self.pdfContentView = [[PDFView alloc] initWithFrame:self.view.frame url:url andCurPage:currentPage];
         self.urlToFile = url;
         self.currentPageNumber = currentPage;
     }
@@ -33,12 +32,13 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.pdfContentView = [[PDFView alloc] initWithFrame:self.view.frame url:self.urlToFile andCurPage:self.currentPageNumber];
+    [self.view addSubview:self.pdfContentView];
     
     // Create our PDFScrollView and add it to the view controller.
-	PDFScrollView *sv = [[PDFScrollView alloc] initWithFrame:self.view.bounds];
-	
-    [[self view] addSubview:sv];
-
+//	PDFScrollView *sv = [[PDFScrollView alloc] initWithFrame:self.view.bounds];
+//	
+//    [[self view] addSubview:sv];
 }
 
 - (void)didReceiveMemoryWarning

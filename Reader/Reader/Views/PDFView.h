@@ -12,7 +12,7 @@
 @property (assign, nonatomic) CGPDFDocumentRef document;
 @property (assign, nonatomic) NSInteger currentPage;
 @property (strong, nonatomic) NSURL* urlToFile;
--(void)increasePageNumber;
--(void)decreasePageNumber;
+- (NSInteger)increasePageNumber;
+- (NSInteger)decreasePageNumber;
 - (id)initWithFrame:(CGRect)frame url:(NSURL*)url andCurPage:(NSInteger)page;
 @end

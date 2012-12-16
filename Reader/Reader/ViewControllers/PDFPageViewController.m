@@ -65,7 +65,6 @@
                                       direction:UIPageViewControllerNavigationDirectionForward
                                        animated:NO
                                      completion:nil];
-    
     //Step 4:
     //ViewController containment steps
     //Add the pageViewController as the childViewController
@@ -86,7 +85,6 @@
     //Step 6:
     //Assign the gestureRecognizers property of our pageViewController to our view's gestureRecognizers property.
     self.view.gestureRecognizers = self.pageViewController.gestureRecognizers;
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -108,8 +106,7 @@
       viewControllerBeforeViewController:(UIViewController *)viewController
 {
       ContentViewController *contentViewController = [[ContentViewController alloc] initWithUrl:self.urlToFile andCurrentNumber:self.currentPageNumber];
-    [contentViewController.pdfContentView increasePageNumber];
-//    contentViewController.labelContents = [self.modelArray objectAtIndex:currentIndex - 1];
+    self.currentPageNumber = [contentViewController.pdfContentView increasePageNumber];
     return contentViewController;
 }
 
@@ -117,8 +114,8 @@
        viewControllerAfterViewController:(UIViewController *)viewController
 {
     ContentViewController *contentViewController = [[ContentViewController alloc] initWithUrl:self.urlToFile andCurrentNumber:self.currentPageNumber];
-//    contentViewController.labelContents = [self.modelArray objectAtIndex:currentIndex + 1];
-    [contentViewController.pdfContentView decreasePageNumber];
+    
+    self.currentPageNumber = [contentViewController.pdfContentView decreasePageNumber];
     return contentViewController;
 }
 
