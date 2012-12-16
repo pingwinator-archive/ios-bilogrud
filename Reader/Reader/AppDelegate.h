@@ -11,9 +11,8 @@
 @class StartViewController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
-
 @property (strong, nonatomic) UIWindow *window;
-
 @property (strong, nonatomic) StartViewController *startViewController;
-
+@property (strong, nonatomic) UINavigationController *navController;
+@property (nonatomic) NSInteger pageNumber;
 @end

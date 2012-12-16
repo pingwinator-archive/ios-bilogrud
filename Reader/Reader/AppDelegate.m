@@ -10,6 +10,8 @@
 #import "StartViewController.h"
 
 @implementation AppDelegate
+@synthesize navController;
+@synthesize pageNumber;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -20,7 +22,11 @@
     } else {
         self.startViewController = [[StartViewController alloc] initWithNibName:@"StartViewController_iPad" bundle:nil];
     }
-    self.window.rootViewController = self.startViewController;
+    self.navController = [[UINavigationController alloc] initWithRootViewController:self.startViewController];
+    self.navController.toolbar.translucent = YES;
+    
+    
+    self.window.rootViewController = self.navController;
     [self.window makeKeyAndVisible];
     return YES;
 }

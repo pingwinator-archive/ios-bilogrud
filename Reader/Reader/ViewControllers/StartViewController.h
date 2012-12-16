@@ -10,7 +10,7 @@
 
 #import "DirectoryWatcher.h"
 @interface StartViewController : UITableViewController<DirectoryWatcherDelegate, UIDocumentInteractionControllerDelegate>
-@property (nonatomic, retain) DirectoryWatcher *docWatcher;
-@property (nonatomic, retain) NSMutableArray *documentURLs;
-@property (nonatomic, retain) UIDocumentInteractionController *docInteractionController;
+@property (nonatomic, strong) DirectoryWatcher *docWatcher;
+@property (nonatomic, strong) NSMutableArray *documentURLs;
+@property (nonatomic, strong) UIDocumentInteractionController *docInteractionController;
 @end

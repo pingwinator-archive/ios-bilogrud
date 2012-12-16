@@ -16,10 +16,19 @@
 		6E0C267F16791DD4002E75A4 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E0C267E16791DD4002E75A4 /* Default.png */; };
 		6E0C268116791DD4002E75A4 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E0C268016791DD4002E75A4 /* Default@2x.png */; };
 		6E0C268316791DD4002E75A4 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E0C268216791DD4002E75A4 /* Default-568h@2x.png */; };
-		6E0C269A16791E91002E75A4 /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E0C269816791E91002E75A4 /* StartViewController.m */; };
-		6E0C269B16791E91002E75A4 /* StartViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E0C269916791E91002E75A4 /* StartViewController_iPad.xib */; };
-		6E0C269D16791F00002E75A4 /* StartViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E0C269C16791F00002E75A4 /* StartViewController_iPhone.xib */; };
-		6E0C26A816792726002E75A4 /* DirectoryWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E0C26A716792725002E75A4 /* DirectoryWatcher.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6EFB1621167DC2EC00C9522A /* DirectoryWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EFB160F167DC2EC00C9522A /* DirectoryWatcher.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6EFB1622167DC2EC00C9522A /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EFB1613167DC2EC00C9522A /* ContentViewController.m */; };
+		6EFB1623167DC2EC00C9522A /* PDFPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EFB1615167DC2EC00C9522A /* PDFPageViewController.m */; };
+		6EFB1624167DC2EC00C9522A /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EFB1617167DC2EC00C9522A /* StartViewController.m */; };
+		6EFB1625167DC2EC00C9522A /* ContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EFB161C167DC2EC00C9522A /* ContentViewController.xib */; };
+		6EFB1626167DC2EC00C9522A /* PDFPageViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EFB161D167DC2EC00C9522A /* PDFPageViewController_iPad.xib */; };
+		6EFB1627167DC2EC00C9522A /* PDFPageViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EFB161E167DC2EC00C9522A /* PDFPageViewController_iPhone.xib */; };
+		6EFB1628167DC2EC00C9522A /* StartViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EFB161F167DC2EC00C9522A /* StartViewController_iPad.xib */; };
+		6EFB1629167DC2EC00C9522A /* StartViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EFB1620167DC2EC00C9522A /* StartViewController_iPhone.xib */; };
+		6EFB162C167DC32A00C9522A /* PDFView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EFB162B167DC32A00C9522A /* PDFView.m */; };
+		6EFB1631167DEF5000C9522A /* PDFScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EFB162E167DEF5000C9522A /* PDFScrollView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6EFB1632167DEF5000C9522A /* TiledPDFView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EFB1630167DEF5000C9522A /* TiledPDFView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6EFB1634167DF85000C9522A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EFB1633167DF85000C9522A /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,12 +45,26 @@
 		6E0C267E16791DD4002E75A4 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		6E0C268016791DD4002E75A4 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		6E0C268216791DD4002E75A4 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		6E0C269716791E91002E75A4 /* StartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartViewController.h; sourceTree = "<group>"; };
-		6E0C269816791E91002E75A4 /* StartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartViewController.m; sourceTree = "<group>"; };
-		6E0C269916791E91002E75A4 /* StartViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StartViewController_iPad.xib; sourceTree = "<group>"; };
-		6E0C269C16791F00002E75A4 /* StartViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StartViewController_iPhone.xib; sourceTree = "<group>"; };
-		6E0C26A616792725002E75A4 /* DirectoryWatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectoryWatcher.h; sourceTree = "<group>"; };
-		6E0C26A716792725002E75A4 /* DirectoryWatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectoryWatcher.m; sourceTree = "<group>"; };
+		6EFB160E167DC2EC00C9522A /* DirectoryWatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectoryWatcher.h; sourceTree = "<group>"; };
+		6EFB160F167DC2EC00C9522A /* DirectoryWatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectoryWatcher.m; sourceTree = "<group>"; };
+		6EFB1612167DC2EC00C9522A /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
+		6EFB1613167DC2EC00C9522A /* ContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentViewController.m; sourceTree = "<group>"; };
+		6EFB1614167DC2EC00C9522A /* PDFPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFPageViewController.h; sourceTree = "<group>"; };
+		6EFB1615167DC2EC00C9522A /* PDFPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFPageViewController.m; sourceTree = "<group>"; };
+		6EFB1616167DC2EC00C9522A /* StartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartViewController.h; sourceTree = "<group>"; };
+		6EFB1617167DC2EC00C9522A /* StartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartViewController.m; sourceTree = "<group>"; };
+		6EFB161C167DC2EC00C9522A /* ContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentViewController.xib; sourceTree = "<group>"; };
+		6EFB161D167DC2EC00C9522A /* PDFPageViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PDFPageViewController_iPad.xib; sourceTree = "<group>"; };
+		6EFB161E167DC2EC00C9522A /* PDFPageViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PDFPageViewController_iPhone.xib; sourceTree = "<group>"; };
+		6EFB161F167DC2EC00C9522A /* StartViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StartViewController_iPad.xib; sourceTree = "<group>"; };
+		6EFB1620167DC2EC00C9522A /* StartViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StartViewController_iPhone.xib; sourceTree = "<group>"; };
+		6EFB162A167DC32A00C9522A /* PDFView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFView.h; sourceTree = "<group>"; };
+		6EFB162B167DC32A00C9522A /* PDFView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFView.m; sourceTree = "<group>"; };
+		6EFB162D167DEF5000C9522A /* PDFScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFScrollView.h; sourceTree = "<group>"; };
+		6EFB162E167DEF5000C9522A /* PDFScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFScrollView.m; sourceTree = "<group>"; };
+		6EFB162F167DEF5000C9522A /* TiledPDFView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiledPDFView.h; sourceTree = "<group>"; };
+		6EFB1630167DEF5000C9522A /* TiledPDFView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TiledPDFView.m; sourceTree = "<group>"; };
+		6EFB1633167DF85000C9522A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EFB1634167DF85000C9522A /* QuartzCore.framework in Frameworks */,
 				6E0C266D16791DD4002E75A4 /* UIKit.framework in Frameworks */,
 				6E0C266F16791DD4002E75A4 /* Foundation.framework in Frameworks */,
 				6E0C267116791DD4002E75A4 /* CoreGraphics.framework in Frameworks */,
@@ -61,6 +85,11 @@
 		6E0C265D16791DD4002E75A4 = {
 			isa = PBXGroup;
 			children = (
+				6EFB160C167DC2EC00C9522A /* Externals */,
+				6EFB1610167DC2EC00C9522A /* Managers */,
+				6EFB1611167DC2EC00C9522A /* ViewControllers */,
+				6EFB1618167DC2EC00C9522A /* Views */,
+				6EFB1619167DC2EC00C9522A /* Resources */,
 				6E0C267216791DD4002E75A4 /* Reader */,
 				6E0C266B16791DD4002E75A4 /* Frameworks */,
 				6E0C266916791DD4002E75A4 /* Products */,
@@ -78,6 +107,7 @@
 		6E0C266B16791DD4002E75A4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6EFB1633167DF85000C9522A /* QuartzCore.framework */,
 				6E0C266C16791DD4002E75A4 /* UIKit.framework */,
 				6E0C266E16791DD4002E75A4 /* Foundation.framework */,
 				6E0C267016791DD4002E75A4 /* CoreGraphics.framework */,
@@ -90,13 +120,7 @@
 			children = (
 				6E0C267B16791DD4002E75A4 /* AppDelegate.h */,
 				6E0C267C16791DD4002E75A4 /* AppDelegate.m */,
-				6E0C26A616792725002E75A4 /* DirectoryWatcher.h */,
-				6E0C26A716792725002E75A4 /* DirectoryWatcher.m */,
 				6E0C267316791DD4002E75A4 /* Supporting Files */,
-				6E0C269716791E91002E75A4 /* StartViewController.h */,
-				6E0C269816791E91002E75A4 /* StartViewController.m */,
-				6E0C269916791E91002E75A4 /* StartViewController_iPad.xib */,
-				6E0C269C16791F00002E75A4 /* StartViewController_iPhone.xib */,
 			);
 			path = Reader;
 			sourceTree = "<group>";
@@ -113,6 +137,89 @@
 				6E0C268216791DD4002E75A4 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6EFB160C167DC2EC00C9522A /* Externals */ = {
+			isa = PBXGroup;
+			children = (
+				6EFB160D167DC2EC00C9522A /* DirectoryWatcher */,
+			);
+			name = Externals;
+			path = Reader/Externals;
+			sourceTree = "<group>";
+		};
+		6EFB160D167DC2EC00C9522A /* DirectoryWatcher */ = {
+			isa = PBXGroup;
+			children = (
+				6EFB160E167DC2EC00C9522A /* DirectoryWatcher.h */,
+				6EFB160F167DC2EC00C9522A /* DirectoryWatcher.m */,
+			);
+			path = DirectoryWatcher;
+			sourceTree = "<group>";
+		};
+		6EFB1610167DC2EC00C9522A /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Managers;
+			path = Reader/Managers;
+			sourceTree = "<group>";
+		};
+		6EFB1611167DC2EC00C9522A /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				6EFB1612167DC2EC00C9522A /* ContentViewController.h */,
+				6EFB1613167DC2EC00C9522A /* ContentViewController.m */,
+				6EFB1614167DC2EC00C9522A /* PDFPageViewController.h */,
+				6EFB1615167DC2EC00C9522A /* PDFPageViewController.m */,
+				6EFB1616167DC2EC00C9522A /* StartViewController.h */,
+				6EFB1617167DC2EC00C9522A /* StartViewController.m */,
+			);
+			name = ViewControllers;
+			path = Reader/ViewControllers;
+			sourceTree = "<group>";
+		};
+		6EFB1618167DC2EC00C9522A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6EFB162D167DEF5000C9522A /* PDFScrollView.h */,
+				6EFB162E167DEF5000C9522A /* PDFScrollView.m */,
+				6EFB162F167DEF5000C9522A /* TiledPDFView.h */,
+				6EFB1630167DEF5000C9522A /* TiledPDFView.m */,
+				6EFB162A167DC32A00C9522A /* PDFView.h */,
+				6EFB162B167DC32A00C9522A /* PDFView.m */,
+			);
+			name = Views;
+			path = Reader/Views;
+			sourceTree = "<group>";
+		};
+		6EFB1619167DC2EC00C9522A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6EFB161A167DC2EC00C9522A /* Images */,
+				6EFB161B167DC2EC00C9522A /* Nibs */,
+			);
+			name = Resources;
+			path = Reader/Resources;
+			sourceTree = "<group>";
+		};
+		6EFB161A167DC2EC00C9522A /* Images */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		6EFB161B167DC2EC00C9522A /* Nibs */ = {
+			isa = PBXGroup;
+			children = (
+				6EFB161C167DC2EC00C9522A /* ContentViewController.xib */,
+				6EFB161D167DC2EC00C9522A /* PDFPageViewController_iPad.xib */,
+				6EFB161E167DC2EC00C9522A /* PDFPageViewController_iPhone.xib */,
+				6EFB161F167DC2EC00C9522A /* StartViewController_iPad.xib */,
+				6EFB1620167DC2EC00C9522A /* StartViewController_iPhone.xib */,
+			);
+			path = Nibs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -170,8 +277,11 @@
 				6E0C267F16791DD4002E75A4 /* Default.png in Resources */,
 				6E0C268116791DD4002E75A4 /* Default@2x.png in Resources */,
 				6E0C268316791DD4002E75A4 /* Default-568h@2x.png in Resources */,
-				6E0C269B16791E91002E75A4 /* StartViewController_iPad.xib in Resources */,
-				6E0C269D16791F00002E75A4 /* StartViewController_iPhone.xib in Resources */,
+				6EFB1625167DC2EC00C9522A /* ContentViewController.xib in Resources */,
+				6EFB1626167DC2EC00C9522A /* PDFPageViewController_iPad.xib in Resources */,
+				6EFB1627167DC2EC00C9522A /* PDFPageViewController_iPhone.xib in Resources */,
+				6EFB1628167DC2EC00C9522A /* StartViewController_iPad.xib in Resources */,
+				6EFB1629167DC2EC00C9522A /* StartViewController_iPhone.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,8 +294,13 @@
 			files = (
 				6E0C267916791DD4002E75A4 /* main.m in Sources */,
 				6E0C267D16791DD4002E75A4 /* AppDelegate.m in Sources */,
-				6E0C269A16791E91002E75A4 /* StartViewController.m in Sources */,
-				6E0C26A816792726002E75A4 /* DirectoryWatcher.m in Sources */,
+				6EFB1621167DC2EC00C9522A /* DirectoryWatcher.m in Sources */,
+				6EFB1622167DC2EC00C9522A /* ContentViewController.m in Sources */,
+				6EFB1623167DC2EC00C9522A /* PDFPageViewController.m in Sources */,
+				6EFB1624167DC2EC00C9522A /* StartViewController.m in Sources */,
+				6EFB162C167DC32A00C9522A /* PDFView.m in Sources */,
+				6EFB1631167DEF5000C9522A /* PDFScrollView.m in Sources */,
+				6EFB1632167DEF5000C9522A /* TiledPDFView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

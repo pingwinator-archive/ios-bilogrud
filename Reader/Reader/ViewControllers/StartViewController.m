@@ -7,31 +7,43 @@
 //
 
 #import "StartViewController.h"
+#import "PDFPageViewController.h"
 
 @interface StartViewController ()
-
+@property PDFPageViewController* pdfViewController;
 @end
 
 @implementation StartViewController
 @synthesize documentURLs;
 @synthesize docWatcher;
 @synthesize docInteractionController;
+@synthesize pdfViewController;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // start monitoring the document directory…
+    
+    self.navigationController.navigationBarHidden = YES;
     self.docWatcher = [DirectoryWatcher watchFolderWithPath:[self applicationDocumentsDirectory] delegate:self];
     self.documentURLs = [NSMutableArray array];
     // scan for existing documents
     [self directoryDidChange:self.docWatcher];
+    
+    
 
+    
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    self.navigationController.navigationBarHidden = YES;
 }
 
 - (NSString *)formattedFileSize:(unsigned long long)size
@@ -121,8 +133,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Info" message: [NSString stringWithFormat:@"%@", [self.documentURLs objectAtIndex:indexPath.row]] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-    [alert show];
+    NSURL *pdfUrl = [self.documentURLs objectAtIndex:indexPath.row];
+   
+    self.pdfViewController = [[PDFPageViewController alloc] initWithUrlDocument:pdfUrl andLastOpenedPage:1];
+    
+    [self.navigationController pushViewController:self.pdfViewController animated:YES];
+//   UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Info" message: [NSString stringWithFormat:@"%@", [self.documentURLs objectAtIndex:indexPath.row]] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+//    [alert show];
 }
 
 
