@@ -39,29 +39,4 @@
     }
 }
 
-- (NSInteger)increasePageNumber
-{
-    size_t pageCount = CGPDFDocumentGetNumberOfPages(self.document);
-    if (self.currentPage == pageCount) {
-        // do nothing
-    }
-    else {
-        self.currentPage++;
-        [self setNeedsDisplay];
-    }
-    return self.currentPage;
-}
-
-- (NSInteger)decreasePageNumber
-{
-    if (self.currentPage == 1) {
-        // do nothing
-    }
-    else {
-        self.currentPage--;
-        [self setNeedsDisplay];
-    }
-    return self.currentPage;
-}
-
 @end

@@ -135,7 +135,7 @@
 {
     NSURL *pdfUrl = [self.documentURLs objectAtIndex:indexPath.row];
    
-    self.pdfViewController = [[PDFPageViewController alloc] initWithUrlDocument:pdfUrl andLastOpenedPage:1];
+    self.pdfViewController = [[PDFPageViewController alloc] initWithUrlDocument:pdfUrl andLastOpenedPage:5];
     
     [self.navigationController pushViewController:self.pdfViewController animated:YES];
 //   UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Info" message: [NSString stringWithFormat:@"%@", [self.documentURLs objectAtIndex:indexPath.row]] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];

@@ -105,18 +105,43 @@
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController
       viewControllerBeforeViewController:(UIViewController *)viewController
 {
+    [self decreasePageNumber];
       ContentViewController *contentViewController = [[ContentViewController alloc] initWithUrl:self.urlToFile andCurrentNumber:self.currentPageNumber];
-    self.currentPageNumber = [contentViewController.pdfContentView increasePageNumber];
+   
     return contentViewController;
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController
        viewControllerAfterViewController:(UIViewController *)viewController
 {
+    [self increasePageNumber];
     ContentViewController *contentViewController = [[ContentViewController alloc] initWithUrl:self.urlToFile andCurrentNumber:self.currentPageNumber];
-    
-    self.currentPageNumber = [contentViewController.pdfContentView decreasePageNumber];
+   
     return contentViewController;
+}
+
+
+- (void)increasePageNumber
+{
+    size_t pageCount = CGPDFDocumentGetNumberOfPages(CGPDFDocumentCreateWithURL((__bridge CFURLRef)self.urlToFile));
+    if (self.currentPageNumber == pageCount) {
+        // do nothing
+    }
+    else {
+        self.currentPageNumber++;
+        [self.pdfView setNeedsDisplay];
+    }
+}
+
+- (void)decreasePageNumber
+{
+    if (self.currentPageNumber == 1) {
+        // do nothing
+    }
+    else {
+        self.currentPageNumber--;
+        [self.pdfView setNeedsDisplay];
+    }
 }
 
 #pragma mark - UIPageViewControllerDelegate Methods
