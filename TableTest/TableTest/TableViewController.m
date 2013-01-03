@@ -11,8 +11,8 @@
 
 #define SHOW_MULTIPLE_SECTIONS		1		// If commented out, multiple sections with header and footer views are not shown
 
-#define PORTRAIT_WIDTH				768
-#define LANDSCAPE_HEIGHT			(1024-20)
+#define PORTRAIT_WIDTH				320
+#define LANDSCAPE_HEIGHT			(480-20)
 #define HORIZONTAL_TABLEVIEW_HEIGHT	140
 #define VERTICAL_TABLEVIEW_WIDTH	180
 #define TABLE_BACKGROUND_COLOR		[UIColor clearColor]
@@ -37,8 +37,8 @@
 {
     self = [super init];
     if (self) {
-
-    
+        
+        
     }
     return self;
 }
@@ -48,7 +48,7 @@
 {
     [super viewDidLoad];
     [self setuphorizontalView];
-
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -60,14 +60,14 @@
 - (void)setuphorizontalView {
 	CGRect frameRect	= CGRectMake(0, LANDSCAPE_HEIGHT - HORIZONTAL_TABLEVIEW_HEIGHT, PORTRAIT_WIDTH, HORIZONTAL_TABLEVIEW_HEIGHT);
 	EasyTableView *view	= [[EasyTableView alloc] initWithFrame:frameRect numberOfColumns:NUM_OF_CELLS ofWidth:VERTICAL_TABLEVIEW_WIDTH];
-	self.self.horizontalView = view;
+	self.horizontalView = view;
 	
-	self.horizontalView.delegate						= self;
-	self.horizontalView.tableView.backgroundColor	= TABLE_BACKGROUND_COLOR;
-	self.horizontalView.tableView.allowsSelection	= YES;
-	self.horizontalView.tableView.separatorColor		= [UIColor darkGrayColor];
-	self.horizontalView.cellBackgroundColor			= [UIColor darkGrayColor];
-	self.horizontalView.autoresizingMask				= UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
+	self.horizontalView.delegate = self;
+	self.horizontalView.tableView.backgroundColor = TABLE_BACKGROUND_COLOR;
+	self.horizontalView.tableView.allowsSelection = YES;
+	self.horizontalView.tableView.separatorColor = [UIColor darkGrayColor];
+	self.horizontalView.cellBackgroundColor	= [UIColor darkGrayColor];
+	self.horizontalView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
 	
 	[self.view addSubview:self.horizontalView];
 }
@@ -81,7 +81,6 @@
 	NSString *borderImageName	= (selected) ? @"selected_border.png" : @"image_border.png";
 	borderView.image			= [UIImage imageNamed:borderImageName];
 }
-
 
 #pragma mark -
 #pragma mark EasyTableViewDelegate
