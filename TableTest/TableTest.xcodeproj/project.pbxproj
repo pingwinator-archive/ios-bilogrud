@@ -21,7 +21,10 @@
 		6E1B7A361690B418006AB8B6 /* StatusCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E1B7A341690B418006AB8B6 /* StatusCell.xib */; };
 		6E1B7A3D1690C858006AB8B6 /* image.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 6E1B7A3C1690C858006AB8B6 /* image.jpeg */; };
 		6E1B7A531690D63B006AB8B6 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E1B7A511690D63B006AB8B6 /* TableViewController.m */; };
-		6E1B7A561690E748006AB8B6 /* TableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E1B7A551690E748006AB8B6 /* TableViewController.xib */; };
+		6EEFF55A169614C200205FC0 /* EasyTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EEFF559169614C200205FC0 /* EasyTableView.m */; };
+		6EEFF55D1696155500205FC0 /* TableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EEFF55C1696155500205FC0 /* TableViewController.xib */; };
+		6EEFF55F16961D7600205FC0 /* image_border.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EEFF55E16961D7600205FC0 /* image_border.png */; };
+		6EEFF56116961D8900205FC0 /* selected_border.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EEFF56016961D8900205FC0 /* selected_border.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,7 +49,11 @@
 		6E1B7A3C1690C858006AB8B6 /* image.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image.jpeg; sourceTree = "<group>"; };
 		6E1B7A501690D63B006AB8B6 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
 		6E1B7A511690D63B006AB8B6 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
-		6E1B7A551690E748006AB8B6 /* TableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewController.xib; sourceTree = "<group>"; };
+		6EEFF558169614C200205FC0 /* EasyTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasyTableView.h; sourceTree = "<group>"; };
+		6EEFF559169614C200205FC0 /* EasyTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EasyTableView.m; sourceTree = "<group>"; };
+		6EEFF55C1696155500205FC0 /* TableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewController.xib; sourceTree = "<group>"; };
+		6EEFF55E16961D7600205FC0 /* image_border.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image_border.png; sourceTree = "<group>"; };
+		6EEFF56016961D8900205FC0 /* selected_border.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selected_border.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +101,8 @@
 		6E1B7A101690AC6D006AB8B6 /* TableTest */ = {
 			isa = PBXGroup;
 			children = (
+				6EEFF558169614C200205FC0 /* EasyTableView.h */,
+				6EEFF559169614C200205FC0 /* EasyTableView.m */,
 				6E1B7A191690AC6D006AB8B6 /* AppDelegate.h */,
 				6E1B7A1A1690AC6D006AB8B6 /* AppDelegate.m */,
 				6E1B7A221690AC6D006AB8B6 /* ViewController.h */,
@@ -101,6 +110,7 @@
 				6E1B7A111690AC6D006AB8B6 /* Supporting Files */,
 				6E1B7A501690D63B006AB8B6 /* TableViewController.h */,
 				6E1B7A511690D63B006AB8B6 /* TableViewController.m */,
+				6EEFF55C1696155500205FC0 /* TableViewController.xib */,
 			);
 			path = TableTest;
 			sourceTree = "<group>";
@@ -108,7 +118,8 @@
 		6E1B7A111690AC6D006AB8B6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				6E1B7A551690E748006AB8B6 /* TableViewController.xib */,
+				6EEFF56016961D8900205FC0 /* selected_border.png */,
+				6EEFF55E16961D7600205FC0 /* image_border.png */,
 				6E1B7A3C1690C858006AB8B6 /* image.jpeg */,
 				6E1B7A121690AC6D006AB8B6 /* TableTest-Info.plist */,
 				6E1B7A131690AC6D006AB8B6 /* InfoPlist.strings */,
@@ -188,7 +199,9 @@
 				6E1B7A211690AC6D006AB8B6 /* Default-568h@2x.png in Resources */,
 				6E1B7A361690B418006AB8B6 /* StatusCell.xib in Resources */,
 				6E1B7A3D1690C858006AB8B6 /* image.jpeg in Resources */,
-				6E1B7A561690E748006AB8B6 /* TableViewController.xib in Resources */,
+				6EEFF55D1696155500205FC0 /* TableViewController.xib in Resources */,
+				6EEFF55F16961D7600205FC0 /* image_border.png in Resources */,
+				6EEFF56116961D8900205FC0 /* selected_border.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,6 +217,7 @@
 				6E1B7A241690AC6D006AB8B6 /* ViewController.m in Sources */,
 				6E1B7A351690B418006AB8B6 /* StatusCell.m in Sources */,
 				6E1B7A531690D63B006AB8B6 /* TableViewController.m in Sources */,
+				6EEFF55A169614C200205FC0 /* EasyTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,6 +328,7 @@
 				6E1B7A2C1690AC6D006AB8B6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

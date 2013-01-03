@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EasyTableView.h"
 
-@interface TableViewController : UITableViewController
-
+@interface TableViewController : UIViewController<EasyTableViewDelegate>
+@property (nonatomic) EasyTableView* horizontalView;
 @end

@@ -9,40 +9,36 @@
 #import "TableViewController.h"
 #import "StatusCell.h"
 
+#define SHOW_MULTIPLE_SECTIONS		1		// If commented out, multiple sections with header and footer views are not shown
+
+#define PORTRAIT_WIDTH				768
+#define LANDSCAPE_HEIGHT			(1024-20)
+#define HORIZONTAL_TABLEVIEW_HEIGHT	140
+#define VERTICAL_TABLEVIEW_WIDTH	180
+#define TABLE_BACKGROUND_COLOR		[UIColor clearColor]
+
+#define BORDER_VIEW_TAG				10
+
+#ifdef SHOW_MULTIPLE_SECTIONS
+#define NUM_OF_CELLS			10
+#define NUM_OF_SECTIONS			2
+#else
+#define NUM_OF_CELLS			21
+#endif
 @interface TableViewController ()
 @property (strong, nonatomic) NSMutableArray* allCells;
 @end
 
 @implementation TableViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 
 - (id)init
 {
     self = [super init];
     if (self) {
-//        [self.view setFrame:CGRectMake(0, 0, 220, 100)];
-//       self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width - 20, self.view.frame.size.height - 10);
-//        self.view.alpha = 0.5f;
-//        CGRect tvframe = [self.view frame];
-//        [self.tableView setFrame:CGRectMake(tvframe.origin.x,
-//                                       tvframe.origin.y,
-//                                       tvframe.size.width,
-//                                       100)];
-        [self.tableView setFrame:CGRectMake(self.tableView.frame.origin.x, self.tableView.frame.origin.y, self.tableView.frame.size.height, 250)];
-         [self.tableView setBackgroundColor:[UIColor redColor]];
-        self.allCells = [NSMutableArray array];
-        for (NSInteger i = 0; i < 20; i++) {
-            [self.allCells addObject:[NSString stringWithFormat:@"Cell number %d", i]];
-        }
+
+    
     }
     return self;
 }
@@ -51,16 +47,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    CGAffineTransform rotateTable = CGAffineTransformMakeRotation(M_PI_2);
-    self.tableView.transform = rotateTable;
-    
-  
+    [self setuphorizontalView];
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning
@@ -69,42 +57,68 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - UITableViewDataSource Methods
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    NSInteger count = [self.allCells count];
-    
-    return count;
+- (void)setuphorizontalView {
+	CGRect frameRect	= CGRectMake(0, LANDSCAPE_HEIGHT - HORIZONTAL_TABLEVIEW_HEIGHT, PORTRAIT_WIDTH, HORIZONTAL_TABLEVIEW_HEIGHT);
+	EasyTableView *view	= [[EasyTableView alloc] initWithFrame:frameRect numberOfColumns:NUM_OF_CELLS ofWidth:VERTICAL_TABLEVIEW_WIDTH];
+	self.self.horizontalView = view;
+	
+	self.horizontalView.delegate						= self;
+	self.horizontalView.tableView.backgroundColor	= TABLE_BACKGROUND_COLOR;
+	self.horizontalView.tableView.allowsSelection	= YES;
+	self.horizontalView.tableView.separatorColor		= [UIColor darkGrayColor];
+	self.horizontalView.cellBackgroundColor			= [UIColor darkGrayColor];
+	self.horizontalView.autoresizingMask				= UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
+	
+	[self.view addSubview:self.horizontalView];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellTableIdentifier = @"CellTableIdentifier";
-    
-    BOOL nibsRegistered = NO;
-    if (!nibsRegistered) {
-        UINib *nib = [UINib nibWithNibName:@"StatusCell" bundle:nil];
-        [tableView registerNib:nib forCellReuseIdentifier:CellTableIdentifier];
-        nibsRegistered = YES;
-    }
-    StatusCell *cell = (StatusCell *)[tableView dequeueReusableCellWithIdentifier:CellTableIdentifier];
-    
-    if([self.allCells count]){
-        NSUInteger row = [indexPath row];
-        cell.nameLabel.text = [self.allCells objectAtIndex:row];
-    }
-    return cell;
+
+#pragma mark -
+#pragma mark Utility Methods
+
+- (void)borderIsSelected:(BOOL)selected forView:(UIView *)view {
+	UIImageView *borderView		= (UIImageView *)[view viewWithTag:BORDER_VIEW_TAG];
+	NSString *borderImageName	= (selected) ? @"selected_border.png" : @"image_border.png";
+	borderView.image			= [UIImage imageNamed:borderImageName];
 }
 
-#pragma  mark - UITableViewDelegate Methods
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    //    NSString* text = [[self.allCells objectAtIndex:indexPath.row] message];
-    //    CGSize textSize = [text sizeWithFont:[UIFont systemFontOfSize:kFontMesage]  constrainedToSize:CGSizeMake(280, 2000)];
-    return 100;//MAX(cellHeight, textSize.height + kCellOffset) ;
+#pragma mark -
+#pragma mark EasyTableViewDelegate
+
+// These delegate methods support both example views - first delegate method creates the necessary views
+
+- (UIView *)easyTableView:(EasyTableView *)easyTableView viewForRect:(CGRect)rect {
+	CGRect labelRect		= CGRectMake(10, 10, rect.size.width-20, rect.size.height-20);
+	UILabel *label			= [[UILabel alloc] initWithFrame:labelRect];
+	label.textAlignment		= UITextAlignmentCenter;
+	label.textColor			= [UIColor whiteColor];
+	label.font				= [UIFont boldSystemFontOfSize:60];
+	
+	// Use a different color for the two different examples
+	if (easyTableView == self.horizontalView)
+		label.backgroundColor = [[UIColor greenColor] colorWithAlphaComponent:0.3];
+	else
+		label.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.3];
+	
+	UIImageView *borderView		= [[UIImageView alloc] initWithFrame:label.bounds];
+	borderView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+	borderView.tag				= BORDER_VIEW_TAG;
+	
+	[label addSubview:borderView];
+    
+	return label;
 }
 
+// Second delegate populates the views with data from a data source
+
+- (void)easyTableView:(EasyTableView *)easyTableView setDataForView:(UIView *)view forIndexPath:(NSIndexPath *)indexPath {
+	UILabel *label	= (UILabel *)view;
+	label.text		= [NSString stringWithFormat:@"%i", indexPath.row];
+	
+	// selectedIndexPath can be nil so we need to test for that condition
+	BOOL isSelected = (easyTableView.selectedIndexPath) ? ([easyTableView.selectedIndexPath compare:indexPath] == NSOrderedSame) : NO;
+    [self borderIsSelected:isSelected forView:view];
+}
 
 @end
