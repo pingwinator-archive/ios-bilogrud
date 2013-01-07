@@ -388,7 +388,7 @@ typedef enum {
     
     
     self.activeFilter = GPUIMAGE_SEPIA;
-    [self setupDisplayFiltering];
+//    [self setupDisplayFiltering];
 //    self.horisontalScrollView.co
 }
 
@@ -468,44 +468,44 @@ typedef enum {
 #pragma mark -
 #pragma mark Image filtering
 
-
-- (void)setupDisplayFiltering
-{
-    NSLog(@"size %f %f", self.choosenImage.size.height, self.choosenImage.size.width);
-    CGFloat middleX = self.choosenImage.size.width / 2;
-    //CGFloat middleY = self.choosenImage.size.height / 2;
-    
-    CGRect testRect = CGRectMake(0, 0, middleX, self.choosenImage.size.height);
-  
-  
-    NSLog(@"scale %f", self.choosenImage.scale);
-   
-    [self initFilter];
-  
-//    GPUImageEmbossFilter *embossFilter = [[GPUImageEmbossFilter alloc] init];
-//    embossFilter.intensity = 2.0;
-    
-    self.imageView.image = [self.choosenImage processInRect:testRect filter:(GPUImageFilter*)self.filter];
-//    UIImageView* tt = [[UIImageView alloc] initWithFrame:self.imageView.frame];
-//    tt.image = [self.choosenImage processInRect:testRect filter:embossFilter];
-//    [self.view addSubview:tt];
-}
+//
+//- (void)setupDisplayFiltering
+//{
+//    NSLog(@"size %f %f", self.choosenImage.size.height, self.choosenImage.size.width);
+//    CGFloat middleX = self.choosenImage.size.width / 2;
+//    //CGFloat middleY = self.choosenImage.size.height / 2;
+//    
+//    CGRect testRect = CGRectMake(0, 0, middleX, self.choosenImage.size.height);
+//  
+//  
+//    NSLog(@"scale %f", self.choosenImage.scale);
+//   
+//    [self initFilter];
+//  
+////    GPUImageEmbossFilter *embossFilter = [[GPUImageEmbossFilter alloc] init];
+////    embossFilter.intensity = 2.0;
+//    
+//    self.imageView.image = [self.choosenImage processInRect:testRect filter:(GPUImageFilter*)self.filter];
+////    UIImageView* tt = [[UIImageView alloc] initWithFrame:self.imageView.frame];
+////    tt.image = [self.choosenImage processInRect:testRect filter:embossFilter];
+////    [self.view addSubview:tt];
+//}
 
 - (UIImage*)imageWithFilter:(UIImage*)image
 {
     NSLog(@"size %f %f", image.size.height, image.size.width);
     
-    CGRect testRect = CGRectMake(0, 0, image.size.width, image.size.height);
-    
-    
-    NSLog(@"scale %f", image.scale);
-    
-    [self initFilter];
+//    CGRect testRect = CGRectMake(0, 0, image.size.width, image.size.height);
+//    
+//    
+//    NSLog(@"scale %f", image.scale);
+//    
+//    [self initFilter];
     
     //    GPUImageEmbossFilter *embossFilter = [[GPUImageEmbossFilter alloc] init];
     //    embossFilter.intensity = 2.0;
     
-    return [image processInRect:testRect filter:(GPUImageFilter*)self.filter];
+    return [self.filter imageByFilteringImage:image];//[image processInRect:testRect filter:(GPUImageFilter*)self.filter];
     //    UIImageView* tt = [[UIImageView alloc] initWithFrame:self.imageView.frame];
     //    tt.image = [self.choosenImage processInRect:testRect filter:embossFilter];
     //    [self.view addSubview:tt];

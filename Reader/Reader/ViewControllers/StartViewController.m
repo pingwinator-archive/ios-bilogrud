@@ -8,9 +8,13 @@
 
 #import "StartViewController.h"
 #import "PDFPageViewController.h"
+#import "DocumentModel.h"
+#import "FB2ViewController.h"
 
 @interface StartViewController ()
 @property PDFPageViewController* pdfViewController;
+@property FB2ViewController* fb2ViewController;
+@property (nonatomic, strong) DocumentModel* documentModel;
 @end
 
 @implementation StartViewController
@@ -18,20 +22,22 @@
 @synthesize docWatcher;
 @synthesize docInteractionController;
 @synthesize pdfViewController;
+@synthesize documentModel;
+@synthesize fb2ViewController;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    if (!self.documentModel) {
+        self.documentModel = [[DocumentModel alloc] init];
+    }
     
     self.navigationController.navigationBarHidden = YES;
     self.docWatcher = [DirectoryWatcher watchFolderWithPath:[self applicationDocumentsDirectory] delegate:self];
     self.documentURLs = [NSMutableArray array];
     // scan for existing documents
     [self directoryDidChange:self.docWatcher];
-    
-    
-
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -79,7 +85,6 @@
         self.docInteractionController.URL = url;
     }
 }
-
 
 #pragma mark - Table view data source
 
@@ -133,13 +138,19 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSURL *pdfUrl = [self.documentURLs objectAtIndex:indexPath.row];
+    NSURL *fileUrl = [self.documentURLs objectAtIndex:indexPath.row];
+    self.documentModel.documentLastPage = 1;
+    self.documentModel.documentUrl = fileUrl;
+    if ([[fileUrl pathExtension] isEqualToString: @"pdf"]) {
+         self.pdfViewController = [[PDFPageViewController alloc] initWithDocument:self.documentModel];
+        [self.navigationController pushViewController:self.pdfViewController animated:YES];
+    }
    
-    self.pdfViewController = [[PDFPageViewController alloc] initWithUrlDocument:pdfUrl andLastOpenedPage:5];
     
-    [self.navigationController pushViewController:self.pdfViewController animated:YES];
-//   UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Info" message: [NSString stringWithFormat:@"%@", [self.documentURLs objectAtIndex:indexPath.row]] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-//    [alert show];
+    if ([[fileUrl pathExtension] isEqualToString: @"fb2"]) {
+        self.fb2ViewController = [[FB2ViewController alloc] initWithDocument:self.documentModel];
+        [self.navigationController pushViewController:self.fb2ViewController animated:YES];
+    }
 }
 
 

@@ -9,6 +9,7 @@
 #import "PDFPageViewController.h"
 #import "ContentViewController.h"
 #import "PDFView.h"
+#import "DocumentModel.h"
 
 @interface PDFPageViewController ()
 @property (strong, nonatomic) PDFView* pdfView;
@@ -31,6 +32,16 @@
     if (self) {
         self.urlToFile = url;
         self.currentPageNumber = page;
+    }
+    return self;
+}
+
+- (id)initWithDocument:(DocumentModel*)model
+{
+    self = [super init];
+    if (self) {
+        self.urlToFile = model.documentUrl;
+        self.currentPageNumber = model.documentLastPage;
     }
     return self;
 }

@@ -7,11 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class DocumentModel;
 @interface PDFPageViewController : UIViewController<UIPageViewControllerDataSource, UIPageViewControllerDelegate>
-//@property (strong, nonatomic) IBOutlet UIWebView* webView;
 @property (strong, nonatomic) UIPageViewController* pageViewController;
 
 - (id)initWithUrlDocument:(NSURL*)url andLastOpenedPage:(NSInteger)page;
-
+- (id)initWithDocument:(DocumentModel*)model;
 @end

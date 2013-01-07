@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E0A784A16975A0B0065D861 /* DocumentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E0A784916975A0B0065D861 /* DocumentModel.m */; };
 		6E0C266D16791DD4002E75A4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E0C266C16791DD4002E75A4 /* UIKit.framework */; };
 		6E0C266F16791DD4002E75A4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E0C266E16791DD4002E75A4 /* Foundation.framework */; };
 		6E0C267116791DD4002E75A4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E0C267016791DD4002E75A4 /* CoreGraphics.framework */; };
@@ -16,6 +17,7 @@
 		6E0C267F16791DD4002E75A4 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E0C267E16791DD4002E75A4 /* Default.png */; };
 		6E0C268116791DD4002E75A4 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E0C268016791DD4002E75A4 /* Default@2x.png */; };
 		6E0C268316791DD4002E75A4 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E0C268216791DD4002E75A4 /* Default-568h@2x.png */; };
+		6E1089E4169B10BE00041E0F /* FB2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E1089E3169B10BE00041E0F /* FB2ViewController.m */; };
 		6EFB1621167DC2EC00C9522A /* DirectoryWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EFB160F167DC2EC00C9522A /* DirectoryWatcher.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		6EFB1622167DC2EC00C9522A /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EFB1613167DC2EC00C9522A /* ContentViewController.m */; };
 		6EFB1623167DC2EC00C9522A /* PDFPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EFB1615167DC2EC00C9522A /* PDFPageViewController.m */; };
@@ -32,6 +34,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6E0A784816975A0B0065D861 /* DocumentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentModel.h; sourceTree = "<group>"; };
+		6E0A784916975A0B0065D861 /* DocumentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentModel.m; sourceTree = "<group>"; };
 		6E0C266816791DD4002E75A4 /* Reader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E0C266C16791DD4002E75A4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6E0C266E16791DD4002E75A4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -45,6 +49,8 @@
 		6E0C267E16791DD4002E75A4 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		6E0C268016791DD4002E75A4 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		6E0C268216791DD4002E75A4 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		6E1089E2169B10BE00041E0F /* FB2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FB2ViewController.h; sourceTree = "<group>"; };
+		6E1089E3169B10BE00041E0F /* FB2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FB2ViewController.m; sourceTree = "<group>"; };
 		6EFB160E167DC2EC00C9522A /* DirectoryWatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectoryWatcher.h; sourceTree = "<group>"; };
 		6EFB160F167DC2EC00C9522A /* DirectoryWatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectoryWatcher.m; sourceTree = "<group>"; };
 		6EFB1612167DC2EC00C9522A /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
@@ -82,9 +88,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6E0A7846169758870065D861 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6E0A784816975A0B0065D861 /* DocumentModel.h */,
+				6E0A784916975A0B0065D861 /* DocumentModel.m */,
+			);
+			name = Models;
+			path = Reader/Models;
+			sourceTree = "<group>";
+		};
 		6E0C265D16791DD4002E75A4 = {
 			isa = PBXGroup;
 			children = (
+				6E0A7846169758870065D861 /* Models */,
 				6EFB160C167DC2EC00C9522A /* Externals */,
 				6EFB1610167DC2EC00C9522A /* Managers */,
 				6EFB1611167DC2EC00C9522A /* ViewControllers */,
@@ -174,6 +191,8 @@
 				6EFB1615167DC2EC00C9522A /* PDFPageViewController.m */,
 				6EFB1616167DC2EC00C9522A /* StartViewController.h */,
 				6EFB1617167DC2EC00C9522A /* StartViewController.m */,
+				6E1089E2169B10BE00041E0F /* FB2ViewController.h */,
+				6E1089E3169B10BE00041E0F /* FB2ViewController.m */,
 			);
 			name = ViewControllers;
 			path = Reader/ViewControllers;
@@ -301,6 +320,8 @@
 				6EFB162C167DC32A00C9522A /* PDFView.m in Sources */,
 				6EFB1631167DEF5000C9522A /* PDFScrollView.m in Sources */,
 				6EFB1632167DEF5000C9522A /* TiledPDFView.m in Sources */,
+				6E0A784A16975A0B0065D861 /* DocumentModel.m in Sources */,
+				6E1089E4169B10BE00041E0F /* FB2ViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
