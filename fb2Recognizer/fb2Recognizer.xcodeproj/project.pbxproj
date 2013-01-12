@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E030E9316A1E2C700343208 /* test.fb2 in Resources */ = {isa = PBXBuildFile; fileRef = 6E030E9216A1E2C600343208 /* test.fb2 */; };
+		6E030E9E16A1F1CE00343208 /* Dievushka, kotoraia vzryvala vozdushnyie - Stigh Larsson.fb2 in Resources */ = {isa = PBXBuildFile; fileRef = 6E030E9D16A1F1CE00343208 /* Dievushka, kotoraia vzryvala vozdushnyie - Stigh Larsson.fb2 */; };
+		6E030EA116A1F31400343208 /* fb2Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E030EA016A1F31400343208 /* fb2Parser.m */; };
 		6E84CA0E169FFF510021EF4E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E84CA0D169FFF510021EF4E /* UIKit.framework */; };
 		6E84CA10169FFF510021EF4E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E84CA0F169FFF510021EF4E /* Foundation.framework */; };
 		6E84CA12169FFF510021EF4E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E84CA11169FFF510021EF4E /* CoreGraphics.framework */; };
@@ -23,6 +26,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6E030E9216A1E2C600343208 /* test.fb2 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = test.fb2; sourceTree = "<group>"; };
+		6E030E9D16A1F1CE00343208 /* Dievushka, kotoraia vzryvala vozdushnyie - Stigh Larsson.fb2 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Dievushka, kotoraia vzryvala vozdushnyie - Stigh Larsson.fb2"; sourceTree = "<group>"; };
+		6E030E9F16A1F31400343208 /* fb2Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fb2Parser.h; sourceTree = "<group>"; };
+		6E030EA016A1F31400343208 /* fb2Parser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = fb2Parser.m; sourceTree = "<group>"; };
 		6E84CA09169FFF510021EF4E /* fb2Recognizer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fb2Recognizer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E84CA0D169FFF510021EF4E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6E84CA0F169FFF510021EF4E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -95,6 +102,8 @@
 				6E84CA28169FFF510021EF4E /* ViewController_iPhone.xib */,
 				6E84CA2B169FFF510021EF4E /* ViewController_iPad.xib */,
 				6E84CA14169FFF510021EF4E /* Supporting Files */,
+				6E030E9F16A1F31400343208 /* fb2Parser.h */,
+				6E030EA016A1F31400343208 /* fb2Parser.m */,
 			);
 			path = fb2Recognizer;
 			sourceTree = "<group>";
@@ -116,6 +125,8 @@
 		6E84CA3316A000600021EF4E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6E030E9D16A1F1CE00343208 /* Dievushka, kotoraia vzryvala vozdushnyie - Stigh Larsson.fb2 */,
+				6E030E9216A1E2C600343208 /* test.fb2 */,
 				6E84CA3416A000600021EF4E /* Larsson.fb2 */,
 			);
 			name = Resources;
@@ -180,6 +191,8 @@
 				6E84CA2A169FFF510021EF4E /* ViewController_iPhone.xib in Resources */,
 				6E84CA2D169FFF510021EF4E /* ViewController_iPad.xib in Resources */,
 				6E84CA3516A000600021EF4E /* Larsson.fb2 in Resources */,
+				6E030E9316A1E2C700343208 /* test.fb2 in Resources */,
+				6E030E9E16A1F1CE00343208 /* Dievushka, kotoraia vzryvala vozdushnyie - Stigh Larsson.fb2 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,6 +206,7 @@
 				6E84CA1A169FFF510021EF4E /* main.m in Sources */,
 				6E84CA1E169FFF510021EF4E /* AppDelegate.m in Sources */,
 				6E84CA27169FFF510021EF4E /* ViewController.m in Sources */,
+				6E030EA116A1F31400343208 /* fb2Parser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,6 +335,7 @@
 				6E84CA32169FFF510021EF4E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

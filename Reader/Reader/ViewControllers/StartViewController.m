@@ -146,7 +146,6 @@
         [self.navigationController pushViewController:self.pdfViewController animated:YES];
     }
    
-    
     if ([[fileUrl pathExtension] isEqualToString: @"fb2"]) {
         self.fb2ViewController = [[FB2ViewController alloc] initWithDocument:self.documentModel];
         [self.navigationController pushViewController:self.fb2ViewController animated:YES];
