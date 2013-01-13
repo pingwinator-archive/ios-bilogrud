@@ -7,9 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6E030E9316A1E2C700343208 /* test.fb2 in Resources */ = {isa = PBXBuildFile; fileRef = 6E030E9216A1E2C600343208 /* test.fb2 */; };
-		6E030E9E16A1F1CE00343208 /* Dievushka, kotoraia vzryvala vozdushnyie - Stigh Larsson.fb2 in Resources */ = {isa = PBXBuildFile; fileRef = 6E030E9D16A1F1CE00343208 /* Dievushka, kotoraia vzryvala vozdushnyie - Stigh Larsson.fb2 */; };
-		6E030EA116A1F31400343208 /* fb2Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E030EA016A1F31400343208 /* fb2Parser.m */; };
+		6E0DB5E216A34F9500B7020D /* fb2Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E0DB5DC16A34F9500B7020D /* fb2Parser.m */; };
+		6E0DB5E316A34F9500B7020D /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E0DB5DF16A34F9500B7020D /* ContentViewController.m */; };
+		6E0DB5E416A34F9500B7020D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E0DB5E116A34F9500B7020D /* ViewController.m */; };
+		6E0DB5F316A34FFC00B7020D /* Aksakov_Sergej__Alenkij_cvetochek 2.fb2 in Resources */ = {isa = PBXBuildFile; fileRef = 6E0DB5E916A34FFC00B7020D /* Aksakov_Sergej__Alenkij_cvetochek 2.fb2 */; };
+		6E0DB5F416A34FFC00B7020D /* Aksakov_Sergej__Alenkij_cvetochek.1.fb2 in Resources */ = {isa = PBXBuildFile; fileRef = 6E0DB5EA16A34FFC00B7020D /* Aksakov_Sergej__Alenkij_cvetochek.1.fb2 */; };
+		6E0DB5F516A34FFC00B7020D /* Aksakov_Sergej__Alenkij_cvetochek.fb2 in Resources */ = {isa = PBXBuildFile; fileRef = 6E0DB5EB16A34FFC00B7020D /* Aksakov_Sergej__Alenkij_cvetochek.fb2 */; };
+		6E0DB5F616A34FFC00B7020D /* Dievushka, kotoraia vzryvala vozdushnyie - Stigh Larsson.fb2 in Resources */ = {isa = PBXBuildFile; fileRef = 6E0DB5EC16A34FFC00B7020D /* Dievushka, kotoraia vzryvala vozdushnyie - Stigh Larsson.fb2 */; };
+		6E0DB5F716A34FFC00B7020D /* Larsson.fb2 in Resources */ = {isa = PBXBuildFile; fileRef = 6E0DB5ED16A34FFC00B7020D /* Larsson.fb2 */; };
+		6E0DB5F816A34FFC00B7020D /* test.fb2 in Resources */ = {isa = PBXBuildFile; fileRef = 6E0DB5EE16A34FFC00B7020D /* test.fb2 */; };
+		6E0DB5F916A34FFC00B7020D /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E0DB5F116A34FFC00B7020D /* ViewController_iPad.xib */; };
+		6E0DB5FA16A34FFC00B7020D /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E0DB5F216A34FFC00B7020D /* ViewController_iPhone.xib */; };
+		6E0DB5FD16A3506300B7020D /* NSData+NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E0DB5FC16A3506300B7020D /* NSData+NSDataAdditions.m */; };
+		6E0DB60716A3518F00B7020D /* NSString+NSStringAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E0DB60616A3518F00B7020D /* NSString+NSStringAdditions.m */; };
 		6E84CA0E169FFF510021EF4E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E84CA0D169FFF510021EF4E /* UIKit.framework */; };
 		6E84CA10169FFF510021EF4E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E84CA0F169FFF510021EF4E /* Foundation.framework */; };
 		6E84CA12169FFF510021EF4E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E84CA11169FFF510021EF4E /* CoreGraphics.framework */; };
@@ -19,17 +29,28 @@
 		6E84CA20169FFF510021EF4E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E84CA1F169FFF510021EF4E /* Default.png */; };
 		6E84CA22169FFF510021EF4E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E84CA21169FFF510021EF4E /* Default@2x.png */; };
 		6E84CA24169FFF510021EF4E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E84CA23169FFF510021EF4E /* Default-568h@2x.png */; };
-		6E84CA27169FFF510021EF4E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E84CA26169FFF510021EF4E /* ViewController.m */; };
-		6E84CA2A169FFF510021EF4E /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E84CA28169FFF510021EF4E /* ViewController_iPhone.xib */; };
-		6E84CA2D169FFF510021EF4E /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E84CA2B169FFF510021EF4E /* ViewController_iPad.xib */; };
-		6E84CA3516A000600021EF4E /* Larsson.fb2 in Resources */ = {isa = PBXBuildFile; fileRef = 6E84CA3416A000600021EF4E /* Larsson.fb2 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6E030E9216A1E2C600343208 /* test.fb2 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = test.fb2; sourceTree = "<group>"; };
-		6E030E9D16A1F1CE00343208 /* Dievushka, kotoraia vzryvala vozdushnyie - Stigh Larsson.fb2 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Dievushka, kotoraia vzryvala vozdushnyie - Stigh Larsson.fb2"; sourceTree = "<group>"; };
-		6E030E9F16A1F31400343208 /* fb2Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fb2Parser.h; sourceTree = "<group>"; };
-		6E030EA016A1F31400343208 /* fb2Parser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = fb2Parser.m; sourceTree = "<group>"; };
+		6E0DB5D916A34F9500B7020D /* DefineConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefineConst.h; sourceTree = "<group>"; };
+		6E0DB5DB16A34F9500B7020D /* fb2Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fb2Parser.h; sourceTree = "<group>"; };
+		6E0DB5DC16A34F9500B7020D /* fb2Parser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = fb2Parser.m; sourceTree = "<group>"; };
+		6E0DB5DE16A34F9500B7020D /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
+		6E0DB5DF16A34F9500B7020D /* ContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentViewController.m; sourceTree = "<group>"; };
+		6E0DB5E016A34F9500B7020D /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		6E0DB5E116A34F9500B7020D /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		6E0DB5E916A34FFC00B7020D /* Aksakov_Sergej__Alenkij_cvetochek 2.fb2 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Aksakov_Sergej__Alenkij_cvetochek 2.fb2"; sourceTree = "<group>"; };
+		6E0DB5EA16A34FFC00B7020D /* Aksakov_Sergej__Alenkij_cvetochek.1.fb2 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Aksakov_Sergej__Alenkij_cvetochek.1.fb2; sourceTree = "<group>"; };
+		6E0DB5EB16A34FFC00B7020D /* Aksakov_Sergej__Alenkij_cvetochek.fb2 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Aksakov_Sergej__Alenkij_cvetochek.fb2; sourceTree = "<group>"; };
+		6E0DB5EC16A34FFC00B7020D /* Dievushka, kotoraia vzryvala vozdushnyie - Stigh Larsson.fb2 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Dievushka, kotoraia vzryvala vozdushnyie - Stigh Larsson.fb2"; sourceTree = "<group>"; };
+		6E0DB5ED16A34FFC00B7020D /* Larsson.fb2 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Larsson.fb2; sourceTree = "<group>"; };
+		6E0DB5EE16A34FFC00B7020D /* test.fb2 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = test.fb2; sourceTree = "<group>"; };
+		6E0DB5F116A34FFC00B7020D /* ViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController_iPad.xib; sourceTree = "<group>"; };
+		6E0DB5F216A34FFC00B7020D /* ViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController_iPhone.xib; sourceTree = "<group>"; };
+		6E0DB5FB16A3506300B7020D /* NSData+NSDataAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+NSDataAdditions.h"; sourceTree = "<group>"; };
+		6E0DB5FC16A3506300B7020D /* NSData+NSDataAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+NSDataAdditions.m"; sourceTree = "<group>"; };
+		6E0DB60516A3518E00B7020D /* NSString+NSStringAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+NSStringAdditions.h"; sourceTree = "<group>"; };
+		6E0DB60616A3518F00B7020D /* NSString+NSStringAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+NSStringAdditions.m"; sourceTree = "<group>"; };
 		6E84CA09169FFF510021EF4E /* fb2Recognizer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fb2Recognizer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E84CA0D169FFF510021EF4E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6E84CA0F169FFF510021EF4E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -43,11 +64,6 @@
 		6E84CA1F169FFF510021EF4E /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		6E84CA21169FFF510021EF4E /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		6E84CA23169FFF510021EF4E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		6E84CA25169FFF510021EF4E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		6E84CA26169FFF510021EF4E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		6E84CA29169FFF510021EF4E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPhone.xib; sourceTree = "<group>"; };
-		6E84CA2C169FFF510021EF4E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPad.xib; sourceTree = "<group>"; };
-		6E84CA3416A000600021EF4E /* Larsson.fb2 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Larsson.fb2; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,10 +80,115 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6E0DB5D716A34F9500B7020D /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				6E0DB60516A3518E00B7020D /* NSString+NSStringAdditions.h */,
+				6E0DB60616A3518F00B7020D /* NSString+NSStringAdditions.m */,
+				6E0DB5FB16A3506300B7020D /* NSData+NSDataAdditions.h */,
+				6E0DB5FC16A3506300B7020D /* NSData+NSDataAdditions.m */,
+			);
+			name = Categories;
+			path = fb2Recognizer/Categories;
+			sourceTree = "<group>";
+		};
+		6E0DB5D816A34F9500B7020D /* Other sources */ = {
+			isa = PBXGroup;
+			children = (
+				6E0DB5D916A34F9500B7020D /* DefineConst.h */,
+			);
+			name = "Other sources";
+			path = "fb2Recognizer/Other sources";
+			sourceTree = "<group>";
+		};
+		6E0DB5DA16A34F9500B7020D /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+				6E0DB5DB16A34F9500B7020D /* fb2Parser.h */,
+				6E0DB5DC16A34F9500B7020D /* fb2Parser.m */,
+			);
+			name = Parser;
+			path = fb2Recognizer/Parser;
+			sourceTree = "<group>";
+		};
+		6E0DB5DD16A34F9500B7020D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				6E0DB5DE16A34F9500B7020D /* ContentViewController.h */,
+				6E0DB5DF16A34F9500B7020D /* ContentViewController.m */,
+				6E0DB5E016A34F9500B7020D /* ViewController.h */,
+				6E0DB5E116A34F9500B7020D /* ViewController.m */,
+			);
+			name = ViewControllers;
+			path = fb2Recognizer/ViewControllers;
+			sourceTree = "<group>";
+		};
+		6E0DB5E516A34FB000B7020D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			path = fb2Recognizer/Views;
+			sourceTree = "<group>";
+		};
+		6E0DB5E616A34FB100B7020D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			path = fb2Recognizer/Models;
+			sourceTree = "<group>";
+		};
+		6E0DB5E716A34FFC00B7020D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6E0DB5E816A34FFC00B7020D /* fb2 */,
+				6E0DB5EF16A34FFC00B7020D /* Images */,
+				6E0DB5F016A34FFC00B7020D /* Nibs */,
+			);
+			name = Resources;
+			path = fb2Recognizer/Resources;
+			sourceTree = "<group>";
+		};
+		6E0DB5E816A34FFC00B7020D /* fb2 */ = {
+			isa = PBXGroup;
+			children = (
+				6E0DB5E916A34FFC00B7020D /* Aksakov_Sergej__Alenkij_cvetochek 2.fb2 */,
+				6E0DB5EA16A34FFC00B7020D /* Aksakov_Sergej__Alenkij_cvetochek.1.fb2 */,
+				6E0DB5EB16A34FFC00B7020D /* Aksakov_Sergej__Alenkij_cvetochek.fb2 */,
+				6E0DB5EC16A34FFC00B7020D /* Dievushka, kotoraia vzryvala vozdushnyie - Stigh Larsson.fb2 */,
+				6E0DB5ED16A34FFC00B7020D /* Larsson.fb2 */,
+				6E0DB5EE16A34FFC00B7020D /* test.fb2 */,
+			);
+			path = fb2;
+			sourceTree = "<group>";
+		};
+		6E0DB5EF16A34FFC00B7020D /* Images */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		6E0DB5F016A34FFC00B7020D /* Nibs */ = {
+			isa = PBXGroup;
+			children = (
+				6E0DB5F116A34FFC00B7020D /* ViewController_iPad.xib */,
+				6E0DB5F216A34FFC00B7020D /* ViewController_iPhone.xib */,
+			);
+			path = Nibs;
+			sourceTree = "<group>";
+		};
 		6E84C9FE169FFF510021EF4E = {
 			isa = PBXGroup;
 			children = (
-				6E84CA3316A000600021EF4E /* Resources */,
+				6E0DB5DA16A34F9500B7020D /* Parser */,
+				6E0DB5DD16A34F9500B7020D /* ViewControllers */,
+				6E0DB5E616A34FB100B7020D /* Models */,
+				6E0DB5E516A34FB000B7020D /* Views */,
+				6E0DB5E716A34FFC00B7020D /* Resources */,
+				6E0DB5D716A34F9500B7020D /* Categories */,
+				6E0DB5D816A34F9500B7020D /* Other sources */,
 				6E84CA13169FFF510021EF4E /* fb2Recognizer */,
 				6E84CA0C169FFF510021EF4E /* Frameworks */,
 				6E84CA0A169FFF510021EF4E /* Products */,
@@ -97,13 +218,7 @@
 			children = (
 				6E84CA1C169FFF510021EF4E /* AppDelegate.h */,
 				6E84CA1D169FFF510021EF4E /* AppDelegate.m */,
-				6E84CA25169FFF510021EF4E /* ViewController.h */,
-				6E84CA26169FFF510021EF4E /* ViewController.m */,
-				6E84CA28169FFF510021EF4E /* ViewController_iPhone.xib */,
-				6E84CA2B169FFF510021EF4E /* ViewController_iPad.xib */,
 				6E84CA14169FFF510021EF4E /* Supporting Files */,
-				6E030E9F16A1F31400343208 /* fb2Parser.h */,
-				6E030EA016A1F31400343208 /* fb2Parser.m */,
 			);
 			path = fb2Recognizer;
 			sourceTree = "<group>";
@@ -120,17 +235,6 @@
 				6E84CA23169FFF510021EF4E /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		6E84CA3316A000600021EF4E /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				6E030E9D16A1F1CE00343208 /* Dievushka, kotoraia vzryvala vozdushnyie - Stigh Larsson.fb2 */,
-				6E030E9216A1E2C600343208 /* test.fb2 */,
-				6E84CA3416A000600021EF4E /* Larsson.fb2 */,
-			);
-			name = Resources;
-			path = fb2Recognizer/Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -188,11 +292,14 @@
 				6E84CA20169FFF510021EF4E /* Default.png in Resources */,
 				6E84CA22169FFF510021EF4E /* Default@2x.png in Resources */,
 				6E84CA24169FFF510021EF4E /* Default-568h@2x.png in Resources */,
-				6E84CA2A169FFF510021EF4E /* ViewController_iPhone.xib in Resources */,
-				6E84CA2D169FFF510021EF4E /* ViewController_iPad.xib in Resources */,
-				6E84CA3516A000600021EF4E /* Larsson.fb2 in Resources */,
-				6E030E9316A1E2C700343208 /* test.fb2 in Resources */,
-				6E030E9E16A1F1CE00343208 /* Dievushka, kotoraia vzryvala vozdushnyie - Stigh Larsson.fb2 in Resources */,
+				6E0DB5F316A34FFC00B7020D /* Aksakov_Sergej__Alenkij_cvetochek 2.fb2 in Resources */,
+				6E0DB5F416A34FFC00B7020D /* Aksakov_Sergej__Alenkij_cvetochek.1.fb2 in Resources */,
+				6E0DB5F516A34FFC00B7020D /* Aksakov_Sergej__Alenkij_cvetochek.fb2 in Resources */,
+				6E0DB5F616A34FFC00B7020D /* Dievushka, kotoraia vzryvala vozdushnyie - Stigh Larsson.fb2 in Resources */,
+				6E0DB5F716A34FFC00B7020D /* Larsson.fb2 in Resources */,
+				6E0DB5F816A34FFC00B7020D /* test.fb2 in Resources */,
+				6E0DB5F916A34FFC00B7020D /* ViewController_iPad.xib in Resources */,
+				6E0DB5FA16A34FFC00B7020D /* ViewController_iPhone.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,8 +312,11 @@
 			files = (
 				6E84CA1A169FFF510021EF4E /* main.m in Sources */,
 				6E84CA1E169FFF510021EF4E /* AppDelegate.m in Sources */,
-				6E84CA27169FFF510021EF4E /* ViewController.m in Sources */,
-				6E030EA116A1F31400343208 /* fb2Parser.m in Sources */,
+				6E0DB5E216A34F9500B7020D /* fb2Parser.m in Sources */,
+				6E0DB5E316A34F9500B7020D /* ContentViewController.m in Sources */,
+				6E0DB5E416A34F9500B7020D /* ViewController.m in Sources */,
+				6E0DB5FD16A3506300B7020D /* NSData+NSDataAdditions.m in Sources */,
+				6E0DB60716A3518F00B7020D /* NSString+NSStringAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,22 +329,6 @@
 				6E84CA17169FFF510021EF4E /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		6E84CA28169FFF510021EF4E /* ViewController_iPhone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6E84CA29169FFF510021EF4E /* en */,
-			);
-			name = ViewController_iPhone.xib;
-			sourceTree = "<group>";
-		};
-		6E84CA2B169FFF510021EF4E /* ViewController_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6E84CA2C169FFF510021EF4E /* en */,
-			);
-			name = ViewController_iPad.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

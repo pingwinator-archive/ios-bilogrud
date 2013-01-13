@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 @class fb2Parser;
-@interface ViewController : UIViewController<UIWebViewDelegate>
+@interface ViewController : UIViewController<UIWebViewDelegate, UIPageViewControllerDataSource, UIPageViewControllerDelegate>
 
-@property (strong, nonatomic) UILabel* label;
-@property (strong, nonatomic) UITextView* textView;
 @property (strong, nonatomic) fb2Parser* testBook;
+
+
+
+@property (strong, nonatomic) UIPageViewController* pageViewController;
 @end
