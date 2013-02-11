@@ -11,43 +11,36 @@
 
 
 @interface ViewController ()
-
+@property(assign, nonatomic) BOOL showAnimation;
 @end
 
 @implementation ViewController
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self makeJellyAnimationFor:self.imageView];
+    self.showAnimation = YES;
+    [self makeJellyAnimationFor:self.imageView andDelta:10];
 }
 
-- (void)makeJellyAnimationFor:(UIView*)view
+
+- (void)makeJellyAnimationFor:(UIView*)view andDelta:(NSInteger)i
 {
-    NSInteger i = 10;
     CGRect rect = view.frame;
-    
-    while (i > 1) {
-        [UIView animateWithDuration:2 animations:^{
-            view.frame = CGRectMake(rect.origin.x - i, rect.origin.y, rect.size.width, rect.size.height);
-        } completion:^(BOOL finished) {
-            view.frame = CGRectMake(rect.origin.x + 2*i, rect.origin.y, rect.size.width, rect.size.height);
-        }];
-        i--;
+    __block NSInteger test = i;
+    if (self.showAnimation) {
+        if (i > 1) {
+            if (test % 2) {
+                test = - test;
+            }
+            [UIView animateWithDuration:0.2 animations:^{
+                view.frame = CGRectMake(rect.origin.x - test, rect.origin.y, rect.size.width, rect.size.height);
+            } completion:^(BOOL finished) {
+                [self makeJellyAnimationFor:view andDelta:i - 1];
+            }];
+        } else {
+            self.showAnimation = NO;
+        }
     }
-   
 }
-
 @end
