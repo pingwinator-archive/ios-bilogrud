@@ -21,7 +21,7 @@
 {
     [super viewDidAppear:animated];
     self.imageView.transform = CGAffineTransformMakeRotation(0);
-    [self makeJellyAnimationFor:self.imageView andDelta:2];
+    [self makeJellyAnimationFor:self.imageView andDelta:10];
 }
 
 
@@ -30,17 +30,17 @@
     CGAffineTransform t = view.transform;
     __block NSInteger test = i;
     if (i > 1) {
-        [UIView animateWithDuration:0.4 animations:^{
+        [UIView animateWithDuration:0.1 animations:^{
             //            view.transform = CGAffineTransformMakeRotation(- test * M_PI_4/30);
-            view.transform = CGAffineTransformMakeRotation(- M_PI_4);
+            view.transform = CGAffineTransformMakeRotation(- test * M_PI/150);
             NSLogR(view.frame);
         } completion:^(BOOL finished) {
-            [UIView animateWithDuration:0.8 animations:^{
-                view.transform = CGAffineTransformMakeRotation(M_PI_2);
+            [UIView animateWithDuration:0.2 animations:^{
+                view.transform = CGAffineTransformMakeRotation(test * M_PI/150);
                 NSLogR(view.frame);
             }completion:^(BOOL finished) {
-                [UIView animateWithDuration:0.4 animations:^{
-                    view.transform = CGAffineTransformMakeRotation(- M_PI_4);
+                [UIView animateWithDuration:0.1 animations:^{
+                    view.transform = CGAffineTransformMakeRotation(0);
                     NSLogR(view.frame);
                 }completion:^(BOOL finished){
                     NSLog(@"%d  test", test);
