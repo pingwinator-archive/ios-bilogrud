@@ -9,9 +9,13 @@
 #import "ViewController.h"
 #import <MobileCoreServices/UTCoreTypes.h>
 
+#import <AssetsLibrary/AssetsLibrary.h>
+#import "ALAssetsLibrary+CustomPhotoAlbum.h"
+
 @interface ViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (strong, nonatomic) UIImagePickerController* picker;
 @property (strong, nonatomic) UIImage* image;
+@property (strong, atomic) ALAssetsLibrary* library;
 @end
 
 @implementation ViewController
@@ -20,6 +24,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    self.library = [[ALAssetsLibrary alloc] init];
 }
 
 - (void)didReceiveMemoryWarning
@@ -30,20 +35,28 @@
 
 - (IBAction)showPhoto
 {
-    [self imageFromSource:UIImagePickerControllerSourceTypePhotoLibrary];
+    [self imageFromSource:UIImagePickerControllerSourceTypeCamera];
 }
 
 - (IBAction)savePhoto
 {
-    [self save];
+   [self imageFromSource:UIImagePickerControllerSourceTypePhotoLibrary];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+   
+     
     
     if([[info objectForKey:UIImagePickerControllerMediaType] isEqual: (NSString*)kUTTypeImage])
     {
         self.image = [info objectForKey:UIImagePickerControllerOriginalImage];
-         [self dismissModalViewControllerAnimated:YES];
+        [self.library saveImage:self.image toAlbum:@"Custom Photo Album" withCompletionBlock:^(NSError *error) {
+            if (error!=nil) {
+                NSLog(@"Big error: %@", [error description]);
+            }
+        }];
+//        [self save];
+        [self dismissModalViewControllerAnimated:YES];
     }
     self.picker = nil;
 }
@@ -66,12 +79,29 @@
     }
 }
 
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [picker dismissModalViewControllerAnimated:NO];
+}
+
+//- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
+//{
+//    [self.library saveImage:image toAlbum:@"Custom Photo Album" withCompletionBlock:^(NSError *error) {
+//        if (error!=nil) {
+//            NSLog(@"Big error: %@", [error description]);
+//        }
+//    }];
+//    
+//    [picker dismissModalViewControllerAnimated:NO];
+//}
+
 - (NSString *)getPathToSettingsFile
 {
     NSString *path = nil;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
-    path = [documentsDirectory stringByAppendingPathComponent:@"settings.plist"];
+    path = [documentsDirectory stringByAppendingPathComponent:@"Custom Photo Album"];
     return path;
 }
 

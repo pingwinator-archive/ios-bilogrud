@@ -20,6 +20,7 @@
 		6EE8E97716CB7B82004AA3C6 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EE8E97516CB7B82004AA3C6 /* ViewController.xib */; };
 		6EE8E97E16CB7F61004AA3C6 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE8E97D16CB7F61004AA3C6 /* MobileCoreServices.framework */; };
 		6EE8E98116CB837D004AA3C6 /* ALAssetsLibrary+CustomPhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EE8E98016CB837D004AA3C6 /* ALAssetsLibrary+CustomPhotoAlbum.m */; };
+		6EE8E98716CBB263004AA3C6 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EE8E98616CBB263004AA3C6 /* AssetsLibrary.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		6EE8E97D16CB7F61004AA3C6 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		6EE8E97F16CB837D004AA3C6 /* ALAssetsLibrary+CustomPhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAssetsLibrary+CustomPhotoAlbum.h"; sourceTree = "<group>"; };
 		6EE8E98016CB837D004AA3C6 /* ALAssetsLibrary+CustomPhotoAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAssetsLibrary+CustomPhotoAlbum.m"; sourceTree = "<group>"; };
+		6EE8E98616CBB263004AA3C6 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EE8E98716CBB263004AA3C6 /* AssetsLibrary.framework in Frameworks */,
 				6EE8E97E16CB7F61004AA3C6 /* MobileCoreServices.framework in Frameworks */,
 				6EE8E95B16CB7B82004AA3C6 /* UIKit.framework in Frameworks */,
 				6EE8E95D16CB7B82004AA3C6 /* Foundation.framework in Frameworks */,
@@ -62,6 +65,7 @@
 		6EE8E94E16CB7B82004AA3C6 = {
 			isa = PBXGroup;
 			children = (
+				6EE8E98616CBB263004AA3C6 /* AssetsLibrary.framework */,
 				6EE8E96016CB7B82004AA3C6 /* CustomFolderApp */,
 				6EE8E95916CB7B82004AA3C6 /* Frameworks */,
 				6EE8E95816CB7B82004AA3C6 /* Products */,
