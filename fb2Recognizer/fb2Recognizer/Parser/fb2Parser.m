@@ -54,7 +54,6 @@ static NSString * const kImageElementName = @"image";
     if (!self.elementArray) {
         self.elementArray = [NSMutableArray array];
     }
-
     SWITCH (self.currentElement) {
         CASE (kTextElementName) {
             self.currentNodeContent = (NSMutableString *) [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -85,10 +84,6 @@ static NSString * const kImageElementName = @"image";
             break;
         }
     }
-   
-       
-        
-    
 }
 
 - (void)parserDidStartDocument:(NSXMLParser *)parser

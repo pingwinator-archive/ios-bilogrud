@@ -12,6 +12,7 @@
 
 @interface ViewController ()
 @property (assign, nonatomic) NSInteger currentPageNumber;
+@property (strong, nonatomic) ContentViewController* contentViewController;
 @end
 
 @implementation ViewController
@@ -21,7 +22,7 @@
     [super viewDidLoad];
     
     self.testBook = [[fb2Parser alloc] init];
-
+    self.currentPageNumber = 0;
     
     //Step 1
     //Instantiate the UIPageViewController.
@@ -74,29 +75,52 @@
     for (NSString* s in self.testBook.elementArray) {
         bookString = [bookString stringByAppendingString:s];
     }
-  
+    
+    self.contentViewController = [[ContentViewController alloc] initWithNodes:self.testBook andCurrentNumber:self.currentPageNumber];
 }
-
-
 
 #pragma mark - UIPageViewControllerDataSource Methods
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController
       viewControllerBeforeViewController:(UIViewController *)viewController
 {
-//    [self decreasePageNumber];
-    ContentViewController *contentViewController = [[ContentViewController alloc] initWithNodes:self.testBook andCurrentNumber:self.currentPageNumber];
-    
-    return contentViewController;
+    [self decreasePageNumber];
+    if (!self.contentViewController) {
+        self.contentViewController = [[ContentViewController alloc] initWithNodes:self.testBook andCurrentNumber:self.currentPageNumber];
+    } else {
+        [self.contentViewController changePage: self.currentPageNumber];
+    }
+        
+    return self.contentViewController;
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController
        viewControllerAfterViewController:(UIViewController *)viewController
 {
-//    [self increasePageNumber];
-    ContentViewController *contentViewController = [[ContentViewController alloc] initWithNodes:self.testBook andCurrentNumber:self.currentPageNumber];
+    [self increasePageNumber];
+    if (!self.contentViewController) {
+        self.contentViewController = [[ContentViewController alloc] initWithNodes:self.testBook andCurrentNumber:self.currentPageNumber];
+    } else {
+        [self.contentViewController changePage: self.currentPageNumber];
+    }
     
-    return contentViewController;
+    return self.contentViewController;
+}
+
+- (void)decreasePageNumber
+{
+    if (self.currentPageNumber > 0) {
+        self.currentPageNumber--;
+    }
+    NSLog(@"current page %d", self.currentPageNumber);
+}
+
+- (void)increasePageNumber
+{
+    if (self.currentPageNumber < [self.testBook.elementArray count]) {
+        self.currentPageNumber++;
+    }
+    NSLog(@"current page %d", self.currentPageNumber);
 }
 
 #pragma mark - UIPageViewControllerDelegate Methods

@@ -11,8 +11,5 @@
 @interface ViewController : UIViewController<UIWebViewDelegate, UIPageViewControllerDataSource, UIPageViewControllerDelegate>
 
 @property (strong, nonatomic) fb2Parser* testBook;
-
-
-
 @property (strong, nonatomic) UIPageViewController* pageViewController;
 @end

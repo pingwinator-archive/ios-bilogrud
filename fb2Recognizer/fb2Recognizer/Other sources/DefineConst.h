@@ -28,7 +28,7 @@ return _sharedObject;
 #define DISABLE_DEPRICADETED_WARNINGS_END _Pragma("clang diagnostic pop")
 
 
-#define settingFont [UIFont fontWithName:@"helvetica" size:15]
+#define settingFont [UIFont fontWithName:@"helvetica" size:25]
 #define tutorialFont [UIFont fontWithName:@"American Typewriter" size:15]
 #define textButtonFont [UIFont fontWithName:@"American Typewriter" size:10]
 #define textButtonFontIPad [UIFont fontWithName:@"American Typewriter" size:12]

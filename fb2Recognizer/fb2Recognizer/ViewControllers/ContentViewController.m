@@ -11,7 +11,7 @@
 
 
 @interface ContentViewController ()
-
+@property(assign, nonatomic) NSUInteger currentNode;
 @end
 
 @implementation ContentViewController
@@ -19,26 +19,25 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    	// Do any additional setup after loading the view.
     self.webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
+    //    self.webView.scrollView.scrollEnabled = NO;
+    //    self.webView.scrollView.bounces = NO;
+    [self changePage:self.currentPage];
+}
 
-//    self.webView.scrollView.scrollEnabled = NO;
-//    self.webView.scrollView.bounces = NO;
-  
+- (void)changePage:(NSUInteger)page
+{
+    self.currentPage = page;
+    
     [self.webView loadHTMLString:[self generateHTML] baseURL:nil];
     [self.view addSubview:self.webView];
-
+    
     [self.webView sizeThatFits:CGSizeZero];
     
     CGSize goodSize = [self.webView sizeThatFits: self.view.frame.size];
-    NSLog(@"good");
+    NSLog(@"goodsize : ");
     NSLogS(goodSize);
-	// Do any additional setup after loading the view.
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (id)initWithNodes:(fb2Parser*)nodes andCurrentNumber:(NSInteger)curNumber
@@ -47,44 +46,14 @@
     if (self) {
         self.testBookNodes = nodes;
         self.currentPage = curNumber;
+        self.currentNode = 0;
     }
     return self;
 }
 
 - (NSString*)generateHTML
 {
-    
-    UIFont *myFont = settingFont;
-    NSString *content = [NSString string];
-    
-    int i = 0;
-    while ([content sizeWithFont:myFont constrainedToSize:CGSizeMake(320, 480) lineBreakMode:UILineBreakModeWordWrap].height < self.view.frame.size.height &&
-           [content sizeWithFont:myFont constrainedToSize:CGSizeMake(320, 480) lineBreakMode:UILineBreakModeWordWrap].width < self.view.frame.size.width) {
-//     NSLog(@"%@", [[self.testBookNodes.elementArray lastObject] description]);
-        if ([[self.testBookNodes.elementArray lastObject] isKindOfClass:[NSData class]]) {
-            UIImage* image = [UIImage imageWithData:[self.testBookNodes.elementArray lastObject]];
-            [content stringByAppendingFormat:@"<image>%@</image>", image];
-        }
-        if ([[self.testBookNodes.elementArray lastObject] isKindOfClass:[NSString class]]) {
-           
-             content = [content stringByAppendingString:[self.testBookNodes.elementArray lastObject]];
-      
-        
-//        NSLog(@" w %f ", [content sizeWithFont:myFont constrainedToSize:CGSizeMake(320, 480) lineBreakMode:UILineBreakModeWordWrap].width);
-//        
-//        NSLog(@" i %d", i);
-//        
-//        NSLog(@"cur %@", [self.testBookNodes.elementArray objectAtIndex:i]);
-        }
-        
-        i++;
-    }
-    
-//    do {
-//        UILineBreakModeCharacterWrap].height - 30 < self.view.frame.size.height) {
-//            content = [content stringByAppendingString:[self.testBookNodes.elementArray objectAtIndex:i]];
-//            i++;
-//    } while (<#condition#>);
+    NSString *content = [self getPage:self.currentPage];
     NSString *myHTML = [NSString stringWithFormat:@"<html> \n"
                                    "<head> \n"
                                    "<style type=\"text/css\"> \n"
@@ -92,13 +61,31 @@
                                    "</style> \n"
                                    "</head> \n"
                                    "<body>%@</body> \n"
-                                   "</html>", @"helvetica", [NSNumber numberWithInt:20], content];
-//    
-//    CGSize _size = [content sizeWithFont:myFont
-//                                   forWidth:320.0f
-//                              lineBreakMode:UILineBreakModeCharacterWrap];
-    CGSize _size = [content sizeWithFont:myFont constrainedToSize:CGSizeMake(320, 480) lineBreakMode:UILineBreakModeWordWrap];
-    NSLogS(_size);
+                                   "</html>", @"helvetica", [NSNumber numberWithInt:25], content];
     return myHTML;
 }
+
+//с номером страницы 
+- (NSString*)getPage:(NSUInteger)iPage
+{
+    UIFont *myFont = settingFont;
+    NSString *content = [NSString string];
+    while ([content sizeWithFont:myFont constrainedToSize:CGSizeMake(320, 1000) lineBreakMode:UILineBreakModeWordWrap].height < self.view.frame.size.height &&
+           [content sizeWithFont:myFont constrainedToSize:CGSizeMake(320, 1000) lineBreakMode:UILineBreakModeWordWrap].width < self.view.frame.size.width &&
+           self.currentNode < [self.testBookNodes.elementArray count]) {
+        
+        NSLog(@" h %f", [content sizeWithFont:myFont constrainedToSize:CGSizeMake(320, 400) lineBreakMode:UILineBreakModeWordWrap].height);
+        NSLog(@" w %f", [content sizeWithFont:myFont constrainedToSize:CGSizeMake(320, 400) lineBreakMode:UILineBreakModeWordWrap].width);
+        
+        NSLog(@"content: %@  i: %d", content, self.currentNode);
+        if ([[self.testBookNodes.elementArray objectAtIndex:self.currentNode] isKindOfClass:[NSString class]]) {
+            content = [content stringByAppendingString:[self.testBookNodes.elementArray objectAtIndex:self.currentNode]];
+            CGSize _size = [content sizeWithFont:myFont constrainedToSize:CGSizeMake(320, 1000) lineBreakMode:UILineBreakModeWordWrap];
+            NSLogS(_size);
+        }
+        self.currentNode++;
+    }
+    return content;
+}
+
 @end

@@ -15,5 +15,5 @@
 @property (strong, nonatomic) fb2Parser* testBookNodes;
 @property (assign, nonatomic) NSInteger currentPage;
 - (id)initWithNodes:(fb2Parser*)nodes andCurrentNumber:(NSInteger)curNumber;
-
+- (void)changePage:(NSUInteger)page;
 @end
