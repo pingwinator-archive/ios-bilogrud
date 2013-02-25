@@ -20,7 +20,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-       [self setThumbImage:[imagePNG(@"handleFilter")stretchableImageWithLeftCapWidth:0 topCapHeight:0] forState:UIControlStateNormal];
+       [self setThumbImage:[imagePNG(@"handleFilter")stretchableImageWithLeftCapWidth:15 topCapHeight:15] forState:UIControlStateNormal];
         
         UIImage* stretchLeftTrack = imagePNG(@"trackFilter"),*stretchRightTrack = imagePNG(@"trackFilter");
         
