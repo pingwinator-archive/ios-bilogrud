@@ -23,6 +23,7 @@
 		6E57E9D816D79852002275B0 /* trackFilter.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E57E9D416D79852002275B0 /* trackFilter.png */; };
 		6E57E9D916D79852002275B0 /* trackFilter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E57E9D516D79852002275B0 /* trackFilter@2x.png */; };
 		6E57E9DC16D79865002275B0 /* CustomSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E57E9DB16D79865002275B0 /* CustomSlider.m */; };
+		6E9F5F4116DBBA14004A11CE /* __handleFilter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E9F5F4016DBBA14004A11CE /* __handleFilter@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		6E57E9DA16D79865002275B0 /* CustomSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSlider.h; sourceTree = "<group>"; };
 		6E57E9DB16D79865002275B0 /* CustomSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSlider.m; sourceTree = "<group>"; };
 		6E57E9DD16D798EC002275B0 /* DefineConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefineConst.h; sourceTree = "<group>"; };
+		6E9F5F4016DBBA14004A11CE /* __handleFilter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "__handleFilter@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 		6E57E9D116D79852002275B0 /* sliderIcon */ = {
 			isa = PBXGroup;
 			children = (
+				6E9F5F4016DBBA14004A11CE /* __handleFilter@2x.png */,
 				6E57E9D216D79852002275B0 /* handleFilter.png */,
 				6E57E9D316D79852002275B0 /* handleFilter@2x.png */,
 				6E57E9D416D79852002275B0 /* trackFilter.png */,
@@ -194,6 +197,7 @@
 				6E57E9D716D79852002275B0 /* handleFilter@2x.png in Resources */,
 				6E57E9D816D79852002275B0 /* trackFilter.png in Resources */,
 				6E57E9D916D79852002275B0 /* trackFilter@2x.png in Resources */,
+				6E9F5F4116DBBA14004A11CE /* __handleFilter@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,6 +336,7 @@
 				6E57E9CC16D7958B002275B0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
