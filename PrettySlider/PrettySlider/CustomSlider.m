@@ -20,10 +20,8 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-       [self setThumbImage:[imagePNG(@"handleFilter")stretchableImageWithLeftCapWidth:0 topCapHeight:0] forState:UIControlStateSelected];
-        self.thumbTintColor = [UIColor redColor];
+       [self setThumbImage:[imagePNG(@"handleFilter")stretchableImageWithLeftCapWidth:0 topCapHeight:0] forState:UIControlStateNormal];
         
-    
         UIImage* stretchLeftTrack = imagePNG(@"trackFilter"),*stretchRightTrack = imagePNG(@"trackFilter");
         
         if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"6.0")) {
@@ -38,18 +36,8 @@
         self.maximumValue = maxValue;
         self.value = startValue;
         self.userInteractionEnabled = YES;
-        self.backgroundColor=  [UIColor blueColor];
     }
     return self;
 }
-
-//- (CGRect)thumbRectForBounds:(CGRect)bounds trackRect:(CGRect)rect value:(float)value
-//{
-//    NSLog(@"ee");
-//   
-////    bounds.size.width += 5;
-////    NSLogR([super thumbRectForBounds:bounds trackRect:rect value:value]);
-//    return CGRectMake(75, 4, 100, 23);//[super thumbRectForBounds:bounds trackRect:rect value:value];
-//}
 
 @end
