@@ -11,7 +11,10 @@
 
 
 @interface ContentViewController ()
-@property(assign, nonatomic) NSUInteger currentNode;
+@property (strong, nonatomic) UIWebView* webView;
+@property (strong, nonatomic) fb2Parser* testBookNodes;
+@property (assign, nonatomic) NSInteger currentPage;
+
 @end
 
 @implementation ContentViewController
@@ -19,25 +22,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    	// Do any additional setup after loading the view.
     self.webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
-    //    self.webView.scrollView.scrollEnabled = NO;
-    //    self.webView.scrollView.bounces = NO;
-    [self changePage:self.currentPage];
+    [self.view addSubview:self.webView];
+    [self changePage:self.currentPage withCurrentNode:self.currentNode andCurrentPosition:self.currentPosition];
 }
 
-- (void)changePage:(NSUInteger)page
+- (void)changePage:(NSUInteger)curPage withCurrentNode:(NSInteger)curNode andCurrentPosition:(NSInteger)curPos
 {
-    self.currentPage = page;
-    
+    self.currentPage = curPage;
+    self.currentNode = curNode;
+    self.currentPosition = curPos;
     [self.webView loadHTMLString:[self generateHTML] baseURL:nil];
-    [self.view addSubview:self.webView];
-    
-    [self.webView sizeThatFits:CGSizeZero];
-    
-    CGSize goodSize = [self.webView sizeThatFits: self.view.frame.size];
-    NSLog(@"goodsize : ");
-    NSLogS(goodSize);
 }
 
 - (id)initWithNodes:(fb2Parser*)nodes andCurrentNumber:(NSInteger)curNumber
@@ -46,6 +41,7 @@
     if (self) {
         self.testBookNodes = nodes;
         self.currentPage = curNumber;
+        self.currentPosition = 0;
         self.currentNode = 0;
     }
     return self;
@@ -55,37 +51,97 @@
 {
     NSString *content = [self getPage:self.currentPage];
     NSString *myHTML = [NSString stringWithFormat:@"<html> \n"
-                                   "<head> \n"
-                                   "<style type=\"text/css\"> \n"
-                                   "body {font-family: \"%@\"; font-size: %@;}\n"
-                                   "</style> \n"
-                                   "</head> \n"
-                                   "<body>%@</body> \n"
-                                   "</html>", @"helvetica", [NSNumber numberWithInt:25], content];
+                        "<head> \n"
+                        "<style type=\"text/css\"> \n"
+                        "body {font-family: \"%@\"; font-size: %@;}\n"
+                        "</style> \n"
+                        "</head> \n"
+                        "<body>%@</body> \n"
+                        "</html>", @"helvetica", [NSNumber numberWithInt:25], content];
     return myHTML;
 }
 
-//с номером страницы 
+//с номером страницы
 - (NSString*)getPage:(NSUInteger)iPage
 {
     UIFont *myFont = settingFont;
     NSString *content = [NSString string];
-    while ([content sizeWithFont:myFont constrainedToSize:CGSizeMake(320, 1000) lineBreakMode:UILineBreakModeWordWrap].height < self.view.frame.size.height &&
-           [content sizeWithFont:myFont constrainedToSize:CGSizeMake(320, 1000) lineBreakMode:UILineBreakModeWordWrap].width < self.view.frame.size.width &&
-           self.currentNode < [self.testBookNodes.elementArray count]) {
+    CGSize emptySize = CGSizeMake(320, 0);
+    //
+    while (self.currentNode < [self.testBookNodes.elementArray count]-1 && [[content stringByAppendingString:[self.testBookNodes.elementArray objectAtIndex:self.currentNode]] sizeWithFont:myFont constrainedToSize:CGSizeMake(320, 1000) lineBreakMode:UILineBreakModeWordWrap].height < self.view.frame.size.height &&
+           [[content stringByAppendingString:[self.testBookNodes.elementArray objectAtIndex:self.currentNode]] sizeWithFont:myFont constrainedToSize:CGSizeMake(320, 1000) lineBreakMode:UILineBreakModeWordWrap].width < self.view.frame.size.width) {
         
-        NSLog(@" h %f", [content sizeWithFont:myFont constrainedToSize:CGSizeMake(320, 400) lineBreakMode:UILineBreakModeWordWrap].height);
-        NSLog(@" w %f", [content sizeWithFont:myFont constrainedToSize:CGSizeMake(320, 400) lineBreakMode:UILineBreakModeWordWrap].width);
-        
-        NSLog(@"content: %@  i: %d", content, self.currentNode);
-        if ([[self.testBookNodes.elementArray objectAtIndex:self.currentNode] isKindOfClass:[NSString class]]) {
-            content = [content stringByAppendingString:[self.testBookNodes.elementArray objectAtIndex:self.currentNode]];
-            CGSize _size = [content sizeWithFont:myFont constrainedToSize:CGSizeMake(320, 1000) lineBreakMode:UILineBreakModeWordWrap];
-            NSLogS(_size);
+        if (self.currentPosition > 0) {
+            content = [content stringByAppendingString:[self addTailNode:[self.testBookNodes.elementArray objectAtIndex:self.currentNode] onSize:self.view.frame.size]];
+            
+        } else {
+            
+            
+            
+            if ([[self.testBookNodes.elementArray objectAtIndex:self.currentNode] isKindOfClass:[NSString class]]) {
+                content = [content stringByAppendingString:[self.testBookNodes.elementArray objectAtIndex:self.currentNode]];
+                CGSize _size = [content sizeWithFont:myFont constrainedToSize:CGSizeMake(320, 1000) lineBreakMode:UILineBreakModeWordWrap];
+                emptySize.height = self.view.frame.size.height - _size.height;
+                NSLogS(emptySize);
+            }
         }
+        
         self.currentNode++;
     }
+    if (emptySize.height > 30) {
+        content = [content stringByAppendingString:[self fillEmptySpace:[self.testBookNodes.elementArray objectAtIndex:self.currentNode] onSize:emptySize]];
+    }
+    
+    NSLog(@"content: %@  i: %d", content, self.currentNode);
     return content;
+}
+
+//проверка на пробелы!
+- (NSString*)fillEmptySpace:(NSString*)nodeContent onSize:(CGSize)size
+{
+    NSString* partNode;
+    CGSize _size = [nodeContent sizeWithFont:settingFont constrainedToSize:CGSizeMake(320, 1000) lineBreakMode:UILineBreakModeWordWrap];
+    
+    CGFloat part = size.height / _size.height;
+    
+    NSInteger len = nodeContent.length;
+    NSInteger index = (NSInteger)(part * len);
+    
+    self.currentPosition = index;
+    NSLog(@"2 index : %d", self.currentPosition);
+    partNode = [nodeContent substringToIndex:index];
+    
+    NSLog(@"partNode: %@ ", partNode);
+    return partNode;
+}
+
+- (NSString*)addTailNode:(NSString*)nodeContent onSize:(CGSize)size
+{
+    NSString* partNode;
+    CGSize _size = [nodeContent sizeWithFont:settingFont constrainedToSize:CGSizeMake(320, 1000) lineBreakMode:UILineBreakModeWordWrap];
+    
+    CGFloat part = size.height / _size.height;
+    
+    NSInteger len = nodeContent.length;
+    NSInteger index = (NSInteger)(part * len);
+    
+    NSLog(@"1 index : %d", (index > len) ? len - 1 :  self.currentPosition - 1);
+    partNode = [nodeContent substringToIndex:(index > len) ? len - 1 :  self.currentPosition - 1];
+    self.currentPosition = (index > len) ? 0 : index;
+    NSLog(@"%@",[nodeContent substringFromIndex:self.currentPosition ]);
+    
+    return partNode;
+}
+
++ (NSString*)firstWords:(NSString*)theStr howMany:(NSInteger)maxWords {
+    
+    NSArray *theWords = [theStr componentsSeparatedByString:@" "];
+    if ([theWords count] < maxWords) {
+    	maxWords = [theWords count];
+    }
+    NSRange wordRange = NSMakeRange(0, maxWords - 1);
+    NSArray *firstWords = [theWords subarrayWithRange:wordRange];
+    return [firstWords componentsJoinedByString:@" "];
 }
 
 @end

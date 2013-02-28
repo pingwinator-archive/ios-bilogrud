@@ -12,6 +12,8 @@
 
 @interface ViewController ()
 @property (assign, nonatomic) NSInteger currentPageNumber;
+@property (assign, nonatomic) NSInteger currentNode;
+@property (assign, nonatomic) NSInteger currentPosition;
 @property (strong, nonatomic) ContentViewController* contentViewController;
 @end
 
@@ -23,6 +25,7 @@
     
     self.testBook = [[fb2Parser alloc] init];
     self.currentPageNumber = 0;
+    self.currentNode = 0;
     
     //Step 1
     //Instantiate the UIPageViewController.
@@ -36,9 +39,9 @@
     
     //Step 3:
     //Set the initial view controllers.
-    ContentViewController *contentViewController = [[ContentViewController alloc] initWithNodes:self.testBook andCurrentNumber:self.currentPageNumber];
+    self.contentViewController = [[ContentViewController alloc] initWithNodes:self.testBook andCurrentNumber:self.currentPageNumber];
     
-    NSArray *viewControllers = [NSArray arrayWithObject:contentViewController];
+    NSArray *viewControllers = [NSArray arrayWithObject:self.contentViewController];
     [self.pageViewController setViewControllers:viewControllers
                                       direction:UIPageViewControllerNavigationDirectionForward
                                        animated:NO
@@ -63,20 +66,11 @@
     //Step 6:
     //Assign the gestureRecognizers property of our pageViewController to our view's gestureRecognizers property.
     self.view.gestureRecognizers = self.pageViewController.gestureRecognizers;
-    
-    
-//    self.webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
-//    self.webView.backgroundColor = [UIColor redColor];
-//    
-//    [self.webView loadHTMLString:[self generateHTML] baseURL:nil];
-//    [self.view addSubview:self.webView];
-    
+
     NSString* bookString = [NSMutableString string];
     for (NSString* s in self.testBook.elementArray) {
         bookString = [bookString stringByAppendingString:s];
     }
-    
-    self.contentViewController = [[ContentViewController alloc] initWithNodes:self.testBook andCurrentNumber:self.currentPageNumber];
 }
 
 #pragma mark - UIPageViewControllerDataSource Methods
@@ -84,25 +78,27 @@
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController
       viewControllerBeforeViewController:(UIViewController *)viewController
 {
+    self.currentNode = self.contentViewController.currentNode;
+    self.currentPosition = self.contentViewController.currentPosition;
     [self decreasePageNumber];
-    if (!self.contentViewController) {
-        self.contentViewController = [[ContentViewController alloc] initWithNodes:self.testBook andCurrentNumber:self.currentPageNumber];
-    } else {
-        [self.contentViewController changePage: self.currentPageNumber];
-    }
-        
+    //update init
+    self.contentViewController = [[ContentViewController alloc] initWithNodes:self.testBook andCurrentNumber:self.currentPageNumber];
+    [self.contentViewController changePage: self.currentPageNumber withCurrentNode:self.currentNode andCurrentPosition:self.currentPosition];
+
     return self.contentViewController;
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController
        viewControllerAfterViewController:(UIViewController *)viewController
 {
+    self.currentNode = self.contentViewController.currentNode;
+    self.currentPosition = self.contentViewController.currentPosition;
+
     [self increasePageNumber];
-    if (!self.contentViewController) {
-        self.contentViewController = [[ContentViewController alloc] initWithNodes:self.testBook andCurrentNumber:self.currentPageNumber];
-    } else {
-        [self.contentViewController changePage: self.currentPageNumber];
-    }
+
+    self.contentViewController = [[ContentViewController alloc] initWithNodes:self.testBook andCurrentNumber:self.currentPageNumber];
+
+    [self.contentViewController changePage: self.currentPageNumber withCurrentNode:self.currentNode andCurrentPosition:self.currentPosition];
     
     return self.contentViewController;
 }
@@ -117,7 +113,7 @@
 
 - (void)increasePageNumber
 {
-    if (self.currentPageNumber < [self.testBook.elementArray count]) {
+    if (self.contentViewController.currentNode < [self.testBook.elementArray count]) {
         self.currentPageNumber++;
     }
     NSLog(@"current page %d", self.currentPageNumber);

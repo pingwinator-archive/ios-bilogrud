@@ -10,10 +10,8 @@
 @class fb2Parser;
 
 @interface ContentViewController : UIViewController
-
-@property (strong, nonatomic) UIWebView* webView;
-@property (strong, nonatomic) fb2Parser* testBookNodes;
-@property (assign, nonatomic) NSInteger currentPage;
+@property (assign, nonatomic) NSUInteger currentNode;
+@property (assign, nonatomic) NSInteger currentPosition;
 - (id)initWithNodes:(fb2Parser*)nodes andCurrentNumber:(NSInteger)curNumber;
-- (void)changePage:(NSUInteger)page;
+- (void)changePage:(NSUInteger)curPage withCurrentNode:(NSInteger)curNode andCurrentPosition:(NSInteger)curPos;
 @end
