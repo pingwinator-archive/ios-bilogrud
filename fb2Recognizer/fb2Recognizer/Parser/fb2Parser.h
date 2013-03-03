@@ -8,9 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@interface fb2Parser : NSObject<NSXMLParserDelegate>
+@interface Fb2Parser : NSObject<NSXMLParserDelegate>
+
+- (id)initWithUrl:(NSURL*)fileUrl;
+
 @property (strong, nonatomic) id currentNodeContent;
 @property (strong, nonatomic) NSString* currentElement;
 @property (strong, nonatomic) NSXMLParser* xmlParser;
 @property (strong, nonatomic) NSMutableArray* elementArray;
+
 @end

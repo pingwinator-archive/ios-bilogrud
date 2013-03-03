@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6E0DB5E216A34F9500B7020D /* fb2Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E0DB5DC16A34F9500B7020D /* fb2Parser.m */; };
+		6E0DB5E216A34F9500B7020D /* Fb2Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E0DB5DC16A34F9500B7020D /* Fb2Parser.m */; };
 		6E0DB5E316A34F9500B7020D /* ContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E0DB5DF16A34F9500B7020D /* ContentViewController.m */; };
-		6E0DB5E416A34F9500B7020D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E0DB5E116A34F9500B7020D /* ViewController.m */; };
+		6E0DB5E416A34F9500B7020D /* FB2ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E0DB5E116A34F9500B7020D /* FB2ViewController.m */; };
 		6E0DB5F316A34FFC00B7020D /* Aksakov_Sergej__Alenkij_cvetochek 2.fb2 in Resources */ = {isa = PBXBuildFile; fileRef = 6E0DB5E916A34FFC00B7020D /* Aksakov_Sergej__Alenkij_cvetochek 2.fb2 */; };
 		6E0DB5F416A34FFC00B7020D /* Aksakov_Sergej__Alenkij_cvetochek.1.fb2 in Resources */ = {isa = PBXBuildFile; fileRef = 6E0DB5EA16A34FFC00B7020D /* Aksakov_Sergej__Alenkij_cvetochek.1.fb2 */; };
 		6E0DB5F516A34FFC00B7020D /* Aksakov_Sergej__Alenkij_cvetochek.fb2 in Resources */ = {isa = PBXBuildFile; fileRef = 6E0DB5EB16A34FFC00B7020D /* Aksakov_Sergej__Alenkij_cvetochek.fb2 */; };
@@ -20,6 +20,8 @@
 		6E0DB5FA16A34FFC00B7020D /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E0DB5F216A34FFC00B7020D /* ViewController_iPhone.xib */; };
 		6E0DB5FD16A3506300B7020D /* NSData+NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E0DB5FC16A3506300B7020D /* NSData+NSDataAdditions.m */; };
 		6E0DB60716A3518F00B7020D /* NSString+NSStringAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E0DB60616A3518F00B7020D /* NSString+NSStringAdditions.m */; };
+		6E412D2C16E34ED40085959F /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E412D2A16E34ED40085959F /* StartViewController.m */; };
+		6E412D3416E3523A0085959F /* DocumentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E412D3316E3523A0085959F /* DocumentModel.m */; };
 		6E84CA0E169FFF510021EF4E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E84CA0D169FFF510021EF4E /* UIKit.framework */; };
 		6E84CA10169FFF510021EF4E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E84CA0F169FFF510021EF4E /* Foundation.framework */; };
 		6E84CA12169FFF510021EF4E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E84CA11169FFF510021EF4E /* CoreGraphics.framework */; };
@@ -29,16 +31,23 @@
 		6E84CA20169FFF510021EF4E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E84CA1F169FFF510021EF4E /* Default.png */; };
 		6E84CA22169FFF510021EF4E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E84CA21169FFF510021EF4E /* Default@2x.png */; };
 		6E84CA24169FFF510021EF4E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E84CA23169FFF510021EF4E /* Default-568h@2x.png */; };
+		6E9ABBB616E3545A00FAB7BA /* StartViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E9ABBB416E3545A00FAB7BA /* StartViewController_iPad.xib */; };
+		6E9ABBB716E3545A00FAB7BA /* StartViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E9ABBB516E3545A00FAB7BA /* StartViewController_iPhone.xib */; };
+		6E9ABBBC16E357E900FAB7BA /* DirectoryWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E9ABBBB16E357E900FAB7BA /* DirectoryWatcher.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6E9ABBC316E3599B00FAB7BA /* Setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E9ABBC116E3599B00FAB7BA /* Setting.png */; };
+		6E9ABBC416E3599B00FAB7BA /* Setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E9ABBC216E3599B00FAB7BA /* Setting@2x.png */; };
+		6E9ABBC816E35A0800FAB7BA /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E9ABBC616E35A0800FAB7BA /* SettingViewController.m */; };
+		6E9ABBC916E35A0800FAB7BA /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E9ABBC716E35A0800FAB7BA /* SettingViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		6E0DB5D916A34F9500B7020D /* DefineConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefineConst.h; sourceTree = "<group>"; };
-		6E0DB5DB16A34F9500B7020D /* fb2Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fb2Parser.h; sourceTree = "<group>"; };
-		6E0DB5DC16A34F9500B7020D /* fb2Parser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = fb2Parser.m; sourceTree = "<group>"; };
+		6E0DB5DB16A34F9500B7020D /* Fb2Parser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fb2Parser.h; sourceTree = "<group>"; };
+		6E0DB5DC16A34F9500B7020D /* Fb2Parser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Fb2Parser.m; sourceTree = "<group>"; };
 		6E0DB5DE16A34F9500B7020D /* ContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContentViewController.h; sourceTree = "<group>"; };
 		6E0DB5DF16A34F9500B7020D /* ContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentViewController.m; sourceTree = "<group>"; };
-		6E0DB5E016A34F9500B7020D /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		6E0DB5E116A34F9500B7020D /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		6E0DB5E016A34F9500B7020D /* FB2ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FB2ViewController.h; sourceTree = "<group>"; };
+		6E0DB5E116A34F9500B7020D /* FB2ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FB2ViewController.m; sourceTree = "<group>"; };
 		6E0DB5E916A34FFC00B7020D /* Aksakov_Sergej__Alenkij_cvetochek 2.fb2 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Aksakov_Sergej__Alenkij_cvetochek 2.fb2"; sourceTree = "<group>"; };
 		6E0DB5EA16A34FFC00B7020D /* Aksakov_Sergej__Alenkij_cvetochek.1.fb2 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Aksakov_Sergej__Alenkij_cvetochek.1.fb2; sourceTree = "<group>"; };
 		6E0DB5EB16A34FFC00B7020D /* Aksakov_Sergej__Alenkij_cvetochek.fb2 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Aksakov_Sergej__Alenkij_cvetochek.fb2; sourceTree = "<group>"; };
@@ -51,6 +60,10 @@
 		6E0DB5FC16A3506300B7020D /* NSData+NSDataAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+NSDataAdditions.m"; sourceTree = "<group>"; };
 		6E0DB60516A3518E00B7020D /* NSString+NSStringAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+NSStringAdditions.h"; sourceTree = "<group>"; };
 		6E0DB60616A3518F00B7020D /* NSString+NSStringAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+NSStringAdditions.m"; sourceTree = "<group>"; };
+		6E412D2A16E34ED40085959F /* StartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartViewController.m; sourceTree = "<group>"; };
+		6E412D2B16E34ED40085959F /* StartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartViewController.h; sourceTree = "<group>"; };
+		6E412D3216E3523A0085959F /* DocumentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentModel.h; sourceTree = "<group>"; };
+		6E412D3316E3523A0085959F /* DocumentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentModel.m; sourceTree = "<group>"; };
 		6E84CA09169FFF510021EF4E /* fb2Recognizer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fb2Recognizer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E84CA0D169FFF510021EF4E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6E84CA0F169FFF510021EF4E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -64,6 +77,15 @@
 		6E84CA1F169FFF510021EF4E /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		6E84CA21169FFF510021EF4E /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		6E84CA23169FFF510021EF4E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		6E9ABBB416E3545A00FAB7BA /* StartViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StartViewController_iPad.xib; sourceTree = "<group>"; };
+		6E9ABBB516E3545A00FAB7BA /* StartViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StartViewController_iPhone.xib; sourceTree = "<group>"; };
+		6E9ABBBA16E357E900FAB7BA /* DirectoryWatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectoryWatcher.h; sourceTree = "<group>"; };
+		6E9ABBBB16E357E900FAB7BA /* DirectoryWatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectoryWatcher.m; sourceTree = "<group>"; };
+		6E9ABBC116E3599B00FAB7BA /* Setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Setting.png; sourceTree = "<group>"; };
+		6E9ABBC216E3599B00FAB7BA /* Setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Setting@2x.png"; sourceTree = "<group>"; };
+		6E9ABBC516E35A0800FAB7BA /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		6E9ABBC616E35A0800FAB7BA /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		6E9ABBC716E35A0800FAB7BA /* SettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingViewController.xib; path = ../../ViewControllers/SettingViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,8 +126,8 @@
 		6E0DB5DA16A34F9500B7020D /* Parser */ = {
 			isa = PBXGroup;
 			children = (
-				6E0DB5DB16A34F9500B7020D /* fb2Parser.h */,
-				6E0DB5DC16A34F9500B7020D /* fb2Parser.m */,
+				6E0DB5DB16A34F9500B7020D /* Fb2Parser.h */,
+				6E0DB5DC16A34F9500B7020D /* Fb2Parser.m */,
 			);
 			name = Parser;
 			path = fb2Recognizer/Parser;
@@ -114,10 +136,14 @@
 		6E0DB5DD16A34F9500B7020D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				6E412D2B16E34ED40085959F /* StartViewController.h */,
+				6E412D2A16E34ED40085959F /* StartViewController.m */,
 				6E0DB5DE16A34F9500B7020D /* ContentViewController.h */,
 				6E0DB5DF16A34F9500B7020D /* ContentViewController.m */,
-				6E0DB5E016A34F9500B7020D /* ViewController.h */,
-				6E0DB5E116A34F9500B7020D /* ViewController.m */,
+				6E0DB5E016A34F9500B7020D /* FB2ViewController.h */,
+				6E0DB5E116A34F9500B7020D /* FB2ViewController.m */,
+				6E9ABBC516E35A0800FAB7BA /* SettingViewController.h */,
+				6E9ABBC616E35A0800FAB7BA /* SettingViewController.m */,
 			);
 			name = ViewControllers;
 			path = fb2Recognizer/ViewControllers;
@@ -134,6 +160,8 @@
 		6E0DB5E616A34FB100B7020D /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				6E412D3216E3523A0085959F /* DocumentModel.h */,
+				6E412D3316E3523A0085959F /* DocumentModel.m */,
 			);
 			name = Models;
 			path = fb2Recognizer/Models;
@@ -166,6 +194,8 @@
 		6E0DB5EF16A34FFC00B7020D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				6E9ABBC116E3599B00FAB7BA /* Setting.png */,
+				6E9ABBC216E3599B00FAB7BA /* Setting@2x.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -173,6 +203,9 @@
 		6E0DB5F016A34FFC00B7020D /* Nibs */ = {
 			isa = PBXGroup;
 			children = (
+				6E9ABBC716E35A0800FAB7BA /* SettingViewController.xib */,
+				6E9ABBB416E3545A00FAB7BA /* StartViewController_iPad.xib */,
+				6E9ABBB516E3545A00FAB7BA /* StartViewController_iPhone.xib */,
 				6E0DB5F116A34FFC00B7020D /* ViewController_iPad.xib */,
 				6E0DB5F216A34FFC00B7020D /* ViewController_iPhone.xib */,
 			);
@@ -182,6 +215,7 @@
 		6E84C9FE169FFF510021EF4E = {
 			isa = PBXGroup;
 			children = (
+				6E9ABBB816E357E900FAB7BA /* Externals */,
 				6E0DB5DA16A34F9500B7020D /* Parser */,
 				6E0DB5DD16A34F9500B7020D /* ViewControllers */,
 				6E0DB5E616A34FB100B7020D /* Models */,
@@ -235,6 +269,24 @@
 				6E84CA23169FFF510021EF4E /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6E9ABBB816E357E900FAB7BA /* Externals */ = {
+			isa = PBXGroup;
+			children = (
+				6E9ABBB916E357E900FAB7BA /* DirectoryWatcher */,
+			);
+			name = Externals;
+			path = fb2Recognizer/Externals;
+			sourceTree = "<group>";
+		};
+		6E9ABBB916E357E900FAB7BA /* DirectoryWatcher */ = {
+			isa = PBXGroup;
+			children = (
+				6E9ABBBA16E357E900FAB7BA /* DirectoryWatcher.h */,
+				6E9ABBBB16E357E900FAB7BA /* DirectoryWatcher.m */,
+			);
+			path = DirectoryWatcher;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -300,6 +352,11 @@
 				6E0DB5F816A34FFC00B7020D /* test.fb2 in Resources */,
 				6E0DB5F916A34FFC00B7020D /* ViewController_iPad.xib in Resources */,
 				6E0DB5FA16A34FFC00B7020D /* ViewController_iPhone.xib in Resources */,
+				6E9ABBB616E3545A00FAB7BA /* StartViewController_iPad.xib in Resources */,
+				6E9ABBB716E3545A00FAB7BA /* StartViewController_iPhone.xib in Resources */,
+				6E9ABBC316E3599B00FAB7BA /* Setting.png in Resources */,
+				6E9ABBC416E3599B00FAB7BA /* Setting@2x.png in Resources */,
+				6E9ABBC916E35A0800FAB7BA /* SettingViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,11 +369,15 @@
 			files = (
 				6E84CA1A169FFF510021EF4E /* main.m in Sources */,
 				6E84CA1E169FFF510021EF4E /* AppDelegate.m in Sources */,
-				6E0DB5E216A34F9500B7020D /* fb2Parser.m in Sources */,
+				6E0DB5E216A34F9500B7020D /* Fb2Parser.m in Sources */,
 				6E0DB5E316A34F9500B7020D /* ContentViewController.m in Sources */,
-				6E0DB5E416A34F9500B7020D /* ViewController.m in Sources */,
+				6E0DB5E416A34F9500B7020D /* FB2ViewController.m in Sources */,
 				6E0DB5FD16A3506300B7020D /* NSData+NSDataAdditions.m in Sources */,
 				6E0DB60716A3518F00B7020D /* NSString+NSStringAdditions.m in Sources */,
+				6E412D2C16E34ED40085959F /* StartViewController.m in Sources */,
+				6E412D3416E3523A0085959F /* DocumentModel.m in Sources */,
+				6E9ABBBC16E357E900FAB7BA /* DirectoryWatcher.m in Sources */,
+				6E9ABBC816E35A0800FAB7BA /* SettingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

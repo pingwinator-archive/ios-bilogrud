@@ -7,12 +7,12 @@
 //
 
 #import "ContentViewController.h"
-#import "fb2Parser.h"
+#import "Fb2Parser.h"
 
 
 @interface ContentViewController ()
 @property (strong, nonatomic) UIWebView* webView;
-@property (strong, nonatomic) fb2Parser* testBookNodes;
+@property (strong, nonatomic) Fb2Parser* testBookNodes;
 @property (assign, nonatomic) NSInteger currentPage;
 
 @end
@@ -25,6 +25,41 @@
     self.webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:self.webView];
     [self changePage:self.currentPage withCurrentNode:self.currentNode andCurrentPosition:self.currentPosition];
+    self.navigationController.navigationBarHidden = YES;
+    
+//    UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(showGestureForTapRecognizer:)];
+//    tapGesture.numberOfTapsRequired = 1;
+//    [self.webView addGestureRecognizer:tapGesture];
+//    
+//    
+//    UIPanGestureRecognizer* panGesture = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(showGestureForTapRecognizer:)];
+//    [panGesture setMaximumNumberOfTouches:2];
+//    [panGesture setDelegate:self];
+//    [self.webView addGestureRecognizer:panGesture];
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer*)otherGestureRecognizer {
+    return YES;
+}
+
+- (void)showGestureForTapRecognizer:(UIGestureRecognizer *)recognizer {
+	
+	CGPoint location = [recognizer locationInView:self.webView];
+    if ([[recognizer class] isKindOfClass:[UITapGestureRecognizer class]]) {
+        NSLog(@"tap");
+    }
+    if ([[recognizer class] isKindOfClass:[UIPanGestureRecognizer class]]) {
+        NSLog(@"pan");
+    }
+	[UIView animateWithDuration:0.5 animations:^{
+        self.navigationController.navigationBarHidden = ![self.navigationController isNavigationBarHidden];
+    }];
 }
 
 - (void)changePage:(NSUInteger)curPage withCurrentNode:(NSInteger)curNode andCurrentPosition:(NSInteger)curPos
@@ -35,7 +70,7 @@
     [self.webView loadHTMLString:[self generateHTML] baseURL:nil];
 }
 
-- (id)initWithNodes:(fb2Parser*)nodes andCurrentNumber:(NSInteger)curNumber
+- (id)initWithNodes:(Fb2Parser*)nodes andCurrentNumber:(NSInteger)curNumber
 {
     self = [super init];
     if (self) {

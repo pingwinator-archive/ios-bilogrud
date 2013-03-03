@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-@class fb2Parser;
+@class Fb2Parser;
 
-@interface ContentViewController : UIViewController
+@interface ContentViewController : UIViewController<UIGestureRecognizerDelegate>
 @property (assign, nonatomic) NSUInteger currentNode;
 @property (assign, nonatomic) NSInteger currentPosition;
-- (id)initWithNodes:(fb2Parser*)nodes andCurrentNumber:(NSInteger)curNumber;
+- (id)initWithNodes:(Fb2Parser*)nodes andCurrentNumber:(NSInteger)curNumber;
 - (void)changePage:(NSUInteger)curPage withCurrentNode:(NSInteger)curNode andCurrentPosition:(NSInteger)curPos;
 @end

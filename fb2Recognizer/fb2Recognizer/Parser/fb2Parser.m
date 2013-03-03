@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Natasha. All rights reserved.
 //
 
-#import "fb2Parser.h"
+#import "Fb2Parser.h"
 #import "NSData+NSDataAdditions.h"
 #import "NSString+NSStringAdditions.h"
 #define CASE(str)                       if ([__s__ isEqualToString:(str)])
@@ -19,10 +19,10 @@ static NSString * const kBookTitleElementName = @"book-title";
 static NSString * const kAnnotationElementName = @"annotation";
 static NSString * const kImageElementName = @"image";
 
-@interface fb2Parser ()
+@interface Fb2Parser ()
 
 @end
-@implementation fb2Parser
+@implementation Fb2Parser
 - (id)init
 {
     self = [super init];
@@ -37,6 +37,24 @@ static NSString * const kImageElementName = @"image";
             [alert show];
         }
 
+    }
+    return self;
+}
+
+- (id)initWithUrl:(NSURL*)fileUrl
+{
+    self = [super init];
+    if (self) {
+        NSString *xmlPath = fileUrl.path;
+        NSData *xmlData = [NSData dataWithContentsOfFile:xmlPath];
+        self.xmlParser = [[NSXMLParser alloc] initWithData:xmlData];
+        self.xmlParser.delegate = self;
+        BOOL ok = [self.xmlParser parse];
+        if (!ok) {
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Message" message:@"Error" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [alert show];
+        }
+        
     }
     return self;
 }

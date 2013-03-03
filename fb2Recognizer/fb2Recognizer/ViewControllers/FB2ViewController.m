@@ -6,31 +6,41 @@
 //  Copyright (c) 2013 Natasha. All rights reserved.
 //
 
-#import "ViewController.h"
-#import "fb2Parser.h"
+#import "FB2ViewController.h"
+#import "Fb2Parser.h"
 #import "ContentViewController.h"
+#import "DocumentModel.h"
 
-@interface ViewController ()
+@interface FB2ViewController ()
 @property (assign, nonatomic) NSInteger currentPageNumber;
 @property (assign, nonatomic) NSInteger currentNode;
 @property (assign, nonatomic) NSInteger currentPosition;
 @property (strong, nonatomic) ContentViewController* contentViewController;
+@property (weak, nonatomic) DocumentModel* docModel;
 @end
 
-@implementation ViewController
+@implementation FB2ViewController
+
+- (id)initWithDocument:(DocumentModel*)model
+{
+    self = [super init];
+    if (self) {
+        self.docModel = model;
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.testBook = [[fb2Parser alloc] init];
+
+    self.testBook = [[Fb2Parser alloc] initWithUrl:self.docModel.documentUrl];
     self.currentPageNumber = 0;
     self.currentNode = 0;
     
     //Step 1
     //Instantiate the UIPageViewController.
-    self.pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStylePageCurl
-                                                              navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
+    self.pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStylePageCurl navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
     
     //Step 2:
     //Assign the delegate and datasource as self.
