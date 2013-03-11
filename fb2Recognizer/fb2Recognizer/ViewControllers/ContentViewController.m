@@ -22,20 +22,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.wantsFullScreenLayout = YES;
+    
     self.webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:self.webView];
     [self changePage:self.currentPage withCurrentNode:self.currentNode andCurrentPosition:self.currentPosition];
     self.navigationController.navigationBarHidden = YES;
     
-//    UITapGestureRecognizer* tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(showGestureForTapRecognizer:)];
-//    tapGesture.numberOfTapsRequired = 1;
-//    [self.webView addGestureRecognizer:tapGesture];
-//    
-//    
-//    UIPanGestureRecognizer* panGesture = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(showGestureForTapRecognizer:)];
-//    [panGesture setMaximumNumberOfTouches:2];
-//    [panGesture setDelegate:self];
-//    [self.webView addGestureRecognizer:panGesture];
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
+	singleTap.numberOfTouchesRequired = 1; singleTap.numberOfTapsRequired = 1; singleTap.delegate = self;
+	[self.webView addGestureRecognizer:singleTap];
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -48,15 +44,7 @@
     return YES;
 }
 
-- (void)showGestureForTapRecognizer:(UIGestureRecognizer *)recognizer {
-	
-	CGPoint location = [recognizer locationInView:self.webView];
-    if ([[recognizer class] isKindOfClass:[UITapGestureRecognizer class]]) {
-        NSLog(@"tap");
-    }
-    if ([[recognizer class] isKindOfClass:[UIPanGestureRecognizer class]]) {
-        NSLog(@"pan");
-    }
+- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
 	[UIView animateWithDuration:0.5 animations:^{
         self.navigationController.navigationBarHidden = ![self.navigationController isNavigationBarHidden];
     }];

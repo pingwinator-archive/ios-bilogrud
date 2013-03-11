@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
+#import "TransparentNavBar.h"
 #import "StartViewController.h"
 
 @implementation AppDelegate
@@ -21,9 +21,11 @@
     } else {
         self.startViewController = [[StartViewController alloc] initWithNibName:@"ViewController_iPad" bundle:nil];
     }
-    
     self.navController = [[UINavigationController alloc] initWithRootViewController:self.startViewController];
-    self.navController.toolbar.translucent = YES;
+    
+//    TransparentNavBar* navigationBar = [[TransparentNavBar alloc] initWithFrame:CGRectMake(0, 0, self.startViewController.view.frame.size.width, 150)];
+//    [self.navController  setValue:navigationBar forKey:@"navigationBar"];
+//    self.navController.navigationBar.hidden = NO;
     
     self.window.rootViewController = self.navController;
     [self.window makeKeyAndVisible];

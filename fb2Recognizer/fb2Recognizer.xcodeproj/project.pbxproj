@@ -22,6 +22,7 @@
 		6E0DB60716A3518F00B7020D /* NSString+NSStringAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E0DB60616A3518F00B7020D /* NSString+NSStringAdditions.m */; };
 		6E412D2C16E34ED40085959F /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E412D2A16E34ED40085959F /* StartViewController.m */; };
 		6E412D3416E3523A0085959F /* DocumentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E412D3316E3523A0085959F /* DocumentModel.m */; };
+		6E56B38D16E6072400D11050 /* TransparentNavBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E56B38C16E6072400D11050 /* TransparentNavBar.m */; };
 		6E84CA0E169FFF510021EF4E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E84CA0D169FFF510021EF4E /* UIKit.framework */; };
 		6E84CA10169FFF510021EF4E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E84CA0F169FFF510021EF4E /* Foundation.framework */; };
 		6E84CA12169FFF510021EF4E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E84CA11169FFF510021EF4E /* CoreGraphics.framework */; };
@@ -64,6 +65,8 @@
 		6E412D2B16E34ED40085959F /* StartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartViewController.h; sourceTree = "<group>"; };
 		6E412D3216E3523A0085959F /* DocumentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentModel.h; sourceTree = "<group>"; };
 		6E412D3316E3523A0085959F /* DocumentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentModel.m; sourceTree = "<group>"; };
+		6E56B38B16E6072400D11050 /* TransparentNavBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransparentNavBar.h; sourceTree = "<group>"; };
+		6E56B38C16E6072400D11050 /* TransparentNavBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransparentNavBar.m; sourceTree = "<group>"; };
 		6E84CA09169FFF510021EF4E /* fb2Recognizer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fb2Recognizer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E84CA0D169FFF510021EF4E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		6E84CA0F169FFF510021EF4E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -152,6 +155,8 @@
 		6E0DB5E516A34FB000B7020D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				6E56B38B16E6072400D11050 /* TransparentNavBar.h */,
+				6E56B38C16E6072400D11050 /* TransparentNavBar.m */,
 			);
 			name = Views;
 			path = fb2Recognizer/Views;
@@ -378,6 +383,7 @@
 				6E412D3416E3523A0085959F /* DocumentModel.m in Sources */,
 				6E9ABBBC16E357E900FAB7BA /* DirectoryWatcher.m in Sources */,
 				6E9ABBC816E35A0800FAB7BA /* SettingViewController.m in Sources */,
+				6E56B38D16E6072400D11050 /* TransparentNavBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
