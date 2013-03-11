@@ -32,24 +32,10 @@
     if (!self.documentModel) {
         self.documentModel = [[DocumentModel alloc] init];
     }
-    
-    self.navigationController.navigationBarHidden = YES;
     self.docWatcher = [DirectoryWatcher watchFolderWithPath:[self applicationDocumentsDirectory] delegate:self];
     self.documentURLs = [NSMutableArray array];
     // scan for existing documents
     [self directoryDidChange:self.docWatcher];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:YES];
-    self.navigationController.navigationBarHidden = YES;
 }
 
 - (NSString *)formattedFileSize:(unsigned long long)size

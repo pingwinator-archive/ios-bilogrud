@@ -25,7 +25,6 @@
     self.navController = [[UINavigationController alloc] initWithRootViewController:self.startViewController];
     self.navController.toolbar.translucent = YES;
     
-    
     self.window.rootViewController = self.navController;
     [self.window makeKeyAndVisible];
     return YES;

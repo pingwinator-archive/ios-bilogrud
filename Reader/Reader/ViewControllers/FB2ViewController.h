@@ -11,4 +11,6 @@
 
 @interface FB2ViewController : UIViewController
 - (id)initWithDocument:(DocumentModel*)model;
+@property (strong, nonatomic) UIWebView* webView;
+@property (strong, nonatomic) UIPageViewController* pageViewController;
 @end
