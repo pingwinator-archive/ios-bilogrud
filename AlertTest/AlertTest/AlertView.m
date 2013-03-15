@@ -35,7 +35,7 @@
 
 - (id)initWithTitle:(NSString *)title message:(NSString *)message delegate:(id )delegate cancelButtonTitle:(NSString *)cancelButtonTitle doneButtonTitles:(NSString *)doneButtonTitle
 {
-    self = [super initWithFrame:CGRectMake(0, 0, 320, 480)];
+    self = [super initWithFrame:[[UIScreen mainScreen] bounds]];
     if (self) {
         //labels
 //        CGSize titlesSize = [title sizeWithFont:shareLabelFont constrainedToSize:CGSizeMake(240, 500)];
@@ -49,11 +49,10 @@
         CGSize messageSize = [message sizeWithFont:shareLabelFont forWidth:240 lineBreakMode:NSLineBreakByWordWrapping];
         self.messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, messageSize.width, messageSize.height)];
         
-        
-        
         //messageview
         CGRect rect = CGRectMake(20, 300, 280, 100);
         self.messageView = [[UIImageView alloc] initWithFrame:rect];
+        self.messageView.userInteractionEnabled = YES;
         self.messageView.image = [UIImage imageNamed:@"alertBg.png"];
         self.messageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin |
         UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
@@ -61,7 +60,6 @@
         //labels
         self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(borderOffset, borderOffset, 240, 100)];
         self.titleLabel.text = title;
-        
         
         //buttons
         self.okButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -71,9 +69,9 @@
         self.okButton.titleLabel.text = doneButtonTitle;
         [self.okButton setTitle:doneButtonTitle forState:UIControlStateNormal];
         
-        [self.cancelButton setTitle:cancelButtonTitle forState:UIControlStateNormal];
+        [self.okButton setTitle:doneButtonTitle forState:UIControlStateNormal];
         
-        [self.cancelButton addTarget:self action:@selector(doneAlert) forControlEvents:UIControlEventTouchUpInside];
+        [self.okButton addTarget:self action:@selector(doneAlert) forControlEvents:UIControlEventTouchUpInside];
         [self.messageView addSubview:self.okButton];
         
         self.cancelButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -115,7 +113,6 @@
     if ([self.delegate respondsToSelector:@selector(alertView:clickedButton:)]) {
         [self.delegate alertView:self clickedButton:0];
     }
-
 }
 
 @end
