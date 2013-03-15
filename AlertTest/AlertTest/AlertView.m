@@ -24,33 +24,21 @@
 @end
 @implementation AlertView
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-    }
-    return self;
-}
-
 - (id)initWithTitle:(NSString *)title message:(NSString *)message delegate:(id )delegate cancelButtonTitle:(NSString *)cancelButtonTitle doneButtonTitles:(NSString *)doneButtonTitle
 {
     self = [super initWithFrame:[[UIScreen mainScreen] bounds]];
     if (self) {
         self.delegate = delegate;
         
-        CGSize titlesSize = [title sizeWithFont:shareLabelFont constrainedToSize:CGSizeMake(240, 500)];
-        CGSize messageSize = [message sizeWithFont:shareLabelFont constrainedToSize:CGSizeMake(240, 500)];
-        
-        CGSize maximumLabelSize = CGSizeMake(240,9999);
-        CGSize titleSize = [self.titleLabel.text sizeWithFont:shareLabelFont constrainedToSize:maximumLabelSize lineBreakMode:NSLineBreakByWordWrapping];
+        CGSize titleSize = [title sizeWithFont:shareLabelFont constrainedToSize:CGSizeMake(240, 300)];
+        CGSize messageSize = [message sizeWithFont:shareLabelFont constrainedToSize:CGSizeMake(240, 300)];
         
         NSLog(@"Height: %.f  Width: %.f", titleSize.height, titleSize.width);
 
-        self.messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, messageSize.width, messageSize.height)];
+//        self.messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, messageSize.width, messageSize.height)];
         
         //messageview
-        CGRect rect = CGRectMake(20, 300, 280, 100 + titleSize.height + messageSize.height);
+        CGRect rect = CGRectMake(20, 300, 280, 3 * borderOffset + titleSize.height );
         self.messageView = [[UIImageView alloc] initWithFrame:rect];
         self.messageView.userInteractionEnabled = YES;
         self.messageView.image = [UIImage imageNamed:@"alertBg.png"];
@@ -58,8 +46,7 @@
         UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
         
         //labels
-         
-        self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(borderOffset, borderOffset, 240, titlesSize.height)];
+        self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(borderOffset, borderOffset, 240, titleSize.height)];
         self.titleLabel.numberOfLines = 2;
         self.titleLabel.backgroundColor = [UIColor clearColor];
         self.titleLabel.textColor = [UIColor whiteColor];
