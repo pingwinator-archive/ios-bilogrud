@@ -18,6 +18,9 @@
 		6E588A5316F3570C00E6F254 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E588A5216F3570C00E6F254 /* Default-568h@2x.png */; };
 		6E588A5616F3570C00E6F254 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E588A5516F3570C00E6F254 /* ViewController.m */; };
 		6E588A5916F3570C00E6F254 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E588A5716F3570C00E6F254 /* ViewController.xib */; };
+		6EA3BEBC16F745D700E295CB /* AnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EA3BEBB16F745D700E295CB /* AnimationView.m */; };
+		6EA3BEBE16F745ED00E295CB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EA3BEBD16F745ED00E295CB /* QuartzCore.framework */; };
+		6EA3BEC016F74ABC00E295CB /* submit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EA3BEBF16F74ABC00E295CB /* submit@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +40,10 @@
 		6E588A5416F3570C00E6F254 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		6E588A5516F3570C00E6F254 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		6E588A5816F3570C00E6F254 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+		6EA3BEBA16F745D700E295CB /* AnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationView.h; sourceTree = "<group>"; };
+		6EA3BEBB16F745D700E295CB /* AnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationView.m; sourceTree = "<group>"; };
+		6EA3BEBD16F745ED00E295CB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		6EA3BEBF16F74ABC00E295CB /* submit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "submit@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EA3BEBE16F745ED00E295CB /* QuartzCore.framework in Frameworks */,
 				6E588A3D16F3570C00E6F254 /* UIKit.framework in Frameworks */,
 				6E588A3F16F3570C00E6F254 /* Foundation.framework in Frameworks */,
 				6E588A4116F3570C00E6F254 /* CoreGraphics.framework in Frameworks */,
@@ -73,6 +81,7 @@
 		6E588A3B16F3570C00E6F254 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6EA3BEBD16F745ED00E295CB /* QuartzCore.framework */,
 				6E588A3C16F3570C00E6F254 /* UIKit.framework */,
 				6E588A3E16F3570C00E6F254 /* Foundation.framework */,
 				6E588A4016F3570C00E6F254 /* CoreGraphics.framework */,
@@ -83,12 +92,15 @@
 		6E588A4216F3570C00E6F254 /* GroupAnimation */ = {
 			isa = PBXGroup;
 			children = (
+				6EA3BEBF16F74ABC00E295CB /* submit@2x.png */,
 				6E588A4B16F3570C00E6F254 /* AppDelegate.h */,
 				6E588A4C16F3570C00E6F254 /* AppDelegate.m */,
 				6E588A5416F3570C00E6F254 /* ViewController.h */,
 				6E588A5516F3570C00E6F254 /* ViewController.m */,
 				6E588A5716F3570C00E6F254 /* ViewController.xib */,
 				6E588A4316F3570C00E6F254 /* Supporting Files */,
+				6EA3BEBA16F745D700E295CB /* AnimationView.h */,
+				6EA3BEBB16F745D700E295CB /* AnimationView.m */,
 			);
 			path = GroupAnimation;
 			sourceTree = "<group>";
@@ -163,6 +175,7 @@
 				6E588A5116F3570C00E6F254 /* Default@2x.png in Resources */,
 				6E588A5316F3570C00E6F254 /* Default-568h@2x.png in Resources */,
 				6E588A5916F3570C00E6F254 /* ViewController.xib in Resources */,
+				6EA3BEC016F74ABC00E295CB /* submit@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,6 +189,7 @@
 				6E588A4916F3570C00E6F254 /* main.m in Sources */,
 				6E588A4D16F3570C00E6F254 /* AppDelegate.m in Sources */,
 				6E588A5616F3570C00E6F254 /* ViewController.m in Sources */,
+				6EA3BEBC16F745D700E295CB /* AnimationView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,6 +277,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GroupAnimation/GroupAnimation-Prefix.pch";
 				INFOPLIST_FILE = "GroupAnimation/GroupAnimation-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -274,6 +289,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GroupAnimation/GroupAnimation-Prefix.pch";
 				INFOPLIST_FILE = "GroupAnimation/GroupAnimation-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -298,6 +314,7 @@
 				6E588A5E16F3570C00E6F254 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

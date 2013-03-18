@@ -7,8 +7,9 @@
 //
 
 #import "ViewController.h"
-
+#import "AnimationView.h"
 @interface ViewController ()
+@property (strong, nonatomic) AnimationView* animationButton;
 
 @end
 
@@ -17,13 +18,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    NSLog(@"viewDidLoad");
 	// Do any additional setup after loading the view, typically from a nib.
+    self.animationButton = [[AnimationView alloc] initWithFrame:CGRectMake(100, 100, 100, 100)];
+    self.animationButton.delegate = self;
+    [self.animationButton setBackgroundColor:[UIColor blackColor]];
+    [self.view addSubview:self.animationButton];
 }
 
-- (void)didReceiveMemoryWarning
+- (void)animationViewSelected
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    NSLog(@"animationViewSelected");
+    self.animationButton.hidden = YES;
 }
 
 @end

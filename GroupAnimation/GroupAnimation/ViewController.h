@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AnimationView.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController<AnimationViewDelegate>
 
 @end
