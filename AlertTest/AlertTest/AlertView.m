@@ -12,6 +12,8 @@
 #define heightButton 50
 #define offset 20
 #define borderOffset 15
+#define borderOffsetBottom 20
+
 @interface AlertView ()
 
 @property (nonatomic, strong) UIView *backgroundView;
@@ -30,15 +32,13 @@
     if (self) {
         self.delegate = delegate;
         
-        CGSize titleSize = [title sizeWithFont:shareLabelFont constrainedToSize:CGSizeMake(240, 300)];
-        CGSize messageSize = [message sizeWithFont:shareLabelFont constrainedToSize:CGSizeMake(240, 300)];
+        CGSize titleSize = [title sizeWithFont:alertTitleLabelFont constrainedToSize:CGSizeMake(240, 300)];
+        CGSize messageSize = [message sizeWithFont:alertLabelFont constrainedToSize:CGSizeMake(240, 300)];
         
         NSLog(@"Height: %.f  Width: %.f", titleSize.height, titleSize.width);
-
-//        self.messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, messageSize.width, messageSize.height)];
         
         //messageview
-        CGRect rect = CGRectMake(20, 300, 280, 3 * borderOffset + titleSize.height );
+        CGRect rect = CGRectMake(20, 300, 280, 3 * borderOffset + heightButton + titleSize.height +messageSize.height);
         self.messageView = [[UIImageView alloc] initWithFrame:rect];
         self.messageView.userInteractionEnabled = YES;
         self.messageView.image = [UIImage imageNamed:@"alertBg.png"];
@@ -46,26 +46,28 @@
         UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
         
         //labels
-        self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(borderOffset, borderOffset, 240, titleSize.height)];
-        self.titleLabel.numberOfLines = 2;
-        self.titleLabel.backgroundColor = [UIColor clearColor];
+        self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(borderOffset, borderOffset, 250, titleSize.height)];
+        [self.titleLabel setBackgroundColor:[UIColor clearColor]];
+        self.titleLabel.textAlignment = NSTextAlignmentCenter;
+        self.titleLabel.numberOfLines = 0;
         self.titleLabel.textColor = [UIColor whiteColor];
-        self.titleLabel.font = alertLabelFont;
+        self.titleLabel.font = alertTitleLabelFont;
         self.titleLabel.text = title;
         [self.messageView addSubview:self.titleLabel];
         
-//        self.messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(borderOffset, borderOffset, 240, titlesSize.height)];
-//        self.messageLabel.numberOfLines = 3;
-//        self.messageLabel.backgroundColor = [UIColor clearColor];
-//        self.messageLabel.textColor = [UIColor whiteColor];
-//        self.messageLabel.font = alertLabelFont;
-//        self.messageLabel.text = message;
-//        [self.messageView addSubview:self.messageLabel];
+        self.messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(borderOffset, titleSize.height + borderOffset, 250, messageSize.height)];
+        self.messageLabel.numberOfLines = 0;
+        self.messageLabel.textAlignment = NSTextAlignmentCenter;
+        self.messageLabel.backgroundColor = [UIColor clearColor];
+        self.messageLabel.textColor = [UIColor whiteColor];
+        self.messageLabel.font = alertLabelFont;
+        self.messageLabel.text = message;
+        [self.messageView addSubview:self.messageLabel];
         
         //buttons
         self.okButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [self.okButton setBackgroundImage:[UIImage imageNamed:@"alertOk.png"] forState:UIControlStateNormal];
-        self.okButton.frame = CGRectMake(borderOffset, self.messageView.bounds.size.height - heightButton - borderOffset, 120, 50);
+        self.okButton.frame = CGRectMake(borderOffset, self.messageView.bounds.size.height - heightButton - borderOffsetBottom, 120, 50);
         self.okButton.titleLabel.font = alertLabelFont;
         [self.okButton setTitle:doneButtonTitle forState:UIControlStateNormal];
         [self.okButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -74,7 +76,7 @@
         
         self.cancelButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [self.cancelButton setBackgroundImage:[UIImage imageNamed:@"alertCancel.png"] forState:UIControlStateNormal];
-        self.cancelButton.frame = CGRectMake(145, self.messageView.bounds.size.height - heightButton - borderOffset, 120, heightButton);
+        self.cancelButton.frame = CGRectMake(145, self.messageView.bounds.size.height - heightButton - borderOffsetBottom, 120, heightButton);
         self.cancelButton.titleLabel.font = alertLabelFont;
         [self.cancelButton setTitle:cancelButtonTitle forState:UIControlStateNormal];
         [self.cancelButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

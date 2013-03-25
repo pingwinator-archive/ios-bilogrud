@@ -31,8 +31,8 @@
 - (void)showAlert
 {
 //    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"" message:@"" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
-//    [alert show];
-    AlertView* alert = [[AlertView alloc] initWithTitle:@"someTitle jgjg hugugugu uhihohyfu hhihii" message:@"someMessage" delegate:self cancelButtonTitle:@"No, do nothing" doneButtonTitles:@" Yup"];
+//    [alert show]; 
+    AlertView* alert = [[AlertView alloc] initWithTitle:@"Start over?" message:@"Are you sure?\nYou'll lose all your changes.." delegate:self cancelButtonTitle:@"No, do nothing" doneButtonTitles:@" Yup"];
     [self.view addSubview:alert];
     [self.view bringSubviewToFront: alert];
 }

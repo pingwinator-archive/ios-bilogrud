@@ -67,6 +67,7 @@ return _sharedObject;
 #define filterNameFont [UIFont fontWithName:@"HomemadeApple" size:12]
 #define shareLabelFont [UIFont fontWithName:@"HomemadeApple" size:20]
 #define alertLabelFont [UIFont fontWithName:@"HomemadeApple" size:14]
+#define alertTitleLabelFont [UIFont fontWithName:@"HomemadeApple" size:18]
 
 
 //strings
