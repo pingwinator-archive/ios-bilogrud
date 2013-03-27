@@ -42,7 +42,7 @@
 		6E215A2F1700E0CE0017D233 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		6E215A311700E1870017D233 /* UIImage+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Additions.h"; sourceTree = "<group>"; };
 		6E215A321700E1870017D233 /* UIImage+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Additions.m"; sourceTree = "<group>"; };
-		6E215A341700E2040017D233 /* DefineConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefineConst.h; sourceTree = "<group>"; };
+		6E56A41A17019A670046A045 /* DefineConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DefineConst.h; path = PickerTest/DefineConst.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,7 +63,7 @@
 		6E215A001700DE280017D233 = {
 			isa = PBXGroup;
 			children = (
-				6E215A341700E2040017D233 /* DefineConst.h */,
+				6E56A41A17019A670046A045 /* DefineConst.h */,
 				6E215A121700DE280017D233 /* PickerTest */,
 				6E215A0B1700DE280017D233 /* Frameworks */,
 				6E215A0A1700DE280017D233 /* Products */,
@@ -312,6 +312,7 @@
 				6E215A2E1700DE280017D233 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -285,10 +285,11 @@ BOOL sizeMoreThan(CGSize size, CGFloat side)
 + (UIImage*) processAlbumPhoto:(NSDictionary *)info {
     UIImage *originalImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     CGFloat prevWidth = originalImage.size.width;
+    CGFloat prevheight = originalImage.size.height;
     originalImage = (sizeMoreThan(originalImage.size, maxImageSize)) ? [originalImage softScaleToSide:maxImageSize] : originalImage;
     float original_width = originalImage.size.width;
     float original_height = originalImage.size.height;
-    CGFloat aspectRatio = original_width / prevWidth;
+    CGFloat aspectRatio = original_width / MAX(prevWidth, prevheight);
     DBLog(@"aspectRatio %f", aspectRatio);
     
     if ([info objectForKey:UIImagePickerControllerCropRect] == nil) {
@@ -345,6 +346,8 @@ BOOL sizeMoreThan(CGSize size, CGFloat side)
             [tmpImage drawAtPoint:CGPointMake(0.0f, new_y)];
             
             UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+            NSLog(@"new Image size");
+            NSLogS(newImage.size);
             UIGraphicsEndImageContext();
             return newImage;
         } else if ( (crop_longer_side > remaining_width) && (crop_longer_side <= remaining_height) ) {
@@ -368,6 +371,20 @@ BOOL sizeMoreThan(CGSize size, CGFloat side)
     }
 }
 
+//- (UIImage*)fixHorizontalImage:(CGFloat)crop_longer_side
+//{
+////    UIImage *tmpImage = [originalImage cropImageWithBounds:CGRectMake(crop_x, crop_y, crop_longer_side, remaining_height)];
+//    
+//    float new_y = (crop_y >= 0) ? (crop_longer_side - remaining_height) / 2.0 : (crop_longer_side - remaining_height);
+//    //UIGraphicsBeginImageContext(CGSizeMake(crop_longer_side, crop_longer_side));
+//    UIGraphicsBeginImageContextWithOptions(CGSizeMake(crop_longer_side, crop_longer_side), YES, 1.0f);
+//    [tmpImage drawAtPoint:CGPointMake(0.0f, new_y)];
+//    
+//    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+//    UIGraphicsEndImageContext();
+//    return newImage;
+//
+//}
 CGFloat RadiansOfDegrees(CGFloat degrees) {return degrees * M_PI / 180;};
 
 - (UIImage *)cropImageWithBounds:(CGRect)bounds {
