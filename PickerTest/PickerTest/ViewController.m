@@ -73,34 +73,38 @@
     CGSize __block smallSize;
     
         [self dismissViewControllerAnimated:YES completion:^{
-            
-            choosenImage = [UIImage processAlbumPhoto:info];
+                        
             UIImage* original = [info objectForKey:UIImagePickerControllerOriginalImage];
             originalSize = CGSizeMake(original.size.width, original.size.height);
             [self.originalLabel setText:[NSString stringWithFormat:@"original size: %i x %i", (int)roundf( original.size.width), (int)roundf( original.size.height)]];
             
-            
-            
+          
+            choosenImage = [UIImage processAlbumPhoto:info];//[original crop:[[info objectForKey:UIImagePickerControllerCropRect] CGRectValue]];//[UIImage processAlbumPhoto:info];
+            NSLog(@"1");
+            NSLogS(choosenImage.size);
+   
             original = [original softScaleToSide:200];
             smallSize = original.size;
             NSLogS(original.size);
-            
+    
             UIImage* choosenSmall = [choosenImage softScaleToSide:200];
             smallSize = choosenSmall.size;
 //            NSLogS(original.size);
 
             
             CGRect cropRect = [[info objectForKey:UIImagePickerControllerCropRect] CGRectValue];
-            CGFloat aspectRatio = smallSize.height / originalSize.height;
+            CGFloat aspectRatio = MAX(smallSize.height, smallSize.width) / MAX(originalSize.height, originalSize.width);
             
             [self.cropLabel setText:[NSString stringWithFormat:@"crop rect: x %i y %i w %i h %i", (int)roundf( cropRect.origin.x), (int)roundf( cropRect.origin.y), (int)roundf( cropRect.size.width), (int)roundf( cropRect.size.height)]];
             
             cropRect = CGRectMake(cropRect.origin.x * aspectRatio, cropRect.origin.y * aspectRatio, cropRect.size.width * aspectRatio, cropRect.size.height * aspectRatio);
             
-            
+            NSLogR(cropRect);
+     
 //            [self setImageFromPicker:choosenImage withCropRect:cropRect];
+//            [self setImageFromPicker:choosenSmall withCropRect:cropRect];
+     
             [self setImageFromPicker:original withCropRect:cropRect];
-
             [self.squareLabel setText:[NSString stringWithFormat:@"square size: %i x %i", (int)roundf( choosenImage.size.width), (int)roundf( choosenImage.size.height)]];
         }];
     
