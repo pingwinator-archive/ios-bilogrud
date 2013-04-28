@@ -36,92 +36,15 @@ return _sharedObject;
 #define scoreFontLarge [UIFont fontWithName:@"DS-Digital" size:20]
 #define scoreFontiPad [UIFont fontWithName:@"DS-Digital" size:30]
 
-#define kRoundedCornerImageSize 10
-#define kBorderSize 1
-#define cameraIndexButton 1
 
-#define defAlpha 0.5f
+//fonts
+#define FONT(name, fontSize) [UIFont fontWithName:name size:fontSize]
+#define HM_FONT(size) FONT(@"HomemadeApple", size)
+#define Ms_FONT(size) FONT(@"Mistral", size)
 
-#define radiusForItemMenu 130.0f
-#define rightPhotoMenuTag 1
-#define leftPhotoMenuTag 0
-#define rightPhotoTransformAngle M_PI_4/6
-#define leftPhotoTransformAngle -M_PI_4/6
+#define navigationButtonFont HM_FONT(13)
 
-#define addPhotoPreViewSize 106.0f
-#define editPhotoPreViewSize 63.0f
-#define resultEditPhotoSize 228.0f
-
-#define resImageSize 290.0f
-#define leftPhotoPreViewTag 1
-#define rightPhotoPreViewTag 2
-
-
-#define startAlpha 0.5f
-
-#define filterNameFont [UIFont fontWithName:@"Anke Calligraphic FG" size:14]
-#define shareLabelFont [UIFont fontWithName:@"Anke Calligraphic FG" size:22]
-#define shareButtonFont [UIFont fontWithName:@"Anke Calligraphic FG" size:16]
-
-#define shareString @"MultiExpo Photo"
-#define okString @"Image was saved"
-#define failString @"Image wasn't save"
-typedef enum{
-    IconState_IconPlain,
-    IconState_IconChoose,
-    IconState_IconChooseActive
-} IconState;
-
-typedef enum{
-    PolaroidType_FirstIconType,
-    PolaroidType_SecondIconType
-} PolaroidType;
-
-typedef enum
-{
-    ImageViewTag_First = 700,
-    ImageViewTag_Second
-} ImageViewTag;
-
-typedef enum
-{
-    ItemLocation_Left,
-    ItemLocation_Right
-} ItemLocation;
-
-typedef enum
-{
-    ResolutionType_Small,
-    ResolutionType_Middle,
-    ResolutionType_Max
-} ResolutionType;
-
-typedef enum
-{
-    SlyderType_Opacity = 500,
-    SlyderType_Rotation
-} SlyderType;
-
-typedef enum {
-    NO_FILTER = 0,
-    GPUIMAGE_DISSOLVE,
-    GPUIMAGE_ADD,
-    GPUIMAGE_DIVIDE,
-    GPUIMAGE_MULTIPLY,
-    GPUIMAGE_OVERLAY,
-    GPUIMAGE_LIGHTEN,
-    GPUIMAGE_DARKEN,
-    GPUIMAGE_COLORBURN,
-    GPUIMAGE_COLORDODGE,
-    GPUIMAGE_SCREENBLEND,
-    GPUIMAGE_DIFFERENCEBLEND,
-    GPUIMAGE_SUBTRACTBLEND,
-    GPUIMAGE_EXCLUSIONBLEND,
-    GPUIMAGE_HARDLIGHTBLEND,
-    GPUIMAGE_SOFTLIGHTBLEND,
-    GPUIMAGE_NORMALBLEND,
-    GPUIMAGE_NUMFILTERS
-} GPUImageollectionFilterType;
+#define navigationButtonFontiPad HM_FONT(22)
 
 // NSLog macro to output a CGRect, CGSize, CGPoint
 

@@ -9,11 +9,19 @@
 #import "StartViewController.h"
 #import "FB2ViewController.h"
 #import "DocumentModel.h"
+#import "HTMLViewController.h"
+#import "PDFViewController.h"
+
+#define navButtonSideiPhone 70.0f
+#define navButtonSideiPad 90.0f
 
 @interface StartViewController ()
-//@property PDFPageViewController* pdfViewController;
-@property FB2ViewController* fb2ViewController;
+
+@property (nonatomic, strong) FB2ViewController* fb2ViewController;
+@property (nonatomic, strong) HTMLViewController* htmlViewController;
+@property (nonatomic, strong) PDFViewController* pdfViewController;
 @property (nonatomic, strong) DocumentModel* documentModel;
+
 @end
 
 @implementation StartViewController
@@ -25,6 +33,7 @@
     UIButton* customNextButton = [self buttonWithImage:[UIImage imageNamed:@"Setting.png"] andAction:@selector(showSetting)];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:customNextButton];
     self.navigationItem.title = @"Your books";
+    [self.navigationController.navigationBar setBackgroundColor:[UIColor lightGrayColor]];
 
     if (!self.documentModel) {
         self.documentModel = [[DocumentModel alloc] init];
@@ -34,6 +43,8 @@
     // scan for existing documents
     [self directoryDidChange:self.docWatcher];
 }
+
+#pragma mark - Private Methods
 
 - (UIButton*)buttonWithImage:(UIImage*)image andAction:(SEL)action
 {
@@ -49,7 +60,6 @@
 {
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Setting" message:@"Availability download books and show all bookmarks see later" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
     [alert show];
-//[self presentViewController:<#(UIViewController *)#> animated:<#(BOOL)#> completion:<#^(void)completion#>
 }
 
 - (NSString *)formattedFileSize:(unsigned long long)size
@@ -116,21 +126,22 @@
 	[self setupDocumentControllerWithURL:fileURL];
 	
     // layout the cell
-    cell.textLabel.text = [[fileURL path] lastPathComponent];
+    cell.textLabel.text = [[[fileURL path] lastPathComponent] stringByDeletingPathExtension];
     NSInteger iconCount = [self.docInteractionController.icons count];
-    if (iconCount > 0)
-    {
-        cell.imageView.image = [self.docInteractionController.icons objectAtIndex:iconCount - 1];
-    }
+//    if (iconCount > 0)
+//    {
+//        cell.imageView.image = [self.docInteractionController.icons objectAtIndex:iconCount - 1];
+//    }
     
     NSError *error;
     NSString *fileURLString = [self.docInteractionController.URL path];
     NSDictionary *fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:fileURLString error:&error];
     NSInteger fileSize = [[fileAttributes objectForKey:NSFileSize] intValue];
     
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ - %@",
-                                 [self formattedFileSize:fileSize], self.docInteractionController.UTI];
-    
+//    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ - %@",
+//                                 [self formattedFileSize:fileSize], self.docInteractionController.UTI];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",
+                                 [self formattedFileSize:fileSize]];
     return cell;
 }
 
@@ -141,14 +152,22 @@
     NSURL *fileUrl = [self.documentURLs objectAtIndex:indexPath.row];
     self.documentModel.documentLastPage = 1;
     self.documentModel.documentUrl = fileUrl;
+    NSLog(@"file extension %@", [fileUrl pathExtension]);
     if ([[fileUrl pathExtension] isEqualToString: @"pdf"]) {
-//         self.pdfViewController = [[PDFPageViewController alloc] initWithDocument:self.documentModel];
-//        [self.navigationController pushViewController:self.pdfViewController animated:YES];
+        self.documentModel.documentType = DocumentType_PDF;
+        self.pdfViewController = [[PDFViewController alloc] initWithDocument:self.documentModel];
+        [self.navigationController pushViewController:self.pdfViewController animated:YES];
     }
-   
+    
     if ([[fileUrl pathExtension] isEqualToString: @"fb2"]) {
+        self.documentModel.documentType = DocumentType_fb2;
         self.fb2ViewController = [[FB2ViewController alloc] initWithDocument:self.documentModel];
         [self.navigationController pushViewController:self.fb2ViewController animated:YES];
+    }
+    if ([[fileUrl pathExtension] isEqualToString: @"html"]) {
+        self.documentModel.documentType = DocumentType_HTML;
+        self.htmlViewController = [[HTMLViewController alloc] initWithDocument:self.documentModel];
+        [self.navigationController pushViewController:self.htmlViewController animated:YES];
     }
 }
 
@@ -182,7 +201,6 @@
             [self.documentURLs addObject:fileURL];
         }
 	}
-	
 	[self.tableView reloadData];
 }
 
