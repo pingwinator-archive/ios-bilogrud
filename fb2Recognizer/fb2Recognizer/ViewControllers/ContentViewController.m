@@ -91,7 +91,7 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-//    self.navigationController.navigationBarHidden = YES;
+    self.navigationController.navigationBar.alpha = 0;
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer*)otherGestureRecognizer {
@@ -101,19 +101,8 @@
 - (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
     NSLog(@"alpha %f",self.navigationController.navigationBar.alpha);
     [UIView animateWithDuration:fadeAnimationDuration animations:^{
-        self.navigationController.navigationBar.alpha = !self.navigationController.navigationBar.alpha;
+        self.navigationController.navigationBar.alpha = (self.navigationController.navigationBar.alpha == 0) ? 0.7  : 0;
     }];
-}
-
-
-- (void)hiddenNavigationBarWithAnimation:(BOOL)isHidden
-{
-    [self performSelector:@selector(animate:) withObject:[NSNumber numberWithBool:isHidden] afterDelay:fadeNavButtonDelay];
-}
-
-- (void)hideNavigationBar
-{
-    self.navigationController.navigationBar.alpha = minAlpha;
 }
 
 - (void)changePage:(NSUInteger)curPage withCurrentNode:(NSInteger)curNode andCurrentPosition:(NSInteger)curPos
