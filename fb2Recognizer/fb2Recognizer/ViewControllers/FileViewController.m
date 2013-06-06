@@ -1,25 +1,19 @@
 //
-//  ViewController.m
+//  FileViewController.m
 //  fb2Recognizer
 //
-//  Created by Natasha on 11.01.13.
+//  Created by Natasha on 24.04.13.
 //  Copyright (c) 2013 Natasha. All rights reserved.
 //
 
-#import "FB2ViewController.h"
-#import "Fb2Parser.h"
-#import "ContentViewController.h"
+#import "FileViewController.h"
 #import "DocumentModel.h"
 
-@interface FB2ViewController ()
-@property (assign, nonatomic) NSInteger currentPageNumber;
-@property (assign, nonatomic) NSInteger currentNode;
-@property (assign, nonatomic) NSInteger currentPosition;
-@property (strong, nonatomic) ContentViewController* contentViewController;
-@property (weak, nonatomic) DocumentModel* docModel;
+@interface FileViewController ()
+
 @end
 
-@implementation FB2ViewController
+@implementation FileViewController
 
 - (id)initWithDocument:(DocumentModel*)model
 {
@@ -33,72 +27,23 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    self.testBook = [[Fb2Parser alloc] initWithUrl:self.docModel.documentUrl];
-    self.currentPageNumber = 0;
-    self.currentNode = 0;
-    
-    //Step 1
-    //Instantiate the UIPageViewController.
-    self.pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStylePageCurl navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
-    
-    //Step 2:
-    //Assign the delegate and datasource as self.
-    self.pageViewController.delegate = self;
-    self.pageViewController.dataSource = self;
-    
-    //Step 3:
-    //Set the initial view controllers.
-    self.contentViewController = [[ContentViewController alloc] initWithNodes:self.testBook andCurrentNumber:self.currentPageNumber];
-    self.contentViewController.moveAhead = YES;
-    
-    NSArray *viewControllers = [NSArray arrayWithObject:self.contentViewController];
-    [self.pageViewController setViewControllers:viewControllers
-                                      direction:UIPageViewControllerNavigationDirectionForward
-                                       animated:NO
-                                     completion:nil];
-    //Step 4:
-    //ViewController containment steps
-    //Add the pageViewController as the childViewController
-    [self addChildViewController:self.pageViewController];
-    
-    //Add the view of the pageViewController to the current view
-    [self.view addSubview:self.pageViewController.view];
-    
-    //Call didMoveToParentViewController: of the childViewController, the UIPageViewController instance in our case.
-    [self.pageViewController didMoveToParentViewController:self];
-    
-    //Step 5:
-    // set the pageViewController's frame as an inset rect.
-    CGRect pageViewRect = self.view.bounds;
-    //pageViewRect = CGRectInset(pageViewRect, 40.0, 40.0);
-    self.pageViewController.view.frame = pageViewRect;
-    
-    //Step 6:
-    //Assign the gestureRecognizers property of our pageViewController to our view's gestureRecognizers property.
-    self.view.gestureRecognizers = self.pageViewController.gestureRecognizers;
-
-    NSString* bookString = [NSMutableString string];
-    for (NSString* s in self.testBook.elementArray) {
-        bookString = [bookString stringByAppendingString:s];
-    }
 }
 
 #pragma mark - UIPageViewControllerDataSource Methods
-
+/*
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController
       viewControllerBeforeViewController:(UIViewController *)viewController
 {
-    self.currentNode = self.contentViewController.currentNode;
-    NSLog(@" currentNode %d", self.currentNode);
-    self.currentPosition = self.contentViewController.currentPosition;
-    NSLog(@"currentPosition %d", self.contentViewController.currentPosition);
+//    self.currentNode = self.contentViewController.currentNode;
+//    NSLog(@" currentNode %d", self.currentNode);
+//    self.currentPosition = self.contentViewController.currentPosition;
+//    NSLog(@"currentPosition %d", self.contentViewController.currentPosition);
     [self decreasePageNumber];
     //update init
     self.contentViewController = [[ContentViewController alloc] initWithNodes:self.testBook andCurrentNumber:self.currentPageNumber];
     self.contentViewController.moveAhead = NO;
     [self.contentViewController changePage: self.currentPageNumber withCurrentNode:self.currentNode andCurrentPosition:self.currentPosition];
-
+    
     return self.contentViewController;
 }
 
@@ -107,14 +52,14 @@
 {
     self.currentNode = self.contentViewController.currentNode;
     NSLog(@" currentNode %d", self.currentNode);
-
+    
     self.currentPosition = self.contentViewController.currentPosition;
     NSLog(@"currentPosition %d", self.contentViewController.currentPosition);
     
     [self increasePageNumber];
-
+    
     self.contentViewController = [[ContentViewController alloc] initWithNodes:self.testBook andCurrentNumber:self.currentPageNumber];
-
+    
     self.contentViewController.moveAhead = YES;
     [self.contentViewController changePage: self.currentPageNumber withCurrentNode:self.currentNode andCurrentPosition:self.currentPosition];
     
@@ -156,4 +101,5 @@
     }
     return nil;
 }
+*/
 @end

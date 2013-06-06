@@ -8,27 +8,27 @@
 
 #import "TransparentNavBar.h"
 #define navBarWidth 320
-#define navbarHeight 55
+#define navbarHeight 50
 @implementation TransparentNavBar
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-//       self.translucent = YES;
+//        self.translucent = YES;
     }
     return self;
 }
 
 - (CGSize)sizeThatFits:(CGSize)size {
-    CGSize newSize = CGSizeMake(navBarWidth, navbarHeight);
+    CGSize newSize = (isiPhone) ? CGSizeMake(navBarWidth, navbarHeight) : CGSizeMake(768, 90);
     return newSize;
 }
 
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
+// Attention! This method needs for correct draw navigation bar
 - (void)drawRect:(CGRect)rect
 {
     // Drawing code
 }
+
 @end

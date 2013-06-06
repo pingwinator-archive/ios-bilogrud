@@ -8,55 +8,21 @@
 
 #import "ContentViewController.h"
 #import "Fb2Parser.h"
+#import "PDFView.h"
 
-
+#define fadeNavButtonDelay 0.1f
+#define fadeAnimationDuration 0.5f
+#define minAlpha 0
 @interface ContentViewController ()
+
 @property (strong, nonatomic) UIWebView* webView;
 @property (strong, nonatomic) Fb2Parser* testBookNodes;
 @property (assign, nonatomic) NSInteger currentPage;
+@property (strong, nonatomic) NSString* htmlDoc;
 
 @end
 
 @implementation ContentViewController
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    self.wantsFullScreenLayout = YES;
-    
-    self.webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
-    [self.view addSubview:self.webView];
-    [self changePage:self.currentPage withCurrentNode:self.currentNode andCurrentPosition:self.currentPosition];
-    self.navigationController.navigationBarHidden = YES;
-    
-    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
-	singleTap.numberOfTouchesRequired = 1; singleTap.numberOfTapsRequired = 1; singleTap.delegate = self;
-	[self.webView addGestureRecognizer:singleTap];
-}
-
-- (void) viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = YES;
-}
-
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer*)otherGestureRecognizer {
-    return YES;
-}
-
-- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
-	[UIView animateWithDuration:0.5 animations:^{
-        self.navigationController.navigationBarHidden = ![self.navigationController isNavigationBarHidden];
-    }];
-}
-
-- (void)changePage:(NSUInteger)curPage withCurrentNode:(NSInteger)curNode andCurrentPosition:(NSInteger)curPos
-{
-    self.currentPage = curPage;
-    self.currentNode = curNode;
-    self.currentPosition = curPos;
-    [self.webView loadHTMLString:[self generateHTML] baseURL:nil];
-}
 
 - (id)initWithNodes:(Fb2Parser*)nodes andCurrentNumber:(NSInteger)curNumber
 {
@@ -69,6 +35,84 @@
     }
     return self;
 }
+
+- (id)initWithHtml:(id)htmlFile andCurrentNumber:(NSInteger)curNumber
+{
+    self = [super init];
+    if (self) {
+        self.htmlDoc = htmlFile;
+        self.currentPage = curNumber;
+        self.currentPosition = 0;
+        self.currentNode = 0;
+    }
+    return self;
+}
+
+- (id)initWithUrl:(NSURL*)url andCurrentNumber:(NSInteger)currentPage
+{
+    self = [super init];
+    if (self) {
+        self.urlToFile = url;
+        self.currentPage = currentPage;
+    }
+    return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.wantsFullScreenLayout = YES;
+
+    if (self.documentType == DocumentType_fb2) {
+        self.webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
+        [self.view addSubview:self.webView];
+        [self changePage:self.currentPage withCurrentNode:self.currentNode andCurrentPosition:self.currentPosition];
+        self.navigationController.navigationBar.alpha = 0;
+//        self.navigationController.navigationBarHidden = YES;
+        
+//        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
+//        singleTap.numberOfTouchesRequired = 1;
+//        singleTap.numberOfTapsRequired = 1;
+//        singleTap.delegate = self;
+//        [self.webView addGestureRecognizer:singleTap];
+    }
+    if (self.documentType == DocumentType_PDF) {
+        self.pdfContentView = [[PDFView alloc] initWithFrame:self.view.frame url:self.urlToFile andCurPage:self.currentPage];
+        self.pdfContentView.frame = CGRectMake(0, 0, 320, 480);
+        [self.view addSubview:self.pdfContentView];
+    }
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
+    singleTap.numberOfTouchesRequired = 1;
+    singleTap.numberOfTapsRequired = 1;
+    singleTap.delegate = self;
+    [self.view addGestureRecognizer:singleTap];
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.alpha = 0;
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer*)otherGestureRecognizer {
+    return YES;
+}
+
+- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
+    NSLog(@"alpha %f",self.navigationController.navigationBar.alpha);
+    [UIView animateWithDuration:fadeAnimationDuration animations:^{
+        self.navigationController.navigationBar.alpha = (self.navigationController.navigationBar.alpha == 0) ? 0.7  : 0;
+    }];
+}
+
+- (void)changePage:(NSUInteger)curPage withCurrentNode:(NSInteger)curNode andCurrentPosition:(NSInteger)curPos
+{
+    self.currentPage = curPage;
+    self.currentNode = curNode;
+    self.currentPosition = curPos;
+    [self.webView loadHTMLString:self.htmlDoc baseURL:nil];
+}
+
 
 - (NSString*)generateHTML
 {
@@ -98,9 +142,6 @@
             content = [content stringByAppendingString:[self addTailNode:[self.testBookNodes.elementArray objectAtIndex:self.currentNode] onSize:self.view.frame.size]];
             
         } else {
-            
-            
-            
             if ([[self.testBookNodes.elementArray objectAtIndex:self.currentNode] isKindOfClass:[NSString class]]) {
                 content = [content stringByAppendingString:[self.testBookNodes.elementArray objectAtIndex:self.currentNode]];
                 CGSize _size = [content sizeWithFont:myFont constrainedToSize:CGSizeMake(320, 1000) lineBreakMode:UILineBreakModeWordWrap];
@@ -108,13 +149,17 @@
                 NSLogS(emptySize);
             }
         }
-        
-        self.currentNode++;
+        if (self.moveAhead) {
+            self.currentNode++;
+        } else {
+            if (self.currentNode > 0) {
+                self.currentNode--;   
+            }
+        }
     }
     if (emptySize.height > 30) {
         content = [content stringByAppendingString:[self fillEmptySpace:[self.testBookNodes.elementArray objectAtIndex:self.currentNode] onSize:emptySize]];
     }
-    
     NSLog(@"content: %@  i: %d", content, self.currentNode);
     return content;
 }

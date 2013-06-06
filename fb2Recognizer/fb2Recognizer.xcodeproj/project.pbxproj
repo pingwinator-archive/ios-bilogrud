@@ -20,6 +20,23 @@
 		6E0DB5FA16A34FFC00B7020D /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E0DB5F216A34FFC00B7020D /* ViewController_iPhone.xib */; };
 		6E0DB5FD16A3506300B7020D /* NSData+NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E0DB5FC16A3506300B7020D /* NSData+NSDataAdditions.m */; };
 		6E0DB60716A3518F00B7020D /* NSString+NSStringAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E0DB60616A3518F00B7020D /* NSString+NSStringAdditions.m */; };
+		6E16E421172C34B0004E6E33 /* PDFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E16E420172C34B0004E6E33 /* PDFViewController.m */; };
+		6E16E424172C34F5004E6E33 /* HTMLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E16E423172C34F5004E6E33 /* HTMLViewController.m */; };
+		6E16E427172C3C8F004E6E33 /* PDFView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E16E426172C3C8F004E6E33 /* PDFView.m */; };
+		6E16E5D0172D6011004E6E33 /* ComFuncCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E16E5CE172D6011004E6E33 /* ComFuncCollection.m */; };
+		6E16E5D7172D60DC004E6E33 /* AnkeCall.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6E16E5D2172D60DC004E6E33 /* AnkeCall.ttf */; };
+		6E16E5D8172D60DC004E6E33 /* Apple Chancery.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6E16E5D3172D60DC004E6E33 /* Apple Chancery.ttf */; };
+		6E16E5D9172D60DC004E6E33 /* GOGOL.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E16E5D4172D60DC004E6E33 /* GOGOL.otf */; };
+		6E16E5DA172D60DC004E6E33 /* HomemadeApple.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6E16E5D5172D60DC004E6E33 /* HomemadeApple.ttf */; };
+		6E16E5DB172D60DC004E6E33 /* Mistral.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6E16E5D6172D60DC004E6E33 /* Mistral.ttf */; };
+		6E16E5DE172D6182004E6E33 /* UIDevice+CheckDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E16E5DD172D6182004E6E33 /* UIDevice+CheckDisplay.m */; };
+		6E16E5F6172D61BA004E6E33 /* bgNavigationButtoniPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E16E5E8172D61BA004E6E33 /* bgNavigationButtoniPad.png */; };
+		6E16E5F7172D61BA004E6E33 /* bgNavigationButtoniPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E16E5E9172D61BA004E6E33 /* bgNavigationButtoniPad@2x.png */; };
+		6E16E5F8172D61BA004E6E33 /* bgNavigationButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E16E5EC172D61BA004E6E33 /* bgNavigationButton.png */; };
+		6E16E5F9172D61BA004E6E33 /* bgNavigationButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E16E5ED172D61BA004E6E33 /* bgNavigationButton@2x.png */; };
+		6E16E5FA172D61BA004E6E33 /* Setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E16E5EF172D61BA004E6E33 /* Setting.png */; };
+		6E16E5FB172D61BA004E6E33 /* Setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E16E5F0172D61BA004E6E33 /* Setting@2x.png */; };
+		6E2E12581727FA96005145DA /* FileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E2E12571727FA96005145DA /* FileViewController.m */; };
 		6E412D2C16E34ED40085959F /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E412D2A16E34ED40085959F /* StartViewController.m */; };
 		6E412D3416E3523A0085959F /* DocumentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E412D3316E3523A0085959F /* DocumentModel.m */; };
 		6E56B38D16E6072400D11050 /* TransparentNavBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E56B38C16E6072400D11050 /* TransparentNavBar.m */; };
@@ -35,8 +52,6 @@
 		6E9ABBB616E3545A00FAB7BA /* StartViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E9ABBB416E3545A00FAB7BA /* StartViewController_iPad.xib */; };
 		6E9ABBB716E3545A00FAB7BA /* StartViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E9ABBB516E3545A00FAB7BA /* StartViewController_iPhone.xib */; };
 		6E9ABBBC16E357E900FAB7BA /* DirectoryWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E9ABBBB16E357E900FAB7BA /* DirectoryWatcher.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		6E9ABBC316E3599B00FAB7BA /* Setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E9ABBC116E3599B00FAB7BA /* Setting.png */; };
-		6E9ABBC416E3599B00FAB7BA /* Setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E9ABBC216E3599B00FAB7BA /* Setting@2x.png */; };
 		6E9ABBC816E35A0800FAB7BA /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E9ABBC616E35A0800FAB7BA /* SettingViewController.m */; };
 		6E9ABBC916E35A0800FAB7BA /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E9ABBC716E35A0800FAB7BA /* SettingViewController.xib */; };
 /* End PBXBuildFile section */
@@ -61,6 +76,29 @@
 		6E0DB5FC16A3506300B7020D /* NSData+NSDataAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+NSDataAdditions.m"; sourceTree = "<group>"; };
 		6E0DB60516A3518E00B7020D /* NSString+NSStringAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+NSStringAdditions.h"; sourceTree = "<group>"; };
 		6E0DB60616A3518F00B7020D /* NSString+NSStringAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+NSStringAdditions.m"; sourceTree = "<group>"; };
+		6E16E41F172C34B0004E6E33 /* PDFViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFViewController.h; sourceTree = "<group>"; };
+		6E16E420172C34B0004E6E33 /* PDFViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFViewController.m; sourceTree = "<group>"; };
+		6E16E422172C34F5004E6E33 /* HTMLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLViewController.h; sourceTree = "<group>"; };
+		6E16E423172C34F5004E6E33 /* HTMLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLViewController.m; sourceTree = "<group>"; };
+		6E16E425172C3C8F004E6E33 /* PDFView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFView.h; sourceTree = "<group>"; };
+		6E16E426172C3C8F004E6E33 /* PDFView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFView.m; sourceTree = "<group>"; };
+		6E16E5CE172D6011004E6E33 /* ComFuncCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComFuncCollection.m; sourceTree = "<group>"; };
+		6E16E5CF172D6011004E6E33 /* ComFuncCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComFuncCollection.h; sourceTree = "<group>"; };
+		6E16E5D2172D60DC004E6E33 /* AnkeCall.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AnkeCall.ttf; sourceTree = "<group>"; };
+		6E16E5D3172D60DC004E6E33 /* Apple Chancery.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Apple Chancery.ttf"; sourceTree = "<group>"; };
+		6E16E5D4172D60DC004E6E33 /* GOGOL.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GOGOL.otf; sourceTree = "<group>"; };
+		6E16E5D5172D60DC004E6E33 /* HomemadeApple.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HomemadeApple.ttf; sourceTree = "<group>"; };
+		6E16E5D6172D60DC004E6E33 /* Mistral.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Mistral.ttf; sourceTree = "<group>"; };
+		6E16E5DC172D6182004E6E33 /* UIDevice+CheckDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+CheckDisplay.h"; sourceTree = "<group>"; };
+		6E16E5DD172D6182004E6E33 /* UIDevice+CheckDisplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+CheckDisplay.m"; sourceTree = "<group>"; };
+		6E16E5E8172D61BA004E6E33 /* bgNavigationButtoniPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bgNavigationButtoniPad.png; sourceTree = "<group>"; };
+		6E16E5E9172D61BA004E6E33 /* bgNavigationButtoniPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bgNavigationButtoniPad@2x.png"; sourceTree = "<group>"; };
+		6E16E5EC172D61BA004E6E33 /* bgNavigationButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bgNavigationButton.png; sourceTree = "<group>"; };
+		6E16E5ED172D61BA004E6E33 /* bgNavigationButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bgNavigationButton@2x.png"; sourceTree = "<group>"; };
+		6E16E5EF172D61BA004E6E33 /* Setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Setting.png; sourceTree = "<group>"; };
+		6E16E5F0172D61BA004E6E33 /* Setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Setting@2x.png"; sourceTree = "<group>"; };
+		6E2E12561727FA96005145DA /* FileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileViewController.h; sourceTree = "<group>"; };
+		6E2E12571727FA96005145DA /* FileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileViewController.m; sourceTree = "<group>"; };
 		6E412D2A16E34ED40085959F /* StartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartViewController.m; sourceTree = "<group>"; };
 		6E412D2B16E34ED40085959F /* StartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartViewController.h; sourceTree = "<group>"; };
 		6E412D3216E3523A0085959F /* DocumentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentModel.h; sourceTree = "<group>"; };
@@ -84,8 +122,6 @@
 		6E9ABBB516E3545A00FAB7BA /* StartViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StartViewController_iPhone.xib; sourceTree = "<group>"; };
 		6E9ABBBA16E357E900FAB7BA /* DirectoryWatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectoryWatcher.h; sourceTree = "<group>"; };
 		6E9ABBBB16E357E900FAB7BA /* DirectoryWatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectoryWatcher.m; sourceTree = "<group>"; };
-		6E9ABBC116E3599B00FAB7BA /* Setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Setting.png; sourceTree = "<group>"; };
-		6E9ABBC216E3599B00FAB7BA /* Setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Setting@2x.png"; sourceTree = "<group>"; };
 		6E9ABBC516E35A0800FAB7BA /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
 		6E9ABBC616E35A0800FAB7BA /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		6E9ABBC716E35A0800FAB7BA /* SettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingViewController.xib; path = ../../ViewControllers/SettingViewController.xib; sourceTree = "<group>"; };
@@ -108,6 +144,8 @@
 		6E0DB5D716A34F9500B7020D /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				6E16E5DC172D6182004E6E33 /* UIDevice+CheckDisplay.h */,
+				6E16E5DD172D6182004E6E33 /* UIDevice+CheckDisplay.m */,
 				6E0DB60516A3518E00B7020D /* NSString+NSStringAdditions.h */,
 				6E0DB60616A3518F00B7020D /* NSString+NSStringAdditions.m */,
 				6E0DB5FB16A3506300B7020D /* NSData+NSDataAdditions.h */,
@@ -120,6 +158,8 @@
 		6E0DB5D816A34F9500B7020D /* Other sources */ = {
 			isa = PBXGroup;
 			children = (
+				6E16E5CE172D6011004E6E33 /* ComFuncCollection.m */,
+				6E16E5CF172D6011004E6E33 /* ComFuncCollection.h */,
 				6E0DB5D916A34F9500B7020D /* DefineConst.h */,
 			);
 			name = "Other sources";
@@ -147,6 +187,12 @@
 				6E0DB5E116A34F9500B7020D /* FB2ViewController.m */,
 				6E9ABBC516E35A0800FAB7BA /* SettingViewController.h */,
 				6E9ABBC616E35A0800FAB7BA /* SettingViewController.m */,
+				6E2E12561727FA96005145DA /* FileViewController.h */,
+				6E2E12571727FA96005145DA /* FileViewController.m */,
+				6E16E41F172C34B0004E6E33 /* PDFViewController.h */,
+				6E16E420172C34B0004E6E33 /* PDFViewController.m */,
+				6E16E422172C34F5004E6E33 /* HTMLViewController.h */,
+				6E16E423172C34F5004E6E33 /* HTMLViewController.m */,
 			);
 			name = ViewControllers;
 			path = fb2Recognizer/ViewControllers;
@@ -157,6 +203,8 @@
 			children = (
 				6E56B38B16E6072400D11050 /* TransparentNavBar.h */,
 				6E56B38C16E6072400D11050 /* TransparentNavBar.m */,
+				6E16E425172C3C8F004E6E33 /* PDFView.h */,
+				6E16E426172C3C8F004E6E33 /* PDFView.m */,
 			);
 			name = Views;
 			path = fb2Recognizer/Views;
@@ -175,8 +223,9 @@
 		6E0DB5E716A34FFC00B7020D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6E16E5DF172D61BA004E6E33 /* Images */,
+				6E16E5D1172D60DC004E6E33 /* Fonts */,
 				6E0DB5E816A34FFC00B7020D /* fb2 */,
-				6E0DB5EF16A34FFC00B7020D /* Images */,
 				6E0DB5F016A34FFC00B7020D /* Nibs */,
 			);
 			name = Resources;
@@ -196,15 +245,6 @@
 			path = fb2;
 			sourceTree = "<group>";
 		};
-		6E0DB5EF16A34FFC00B7020D /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				6E9ABBC116E3599B00FAB7BA /* Setting.png */,
-				6E9ABBC216E3599B00FAB7BA /* Setting@2x.png */,
-			);
-			path = Images;
-			sourceTree = "<group>";
-		};
 		6E0DB5F016A34FFC00B7020D /* Nibs */ = {
 			isa = PBXGroup;
 			children = (
@@ -215,6 +255,71 @@
 				6E0DB5F216A34FFC00B7020D /* ViewController_iPhone.xib */,
 			);
 			path = Nibs;
+			sourceTree = "<group>";
+		};
+		6E16E5D1172D60DC004E6E33 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				6E16E5D2172D60DC004E6E33 /* AnkeCall.ttf */,
+				6E16E5D3172D60DC004E6E33 /* Apple Chancery.ttf */,
+				6E16E5D4172D60DC004E6E33 /* GOGOL.otf */,
+				6E16E5D5172D60DC004E6E33 /* HomemadeApple.ttf */,
+				6E16E5D6172D60DC004E6E33 /* Mistral.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		6E16E5DF172D61BA004E6E33 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				6E16E5E6172D61BA004E6E33 /* iPad */,
+				6E16E5EA172D61BA004E6E33 /* iPhone */,
+				6E16E5EE172D61BA004E6E33 /* settings */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		6E16E5E6172D61BA004E6E33 /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+				6E16E5E7172D61BA004E6E33 /* navigationBarButtons */,
+			);
+			path = iPad;
+			sourceTree = "<group>";
+		};
+		6E16E5E7172D61BA004E6E33 /* navigationBarButtons */ = {
+			isa = PBXGroup;
+			children = (
+				6E16E5E8172D61BA004E6E33 /* bgNavigationButtoniPad.png */,
+				6E16E5E9172D61BA004E6E33 /* bgNavigationButtoniPad@2x.png */,
+			);
+			path = navigationBarButtons;
+			sourceTree = "<group>";
+		};
+		6E16E5EA172D61BA004E6E33 /* iPhone */ = {
+			isa = PBXGroup;
+			children = (
+				6E16E5EB172D61BA004E6E33 /* navigationBarButtons */,
+			);
+			path = iPhone;
+			sourceTree = "<group>";
+		};
+		6E16E5EB172D61BA004E6E33 /* navigationBarButtons */ = {
+			isa = PBXGroup;
+			children = (
+				6E16E5EC172D61BA004E6E33 /* bgNavigationButton.png */,
+				6E16E5ED172D61BA004E6E33 /* bgNavigationButton@2x.png */,
+			);
+			path = navigationBarButtons;
+			sourceTree = "<group>";
+		};
+		6E16E5EE172D61BA004E6E33 /* settings */ = {
+			isa = PBXGroup;
+			children = (
+				6E16E5EF172D61BA004E6E33 /* Setting.png */,
+				6E16E5F0172D61BA004E6E33 /* Setting@2x.png */,
+			);
+			path = settings;
 			sourceTree = "<group>";
 		};
 		6E84C9FE169FFF510021EF4E = {
@@ -359,9 +464,18 @@
 				6E0DB5FA16A34FFC00B7020D /* ViewController_iPhone.xib in Resources */,
 				6E9ABBB616E3545A00FAB7BA /* StartViewController_iPad.xib in Resources */,
 				6E9ABBB716E3545A00FAB7BA /* StartViewController_iPhone.xib in Resources */,
-				6E9ABBC316E3599B00FAB7BA /* Setting.png in Resources */,
-				6E9ABBC416E3599B00FAB7BA /* Setting@2x.png in Resources */,
 				6E9ABBC916E35A0800FAB7BA /* SettingViewController.xib in Resources */,
+				6E16E5D7172D60DC004E6E33 /* AnkeCall.ttf in Resources */,
+				6E16E5D8172D60DC004E6E33 /* Apple Chancery.ttf in Resources */,
+				6E16E5D9172D60DC004E6E33 /* GOGOL.otf in Resources */,
+				6E16E5DA172D60DC004E6E33 /* HomemadeApple.ttf in Resources */,
+				6E16E5DB172D60DC004E6E33 /* Mistral.ttf in Resources */,
+				6E16E5F6172D61BA004E6E33 /* bgNavigationButtoniPad.png in Resources */,
+				6E16E5F7172D61BA004E6E33 /* bgNavigationButtoniPad@2x.png in Resources */,
+				6E16E5F8172D61BA004E6E33 /* bgNavigationButton.png in Resources */,
+				6E16E5F9172D61BA004E6E33 /* bgNavigationButton@2x.png in Resources */,
+				6E16E5FA172D61BA004E6E33 /* Setting.png in Resources */,
+				6E16E5FB172D61BA004E6E33 /* Setting@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,6 +498,12 @@
 				6E9ABBBC16E357E900FAB7BA /* DirectoryWatcher.m in Sources */,
 				6E9ABBC816E35A0800FAB7BA /* SettingViewController.m in Sources */,
 				6E56B38D16E6072400D11050 /* TransparentNavBar.m in Sources */,
+				6E2E12581727FA96005145DA /* FileViewController.m in Sources */,
+				6E16E421172C34B0004E6E33 /* PDFViewController.m in Sources */,
+				6E16E424172C34F5004E6E33 /* HTMLViewController.m in Sources */,
+				6E16E427172C3C8F004E6E33 /* PDFView.m in Sources */,
+				6E16E5D0172D6011004E6E33 /* ComFuncCollection.m in Sources */,
+				6E16E5DE172D6182004E6E33 /* UIDevice+CheckDisplay.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -18,6 +18,7 @@ static NSString * const kAuthorElementName = @"author";
 static NSString * const kBookTitleElementName = @"book-title";
 static NSString * const kAnnotationElementName = @"annotation";
 static NSString * const kImageElementName = @"image";
+static NSString * const kEmptyLine = @"empty-line ";
 
 @interface Fb2Parser ()
 
@@ -91,13 +92,19 @@ static NSString * const kImageElementName = @"image";
         CASE (kTitleElementName) {
             
         } break;
-        CASE (@"binary") {
-            NSData* data = [NSData base64DataFromString:string];
-            self.currentNodeContent = data;
-            [self.elementArray addObject:self.currentNodeContent];
-            NSLog(@"-------binary!!!");
-            NSLog(@"%@", self.currentNodeContent);
-        } break;
+//        CASE (@"binary") {
+//            NSData* data = [NSData base64DataFromString:string];
+//            self.currentNodeContent = data;
+//            [self.elementArray addObject:self.currentNodeContent];
+//            NSLog(@"-------binary!!!");
+//            NSLog(@"%@", self.currentNodeContent);
+//        } break;
+        CASE(kEmptyLine)
+        {
+            NSLog(@"!!!break line!!!!");
+            [self.elementArray addObject:@"<br>"];
+        }
+        break;
         DEFAULT {
             break;
         }
