@@ -10,4 +10,9 @@
 
 @interface ViewController : UIViewController
 
+@property (strong, nonatomic) IBOutlet UITextField* searchField;
+@property (strong, nonatomic) IBOutlet UIButton* searchButton;
+@property (strong, nonatomic) IBOutlet UITextView* resultText;
+
+- (IBAction) doSearch:(id)sender;
 @end
