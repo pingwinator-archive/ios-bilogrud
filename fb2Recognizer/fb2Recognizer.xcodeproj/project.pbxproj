@@ -16,7 +16,6 @@
 		6E0DB5F616A34FFC00B7020D /* Dievushka, kotoraia vzryvala vozdushnyie - Stigh Larsson.fb2 in Resources */ = {isa = PBXBuildFile; fileRef = 6E0DB5EC16A34FFC00B7020D /* Dievushka, kotoraia vzryvala vozdushnyie - Stigh Larsson.fb2 */; };
 		6E0DB5F716A34FFC00B7020D /* Larsson.fb2 in Resources */ = {isa = PBXBuildFile; fileRef = 6E0DB5ED16A34FFC00B7020D /* Larsson.fb2 */; };
 		6E0DB5F816A34FFC00B7020D /* test.fb2 in Resources */ = {isa = PBXBuildFile; fileRef = 6E0DB5EE16A34FFC00B7020D /* test.fb2 */; };
-		6E0DB5F916A34FFC00B7020D /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E0DB5F116A34FFC00B7020D /* ViewController_iPad.xib */; };
 		6E0DB5FA16A34FFC00B7020D /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E0DB5F216A34FFC00B7020D /* ViewController_iPhone.xib */; };
 		6E0DB5FD16A3506300B7020D /* NSData+NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E0DB5FC16A3506300B7020D /* NSData+NSDataAdditions.m */; };
 		6E0DB60716A3518F00B7020D /* NSString+NSStringAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E0DB60616A3518F00B7020D /* NSString+NSStringAdditions.m */; };
@@ -49,6 +48,8 @@
 		6E84CA20169FFF510021EF4E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E84CA1F169FFF510021EF4E /* Default.png */; };
 		6E84CA22169FFF510021EF4E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E84CA21169FFF510021EF4E /* Default@2x.png */; };
 		6E84CA24169FFF510021EF4E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E84CA23169FFF510021EF4E /* Default-568h@2x.png */; };
+		6E8C7A251770E3B800247E0D /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E8C7A241770E3B800247E0D /* ViewController_iPad.xib */; };
+		6E8C7A271770FC3300247E0D /* 1.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6E8C7A261770FC3300247E0D /* 1.pdf */; };
 		6E9ABBB616E3545A00FAB7BA /* StartViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E9ABBB416E3545A00FAB7BA /* StartViewController_iPad.xib */; };
 		6E9ABBB716E3545A00FAB7BA /* StartViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6E9ABBB516E3545A00FAB7BA /* StartViewController_iPhone.xib */; };
 		6E9ABBBC16E357E900FAB7BA /* DirectoryWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 6E9ABBBB16E357E900FAB7BA /* DirectoryWatcher.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -70,7 +71,6 @@
 		6E0DB5EC16A34FFC00B7020D /* Dievushka, kotoraia vzryvala vozdushnyie - Stigh Larsson.fb2 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Dievushka, kotoraia vzryvala vozdushnyie - Stigh Larsson.fb2"; sourceTree = "<group>"; };
 		6E0DB5ED16A34FFC00B7020D /* Larsson.fb2 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Larsson.fb2; sourceTree = "<group>"; };
 		6E0DB5EE16A34FFC00B7020D /* test.fb2 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = test.fb2; sourceTree = "<group>"; };
-		6E0DB5F116A34FFC00B7020D /* ViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController_iPad.xib; sourceTree = "<group>"; };
 		6E0DB5F216A34FFC00B7020D /* ViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController_iPhone.xib; sourceTree = "<group>"; };
 		6E0DB5FB16A3506300B7020D /* NSData+NSDataAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+NSDataAdditions.h"; sourceTree = "<group>"; };
 		6E0DB5FC16A3506300B7020D /* NSData+NSDataAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+NSDataAdditions.m"; sourceTree = "<group>"; };
@@ -118,6 +118,8 @@
 		6E84CA1F169FFF510021EF4E /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		6E84CA21169FFF510021EF4E /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		6E84CA23169FFF510021EF4E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		6E8C7A241770E3B800247E0D /* ViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController_iPad.xib; sourceTree = "<group>"; };
+		6E8C7A261770FC3300247E0D /* 1.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = 1.pdf; sourceTree = "<group>"; };
 		6E9ABBB416E3545A00FAB7BA /* StartViewController_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StartViewController_iPad.xib; sourceTree = "<group>"; };
 		6E9ABBB516E3545A00FAB7BA /* StartViewController_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StartViewController_iPhone.xib; sourceTree = "<group>"; };
 		6E9ABBBA16E357E900FAB7BA /* DirectoryWatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectoryWatcher.h; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 				6E16E5DF172D61BA004E6E33 /* Images */,
 				6E16E5D1172D60DC004E6E33 /* Fonts */,
 				6E0DB5E816A34FFC00B7020D /* fb2 */,
+				6E8C7A261770FC3300247E0D /* 1.pdf */,
 				6E0DB5F016A34FFC00B7020D /* Nibs */,
 			);
 			name = Resources;
@@ -251,8 +254,8 @@
 				6E9ABBC716E35A0800FAB7BA /* SettingViewController.xib */,
 				6E9ABBB416E3545A00FAB7BA /* StartViewController_iPad.xib */,
 				6E9ABBB516E3545A00FAB7BA /* StartViewController_iPhone.xib */,
-				6E0DB5F116A34FFC00B7020D /* ViewController_iPad.xib */,
 				6E0DB5F216A34FFC00B7020D /* ViewController_iPhone.xib */,
+				6E8C7A241770E3B800247E0D /* ViewController_iPad.xib */,
 			);
 			path = Nibs;
 			sourceTree = "<group>";
@@ -460,7 +463,6 @@
 				6E0DB5F616A34FFC00B7020D /* Dievushka, kotoraia vzryvala vozdushnyie - Stigh Larsson.fb2 in Resources */,
 				6E0DB5F716A34FFC00B7020D /* Larsson.fb2 in Resources */,
 				6E0DB5F816A34FFC00B7020D /* test.fb2 in Resources */,
-				6E0DB5F916A34FFC00B7020D /* ViewController_iPad.xib in Resources */,
 				6E0DB5FA16A34FFC00B7020D /* ViewController_iPhone.xib in Resources */,
 				6E9ABBB616E3545A00FAB7BA /* StartViewController_iPad.xib in Resources */,
 				6E9ABBB716E3545A00FAB7BA /* StartViewController_iPhone.xib in Resources */,
@@ -476,6 +478,8 @@
 				6E16E5F9172D61BA004E6E33 /* bgNavigationButton@2x.png in Resources */,
 				6E16E5FA172D61BA004E6E33 /* Setting.png in Resources */,
 				6E16E5FB172D61BA004E6E33 /* Setting@2x.png in Resources */,
+				6E8C7A251770E3B800247E0D /* ViewController_iPad.xib in Resources */,
+				6E8C7A271770FC3300247E0D /* 1.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

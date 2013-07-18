@@ -140,7 +140,7 @@
     }
     else {
         self.currentPageNumber++;
-        [self.pdfView setNeedsDisplay];
+//        [self.pdfView setNeedsDisplay];
     }
 }
 
@@ -151,7 +151,7 @@
     }
     else {
         self.currentPageNumber--;
-        [self.pdfView setNeedsDisplay];
+//        [self.pdfView setNeedsDisplay];
     }
 }
 

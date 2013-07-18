@@ -14,7 +14,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor clearColor];
+        self.backgroundColor = [UIColor redColor];
         //!!
         self.document = CGPDFDocumentCreateWithURL((__bridge CFURLRef)url);
         self.currentPage = page;
