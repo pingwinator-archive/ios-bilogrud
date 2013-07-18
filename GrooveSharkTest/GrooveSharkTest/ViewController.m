@@ -8,9 +8,10 @@
 
 #import "ViewController.h"
 #import "SBJson.h"
+#import "NSString+HMAC.h"
+#import "CustomGrooveClient.h"
 
-#define key @"postindustria" 
-#define secret @"add0e90de3658b8f132724607d841ae5"
+
 
 @interface ViewController ()
 
@@ -24,6 +25,12 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    [[CustomGrooveClient sharedClient] setOnReady:^(BOOL isReady) {
+        if (isReady) {
+            [self.searchField setBackgroundColor:[UIColor redColor]];
+        } 
+    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -37,35 +44,21 @@
 //1 startSession
 //2 authenticateUser
 //3 addUserFavoriteSong
-    NSLog(@"doSearch press");
-    NSString* serverAddress = [NSString stringWithFormat:@"http://api.grooveshark.com/ws3.php?sig=%@", secret];
-
-//    {'method': 'addUserFavoriteSong', 'parameters': {'songID': 0}, 'header': {'wsKey': 'key', 'sessionID': 'sessionID'}}
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:serverAddress]
-                                                           cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
-                                                       timeoutInterval:10];
-    [request setHTTPMethod: @"POST"];
-//    NSDictionary* headerDict = @{@"wsKey": @"key", @"sessionID"};
-    NSArray *keys = [NSArray arrayWithObjects:@"method", nil];
-    NSArray *objects = [NSArray arrayWithObjects:@"startSession", nil];
-    NSDictionary *jsonDictionary = [NSDictionary dictionaryWithObjects:objects forKeys:keys];
-    NSString* jsonString = [jsonDictionary JSONRepresentation];
-    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
-
-    [request setHTTPBody:jsonData];
-
-    NSURLConnection *theConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    if (theConnection) {
-        self.jsonData = [NSMutableData data];
-    } else {
-        NSLog(@"Connection failed");
+    NSString* searchText = self.searchField.text;
+    if (![searchText length]) {
+        searchText = @"Scorp";
     }
-    
-//    NSMutableString* stringData= [[NSString alloc]initWithData:responseData encoding:NSUTF8StringEncoding];
-//    NSDictionary    *jsonDictionaryResponse = [stringData JSONValue];
-//    
-//    NSString *json_message=[jsonDictionaryResponse objectForKey:@"message"];
+    [[CustomGrooveClient sharedClient] getArtistSearchResults:searchText withCallbackBlock:^(NSDictionary* dict, NSError* err) {
 
+        NSArray* artistCollection = dict[@"result"][@"artists"];
+        for (NSUInteger i = 0; i < [artistCollection count]; i++) {
+            
+            NSDictionary* d = artistCollection[i][@"ArtistName"];
+            NSLog(@"%@", artistCollection[i]);
+        }
+        
+        NSLog(@"check result");
+    }];
     NSLog(@"doSearch press");
 }
 
