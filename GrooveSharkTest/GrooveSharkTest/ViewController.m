@@ -7,11 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "SBJson.h"
-#import "NSString+HMAC.h"
 #import "CustomGrooveClient.h"
-
-
 
 @interface ViewController ()
 
@@ -24,19 +20,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-    
     [[CustomGrooveClient sharedClient] setOnReady:^(BOOL isReady) {
         if (isReady) {
-            [self.searchField setBackgroundColor:[UIColor redColor]];
+            [self.searchField setBackgroundColor:[[UIColor yellowColor] colorWithAlphaComponent:0.5f]];
         } 
     }];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (IBAction) doSearch:(id)sender
@@ -49,35 +37,21 @@
         searchText = @"Scorp";
     }
     [[CustomGrooveClient sharedClient] getArtistSearchResults:searchText withCallbackBlock:^(NSDictionary* dict, NSError* err) {
-
+        NSString* artistInfo = @"";
         NSArray* artistCollection = dict[@"result"][@"artists"];
         for (NSUInteger i = 0; i < [artistCollection count]; i++) {
             
-            NSDictionary* d = artistCollection[i][@"ArtistName"];
+            NSString* d = artistCollection[i][@"ArtistName"];
+            artistInfo = [NSString stringWithFormat:@"%@\n%@", artistInfo, d];
             NSLog(@"%@", artistCollection[i]);
         }
-        
+        self.resultText.text = artistInfo;
         NSLog(@"check result");
     }];
-    NSLog(@"doSearch press");
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    [self.jsonData appendData:data];
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    NSLog(@"%@", error);
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-	NSString *result = [[NSString alloc] initWithData:self.jsonData encoding:NSUTF8StringEncoding];
-	NSLog( @"%@",result );
     
-	SBJsonParser *jsonParser = [[SBJsonParser alloc] init];
-	
-	NSArray *dataObject = [jsonParser objectWithString:result];
-	
-    NSLog(@"check");
+    [[CustomGrooveClient sharedClient] getArtistAlbumsByArtistID:@"4144" withCallbackBlock:^(NSDictionary* dict, NSError* err) {
+        NSLog(@"1589599 id test");
+    }];
 }
+
 @end

@@ -18,10 +18,11 @@ typedef void (^OnReady)(BOOL);
 
 @property (nonatomic, copy) OnReady onReady;
 
-+ (CustomGrooveClient*)sharedClient;
++ (CustomGrooveClient*) sharedClient;
 - (void) end;
 
-- (void) startSessionWithCallbackBlock:(ResultBlock)callbackBlock;
+- (void) startSession;
 - (void) getArtistSearchResults:(NSString*)searchText withCallbackBlock:(ResultBlock)callbackBlock;
+- (void) getArtistAlbumsByArtistID:(NSString*)artistID withCallbackBlock:(ResultBlock)callbackBlock;
 
 @end

@@ -10,8 +10,6 @@
 #import "AFJSONRequestOperation.h"
 #import "NSString+HMAC.h"
 
-#import "SBJson.h"
-
 #define key @"postindustria"
 #define secret @"add0e90de3658b8f132724607d841ae5"
 
@@ -36,8 +34,6 @@ BOOL isStringWithAnyText(NSString* str) {
 NSString* safeString(NSString* str) {
 	return isStringWithAnyText(str) ? str : @"";
 }
-
-
 
 - (id) initWithBaseURL:(NSURL *)url
 {
@@ -79,7 +75,7 @@ NSString* safeString(NSString* str) {
 - (void) postMethod:(NSString*)method parameters:(NSDictionary*)params withCallbackBlock:(ResultBlock)callbackBlock
 {
     NSDictionary* allParams = @{@"method": method, @"parameters": params, @"header": @{@"wsKey": key,  @"sessionID": safeString(self.session[kSessionID])}};
-
+    
     [self postPath:[self generatePath:allParams] parameters:allParams success:^(AFHTTPRequestOperation *operation, NSDictionary* responseObject) {
         NSLog(@"responseObject %@", responseObject);
         if (callbackBlock) callbackBlock(responseObject, nil);
@@ -116,8 +112,13 @@ NSString* safeString(NSString* str) {
 }
 
 - (void) getArtistSearchResults:(NSString*)searchText withCallbackBlock:(ResultBlock)callbackBlock
-{    
+{
     [self postMethod:@"getArtistSearchResults" parameters:@{@"query": searchText} withCallbackBlock:callbackBlock];
+}
+
+- (void) getArtistAlbumsByArtistID:(NSString*)artistID withCallbackBlock:(ResultBlock)callbackBlock
+{
+    [self postMethod:@"getArtistAlbums" parameters:@{@"artistID": artistID} withCallbackBlock:callbackBlock];
 }
 
 @end
