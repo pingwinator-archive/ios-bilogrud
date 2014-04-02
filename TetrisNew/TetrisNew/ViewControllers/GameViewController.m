@@ -392,11 +392,11 @@ typedef enum {
     [self addRotateButton:CGRectMake(rectManage.origin.x + 170, rectManage.origin.y + 65, rotateSizeButton, rotateSizeButton) withImage:rotateButtonImage andHighlighted:highlightedImageRotate onView:self.view];
    
     //add score to GameCenter
-    UIButton* score = [[UIButton alloc] initWithFrame:CGRectMake(rectManage.origin.x + 145, rectManage.origin.y + 50, 40, 40)];
-    [score setTitle:@"GC" forState:UIControlStateNormal];
-    score.backgroundColor = [UIColor redColor];
-    [score addTarget:self action:@selector(showGameCenter) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:score];
+//    UIButton* score = [[UIButton alloc] initWithFrame:CGRectMake(rectManage.origin.x + 145, rectManage.origin.y + 50, 40, 40)];
+//    [score setTitle:@"GC" forState:UIControlStateNormal];
+//    score.backgroundColor = [UIColor redColor];
+//    [score addTarget:self action:@selector(showGameCenter) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:score];
     
     CGRect rectMove = CGRectMake(30, self.boardRect.size.height + 95, 100, 20);
     
@@ -467,6 +467,9 @@ typedef enum {
     
     //right button
     [self addRightMoveButton:CGRectMake(rectMove.origin.x + 120, rectMove.origin.y, moveSizeButtoniPad, moveSizeButtoniPad) withImage:imageButton onView:self.view];
+}
+- (BOOL)prefersStatusBarHidden {
+    return YES;
 }
 
 #pragma mark - Init components
