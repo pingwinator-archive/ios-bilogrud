@@ -66,15 +66,16 @@
 		6EEF2F4616352C1100D38368 /* button_up@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EEF2F3E16352C1100D38368 /* button_up@2x.png */; };
 		6EEF2F5116358B2500D38368 /* rotatebutton_up.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EEF2F4F16358B2400D38368 /* rotatebutton_up.png */; };
 		6EEF2F5216358B2500D38368 /* rotatebutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EEF2F5016358B2400D38368 /* rotatebutton.png */; };
-		6EEF2F561635955300D38368 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EEF2F551635955300D38368 /* libFlurry.a */; };
 		6EEF2F581635976600D38368 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EEF2F571635976600D38368 /* SystemConfiguration.framework */; };
 		6EEF2F5C16359E9700D38368 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EEF2F5916359E9600D38368 /* back.png */; };
 		6EEF2F5D16359E9700D38368 /* back@2x-h568.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EEF2F5A16359E9600D38368 /* back@2x-h568.png */; };
 		6EEF2F5E16359E9700D38368 /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EEF2F5B16359E9700D38368 /* back@2x.png */; };
+		8D59524565C4420EA18A97E2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CA9E514B6D849F0868B1814 /* libPods.a */; };
 		FDB0CFDF18EC106E008D8D40 /* Entitlements.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = FDB0CFDE18EC106E008D8D40 /* Entitlements.entitlements */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6CA9E514B6D849F0868B1814 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E0E44C01652B77E0055DD7E /* StatisticManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatisticManager.h; sourceTree = "<group>"; };
 		6E0E44C11652B77E0055DD7E /* StatisticManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatisticManager.m; sourceTree = "<group>"; };
 		6E13589316393C8F00953402 /* Tetris.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Tetris.caf; sourceTree = "<group>"; };
@@ -154,12 +155,11 @@
 		6EEF2F3E16352C1100D38368 /* button_up@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_up@2x.png"; sourceTree = "<group>"; };
 		6EEF2F4F16358B2400D38368 /* rotatebutton_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rotatebutton_up.png; sourceTree = "<group>"; };
 		6EEF2F5016358B2400D38368 /* rotatebutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rotatebutton.png; sourceTree = "<group>"; };
-		6EEF2F541635955300D38368 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
-		6EEF2F551635955300D38368 /* libFlurry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry.a; sourceTree = "<group>"; };
 		6EEF2F571635976600D38368 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		6EEF2F5916359E9600D38368 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		6EEF2F5A16359E9600D38368 /* back@2x-h568.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x-h568.png"; sourceTree = "<group>"; };
 		6EEF2F5B16359E9700D38368 /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
+		8971EC882AAA4C7885A6B73C /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		FDB0CFDE18EC106E008D8D40 /* Entitlements.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Entitlements.entitlements; path = TetrisNew/Entitlements.entitlements; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -176,7 +176,7 @@
 				6EC7BD2A1621E23C00066F23 /* UIKit.framework in Frameworks */,
 				6EC7BD2C1621E23C00066F23 /* Foundation.framework in Frameworks */,
 				6EC7BD2E1621E23C00066F23 /* CoreGraphics.framework in Frameworks */,
-				6EEF2F561635955300D38368 /* libFlurry.a in Frameworks */,
+				8D59524565C4420EA18A97E2 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,6 +258,7 @@
 				6EC7BD2F1621E23C00066F23 /* TetrisNew */,
 				6EC7BD281621E23C00066F23 /* Frameworks */,
 				6EC7BD261621E23C00066F23 /* Products */,
+				8971EC882AAA4C7885A6B73C /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -280,6 +281,7 @@
 				6EC7BD291621E23C00066F23 /* UIKit.framework */,
 				6EC7BD2B1621E23C00066F23 /* Foundation.framework */,
 				6EC7BD2D1621E23C00066F23 /* CoreGraphics.framework */,
+				6CA9E514B6D849F0868B1814 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -366,7 +368,6 @@
 		6EC7BD691621E36900066F23 /* Resourses */ = {
 			isa = PBXGroup;
 			children = (
-				6EEF2F531635955300D38368 /* Flurry */,
 				6EC7BD321621E23C00066F23 /* Localizable.strings */,
 				6E2AEE78162724BE000D9561 /* Sounds */,
 				6E5F313716260AC000274174 /* Fonts */,
@@ -424,15 +425,6 @@
 			path = Buttons;
 			sourceTree = "<group>";
 		};
-		6EEF2F531635955300D38368 /* Flurry */ = {
-			isa = PBXGroup;
-			children = (
-				6EEF2F541635955300D38368 /* Flurry.h */,
-				6EEF2F551635955300D38368 /* libFlurry.a */,
-			);
-			path = Flurry;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -440,9 +432,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6EC7BD4C1621E23C00066F23 /* Build configuration list for PBXNativeTarget "TetrisNew" */;
 			buildPhases = (
+				1E614D106F1749DC9ECD88D7 /* Check Pods Manifest.lock */,
 				6EC7BD211621E23C00066F23 /* Sources */,
 				6EC7BD221621E23C00066F23 /* Frameworks */,
 				6EC7BD231621E23C00066F23 /* Resources */,
+				8B4A9F0DE97E4350AD915BA9 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -529,6 +523,39 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1E614D106F1749DC9ECD88D7 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		8B4A9F0DE97E4350AD915BA9 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		6EC7BD211621E23C00066F23 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -596,19 +623,20 @@
 		};
 		6E0EB8AD1635E529002A5F10 /* Ad Hoc Distribution */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8971EC882AAA4C7885A6B73C /* Pods.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "/Users/basil/remote_repo/ios-bilogrud/TetrisNew/TetrisNew/Entitlements.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Millena Korneeva (BHEPN5QS7F)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TetrisNew/TetrisNew-Prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/TetrisNew/Resourses/Flurry\"",
 				);
 				OTHER_CPLUSPLUSFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = "Ad Hoc Distribution";
@@ -671,12 +699,13 @@
 		};
 		6EC7BD4D1621E23C00066F23 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8971EC882AAA4C7885A6B73C /* Pods.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "/Users/basil/remote_repo/ios-bilogrud/TetrisNew/TetrisNew/Entitlements.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TetrisNew/TetrisNew-Prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/TetrisNew/Resourses/Flurry\"",
@@ -684,25 +713,26 @@
 				OTHER_CPLUSPLUSFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
 		6EC7BD4E1621E23C00066F23 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8971EC882AAA4C7885A6B73C /* Pods.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "/Users/basil/remote_repo/ios-bilogrud/TetrisNew/TetrisNew/Entitlements.entitlements";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TetrisNew/TetrisNew-Prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/TetrisNew/Resourses/Flurry\"",
 				);
 				OTHER_CPLUSPLUSFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				VALID_ARCHS = "armv7 armv7s";
+				VALID_ARCHS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
