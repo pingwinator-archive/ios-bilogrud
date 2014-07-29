@@ -626,7 +626,9 @@
 			baseConfigurationReference = 8971EC882AAA4C7885A6B73C /* Pods.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "/Users/basil/remote_repo/ios-bilogrud/TetrisNew/TetrisNew/Entitlements.entitlements";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Millena Korneeva (BHEPN5QS7F)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CURRENT_PROJECT_VERSION = 1;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TetrisNew/TetrisNew-Prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
@@ -636,7 +638,8 @@
 				);
 				OTHER_CPLUSPLUSFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				VALID_ARCHS = "";
+				VALID_ARCHS = "arm64 armv7 armv7s";
+				VERSIONING_SYSTEM = "apple-generic";
 				WRAPPER_EXTENSION = app;
 			};
 			name = "Ad Hoc Distribution";
@@ -703,6 +706,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "/Users/basil/remote_repo/ios-bilogrud/TetrisNew/TetrisNew/Entitlements.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TetrisNew/TetrisNew-Prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
@@ -713,7 +717,8 @@
 				OTHER_CPLUSPLUSFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				VALID_ARCHS = "";
+				VALID_ARCHS = "arm64 armv7 armv7s";
+				VERSIONING_SYSTEM = "apple-generic";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -723,6 +728,7 @@
 			baseConfigurationReference = 8971EC882AAA4C7885A6B73C /* Pods.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "/Users/basil/remote_repo/ios-bilogrud/TetrisNew/TetrisNew/Entitlements.entitlements";
+				CURRENT_PROJECT_VERSION = 1;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TetrisNew/TetrisNew-Prefix.pch";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
@@ -732,7 +738,8 @@
 				);
 				OTHER_CPLUSPLUSFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				VALID_ARCHS = "";
+				VALID_ARCHS = "arm64 armv7 armv7s";
+				VERSIONING_SYSTEM = "apple-generic";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
