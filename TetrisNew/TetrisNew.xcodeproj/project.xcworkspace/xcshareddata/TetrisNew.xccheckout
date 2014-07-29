@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>687E4BB7-4668-45C1-A35C-C5D5A9A39041</string>
+	<key>IDESourceControlProjectName</key>
+	<string>TetrisNew</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>31C3BA11-C0F4-47D5-8E63-A16E23EFBE5E</key>
+		<string>ssh://github.com/pingwinator/ios-bilogrud.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>TetrisNew/TetrisNew.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>31C3BA11-C0F4-47D5-8E63-A16E23EFBE5E</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/pingwinator/ios-bilogrud.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>31C3BA11-C0F4-47D5-8E63-A16E23EFBE5E</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>31C3BA11-C0F4-47D5-8E63-A16E23EFBE5E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ios-bilogrud</string>
+		</dict>
+	</array>
+</dict>
+</plist>
