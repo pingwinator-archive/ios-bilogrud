@@ -1,0 +1,62 @@
+queue:
+    - branch
+    - xcode
+    - clean
+    - bump_version
+    - build
+    #- tests
+    - pack_ipa
+    - pack_dsym
+    #- upload_doa
+    #- ipa_publisher
+    - hockeyapp
+    # - dummy => Names convention: dummy_module.rb|DummyModule
+
+
+default: &default
+    platform:       ios
+    branch:
+        name:       master
+        submodules: false
+    using_pods:     true
+    project_dir:    ./TetrisNew
+    xcode:
+        enabled: true
+        version: v5.1
+    build:
+        configuration:  AdHoc
+        sdk:            iphoneos
+        workspace:
+            name:       TetrisNew
+            scheme:     TetrisNew
+        project:
+            name:       TetrisNew
+            target:     TetrisNew
+    pack_dsym:
+        enabled:    true
+        copy:       false
+        output_dir: "~/Dropbox/<your_project_dir>"
+    bump_version:
+        enabled:    true
+        push:       true
+        up_mver:    true
+        simple:     true
+    pack_ipa:
+        enabled:    true
+        naming:
+            prefix:         Tetris
+            append_version: true
+    profile:
+        file:       "~/Dropbox/MultiExpo/builds/Provisions/Tetris_AdHoc.mobileprovision"
+        identity:   "iPhone Distribution: Millena Korneeva (BHEPN5QS7F)"
+
+adhock:
+    <<: *default
+    branch:
+        name:       master
+    hockeyapp:
+        enabled:    true
+        token:      16d08b8203ee47b69b8a0b2f9b9d91bb
+        app_id:     abdc71ddf99d336b50544b188280052a
+        notify:     true
+        download:   true
