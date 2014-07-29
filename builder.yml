@@ -47,7 +47,7 @@ default: &default
             prefix:         Tetris
             append_version: true
     profile:
-        file:       "~/Dropbox/MultiExpo/builds/Provisions/Tetris_AdHoc.mobileprovision"
+        file:       "~/Dropbox/MultiExpo/builds/Tetris_AdHoc.mobileprovision"
         identity:   "iPhone Distribution: Millena Korneeva (BHEPN5QS7F)"
 
 adhock:
