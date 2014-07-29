@@ -625,7 +625,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8971EC882AAA4C7885A6B73C /* Pods.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CURRENT_PROJECT_VERSION = 10;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
