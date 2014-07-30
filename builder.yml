@@ -50,7 +50,7 @@ default: &default
         file:       "~/Dropbox/MultiExpo/builds/Tetris_AdHoc.mobileprovision"
         identity:   "iPhone Distribution: Millena Korneeva (BHEPN5QS7F)"
 
-adhock: &adhoc
+adhock: &adhock
     <<: *default
     branch:
         name:       master
@@ -62,6 +62,6 @@ adhock: &adhoc
         download:   true
         
 1123: 
-    <<: *adhoc
+    <<: *adhock
     branch:
         name:   "1123"
