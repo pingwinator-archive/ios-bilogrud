@@ -61,7 +61,7 @@ adhock: &adhock
         notify:     true
         download:   true
         
-1123: 
+1123: &1123
     <<: *adhock
     branch:
-        name:   "1123"
+        name:       "1123"
