@@ -1,6 +1,6 @@
 queue:
     - branch
-    - xcode
+    #- xcode
     - clean
     - bump_version
     - build
